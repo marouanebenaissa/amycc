@@ -31,23 +31,7 @@ export function Footer({ locale, dict }: FooterProps) {
 
           {/* Brand column */}
           <div className="lg:col-span-2">
-            <div className="flex items-center gap-3 mb-4">
-              <div
-                className="flex items-center justify-center rounded-xl font-extrabold text-white"
-                style={{
-                  width: '42px',
-                  height: '42px',
-                  backgroundColor: '#0068ff',
-                  fontSize: '17px',
-                }}
-              >
-                AM
-              </div>
-              <div className="flex flex-col leading-tight">
-                <span className="font-extrabold text-lg text-white">AMYCC</span>
-                <span className="text-xs text-slate-400">جمعية روح الفنون والثقافة</span>
-              </div>
-            </div>
+            <Logo locale={locale} variant="dark" className="mb-4" />
             <p className="text-sm text-slate-400 leading-relaxed max-w-md">
               {dict.footer.description}
             </p>
