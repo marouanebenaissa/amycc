@@ -1,0 +1,103 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "about": "À propos",
+    "programs": "Programmes",
+    "events": "Événements",
+    "news": "Actualités",
+    "membership": "Adhésion",
+    "volunteer": "Bénévolat",
+    "partnerships": "Partenariats",
+    "support": "Soutien",
+    "gallery": "Galerie",
+    "contact": "Contact"
+  },
+  "hero": {
+    "title": "Association Esprit des Arts et de la Culture",
+    "subtitle": "Vers une société créative et culturellement diverse",
+    "cta_primary": "Découvrir nos programmes",
+    "cta_secondary": "Rejoignez-nous"
+  },
+  "about": {
+    "title": "À propos",
+    "description": "L'Association Esprit des Arts et de la Culture (AMYCC) est une association à but non lucratif basée au Maroc, fondée en 2026, œuvrant pour la promotion des arts, de la culture et l'autonomisation de la jeunesse.",
+    "mission_title": "Notre Mission",
+    "vision_title": "Notre Vision",
+    "values_title": "Nos Valeurs"
+  },
+  "programs": {
+    "title": "Nos Programmes",
+    "view_all": "Voir tous les programmes",
+    "learn_more": "En savoir plus"
+  },
+  "events": {
+    "title": "Événements",
+    "upcoming": "Événements à venir",
+    "past": "Événements passés",
+    "register": "S'inscrire",
+    "view_all": "Voir tous les événements",
+    "no_events": "Aucun événement à venir pour le moment."
+  },
+  "news": {
+    "title": "Actualités",
+    "read_more": "Lire la suite",
+    "view_all": "Toutes les actualités"
+  },
+  "membership": {
+    "title": "Adhésion",
+    "subtitle": "Rejoignez notre communauté",
+    "apply": "Demander l'adhésion"
+  },
+  "volunteer": {
+    "title": "Bénévolat",
+    "subtitle": "Faites partie du changement",
+    "apply": "Devenir bénévole",
+    "initiative": "Initiative Jeunesse en Action"
+  },
+  "partnerships": {
+    "title": "Partenariats",
+    "subtitle": "Construisons ensemble",
+    "apply": "Proposer un partenariat"
+  },
+  "support": {
+    "title": "Soutien",
+    "subtitle": "Soutenez notre démarche culturelle"
+  },
+  "gallery": {
+    "title": "Galerie"
+  },
+  "contact": {
+    "title": "Contact",
+    "email_label": "Adresse e-mail",
+    "phone_label": "Téléphone",
+    "message_label": "Message",
+    "name_label": "Nom complet",
+    "send": "Envoyer",
+    "success": "Votre message a été envoyé avec succès.",
+    "error": "Une erreur s'est produite. Veuillez réessayer."
+  },
+  "footer": {
+    "rights": "Tous droits réservés",
+    "privacy": "Politique de confidentialité",
+    "legal": "Mentions légales",
+    "description": "Association à but non lucratif œuvrant pour la promotion des arts, de la culture et l'autonomisation de la jeunesse au Maroc."
+  },
+  "common": {
+    "loading": "Chargement...",
+    "error": "Une erreur s'est produite",
+    "not_found": "Page introuvable",
+    "back": "Retour",
+    "close": "Fermer",
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "submit": "Envoyer",
+    "required": "Ce champ est obligatoire",
+    "language": "Langue",
+    "skip_to_content": "Aller au contenu principal"
+  },
+  "meta": {
+    "site_name": "Association Esprit des Arts et de la Culture - AMYCC",
+    "home_title": "Accueil | AMYCC",
+    "home_description": "Association Esprit des Arts et de la Culture - Association à but non lucratif basée au Maroc, promouvant les arts, la culture et la jeunesse."
+  }
+}

@@ -1,26 +1,126 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* ============================================================
+   AMYCC Design System — Tailwind CSS v4 Theme
+   Palette:
+   - Primary Brand / Header / Hero: White (#FFFFFF)
+   - Accent & Brand Blue: #0068ff (Vibrant Navy / Electric Blue)
+   - Text & Accents: Black & Slate Grays (#0A0F1D, #334155, #64748B)
+   ============================================================ */
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* --- Brand Colors --- */
+  --color-blue-brand: #0068ff;
+  --color-blue-brand-hover: #0054d1;
+  --color-blue-brand-dark: #0041a8;
+  --color-blue-brand-light: #e6f0ff;
+  --color-blue-brand-subtle: #f0f6ff;
+
+  --color-dark-950: #050811;
+  --color-dark-900: #0a0f1d;
+  --color-dark-800: #121829;
+  --color-dark-700: #1e293b;
+
+  --color-slate-900: #0f172a;
+  --color-slate-800: #1e293b;
+  --color-slate-700: #334155;
+  --color-slate-600: #475569;
+  --color-slate-500: #64748b;
+  --color-slate-400: #94a3b8;
+  --color-slate-300: #cbd5e1;
+  --color-slate-200: #e2e8f0;
+  --color-slate-100: #f1f5f9;
+  --color-slate-50:  #f8fafc;
+
+  /* --- Semantic aliases --- */
+  --color-primary:        #ffffff;
+  --color-primary-dark:   #f8fafc;
+  --color-accent:         #0068ff;
+  --color-accent-hover:   #0054d1;
+  --color-accent-light:   #e6f0ff;
+
+  --color-surface:        #ffffff;
+  --color-surface-muted:  #f8fafc;
+  --color-surface-card:   #ffffff;
+  --color-border:         #e2e8f0;
+  --color-border-strong:  #cbd5e1;
+  --color-border-accent:  #bfdbfe;
+
+  --color-text-primary:   #0a0f1d;
+  --color-text-secondary: #475569;
+  --color-text-muted:     #64748b;
+  --color-text-inverse:   #ffffff;
+
+  --color-success:  #10b981;
+  --color-warning:  #f59e0b;
+  --color-error:    #ef4444;
+  --color-info:     #0068ff;
+
+  /* --- Typography --- */
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-arabic: 'Noto Sans Arabic', 'Segoe UI', system-ui, sans-serif;
+
+  /* --- Border radius --- */
+  --radius-sm:  0.25rem;
+  --radius-md:  0.5rem;
+  --radius-lg:  0.75rem;
+  --radius-xl:  1rem;
+  --radius-2xl: 1.5rem;
+
+  /* --- Shadows --- */
+  --shadow-card: 0 1px 3px 0 rgb(0 0 0 / 0.06), 0 1px 2px -1px rgb(0 0 0 / 0.04);
+  --shadow-card-hover: 0 10px 15px -3px rgb(0 104 255 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.05);
+  --shadow-nav: 0 1px 0 0 var(--color-border);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ============================================================
+   Base Styles
+   ============================================================ */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-surface);
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  min-height: 100dvh;
+}
+
+/* Arabic RTL body uses Arabic font stack */
+[dir="rtl"] body,
+[lang="ar"] body,
+body:has([dir="rtl"]) {
+  font-family: var(--font-arabic);
+}
+
+/* ============================================================
+   Focus Styles (Accessibility)
+   ============================================================ */
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ============================================================
+   Scrollbar
+   ============================================================ */
+
+@media (min-width: 768px) {
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--color-surface-muted); }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-slate-300);
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover { background: var(--color-slate-400); }
 }

@@ -1,0 +1,103 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "programs": "Programs",
+    "events": "Events",
+    "news": "News",
+    "membership": "Membership",
+    "volunteer": "Volunteer",
+    "partnerships": "Partnerships",
+    "support": "Support",
+    "gallery": "Gallery",
+    "contact": "Contact"
+  },
+  "hero": {
+    "title": "Spirit of Arts & Culture Association",
+    "subtitle": "Towards a Creative and Culturally Diverse Society",
+    "cta_primary": "Explore Our Programs",
+    "cta_secondary": "Join Us"
+  },
+  "about": {
+    "title": "About Us",
+    "description": "The Spirit of Arts & Culture Association (AMYCC) is a nonprofit association based in Morocco, founded in 2026, dedicated to promoting arts, culture, and youth empowerment.",
+    "mission_title": "Our Mission",
+    "vision_title": "Our Vision",
+    "values_title": "Our Values"
+  },
+  "programs": {
+    "title": "Our Programs",
+    "view_all": "View All Programs",
+    "learn_more": "Learn More"
+  },
+  "events": {
+    "title": "Events",
+    "upcoming": "Upcoming Events",
+    "past": "Past Events",
+    "register": "Register Now",
+    "view_all": "View All Events",
+    "no_events": "No upcoming events at the moment."
+  },
+  "news": {
+    "title": "News",
+    "read_more": "Read More",
+    "view_all": "All News"
+  },
+  "membership": {
+    "title": "Membership",
+    "subtitle": "Join Our Community",
+    "apply": "Apply for Membership"
+  },
+  "volunteer": {
+    "title": "Volunteer",
+    "subtitle": "Be Part of the Change",
+    "apply": "Apply to Volunteer",
+    "initiative": "Youth in Action Initiative"
+  },
+  "partnerships": {
+    "title": "Partnerships",
+    "subtitle": "Building Together",
+    "apply": "Propose a Partnership"
+  },
+  "support": {
+    "title": "Support",
+    "subtitle": "Support Our Cultural Journey"
+  },
+  "gallery": {
+    "title": "Gallery"
+  },
+  "contact": {
+    "title": "Contact",
+    "email_label": "Email Address",
+    "phone_label": "Phone",
+    "message_label": "Message",
+    "name_label": "Full Name",
+    "send": "Send Message",
+    "success": "Your message has been sent successfully.",
+    "error": "An error occurred. Please try again."
+  },
+  "footer": {
+    "rights": "All rights reserved",
+    "privacy": "Privacy Policy",
+    "legal": "Legal",
+    "description": "A nonprofit association promoting arts, culture, and youth empowerment in Morocco."
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "not_found": "Page not found",
+    "back": "Back",
+    "close": "Close",
+    "save": "Save",
+    "cancel": "Cancel",
+    "submit": "Submit",
+    "required": "This field is required",
+    "language": "Language",
+    "skip_to_content": "Skip to main content"
+  },
+  "meta": {
+    "site_name": "Spirit of Arts & Culture Association - AMYCC",
+    "home_title": "Home | AMYCC",
+    "home_description": "Spirit of Arts & Culture Association - A nonprofit based in Morocco promoting arts, culture, and youth empowerment."
+  }
+}
