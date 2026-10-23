@@ -33,16 +33,16 @@ export default async function AdminEventsPage() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-extrabold text-[#0a0f1d]">Events & Registrations</h1>
-          <p className="text-xs text-slate-500 mt-1">
-            Monitor upcoming workshops, cultural nights, venue capacities, and registrations.
+          <h1 className="text-2xl font-black text-[#08242a]">Events & Cultural Programming</h1>
+          <p className="text-xs text-[#5f7174] mt-1">
+            Monitor upcoming workshops, cultural nights, venue capacities, and registration gates.
           </p>
         </div>
         <Link
           href="/admin/events/new"
-          className="inline-flex items-center gap-2 px-4 py-2.5 bg-[#0068ff] text-white text-sm font-bold rounded-xl hover:bg-blue-700 transition-colors"
+          className="inline-flex items-center gap-2 px-4 py-2.5 bg-[#0d3b43] text-white text-xs font-bold rounded-xl hover:bg-[#14505b] active:scale-98 transition-all shadow-subtle hover:shadow-card"
         >
           <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
@@ -51,10 +51,10 @@ export default async function AdminEventsPage() {
         </Link>
       </div>
 
-      <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-2xs">
+      <div className="bg-white rounded-2xl border border-[#e5e0d6] overflow-hidden shadow-2xs">
         <div className="overflow-x-auto">
-          <table className="w-full text-start text-xs text-slate-700">
-            <thead className="bg-slate-50 border-b border-slate-200 text-2xs uppercase tracking-wider text-slate-500 font-bold">
+          <table className="w-full text-start text-xs text-[#2d3b3e]">
+            <thead className="bg-[#faf7f2] border-b border-[#e5e0d6] text-2xs uppercase tracking-wider text-[#5f7174] font-bold">
               <tr>
                 <th className="px-6 py-4 text-start">Event Title</th>
                 <th className="px-6 py-4 text-start">Date & Venue</th>
@@ -63,34 +63,34 @@ export default async function AdminEventsPage() {
                 <th className="px-6 py-4 text-start">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100">
+            <tbody className="divide-y divide-[#f4ede2]">
               {events && events.length > 0 ? (
                 events.map((ev) => {
                   const title = ev.event_translations?.[0]?.title || ev.slug
                   const regCount = ev.event_registrations?.[0]?.count ?? 0
                   return (
-                    <tr key={ev.id} className="hover:bg-slate-50/50 transition-colors">
+                    <tr key={ev.id} className="hover:bg-[#faf7f2]/60 transition-colors">
                       <td className="px-6 py-4">
-                        <div className="font-bold text-[#0a0f1d]">{title}</div>
-                        <div className="text-slate-400 text-3xs font-mono">/{ev.slug}</div>
+                        <div className="font-bold text-[#08242a]">{title}</div>
+                        <div className="text-[#819598] text-3xs font-mono">/{ev.slug}</div>
                       </td>
                       <td className="px-6 py-4">
-                        <span className="font-semibold block">
+                        <span className="font-semibold block text-[#08242a]">
                           {new Date(ev.start_date).toLocaleDateString()}
                         </span>
-                        <span className="text-slate-400 text-2xs">
+                        <span className="text-[#819598] text-3xs">
                           {ev.venue || ev.city || 'TBD'}
                         </span>
                       </td>
                       <td className="px-6 py-4">
-                        <span className="font-bold text-[#0068ff]">{regCount}</span>
-                        <span className="text-slate-400 text-2xs"> / {ev.capacity || 'Unlimited'}</span>
+                        <span className="font-bold text-[#0d3b43]">{regCount}</span>
+                        <span className="text-[#819598] text-3xs"> / {ev.capacity || 'Unlimited'}</span>
                       </td>
                       <td className="px-6 py-4">
                         <span
                           className={`inline-block px-2.5 py-1 rounded-full text-2xs font-bold ${
                             ev.registration_open
-                              ? 'bg-emerald-50 text-emerald-700'
+                              ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
                               : 'bg-slate-100 text-slate-600'
                           }`}
                         >
@@ -101,14 +101,14 @@ export default async function AdminEventsPage() {
                         <div className="flex items-center gap-2 flex-wrap">
                           <Link
                             href={`/admin/events/${ev.id}/edit`}
-                            className="px-2.5 py-1 rounded-lg text-2xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition-colors"
+                            className="px-2.5 py-1 rounded-lg text-2xs font-bold bg-[#faf7f2] text-[#08242a] hover:bg-[#f4ede2] border border-[#e5e0d6] transition-colors"
                           >
                             Edit
                           </Link>
                           <form action={toggleRegistration.bind(null, ev.id, ev.registration_open)}>
                             <button
                               type="submit"
-                              className="px-2.5 py-1 rounded-lg text-2xs font-bold border border-slate-200 hover:bg-slate-50 transition-colors"
+                              className="px-2.5 py-1 rounded-lg text-2xs font-bold border border-[#cfc7b9] hover:bg-[#faf7f2] transition-colors"
                             >
                               {ev.registration_open ? 'Close Reg.' : 'Open Reg.'}
                             </button>
@@ -116,7 +116,7 @@ export default async function AdminEventsPage() {
                           <form action={handleDelete.bind(null, ev.id)} className="inline">
                             <button
                               type="submit"
-                              className="px-2.5 py-1 rounded-lg text-2xs font-bold bg-red-50 text-red-700 hover:bg-red-100 transition-colors"
+                              className="px-2.5 py-1 rounded-lg text-2xs font-bold text-red-600 hover:bg-red-50 transition-colors"
                             >
                               Delete
                             </button>
@@ -128,9 +128,9 @@ export default async function AdminEventsPage() {
                 })
               ) : (
                 <tr>
-                  <td colSpan={5} className="px-6 py-12 text-center text-slate-400">
-                    No events yet.{' '}
-                    <Link href="/admin/events/new" className="text-[#0068ff] hover:underline">
+                  <td colSpan={5} className="px-6 py-12 text-center text-[#819598]">
+                    No events scheduled yet.{' '}
+                    <Link href="/admin/events/new" className="text-[#c85a32] font-bold hover:underline">
                       Schedule the first one →
                     </Link>
                   </td>

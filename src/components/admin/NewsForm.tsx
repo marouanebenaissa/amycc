@@ -66,14 +66,14 @@ export function NewsForm({ article }: NewsFormProps) {
   return (
     <form action={handleSubmit} className="space-y-6">
       {error && (
-        <div className="p-4 rounded-xl bg-red-50 border border-red-200 text-red-700 text-sm">
+        <div className="p-4 rounded-xl bg-[#fae4dc] border border-[#f2c2b0] text-[#c85a32] text-xs font-bold">
           {error}
         </div>
       )}
 
       {/* General */}
-      <div className="bg-white rounded-2xl border border-slate-200 p-6 space-y-5">
-        <h2 className="text-sm font-bold text-slate-700 uppercase tracking-wider">General</h2>
+      <div className="bg-white rounded-2xl border border-[#e5e0d6] p-6 space-y-5 shadow-2xs">
+        <h2 className="text-xs font-bold text-[#08242a] uppercase tracking-wider">General Information</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <FormField label="URL Slug" required hint="Auto-generated from English title if blank">
             <Input
@@ -96,26 +96,26 @@ export function NewsForm({ article }: NewsFormProps) {
             name="cover_image"
             type="url"
             defaultValue={article?.cover_image || ''}
-            placeholder="https://..."
+            placeholder="https://images.unsplash.com/..."
           />
         </FormField>
       </div>
 
       {/* Translations */}
-      <div className="bg-white rounded-2xl border border-slate-200 p-6 space-y-5">
+      <div className="bg-white rounded-2xl border border-[#e5e0d6] p-6 space-y-5 shadow-2xs">
         <div className="flex items-center justify-between">
-          <h2 className="text-sm font-bold text-slate-700 uppercase tracking-wider">Content</h2>
-          <div className="flex gap-2">
+          <h2 className="text-xs font-bold text-[#08242a] uppercase tracking-wider">Trilingual Article Content</h2>
+          <div className="flex gap-1.5 p-1 rounded-xl bg-[#faf7f2] border border-[#e5e0d6]">
             {(['ar', 'fr', 'en'] as const).map((loc) => (
               <button
                 key={loc}
                 type="button"
                 onClick={() => setActiveLocale(loc)}
                 className={[
-                  'px-3 py-1.5 text-xs font-bold rounded-lg transition-colors',
+                  'px-3 py-1.5 text-xs font-bold rounded-lg transition-all',
                   activeLocale === loc
-                    ? 'bg-[#0068ff] text-white'
-                    : 'text-slate-500 hover:bg-slate-100',
+                    ? 'bg-[#0d3b43] text-white shadow-xs'
+                    : 'text-[#445457] hover:bg-[#f4ede2]',
                 ].join(' ')}
               >
                 {loc.toUpperCase()}
@@ -132,7 +132,7 @@ export function NewsForm({ article }: NewsFormProps) {
               name="title_ar"
               dir="rtl"
               defaultValue={arTrans?.title || ''}
-              placeholder="عنوان المقال"
+              placeholder="عنوان المقال أو البيان الصحفي"
             />
           </FormField>
           <FormField label="Excerpt (Arabic)" hint="Short summary shown in news listing">
@@ -141,14 +141,14 @@ export function NewsForm({ article }: NewsFormProps) {
               dir="rtl"
               rows={2}
               defaultValue={arTrans?.excerpt || ''}
-              placeholder="ملخص المقال..."
+              placeholder="ملخص موجز للمقال..."
             />
           </FormField>
-          <FormField label="Article Body (Arabic)" required>
+          <FormField label="Article Body (Arabic) — TipTap Rich Text" required>
             <RichTextEditor
               name="content_ar"
               defaultValue={arTrans?.content || ''}
-              placeholder="اكتب محتوى المقال هنا..."
+              placeholder="اكتب محتوى المقال مع التنسيق الغني هنا..."
               dir="rtl"
               required
             />
@@ -173,7 +173,7 @@ export function NewsForm({ article }: NewsFormProps) {
               placeholder="Résumé de l'article..."
             />
           </FormField>
-          <FormField label="Article Body (French)" required>
+          <FormField label="Article Body (French) — TipTap Rich Text" required>
             <RichTextEditor
               name="content_fr"
               defaultValue={frTrans?.content || ''}
@@ -201,11 +201,11 @@ export function NewsForm({ article }: NewsFormProps) {
               placeholder="Article summary..."
             />
           </FormField>
-          <FormField label="Article Body (English)" required>
+          <FormField label="Article Body (English) — TipTap Rich Text" required>
             <RichTextEditor
               name="content_en"
               defaultValue={enTrans?.content || ''}
-              placeholder="Write the article body here..."
+              placeholder="Write the article body with rich styling here..."
               required
             />
           </FormField>
@@ -217,14 +217,14 @@ export function NewsForm({ article }: NewsFormProps) {
         <button
           type="button"
           onClick={() => router.back()}
-          className="px-4 py-2.5 text-sm font-semibold text-slate-600 border border-slate-200 rounded-xl hover:bg-slate-50 transition-colors"
+          className="px-5 py-2.5 text-xs font-bold text-[#445457] border border-[#cfc7b9] rounded-xl hover:bg-[#faf7f2] transition-colors"
         >
           Cancel
         </button>
         <button
           type="submit"
           disabled={isPending}
-          className="px-6 py-2.5 text-sm font-bold text-white bg-[#0068ff] rounded-xl hover:bg-blue-700 disabled:opacity-60 disabled:cursor-not-allowed transition-colors"
+          className="px-6 py-2.5 text-xs font-bold text-white bg-[#0d3b43] hover:bg-[#14505b] active:scale-98 rounded-xl disabled:opacity-60 disabled:cursor-not-allowed transition-all shadow-subtle hover:shadow-card"
         >
           {isPending ? 'Saving…' : article ? 'Update Article' : 'Create Article'}
         </button>

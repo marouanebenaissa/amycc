@@ -9,13 +9,13 @@ interface FormFieldProps {
 export function FormField({ label, error, required, children, hint }: FormFieldProps) {
   return (
     <div className="space-y-1.5">
-      <label className="block text-xs font-semibold text-slate-700">
+      <label className="block text-xs font-bold text-[#2d3b3e]">
         {label}
-        {required && <span className="text-red-500 ms-1">*</span>}
+        {required && <span className="text-[#c85a32] ms-1">*</span>}
       </label>
-      {hint && <p className="text-xs text-slate-400">{hint}</p>}
+      {hint && <p className="text-3xs text-[#5f7174]">{hint}</p>}
       {children}
-      {error && <p className="text-xs text-red-600">{error}</p>}
+      {error && <p className="text-xs text-red-600 font-medium">{error}</p>}
     </div>
   )
 }
@@ -28,11 +28,11 @@ export function Input({ error, className = '', ...props }: InputProps) {
   return (
     <input
       className={[
-        'w-full px-3 py-2.5 text-sm rounded-lg border transition-all outline-none',
-        'focus:ring-2 focus:ring-[#0068ff] focus:border-[#0068ff]',
+        'w-full px-3.5 py-2.5 text-sm rounded-xl border transition-all outline-none text-[#08242a]',
+        'focus:ring-2 focus:ring-[#0d3b43] focus:border-[#0d3b43]',
         error
-          ? 'border-red-400 bg-red-50'
-          : 'border-slate-200 bg-white hover:border-slate-300',
+          ? 'border-red-400 bg-red-50/50'
+          : 'border-[#e5e0d6] bg-white hover:border-[#cfc7b9]',
         className,
       ].join(' ')}
       {...props}
@@ -49,11 +49,11 @@ export function Textarea({ error, className = '', ...props }: TextareaProps) {
     <textarea
       rows={4}
       className={[
-        'w-full px-3 py-2.5 text-sm rounded-lg border transition-all outline-none resize-vertical',
-        'focus:ring-2 focus:ring-[#0068ff] focus:border-[#0068ff]',
+        'w-full px-3.5 py-2.5 text-sm rounded-xl border transition-all outline-none resize-vertical text-[#08242a]',
+        'focus:ring-2 focus:ring-[#0d3b43] focus:border-[#0d3b43]',
         error
-          ? 'border-red-400 bg-red-50'
-          : 'border-slate-200 bg-white hover:border-slate-300',
+          ? 'border-red-400 bg-red-50/50'
+          : 'border-[#e5e0d6] bg-white hover:border-[#cfc7b9]',
         className,
       ].join(' ')}
       {...props}
@@ -70,9 +70,9 @@ export function Select({ options, error, className = '', ...props }: SelectProps
   return (
     <select
       className={[
-        'w-full px-3 py-2.5 text-sm rounded-lg border transition-all outline-none bg-white',
-        'focus:ring-2 focus:ring-[#0068ff] focus:border-[#0068ff]',
-        error ? 'border-red-400' : 'border-slate-200 hover:border-slate-300',
+        'w-full px-3.5 py-2.5 text-sm rounded-xl border transition-all outline-none bg-white text-[#08242a]',
+        'focus:ring-2 focus:ring-[#0d3b43] focus:border-[#0d3b43]',
+        error ? 'border-red-400' : 'border-[#e5e0d6] hover:border-[#cfc7b9]',
         className,
       ].join(' ')}
       {...props}
@@ -89,9 +89,9 @@ export function Select({ options, error, className = '', ...props }: SelectProps
 export function SectionDivider({ title }: { title: string }) {
   return (
     <div className="flex items-center gap-3 pt-2">
-      <div className="flex-1 h-px bg-slate-100" />
-      <span className="text-2xs font-bold uppercase tracking-widest text-slate-400">{title}</span>
-      <div className="flex-1 h-px bg-slate-100" />
+      <div className="flex-1 h-px bg-[#e5e0d6]" />
+      <span className="text-3xs font-bold uppercase tracking-widest text-[#5f7174]">{title}</span>
+      <div className="flex-1 h-px bg-[#e5e0d6]" />
     </div>
   )
 }
@@ -112,8 +112,8 @@ export function LocaleTab({
       type="button"
       onClick={onClick}
       className={[
-        'px-4 py-2 text-xs font-semibold rounded-lg transition-colors',
-        active ? 'bg-[#0068ff] text-white' : 'text-slate-500 hover:bg-slate-100',
+        'px-4 py-2 text-xs font-bold rounded-xl transition-all',
+        active ? 'bg-[#0d3b43] text-white shadow-xs' : 'text-[#445457] hover:bg-[#f4ede2]',
       ].join(' ')}
     >
       {locale.toUpperCase()} — {label}

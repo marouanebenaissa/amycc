@@ -1,6 +1,8 @@
 import { loginAdmin } from '@/lib/actions/admin'
 import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
+import Image from 'next/image'
+import Link from 'next/link'
 
 export default async function AdminLoginPage(props: {
   searchParams: Promise<{ error?: string }>
@@ -14,62 +16,83 @@ export default async function AdminLoginPage(props: {
   }
 
   return (
-    <div className="w-full max-w-md mx-auto">
-      <div className="bg-white p-8 sm:p-10 rounded-2xl border border-slate-200 shadow-sm">
+    <div className="w-full max-w-md mx-auto my-12 px-4">
+      <div className="bg-white p-8 sm:p-10 rounded-3xl border border-[#e5e0d6] shadow-card">
+        {/* Seal & Heading */}
         <div className="text-center mb-8">
-          <div className="w-12 h-12 rounded-2xl bg-[#0068ff] flex items-center justify-center font-extrabold text-white text-lg mx-auto mb-4 shadow-sm">
-            AM
+          <div className="w-14 h-14 rounded-2xl bg-[#0d3b43] border border-[#14505b] flex items-center justify-center mx-auto mb-4 p-2 shadow-subtle">
+            <Image
+              src="/logo.png"
+              alt="AMYCC Logo"
+              width={40}
+              height={40}
+              className="object-contain w-auto h-auto"
+              priority
+            />
           </div>
-          <h1 className="text-2xl font-extrabold text-[#0a0f1d]">AMYCC Admin Login</h1>
-          <p className="text-xs text-slate-500 mt-1">
+          <h1 className="text-2xl font-black text-[#08242a] tracking-tight">
+            AMYCC Administration
+          </h1>
+          <p className="text-xs font-semibold text-[#0d3b43] mt-1">
+            جمعية روح الفنون والثقافة
+          </p>
+          <p className="text-3xs text-[#5f7174] mt-1">
             Sign in with authorized association credentials
           </p>
         </div>
 
         {searchParams.error && (
-          <div className="p-3 mb-4 rounded-xl bg-red-50 text-red-700 text-xs font-semibold border border-red-200">
+          <div className="p-3.5 mb-6 rounded-xl bg-[#fae4dc] text-[#c85a32] text-xs font-bold border border-[#f2c2b0]">
             {searchParams.error}
           </div>
         )}
 
         <form action={loginAdmin} className="space-y-4">
           <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
-              Email Address
+            <label className="block text-2xs font-bold uppercase tracking-wider text-[#445457] mb-1.5">
+              Email Address / البريد الإلكتروني
             </label>
             <input
               type="email"
               name="email"
               required
-              className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:border-[#0068ff] focus:ring-1 focus:ring-[#0068ff] outline-none"
+              className="w-full px-4 py-2.5 rounded-xl border border-[#e5e0d6] text-sm text-[#08242a] focus:border-[#0d3b43] focus:ring-1 focus:ring-[#0d3b43] outline-none transition-all"
               placeholder="admin@amycc.org"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
-              Password
+            <label className="block text-2xs font-bold uppercase tracking-wider text-[#445457] mb-1.5">
+              Password / كلمة المرور
             </label>
             <input
               type="password"
               name="password"
               required
-              className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:border-[#0068ff] focus:ring-1 focus:ring-[#0068ff] outline-none"
+              className="w-full px-4 py-2.5 rounded-xl border border-[#e5e0d6] text-sm text-[#08242a] focus:border-[#0d3b43] focus:ring-1 focus:ring-[#0d3b43] outline-none transition-all"
               placeholder="••••••••••••"
             />
           </div>
 
           <button
             type="submit"
-            className="w-full py-3 px-4 rounded-xl font-bold text-white bg-[#0068ff] hover:bg-[#0054d1] transition-all shadow-sm text-sm mt-2"
+            className="w-full py-3.5 px-4 rounded-xl font-bold text-white bg-[#0d3b43] hover:bg-[#14505b] active:scale-98 transition-all shadow-subtle hover:shadow-card text-sm mt-3"
           >
-            Sign In to Dashboard
+            Sign In to Dashboard / تسجيل الدخول
           </button>
         </form>
 
-        <p className="text-2xs text-slate-400 text-center mt-6">
-          Protected area. Unauthorized access is strictly logged and restricted.
-        </p>
+        <div className="pt-6 mt-6 border-t border-[#f4ede2] text-center space-y-2">
+          <p className="text-3xs text-[#819598]">
+            Protected institutional area. Row Level Security & Session Auditing Enforced.
+          </p>
+          <Link
+            href="/ar"
+            className="inline-block text-2xs font-bold text-[#c85a32] hover:underline"
+          >
+            ← العودة إلى الموقع الرئيسي / Back to Website
+          </Link>
+        </div>
       </div>
     </div>
   )

@@ -37,31 +37,31 @@ export default async function AdminUsersPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-extrabold text-[#0a0f1d]">Users & Role-Based Permissions</h1>
-        <p className="text-xs text-slate-500 mt-1">
+        <h1 className="text-2xl font-black text-[#08242a]">Users & Role-Based Permissions (RBAC)</h1>
+        <p className="text-xs text-[#5f7174] mt-1">
           Enforce the principle of least privilege. Manage authorized staff roles and access levels.
         </p>
       </div>
 
-      <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-2xs">
+      <div className="bg-white rounded-2xl border border-[#e5e0d6] overflow-hidden shadow-2xs">
         <div className="overflow-x-auto">
-          <table className="w-full text-start text-xs text-slate-700">
-            <thead className="bg-slate-50 border-b border-slate-200 text-2xs uppercase tracking-wider text-slate-500 font-bold">
+          <table className="w-full text-start text-xs text-[#2d3b3e]">
+            <thead className="bg-[#faf7f2] border-b border-[#e5e0d6] text-2xs uppercase tracking-wider text-[#5f7174] font-bold">
               <tr>
-                <th className="px-6 py-4 text-start">User</th>
+                <th className="px-6 py-4 text-start">Staff User</th>
                 <th className="px-6 py-4 text-start">Assigned Roles</th>
                 <th className="px-6 py-4 text-start">Member Since</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100">
+            <tbody className="divide-y divide-[#f4ede2]">
               {profiles.length > 0 ? (
                 profiles.map((p) => {
                   const userRoles = p.user_roles?.map((ur) => ur.roles?.name).filter((name): name is string => Boolean(name)) || []
                   return (
-                    <tr key={p.id} className="hover:bg-slate-50/50 transition-colors">
+                    <tr key={p.id} className="hover:bg-[#faf7f2]/60 transition-colors">
                       <td className="px-6 py-4">
-                        <div className="font-bold text-[#0a0f1d]">{p.full_name || 'Staff Member'}</div>
-                        <div className="text-slate-500 text-2xs font-mono">{p.email}</div>
+                        <div className="font-bold text-[#08242a]">{p.full_name || 'Staff Member'}</div>
+                        <div className="text-[#5f7174] text-3xs font-mono">{p.email}</div>
                       </td>
                       <td className="px-6 py-4">
                         {userRoles.length > 0 ? (
@@ -69,10 +69,10 @@ export default async function AdminUsersPage() {
                             {userRoles.map((r: string) => (
                               <span
                                 key={r}
-                                className={`px-2 py-0.5 rounded-full text-3xs font-bold uppercase tracking-wider ${
+                                className={`px-2.5 py-0.5 rounded-full text-3xs font-bold uppercase tracking-wider ${
                                   r === 'super_admin'
-                                    ? 'bg-purple-100 text-purple-700'
-                                    : 'bg-blue-50 text-[#0068ff]'
+                                    ? 'bg-[#fae4dc] text-[#c85a32] border border-[#f2c2b0]'
+                                    : 'bg-[#d8f0f4] text-[#0d3b43] border border-[#aedfe7]'
                                 }`}
                               >
                                 {r.replace('_', ' ')}
@@ -80,10 +80,10 @@ export default async function AdminUsersPage() {
                             ))}
                           </div>
                         ) : (
-                          <span className="text-slate-400 text-2xs">No active role assigned</span>
+                          <span className="text-[#819598] text-2xs">No active role assigned</span>
                         )}
                       </td>
-                      <td className="px-6 py-4 text-slate-500 text-2xs">
+                      <td className="px-6 py-4 text-[#819598] text-3xs">
                         {new Date(p.created_at).toLocaleDateString()}
                       </td>
                     </tr>
@@ -91,7 +91,7 @@ export default async function AdminUsersPage() {
                 })
               ) : (
                 <tr>
-                  <td colSpan={3} className="px-6 py-12 text-center text-slate-400">
+                  <td colSpan={3} className="px-6 py-12 text-center text-[#819598]">
                     No users loaded.
                   </td>
                 </tr>
@@ -101,18 +101,26 @@ export default async function AdminUsersPage() {
         </div>
       </div>
 
-      {/* Role Directory Card */}
-      <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-2xs">
-        <h2 className="text-sm font-bold text-[#0a0f1d] mb-4">Configured System Roles</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {roles?.map((r) => (
-            <div key={r.id} className="p-4 rounded-xl bg-slate-50 border border-slate-100">
-              <span className="font-bold text-xs text-[#0a0f1d] block capitalize">
-                {r.name.replace(/_/g, ' ')}
-              </span>
-              <p className="text-2xs text-slate-500 mt-1">{r.description}</p>
-            </div>
-          ))}
+      {/* Predefined Roles Reference Card */}
+      <div className="bg-white p-6 rounded-2xl border border-[#e5e0d6] shadow-2xs">
+        <h2 className="text-xs font-bold text-[#08242a] mb-3 uppercase tracking-wider">
+          Predefined Role Definitions in AMYCC Security Matrix
+        </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+          {roles && roles.length > 0 ? (
+            roles.map((role) => (
+              <div key={role.id} className="p-3 rounded-xl bg-[#faf7f2] border border-[#e5e0d6] text-xs">
+                <span className="font-bold text-[#08242a] capitalize block">
+                  {role.name.replace(/_/g, ' ')}
+                </span>
+                <span className="text-3xs text-[#5f7174] leading-relaxed mt-0.5 block">
+                  {role.description}
+                </span>
+              </div>
+            ))
+          ) : (
+            <p className="text-xs text-[#819598]">9 standard roles initialized.</p>
+          )}
         </div>
       </div>
     </div>
