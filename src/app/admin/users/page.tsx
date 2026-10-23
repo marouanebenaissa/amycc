@@ -1,6 +1,24 @@
 import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 
+interface RoleInfo {
+  name: string
+  description: string
+}
+
+interface UserRoleRelation {
+  role_id: number
+  roles: RoleInfo | null
+}
+
+interface ProfileRow {
+  id: string
+  email: string
+  full_name?: string
+  created_at: string
+  user_roles?: UserRoleRelation[]
+}
+
 export default async function AdminUsersPage() {
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
@@ -9,10 +27,12 @@ export default async function AdminUsersPage() {
     redirect('/admin/login')
   }
 
-  const [{ data: profiles }, { data: roles }] = await Promise.all([
+  const [{ data: rawProfiles }, { data: roles }] = await Promise.all([
     supabase.from('profiles').select('*, user_roles(role_id, roles(name, description))').order('created_at', { ascending: false }),
     supabase.from('roles').select('*').order('id', { ascending: true }),
   ])
+
+  const profiles = (rawProfiles || []) as ProfileRow[]
 
   return (
     <div className="space-y-6">
@@ -34,9 +54,9 @@ export default async function AdminUsersPage() {
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100">
-              {profiles && profiles.length > 0 ? (
+              {profiles.length > 0 ? (
                 profiles.map((p) => {
-                  const userRoles = p.user_roles?.map((ur: any) => ur.roles?.name).filter(Boolean) || []
+                  const userRoles = p.user_roles?.map((ur) => ur.roles?.name).filter((name): name is string => Boolean(name)) || []
                   return (
                     <tr key={p.id} className="hover:bg-slate-50/50 transition-colors">
                       <td className="px-6 py-4">

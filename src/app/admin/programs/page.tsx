@@ -2,6 +2,20 @@ import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import { revalidatePath } from 'next/cache'
 
+interface ProgramTrans {
+  locale: string
+  title: string
+}
+
+interface ProgramRow {
+  id: string
+  slug: string
+  category: string
+  city?: string
+  status: string
+  program_translations?: ProgramTrans[]
+}
+
 export default async function AdminProgramsPage() {
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
@@ -10,10 +24,12 @@ export default async function AdminProgramsPage() {
     redirect('/admin/login')
   }
 
-  const { data: programs } = await supabase
+  const { data: rawPrograms } = await supabase
     .from('programs')
     .select('*, program_translations(*)')
     .order('created_at', { ascending: false })
+
+  const programs = (rawPrograms || []) as ProgramRow[]
 
   async function updateProgramStatus(id: string, newStatus: string) {
     'use server'
@@ -46,10 +62,10 @@ export default async function AdminProgramsPage() {
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100">
-              {programs && programs.length > 0 ? (
+              {programs.length > 0 ? (
                 programs.map((prog) => {
-                  const arTitle = prog.program_translations?.find((t: any) => t.locale === 'ar')?.title || prog.slug
-                  const enTitle = prog.program_translations?.find((t: any) => t.locale === 'en')?.title
+                  const arTitle = prog.program_translations?.find((t) => t.locale === 'ar')?.title || prog.slug
+                  const enTitle = prog.program_translations?.find((t) => t.locale === 'en')?.title
                   return (
                     <tr key={prog.id} className="hover:bg-slate-50/50 transition-colors">
                       <td className="px-6 py-4">

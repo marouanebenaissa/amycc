@@ -5,6 +5,21 @@ import { createPublicClient } from '@/lib/supabase/public'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
+interface ProgramTranslation {
+  locale: string
+  title: string
+  description?: string
+  objectives?: string
+  activities?: string
+}
+
+interface ProgramDetail {
+  slug: string
+  category: string
+  city?: string
+  program_translations?: ProgramTranslation[]
+}
+
 export async function generateStaticParams() {
   return [
     { locale: 'ar', slug: 'youth-in-action' },
@@ -22,7 +37,7 @@ export default async function ProgramDetailPage(props: {
   const { locale, slug } = await props.params
   const dict = await getDictionary(locale)
 
-  let program: any = null
+  let program: ProgramDetail | null = null
 
   try {
     const supabase = createPublicClient()
@@ -34,7 +49,7 @@ export default async function ProgramDetailPage(props: {
       .single()
 
     if (data) {
-      program = data
+      program = data as unknown as ProgramDetail
     }
   } catch {
     // Fallback
@@ -77,7 +92,7 @@ export default async function ProgramDetailPage(props: {
     }
   }
 
-  const translation = program.program_translations?.find((t: any) => t.locale === locale) || program.program_translations?.[0]
+  const translation = program.program_translations?.find((t) => t.locale === locale) || program.program_translations?.[0]
 
   return (
     <>

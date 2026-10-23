@@ -4,11 +4,23 @@ import { Footer } from '@/components/layout/Footer'
 import { createPublicClient } from '@/lib/supabase/public'
 import Link from 'next/link'
 
+interface ProgramListItem {
+  id: string
+  slug: string
+  category: string
+  city?: string
+  program_translations?: {
+    title: string
+    description?: string
+    objectives?: string
+  }[]
+}
+
 export default async function ProgramsPage(props: { params: Promise<{ locale: string }> }) {
   const { locale } = await props.params
   const dict = await getDictionary(locale)
 
-  let programs: any[] = []
+  let programs: ProgramListItem[] = []
 
   try {
     const supabase = createPublicClient()
@@ -19,14 +31,14 @@ export default async function ProgramsPage(props: { params: Promise<{ locale: st
       .eq('program_translations.locale', locale)
 
     if (data && data.length > 0) {
-      programs = data
+      programs = data as unknown as ProgramListItem[]
     }
   } catch {
-    // Graceful fallback if database is not reachable yet
+    // Graceful fallback
   }
 
-  // Built-in fallback sample programs if none queried yet
-  const defaultPrograms = [
+  // Built-in fallback sample programs
+  const defaultPrograms: ProgramListItem[] = [
     {
       id: '1',
       slug: 'youth-in-action',
@@ -76,7 +88,7 @@ export default async function ProgramsPage(props: { params: Promise<{ locale: st
         <div className="max-w-6xl mx-auto px-4 py-16">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {displayPrograms.map((prog) => {
-              const trans = prog.program_translations?.[0] || {}
+              const trans = prog.program_translations?.[0] || { title: prog.slug }
               return (
                 <div
                   key={prog.id}
@@ -94,7 +106,7 @@ export default async function ProgramsPage(props: { params: Promise<{ locale: st
                   </div>
                   <div>
                     <Link
-                      href={`/${locale}/volunteer`}
+                      href={`/${locale}/programs/${prog.slug}`}
                       className="inline-flex items-center text-sm font-bold text-[#0068ff] hover:text-[#0054d1]"
                     >
                       {dict.programs.learn_more} →

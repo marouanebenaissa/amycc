@@ -15,7 +15,8 @@ export async function GET() {
       database: 'connected',
       timestamp: new Date().toISOString(),
     })
-  } catch (err: any) {
-    return NextResponse.json({ status: 'error', message: err.message }, { status: 500 })
+  } catch (err: unknown) {
+    const errorMsg = err instanceof Error ? err.message : 'Unknown error'
+    return NextResponse.json({ status: 'error', message: errorMsg }, { status: 500 })
   }
 }

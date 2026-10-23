@@ -1,12 +1,13 @@
 import { isValidLocale, type Locale, defaultLocale } from './config'
+import enMessages from '@/messages/en.json'
 
-const dictionaries: Record<Locale, () => Promise<any>> = {
-  ar: () => import('@/messages/ar.json').then((m) => m.default),
-  fr: () => import('@/messages/fr.json').then((m) => m.default),
-  en: () => import('@/messages/en.json').then((m) => m.default),
+export type Dictionary = typeof enMessages
+
+const dictionaries: Record<Locale, () => Promise<Dictionary>> = {
+  ar: () => import('@/messages/ar.json').then((m) => m.default as Dictionary),
+  fr: () => import('@/messages/fr.json').then((m) => m.default as Dictionary),
+  en: () => import('@/messages/en.json').then((m) => m.default as Dictionary),
 }
-
-export type Dictionary = Awaited<ReturnType<typeof dictionaries['en']>>
 
 export async function getDictionary(locale: string = defaultLocale): Promise<Dictionary> {
   const targetLocale = isValidLocale(locale) ? locale : defaultLocale

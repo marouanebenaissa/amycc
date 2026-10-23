@@ -2,7 +2,20 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { isValidLocale, localeDir, type Locale } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/dictionaries'
+import { Inter, Noto_Sans_Arabic } from 'next/font/google'
 import '../globals.css'
+
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-sans',
+  display: 'swap',
+})
+
+const notoArabic = Noto_Sans_Arabic({
+  subsets: ['arabic'],
+  variable: '--font-arabic',
+  display: 'swap',
+})
 
 export async function generateStaticParams() {
   return [{ locale: 'ar' }, { locale: 'fr' }, { locale: 'en' }]
@@ -40,15 +53,7 @@ export default async function LocaleLayout(props: {
   const dir = localeDir[locale as Locale]
 
   return (
-    <html lang={locale} dir={dir} className="h-full">
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+Arabic:wght@300;400;500;600;700&display=swap"
-          rel="stylesheet"
-        />
-      </head>
+    <html lang={locale} dir={dir} className={`h-full ${inter.variable} ${notoArabic.variable}`}>
       <body className="flex flex-col min-h-full">
         {props.children}
       </body>

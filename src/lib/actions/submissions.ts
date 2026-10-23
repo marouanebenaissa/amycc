@@ -53,8 +53,9 @@ export async function submitMembership(formData: FormData): Promise<ActionRespon
     }
 
     return { success: true, message: 'Application submitted successfully.' }
-  } catch (err: any) {
-    return { success: false, message: err.message || 'An unexpected error occurred.' }
+  } catch (err: unknown) {
+    const errorMsg = err instanceof Error ? err.message : 'An unexpected error occurred.'
+    return { success: false, message: errorMsg }
   }
 }
 
@@ -100,8 +101,9 @@ export async function submitVolunteer(formData: FormData): Promise<ActionRespons
     }
 
     return { success: true, message: 'Volunteer application submitted successfully.' }
-  } catch (err: any) {
-    return { success: false, message: err.message || 'An unexpected error occurred.' }
+  } catch (err: unknown) {
+    const errorMsg = err instanceof Error ? err.message : 'An unexpected error occurred.'
+    return { success: false, message: errorMsg }
   }
 }
 
@@ -145,8 +147,9 @@ export async function submitPartnership(formData: FormData): Promise<ActionRespo
     }
 
     return { success: true, message: 'Partnership inquiry submitted successfully.' }
-  } catch (err: any) {
-    return { success: false, message: err.message || 'An unexpected error occurred.' }
+  } catch (err: unknown) {
+    const errorMsg = err instanceof Error ? err.message : 'An unexpected error occurred.'
+    return { success: false, message: errorMsg }
   }
 }
 
@@ -189,7 +192,34 @@ export async function submitSupportInquiry(formData: FormData): Promise<ActionRe
     }
 
     return { success: true, message: 'Support inquiry recorded successfully.' }
-  } catch (err: any) {
-    return { success: false, message: err.message || 'An unexpected error occurred.' }
+  } catch (err: unknown) {
+    const errorMsg = err instanceof Error ? err.message : 'An unexpected error occurred.'
+    return { success: false, message: errorMsg }
+  }
+}
+
+export async function submitContact(formData: FormData): Promise<ActionResponse> {
+  try {
+    const rawData = {
+      name: formData.get('name'),
+      email: formData.get('email'),
+      phone: formData.get('phone') || undefined,
+      subject: formData.get('subject') || undefined,
+      message: formData.get('message'),
+    }
+
+    const validated = contactSchema.safeParse(rawData)
+    if (!validated.success) {
+      return {
+        success: false,
+        message: 'Invalid submission data',
+        errors: validated.error.flatten().fieldErrors,
+      }
+    }
+
+    return { success: true, message: 'Message sent successfully.' }
+  } catch (err: unknown) {
+    const errorMsg = err instanceof Error ? err.message : 'An unexpected error occurred.'
+    return { success: false, message: errorMsg }
   }
 }
