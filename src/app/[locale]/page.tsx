@@ -636,16 +636,16 @@ export default async function HomePage(props: { params: Promise<{ locale: string
                   </h3>
                   <p className="text-sm text-[#445457] leading-relaxed">
                     {isAr
-                      ? 'رعاية الإبداع الفني والموسيقي والمسرحي، تمكين الشباب وصقل مهاراتهم، وتيسير الولوج الثقافي لجميع فئات المجتمع في مختلف المدن المغربية.'
+                      ? 'تؤمن الجمعية بأن لكل شاب موهبة وقدرات إبداعية تستحق الاكتشاف والرعاية، وتعمل انطلاقاً من مدينة مراكش على صقل الطاقات الفنية وتمكين الشباب في خدمة المجتمع.'
                       : dict.about.description}
                   </p>
                 </div>
                 <div className="pt-6 mt-6 border-t border-[#f4ede2]">
                   <Link
-                    href={`/${locale}/about`}
+                    href={`/${locale}/about#mission`}
                     className="text-xs font-bold text-[#0d3b43] hover:text-[#c85a32] transition-colors"
                   >
-                    {isAr ? 'عن الجمعية وأهدافها' : 'Learn more about us'} →
+                    {isAr ? 'اكتشف رسالتنا الكاملة' : 'Read Our Full Mission'} →
                   </Link>
                 </div>
               </div>
@@ -668,16 +668,16 @@ export default async function HomePage(props: { params: Promise<{ locale: string
                   </h3>
                   <p className="text-sm text-[#445457] leading-relaxed">
                     {isAr
-                      ? 'بناء مجتمع مغربي متفاعل ومبدع يحتفي بالتنوع الثقافي والتراثي، ويجعل من الفنون رافعة حقيقية للتنمية البشرية والتماسك الاجتماعي.'
+                      ? 'أن تصبح جمعية رائدة في الفنون والتمكين، عبر شبكة متكاملة من الفروع تنطلق إقليمياً وتمتد لمختلف جهات المملكة وصولاً للمستوى الوطني والدولي.'
                       : dict.hero.subtitle}
                   </p>
                 </div>
                 <div className="pt-6 mt-6 border-t border-[#f4ede2] relative z-10">
                   <Link
-                    href={`/${locale}/programs`}
+                    href={`/${locale}/about#vision`}
                     className="text-xs font-bold text-[#c85a32] hover:underline"
                   >
-                    {isAr ? 'استكشف رؤيتنا ميدانياً' : 'Discover our vision'} →
+                    {isAr ? 'استكشف خارطة الرؤية' : 'Explore Vision Roadmap'} →
                   </Link>
                 </div>
               </div>
@@ -699,16 +699,16 @@ export default async function HomePage(props: { params: Promise<{ locale: string
                   </h3>
                   <p className="text-sm text-[#445457] leading-relaxed">
                     {isAr
-                      ? 'الإبداع الحر، التطوع المسؤول، المواطنة الإيجابية، الشفافية المؤسساتية، والشراكة الفاعلة مع مختلف الفاعلين الثقافيين والتربويين.'
+                      ? 'تستند الجمعية إلى 7 قيم أساسية: الإبداع، الشمولية، التضامن، التعليم والتطوير، الاحترام والتنوع، التعاون والشراكة، والشفافية والمسؤولية.'
                       : dict.footer.description}
                   </p>
                 </div>
                 <div className="pt-6 mt-6 border-t border-[#f4ede2]">
                   <Link
-                    href={`/${locale}/membership`}
+                    href={`/${locale}/about#values`}
                     className="text-xs font-bold text-[#d99b26] hover:text-[#08242a] transition-colors"
                   >
-                    {isAr ? 'شاركنا هذه القيم وانخرط معنا' : 'Join our values'} →
+                    {isAr ? 'تفاصيل قيمنا الـ 7' : 'Our 7 Core Values'} →
                   </Link>
                 </div>
               </div>
