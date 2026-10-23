@@ -2,13 +2,14 @@ import { getDictionary } from '@/lib/i18n/dictionaries'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { createPublicClient } from '@/lib/supabase/public'
-import Image from 'next/image'
+import { ImageWithFallback } from '@/components/ui/ImageWithFallback'
 
 interface GalleryItem {
   id: string
   title: string
   description?: string | null
   image_url: string
+  fallbackSrc?: string
   category: string
   created_at: string
 }
@@ -37,12 +38,14 @@ export default async function GalleryPage(props: { params: Promise<{ locale: str
   }
 
   // Initial curated photography representing AMYCC's cultural themes
+  // Supports local files in public/images/gallery/1.png to 6.png
   const defaultItems: GalleryItem[] = [
     {
       id: 'g-1',
       title: isAr ? 'مبادرة شباب في العمل — ورشة القيادة الثقافية' : isFr ? 'Jeunesse en Action — Leadership Culturel' : 'Youth in Action Cultural Leadership',
       description: isAr ? 'شباب متطوع في تأطير وتنظيم التظاهرات الفنية والتنشيط المجتمعي.' : 'Youth volunteers organizing cultural community initiatives.',
-      image_url: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1200&q=80',
+      image_url: '/images/gallery/1.png',
+      fallbackSrc: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1200&q=80',
       category: 'youth',
       created_at: '2026-02-15',
     },
@@ -50,7 +53,8 @@ export default async function GalleryPage(props: { params: Promise<{ locale: str
       id: 'g-2',
       title: isAr ? 'المسرح وفنون الأداء التعبيري' : isFr ? 'Théâtre et Expression Scénique' : 'Theatre & Performing Arts Workshop',
       description: isAr ? 'تدريبات مسرحية على التعبير الركحي والإلقاء الصوتي للشباب.' : 'Dramatic stage training and vocal projection masterclass.',
-      image_url: 'https://images.unsplash.com/photo-1460723237483-7a6dc9d0b212?auto=format&fit=crop&w=1200&q=80',
+      image_url: '/images/gallery/2.png',
+      fallbackSrc: 'https://images.unsplash.com/photo-1460723237483-7a6dc9d0b212?auto=format&fit=crop&w=1200&q=80',
       category: 'theatre',
       created_at: '2026-03-01',
     },
@@ -58,7 +62,8 @@ export default async function GalleryPage(props: { params: Promise<{ locale: str
       id: 'g-3',
       title: isAr ? 'التراث الموسيقي المغربي الأصيل' : isFr ? 'Patrimoine Musical Marocain' : 'Moroccan Heritage Music Session',
       description: isAr ? 'جلسات استماع وتدريب على الآلات التراثية والمقامات المغربية.' : 'Acoustic sessions exploring Moroccan traditional musical heritage.',
-      image_url: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=1200&q=80',
+      image_url: '/images/gallery/3.png',
+      fallbackSrc: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=1200&q=80',
       category: 'music',
       created_at: '2026-03-18',
     },
@@ -66,7 +71,8 @@ export default async function GalleryPage(props: { params: Promise<{ locale: str
       id: 'g-4',
       title: isAr ? 'ورشة الفنون التشكيلية والتعبير البصري' : isFr ? 'Atelier des Arts Plastiques' : 'Visual Arts & Painting Workshop',
       description: isAr ? 'استكشاف الألوان والموتيفات الهندسية المغربية برؤية معاصرة.' : 'Exploring colors and Moroccan geometric patterns through contemporary art.',
-      image_url: 'https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=1200&q=80',
+      image_url: '/images/gallery/4.png',
+      fallbackSrc: 'https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=1200&q=80',
       category: 'arts',
       created_at: '2026-04-05',
     },
@@ -74,7 +80,8 @@ export default async function GalleryPage(props: { params: Promise<{ locale: str
       id: 'g-5',
       title: isAr ? 'الملتقى الثقافي والتواصل المجتمعي' : isFr ? 'Forum Culturel et Échange Communautaire' : 'Cultural Gathering & Community Dialogue',
       description: isAr ? 'حوارات مفتوحة حول دور الفنون في تقوية الروابط المجتمعية.' : 'Open dialogues on the power of arts in strengthening community bonds.',
-      image_url: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=1200&q=80',
+      image_url: '/images/gallery/5.png',
+      fallbackSrc: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=1200&q=80',
       category: 'events',
       created_at: '2026-04-20',
     },
@@ -82,7 +89,8 @@ export default async function GalleryPage(props: { params: Promise<{ locale: str
       id: 'g-6',
       title: isAr ? 'التراث المعماري والهوية البصرية المغربية' : isFr ? 'Patrimoine Architectural Marocain' : 'Moroccan Architectural Heritage',
       description: isAr ? 'توثيق الجماليات والزخارف المغربية الأصيلة وإلهامها للإبداع المعاصر.' : 'Documenting authentic Moroccan aesthetics inspiring modern creators.',
-      image_url: 'https://images.unsplash.com/photo-1539020140153-e479b8c22e70?auto=format&fit=crop&w=1200&q=80',
+      image_url: '/images/gallery/6.png',
+      fallbackSrc: 'https://images.unsplash.com/photo-1539020140153-e479b8c22e70?auto=format&fit=crop&w=1200&q=80',
       category: 'culture',
       created_at: '2026-05-10',
     },
@@ -137,8 +145,9 @@ export default async function GalleryPage(props: { params: Promise<{ locale: str
               >
                 {/* Photo Thumbnail */}
                 <div className="relative aspect-[4/3] w-full bg-[#08242a]/10 overflow-hidden">
-                  <Image
+                  <ImageWithFallback
                     src={item.image_url}
+                    fallbackSrc={item.fallbackSrc}
                     alt={item.title}
                     fill
                     sizes="(max-width: 768px) 100vw, 33vw"

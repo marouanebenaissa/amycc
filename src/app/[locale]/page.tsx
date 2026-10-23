@@ -5,6 +5,7 @@ import { createPublicClient } from '@/lib/supabase/public'
 import { FaqAccordion } from '@/components/home/FaqAccordion'
 import { EventRegistrationModal } from '@/components/events/EventRegistrationModal'
 import { IconWithFallback } from '@/components/ui/IconWithFallback'
+import { ImageWithFallback } from '@/components/ui/ImageWithFallback'
 import Link from 'next/link'
 import Image from 'next/image'
 
@@ -513,8 +514,9 @@ export default async function HomePage(props: { params: Promise<{ locale: string
                   <div className="relative rounded-3xl p-3.5 bg-white/90 border-2 border-[#e5e0d6] shadow-card-hover backdrop-blur-xs overflow-hidden">
                     {/* Main Cultural Card */}
                     <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-[#08242a]">
-                      <Image
-                        src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1200&q=80"
+                      <ImageWithFallback
+                        src="/images/hero.png"
+                        fallbackSrc="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1200&q=80"
                         alt="AMYCC Youth in Action & Cultural Expression"
                         fill
                         sizes="(max-width: 768px) 100vw, 40vw"
@@ -914,8 +916,9 @@ export default async function HomePage(props: { params: Promise<{ locale: string
               <div className="lg:col-span-5 relative">
                 <div className="relative rounded-3xl p-3 bg-white/10 border border-white/20 backdrop-blur-md shadow-2xl">
                   <div className="relative aspect-[4/3] rounded-2xl overflow-hidden">
-                    <Image
-                      src="https://images.unsplash.com/photo-1460723237483-7a6dc9d0b212?auto=format&fit=crop&w=1200&q=80"
+                    <ImageWithFallback
+                      src="/images/youth-in-action.png"
+                      fallbackSrc="https://images.unsplash.com/photo-1460723237483-7a6dc9d0b212?auto=format&fit=crop&w=1200&q=80"
                       alt="Youth in Action Performing Arts"
                       fill
                       sizes="(max-width: 768px) 100vw, 40vw"

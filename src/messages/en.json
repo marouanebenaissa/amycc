@@ -3,6 +3,9 @@
     "home": "Home",
     "about": "About",
     "programs": "Programs",
+    "programs_group": "Programs & Initiatives",
+    "annual_program": "Annual Program",
+    "impact": "Our Impact",
     "events": "Events",
     "news": "News",
     "membership": "Membership",
@@ -102,6 +105,16 @@
   "support": {
     "title": "Support",
     "subtitle": "Support Our Cultural Journey"
+  },
+  "annual_program": {
+    "title": "Annual Program",
+    "subtitle": "Comprehensive cultural agenda for the 2026 season across Morocco",
+    "tag": "Cultural Season 2026"
+  },
+  "impact": {
+    "title": "Our Impact",
+    "subtitle": "Empowering youth, nurturing creativity, and serving Moroccan communities",
+    "tag": "Impact & Metrics"
   },
   "gallery": {
     "title": "Gallery"

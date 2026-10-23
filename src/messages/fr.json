@@ -3,6 +3,9 @@
     "home": "Accueil",
     "about": "À propos",
     "programs": "Programmes",
+    "programs_group": "Programmes & Initiatives",
+    "annual_program": "Programme Annuel",
+    "impact": "Notre Impact",
     "events": "Événements",
     "news": "Actualités",
     "membership": "Adhésion",
@@ -102,6 +105,16 @@
   "support": {
     "title": "Soutien",
     "subtitle": "Soutenez notre démarche culturelle"
+  },
+  "annual_program": {
+    "title": "Programme Annuel",
+    "subtitle": "Agenda culturel et artistique de la saison 2026 au Maroc",
+    "tag": "Saison Culturelle 2026"
+  },
+  "impact": {
+    "title": "Notre Impact",
+    "subtitle": "L'impact de nos initiatives culturelles et de l'autonomisation des jeunes au Maroc",
+    "tag": "Indicateurs d'impact"
   },
   "gallery": {
     "title": "Galerie"
