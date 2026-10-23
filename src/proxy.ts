@@ -1,9 +1,8 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
-import { locales, defaultLocale, isValidLocale } from '@/lib/i18n/config'
+import { defaultLocale, isValidLocale } from '@/lib/i18n/config'
 
 function getLocaleFromRequest(request: NextRequest): string {
-  // Check Accept-Language header
   const acceptLanguage = request.headers.get('accept-language')
   if (acceptLanguage) {
     const preferred = acceptLanguage
@@ -17,6 +16,11 @@ function getLocaleFromRequest(request: NextRequest): string {
 
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl
+
+  // Skip admin and API routes from locale redirection
+  if (pathname.startsWith('/admin') || pathname.startsWith('/api')) {
+    return NextResponse.next()
+  }
 
   // Check if the pathname already has a valid locale prefix
   const pathnameLocale = pathname.split('/')[1]
@@ -33,7 +37,7 @@ export function proxy(request: NextRequest) {
 
 export const config = {
   matcher: [
-    // Skip _next, api, static files, and public assets
-    '/((?!_next/static|_next/image|api|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico|css|js)$).*)',
+    // Skip _next, static files, and public assets
+    '/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico|css|js)$).*)',
   ],
 }

@@ -1,36 +1,62 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# AMYCC — Spirit of Arts & Culture Association Platform
+**جمعية روح الفنون والثقافة (AMYCC)**  
+Official Multilingual Website and Administration Dashboard
 
-## Getting Started
+---
 
-First, run the development server:
+## 🏛️ Organization Identity
+- **Arabic Name**: جمعية روح الفنون والثقافة
+- **English Name**: Spirit of Arts & Culture Association
+- **French Name**: Association Esprit des Arts et de la Culture
+- **Abbreviation**: AMYCC
+- **Type**: Nonprofit Cultural & Youth Association based in Morocco
+- **Foundation Year**: 2026
+- **Initiative**: Youth in Action (الشباب في العمل)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🚀 Technology Stack
+- **Framework**: Next.js 16 (App Router)
+- **Runtime & Library**: React 19, TypeScript (Strict Mode)
+- **Styling**: Tailwind CSS v4 (Custom White & Vibrant Navy `#0068ff` Design System)
+- **Database & Auth**: PostgreSQL via Supabase (Row Level Security & RBAC)
+- **Validation**: Zod
+- **Internationalization**: Full RTL/LTR routing for Arabic (`/ar`), French (`/fr`), and English (`/en`)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🌐 Public Routes
+| Section | Arabic (RTL) | French (LTR) | English (LTR) |
+|---|---|---|---|
+| Home | `/ar` | `/fr` | `/en` |
+| About | `/ar/about` | `/fr/about` | `/en/about` |
+| Programs | `/ar/programs` | `/fr/programs` | `/en/programs` |
+| Events | `/ar/events` | `/fr/events` | `/en/events` |
+| News | `/ar/news` | `/fr/news` | `/en/news` |
+| Membership | `/ar/membership` | `/fr/membership` | `/en/membership` |
+| Volunteering | `/ar/volunteer` | `/fr/volunteer` | `/en/volunteer` |
+| Partnerships | `/ar/partnerships` | `/fr/partnerships` | `/en/partnerships` |
+| Support & Donations | `/ar/support` | `/fr/support` | `/en/support` |
+| Gallery | `/ar/gallery` | `/fr/gallery` | `/en/gallery` |
+| Contact | `/ar/contact` | `/fr/contact` | `/en/contact` |
+| Privacy Policy | `/ar/privacy` | `/fr/privacy` | `/en/privacy` |
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## 🛡️ Admin Dashboard Routes
+- `/admin/login` — Secure administrator authentication
+- `/admin` — Real-time overview of applications and system status
+- `/admin/memberships` — Manage membership application pipeline
+- `/admin/volunteers` — Manage Youth in Action volunteer roster
+- `/admin/partnerships` — Review institutional and corporate proposals
+- `/admin/settings` — Identity, branding, and system configuration
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 📖 Documentation
+- [SETUP.md](SETUP.md) — Local development and installation guide
+- [ARCHITECTURE.md](ARCHITECTURE.md) — System and routing architecture
+- [DATABASE.md](DATABASE.md) — Schema, ER diagram, and RLS policies
+- [SECURITY.md](SECURITY.md) — Security rules, CNDP Law 09-08 compliance, and secrets management
+- [DEPLOYMENT.md](DEPLOYMENT.md) — Production deployment and domain configuration
+- [BACKUP_AND_RECOVERY.md](BACKUP_AND_RECOVERY.md) — Backup procedures and disaster recovery
