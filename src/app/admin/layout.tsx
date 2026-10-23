@@ -11,9 +11,15 @@ export const metadata: Metadata = {
 
 const navItems = [
   { href: '/admin', label: 'Overview', icon: '📊' },
+  { href: '/admin/programs', label: 'Programs', icon: '🎨' },
+  { href: '/admin/events', label: 'Events', icon: '📅' },
+  { href: '/admin/news', label: 'News', icon: '📰' },
   { href: '/admin/memberships', label: 'Memberships', icon: '👥' },
   { href: '/admin/volunteers', label: 'Volunteers', icon: '🤝' },
   { href: '/admin/partnerships', label: 'Partnerships', icon: '🏛️' },
+  { href: '/admin/donations', label: 'Donations', icon: '💝' },
+  { href: '/admin/users', label: 'Users & Roles', icon: '🛡️' },
+  { href: '/admin/audit-logs', label: 'Audit Logs', icon: '📜' },
   { href: '/admin/settings', label: 'Settings', icon: '⚙️' },
 ]
 
@@ -33,7 +39,7 @@ export default async function AdminLayout({
             {/* Sidebar */}
             <aside className="w-full md:w-64 bg-[#0a0f1d] text-white flex flex-col justify-between p-6 shrink-0 border-r border-slate-800">
               <div>
-                <div className="flex items-center gap-3 mb-8">
+                <div className="flex items-center gap-3 mb-6">
                   <div className="w-9 h-9 rounded-xl bg-[#0068ff] flex items-center justify-center font-bold text-white text-sm">
                     AM
                   </div>
@@ -43,14 +49,14 @@ export default async function AdminLayout({
                   </div>
                 </div>
 
-                <nav className="space-y-1.5" aria-label="Admin Navigation">
+                <nav className="space-y-1 overflow-y-auto max-h-[calc(100vh-220px)] pr-1" aria-label="Admin Navigation">
                   {navItems.map((item) => (
                     <Link
                       key={item.href}
                       href={item.href}
-                      className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-800/80 transition-all"
+                      className="flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-800/80 transition-all"
                     >
-                      <span>{item.icon}</span>
+                      <span className="text-sm">{item.icon}</span>
                       <span>{item.label}</span>
                     </Link>
                   ))}
@@ -58,7 +64,7 @@ export default async function AdminLayout({
               </div>
 
               {/* User profile & Logout */}
-              <div className="pt-6 border-t border-slate-800 space-y-3">
+              <div className="pt-4 border-t border-slate-800 space-y-3">
                 <div className="text-2xs text-slate-400 truncate">
                   Signed in as: <br />
                   <strong className="text-white text-xs">{user.email}</strong>
