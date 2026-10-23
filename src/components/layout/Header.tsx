@@ -15,13 +15,19 @@ interface HeaderProps {
 
 export function Header({ locale, dict }: HeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [aboutDropdownOpen, setAboutDropdownOpen] = useState(false)
   const [programsDropdownOpen, setProgramsDropdownOpen] = useState(false)
+  const [mobileAboutOpen, setMobileAboutOpen] = useState(false)
   const [mobileProgramsOpen, setMobileProgramsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const pathname = usePathname()
   const [prevPathname, setPrevPathname] = useState(pathname)
-  const dropdownRef = useRef<HTMLDivElement>(null)
-  const dropdownTimeoutRef = useRef<NodeJS.Timeout | null>(null)
+
+  const aboutDropdownRef = useRef<HTMLDivElement>(null)
+  const programsDropdownRef = useRef<HTMLDivElement>(null)
+  const aboutTimeoutRef = useRef<NodeJS.Timeout | null>(null)
+  const programsTimeoutRef = useRef<NodeJS.Timeout | null>(null)
+
   const isAr = locale === 'ar'
   const isFr = locale === 'fr'
 
@@ -29,7 +35,9 @@ export function Header({ locale, dict }: HeaderProps) {
   if (prevPathname !== pathname) {
     setPrevPathname(pathname)
     setMobileMenuOpen(false)
+    setAboutDropdownOpen(false)
     setProgramsDropdownOpen(false)
+    setMobileAboutOpen(false)
     setMobileProgramsOpen(false)
   }
 
@@ -54,10 +62,14 @@ export function Header({ locale, dict }: HeaderProps) {
     }
   }, [mobileMenuOpen])
 
-  // Close desktop dropdown on click outside
+  // Close desktop dropdowns on click outside
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      const target = event.target as Node
+      if (aboutDropdownRef.current && !aboutDropdownRef.current.contains(target)) {
+        setAboutDropdownOpen(false)
+      }
+      if (programsDropdownRef.current && !programsDropdownRef.current.contains(target)) {
         setProgramsDropdownOpen(false)
       }
     }
@@ -65,19 +77,61 @@ export function Header({ locale, dict }: HeaderProps) {
     return () => document.removeEventListener('mousedown', handleClickOutside)
   }, [])
 
-  // Smooth hover handlers with timeout for dropdown
-  const handleMouseEnter = () => {
-    if (dropdownTimeoutRef.current) clearTimeout(dropdownTimeoutRef.current)
+  // About dropdown hover handlers
+  const handleAboutMouseEnter = () => {
+    if (aboutTimeoutRef.current) clearTimeout(aboutTimeoutRef.current)
+    setProgramsDropdownOpen(false)
+    setAboutDropdownOpen(true)
+  }
+
+  const handleAboutMouseLeave = () => {
+    aboutTimeoutRef.current = setTimeout(() => {
+      setAboutDropdownOpen(false)
+    }, 180)
+  }
+
+  // Programs dropdown hover handlers
+  const handleProgramsMouseEnter = () => {
+    if (programsTimeoutRef.current) clearTimeout(programsTimeoutRef.current)
+    setAboutDropdownOpen(false)
     setProgramsDropdownOpen(true)
   }
 
-  const handleMouseLeave = () => {
-    dropdownTimeoutRef.current = setTimeout(() => {
+  const handleProgramsMouseLeave = () => {
+    programsTimeoutRef.current = setTimeout(() => {
       setProgramsDropdownOpen(false)
     }, 180)
   }
 
-  // Sub-items grouped under "البرامج والمبادرات"
+  // Sub-items grouped under "عن الجمعية" (About + Team + Contact)
+  const aboutSubItems = [
+    {
+      key: 'about',
+      title: dict.nav.about,
+      desc: isAr ? 'الرؤية والرسالة والأهداف التأسيسية للجمعية' : isFr ? 'Vision, mission et objectifs fondateurs' : 'Vision, mission, and core values',
+      path: 'about',
+      icon: '✦',
+      iconSrc: '/icons/nav/about.png',
+    },
+    {
+      key: 'team',
+      title: isAr ? 'فريق العمل والحكامة' : isFr ? 'Notre Équipe & Gouvernance' : 'Our Team & Governance',
+      desc: isAr ? 'المكتب التنفيذي واللجان الفنية والوظيفية' : isFr ? 'Bureau exécutif et commissions artistiques' : 'Executive board & functional committees',
+      path: 'team',
+      icon: '👥',
+      iconSrc: '/icons/nav/team.png',
+    },
+    {
+      key: 'contact',
+      title: isAr ? 'تواصل معنا' : isFr ? 'Contactez-nous' : 'Contact Us',
+      desc: isAr ? 'المقر، البريد الإلكتروني، وقنوات التواصل الرسمي' : isFr ? 'Siège, e-mail officiel et coordonnées' : 'Headquarters, email, and social channels',
+      path: 'contact',
+      icon: '✉️',
+      iconSrc: '/icons/nav/contact.png',
+    },
+  ]
+
+  // Sub-items grouped under "البرامج والمبادرات" (Programs + Annual Program + Impact)
   const programSubItems = [
     {
       key: 'programs',
@@ -105,17 +159,57 @@ export function Header({ locale, dict }: HeaderProps) {
     },
   ]
 
-  // Check if any programs-related page is active
+  // Individual direct nav links
+  const directNavLinks = [
+    {
+      key: 'events' as const,
+      title: dict.nav.events,
+      path: 'events',
+      icon: '📅',
+      iconSrc: '/icons/nav/events.png',
+    },
+    {
+      key: 'news' as const,
+      title: dict.nav.news,
+      path: 'news',
+      icon: '📰',
+      iconSrc: '/icons/nav/news.png',
+    },
+    {
+      key: 'gallery' as const,
+      title: dict.nav.gallery,
+      path: 'gallery',
+      icon: '🖼️',
+      iconSrc: '/icons/nav/gallery.png',
+    },
+    {
+      key: 'volunteer' as const,
+      title: dict.nav.volunteer,
+      path: 'volunteer',
+      icon: '🤝',
+      iconSrc: '/icons/nav/volunteer.png',
+    },
+    {
+      key: 'partnerships' as const,
+      title: dict.nav.partnerships,
+      path: 'partnerships',
+      icon: '🏛️',
+      iconSrc: '/icons/nav/partnerships.png',
+    },
+  ]
+
+  // Check active states
+  const isHomeActive = pathname === `/${locale}` || pathname === `/${locale}/`
+  const isAboutActive =
+    pathname.startsWith(`/${locale}/about`) ||
+    pathname.startsWith(`/${locale}/team`) ||
+    pathname.startsWith(`/${locale}/contact`)
   const isProgramsActive =
     pathname.startsWith(`/${locale}/programs`) ||
     pathname.startsWith(`/${locale}/annual-program`) ||
     pathname.startsWith(`/${locale}/impact`)
 
-  // Check if a standard nav item is active
-  function isItemActive(path: string) {
-    if (path === '') {
-      return pathname === `/${locale}` || pathname === `/${locale}/`
-    }
+  function isPathActive(path: string) {
     return pathname.startsWith(`/${locale}/${path}`)
   }
 
@@ -176,12 +270,12 @@ export function Header({ locale, dict }: HeaderProps) {
           <Logo locale={locale} />
 
           {/* Desktop Navigation Links */}
-          <nav className="hidden lg:flex items-center gap-1.5 xl:gap-2" aria-label="Main navigation">
+          <nav className="hidden lg:flex items-center gap-1 xl:gap-1.5" aria-label="Main navigation">
             {/* 1. الرئيسية (Home) */}
             <Link
               href={`/${locale}`}
               className={`group px-3 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 ${
-                isItemActive('')
+                isHomeActive
                   ? 'bg-[#0d3b43]/8 text-[#c85a32] border border-[#c85a32]/25 shadow-2xs font-black'
                   : 'text-[#1b2628] hover:text-[#0d3b43] hover:bg-[#ebe1d1]/50'
               }`}
@@ -196,41 +290,116 @@ export function Header({ locale, dict }: HeaderProps) {
                 />
               </span>
               <span>{dict.nav.home}</span>
-              {isItemActive('') && (
+              {isHomeActive && (
                 <span className="w-1.5 h-1.5 rounded-full bg-[#c85a32] shrink-0" aria-hidden="true" />
               )}
             </Link>
 
-            {/* 2. من نحن (About) */}
-            <Link
-              href={`/${locale}/about`}
-              className={`group px-3 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 ${
-                isItemActive('about')
-                  ? 'bg-[#0d3b43]/8 text-[#c85a32] border border-[#c85a32]/25 shadow-2xs font-black'
-                  : 'text-[#1b2628] hover:text-[#0d3b43] hover:bg-[#ebe1d1]/50'
-              }`}
+            {/* 2. عن الجمعية (GROUPED DROPDOWN: من نحن + فريق العمل + تواصل معنا) */}
+            <div
+              ref={aboutDropdownRef}
+              className="relative"
+              onMouseEnter={handleAboutMouseEnter}
+              onMouseLeave={handleAboutMouseLeave}
             >
-              <span className="w-4 h-4 shrink-0 flex items-center justify-center opacity-85 group-hover:scale-110 transition-transform">
-                <IconWithFallback
-                  src="/icons/nav/about.png"
-                  fallbackEmoji="✦"
-                  alt={dict.nav.about}
-                  size={16}
-                  className="w-full h-full object-contain"
-                />
-              </span>
-              <span>{dict.nav.about}</span>
-              {isItemActive('about') && (
-                <span className="w-1.5 h-1.5 rounded-full bg-[#c85a32] shrink-0" aria-hidden="true" />
+              <button
+                type="button"
+                onClick={() => setAboutDropdownOpen(!aboutDropdownOpen)}
+                className={`group px-3 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 ${
+                  isAboutActive || aboutDropdownOpen
+                    ? 'bg-[#0d3b43]/8 text-[#c85a32] border border-[#c85a32]/25 shadow-2xs font-black'
+                    : 'text-[#1b2628] hover:text-[#0d3b43] hover:bg-[#ebe1d1]/50'
+                }`}
+                aria-expanded={aboutDropdownOpen}
+                aria-haspopup="true"
+              >
+                <span className="w-4 h-4 shrink-0 flex items-center justify-center opacity-85 group-hover:scale-110 transition-transform">
+                  <IconWithFallback
+                    src="/icons/nav/about.png"
+                    fallbackEmoji="✦"
+                    alt={isAr ? 'عن الجمعية' : 'About Us'}
+                    size={16}
+                    className="w-full h-full object-contain"
+                  />
+                </span>
+                <span>{isAr ? 'عن الجمعية' : isFr ? 'L\'Association' : 'About Us'}</span>
+
+                <svg
+                  className={`w-3.5 h-3.5 transition-transform duration-200 ${
+                    aboutDropdownOpen ? 'rotate-180 text-[#c85a32]' : 'text-[#819598]'
+                  }`}
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2.5}
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                </svg>
+
+                {isAboutActive && (
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#c85a32] shrink-0" aria-hidden="true" />
+                )}
+              </button>
+
+              {/* Floating Luxury Dropdown for About */}
+              {aboutDropdownOpen && (
+                <div className="absolute top-full start-0 mt-1.5 w-72 rounded-2xl bg-white border border-[#e5e0d6] shadow-xl p-2.5 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
+                  <div className="px-3 py-1.5 text-4xs font-bold uppercase tracking-wider text-[#819598] border-b border-[#f4ede2] mb-1">
+                    {isAr ? 'الهوية والحكامة والتواصل' : 'Organization & Governance'}
+                  </div>
+
+                  <div className="space-y-1">
+                    {aboutSubItems.map((sub) => {
+                      const fullPath = `/${locale}/${sub.path}`
+                      const isActive = pathname.startsWith(fullPath)
+
+                      return (
+                        <Link
+                          key={sub.key}
+                          href={fullPath}
+                          onClick={() => setAboutDropdownOpen(false)}
+                          className={`group/item flex items-start gap-3 p-2.5 rounded-xl transition-all ${
+                            isActive
+                              ? 'bg-[#d8f0f4]/80 text-[#0d3b43]'
+                              : 'hover:bg-[#faf7f2] text-[#1b2628]'
+                          }`}
+                        >
+                          <div className="w-8 h-8 rounded-lg bg-[#faf7f2] border border-[#e5e0d6] flex items-center justify-center shrink-0 p-1.5 shadow-2xs group-hover/item:scale-105 transition-transform">
+                            <IconWithFallback
+                              src={sub.iconSrc}
+                              fallbackEmoji={sub.icon}
+                              alt={sub.title}
+                              size={18}
+                              className="w-full h-full object-contain"
+                            />
+                          </div>
+
+                          <div className="flex-1 min-w-0">
+                            <span className="text-xs font-bold block leading-tight text-[#08242a] group-hover/item:text-[#c85a32] transition-colors">
+                              {sub.title}
+                            </span>
+                            <span className="text-3xs text-[#5f7174] block mt-0.5 line-clamp-1">
+                              {sub.desc}
+                            </span>
+                          </div>
+
+                          {isActive && (
+                            <span className="w-1.5 h-1.5 rounded-full bg-[#c85a32] self-center shrink-0" />
+                          )}
+                        </Link>
+                      )
+                    })}
+                  </div>
+                </div>
               )}
-            </Link>
+            </div>
 
             {/* 3. البرامج والمبادرات (GROUPED DROPDOWN: البرامج + البرنامج السنوي + الأثر) */}
             <div
-              ref={dropdownRef}
+              ref={programsDropdownRef}
               className="relative"
-              onMouseEnter={handleMouseEnter}
-              onMouseLeave={handleMouseLeave}
+              onMouseEnter={handleProgramsMouseEnter}
+              onMouseLeave={handleProgramsMouseLeave}
             >
               <button
                 type="button"
@@ -254,7 +423,6 @@ export function Header({ locale, dict }: HeaderProps) {
                 </span>
                 <span>{dict.nav.programs_group || dict.nav.programs}</span>
 
-                {/* Chevron icon */}
                 <svg
                   className={`w-3.5 h-3.5 transition-transform duration-200 ${
                     programsDropdownOpen ? 'rotate-180 text-[#c85a32]' : 'text-[#819598]'
@@ -272,7 +440,7 @@ export function Header({ locale, dict }: HeaderProps) {
                 )}
               </button>
 
-              {/* Floating Luxury Dropdown Menu */}
+              {/* Floating Luxury Dropdown for Programs */}
               {programsDropdownOpen && (
                 <div className="absolute top-full start-0 mt-1.5 w-72 rounded-2xl bg-white border border-[#e5e0d6] shadow-xl p-2.5 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
                   <div className="px-3 py-1.5 text-4xs font-bold uppercase tracking-wider text-[#819598] border-b border-[#f4ede2] mb-1">
@@ -325,125 +493,37 @@ export function Header({ locale, dict }: HeaderProps) {
               )}
             </div>
 
-            {/* 4. الفعاليات (Events) */}
-            <Link
-              href={`/${locale}/events`}
-              className={`group px-3 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 ${
-                isItemActive('events')
-                  ? 'bg-[#0d3b43]/8 text-[#c85a32] border border-[#c85a32]/25 shadow-2xs font-black'
-                  : 'text-[#1b2628] hover:text-[#0d3b43] hover:bg-[#ebe1d1]/50'
-              }`}
-            >
-              <span className="w-4 h-4 shrink-0 flex items-center justify-center opacity-85 group-hover:scale-110 transition-transform">
-                <IconWithFallback
-                  src="/icons/nav/events.png"
-                  fallbackEmoji="📅"
-                  alt={dict.nav.events}
-                  size={16}
-                  className="w-full h-full object-contain"
-                />
-              </span>
-              <span>{dict.nav.events}</span>
-              {isItemActive('events') && (
-                <span className="w-1.5 h-1.5 rounded-full bg-[#c85a32] shrink-0" aria-hidden="true" />
-              )}
-            </Link>
+            {/* Direct Navigation Links */}
+            {directNavLinks.map(({ key, title, path, icon, iconSrc }) => {
+              const fullPath = `/${locale}/${path}`
+              const isActive = isPathActive(path)
 
-            {/* 5. الأخبار (News) */}
-            <Link
-              href={`/${locale}/news`}
-              className={`group px-3 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 ${
-                isItemActive('news')
-                  ? 'bg-[#0d3b43]/8 text-[#c85a32] border border-[#c85a32]/25 shadow-2xs font-black'
-                  : 'text-[#1b2628] hover:text-[#0d3b43] hover:bg-[#ebe1d1]/50'
-              }`}
-            >
-              <span className="w-4 h-4 shrink-0 flex items-center justify-center opacity-85 group-hover:scale-110 transition-transform">
-                <IconWithFallback
-                  src="/icons/nav/news.png"
-                  fallbackEmoji="📰"
-                  alt={dict.nav.news}
-                  size={16}
-                  className="w-full h-full object-contain"
-                />
-              </span>
-              <span>{dict.nav.news}</span>
-              {isItemActive('news') && (
-                <span className="w-1.5 h-1.5 rounded-full bg-[#c85a32] shrink-0" aria-hidden="true" />
-              )}
-            </Link>
-
-            {/* 6. التطوع (Volunteer) */}
-            <Link
-              href={`/${locale}/volunteer`}
-              className={`group px-3 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 ${
-                isItemActive('volunteer')
-                  ? 'bg-[#0d3b43]/8 text-[#c85a32] border border-[#c85a32]/25 shadow-2xs font-black'
-                  : 'text-[#1b2628] hover:text-[#0d3b43] hover:bg-[#ebe1d1]/50'
-              }`}
-            >
-              <span className="w-4 h-4 shrink-0 flex items-center justify-center opacity-85 group-hover:scale-110 transition-transform">
-                <IconWithFallback
-                  src="/icons/nav/volunteer.png"
-                  fallbackEmoji="🤝"
-                  alt={dict.nav.volunteer}
-                  size={16}
-                  className="w-full h-full object-contain"
-                />
-              </span>
-              <span>{dict.nav.volunteer}</span>
-              {isItemActive('volunteer') && (
-                <span className="w-1.5 h-1.5 rounded-full bg-[#c85a32] shrink-0" aria-hidden="true" />
-              )}
-            </Link>
-
-            {/* 7. الشراكات (Partnerships) */}
-            <Link
-              href={`/${locale}/partnerships`}
-              className={`group px-3 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 ${
-                isItemActive('partnerships')
-                  ? 'bg-[#0d3b43]/8 text-[#c85a32] border border-[#c85a32]/25 shadow-2xs font-black'
-                  : 'text-[#1b2628] hover:text-[#0d3b43] hover:bg-[#ebe1d1]/50'
-              }`}
-            >
-              <span className="w-4 h-4 shrink-0 flex items-center justify-center opacity-85 group-hover:scale-110 transition-transform">
-                <IconWithFallback
-                  src="/icons/nav/partnerships.png"
-                  fallbackEmoji="🏛️"
-                  alt={dict.nav.partnerships}
-                  size={16}
-                  className="w-full h-full object-contain"
-                />
-              </span>
-              <span>{dict.nav.partnerships}</span>
-              {isItemActive('partnerships') && (
-                <span className="w-1.5 h-1.5 rounded-full bg-[#c85a32] shrink-0" aria-hidden="true" />
-              )}
-            </Link>
-
-            {/* 8. اتصل بنا (Contact) */}
-            <Link
-              href={`/${locale}/contact`}
-              className={`group px-3 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 ${
-                isItemActive('contact')
-                  ? 'bg-[#0d3b43]/8 text-[#c85a32] border border-[#c85a32]/25 shadow-2xs font-black'
-                  : 'text-[#1b2628] hover:text-[#0d3b43] hover:bg-[#ebe1d1]/50'
-              }`}
-            >
-              <span className="w-4 h-4 shrink-0 flex items-center justify-center opacity-85 group-hover:scale-110 transition-transform">
-                <IconWithFallback
-                  src="/icons/nav/contact.png"
-                  fallbackEmoji="✉️"
-                  alt={dict.nav.contact}
-                  size={16}
-                  className="w-full h-full object-contain"
-                />
-              </span>
-              <span>{dict.nav.contact}</span>
-              {isItemActive('contact') && (
-                <span className="w-1.5 h-1.5 rounded-full bg-[#c85a32] shrink-0" aria-hidden="true" />
-              )}
-            </Link>
+              return (
+                <Link
+                  key={key}
+                  href={fullPath}
+                  className={`group px-3 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 ${
+                    isActive
+                      ? 'bg-[#0d3b43]/8 text-[#c85a32] border border-[#c85a32]/25 shadow-2xs font-black'
+                      : 'text-[#1b2628] hover:text-[#0d3b43] hover:bg-[#ebe1d1]/50'
+                  }`}
+                >
+                  <span className="w-4 h-4 shrink-0 flex items-center justify-center opacity-85 group-hover:scale-110 transition-transform">
+                    <IconWithFallback
+                      src={iconSrc}
+                      fallbackEmoji={icon}
+                      alt={title}
+                      size={16}
+                      className="w-full h-full object-contain"
+                    />
+                  </span>
+                  <span>{title}</span>
+                  {isActive && (
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#c85a32] shrink-0" aria-hidden="true" />
+                  )}
+                </Link>
+              )
+            })}
           </nav>
 
           {/* Right side: Language switcher + Primary CTA */}
@@ -492,7 +572,7 @@ export function Header({ locale, dict }: HeaderProps) {
                 href={`/${locale}`}
                 onClick={() => setMobileMenuOpen(false)}
                 className={`px-4 py-3 rounded-xl text-sm font-bold transition-all flex items-center justify-between ${
-                  isItemActive('')
+                  isHomeActive
                     ? 'bg-[#d8f0f4] text-[#0d3b43] font-black shadow-2xs'
                     : 'text-[#1b2628] hover:bg-[#f4ede2]'
                 }`}
@@ -509,43 +589,80 @@ export function Header({ locale, dict }: HeaderProps) {
                   </span>
                   <span>{dict.nav.home}</span>
                 </div>
-                {isItemActive('') && (
+                {isHomeActive && (
                   <span className="text-3xs font-black uppercase tracking-wider px-2 py-0.5 rounded-full bg-[#0d3b43] text-white">
                     {isAr ? 'النشط' : 'Active'}
                   </span>
                 )}
               </Link>
 
-              {/* About */}
-              <Link
-                href={`/${locale}/about`}
-                onClick={() => setMobileMenuOpen(false)}
-                className={`px-4 py-3 rounded-xl text-sm font-bold transition-all flex items-center justify-between ${
-                  isItemActive('about')
-                    ? 'bg-[#d8f0f4] text-[#0d3b43] font-black shadow-2xs'
-                    : 'text-[#1b2628] hover:bg-[#f4ede2]'
-                }`}
-              >
-                <div className="flex items-center gap-3">
-                  <span className="w-5 h-5 flex items-center justify-center">
-                    <IconWithFallback
-                      src="/icons/nav/about.png"
-                      fallbackEmoji="✦"
-                      alt={dict.nav.about}
-                      size={18}
-                      className="w-full h-full object-contain"
-                    />
-                  </span>
-                  <span>{dict.nav.about}</span>
-                </div>
-                {isItemActive('about') && (
-                  <span className="text-3xs font-black uppercase tracking-wider px-2 py-0.5 rounded-full bg-[#0d3b43] text-white">
-                    {isAr ? 'النشط' : 'Active'}
-                  </span>
-                )}
-              </Link>
+              {/* Accordion 1: عن الجمعية (About + Team + Contact) */}
+              <div className="rounded-xl border border-[#e5e0d6] overflow-hidden bg-white">
+                <button
+                  type="button"
+                  onClick={() => setMobileAboutOpen(!mobileAboutOpen)}
+                  className={`w-full px-4 py-3 text-sm font-bold flex items-center justify-between transition-colors ${
+                    isAboutActive ? 'bg-[#0d3b43]/5 text-[#c85a32]' : 'text-[#08242a]'
+                  }`}
+                >
+                  <div className="flex items-center gap-3">
+                    <span className="w-5 h-5 flex items-center justify-center">
+                      <IconWithFallback
+                        src="/icons/nav/about.png"
+                        fallbackEmoji="✦"
+                        alt={isAr ? 'عن الجمعية' : 'About'}
+                        size={18}
+                        className="w-full h-full object-contain"
+                      />
+                    </span>
+                    <span>{isAr ? 'عن الجمعية' : isFr ? 'L\'Association' : 'About Us'}</span>
+                  </div>
 
-              {/* Programs Accordion in Mobile */}
+                  <svg
+                    className={`w-4 h-4 transition-transform ${mobileAboutOpen ? 'rotate-180 text-[#c85a32]' : 'text-[#819598]'}`}
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+
+                {mobileAboutOpen && (
+                  <div className="bg-[#faf7f2] p-2 space-y-1 border-t border-[#e5e0d6]">
+                    {aboutSubItems.map((sub) => {
+                      const fullPath = `/${locale}/${sub.path}`
+                      const isActive = pathname.startsWith(fullPath)
+                      return (
+                        <Link
+                          key={sub.key}
+                          href={fullPath}
+                          onClick={() => setMobileMenuOpen(false)}
+                          className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-xs font-bold transition-all ${
+                            isActive
+                              ? 'bg-[#d8f0f4] text-[#0d3b43] font-black'
+                              : 'text-[#445457] hover:bg-white'
+                          }`}
+                        >
+                          <span className="w-4 h-4 flex items-center justify-center">
+                            <IconWithFallback
+                              src={sub.iconSrc}
+                              fallbackEmoji={sub.icon}
+                              alt={sub.title}
+                              size={16}
+                              className="w-full h-full object-contain"
+                            />
+                          </span>
+                          <span>{sub.title}</span>
+                        </Link>
+                      )
+                    })}
+                  </div>
+                )}
+              </div>
+
+              {/* Accordion 2: البرامج والمبادرات (Programs + Annual Program + Impact) */}
               <div className="rounded-xl border border-[#e5e0d6] overflow-hidden bg-white">
                 <button
                   type="button"
@@ -616,7 +733,7 @@ export function Header({ locale, dict }: HeaderProps) {
                 href={`/${locale}/events`}
                 onClick={() => setMobileMenuOpen(false)}
                 className={`px-4 py-3 rounded-xl text-sm font-bold transition-all flex items-center justify-between ${
-                  isItemActive('events')
+                  isPathActive('events')
                     ? 'bg-[#d8f0f4] text-[#0d3b43] font-black shadow-2xs'
                     : 'text-[#1b2628] hover:bg-[#f4ede2]'
                 }`}
@@ -633,7 +750,7 @@ export function Header({ locale, dict }: HeaderProps) {
                   </span>
                   <span>{dict.nav.events}</span>
                 </div>
-                {isItemActive('events') && (
+                {isPathActive('events') && (
                   <span className="text-3xs font-black uppercase tracking-wider px-2 py-0.5 rounded-full bg-[#0d3b43] text-white">
                     {isAr ? 'النشط' : 'Active'}
                   </span>
@@ -645,7 +762,7 @@ export function Header({ locale, dict }: HeaderProps) {
                 href={`/${locale}/news`}
                 onClick={() => setMobileMenuOpen(false)}
                 className={`px-4 py-3 rounded-xl text-sm font-bold transition-all flex items-center justify-between ${
-                  isItemActive('news')
+                  isPathActive('news')
                     ? 'bg-[#d8f0f4] text-[#0d3b43] font-black shadow-2xs'
                     : 'text-[#1b2628] hover:bg-[#f4ede2]'
                 }`}
@@ -662,7 +779,36 @@ export function Header({ locale, dict }: HeaderProps) {
                   </span>
                   <span>{dict.nav.news}</span>
                 </div>
-                {isItemActive('news') && (
+                {isPathActive('news') && (
+                  <span className="text-3xs font-black uppercase tracking-wider px-2 py-0.5 rounded-full bg-[#0d3b43] text-white">
+                    {isAr ? 'النشط' : 'Active'}
+                  </span>
+                )}
+              </Link>
+
+              {/* Gallery */}
+              <Link
+                href={`/${locale}/gallery`}
+                onClick={() => setMobileMenuOpen(false)}
+                className={`px-4 py-3 rounded-xl text-sm font-bold transition-all flex items-center justify-between ${
+                  isPathActive('gallery')
+                    ? 'bg-[#d8f0f4] text-[#0d3b43] font-black shadow-2xs'
+                    : 'text-[#1b2628] hover:bg-[#f4ede2]'
+                }`}
+              >
+                <div className="flex items-center gap-3">
+                  <span className="w-5 h-5 flex items-center justify-center">
+                    <IconWithFallback
+                      src="/icons/nav/gallery.png"
+                      fallbackEmoji="🖼️"
+                      alt={dict.nav.gallery}
+                      size={18}
+                      className="w-full h-full object-contain"
+                    />
+                  </span>
+                  <span>{dict.nav.gallery}</span>
+                </div>
+                {isPathActive('gallery') && (
                   <span className="text-3xs font-black uppercase tracking-wider px-2 py-0.5 rounded-full bg-[#0d3b43] text-white">
                     {isAr ? 'النشط' : 'Active'}
                   </span>
@@ -674,7 +820,7 @@ export function Header({ locale, dict }: HeaderProps) {
                 href={`/${locale}/volunteer`}
                 onClick={() => setMobileMenuOpen(false)}
                 className={`px-4 py-3 rounded-xl text-sm font-bold transition-all flex items-center justify-between ${
-                  isItemActive('volunteer')
+                  isPathActive('volunteer')
                     ? 'bg-[#d8f0f4] text-[#0d3b43] font-black shadow-2xs'
                     : 'text-[#1b2628] hover:bg-[#f4ede2]'
                 }`}
@@ -691,7 +837,7 @@ export function Header({ locale, dict }: HeaderProps) {
                   </span>
                   <span>{dict.nav.volunteer}</span>
                 </div>
-                {isItemActive('volunteer') && (
+                {isPathActive('volunteer') && (
                   <span className="text-3xs font-black uppercase tracking-wider px-2 py-0.5 rounded-full bg-[#0d3b43] text-white">
                     {isAr ? 'النشط' : 'Active'}
                   </span>
@@ -703,7 +849,7 @@ export function Header({ locale, dict }: HeaderProps) {
                 href={`/${locale}/partnerships`}
                 onClick={() => setMobileMenuOpen(false)}
                 className={`px-4 py-3 rounded-xl text-sm font-bold transition-all flex items-center justify-between ${
-                  isItemActive('partnerships')
+                  isPathActive('partnerships')
                     ? 'bg-[#d8f0f4] text-[#0d3b43] font-black shadow-2xs'
                     : 'text-[#1b2628] hover:bg-[#f4ede2]'
                 }`}
@@ -720,36 +866,7 @@ export function Header({ locale, dict }: HeaderProps) {
                   </span>
                   <span>{dict.nav.partnerships}</span>
                 </div>
-                {isItemActive('partnerships') && (
-                  <span className="text-3xs font-black uppercase tracking-wider px-2 py-0.5 rounded-full bg-[#0d3b43] text-white">
-                    {isAr ? 'النشط' : 'Active'}
-                  </span>
-                )}
-              </Link>
-
-              {/* Contact */}
-              <Link
-                href={`/${locale}/contact`}
-                onClick={() => setMobileMenuOpen(false)}
-                className={`px-4 py-3 rounded-xl text-sm font-bold transition-all flex items-center justify-between ${
-                  isItemActive('contact')
-                    ? 'bg-[#d8f0f4] text-[#0d3b43] font-black shadow-2xs'
-                    : 'text-[#1b2628] hover:bg-[#f4ede2]'
-                }`}
-              >
-                <div className="flex items-center gap-3">
-                  <span className="w-5 h-5 flex items-center justify-center">
-                    <IconWithFallback
-                      src="/icons/nav/contact.png"
-                      fallbackEmoji="✉️"
-                      alt={dict.nav.contact}
-                      size={18}
-                      className="w-full h-full object-contain"
-                    />
-                  </span>
-                  <span>{dict.nav.contact}</span>
-                </div>
-                {isItemActive('contact') && (
+                {isPathActive('partnerships') && (
                   <span className="text-3xs font-black uppercase tracking-wider px-2 py-0.5 rounded-full bg-[#0d3b43] text-white">
                     {isAr ? 'النشط' : 'Active'}
                   </span>

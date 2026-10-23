@@ -2,6 +2,8 @@
   "nav": {
     "home": "Home",
     "about": "About",
+    "about_group": "About AMYCC",
+    "team": "Our Team",
     "programs": "Programs",
     "programs_group": "Programs & Initiatives",
     "annual_program": "Annual Program",
@@ -115,6 +117,11 @@
     "title": "Our Impact",
     "subtitle": "Empowering youth, nurturing creativity, and serving Moroccan communities",
     "tag": "Impact & Metrics"
+  },
+  "team": {
+    "title": "Team & Governance",
+    "subtitle": "Executive board, artistic committees, and coordinators of AMYCC",
+    "tag": "Leadership & Governance"
   },
   "gallery": {
     "title": "Gallery"

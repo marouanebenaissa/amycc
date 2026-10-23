@@ -2,6 +2,8 @@
   "nav": {
     "home": "Accueil",
     "about": "À propos",
+    "about_group": "L'Association",
+    "team": "Notre Équipe",
     "programs": "Programmes",
     "programs_group": "Programmes & Initiatives",
     "annual_program": "Programme Annuel",
@@ -115,6 +117,11 @@
     "title": "Notre Impact",
     "subtitle": "L'impact de nos initiatives culturelles et de l'autonomisation des jeunes au Maroc",
     "tag": "Indicateurs d'impact"
+  },
+  "team": {
+    "title": "Équipe & Gouvernance",
+    "subtitle": "Bureau exécutif, commissions artistiques et comités de l'AMYCC",
+    "tag": "Gouvernance Associative"
   },
   "gallery": {
     "title": "Galerie"
