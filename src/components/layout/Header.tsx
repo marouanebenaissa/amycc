@@ -144,7 +144,7 @@ export function Header({ locale, dict }: HeaderProps) {
     },
     {
       key: 'team',
-      title: isAr ? 'فريق العمل والحكامة' : isFr ? 'Notre Équipe & Gouvernance' : 'Our Team & Governance',
+      title: isAr ? 'فريقنا' : isFr ? 'Notre Équipe' : 'Our Team',
       desc: isAr
         ? 'المكتب التنفيذي واللجان الفنية والوظيفية'
         : isFr

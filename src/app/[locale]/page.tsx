@@ -386,34 +386,6 @@ export default async function HomePage(props: { params: Promise<{ locale: string
       <main id="main-content" className="flex flex-col flex-1 bg-[#faf7f2]">
 
         {/* ============================================================
-            SEASON 2026 ANNOUNCEMENT TICKER (ELEVATED CULTURAL RIBBON)
-            ============================================================ */}
-        <div className="bg-[#08242a] text-[#d8f0f4] py-2.5 px-4 text-xs border-b border-[#14505b]/60 relative overflow-hidden">
-          <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
-            <div className="flex items-center gap-2 overflow-hidden text-ellipsis whitespace-nowrap">
-              <span className="w-2 h-2 rounded-full bg-[#f4ce83] animate-ping shrink-0" />
-              <span className="font-mono text-3xs font-extrabold uppercase tracking-widest px-1.5 py-0.5 rounded bg-[#14505b] text-[#f4ce83] shrink-0">
-                2026
-              </span>
-              <span className="font-medium text-xs truncate">
-                {isAr
-                  ? 'الموسم الثقافي التأسيسي — انطلاق ورشات الإبداع والتطوع المدني في مبادرة "شباب في العمل" بالمملكة المغربية'
-                  : isFr
-                  ? 'Saison Culturelle 2026 — Lancement des ateliers et de l\'initiative citoyenne "Jeunesse en Action"'
-                  : 'Cultural Season 2026 — Official launch of workshops and the "Youth in Action" volunteering initiative'}
-              </span>
-            </div>
-            <Link
-              href={`/${locale}/programs/youth-in-action`}
-              className="shrink-0 text-3xs font-black uppercase tracking-wider text-[#f4ce83] hover:text-white underline underline-offset-4 flex items-center gap-1 transition-colors"
-            >
-              <span>{isAr ? 'اكتشف المبادرة' : 'Explore Initiative'}</span>
-              <span aria-hidden="true">{isAr ? '←' : '→'}</span>
-            </Link>
-          </div>
-        </div>
-
-        {/* ============================================================
             1. HERO SECTION — Asymmetric Master Editorial Showcase
             ============================================================ */}
         <section className="relative overflow-hidden bg-gradient-to-b from-[#faf7f2] via-[#f7f2e9] to-[#faf7f2] border-b border-[#e5e0d6] pt-12 pb-16 lg:pt-20 lg:pb-28">
