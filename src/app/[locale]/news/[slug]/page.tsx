@@ -58,21 +58,23 @@ export default async function NewsDetailPage(props: {
     article = {
       id: 'default-1',
       slug: 'official-launch',
-      category: 'association',
-      published_at: '2026-01-15T00:00:00Z',
+      category: 'announcement',
+      published_at: '2026-10-15T10:00:00Z',
       news_translations: [
         {
           title:
             locale === 'ar'
-              ? 'انطلاق أنشطة جمعية روح الفنون والثقافة'
+              ? 'الإطلاق الرسمي للمنصة الرقمية لجمعية روح الفنون والثقافة (AMYCC)'
               : locale === 'fr'
-              ? "Lancement officiel de l'Association Esprit des Arts et de la Culture"
-              : 'Official Launch of the Spirit of Arts & Culture Association',
+              ? "Lancement officiel de la plateforme numérique de l'Association AMYCC"
+              : 'Official Launch of the AMYCC Digital Platform',
           excerpt:
             locale === 'ar'
-              ? 'تأسيس جمعية روح الفنون والثقافة رسمياً للنهوض بالمجال الإبداعي والشبابي في المغرب.'
-              : 'Création officielle de l’AMYCC pour promouvoir la créativité et la jeunesse au Maroc.',
-          content: `<p>${dict.about.description}</p><p>${dict.hero.subtitle}</p>`,
+              ? 'تعلن الجمعية عن تدشين موقعها الإلكتروني التفاعلي بـ 3 لغات رسمية لتعزيز التواصل المجتمعي، وتيسير طلبات الانخراط والتطوع، ومتابعة أجندة الفعاليات الثقافية.'
+              : locale === 'fr'
+              ? 'L\'association inaugure sa plateforme web trilingue facilitant les démarches d\'adhésion, l\'engagement bénévole et le suivi des manifestations culturelles.'
+              : 'AMYCC officially launches its trilingual digital portal to foster community participation, streamline membership applications, and publish its cultural agenda.',
+          content: `<p class="mb-4">${dict.about.description}</p><p class="mb-4">${dict.hero.subtitle}</p><p>تلتزم جمعية روح الفنون والثقافة بفتح المجال أمام كافة الطاقات الشابة للمساهمة في بناء المشهد الثقافي الوطني والمشاركة في مبادرة "شباب في العمل".</p>`,
         },
       ],
     }
@@ -90,57 +92,61 @@ export default async function NewsDetailPage(props: {
   return (
     <>
       <Header locale={locale} dict={dict} />
-      <main id="main-content" className="flex-1 bg-white">
-        {/* Article Header */}
-        <div className="bg-slate-50 border-b border-slate-100 py-12">
-          <div className="max-w-4xl mx-auto px-4">
-            <Link
-              href={`/${locale}/news`}
-              className="inline-flex items-center text-xs font-bold text-[#0068ff] hover:underline mb-6"
-            >
-              ← {dict.news.view_all}
-            </Link>
-            <div className="flex items-center gap-3 mb-4">
-              <span className="px-3 py-1 rounded-full text-xs font-bold bg-blue-50 text-[#0068ff] capitalize">
-                {article.category}
-              </span>
-              {article.published_at && (
-                <time className="text-xs text-slate-400">
-                  {new Date(article.published_at).toLocaleDateString(locale)}
-                </time>
-              )}
-            </div>
-            <h1 className="text-3xl sm:text-5xl font-extrabold text-[#0a0f1d] leading-tight">
-              {trans.title}
-            </h1>
-            {trans.excerpt && (
-              <p className="text-base sm:text-lg text-slate-600 mt-4 leading-relaxed font-medium">
-                {trans.excerpt}
-              </p>
+      <main id="main-content" className="flex-1 bg-[#faf7f2] py-16">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6">
+          <Link
+            href={`/${locale}/news`}
+            className="inline-flex items-center text-xs font-bold text-[#c85a32] hover:underline mb-8"
+          >
+            ← {dict.news.view_all}
+          </Link>
+
+          <div className="flex items-center gap-3 mb-4">
+            <span className="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-[#d8f0f4] text-[#0d3b43]">
+              {article.category}
+            </span>
+            {article.published_at && (
+              <time className="text-xs text-[#5f7174]">
+                {new Date(article.published_at).toLocaleDateString(locale, {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric',
+                })}
+              </time>
             )}
           </div>
-        </div>
 
-        {/* Article Body */}
-        <article className="max-w-4xl mx-auto px-4 py-12">
+          <h1 className="text-3xl sm:text-5xl font-black text-[#08242a] leading-tight mb-6">
+            {trans.title}
+          </h1>
+
+          {trans.excerpt && (
+            <p className="text-base sm:text-xl text-[#445457] mb-10 leading-relaxed font-medium pb-8 border-b border-[#e5e0d6]">
+              {trans.excerpt}
+            </p>
+          )}
+
           {article.cover_image && (
-            <div className="mb-10 rounded-2xl overflow-hidden border border-slate-200">
+            <div className="mb-10 rounded-3xl overflow-hidden border border-[#e5e0d6] shadow-subtle">
               <Image
                 src={article.cover_image}
                 alt={trans.title}
                 width={1200}
                 height={600}
-                className="w-full h-auto max-h-[460px] object-cover"
+                className="w-full h-auto max-h-[500px] object-cover"
                 unoptimized
               />
             </div>
           )}
 
-          <div
-            className="tiptap prose prose-slate max-w-none text-slate-800 leading-relaxed"
-            dangerouslySetInnerHTML={{ __html: trans.content }}
-          />
-        </article>
+          {/* Article Body */}
+          <div className="bg-white p-8 sm:p-12 rounded-3xl border border-[#e5e0d6] shadow-subtle">
+            <div
+              className="tiptap prose prose-slate max-w-none text-[#2d3a3d] leading-relaxed text-base sm:text-lg"
+              dangerouslySetInnerHTML={{ __html: trans.content }}
+            />
+          </div>
+        </div>
       </main>
       <Footer locale={locale} dict={dict} />
     </>

@@ -97,62 +97,62 @@ export default async function ProgramDetailPage(props: {
   return (
     <>
       <Header locale={locale} dict={dict} />
-      <main id="main-content" className="flex-1 bg-white py-16">
+      <main id="main-content" className="flex-1 bg-[#faf7f2] py-16">
         <div className="max-w-4xl mx-auto px-4">
           <Link
             href={`/${locale}/programs`}
-            className="inline-flex items-center text-xs font-bold text-[#0068ff] hover:underline mb-8"
+            className="inline-flex items-center text-xs font-bold text-[#c85a32] hover:underline mb-8"
           >
             ← {locale === 'ar' ? 'العودة إلى جميع البرامج' : 'Back to all programs'}
           </Link>
 
           <div className="flex items-center gap-2 mb-4">
-            <span className="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-blue-50 text-[#0068ff]">
+            <span className="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-[#d8f0f4] text-[#0d3b43]">
               {program.category}
             </span>
-            <span className="text-xs text-slate-400">• {program.city || 'Morocco'}</span>
+            <span className="text-xs text-[#5f7174]">• {program.city || 'Morocco'}</span>
           </div>
 
-          <h1 className="text-3xl sm:text-5xl font-extrabold text-[#0a0f1d] mb-6">
+          <h1 className="text-3xl sm:text-5xl font-black text-[#08242a] mb-6">
             {translation?.title}
           </h1>
 
-          <div className="space-y-8 text-slate-700 leading-relaxed text-sm sm:text-base border-t border-slate-100 pt-8">
+          <div className="bg-white p-8 sm:p-10 rounded-3xl border border-[#e5e0d6] shadow-subtle space-y-8 text-[#445457] leading-relaxed text-sm sm:text-base">
             <div>
-              <h2 className="text-lg font-bold text-[#0a0f1d] mb-2">
+              <h2 className="text-lg font-bold text-[#08242a] mb-2">
                 {locale === 'ar' ? 'نظرة عامة على البرنامج' : 'Program Overview'}
               </h2>
-              <p className="text-slate-600 leading-relaxed">{translation?.description}</p>
+              <p className="leading-relaxed">{translation?.description}</p>
             </div>
 
             {translation?.objectives && (
-              <div className="p-6 rounded-2xl bg-slate-50 border border-slate-200/80">
-                <h2 className="text-lg font-bold text-[#0a0f1d] mb-2">
+              <div className="p-6 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6]">
+                <h2 className="text-lg font-bold text-[#08242a] mb-2">
                   {locale === 'ar' ? 'أهداف البرنامج' : 'Program Objectives'}
                 </h2>
-                <p className="text-slate-600 leading-relaxed">{translation.objectives}</p>
+                <p className="leading-relaxed">{translation.objectives}</p>
               </div>
             )}
 
             {translation?.activities && (
               <div>
-                <h2 className="text-lg font-bold text-[#0a0f1d] mb-2">
+                <h2 className="text-lg font-bold text-[#08242a] mb-2">
                   {locale === 'ar' ? 'الأنشطة المبرمجة' : 'Key Activities'}
                 </h2>
-                <p className="text-slate-600 leading-relaxed">{translation.activities}</p>
+                <p className="leading-relaxed">{translation.activities}</p>
               </div>
             )}
 
-            <div className="pt-6 border-t border-slate-100 flex flex-col sm:flex-row gap-4">
+            <div className="pt-6 border-t border-[#f4ede2] flex flex-col sm:flex-row gap-4">
               <Link
                 href={`/${locale}/volunteer`}
-                className="inline-flex items-center justify-center px-8 py-3.5 rounded-xl font-bold text-white bg-[#0068ff] hover:bg-[#0054d1] transition-all shadow-sm"
+                className="inline-flex items-center justify-center px-8 py-3.5 rounded-xl font-bold text-white bg-[#0d3b43] hover:bg-[#14505b] active:scale-95 transition-all shadow-subtle text-xs"
               >
                 {dict.volunteer.apply}
               </Link>
               <Link
                 href={`/${locale}/contact`}
-                className="inline-flex items-center justify-center px-8 py-3.5 rounded-xl font-bold text-slate-700 bg-slate-100 hover:bg-slate-200 transition-colors"
+                className="inline-flex items-center justify-center px-8 py-3.5 rounded-xl font-bold text-[#08242a] bg-[#faf7f2] hover:bg-[#f4ede2] border border-[#e5e0d6] transition-colors text-xs"
               >
                 {dict.nav.contact}
               </Link>
