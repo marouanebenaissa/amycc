@@ -4,6 +4,7 @@ import { Footer } from '@/components/layout/Footer'
 import { createPublicClient } from '@/lib/supabase/public'
 import { FaqAccordion } from '@/components/home/FaqAccordion'
 import { EventRegistrationModal } from '@/components/events/EventRegistrationModal'
+import { IconWithFallback } from '@/components/ui/IconWithFallback'
 import Link from 'next/link'
 import Image from 'next/image'
 
@@ -255,13 +256,14 @@ export default async function HomePage(props: { params: Promise<{ locale: string
     ]
   }
 
-  // 6 Core Disciplines with elevated artistic metadata
+  // 6 Core Disciplines with elevated artistic metadata and custom PNG icon support
   const areasList = [
     {
       key: 'arts',
       title: dict.areas.arts,
       desc: dict.areas.arts_desc,
       icon: '🎨',
+      iconImg: '/icons/arts.png',
       tag: isAr ? 'محترفات تشكيلية ومعارض' : 'Visual & Fine Arts',
       accent: 'border-[#c85a32]/30 text-[#c85a32]',
       bgGlow: 'from-[#fae4dc]/40 to-transparent',
@@ -271,6 +273,7 @@ export default async function HomePage(props: { params: Promise<{ locale: string
       title: dict.areas.music,
       desc: dict.areas.music_desc,
       icon: '🎵',
+      iconImg: '/icons/music.png',
       tag: isAr ? 'تراث وأداء موسيقي' : 'Heritage & Musical Arts',
       accent: 'border-[#0d3b43]/30 text-[#0d3b43]',
       bgGlow: 'from-[#d8f0f4]/40 to-transparent',
@@ -280,6 +283,7 @@ export default async function HomePage(props: { params: Promise<{ locale: string
       title: dict.areas.theatre,
       desc: dict.areas.theatre_desc,
       icon: '🎭',
+      iconImg: '/icons/theatre.png',
       tag: isAr ? 'تعبير مسرحي وارتجال' : 'Theatre & Scenic Expression',
       accent: 'border-[#d99b26]/40 text-[#d99b26]',
       bgGlow: 'from-[#fdf2db]/40 to-transparent',
@@ -289,6 +293,7 @@ export default async function HomePage(props: { params: Promise<{ locale: string
       title: dict.areas.culture,
       desc: dict.areas.culture_desc,
       icon: '🏛️',
+      iconImg: '/icons/culture.png',
       tag: isAr ? 'صون الذاكرة والتراث' : 'Moroccan Cultural Heritage',
       accent: 'border-[#0d3b43]/30 text-[#0d3b43]',
       bgGlow: 'from-[#d8f0f4]/40 to-transparent',
@@ -298,6 +303,7 @@ export default async function HomePage(props: { params: Promise<{ locale: string
       title: dict.areas.youth,
       desc: dict.areas.youth_desc,
       icon: '🚀',
+      iconImg: '/icons/youth.png',
       tag: isAr ? 'تكوين وقيادة شبابية' : 'Youth Leadership & Skills',
       accent: 'border-[#c85a32]/30 text-[#c85a32]',
       bgGlow: 'from-[#fae4dc]/40 to-transparent',
@@ -307,6 +313,7 @@ export default async function HomePage(props: { params: Promise<{ locale: string
       title: dict.areas.community,
       desc: dict.areas.community_desc,
       icon: '🤝',
+      iconImg: '/icons/community.png',
       tag: isAr ? 'مبادرة شباب في العمل' : 'Civic Volunteering Program',
       accent: 'border-[#d99b26]/40 text-[#d99b26]',
       bgGlow: 'from-[#fdf2db]/40 to-transparent',
@@ -647,10 +654,16 @@ export default async function HomePage(props: { params: Promise<{ locale: string
             {/* Mission, Vision, Values 3-Card Architecture */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {/* Mission */}
-              <div className="luxury-card p-8 flex flex-col justify-between">
+              <div className="luxury-card p-8 flex flex-col justify-between group">
                 <div>
-                  <div className="w-12 h-12 rounded-2xl bg-[#0d3b43] text-white flex items-center justify-center font-bold text-xl mb-6 shadow-xs">
-                    ✦
+                  <div className="w-14 h-14 rounded-2xl bg-[#0d3b43] text-white flex items-center justify-center font-bold text-xl mb-6 shadow-xs p-2.5 overflow-hidden group-hover:scale-105 transition-transform">
+                    <IconWithFallback
+                      src="/icons/mission.png"
+                      fallbackEmoji="✦"
+                      alt={dict.about.mission_title}
+                      size={32}
+                      className="w-full h-full object-contain"
+                    />
                   </div>
                   <h3 className="text-xl font-black text-[#08242a] mb-3">
                     {dict.about.mission_title}
@@ -672,11 +685,17 @@ export default async function HomePage(props: { params: Promise<{ locale: string
               </div>
 
               {/* Vision */}
-              <div className="luxury-card p-8 border-2 border-[#c85a32]/30 flex flex-col justify-between relative overflow-hidden">
+              <div className="luxury-card p-8 border-2 border-[#c85a32]/30 flex flex-col justify-between relative overflow-hidden group">
                 <div className="absolute top-0 end-0 w-24 h-24 bg-[#fae4dc] rounded-bl-full pointer-events-none" />
                 <div className="relative z-10">
-                  <div className="w-12 h-12 rounded-2xl bg-[#c85a32] text-white flex items-center justify-center font-bold text-xl mb-6 shadow-xs">
-                    ★
+                  <div className="w-14 h-14 rounded-2xl bg-[#c85a32] text-white flex items-center justify-center font-bold text-xl mb-6 shadow-xs p-2.5 overflow-hidden group-hover:scale-105 transition-transform">
+                    <IconWithFallback
+                      src="/icons/vision.png"
+                      fallbackEmoji="★"
+                      alt={dict.about.vision_title}
+                      size={32}
+                      className="w-full h-full object-contain"
+                    />
                   </div>
                   <h3 className="text-xl font-black text-[#08242a] mb-3">
                     {dict.about.vision_title}
@@ -698,10 +717,16 @@ export default async function HomePage(props: { params: Promise<{ locale: string
               </div>
 
               {/* Values */}
-              <div className="luxury-card p-8 flex flex-col justify-between">
+              <div className="luxury-card p-8 flex flex-col justify-between group">
                 <div>
-                  <div className="w-12 h-12 rounded-2xl bg-[#d99b26] text-white flex items-center justify-center font-bold text-xl mb-6 shadow-xs">
-                    ♥
+                  <div className="w-14 h-14 rounded-2xl bg-[#d99b26] text-white flex items-center justify-center font-bold text-xl mb-6 shadow-xs p-2.5 overflow-hidden group-hover:scale-105 transition-transform">
+                    <IconWithFallback
+                      src="/icons/values.png"
+                      fallbackEmoji="♥"
+                      alt={dict.about.values_title}
+                      size={32}
+                      className="w-full h-full object-contain"
+                    />
                   </div>
                   <h3 className="text-xl font-black text-[#08242a] mb-3">
                     {dict.about.values_title}
@@ -763,7 +788,7 @@ export default async function HomePage(props: { params: Promise<{ locale: string
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {areasList.map(({ key, title, desc, icon, tag, accent, bgGlow }) => (
+              {areasList.map(({ key, title, desc, icon, iconImg, tag, accent, bgGlow }) => (
                 <div
                   key={key}
                   className="bg-[#faf7f2] p-7 rounded-3xl border border-[#e5e0d6] shadow-subtle hover:shadow-card hover:border-[#cfc7b9] transition-all flex flex-col justify-between group relative overflow-hidden"
@@ -772,8 +797,14 @@ export default async function HomePage(props: { params: Promise<{ locale: string
 
                   <div className="relative z-10">
                     <div className="flex items-center justify-between mb-5">
-                      <div className="w-14 h-14 rounded-2xl bg-white border border-[#e5e0d6] flex items-center justify-center text-3xl shadow-2xs group-hover:scale-105 transition-transform">
-                        {icon}
+                      <div className="w-14 h-14 rounded-2xl bg-white border border-[#e5e0d6] flex items-center justify-center p-2.5 text-3xl shadow-2xs group-hover:scale-105 transition-transform overflow-hidden">
+                        <IconWithFallback
+                          src={iconImg}
+                          fallbackEmoji={icon}
+                          alt={title}
+                          size={36}
+                          className="w-full h-full object-contain"
+                        />
                       </div>
                       <span className={`text-4xs font-black uppercase tracking-wider px-2.5 py-1 rounded-full border bg-white ${accent}`}>
                         {tag}
@@ -1193,16 +1224,24 @@ export default async function HomePage(props: { params: Promise<{ locale: string
             {/* Verified Partner Categories Grid */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto mb-10">
               {[
-                { title: isAr ? 'المراكز الثقافية ودور الشباب' : 'Cultural & Youth Centers', desc: isAr ? 'وطنياً ودولياً' : 'National & International', icon: '🏛️' },
-                { title: isAr ? 'المؤسسات التعليمية' : 'Educational Institutes', desc: isAr ? 'مدارس وجامعات' : 'Schools & Universities', icon: '🎓' },
-                { title: isAr ? 'منظمات المجتمع المدني' : 'Civil Society Organizations', desc: isAr ? 'جمعيات ومنظمات' : 'NGOs & Associations', icon: '🤝' },
-                { title: isAr ? 'الرعاية المؤسسية والقطاع الخاص' : 'Private Sector Sponsorship', desc: isAr ? 'دعم ثقافي واجتماعي' : 'Cultural Sponsorship', icon: '🏢' },
+                { title: isAr ? 'المراكز الثقافية ودور الشباب' : 'Cultural & Youth Centers', desc: isAr ? 'وطنياً ودولياً' : 'National & International', icon: '🏛️', iconImg: '/icons/centers.png' },
+                { title: isAr ? 'المؤسسات التعليمية' : 'Educational Institutes', desc: isAr ? 'مدارس وجامعات' : 'Schools & Universities', icon: '🎓', iconImg: '/icons/education.png' },
+                { title: isAr ? 'منظمات المجتمع المدني' : 'Civil Society Organizations', desc: isAr ? 'جمعيات ومنظمات' : 'NGOs & Associations', icon: '🤝', iconImg: '/icons/ngo.png' },
+                { title: isAr ? 'الرعاية المؤسسية والقطاع الخاص' : 'Private Sector Sponsorship', desc: isAr ? 'دعم ثقافي واجتماعي' : 'Cultural Sponsorship', icon: '🏢', iconImg: '/icons/sponsors.png' },
               ].map((tier, idx) => (
                 <div
                   key={idx}
-                  className="p-6 rounded-3xl bg-white border border-[#e5e0d6] shadow-subtle hover:shadow-card transition-all flex flex-col justify-center items-center text-center"
+                  className="p-6 rounded-3xl bg-white border border-[#e5e0d6] shadow-subtle hover:shadow-card transition-all flex flex-col justify-center items-center text-center group"
                 >
-                  <span className="text-2xl mb-2">{tier.icon}</span>
+                  <div className="w-12 h-12 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6] flex items-center justify-center p-2 mb-3 shadow-2xs group-hover:scale-105 transition-transform overflow-hidden">
+                    <IconWithFallback
+                      src={tier.iconImg}
+                      fallbackEmoji={tier.icon}
+                      alt={tier.title}
+                      size={28}
+                      className="w-full h-full object-contain text-2xl"
+                    />
+                  </div>
                   <span className="text-xs font-bold text-[#08242a] mb-1 leading-snug">{tier.title}</span>
                   <span className="text-3xs text-[#819598] font-medium">{tier.desc}</span>
                 </div>

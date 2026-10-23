@@ -1,6 +1,7 @@
 import { getDictionary } from '@/lib/i18n/dictionaries'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
+import { IconWithFallback } from '@/components/ui/IconWithFallback'
 import Link from 'next/link'
 
 export default async function AboutPage(props: { params: Promise<{ locale: string }> }) {
@@ -130,10 +131,16 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {/* Mission */}
-              <div className="bg-white p-8 rounded-3xl border border-[#e5e0d6] shadow-subtle flex flex-col justify-between">
+              <div className="bg-white p-8 rounded-3xl border border-[#e5e0d6] shadow-subtle flex flex-col justify-between group">
                 <div>
-                  <div className="w-12 h-12 rounded-2xl bg-[#0d3b43] text-white flex items-center justify-center font-bold text-xl mb-6">
-                    ✦
+                  <div className="w-14 h-14 rounded-2xl bg-[#0d3b43] text-white flex items-center justify-center font-bold text-xl mb-6 shadow-xs p-2.5 overflow-hidden group-hover:scale-105 transition-transform">
+                    <IconWithFallback
+                      src="/icons/mission.png"
+                      fallbackEmoji="✦"
+                      alt={dict.about.mission_title}
+                      size={32}
+                      className="w-full h-full object-contain"
+                    />
                   </div>
                   <h3 className="text-xl font-black text-[#08242a] mb-3">
                     {dict.about.mission_title}
@@ -147,11 +154,17 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
               </div>
 
               {/* Vision */}
-              <div className="bg-white p-8 rounded-3xl border-2 border-[#c85a32]/30 shadow-subtle flex flex-col justify-between relative overflow-hidden">
+              <div className="bg-white p-8 rounded-3xl border-2 border-[#c85a32]/30 shadow-subtle flex flex-col justify-between relative overflow-hidden group">
                 <div className="absolute top-0 end-0 w-24 h-24 bg-[#fae4dc] rounded-bl-full pointer-events-none" />
                 <div className="relative z-10">
-                  <div className="w-12 h-12 rounded-2xl bg-[#c85a32] text-white flex items-center justify-center font-bold text-xl mb-6">
-                    ★
+                  <div className="w-14 h-14 rounded-2xl bg-[#c85a32] text-white flex items-center justify-center font-bold text-xl mb-6 shadow-xs p-2.5 overflow-hidden group-hover:scale-105 transition-transform">
+                    <IconWithFallback
+                      src="/icons/vision.png"
+                      fallbackEmoji="★"
+                      alt={dict.about.vision_title}
+                      size={32}
+                      className="w-full h-full object-contain"
+                    />
                   </div>
                   <h3 className="text-xl font-black text-[#08242a] mb-3">
                     {dict.about.vision_title}
@@ -165,10 +178,16 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
               </div>
 
               {/* Values */}
-              <div className="bg-white p-8 rounded-3xl border border-[#e5e0d6] shadow-subtle flex flex-col justify-between">
+              <div className="bg-white p-8 rounded-3xl border border-[#e5e0d6] shadow-subtle flex flex-col justify-between group">
                 <div>
-                  <div className="w-12 h-12 rounded-2xl bg-[#d99b26] text-white flex items-center justify-center font-bold text-xl mb-6">
-                    ♥
+                  <div className="w-14 h-14 rounded-2xl bg-[#d99b26] text-white flex items-center justify-center font-bold text-xl mb-6 shadow-xs p-2.5 overflow-hidden group-hover:scale-105 transition-transform">
+                    <IconWithFallback
+                      src="/icons/values.png"
+                      fallbackEmoji="♥"
+                      alt={dict.about.values_title}
+                      size={32}
+                      className="w-full h-full object-contain"
+                    />
                   </div>
                   <h3 className="text-xl font-black text-[#08242a] mb-3">
                     {dict.about.values_title}
