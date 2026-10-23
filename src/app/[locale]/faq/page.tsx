@@ -49,11 +49,11 @@ export default async function FAQPage(props: { params: Promise<{ locale: string 
   return (
     <>
       <Header locale={locale} dict={dict} />
-      <main id="main-content" className="flex-1 bg-white py-16">
+      <main id="main-content" className="flex-1 bg-[#faf7f2] py-16">
         <div className="max-w-4xl mx-auto px-4">
           <div className="text-center mb-12">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#0068ff]">AMYCC</span>
-            <h1 className="text-3xl sm:text-5xl font-extrabold text-[#0a0f1d] mt-2 mb-4">
+            <span className="text-xs font-bold uppercase tracking-wider text-[#c85a32]">AMYCC Morocco</span>
+            <h1 className="text-3xl sm:text-5xl font-extrabold text-[#08242a] mt-2 mb-4">
               {isAr ? 'الأسئلة الشائعة' : 'Frequently Asked Questions'}
             </h1>
             <p className="text-base text-slate-600">
@@ -65,13 +65,13 @@ export default async function FAQPage(props: { params: Promise<{ locale: string 
             {faqs.map((faq, idx) => (
               <details
                 key={idx}
-                className="group p-6 rounded-2xl bg-slate-50 border border-slate-200/80 open:bg-white open:border-blue-200 open:shadow-xs transition-all"
+                className="group p-6 rounded-2xl bg-white border border-[#e5e0d6] open:border-[#0d3b43]/30 open:shadow-subtle transition-all"
               >
-                <summary className="font-bold text-base text-[#0a0f1d] cursor-pointer flex items-center justify-between list-none">
+                <summary className="font-bold text-base text-[#08242a] cursor-pointer flex items-center justify-between list-none">
                   <span>{faq.q}</span>
-                  <span className="text-[#0068ff] transition-transform group-open:rotate-180">▼</span>
+                  <span className="text-[#0d3b43] transition-transform group-open:rotate-180">▼</span>
                 </summary>
-                <p className="mt-4 text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-3">
+                <p className="mt-4 text-sm text-[#445457] leading-relaxed border-t border-[#f4ede2] pt-3">
                   {faq.a}
                 </p>
               </details>
