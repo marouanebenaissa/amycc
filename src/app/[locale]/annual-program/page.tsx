@@ -239,10 +239,10 @@ export default async function AnnualProgramPage(props: { params: Promise<{ local
                 {dict.events.view_all}
               </Link>
               <Link
-                href={`/${locale}/volunteer`}
+                href={`/${locale}/membership`}
                 className="w-full sm:w-auto px-7 py-3.5 rounded-xl font-bold text-[#08242a] bg-[#f4ce83] hover:bg-[#fae0a5] transition-all text-xs shadow-subtle"
               >
-                {dict.volunteer.apply}
+                {dict.membership.apply}
               </Link>
               <Link
                 href={`/${locale}/partnerships`}

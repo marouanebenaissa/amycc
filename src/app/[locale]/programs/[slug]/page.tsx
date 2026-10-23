@@ -145,10 +145,10 @@ export default async function ProgramDetailPage(props: {
 
             <div className="pt-6 border-t border-[#f4ede2] flex flex-col sm:flex-row gap-4">
               <Link
-                href={`/${locale}/volunteer`}
+                href={`/${locale}/membership`}
                 className="inline-flex items-center justify-center px-8 py-3.5 rounded-xl font-bold text-white bg-[#0d3b43] hover:bg-[#14505b] active:scale-95 transition-all shadow-subtle text-xs"
               >
-                {dict.volunteer.apply}
+                {dict.membership.apply}
               </Link>
               <Link
                 href={`/${locale}/contact`}

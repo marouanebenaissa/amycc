@@ -206,10 +206,10 @@ export default async function ImpactPage(props: { params: Promise<{ locale: stri
 
                 <div className="flex flex-wrap gap-4 pt-2">
                   <Link
-                    href={`/${locale}/volunteer`}
+                    href={`/${locale}/programs/youth-in-action`}
                     className="px-6 py-3 rounded-xl font-bold text-white bg-[#0d3b43] hover:bg-[#14505b] transition-all text-xs shadow-xs"
                   >
-                    {dict.volunteer.apply}
+                    {isAr ? 'اكتشف المبادرة' : 'Discover Initiative'}
                   </Link>
                   <Link
                     href={`/${locale}/annual-program`}

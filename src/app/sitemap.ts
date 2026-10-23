@@ -14,7 +14,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/news',
     '/news/official-launch',
     '/membership',
-    '/volunteer',
     '/partnerships',
     '/support',
     '/contact',
@@ -30,7 +29,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         url: `${baseUrl}/${locale}${page}`,
         lastModified: new Date(),
         changeFrequency: page === '' ? 'daily' : 'weekly',
-        priority: page === '' ? 1.0 : page === '/programs' || page === '/volunteer' ? 0.9 : 0.7,
+        priority: page === '' ? 1.0 : page === '/programs' || page === '/membership' ? 0.9 : 0.7,
       })
     }
   }

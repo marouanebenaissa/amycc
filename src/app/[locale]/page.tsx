@@ -404,10 +404,10 @@ export default async function HomePage(props: { params: Promise<{ locale: string
               </span>
             </div>
             <Link
-              href={`/${locale}/volunteer`}
+              href={`/${locale}/programs/youth-in-action`}
               className="shrink-0 text-3xs font-black uppercase tracking-wider text-[#f4ce83] hover:text-white underline underline-offset-4 flex items-center gap-1 transition-colors"
             >
-              <span>{dict.volunteer.apply}</span>
+              <span>{isAr ? 'اكتشف المبادرة' : 'Explore Initiative'}</span>
               <span aria-hidden="true">{isAr ? '←' : '→'}</span>
             </Link>
           </div>
@@ -474,16 +474,8 @@ export default async function HomePage(props: { params: Promise<{ locale: string
                   </Link>
 
                   <Link
-                    href={`/${locale}/volunteer`}
-                    className="px-7 py-4 rounded-xl font-bold text-[#08242a] bg-[#f4ce83] hover:bg-[#fae0a5] active:scale-98 transition-all shadow-subtle text-center text-sm inline-flex items-center justify-center gap-2"
-                  >
-                    <span>🤝</span>
-                    <span>{dict.volunteer.apply}</span>
-                  </Link>
-
-                  <Link
                     href={`/${locale}/membership`}
-                    className="px-5 py-4 rounded-xl font-bold text-[#0d3b43] bg-white hover:bg-[#faf7f2] border border-[#cfc7b9] transition-all text-center text-sm inline-flex items-center justify-center gap-1.5 shadow-2xs"
+                    className="px-7 py-4 rounded-xl font-bold text-[#08242a] bg-[#f4ce83] hover:bg-[#fae0a5] active:scale-98 transition-all shadow-subtle text-center text-sm inline-flex items-center justify-center gap-2"
                   >
                     <span>{dict.membership.apply}</span>
                     <span aria-hidden="true">↗</span>
@@ -569,14 +561,14 @@ export default async function HomePage(props: { params: Promise<{ locale: string
                       <div className="flex items-center gap-2.5">
                         <span className="w-3 h-3 rounded-full bg-emerald-500 animate-ping" />
                         <span className="text-xs font-bold text-[#08242a]">
-                          {isAr ? 'التطوع والانخراط مفتوح للجميع' : 'Membership & Volunteering Open'}
+                          {isAr ? 'الانخراط وطلب العضوية مفتوح' : 'Membership Applications Open'}
                         </span>
                       </div>
                       <Link
-                        href={`/${locale}/volunteer`}
+                        href={`/${locale}/membership`}
                         className="text-2xs font-extrabold text-[#c85a32] hover:underline"
                       >
-                        {dict.volunteer.apply} →
+                        {dict.membership.apply} →
                       </Link>
                     </div>
                   </div>
@@ -898,10 +890,10 @@ export default async function HomePage(props: { params: Promise<{ locale: string
 
                 <div className="flex flex-col sm:flex-row gap-3 pt-3">
                   <Link
-                    href={`/${locale}/volunteer`}
+                    href={`/${locale}/programs/youth-in-action`}
                     className="px-8 py-3.5 rounded-xl font-bold text-center text-[#08242a] bg-[#f4ce83] hover:bg-white active:scale-95 transition-all shadow-md text-xs sm:text-sm"
                   >
-                    {dict.volunteer.apply}
+                    {isAr ? 'اكتشف تفاصيل المبادرة' : 'Discover Initiative Details'}
                   </Link>
                   <Link
                     href={`/${locale}/about`}
@@ -1286,12 +1278,6 @@ export default async function HomePage(props: { params: Promise<{ locale: string
                 className="w-full sm:w-auto px-8 py-4 rounded-xl font-bold text-white bg-[#c85a32] hover:bg-[#b84e27] active:scale-95 transition-all shadow-card text-center text-sm"
               >
                 {dict.membership.apply}
-              </Link>
-              <Link
-                href={`/${locale}/volunteer`}
-                className="w-full sm:w-auto px-8 py-4 rounded-xl font-bold text-[#08242a] bg-[#f4ce83] hover:bg-white active:scale-95 transition-all text-center text-sm"
-              >
-                {dict.volunteer.apply}
               </Link>
               <Link
                 href={`/${locale}/contact`}

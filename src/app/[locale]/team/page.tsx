@@ -259,10 +259,10 @@ export default async function TeamPage(props: { params: Promise<{ locale: string
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
               <Link
-                href={`/${locale}/volunteer`}
+                href={`/${locale}/membership`}
                 className="w-full sm:w-auto px-8 py-3.5 rounded-xl font-bold text-[#08242a] bg-[#f4ce83] hover:bg-[#fae0a5] transition-all text-xs shadow-subtle"
               >
-                {dict.volunteer.apply}
+                {dict.membership.apply}
               </Link>
               <Link
                 href={`/${locale}/contact`}

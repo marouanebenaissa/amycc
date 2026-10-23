@@ -215,10 +215,10 @@ export default async function ProgramsPage(props: { params: Promise<{ locale: st
                     </Link>
 
                     <Link
-                      href={`/${locale}/volunteer`}
+                      href={`/${locale}/contact`}
                       className="px-4 py-2 rounded-xl text-3xs font-bold text-[#0d3b43] bg-[#faf7f2] hover:bg-[#0d3b43] hover:text-white border border-[#e5e0d6] transition-all"
                     >
-                      {isAr ? 'تطوع في هذا البرنامج' : 'Volunteer Here'}
+                      {isAr ? 'استفسر أو انضم' : 'Inquire or Join'}
                     </Link>
                   </div>
                 </div>

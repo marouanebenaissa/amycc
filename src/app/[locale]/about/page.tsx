@@ -324,12 +324,6 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
                 {dict.membership.apply}
               </Link>
               <Link
-                href={`/${locale}/volunteer`}
-                className="w-full sm:w-auto px-7 py-3.5 rounded-xl font-bold text-[#08242a] bg-[#f4ce83] hover:bg-white active:scale-95 transition-all text-xs sm:text-sm"
-              >
-                {dict.volunteer.apply}
-              </Link>
-              <Link
                 href={`/${locale}/partnerships`}
                 className="w-full sm:w-auto px-6 py-3.5 rounded-xl font-bold text-white border border-[#268292] hover:bg-[#14505b] transition-all text-xs sm:text-sm"
               >

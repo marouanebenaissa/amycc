@@ -19,7 +19,6 @@ export function Footer({ locale, dict }: FooterProps) {
 
   const actionLinks = [
     { key: 'membership' as const, path: 'membership' },
-    { key: 'volunteer' as const, path: 'volunteer' },
     { key: 'partnerships' as const, path: 'partnerships' },
     { key: 'support' as const, path: 'support' },
   ]
@@ -100,10 +99,10 @@ export function Footer({ locale, dict }: FooterProps) {
                 : 'A flagship initiative engaging youth in cultural participation and volunteering.'}
             </p>
             <Link
-              href={`/${locale}/contact`}
+              href={`/${locale}/programs/youth-in-action`}
               className="inline-flex items-center text-xs font-bold text-[#f4ce83] hover:text-white transition-colors"
             >
-              {dict.nav.contact} →
+              {locale === 'ar' ? 'اكتشف المبادرة' : 'Explore Initiative'} →
             </Link>
           </div>
         </div>

@@ -236,15 +236,8 @@ export function Header({ locale, dict }: HeaderProps) {
     },
   ]
 
-  // Individual direct nav links (Volunteer + Partnerships)
+  // Individual direct nav links (Partnerships)
   const directNavLinks = [
-    {
-      key: 'volunteer' as const,
-      title: dict.nav.volunteer,
-      path: 'volunteer',
-      icon: '🤝',
-      iconSrc: '/icons/nav/volunteer.png',
-    },
     {
       key: 'partnerships' as const,
       title: dict.nav.partnerships,
@@ -306,10 +299,10 @@ export function Header({ locale, dict }: HeaderProps) {
 
           <div className="flex items-center gap-4 text-3xs">
             <Link
-              href={`/${locale}/volunteer`}
+              href={`/${locale}/programs/youth-in-action`}
               className="text-[#f4ce83] hover:underline font-bold transition-colors"
             >
-              {isAr ? 'مبادرة شباب في العمل (تطوع)' : 'Youth in Action Initiative'}
+              {isAr ? 'مبادرة شباب في العمل' : 'Youth in Action Initiative'}
             </Link>
             <span className="text-[#1c6875]">•</span>
             <a
@@ -964,35 +957,6 @@ export function Header({ locale, dict }: HeaderProps) {
                 )}
               </div>
 
-              {/* Volunteer */}
-              <Link
-                href={`/${locale}/volunteer`}
-                onClick={() => setMobileMenuOpen(false)}
-                className={`px-4 py-3 rounded-xl text-sm font-bold transition-all flex items-center justify-between ${
-                  isPathActive('volunteer')
-                    ? 'bg-[#d8f0f4] text-[#0d3b43] font-black shadow-2xs'
-                    : 'text-[#1b2628] hover:bg-[#f4ede2]'
-                }`}
-              >
-                <div className="flex items-center gap-3">
-                  <span className="w-5 h-5 flex items-center justify-center">
-                    <IconWithFallback
-                      src="/icons/nav/volunteer.png"
-                      fallbackEmoji="🤝"
-                      alt={dict.nav.volunteer}
-                      size={18}
-                      className="w-full h-full object-contain"
-                    />
-                  </span>
-                  <span>{dict.nav.volunteer}</span>
-                </div>
-                {isPathActive('volunteer') && (
-                  <span className="text-3xs font-black uppercase tracking-wider px-2 py-0.5 rounded-full bg-[#0d3b43] text-white">
-                    {isAr ? 'النشط' : 'Active'}
-                  </span>
-                )}
-              </Link>
-
               {/* Partnerships */}
               <Link
                 href={`/${locale}/partnerships`}
@@ -1032,11 +996,11 @@ export function Header({ locale, dict }: HeaderProps) {
                   {dict.membership.apply}
                 </Link>
                 <Link
-                  href={`/${locale}/volunteer`}
+                  href={`/${locale}/contact`}
                   onClick={() => setMobileMenuOpen(false)}
                   className="w-full flex items-center justify-center py-3.5 px-4 rounded-xl text-sm font-bold text-[#0d3b43] bg-white border border-[#cfc7b9] hover:bg-[#f4ede2] transition-all shadow-2xs"
                 >
-                  {dict.volunteer.apply}
+                  {dict.nav.contact}
                 </Link>
               </div>
 
