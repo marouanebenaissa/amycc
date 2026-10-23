@@ -17,16 +17,20 @@ export function Header({ locale, dict }: HeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [aboutDropdownOpen, setAboutDropdownOpen] = useState(false)
   const [programsDropdownOpen, setProgramsDropdownOpen] = useState(false)
+  const [exploreDropdownOpen, setExploreDropdownOpen] = useState(false)
   const [mobileAboutOpen, setMobileAboutOpen] = useState(false)
   const [mobileProgramsOpen, setMobileProgramsOpen] = useState(false)
+  const [mobileExploreOpen, setMobileExploreOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const pathname = usePathname()
   const [prevPathname, setPrevPathname] = useState(pathname)
 
   const aboutDropdownRef = useRef<HTMLDivElement>(null)
   const programsDropdownRef = useRef<HTMLDivElement>(null)
+  const exploreDropdownRef = useRef<HTMLDivElement>(null)
   const aboutTimeoutRef = useRef<NodeJS.Timeout | null>(null)
   const programsTimeoutRef = useRef<NodeJS.Timeout | null>(null)
+  const exploreTimeoutRef = useRef<NodeJS.Timeout | null>(null)
 
   const isAr = locale === 'ar'
   const isFr = locale === 'fr'
@@ -37,8 +41,10 @@ export function Header({ locale, dict }: HeaderProps) {
     setMobileMenuOpen(false)
     setAboutDropdownOpen(false)
     setProgramsDropdownOpen(false)
+    setExploreDropdownOpen(false)
     setMobileAboutOpen(false)
     setMobileProgramsOpen(false)
+    setMobileExploreOpen(false)
   }
 
   // Track scroll position for subtle elevation
@@ -72,6 +78,9 @@ export function Header({ locale, dict }: HeaderProps) {
       if (programsDropdownRef.current && !programsDropdownRef.current.contains(target)) {
         setProgramsDropdownOpen(false)
       }
+      if (exploreDropdownRef.current && !exploreDropdownRef.current.contains(target)) {
+        setExploreDropdownOpen(false)
+      }
     }
     document.addEventListener('mousedown', handleClickOutside)
     return () => document.removeEventListener('mousedown', handleClickOutside)
@@ -81,6 +90,7 @@ export function Header({ locale, dict }: HeaderProps) {
   const handleAboutMouseEnter = () => {
     if (aboutTimeoutRef.current) clearTimeout(aboutTimeoutRef.current)
     setProgramsDropdownOpen(false)
+    setExploreDropdownOpen(false)
     setAboutDropdownOpen(true)
   }
 
@@ -94,6 +104,7 @@ export function Header({ locale, dict }: HeaderProps) {
   const handleProgramsMouseEnter = () => {
     if (programsTimeoutRef.current) clearTimeout(programsTimeoutRef.current)
     setAboutDropdownOpen(false)
+    setExploreDropdownOpen(false)
     setProgramsDropdownOpen(true)
   }
 
@@ -103,12 +114,30 @@ export function Header({ locale, dict }: HeaderProps) {
     }, 180)
   }
 
+  // Explore dropdown hover handlers
+  const handleExploreMouseEnter = () => {
+    if (exploreTimeoutRef.current) clearTimeout(exploreTimeoutRef.current)
+    setAboutDropdownOpen(false)
+    setProgramsDropdownOpen(false)
+    setExploreDropdownOpen(true)
+  }
+
+  const handleExploreMouseLeave = () => {
+    exploreTimeoutRef.current = setTimeout(() => {
+      setExploreDropdownOpen(false)
+    }, 180)
+  }
+
   // Sub-items grouped under "عن الجمعية" (About + Team + Contact)
   const aboutSubItems = [
     {
       key: 'about',
       title: dict.nav.about,
-      desc: isAr ? 'الرؤية والرسالة والأهداف التأسيسية للجمعية' : isFr ? 'Vision, mission et objectifs fondateurs' : 'Vision, mission, and core values',
+      desc: isAr
+        ? 'الرؤية والرسالة والأهداف التأسيسية للجمعية'
+        : isFr
+        ? 'Vision, mission et objectifs fondateurs'
+        : 'Vision, mission, and core values',
       path: 'about',
       icon: '✦',
       iconSrc: '/icons/nav/about.png',
@@ -116,7 +145,11 @@ export function Header({ locale, dict }: HeaderProps) {
     {
       key: 'team',
       title: isAr ? 'فريق العمل والحكامة' : isFr ? 'Notre Équipe & Gouvernance' : 'Our Team & Governance',
-      desc: isAr ? 'المكتب التنفيذي واللجان الفنية والوظيفية' : isFr ? 'Bureau exécutif et commissions artistiques' : 'Executive board & functional committees',
+      desc: isAr
+        ? 'المكتب التنفيذي واللجان الفنية والوظيفية'
+        : isFr
+        ? 'Bureau exécutif et commissions artistiques'
+        : 'Executive board & functional committees',
       path: 'team',
       icon: '👥',
       iconSrc: '/icons/nav/team.png',
@@ -124,7 +157,11 @@ export function Header({ locale, dict }: HeaderProps) {
     {
       key: 'contact',
       title: isAr ? 'تواصل معنا' : isFr ? 'Contactez-nous' : 'Contact Us',
-      desc: isAr ? 'المقر، البريد الإلكتروني، وقنوات التواصل الرسمي' : isFr ? 'Siège, e-mail officiel et coordonnées' : 'Headquarters, email, and social channels',
+      desc: isAr
+        ? 'المقر، البريد الإلكتروني، وقنوات التواصل الرسمي'
+        : isFr
+        ? 'Siège, e-mail officiel et coordonnées'
+        : 'Headquarters, email, and social channels',
       path: 'contact',
       icon: '✉️',
       iconSrc: '/icons/nav/contact.png',
@@ -136,7 +173,11 @@ export function Header({ locale, dict }: HeaderProps) {
     {
       key: 'programs',
       title: dict.nav.programs,
-      desc: isAr ? 'محترفات الفنون، المسرح، والموسيقى والتراث' : isFr ? 'Arts visuels, théâtre, musique et patrimoine' : 'Workshops in fine arts, theatre, and music',
+      desc: isAr
+        ? 'محترفات الفنون، المسرح، والموسيقى والتراث'
+        : isFr
+        ? 'Arts visuels, théâtre, musique et patrimoine'
+        : 'Workshops in fine arts, theatre, and music',
       path: 'programs',
       icon: '🎨',
       iconSrc: '/icons/nav/programs.png',
@@ -144,7 +185,11 @@ export function Header({ locale, dict }: HeaderProps) {
     {
       key: 'annual_program',
       title: dict.nav.annual_program,
-      desc: isAr ? 'الأجندة الثقافية الشاملة لموسم 2026' : isFr ? 'Agenda culturel complet de la saison 2026' : 'Comprehensive cultural season 2026 agenda',
+      desc: isAr
+        ? 'الأجندة الثقافية الشاملة لموسم 2026'
+        : isFr
+        ? 'Agenda culturel complet de la saison 2026'
+        : 'Comprehensive cultural season 2026 agenda',
       path: 'annual-program',
       icon: '📅',
       iconSrc: '/icons/nav/annual-program.png',
@@ -152,36 +197,59 @@ export function Header({ locale, dict }: HeaderProps) {
     {
       key: 'impact',
       title: dict.nav.impact,
-      desc: isAr ? 'مؤشرات الأثر وتمكين الشباب وصون التراث' : isFr ? 'Indicateurs d\'impact et autonomisation des jeunes' : 'Youth empowerment metrics & community impact',
+      desc: isAr
+        ? 'مؤشرات الأثر وتمكين الشباب وصون التراث'
+        : isFr
+        ? "Indicateurs d'impact et autonomisation des jeunes"
+        : 'Youth empowerment metrics & community impact',
       path: 'impact',
       icon: '📊',
       iconSrc: '/icons/nav/impact.png',
     },
   ]
 
-  // Individual direct nav links
-  const directNavLinks = [
+  // Sub-items grouped under "استكشف" (Explore: Events + News + Gallery)
+  const exploreSubItems = [
     {
-      key: 'events' as const,
+      key: 'events',
       title: dict.nav.events,
+      desc: isAr
+        ? 'المهرجانات، الأمسيات الثقافية والورشات الحية'
+        : isFr
+        ? 'Festivals, soirées culturelles et ateliers en direct'
+        : 'Festivals, cultural nights, and live workshops',
       path: 'events',
       icon: '📅',
       iconSrc: '/icons/nav/events.png',
     },
     {
-      key: 'news' as const,
+      key: 'news',
       title: dict.nav.news,
+      desc: isAr
+        ? 'مستجدات الجمعية، التغطيات الإعلامية والبيانات'
+        : isFr
+        ? "Actualités de l'association et communiqués officiels"
+        : 'Association news, media coverage, and official press',
       path: 'news',
       icon: '📰',
       iconSrc: '/icons/nav/news.png',
     },
     {
-      key: 'gallery' as const,
+      key: 'gallery',
       title: dict.nav.gallery,
+      desc: isAr
+        ? 'توثيق فوتوغرافي وبصري للأنشطة والملتقيات'
+        : isFr
+        ? 'Documentation photographique et visuelle des actions'
+        : 'Visual & photo archive of activities and forums',
       path: 'gallery',
       icon: '🖼️',
       iconSrc: '/icons/nav/gallery.png',
     },
+  ]
+
+  // Individual direct nav links (Volunteer + Partnerships)
+  const directNavLinks = [
     {
       key: 'volunteer' as const,
       title: dict.nav.volunteer,
@@ -208,6 +276,10 @@ export function Header({ locale, dict }: HeaderProps) {
     pathname.startsWith(`/${locale}/programs`) ||
     pathname.startsWith(`/${locale}/annual-program`) ||
     pathname.startsWith(`/${locale}/impact`)
+  const isExploreActive =
+    pathname.startsWith(`/${locale}/events`) ||
+    pathname.startsWith(`/${locale}/news`) ||
+    pathname.startsWith(`/${locale}/gallery`)
 
   function isPathActive(path: string) {
     return pathname.startsWith(`/${locale}/${path}`)
@@ -304,7 +376,11 @@ export function Header({ locale, dict }: HeaderProps) {
             >
               <button
                 type="button"
-                onClick={() => setAboutDropdownOpen(!aboutDropdownOpen)}
+                onClick={() => {
+                  setAboutDropdownOpen(!aboutDropdownOpen)
+                  setProgramsDropdownOpen(false)
+                  setExploreDropdownOpen(false)
+                }}
                 className={`group px-3 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 ${
                   isAboutActive || aboutDropdownOpen
                     ? 'bg-[#0d3b43]/8 text-[#c85a32] border border-[#c85a32]/25 shadow-2xs font-black'
@@ -322,7 +398,7 @@ export function Header({ locale, dict }: HeaderProps) {
                     className="w-full h-full object-contain"
                   />
                 </span>
-                <span>{isAr ? 'عن الجمعية' : isFr ? 'L\'Association' : 'About Us'}</span>
+                <span>{dict.nav.about_group || (isAr ? 'عن الجمعية' : isFr ? "L'Association" : 'About Us')}</span>
 
                 <svg
                   className={`w-3.5 h-3.5 transition-transform duration-200 ${
@@ -403,7 +479,11 @@ export function Header({ locale, dict }: HeaderProps) {
             >
               <button
                 type="button"
-                onClick={() => setProgramsDropdownOpen(!programsDropdownOpen)}
+                onClick={() => {
+                  setProgramsDropdownOpen(!programsDropdownOpen)
+                  setAboutDropdownOpen(false)
+                  setExploreDropdownOpen(false)
+                }}
                 className={`group px-3 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 ${
                   isProgramsActive || programsDropdownOpen
                     ? 'bg-[#0d3b43]/8 text-[#c85a32] border border-[#c85a32]/25 shadow-2xs font-black'
@@ -493,7 +573,110 @@ export function Header({ locale, dict }: HeaderProps) {
               )}
             </div>
 
-            {/* Direct Navigation Links */}
+            {/* 4. استكشف (GROUPED DROPDOWN: الفعاليات + الأخبار + المعرض) */}
+            <div
+              ref={exploreDropdownRef}
+              className="relative"
+              onMouseEnter={handleExploreMouseEnter}
+              onMouseLeave={handleExploreMouseLeave}
+            >
+              <button
+                type="button"
+                onClick={() => {
+                  setExploreDropdownOpen(!exploreDropdownOpen)
+                  setAboutDropdownOpen(false)
+                  setProgramsDropdownOpen(false)
+                }}
+                className={`group px-3 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 ${
+                  isExploreActive || exploreDropdownOpen
+                    ? 'bg-[#0d3b43]/8 text-[#c85a32] border border-[#c85a32]/25 shadow-2xs font-black'
+                    : 'text-[#1b2628] hover:text-[#0d3b43] hover:bg-[#ebe1d1]/50'
+                }`}
+                aria-expanded={exploreDropdownOpen}
+                aria-haspopup="true"
+              >
+                <span className="w-4 h-4 shrink-0 flex items-center justify-center opacity-85 group-hover:scale-110 transition-transform">
+                  <IconWithFallback
+                    src="/icons/nav/explore.png"
+                    fallbackEmoji="🧭"
+                    alt={dict.nav.explore || (isAr ? 'استكشف' : isFr ? 'Explorer' : 'Explore')}
+                    size={16}
+                    className="w-full h-full object-contain"
+                  />
+                </span>
+                <span>{dict.nav.explore || (isAr ? 'استكشف' : isFr ? 'Explorer' : 'Explore')}</span>
+
+                <svg
+                  className={`w-3.5 h-3.5 transition-transform duration-200 ${
+                    exploreDropdownOpen ? 'rotate-180 text-[#c85a32]' : 'text-[#819598]'
+                  }`}
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2.5}
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                </svg>
+
+                {isExploreActive && (
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#c85a32] shrink-0" aria-hidden="true" />
+                )}
+              </button>
+
+              {/* Floating Luxury Dropdown for Explore */}
+              {exploreDropdownOpen && (
+                <div className="absolute top-full start-0 mt-1.5 w-72 rounded-2xl bg-white border border-[#e5e0d6] shadow-xl p-2.5 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
+                  <div className="px-3 py-1.5 text-4xs font-bold uppercase tracking-wider text-[#819598] border-b border-[#f4ede2] mb-1">
+                    {dict.nav.explore || (isAr ? 'استكشف أنشطتنا' : 'Explore Activities')}
+                  </div>
+
+                  <div className="space-y-1">
+                    {exploreSubItems.map((sub) => {
+                      const fullPath = `/${locale}/${sub.path}`
+                      const isActive = pathname.startsWith(fullPath)
+
+                      return (
+                        <Link
+                          key={sub.key}
+                          href={fullPath}
+                          onClick={() => setExploreDropdownOpen(false)}
+                          className={`group/item flex items-start gap-3 p-2.5 rounded-xl transition-all ${
+                            isActive
+                              ? 'bg-[#d8f0f4]/80 text-[#0d3b43]'
+                              : 'hover:bg-[#faf7f2] text-[#1b2628]'
+                          }`}
+                        >
+                          <div className="w-8 h-8 rounded-lg bg-[#faf7f2] border border-[#e5e0d6] flex items-center justify-center shrink-0 p-1.5 shadow-2xs group-hover/item:scale-105 transition-transform">
+                            <IconWithFallback
+                              src={sub.iconSrc}
+                              fallbackEmoji={sub.icon}
+                              alt={sub.title}
+                              size={18}
+                              className="w-full h-full object-contain"
+                            />
+                          </div>
+
+                          <div className="flex-1 min-w-0">
+                            <span className="text-xs font-bold block leading-tight text-[#08242a] group-hover/item:text-[#c85a32] transition-colors">
+                              {sub.title}
+                            </span>
+                            <span className="text-3xs text-[#5f7174] block mt-0.5 line-clamp-1">
+                              {sub.desc}
+                            </span>
+                          </div>
+
+                          {isActive && (
+                            <span className="w-1.5 h-1.5 rounded-full bg-[#c85a32] self-center shrink-0" />
+                          )}
+                        </Link>
+                      )
+                    })}
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Direct Navigation Links (Volunteer + Partnerships) */}
             {directNavLinks.map(({ key, title, path, icon, iconSrc }) => {
               const fullPath = `/${locale}/${path}`
               const isActive = isPathActive(path)
@@ -615,7 +798,7 @@ export function Header({ locale, dict }: HeaderProps) {
                         className="w-full h-full object-contain"
                       />
                     </span>
-                    <span>{isAr ? 'عن الجمعية' : isFr ? 'L\'Association' : 'About Us'}</span>
+                    <span>{dict.nav.about_group || (isAr ? 'عن الجمعية' : isFr ? "L'Association" : 'About Us')}</span>
                   </div>
 
                   <svg
@@ -728,92 +911,71 @@ export function Header({ locale, dict }: HeaderProps) {
                 )}
               </div>
 
-              {/* Events */}
-              <Link
-                href={`/${locale}/events`}
-                onClick={() => setMobileMenuOpen(false)}
-                className={`px-4 py-3 rounded-xl text-sm font-bold transition-all flex items-center justify-between ${
-                  isPathActive('events')
-                    ? 'bg-[#d8f0f4] text-[#0d3b43] font-black shadow-2xs'
-                    : 'text-[#1b2628] hover:bg-[#f4ede2]'
-                }`}
-              >
-                <div className="flex items-center gap-3">
-                  <span className="w-5 h-5 flex items-center justify-center">
-                    <IconWithFallback
-                      src="/icons/nav/events.png"
-                      fallbackEmoji="📅"
-                      alt={dict.nav.events}
-                      size={18}
-                      className="w-full h-full object-contain"
-                    />
-                  </span>
-                  <span>{dict.nav.events}</span>
-                </div>
-                {isPathActive('events') && (
-                  <span className="text-3xs font-black uppercase tracking-wider px-2 py-0.5 rounded-full bg-[#0d3b43] text-white">
-                    {isAr ? 'النشط' : 'Active'}
-                  </span>
-                )}
-              </Link>
+              {/* Accordion 3: استكشف (Explore: Events + News + Gallery) */}
+              <div className="rounded-xl border border-[#e5e0d6] overflow-hidden bg-white">
+                <button
+                  type="button"
+                  onClick={() => setMobileExploreOpen(!mobileExploreOpen)}
+                  className={`w-full px-4 py-3 text-sm font-bold flex items-center justify-between transition-colors ${
+                    isExploreActive ? 'bg-[#0d3b43]/5 text-[#c85a32]' : 'text-[#08242a]'
+                  }`}
+                >
+                  <div className="flex items-center gap-3">
+                    <span className="w-5 h-5 flex items-center justify-center">
+                      <IconWithFallback
+                        src="/icons/nav/explore.png"
+                        fallbackEmoji="🧭"
+                        alt={dict.nav.explore || (isAr ? 'استكشف' : 'Explore')}
+                        size={18}
+                        className="w-full h-full object-contain"
+                      />
+                    </span>
+                    <span>{dict.nav.explore || (isAr ? 'استكشف' : isFr ? 'Explorer' : 'Explore')}</span>
+                  </div>
 
-              {/* News */}
-              <Link
-                href={`/${locale}/news`}
-                onClick={() => setMobileMenuOpen(false)}
-                className={`px-4 py-3 rounded-xl text-sm font-bold transition-all flex items-center justify-between ${
-                  isPathActive('news')
-                    ? 'bg-[#d8f0f4] text-[#0d3b43] font-black shadow-2xs'
-                    : 'text-[#1b2628] hover:bg-[#f4ede2]'
-                }`}
-              >
-                <div className="flex items-center gap-3">
-                  <span className="w-5 h-5 flex items-center justify-center">
-                    <IconWithFallback
-                      src="/icons/nav/news.png"
-                      fallbackEmoji="📰"
-                      alt={dict.nav.news}
-                      size={18}
-                      className="w-full h-full object-contain"
-                    />
-                  </span>
-                  <span>{dict.nav.news}</span>
-                </div>
-                {isPathActive('news') && (
-                  <span className="text-3xs font-black uppercase tracking-wider px-2 py-0.5 rounded-full bg-[#0d3b43] text-white">
-                    {isAr ? 'النشط' : 'Active'}
-                  </span>
-                )}
-              </Link>
+                  <svg
+                    className={`w-4 h-4 transition-transform ${mobileExploreOpen ? 'rotate-180 text-[#c85a32]' : 'text-[#819598]'}`}
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
 
-              {/* Gallery */}
-              <Link
-                href={`/${locale}/gallery`}
-                onClick={() => setMobileMenuOpen(false)}
-                className={`px-4 py-3 rounded-xl text-sm font-bold transition-all flex items-center justify-between ${
-                  isPathActive('gallery')
-                    ? 'bg-[#d8f0f4] text-[#0d3b43] font-black shadow-2xs'
-                    : 'text-[#1b2628] hover:bg-[#f4ede2]'
-                }`}
-              >
-                <div className="flex items-center gap-3">
-                  <span className="w-5 h-5 flex items-center justify-center">
-                    <IconWithFallback
-                      src="/icons/nav/gallery.png"
-                      fallbackEmoji="🖼️"
-                      alt={dict.nav.gallery}
-                      size={18}
-                      className="w-full h-full object-contain"
-                    />
-                  </span>
-                  <span>{dict.nav.gallery}</span>
-                </div>
-                {isPathActive('gallery') && (
-                  <span className="text-3xs font-black uppercase tracking-wider px-2 py-0.5 rounded-full bg-[#0d3b43] text-white">
-                    {isAr ? 'النشط' : 'Active'}
-                  </span>
+                {mobileExploreOpen && (
+                  <div className="bg-[#faf7f2] p-2 space-y-1 border-t border-[#e5e0d6]">
+                    {exploreSubItems.map((sub) => {
+                      const fullPath = `/${locale}/${sub.path}`
+                      const isActive = pathname.startsWith(fullPath)
+                      return (
+                        <Link
+                          key={sub.key}
+                          href={fullPath}
+                          onClick={() => setMobileMenuOpen(false)}
+                          className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-xs font-bold transition-all ${
+                            isActive
+                              ? 'bg-[#d8f0f4] text-[#0d3b43] font-black'
+                              : 'text-[#445457] hover:bg-white'
+                          }`}
+                        >
+                          <span className="w-4 h-4 flex items-center justify-center">
+                            <IconWithFallback
+                              src={sub.iconSrc}
+                              fallbackEmoji={sub.icon}
+                              alt={sub.title}
+                              size={16}
+                              className="w-full h-full object-contain"
+                            />
+                          </span>
+                          <span>{sub.title}</span>
+                        </Link>
+                      )
+                    })}
+                  </div>
                 )}
-              </Link>
+              </div>
 
               {/* Volunteer */}
               <Link
