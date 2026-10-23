@@ -208,7 +208,7 @@ export function Header({ locale, dict }: HeaderProps) {
     },
   ]
 
-  // Sub-items grouped under "استكشف" (Explore: Events + News + Gallery)
+  // Sub-items grouped under "استكشف" (Explore: Events + News)
   const exploreSubItems = [
     {
       key: 'events',
@@ -233,18 +233,6 @@ export function Header({ locale, dict }: HeaderProps) {
       path: 'news',
       icon: '📰',
       iconSrc: '/icons/nav/news.png',
-    },
-    {
-      key: 'gallery',
-      title: dict.nav.gallery,
-      desc: isAr
-        ? 'توثيق فوتوغرافي وبصري للأنشطة والملتقيات'
-        : isFr
-        ? 'Documentation photographique et visuelle des actions'
-        : 'Visual & photo archive of activities and forums',
-      path: 'gallery',
-      icon: '🖼️',
-      iconSrc: '/icons/nav/gallery.png',
     },
   ]
 
@@ -278,8 +266,7 @@ export function Header({ locale, dict }: HeaderProps) {
     pathname.startsWith(`/${locale}/impact`)
   const isExploreActive =
     pathname.startsWith(`/${locale}/events`) ||
-    pathname.startsWith(`/${locale}/news`) ||
-    pathname.startsWith(`/${locale}/gallery`)
+    pathname.startsWith(`/${locale}/news`)
 
   function isPathActive(path: string) {
     return pathname.startsWith(`/${locale}/${path}`)

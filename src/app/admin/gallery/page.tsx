@@ -52,7 +52,6 @@ export default async function AdminGalleryPage() {
     })
 
     revalidatePath('/admin/gallery')
-    revalidatePath('/ar/gallery')
   }
 
   async function handleToggleStatus(id: string, currentStatus: string) {

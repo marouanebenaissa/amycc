@@ -15,7 +15,6 @@ export function Footer({ locale, dict }: FooterProps) {
     { key: 'programs' as const, path: 'programs' },
     { key: 'events' as const, path: 'events' },
     { key: 'news' as const, path: 'news' },
-    { key: 'gallery' as const, path: 'gallery' },
   ]
 
   const actionLinks = [
