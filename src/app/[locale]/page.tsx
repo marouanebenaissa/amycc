@@ -99,10 +99,10 @@ export default async function HomePage(props: { params: Promise<{ locale: string
           {
             title: isAr ? 'مبادرة شباب في العمل (Youth in Action)' : isFr ? 'Initiative Jeunesse en Action' : 'Youth in Action Initiative',
             description: isAr
-              ? 'البرنامج التطوعي الرائد لتمكين الشباب المغربي من القيادة الثقافية وتنظيم التظاهرات الفنية وخدمة المجتمع المحلي.'
+              ? 'برنامج رائد ومستدام لتأهيل وتأطير الطاقات الشابة في مجالات القيادة الثقافية، تنظيم التظاهرات الفنية، والعمل التطوعي الميداني.'
               : isFr
-              ? 'Programme bénévole phare engageant les jeunes dans le leadership culturel et l\'animation de proximité.'
-              : 'Our flagship volunteering program empowering young Moroccans in cultural leadership and community civic engagement.',
+              ? 'Un programme civique et culturel phare pour former et mobiliser les jeunes dans le leadership artistique et le bénévolat.'
+              : 'Our flagship civic initiative empowering young Moroccans to co-create and lead cultural events, artistic workshops, and community volunteering.',
           },
         ],
       },
@@ -110,31 +110,31 @@ export default async function HomePage(props: { params: Promise<{ locale: string
         id: 'p-2',
         slug: 'arts-heritage-workshops',
         category: 'arts',
-        city: isAr ? 'المملكة المغربية' : 'Morocco',
+        city: isAr ? 'المغرب' : 'Morocco',
         program_translations: [
           {
-            title: isAr ? 'ورشات الفنون والتراث الإبداعي' : isFr ? 'Ateliers des Arts et du Patrimoine' : 'Arts & Creative Heritage Workshops',
+            title: isAr ? 'ورشات الفنون والتراث الأصيل' : isFr ? 'Ateliers des Arts & du Patrimoine' : 'Arts & Moroccan Heritage Workshops',
             description: isAr
-              ? 'مساحات تدريبية تفاعلية للشباب والناشئة في الفنون التشكيلية، التعبير المسرحي، والموسيقى التراثية المغربية.'
+              ? 'محترفات تفاعلية لتعليم الفنون التشكيلية، الخط العربي، صون التراث الموسيقي المغربي، ونقل الخبرات بين الأجيال.'
               : isFr
-              ? 'Ateliers interactifs de formation pour jeunes en arts visuels, théâtre dramatique et musique patrimoniale.'
-              : 'Interactive masterclasses for youth exploring visual arts, dramatic theatre, and Moroccan musical heritage.',
+              ? 'Des ateliers immersifs dédiés aux arts plastiques, à la calligraphie et à la préservation du patrimoine musical marocain.'
+              : 'Interactive masterclasses covering visual arts, calligraphy, and safeguarding Moroccan musical traditions across generations.',
           },
         ],
       },
       {
         id: 'p-3',
-        slug: 'cultural-dialogue-forum',
-        category: 'culture',
-        city: isAr ? 'المملكة المغربية' : 'Morocco',
+        slug: 'theatre-expression-forum',
+        category: 'theatre',
+        city: isAr ? 'المغرب' : 'Morocco',
         program_translations: [
           {
-            title: isAr ? 'ملتقى الحوار الثقافي والتنوع' : isFr ? 'Forum du Dialogue Culturel' : 'Cultural Dialogue Forum',
+            title: isAr ? 'محترفات المسرح وفنون العرض' : isFr ? 'Laboratoire du Théâtre & Arts de la Scène' : 'Theatre & Performing Arts Lab',
             description: isAr
-              ? 'ندوات وأمسيات فكرية تجمع الفاعلين الثقافيين والشباب لمناقشة دور الثقافة والفنون في التنمية المستدامة.'
+              ? 'فضاء إبداعي لتدريب الشباب على تقنيات الارتجال المسرحي، الإلقاء، السينوغرافيا، وبناء العروض التعبيرية الهادفة.'
               : isFr
-              ? 'Rencontres et débats réunissant acteurs culturels et jeunes autour du rôle de l\'art dans le développement.'
-              : 'Conferences and roundtables bringing cultural leaders and youth together to explore culture as a catalyst for growth.',
+              ? 'Espace d\'entraînement aux techniques d\'improvisation théâtrale, d\'élocution et de scénographie pour la jeunesse.'
+              : 'Creative development platform training youth in dramatic improvisation, voice projection, and community stage productions.',
           },
         ],
       },
@@ -180,6 +180,24 @@ export default async function HomePage(props: { params: Promise<{ locale: string
           },
         ],
       },
+      {
+        id: 'e-3',
+        slug: 'youth-creative-forum',
+        start_date: '2026-12-20T10:00:00Z',
+        venue: isAr ? 'فضاء الفنون' : 'Arts Space',
+        city: isAr ? 'المغرب' : 'Morocco',
+        registration_open: true,
+        event_translations: [
+          {
+            title: isAr ? 'ملتقى الشباب المبدع ومعرض الفنون التشكيلية' : isFr ? 'Forum des Jeunes Créateurs & Exposition Visuelle' : 'Youth Creative Forum & Visual Arts Exhibition',
+            description: isAr
+              ? 'معرض تفاعلي وورشات حية تتيح للفنانين الشباب عرض إبداعاتهم والتواصل المباشر مع الجمهور والمهتمين.'
+              : isFr
+              ? 'Exposition vivante et ateliers interactifs permettant aux jeunes artistes de présenter leurs créations.'
+              : 'Interactive exhibition and live masterclasses giving young Moroccan artists a platform to showcase their creations.',
+          },
+        ],
+      },
     ]
   }
 
@@ -195,105 +213,143 @@ export default async function HomePage(props: { params: Promise<{ locale: string
           {
             title: isAr ? 'إطلاق المنصة الرقمية الرسمية لجمعية روح الفنون والثقافة (AMYCC)' : isFr ? 'Lancement officiel de la plateforme numérique de l\'AMYCC' : 'Official Launch of the AMYCC Digital Platform',
             excerpt: isAr
-              ? 'تعلن الجمعية عن تدشين موقعها الإلكتروني التفاعلي بـ 3 لغات لتيسير الانخراط والتطوع ومتابعة الأنشطة.'
+              ? 'تعلن الجمعية عن تدشين موقعها الإلكتروني التفاعلي بـ 3 لغات لتيسير الانخراط والتطوع ومتابعة الأنشطة الثقافية.'
               : isFr
               ? 'L\'association inaugure sa plateforme trilingue pour faciliter les adhésions et l\'engagement bénévole.'
               : 'AMYCC officially unveils its trilingual web platform to foster community engagement and cultural participation.',
           },
         ],
       },
+      {
+        id: 'n-2',
+        slug: 'youth-in-action-call',
+        category: 'initiative',
+        published_at: '2026-10-20T14:30:00Z',
+        news_translations: [
+          {
+            title: isAr ? 'فتح باب التطوع في مبادرة "شباب في العمل" لموسم 2026' : isFr ? 'Appel à bénévoles pour l\'initiative "Jeunesse en Action" 2026' : 'Open Call for Volunteers: "Youth in Action" 2026 Initiative',
+            excerpt: isAr
+              ? 'دعوة مفتوحة لكافة الشباب والشابات بالمغرب للمشاركة في تنظيم وتأطير الفعاليات الثقافية واكتساب خبرات ميدانية معتمدة.'
+              : isFr
+              ? 'Appel ouvert aux jeunes du Royaume pour s\'investir dans des projets culturels et acquérir une expérience certifiée.'
+              : 'Open invitation for youth across Morocco to co-organize civic and cultural events while earning recognized leadership experience.',
+          },
+        ],
+      },
+      {
+        id: 'n-3',
+        slug: 'cultural-partnerships-expansion',
+        category: 'partnerships',
+        published_at: '2026-10-22T09:00:00Z',
+        news_translations: [
+          {
+            title: isAr ? 'بناء شبكة شراكات مؤسساتية لتعزيز الإشعاع الثقافي الوطني' : isFr ? 'Développement de partenariats institutionnels culturels et éducatifs' : 'Building Institutional Partnerships for Moroccan Arts & Culture',
+            excerpt: isAr
+              ? 'توسيع نطاق التعاون مع المراكز الثقافية والمؤسسات التعليمية لتعميم الورشات الفنية المجانية بمختلف الجهات.'
+              : isFr
+              ? 'Expansion des collaborations avec les acteurs culturels pour démocratiser l\'accès aux ateliers artistiques.'
+              : 'Expanding joint initiatives with cultural centers and academic institutions to democratize access to arts masterclasses.',
+          },
+        ],
+      },
     ]
   }
 
-  // 6 Core Disciplines
+  // 6 Core Disciplines with elevated artistic metadata
   const areasList = [
     {
       key: 'arts',
       title: dict.areas.arts,
       desc: dict.areas.arts_desc,
       icon: '🎨',
-      color: 'bg-[#faf7f2] border-[#e5e0d6]',
-      accent: 'text-[#c85a32]',
+      tag: isAr ? 'محترفات تشكيلية ومعارض' : 'Visual & Fine Arts',
+      accent: 'border-[#c85a32]/30 text-[#c85a32]',
+      bgGlow: 'from-[#fae4dc]/40 to-transparent',
     },
     {
       key: 'music',
       title: dict.areas.music,
       desc: dict.areas.music_desc,
       icon: '🎵',
-      color: 'bg-[#faf7f2] border-[#e5e0d6]',
-      accent: 'text-[#0d3b43]',
+      tag: isAr ? 'تراث وأداء موسيقي' : 'Heritage & Musical Arts',
+      accent: 'border-[#0d3b43]/30 text-[#0d3b43]',
+      bgGlow: 'from-[#d8f0f4]/40 to-transparent',
     },
     {
       key: 'theatre',
       title: dict.areas.theatre,
       desc: dict.areas.theatre_desc,
       icon: '🎭',
-      color: 'bg-[#faf7f2] border-[#e5e0d6]',
-      accent: 'text-[#d99b26]',
+      tag: isAr ? 'تعبير مسرحي وارتجال' : 'Theatre & Scenic Expression',
+      accent: 'border-[#d99b26]/40 text-[#d99b26]',
+      bgGlow: 'from-[#fdf2db]/40 to-transparent',
     },
     {
       key: 'culture',
       title: dict.areas.culture,
       desc: dict.areas.culture_desc,
       icon: '🏛️',
-      color: 'bg-[#faf7f2] border-[#e5e0d6]',
-      accent: 'text-[#0d3b43]',
+      tag: isAr ? 'صون الذاكرة والتراث' : 'Moroccan Cultural Heritage',
+      accent: 'border-[#0d3b43]/30 text-[#0d3b43]',
+      bgGlow: 'from-[#d8f0f4]/40 to-transparent',
     },
     {
       key: 'youth',
       title: dict.areas.youth,
       desc: dict.areas.youth_desc,
       icon: '🚀',
-      color: 'bg-[#faf7f2] border-[#e5e0d6]',
-      accent: 'text-[#c85a32]',
+      tag: isAr ? 'تكوين وقيادة شبابية' : 'Youth Leadership & Skills',
+      accent: 'border-[#c85a32]/30 text-[#c85a32]',
+      bgGlow: 'from-[#fae4dc]/40 to-transparent',
     },
     {
       key: 'community',
       title: dict.areas.community,
       desc: dict.areas.community_desc,
       icon: '🤝',
-      color: 'bg-[#faf7f2] border-[#e5e0d6]',
-      accent: 'text-[#0d3b43]',
+      tag: isAr ? 'مبادرة شباب في العمل' : 'Civic Volunteering Program',
+      accent: 'border-[#d99b26]/40 text-[#d99b26]',
+      bgGlow: 'from-[#fdf2db]/40 to-transparent',
     },
   ]
 
-  // FAQs
+  // Home FAQs
   const homeFaqs = isAr
     ? [
         {
-          q: 'ما هي جمعية روح الفنون والثقافة (AMYCC)؟',
-          a: 'جمعية غير ربحية مغربية تأسست سنة 2026، تُعنى بالنهوض بالمشهد الثقافي والفني وتنمية المواهب الشابة عبر المسرح والموسيقى والفنون التشكيلية والتطوع المجتمعي بمختلف المدن المغربية.',
+          q: 'ما هي جمعية روح الفنون والثقافة (AMYCC) وما هو إطارها القانوني؟',
+          a: 'جمعية روح الفنون والثقافة هي جمعية مدنية مغربية غير ربحية تأسست سنة 2026، تعمل وفق مقتضيات الظهير الشريف المنظم للحق في تأسيس الجمعيات بالمملكة المغربية، وتهدف إلى رعاية الفنون، صون التراث الثقافي، وتمكين الشباب من خلال المبادرات الإبداعية والمجتمعية.',
         },
         {
-          q: 'ما هي مبادرة "شباب في العمل" وكيف يمكنني التطوع فيها؟',
-          a: 'هي المبادرة الرائدة التي أطلقتها الجمعية لتمكين الشباب والشابات من المشاركة الميدانية في تأطير وتنظيم التظاهرات الفنية والثقافية. يمكنك ملء استمارة التطوع المباشرة عبر الموقع، وسيتواصل معك منسق المبادرة.',
+          q: 'ما هي مبادرة "شباب في العمل" (Youth in Action) وكيف يمكنني الانضمام؟',
+          a: 'هي المبادرة التطوعية والمجتمعية الرائدة للجمعية، تهدف إلى إشراك الشباب في تخطيط وتنظيم الفعاليات الثقافية والورشات الفنية. يمكنك التقديم مجاناً عبر ملء استمارة التطوع المتاحة على المنصة، وتمنح الجمعية شواهد تطوع وتجربة جمعوية معتمدة لكافة المشاركين.',
         },
         {
-          q: 'كيف يمكنني الانخراط كعضو سنوي في الجمعية؟',
-          a: 'تفتح الجمعية باب العضوية لكافة المبدعين والمهتمين بالعمل الثقافي. يمكنك تعبئة استمارة الانخراط الإلكترونية من خلال صفحة "العضوية"، وستتم معالجة طلبك والمصادقة عليه من طرف مكتب الجمعية.',
+          q: 'كيف يمكن الانخراط والحصول على بطاقة العضوية في الجمعية؟',
+          a: 'يمكن للراغبين في الانخراط تعبئة استمارة العضوية الإلكترونية في قسم "العضوية". تتم دراسة الطلبات من طرف مكتب الجمعية وفقاً لمقتضيات النظام الأساسي والداخلي، ويتم التواصل مع مقدم الطلب لتأكيد انخراطه السنوي.',
         },
         {
-          q: 'كيف يمكن للمؤسسات والمراكز الثقافية والمدارس عقد شراكة مع AMYCC؟',
-          a: 'تعتمد الجمعية سياسة الانفتاح المؤسساتي مع كافة المتدخلين في الشأن التربوي والشبابي والثقافي. تتيح صفحة "الشراكات" تقديم مقترح تعاون رسمي، وسيقوم مسؤول الشراكات بمتابعة المقترح ودراسة آفاق التعاون المشترك.',
+          q: 'كيف يمكن للمؤسسات والمراكز الثقافية والتعليمية عقد شراكة مع AMYCC؟',
+          a: 'نرحب بجميع الشراكات الهادفة مع المراكز الثقافية، دور الشباب، المدارس، الجامعات، والجهات الراعية من القطاع الخاص. يمكن تقديم مقترح شراكة مؤسساتية عبر صفحة الشراكات على المنصة أو التواصل المباشر عبر البريد الرسمي contact@amycc.org.',
         },
       ]
     : isFr
     ? [
         {
-          q: 'Qu\'est-ce que l\'Association Esprit des Arts et de la Culture (AMYCC) ?',
-          a: 'Une organisation marocaine à but non lucratif fondée en 2026, dédiée à l\'épanouissement culturel, aux arts vivants, au patrimoine musical et à l\'autonomisation des jeunes à travers le Maroc.',
+          q: 'Qu\'est-ce que l\'Association AMYCC et quel est son statut légal ?',
+          a: 'L\'Association Esprit des Arts et de la Culture (AMYCC) est une organisation marocaine à but non lucratif fondée en 2026. Elle œuvre pour la promotion des arts, la sauvegarde du patrimoine culturel et l\'autonomisation des jeunes à travers le Royaume.',
         },
         {
-          q: 'Qu\'est-ce que l\'initiative "Jeunesse en Action" ?',
-          a: 'C\'est notre programme bénévole phare permettant aux jeunes de s\'engager concrètement dans l\'organisation d\'événements culturels et de développer leurs compétences de leadership communautaire.',
+          q: 'Comment participer à l\'initiative "Jeunesse en Action" ?',
+          a: 'Il s\'agit de notre initiative citoyenne phare. Vous pouvez postuler en ligne via notre formulaire de bénévolat pour participer activement à l\'organisation d\'événements et recevoir une attestation certifiée d\'engagement civique.',
         },
         {
           q: 'Comment devenir membre adhérent de l\'AMYCC ?',
-          a: 'Remplissez le formulaire d\'adhésion en ligne sur notre site. Votre candidature sera examinée par le bureau de l\'association conformément à nos statuts.',
+          a: 'Remplissez le formulaire d\'adhésion en ligne. Votre candidature sera examinée par le bureau exécutif conformément aux statuts de l\'association.',
         },
         {
-          q: 'Comment proposer un partenariat institutionnel ?',
-          a: 'Les centres culturels, établissements scolaires et entreprises peuvent soumettre une proposition de partenariat directement via notre portail institutionnel.',
+          q: 'Comment proposer un partenariat institutionnel avec l\'association ?',
+          a: 'Nous collaborons étroitement avec les centres culturels, universités, écoles et mécènes. Déposez votre projet via notre page dédiée aux partenariats ou écrivez-nous à contact@amycc.org.',
         },
       ]
     : [
@@ -303,15 +359,15 @@ export default async function HomePage(props: { params: Promise<{ locale: string
         },
         {
           q: 'What is the "Youth in Action" volunteering initiative?',
-          a: 'It is our flagship civic initiative empowering young Moroccans to co-create and lead cultural events, workshops, and community outreach projects.',
+          a: 'It is our flagship civic initiative empowering young Moroccans to co-create and lead cultural events, workshops, and community outreach projects with official volunteering certificates.',
         },
         {
           q: 'How can I become an active member of AMYCC?',
-          a: 'Submit an online membership application through our portal. Applications are promptly reviewed by the association\'s board in accordance with our bylaws.',
+          a: 'Submit an online membership application through our portal. Applications are promptly reviewed by the association\'s executive board in accordance with our bylaws.',
         },
         {
           q: 'How can organizations establish a partnership with AMYCC?',
-          a: 'Cultural centers, educational institutes, and private sponsors can submit formal collaboration proposals via our dedicated partnerships page.',
+          a: 'Cultural centers, educational institutes, and private sponsors can submit formal collaboration proposals via our dedicated partnerships page or email us directly at contact@amycc.org.',
         },
       ]
 
@@ -322,35 +378,70 @@ export default async function HomePage(props: { params: Promise<{ locale: string
       <main id="main-content" className="flex flex-col flex-1 bg-[#faf7f2]">
 
         {/* ============================================================
+            SEASON 2026 ANNOUNCEMENT TICKER (ELEVATED CULTURAL RIBBON)
+            ============================================================ */}
+        <div className="bg-[#08242a] text-[#d8f0f4] py-2.5 px-4 text-xs border-b border-[#14505b]/60 relative overflow-hidden">
+          <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
+            <div className="flex items-center gap-2 overflow-hidden text-ellipsis whitespace-nowrap">
+              <span className="w-2 h-2 rounded-full bg-[#f4ce83] animate-ping shrink-0" />
+              <span className="font-mono text-3xs font-extrabold uppercase tracking-widest px-1.5 py-0.5 rounded bg-[#14505b] text-[#f4ce83] shrink-0">
+                2026
+              </span>
+              <span className="font-medium text-xs truncate">
+                {isAr
+                  ? 'الموسم الثقافي التأسيسي — انطلاق ورشات الإبداع والتطوع المدني في مبادرة "شباب في العمل" بالمملكة المغربية'
+                  : isFr
+                  ? 'Saison Culturelle 2026 — Lancement des ateliers et de l\'initiative citoyenne "Jeunesse en Action"'
+                  : 'Cultural Season 2026 — Official launch of workshops and the "Youth in Action" volunteering initiative'}
+              </span>
+            </div>
+            <Link
+              href={`/${locale}/volunteer`}
+              className="shrink-0 text-3xs font-black uppercase tracking-wider text-[#f4ce83] hover:text-white underline underline-offset-4 flex items-center gap-1 transition-colors"
+            >
+              <span>{dict.volunteer.apply}</span>
+              <span aria-hidden="true">{isAr ? '←' : '→'}</span>
+            </Link>
+          </div>
+        </div>
+
+        {/* ============================================================
             1. HERO SECTION — Asymmetric Master Editorial Showcase
             ============================================================ */}
         <section className="relative overflow-hidden bg-gradient-to-b from-[#faf7f2] via-[#f7f2e9] to-[#faf7f2] border-b border-[#e5e0d6] pt-12 pb-16 lg:pt-20 lg:pb-28">
           {/* Subtle decorative Moroccan pattern overlay */}
-          <div className="absolute inset-0 moroccan-pattern-light opacity-40 pointer-events-none" aria-hidden="true" />
+          <div className="absolute inset-0 moroccan-star-pattern opacity-60 pointer-events-none" aria-hidden="true" />
+
+          {/* Ambient Lighting Glow Behind Hero */}
+          <div className="absolute top-1/4 start-1/4 w-96 h-96 bg-[#c85a32]/5 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute bottom-10 end-10 w-96 h-96 bg-[#0d3b43]/5 rounded-full blur-3xl pointer-events-none" />
 
           <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-center">
 
               {/* Text & Content Column (7 cols) */}
               <div className="lg:col-span-7 space-y-6 text-start">
                 {/* Official Verification Pill */}
-                <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-[#0d3b43]/10 border border-[#0d3b43]/20 text-[#0d3b43] text-xs font-bold shadow-xs">
+                <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white border border-[#e5e0d6] text-[#0d3b43] text-xs font-bold shadow-xs">
                   <span className="w-2.5 h-2.5 rounded-full bg-[#c85a32] animate-pulse" />
+                  <span className="font-mono text-3xs px-2 py-0.5 rounded-md bg-[#f4ede2] text-[#c85a32] font-black">
+                    2026
+                  </span>
                   <span>
                     {isAr
-                      ? 'جمعية روح الفنون والثقافة — المملكة المغربية • تأسست 2026'
+                      ? 'جمعية روح الفنون والثقافة — المملكة المغربية'
                       : isFr
-                      ? 'Association Esprit des Arts et de la Culture — Maroc (Fondée 2026)'
-                      : 'Spirit of Arts & Culture Association — Morocco (Founded 2026)'}
+                      ? 'Association Esprit des Arts et de la Culture — Maroc'
+                      : 'Spirit of Arts & Culture Association — Morocco'}
                   </span>
                 </div>
 
                 {/* Grand Cultural Headline */}
-                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-[#08242a] tracking-tight leading-[1.15]">
+                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-[#08242a] tracking-tight leading-[1.14]">
                   <span className="block">
                     {dict.hero.title}
                   </span>
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#c85a32] via-[#bd7d12] to-[#c85a32] text-3xl sm:text-4xl lg:text-5xl block mt-2">
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#c85a32] via-[#bd7d12] to-[#c85a32] text-3xl sm:text-4xl lg:text-5xl block mt-2 font-extrabold">
                     {dict.hero.subtitle}
                   </span>
                 </h1>
@@ -358,7 +449,7 @@ export default async function HomePage(props: { params: Promise<{ locale: string
                 {/* Mission Summary */}
                 <p className="text-base sm:text-lg text-[#445457] leading-relaxed max-w-2xl font-medium">
                   {isAr
-                    ? 'منصة ثقافية ومدنية غير ربحية تُعنى بتنمية المواهب، رعاية الفنون التشكيلية والموسيقى والمسرح، وتمكين الشباب عبر مبادرة "شباب في العمل" وشبكة شراكات وطنية ودولية واعدة.'
+                    ? 'منصة ثقافية وفنية مدنية غير ربحية تأسست سنة 2026 بالمغرب، تكرّس جهودها لترسيخ الإبداع المعاصر، صون التراث الموسيقي والمسرحي، وتمكين الشباب عبر مبادرة "شباب في العمل" وشبكة شراكات وطنية ودولية.'
                     : dict.home.intro_p1}
                 </p>
 
@@ -384,7 +475,7 @@ export default async function HomePage(props: { params: Promise<{ locale: string
 
                   <Link
                     href={`/${locale}/membership`}
-                    className="px-5 py-4 rounded-xl font-bold text-[#0d3b43] bg-white hover:bg-[#faf7f2] border border-[#cfc7b9] transition-all text-center text-sm inline-flex items-center justify-center gap-1.5"
+                    className="px-5 py-4 rounded-xl font-bold text-[#0d3b43] bg-white hover:bg-[#faf7f2] border border-[#cfc7b9] transition-all text-center text-sm inline-flex items-center justify-center gap-1.5 shadow-2xs"
                   >
                     <span>{dict.membership.apply}</span>
                     <span aria-hidden="true">↗</span>
@@ -393,26 +484,26 @@ export default async function HomePage(props: { params: Promise<{ locale: string
 
                 {/* Key Institutional Trust Chips */}
                 <div className="pt-4 border-t border-[#e5e0d6]/70 flex flex-wrap gap-4 text-2xs font-bold text-[#5f7174]">
-                  <span className="flex items-center gap-1.5">
+                  <span className="flex items-center gap-1.5 bg-white px-3 py-1 rounded-lg border border-[#e5e0d6]">
                     <span className="text-[#c85a32]">✓</span>
                     <span>{isAr ? 'جمعية غير ربحية مسجلة بالمغرب' : 'Registered Moroccan Non-Profit'}</span>
                   </span>
-                  <span className="flex items-center gap-1.5">
+                  <span className="flex items-center gap-1.5 bg-white px-3 py-1 rounded-lg border border-[#e5e0d6]">
                     <span className="text-[#0d3b43]">✓</span>
                     <span>{isAr ? '6 مجالات إبداعية وثقافية' : '6 Cultural Disciplines'}</span>
                   </span>
-                  <span className="flex items-center gap-1.5">
+                  <span className="flex items-center gap-1.5 bg-white px-3 py-1 rounded-lg border border-[#e5e0d6]">
                     <span className="text-[#d99b26]">✓</span>
                     <span>{isAr ? 'مبادرة شباب في العمل للتطوع' : 'Youth in Action Program'}</span>
                   </span>
                 </div>
               </div>
 
-              {/* Visual Showcase Feature (5 cols) */}
+              {/* Visual Showcase Feature (5 cols) — High Luxury Editorial Composition */}
               <div className="lg:col-span-5 relative">
                 <div className="relative mx-auto max-w-md lg:max-w-none">
                   {/* Outer Art Border with Moroccan Warm Glow */}
-                  <div className="relative rounded-3xl p-3 bg-white/80 border-2 border-[#e5e0d6] shadow-card-hover backdrop-blur-xs overflow-hidden">
+                  <div className="relative rounded-3xl p-3.5 bg-white/90 border-2 border-[#e5e0d6] shadow-card-hover backdrop-blur-xs overflow-hidden">
                     {/* Main Cultural Card */}
                     <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-[#08242a]">
                       <Image
@@ -490,45 +581,45 @@ export default async function HomePage(props: { params: Promise<{ locale: string
         {/* ============================================================
             2. INSTITUTIONAL FOUNDATIONS BAR (4 Verified Pillars)
             ============================================================ */}
-        <section className="bg-white border-b border-[#e5e0d6] py-8">
+        <section className="bg-white border-b border-[#e5e0d6] py-10">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-              <div className="p-4 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6]">
-                <div className="text-2xl sm:text-3xl font-black text-[#0d3b43]">2026</div>
-                <div className="text-xs font-bold text-[#08242a] mt-1">
+              <div className="p-5 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6] shadow-2xs hover:border-[#0d3b43]/30 transition-all">
+                <div className="text-3xl sm:text-4xl font-black text-[#0d3b43]">2026</div>
+                <div className="text-xs font-bold text-[#08242a] mt-1.5">
                   {isAr ? 'سنة التأسيس الرسمية بالمغرب' : 'Foundation Year in Morocco'}
                 </div>
-                <div className="text-3xs text-[#819598] mt-0.5 font-medium">
+                <div className="text-3xs text-[#819598] mt-1 font-medium">
                   {isAr ? 'تأسيس جمعوي مدني' : 'Nonprofit Association'}
                 </div>
               </div>
 
-              <div className="p-4 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6]">
-                <div className="text-2xl sm:text-3xl font-black text-[#c85a32]">6</div>
-                <div className="text-xs font-bold text-[#08242a] mt-1">
+              <div className="p-5 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6] shadow-2xs hover:border-[#c85a32]/30 transition-all">
+                <div className="text-3xl sm:text-4xl font-black text-[#c85a32]">6</div>
+                <div className="text-xs font-bold text-[#08242a] mt-1.5">
                   {isAr ? 'مجالات عمل فني وثقافي' : 'Core Cultural Domains'}
                 </div>
-                <div className="text-3xs text-[#819598] mt-0.5 font-medium">
+                <div className="text-3xs text-[#819598] mt-1 font-medium">
                   {isAr ? 'فنون، موسيقى، مسرح، تطوع' : 'Arts, Music, Theatre, Civic'}
                 </div>
               </div>
 
-              <div className="p-4 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6]">
-                <div className="text-2xl sm:text-3xl font-black text-[#d99b26]">3</div>
-                <div className="text-xs font-bold text-[#08242a] mt-1">
+              <div className="p-5 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6] shadow-2xs hover:border-[#d99b26]/30 transition-all">
+                <div className="text-3xl sm:text-4xl font-black text-[#d99b26]">3</div>
+                <div className="text-xs font-bold text-[#08242a] mt-1.5">
                   {isAr ? 'لغات تواصل معتمدة' : 'Official Platform Languages'}
                 </div>
-                <div className="text-3xs text-[#819598] mt-0.5 font-medium">
+                <div className="text-3xs text-[#819598] mt-1 font-medium">
                   العربية • Français • English
                 </div>
               </div>
 
-              <div className="p-4 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6]">
-                <div className="text-2xl sm:text-3xl font-black text-[#0d3b43]">100%</div>
-                <div className="text-xs font-bold text-[#08242a] mt-1">
+              <div className="p-5 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6] shadow-2xs hover:border-[#0d3b43]/30 transition-all">
+                <div className="text-3xl sm:text-4xl font-black text-[#0d3b43]">100%</div>
+                <div className="text-xs font-bold text-[#08242a] mt-1.5">
                   {isAr ? 'عمل مدني غير ربحي' : 'Civic Non-Profit Mission'}
                 </div>
-                <div className="text-3xs text-[#819598] mt-0.5 font-medium">
+                <div className="text-3xs text-[#819598] mt-1 font-medium">
                   {isAr ? 'لخدمة الثقافة والشباب' : 'Serving Youth & Culture'}
                 </div>
               </div>
@@ -556,7 +647,7 @@ export default async function HomePage(props: { params: Promise<{ locale: string
             {/* Mission, Vision, Values 3-Card Architecture */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {/* Mission */}
-              <div className="bg-white p-8 rounded-3xl border border-[#e5e0d6] shadow-subtle hover:shadow-card hover:border-[#0d3b43]/30 transition-all flex flex-col justify-between">
+              <div className="luxury-card p-8 flex flex-col justify-between">
                 <div>
                   <div className="w-12 h-12 rounded-2xl bg-[#0d3b43] text-white flex items-center justify-center font-bold text-xl mb-6 shadow-xs">
                     ✦
@@ -581,7 +672,7 @@ export default async function HomePage(props: { params: Promise<{ locale: string
               </div>
 
               {/* Vision */}
-              <div className="bg-white p-8 rounded-3xl border-2 border-[#c85a32]/30 shadow-subtle hover:shadow-card transition-all flex flex-col justify-between relative overflow-hidden">
+              <div className="luxury-card p-8 border-2 border-[#c85a32]/30 flex flex-col justify-between relative overflow-hidden">
                 <div className="absolute top-0 end-0 w-24 h-24 bg-[#fae4dc] rounded-bl-full pointer-events-none" />
                 <div className="relative z-10">
                   <div className="w-12 h-12 rounded-2xl bg-[#c85a32] text-white flex items-center justify-center font-bold text-xl mb-6 shadow-xs">
@@ -607,7 +698,7 @@ export default async function HomePage(props: { params: Promise<{ locale: string
               </div>
 
               {/* Values */}
-              <div className="bg-white p-8 rounded-3xl border border-[#e5e0d6] shadow-subtle hover:shadow-card hover:border-[#d99b26]/50 transition-all flex flex-col justify-between">
+              <div className="luxury-card p-8 flex flex-col justify-between">
                 <div>
                   <div className="w-12 h-12 rounded-2xl bg-[#d99b26] text-white flex items-center justify-center font-bold text-xl mb-6 shadow-xs">
                     ♥
@@ -635,6 +726,26 @@ export default async function HomePage(props: { params: Promise<{ locale: string
         </section>
 
         {/* ============================================================
+            CULTURAL MANIFESTO BANNER (INTERACTIVE EDITORIAL QUOTE)
+            ============================================================ */}
+        <section className="bg-gradient-to-r from-[#0d3b43] via-[#08242a] to-[#0d3b43] py-14 px-4 text-center text-white relative overflow-hidden border-y border-[#14505b]">
+          <div className="absolute inset-0 moroccan-pattern opacity-10 pointer-events-none" />
+          <div className="max-w-4xl mx-auto relative z-10 space-y-3">
+            <span className="text-3xl block text-[#f4ce83]">❝</span>
+            <blockquote className="text-xl sm:text-2xl lg:text-3xl font-extrabold leading-snug tracking-tight text-[#fdfcf9]">
+              {isAr
+                ? '«الفنون ليست مجرد تعبير جمالي، بل هي رافعة حقيقية للتنمية البشرية، وإطلاق طاقات الشباب، وترسيخ الهوية والتنوع الثقافي المغربي»'
+                : isFr
+                ? '« Les arts ne sont pas seulement une expression esthétique, mais un véritable levier d\'émancipation et de cohésion sociale »'
+                : '“Arts and culture are vital catalysts for human development, youth leadership, and civic empowerment across Morocco.”'}
+            </blockquote>
+            <p className="text-xs font-bold text-[#aedfe7] uppercase tracking-widest pt-2">
+              — {isAr ? 'جمعية روح الفنون والثقافة (AMYCC)' : 'Spirit of Arts & Culture Association'}
+            </p>
+          </div>
+        </section>
+
+        {/* ============================================================
             4. SIX CORE DOMAINS OF WORK (مجالات التدخل الستة)
             ============================================================ */}
         <section className="py-20 lg:py-28 bg-white border-b border-[#e5e0d6]">
@@ -652,23 +763,32 @@ export default async function HomePage(props: { params: Promise<{ locale: string
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {areasList.map(({ key, title, desc, icon, accent }) => (
+              {areasList.map(({ key, title, desc, icon, tag, accent, bgGlow }) => (
                 <div
                   key={key}
-                  className="bg-[#faf7f2] p-7 rounded-3xl border border-[#e5e0d6] shadow-subtle hover:shadow-card hover:border-[#cfc7b9] transition-all flex flex-col justify-between group"
+                  className="bg-[#faf7f2] p-7 rounded-3xl border border-[#e5e0d6] shadow-subtle hover:shadow-card hover:border-[#cfc7b9] transition-all flex flex-col justify-between group relative overflow-hidden"
                 >
-                  <div>
-                    <div className="w-14 h-14 rounded-2xl bg-white border border-[#e5e0d6] flex items-center justify-center text-3xl mb-5 shadow-2xs group-hover:scale-105 transition-transform">
-                      {icon}
+                  <div className={`absolute top-0 end-0 w-32 h-32 bg-gradient-to-bl ${bgGlow} rounded-bl-full pointer-events-none`} />
+
+                  <div className="relative z-10">
+                    <div className="flex items-center justify-between mb-5">
+                      <div className="w-14 h-14 rounded-2xl bg-white border border-[#e5e0d6] flex items-center justify-center text-3xl shadow-2xs group-hover:scale-105 transition-transform">
+                        {icon}
+                      </div>
+                      <span className={`text-4xs font-black uppercase tracking-wider px-2.5 py-1 rounded-full border bg-white ${accent}`}>
+                        {tag}
+                      </span>
                     </div>
-                    <h3 className={`text-xl font-black text-[#08242a] mb-2.5 ${accent}`}>
+
+                    <h3 className="text-xl font-black text-[#08242a] mb-2.5">
                       {title}
                     </h3>
                     <p className="text-xs sm:text-sm text-[#445457] leading-relaxed mb-6">
                       {desc}
                     </p>
                   </div>
-                  <div className="pt-4 border-t border-[#e5e0d6]">
+
+                  <div className="pt-4 border-t border-[#e5e0d6] relative z-10">
                     <Link
                       href={`/${locale}/programs`}
                       className="inline-flex items-center text-xs font-bold text-[#0d3b43] hover:text-[#c85a32] transition-colors"
@@ -710,35 +830,35 @@ export default async function HomePage(props: { params: Promise<{ locale: string
 
                 {/* 4-Step Volunteering Journey */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 pt-2">
-                  <div className="p-3.5 rounded-xl bg-[#0d3b43]/80 border border-[#14505b] flex items-start gap-3">
-                    <span className="w-6 h-6 rounded-lg bg-[#c85a32] text-white flex items-center justify-center font-bold text-xs shrink-0">1</span>
+                  <div className="p-4 rounded-2xl bg-[#0d3b43]/80 border border-[#14505b] flex items-start gap-3 hover:border-[#f4ce83]/50 transition-colors">
+                    <span className="w-7 h-7 rounded-lg bg-[#c85a32] text-white flex items-center justify-center font-black text-xs shrink-0 shadow-xs">1</span>
                     <div>
-                      <span className="font-bold text-xs block text-white">التقديم السهل عبر المنصة</span>
-                      <span className="text-3xs text-[#74bfcd]">تعبئة استمارة التطوع الإلكترونية</span>
+                      <span className="font-bold text-xs block text-white">{isAr ? 'التقديم السهل عبر المنصة' : 'Online Registration'}</span>
+                      <span className="text-3xs text-[#74bfcd]">{isAr ? 'تعبئة استمارة التطوع الإلكترونية' : 'Simple trilingual application'}</span>
                     </div>
                   </div>
 
-                  <div className="p-3.5 rounded-xl bg-[#0d3b43]/80 border border-[#14505b] flex items-start gap-3">
-                    <span className="w-6 h-6 rounded-lg bg-[#c85a32] text-white flex items-center justify-center font-bold text-xs shrink-0">2</span>
+                  <div className="p-4 rounded-2xl bg-[#0d3b43]/80 border border-[#14505b] flex items-start gap-3 hover:border-[#f4ce83]/50 transition-colors">
+                    <span className="w-7 h-7 rounded-lg bg-[#c85a32] text-white flex items-center justify-center font-black text-xs shrink-0 shadow-xs">2</span>
                     <div>
-                      <span className="font-bold text-xs block text-white">المواكبة والتأطير الميداني</span>
-                      <span className="text-3xs text-[#74bfcd]">جلسات توجيه وصقل المهارات القيادية</span>
+                      <span className="font-bold text-xs block text-white">{isAr ? 'المواكبة والتأطير الميداني' : 'Field Training & Mentorship'}</span>
+                      <span className="text-3xs text-[#74bfcd]">{isAr ? 'جلسات توجيه وصقل المهارات القيادية' : 'Artistic & leadership development'}</span>
                     </div>
                   </div>
 
-                  <div className="p-3.5 rounded-xl bg-[#0d3b43]/80 border border-[#14505b] flex items-start gap-3">
-                    <span className="w-6 h-6 rounded-lg bg-[#c85a32] text-white flex items-center justify-center font-bold text-xs shrink-0">3</span>
+                  <div className="p-4 rounded-2xl bg-[#0d3b43]/80 border border-[#14505b] flex items-start gap-3 hover:border-[#f4ce83]/50 transition-colors">
+                    <span className="w-7 h-7 rounded-lg bg-[#c85a32] text-white flex items-center justify-center font-black text-xs shrink-0 shadow-xs">3</span>
                     <div>
-                      <span className="font-bold text-xs block text-white">تنظيم التظاهرات الفنية</span>
-                      <span className="text-3xs text-[#74bfcd]">المشاركة الفاعلة في الورش والمهرجانات</span>
+                      <span className="font-bold text-xs block text-white">{isAr ? 'تنظيم التظاهرات الفنية' : 'Event Production'}</span>
+                      <span className="text-3xs text-[#74bfcd]">{isAr ? 'المشاركة الفاعلة في الورش والمهرجانات' : 'Hands-on cultural coordination'}</span>
                     </div>
                   </div>
 
-                  <div className="p-3.5 rounded-xl bg-[#0d3b43]/80 border border-[#14505b] flex items-start gap-3">
-                    <span className="w-6 h-6 rounded-lg bg-[#c85a32] text-white flex items-center justify-center font-bold text-xs shrink-0">4</span>
+                  <div className="p-4 rounded-2xl bg-[#0d3b43]/80 border border-[#14505b] flex items-start gap-3 hover:border-[#f4ce83]/50 transition-colors">
+                    <span className="w-7 h-7 rounded-lg bg-[#c85a32] text-white flex items-center justify-center font-black text-xs shrink-0 shadow-xs">4</span>
                     <div>
-                      <span className="font-bold text-xs block text-white">شهادة تطوع وتجربة موثقة</span>
-                      <span className="text-3xs text-[#74bfcd]">إثراء المسار الأكاديمي والمهني</span>
+                      <span className="font-bold text-xs block text-white">{isAr ? 'شهادة تطوع وتجربة موثقة' : 'Certified Experience'}</span>
+                      <span className="text-3xs text-[#74bfcd]">{isAr ? 'إثراء المسار الأكاديمي والمهني' : 'Formal volunteering certificate'}</span>
                     </div>
                   </div>
                 </div>
