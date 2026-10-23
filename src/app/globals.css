@@ -124,3 +124,75 @@ body:has([dir="rtl"]) {
   }
   ::-webkit-scrollbar-thumb:hover { background: var(--color-slate-400); }
 }
+
+/* ============================================================
+   TipTap Rich Text Editor & Formatted Content Styles
+   ============================================================ */
+
+.tiptap {
+  outline: none;
+  min-height: 200px;
+}
+
+.tiptap p {
+  margin-bottom: 0.75rem;
+  line-height: 1.7;
+}
+
+.tiptap p:last-child {
+  margin-bottom: 0;
+}
+
+.tiptap h2 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--color-dark-900);
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.tiptap h3 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--color-dark-900);
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.tiptap ul {
+  list-style-type: disc;
+  padding-inline-start: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.tiptap ol {
+  list-style-type: decimal;
+  padding-inline-start: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.tiptap li {
+  margin-bottom: 0.25rem;
+}
+
+.tiptap blockquote {
+  border-inline-start: 3px solid var(--color-accent);
+  padding-inline-start: 1rem;
+  color: var(--color-slate-600);
+  font-style: italic;
+  margin: 1rem 0;
+}
+
+.tiptap hr {
+  border: none;
+  border-top: 1px solid var(--color-border);
+  margin: 1.5rem 0;
+}
+
+.tiptap p.is-editor-empty:first-child::before {
+  color: var(--color-slate-400);
+  content: attr(data-placeholder);
+  float: inline-start;
+  height: 0;
+  pointer-events: none;
+}

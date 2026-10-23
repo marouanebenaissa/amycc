@@ -12,6 +12,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/programs/arts-heritage-workshops',
     '/events',
     '/news',
+    '/news/official-launch',
     '/membership',
     '/volunteer',
     '/partnerships',
