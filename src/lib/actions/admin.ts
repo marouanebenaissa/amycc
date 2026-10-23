@@ -31,8 +31,16 @@ export async function logoutAdmin(): Promise<void> {
   redirect('/admin/login')
 }
 
+export type ManageableTable =
+  | 'membership_applications'
+  | 'volunteer_applications'
+  | 'partnership_inquiries'
+  | 'contact_messages'
+  | 'event_registrations'
+  | 'donation_records'
+
 export async function updateApplicationStatus(
-  table: 'membership_applications' | 'volunteer_applications' | 'partnership_inquiries',
+  table: ManageableTable,
   id: string,
   newStatus: string
 ): Promise<void> {
@@ -41,6 +49,17 @@ export async function updateApplicationStatus(
     .from(table)
     .update({ status: newStatus, updated_at: new Date().toISOString() })
     .eq('id', id)
+
+  revalidatePath('/admin')
+  revalidatePath(`/admin/${table.replace('_applications', 's').replace('_inquiries', 's').replace('contact_messages', 'contacts').replace('event_registrations', 'registrations').replace('donation_records', 'donations')}`)
+}
+
+export async function deleteApplicationRecord(
+  table: ManageableTable,
+  id: string
+): Promise<void> {
+  const supabase = await createClient()
+  await supabase.from(table).delete().eq('id', id)
 
   revalidatePath('/admin')
 }

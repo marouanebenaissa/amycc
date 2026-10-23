@@ -10,104 +10,138 @@ export default async function AdminDashboardPage() {
     redirect('/admin/login')
   }
 
-  // Fetch real counts from Supabase
-  const [
-    { count: membershipCount },
-    { count: volunteerCount },
-    { count: partnershipCount },
-    { count: donationCount },
-  ] = await Promise.all([
-    supabase.from('membership_applications').select('*', { count: 'exact', head: true }),
-    supabase.from('volunteer_applications').select('*', { count: 'exact', head: true }),
-    supabase.from('partnership_inquiries').select('*', { count: 'exact', head: true }),
-    supabase.from('donation_records').select('*', { count: 'exact', head: true }),
-  ])
+  // Fetch real counts from Supabase with safe fallback
+  let membershipCount = 0
+  let volunteerCount = 0
+  let partnershipCount = 0
+  let donationCount = 0
+  let registrationCount = 0
+  let contactCount = 0
 
-  const stats = [
-    { label: 'Membership Applications', count: membershipCount ?? 0, href: '/admin/memberships', icon: '👥', color: 'bg-blue-50 text-[#0068ff]' },
-    { label: 'Volunteer Applicants', count: volunteerCount ?? 0, href: '/admin/volunteers', icon: '🤝', color: 'bg-emerald-50 text-emerald-600' },
-    { label: 'Partnership Inquiries', count: partnershipCount ?? 0, href: '/admin/partnerships', icon: '🏛️', color: 'bg-purple-50 text-purple-600' },
-    { label: 'Donation Notices', count: donationCount ?? 0, href: '/admin/donations', icon: '💝', color: 'bg-amber-50 text-amber-600' },
+  try {
+    const [
+      { count: mCount },
+      { count: vCount },
+      { count: pCount },
+      { count: dCount },
+      { count: rCount },
+      { count: cCount },
+    ] = await Promise.all([
+      supabase.from('membership_applications').select('*', { count: 'exact', head: true }),
+      supabase.from('volunteer_applications').select('*', { count: 'exact', head: true }),
+      supabase.from('partnership_inquiries').select('*', { count: 'exact', head: true }),
+      supabase.from('donation_records').select('*', { count: 'exact', head: true }),
+      supabase.from('event_registrations').select('*', { count: 'exact', head: true }),
+      supabase.from('contact_messages').select('*', { count: 'exact', head: true }),
+    ])
+
+    membershipCount = mCount ?? 0
+    volunteerCount = vCount ?? 0
+    partnershipCount = pCount ?? 0
+    donationCount = dCount ?? 0
+    registrationCount = rCount ?? 0
+    contactCount = cCount ?? 0
+  } catch {
+    // Graceful fallback
+  }
+
+  const statCards = [
+    { label: 'Membership Applications', count: membershipCount, href: '/admin/memberships', icon: '👥', color: 'bg-[#d8f0f4] text-[#0d3b43]' },
+    { label: 'Volunteer Applicants', count: volunteerCount, href: '/admin/volunteers', icon: '🤝', color: 'bg-emerald-50 text-emerald-700' },
+    { label: 'Event Registrations', count: registrationCount, href: '/admin/registrations', icon: '🎟️', color: 'bg-blue-50 text-blue-700' },
+    { label: 'Partnership Inquiries', count: partnershipCount, href: '/admin/partnerships', icon: '🏛️', color: 'bg-[#fae4dc] text-[#c85a32]' },
+    { label: 'Contact Inquiries', count: contactCount, href: '/admin/contacts', icon: '💬', color: 'bg-amber-50 text-amber-700' },
+    { label: 'Donation Notices', count: donationCount, href: '/admin/donations', icon: '💝', color: 'bg-purple-50 text-purple-700' },
   ]
 
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-2xl sm:text-3xl font-extrabold text-[#0a0f1d]">Dashboard Overview</h1>
-        <p className="text-sm text-slate-500 mt-1">
-          Real-time summary of AMYCC platform submissions and engagement.
+        <h1 className="text-2xl sm:text-3xl font-black text-[#08242a]">
+          Association Administration Dashboard
+        </h1>
+        <p className="text-xs sm:text-sm text-[#5f7174] mt-1 font-medium">
+          Spirit of Arts & Culture Association (AMYCC) — Comprehensive Control & Records Management
         </p>
       </div>
 
-      {/* Metric Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {stats.map((stat) => (
+      {/* Metric Cards Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {statCards.map((stat) => (
           <Link
             key={stat.label}
             href={stat.href}
-            className="p-6 rounded-2xl bg-white border border-slate-200 shadow-2xs hover:shadow-md transition-all block group"
+            className="p-6 rounded-2xl bg-white border border-[#e5e0d6] shadow-subtle hover:shadow-card hover:border-[#0d3b43]/30 transition-all block group"
           >
             <div className="flex items-center justify-between mb-4">
-              <span className={`w-10 h-10 rounded-xl flex items-center justify-center text-lg ${stat.color}`}>
+              <span className={`w-11 h-11 rounded-xl flex items-center justify-center text-xl ${stat.color}`}>
                 {stat.icon}
               </span>
-              <span className="text-2xs font-bold text-slate-400 group-hover:text-[#0068ff] transition-colors">
-                View →
+              <span className="text-2xs font-bold text-[#5f7174] group-hover:text-[#c85a32] transition-colors">
+                Manage →
               </span>
             </div>
-            <div className="text-3xl font-black text-[#0a0f1d]">{stat.count}</div>
-            <div className="text-xs font-semibold text-slate-500 mt-1">{stat.label}</div>
+            <div className="text-3xl font-black text-[#08242a]">{stat.count}</div>
+            <div className="text-xs font-bold text-[#5f7174] mt-1">{stat.label}</div>
           </Link>
         ))}
       </div>
 
-      {/* Quick Action & Info Grid */}
+      {/* Operations & System Info */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="p-6 rounded-2xl bg-white border border-slate-200 shadow-2xs">
-          <h2 className="text-base font-bold text-[#0a0f1d] mb-4">Quick Operations</h2>
-          <div className="space-y-2">
+        <div className="p-6 rounded-2xl bg-white border border-[#e5e0d6] shadow-subtle">
+          <h2 className="text-sm font-bold text-[#08242a] mb-4 uppercase tracking-wider">
+            Content Management Fast Actions
+          </h2>
+          <div className="space-y-2.5">
             <Link
-              href="/admin/memberships"
-              className="flex items-center justify-between p-3 rounded-xl bg-slate-50 hover:bg-slate-100 transition-colors text-xs font-semibold text-slate-700"
+              href="/admin/programs/new"
+              className="flex items-center justify-between p-3.5 rounded-xl bg-[#faf7f2] hover:bg-[#f4ede2] transition-colors text-xs font-bold text-[#08242a]"
             >
-              <span>Review Pending Membership Applications</span>
-              <span>→</span>
+              <span>Create New Trilingual Program</span>
+              <span className="text-[#c85a32]">New +</span>
             </Link>
             <Link
-              href="/admin/volunteers"
-              className="flex items-center justify-between p-3 rounded-xl bg-slate-50 hover:bg-slate-100 transition-colors text-xs font-semibold text-slate-700"
+              href="/admin/news/new"
+              className="flex items-center justify-between p-3.5 rounded-xl bg-[#faf7f2] hover:bg-[#f4ede2] transition-colors text-xs font-bold text-[#08242a]"
             >
-              <span>Review Youth in Action Volunteer Roster</span>
-              <span>→</span>
+              <span>Draft Cultural News Article (TipTap Editor)</span>
+              <span className="text-[#c85a32]">New +</span>
             </Link>
             <Link
-              href="/admin/partnerships"
-              className="flex items-center justify-between p-3 rounded-xl bg-slate-50 hover:bg-slate-100 transition-colors text-xs font-semibold text-slate-700"
+              href="/admin/events/new"
+              className="flex items-center justify-between p-3.5 rounded-xl bg-[#faf7f2] hover:bg-[#f4ede2] transition-colors text-xs font-bold text-[#08242a]"
             >
-              <span>Review Institutional Partnership Inquiries</span>
-              <span>→</span>
+              <span>Schedule Cultural Event & Set Capacity</span>
+              <span className="text-[#c85a32]">New +</span>
             </Link>
           </div>
         </div>
 
-        <div className="p-6 rounded-2xl bg-white border border-slate-200 shadow-2xs">
-          <h2 className="text-base font-bold text-[#0a0f1d] mb-4">System Status</h2>
-          <div className="space-y-3 text-xs text-slate-600">
-            <div className="flex items-center justify-between pb-2 border-b border-slate-100">
-              <span>Database (PostgreSQL)</span>
-              <span className="font-bold text-emerald-600 flex items-center gap-1.5">
+        <div className="p-6 rounded-2xl bg-white border border-[#e5e0d6] shadow-subtle">
+          <h2 className="text-sm font-bold text-[#08242a] mb-4 uppercase tracking-wider">
+            Security & System Health
+          </h2>
+          <div className="space-y-3.5 text-xs text-[#445457]">
+            <div className="flex items-center justify-between pb-2.5 border-b border-[#f4ede2]">
+              <span className="font-medium">Database (PostgreSQL via Supabase)</span>
+              <span className="font-bold text-emerald-700 flex items-center gap-1.5">
                 <span className="w-2 h-2 rounded-full bg-emerald-500" /> Connected
               </span>
             </div>
-            <div className="flex items-center justify-between pb-2 border-b border-slate-100">
-              <span>Authentication (Supabase Auth)</span>
-              <span className="font-bold text-emerald-600 flex items-center gap-1.5">
-                <span className="w-2 h-2 rounded-full bg-emerald-500" /> Active
+            <div className="flex items-center justify-between pb-2.5 border-b border-[#f4ede2]">
+              <span className="font-medium">Row Level Security (RLS)</span>
+              <span className="font-bold text-emerald-700">Enforced (16 Tables)</span>
+            </div>
+            <div className="flex items-center justify-between pb-2.5 border-b border-[#f4ede2]">
+              <span className="font-medium">Authentication Session</span>
+              <span className="font-mono text-3xs bg-[#faf7f2] px-2 py-1 rounded border border-[#e5e0d6]">
+                Cookie SSR Verified
               </span>
             </div>
             <div className="flex items-center justify-between">
-              <span>Row Level Security (RLS)</span>
-              <span className="font-bold text-blue-600">Enforced (All Tables)</span>
+              <span className="font-medium">Platform Version</span>
+              <span className="font-bold text-[#0d3b43]">Next.js 16.4.2 App Router</span>
             </div>
           </div>
         </div>

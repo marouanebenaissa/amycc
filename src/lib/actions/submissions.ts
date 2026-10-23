@@ -7,6 +7,7 @@ import {
   partnershipSchema,
   contactSchema,
   donationInquirySchema,
+  eventRegistrationSchema,
 } from '@/lib/validation/schemas'
 
 export type ActionResponse = {
@@ -217,7 +218,80 @@ export async function submitContact(formData: FormData): Promise<ActionResponse>
       }
     }
 
+    const supabase = await createClient()
+    const { error } = await supabase.from('contact_messages').insert({
+      full_name: validated.data.name,
+      email: validated.data.email,
+      phone: validated.data.phone || null,
+      subject: validated.data.subject || null,
+      message: validated.data.message,
+      status: 'unread',
+    })
+
+    if (error) {
+      return { success: false, message: 'Database error: ' + error.message }
+    }
+
     return { success: true, message: 'Message sent successfully.' }
+  } catch (err: unknown) {
+    const errorMsg = err instanceof Error ? err.message : 'An unexpected error occurred.'
+    return { success: false, message: errorMsg }
+  }
+}
+
+export async function submitEventRegistration(formData: FormData): Promise<ActionResponse> {
+  try {
+    const rawData = {
+      eventId: formData.get('eventId'),
+      fullName: formData.get('fullName'),
+      email: formData.get('email'),
+      phone: formData.get('phone') || undefined,
+    }
+
+    const validated = eventRegistrationSchema.safeParse(rawData)
+    if (!validated.success) {
+      return {
+        success: false,
+        message: 'Invalid submission data',
+        errors: validated.error.flatten().fieldErrors,
+      }
+    }
+
+    const supabase = await createClient()
+
+    // 1. Verify that event is open for registration
+    const { data: event, error: eventErr } = await supabase
+      .from('events')
+      .select('registration_open, capacity, registration_deadline')
+      .eq('id', validated.data.eventId)
+      .single()
+
+    if (eventErr || !event) {
+      return { success: false, message: 'Event not found.' }
+    }
+
+    if (!event.registration_open) {
+      return { success: false, message: 'Registration is currently closed for this event.' }
+    }
+
+    if (event.registration_deadline && new Date(event.registration_deadline) < new Date()) {
+      return { success: false, message: 'The registration deadline for this event has passed.' }
+    }
+
+    // 2. Insert attendee registration
+    const { error: regErr } = await supabase.from('event_registrations').insert({
+      event_id: validated.data.eventId,
+      full_name: validated.data.fullName,
+      email: validated.data.email,
+      phone: validated.data.phone || null,
+      status: 'confirmed',
+    })
+
+    if (regErr) {
+      return { success: false, message: regErr.message }
+    }
+
+    return { success: true, message: 'Registration confirmed successfully.' }
   } catch (err: unknown) {
     const errorMsg = err instanceof Error ? err.message : 'An unexpected error occurred.'
     return { success: false, message: errorMsg }

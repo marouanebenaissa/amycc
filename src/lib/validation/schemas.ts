@@ -50,3 +50,10 @@ export const donationInquirySchema = z.object({
   currency: z.string().default('MAD'),
   notes: z.string().max(1000).optional(),
 })
+
+export const eventRegistrationSchema = z.object({
+  eventId: z.string().uuid('Invalid event selection'),
+  fullName: z.string().min(3, 'Full name must be at least 3 characters').max(100),
+  email: z.string().email('Please enter a valid email address'),
+  phone: z.string().max(20).optional(),
+})
