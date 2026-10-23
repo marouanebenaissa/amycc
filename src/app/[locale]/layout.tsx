@@ -2,19 +2,21 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { isValidLocale, localeDir, type Locale } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/dictionaries'
-import { Inter, Noto_Sans_Arabic } from 'next/font/google'
+import { Sora, Cairo } from 'next/font/google'
 import '../globals.css'
 
-const inter = Inter({
+const sora = Sora({
   subsets: ['latin'],
   variable: '--font-sans',
   display: 'swap',
+  weight: ['300', '400', '500', '600', '700', '800'],
 })
 
-const notoArabic = Noto_Sans_Arabic({
-  subsets: ['arabic'],
+const cairo = Cairo({
+  subsets: ['arabic', 'latin'],
   variable: '--font-arabic',
   display: 'swap',
+  weight: ['400', '500', '600', '700', '800', '900'],
 })
 
 export async function generateStaticParams() {
@@ -53,8 +55,12 @@ export default async function LocaleLayout(props: {
   const dir = localeDir[locale as Locale]
 
   return (
-    <html lang={locale} dir={dir} className={`h-full ${inter.variable} ${notoArabic.variable}`}>
-      <body className="flex flex-col min-h-full">
+    <html
+      lang={locale}
+      dir={dir}
+      className={`h-full ${sora.variable} ${cairo.variable}`}
+    >
+      <body className="flex flex-col min-h-full bg-[#faf7f2] text-[#111a1c] antialiased selection:bg-[#c85a32]/20 selection:text-[#08242a]">
         {props.children}
       </body>
     </html>

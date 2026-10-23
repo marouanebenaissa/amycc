@@ -19,46 +19,64 @@ export function Logo({
   return (
     <Link
       href={`/${locale}`}
-      className={`group flex items-center gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0068ff] focus-visible:ring-offset-2 rounded-lg transition-transform ${className}`}
+      className={`group flex items-center gap-3.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c85a32] focus-visible:ring-offset-2 rounded-xl transition-all ${className}`}
       aria-label="AMYCC — الرئيسية"
     >
+      {/* Visual Seal / Logo Container */}
       <div
         className={`relative flex items-center justify-center shrink-0 overflow-hidden rounded-xl border p-1 shadow-2xs transition-transform group-hover:scale-105 ${
           isDark
-            ? 'bg-slate-900 border-slate-700/80'
-            : 'bg-white border-slate-200/80'
+            ? 'bg-[#0a2d34] border-[#14505b]/60 shadow-teal-950/40'
+            : 'bg-white border-[#e5e0d6] shadow-subtle'
         }`}
         style={{
-          width: compact ? '38px' : '46px',
-          height: compact ? '38px' : '46px',
+          width: compact ? '40px' : '48px',
+          height: compact ? '40px' : '48px',
         }}
       >
         <Image
           src="/logo.png"
           alt="AMYCC Logo"
-          width={compact ? 32 : 40}
-          height={compact ? 32 : 40}
+          width={compact ? 34 : 42}
+          height={compact ? 34 : 42}
           className="object-contain w-auto h-auto max-w-full max-h-full"
           priority
         />
       </div>
+
+      {/* Typography Identity */}
       {!compact && (
         <div className="flex flex-col leading-tight">
+          <div className="flex items-center gap-1.5">
+            <span
+              className={`font-black text-lg tracking-tight transition-colors ${
+                isDark
+                  ? 'text-white group-hover:text-[#f4ce83]'
+                  : 'text-[#0d3b43] group-hover:text-[#c85a32]'
+              }`}
+            >
+              AMYCC
+            </span>
+            <span
+              className={`text-3xs font-bold uppercase tracking-widest px-1.5 py-0.5 rounded ${
+                isDark
+                  ? 'bg-[#14505b] text-[#f4ce83]'
+                  : 'bg-[#d8f0f4] text-[#0d3b43]'
+              }`}
+            >
+              2026
+            </span>
+          </div>
           <span
-            className={`font-extrabold text-base tracking-tight transition-colors ${
-              isDark
-                ? 'text-white group-hover:text-blue-400'
-                : 'text-[#0a0f1d] group-hover:text-[#0068ff]'
+            className={`text-xs font-semibold ${
+              isDark ? 'text-[#aedfe7]' : 'text-[#445457]'
             }`}
           >
-            AMYCC
-          </span>
-          <span
-            className={`text-xs font-medium ${
-              isDark ? 'text-slate-400' : 'text-[#475569]'
-            }`}
-          >
-            جمعية روح الفنون والثقافة
+            {locale === 'ar'
+              ? 'جمعية روح الفنون والثقافة'
+              : locale === 'fr'
+              ? 'Esprit des Arts et de la Culture'
+              : 'Spirit of Arts & Culture'}
           </span>
         </div>
       )}

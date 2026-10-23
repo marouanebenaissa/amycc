@@ -2,79 +2,118 @@
 
 /* ============================================================
    AMYCC Design System — Tailwind CSS v4 Theme
-   Palette:
-   - Primary Brand / Header / Hero: White (#FFFFFF)
-   - Accent & Brand Blue: #0068ff (Vibrant Navy / Electric Blue)
-   - Text & Accents: Black & Slate Grays (#0A0F1D, #334155, #64748B)
+   Spirit of Arts & Culture Association / جمعية روح الفنون والثقافة
+   
+   Design Palette:
+   - Deep Petrol Teal: Primary branding & institutional trust
+   - Warm Ivory: Atmospheric, welcoming background
+   - Terracotta: Expressive, artistic energy & creative accent
+   - Restrained Amber: Cultural heritage & highlight touches
+   - Charcoal Slate: Accessible, high-contrast typography
    ============================================================ */
 
 @theme inline {
-  /* --- Brand Colors --- */
-  --color-blue-brand: #0068ff;
-  --color-blue-brand-hover: #0054d1;
-  --color-blue-brand-dark: #0041a8;
-  --color-blue-brand-light: #e6f0ff;
-  --color-blue-brand-subtle: #f0f6ff;
+  /* --- Deep Petrol Teal (Brand Primary) --- */
+  --color-teal-950: #04161a;
+  --color-teal-900: #08242a;
+  --color-teal-850: #0a2d34;
+  --color-teal-800: #0d3b43;
+  --color-teal-700: #14505b;
+  --color-teal-600: #1c6875;
+  --color-teal-500: #268292;
+  --color-teal-400: #429fb0;
+  --color-teal-300: #74bfcd;
+  --color-teal-200: #aedfe7;
+  --color-teal-100: #d8f0f4;
+  --color-teal-50:  #f0f8fa;
 
-  --color-dark-950: #050811;
-  --color-dark-900: #0a0f1d;
-  --color-dark-800: #121829;
-  --color-dark-700: #1e293b;
+  /* --- Warm Ivory (Surfaces & Backgrounds) --- */
+  --color-ivory-50:  #fdfcf9;
+  --color-ivory-100: #faf7f2;
+  --color-ivory-200: #f4ede2;
+  --color-ivory-300: #ebe1d1;
+  --color-ivory-400: #ded0bc;
 
-  --color-slate-900: #0f172a;
-  --color-slate-800: #1e293b;
-  --color-slate-700: #334155;
-  --color-slate-600: #475569;
-  --color-slate-500: #64748b;
-  --color-slate-400: #94a3b8;
-  --color-slate-300: #cbd5e1;
-  --color-slate-200: #e2e8f0;
-  --color-slate-100: #f1f5f9;
-  --color-slate-50:  #f8fafc;
+  /* --- Terracotta (Artistic & Expressive Accent) --- */
+  --color-terracotta-900: #5f2411;
+  --color-terracotta-800: #7d3016;
+  --color-terracotta-700: #9c3f1e;
+  --color-terracotta-600: #b84e27;
+  --color-terracotta-500: #c85a32;
+  --color-terracotta-400: #d87652;
+  --color-terracotta-300: #e5997d;
+  --color-terracotta-200: #f2c2b0;
+  --color-terracotta-100: #fae4dc;
+  --color-terracotta-50:  #fdf4f0;
 
-  /* --- Semantic aliases --- */
-  --color-primary:        #ffffff;
-  --color-primary-dark:   #f8fafc;
-  --color-accent:         #0068ff;
-  --color-accent-hover:   #0054d1;
-  --color-accent-light:   #e6f0ff;
+  /* --- Restrained Amber (Cultural Highlight) --- */
+  --color-amber-700: #99620b;
+  --color-amber-600: #bd7d12;
+  --color-amber-500: #d99b26;
+  --color-amber-400: #eab44f;
+  --color-amber-300: #f4ce83;
+  --color-amber-100: #fdf2db;
+  --color-amber-50:  #fef9ed;
 
-  --color-surface:        #ffffff;
-  --color-surface-muted:  #f8fafc;
-  --color-surface-card:   #ffffff;
-  --color-border:         #e2e8f0;
-  --color-border-strong:  #cbd5e1;
-  --color-border-accent:  #bfdbfe;
+  /* --- Accessible Neutral Neutrals (Slate / Charcoal) --- */
+  --color-charcoal-950: #080d0e;
+  --color-charcoal-900: #111a1c;
+  --color-charcoal-800: #1b2628;
+  --color-charcoal-700: #2d3b3e;
+  --color-charcoal-600: #445457;
+  --color-charcoal-500: #5f7174;
+  --color-charcoal-400: #819598;
+  --color-charcoal-300: #abc0c3;
+  --color-charcoal-200: #d4e0e2;
+  --color-charcoal-100: #eaf0f1;
+  --color-charcoal-50:  #f5f8f8;
 
-  --color-text-primary:   #0a0f1d;
-  --color-text-secondary: #475569;
-  --color-text-muted:     #64748b;
-  --color-text-inverse:   #ffffff;
+  /* --- Semantic Aliases --- */
+  --color-brand-primary:       var(--color-teal-800);
+  --color-brand-primary-dark:  var(--color-teal-900);
+  --color-brand-primary-light: var(--color-teal-700);
+  --color-brand-accent:        var(--color-terracotta-500);
+  --color-brand-accent-hover:  var(--color-terracotta-600);
+  --color-brand-highlight:     var(--color-amber-500);
 
-  --color-success:  #10b981;
-  --color-warning:  #f59e0b;
-  --color-error:    #ef4444;
-  --color-info:     #0068ff;
+  --color-surface-base:        var(--color-ivory-100);
+  --color-surface-card:        #ffffff;
+  --color-surface-muted:       var(--color-ivory-200);
+  --color-border-subtle:       #e5e0d6;
+  --color-border-strong:       #cfc7b9;
+
+  --color-text-main:           var(--color-charcoal-900);
+  --color-text-muted:          var(--color-charcoal-600);
+  --color-text-subtle:         var(--color-charcoal-500);
+  --color-text-inverse:        #ffffff;
+
+  --color-success:  #18794e;
+  --color-warning:  #bd7d12;
+  --color-error:    #c53030;
+  --color-info:     #14505b;
 
   /* --- Typography --- */
-  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
-  --font-arabic: 'Noto Sans Arabic', 'Segoe UI', system-ui, sans-serif;
+  --font-sans: var(--font-sans), 'Sora', system-ui, -apple-system, sans-serif;
+  --font-arabic: var(--font-arabic), 'Cairo', system-ui, -apple-system, sans-serif;
 
-  /* --- Border radius --- */
-  --radius-sm:  0.25rem;
+  /* --- Border Radius --- */
+  --radius-xs:  0.25rem;
+  --radius-sm:  0.375rem;
   --radius-md:  0.5rem;
   --radius-lg:  0.75rem;
   --radius-xl:  1rem;
-  --radius-2xl: 1.5rem;
+  --radius-2xl: 1.25rem;
+  --radius-3xl: 1.75rem;
 
-  /* --- Shadows --- */
-  --shadow-card: 0 1px 3px 0 rgb(0 0 0 / 0.06), 0 1px 2px -1px rgb(0 0 0 / 0.04);
-  --shadow-card-hover: 0 10px 15px -3px rgb(0 104 255 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.05);
-  --shadow-nav: 0 1px 0 0 var(--color-border);
+  /* --- Shadows with Warmth --- */
+  --shadow-subtle: 0 1px 3px 0 rgb(13 59 67 / 0.05), 0 1px 2px -1px rgb(13 59 67 / 0.03);
+  --shadow-card:   0 2px 6px -1px rgb(13 59 67 / 0.06), 0 1px 4px -2px rgb(13 59 67 / 0.04);
+  --shadow-card-hover: 0 12px 24px -4px rgb(13 59 67 / 0.1), 0 4px 8px -2px rgb(13 59 67 / 0.06);
+  --shadow-glow:   0 0 24px rgb(200 90 50 / 0.2);
 }
 
 /* ============================================================
-   Base Styles
+   Base Styles & Typography Directionality
    ============================================================ */
 
 *, *::before, *::after {
@@ -87,42 +126,57 @@ html {
 }
 
 body {
-  background-color: var(--color-surface);
-  color: var(--color-text-primary);
+  background-color: var(--color-surface-base);
+  color: var(--color-text-main);
   font-family: var(--font-sans);
   line-height: 1.6;
   min-height: 100dvh;
 }
 
-/* Arabic RTL body uses Arabic font stack */
+/* Arabic RTL uses Cairo font stack exclusively */
+[dir="rtl"],
 [dir="rtl"] body,
+[lang="ar"],
 [lang="ar"] body,
 body:has([dir="rtl"]) {
   font-family: var(--font-arabic);
+  letter-spacing: normal;
+}
+
+/* English and French LTR use Sora font stack */
+[dir="ltr"],
+[dir="ltr"] body,
+[lang="en"],
+[lang="fr"] {
+  font-family: var(--font-sans);
 }
 
 /* ============================================================
-   Focus Styles (Accessibility)
+   Accessibility & Focus States (WCAG 2.1 AA)
    ============================================================ */
 
 :focus-visible {
-  outline: 2px solid var(--color-accent);
-  outline-offset: 2px;
+  outline: 2px solid var(--color-brand-accent);
+  outline-offset: 3px;
   border-radius: 4px;
 }
 
 /* ============================================================
-   Scrollbar
+   Subtle Moroccan Geometric Texture (CSS SVG)
    ============================================================ */
 
-@media (min-width: 768px) {
-  ::-webkit-scrollbar { width: 6px; }
-  ::-webkit-scrollbar-track { background: var(--color-surface-muted); }
-  ::-webkit-scrollbar-thumb {
-    background: var(--color-slate-300);
-    border-radius: 3px;
-  }
-  ::-webkit-scrollbar-thumb:hover { background: var(--color-slate-400); }
+.moroccan-pattern {
+  background-color: var(--color-teal-800);
+  background-image: radial-gradient(var(--color-teal-700) 1px, transparent 1px),
+    radial-gradient(var(--color-teal-700) 1px, var(--color-teal-800) 1px);
+  background-size: 24px 24px;
+  background-position: 0 0, 12px 12px;
+}
+
+.moroccan-pattern-light {
+  background-color: var(--color-ivory-100);
+  background-image: radial-gradient(var(--color-border-subtle) 1px, transparent 1px);
+  background-size: 20px 20px;
 }
 
 /* ============================================================
@@ -135,8 +189,8 @@ body:has([dir="rtl"]) {
 }
 
 .tiptap p {
-  margin-bottom: 0.75rem;
-  line-height: 1.7;
+  margin-bottom: 0.85rem;
+  line-height: 1.75;
 }
 
 .tiptap p:last-child {
@@ -146,7 +200,7 @@ body:has([dir="rtl"]) {
 .tiptap h2 {
   font-size: 1.35rem;
   font-weight: 700;
-  color: var(--color-dark-900);
+  color: var(--color-teal-900);
   margin-top: 1.5rem;
   margin-bottom: 0.75rem;
 }
@@ -154,7 +208,7 @@ body:has([dir="rtl"]) {
 .tiptap h3 {
   font-size: 1.15rem;
   font-weight: 600;
-  color: var(--color-dark-900);
+  color: var(--color-teal-900);
   margin-top: 1.25rem;
   margin-bottom: 0.5rem;
 }
@@ -162,35 +216,35 @@ body:has([dir="rtl"]) {
 .tiptap ul {
   list-style-type: disc;
   padding-inline-start: 1.5rem;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.85rem;
 }
 
 .tiptap ol {
   list-style-type: decimal;
   padding-inline-start: 1.5rem;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.85rem;
 }
 
 .tiptap li {
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.35rem;
 }
 
 .tiptap blockquote {
-  border-inline-start: 3px solid var(--color-accent);
+  border-inline-start: 3px solid var(--color-brand-accent);
   padding-inline-start: 1rem;
-  color: var(--color-slate-600);
+  color: var(--color-charcoal-600);
   font-style: italic;
-  margin: 1rem 0;
+  margin: 1.25rem 0;
 }
 
 .tiptap hr {
   border: none;
-  border-top: 1px solid var(--color-border);
+  border-top: 1px solid var(--color-border-subtle);
   margin: 1.5rem 0;
 }
 
 .tiptap p.is-editor-empty:first-child::before {
-  color: var(--color-slate-400);
+  color: var(--color-charcoal-400);
   content: attr(data-placeholder);
   float: inline-start;
   height: 0;

@@ -8,15 +8,16 @@
     "membership": "Adhésion",
     "volunteer": "Bénévolat",
     "partnerships": "Partenariats",
+    "partners": "Partenaires",
     "support": "Soutien",
     "gallery": "Galerie",
     "contact": "Contact"
   },
   "hero": {
     "title": "Association Esprit des Arts et de la Culture",
-    "subtitle": "Vers une société créative et culturellement diverse",
+    "subtitle": "Vers une société créative, solidaire et culturellement dynamique au Maroc",
     "cta_primary": "Découvrir nos programmes",
-    "cta_secondary": "Rejoignez-nous"
+    "cta_secondary": "Devenir adhérent"
   },
   "about": {
     "title": "À propos",
@@ -24,6 +25,45 @@
     "mission_title": "Notre Mission",
     "vision_title": "Notre Vision",
     "values_title": "Nos Valeurs"
+  },
+  "home": {
+    "intro_badge": "Association culturelle marocaine fondée en 2026",
+    "intro_title": "Nourrir la créativité, inspirer la jeunesse, servir la communauté",
+    "intro_p1": "L'Association Esprit des Arts et de la Culture (AMYCC) est une organisation marocaine à but non lucratif fondée en 2026. Nous œuvrons pour le rayonnement culturel, les arts de la scène, le patrimoine musical et l'engagement civique des jeunes à travers le Royaume.",
+    "areas_title": "Nos six domaines d'intervention",
+    "areas_subtitle": "Une approche culturelle intégrée conçue pour libérer le potentiel créatif et renforcer les liens communautaires.",
+    "featured_programs": "Programmes et initiatives phares",
+    "upcoming_events": "Prochains événements culturels",
+    "latest_news": "Actualités et communiqués",
+    "gallery_preview": "Moments visuels de nos activités",
+    "youth_badge": "Initiative Pilote",
+    "youth_title": "Initiative Jeunesse en Action",
+    "youth_desc": "Un programme d'engagement bénévole et communautaire permettant aux jeunes de diriger des projets artistiques et de développer leurs compétences de leadership.",
+    "partners_title": "Réseau partenarial et institutionnel",
+    "partners_desc": "L'AMYCC développe activement des partenariats nationaux et internationaux avec les centres culturels, établissements éducatifs et organisations civiles.",
+    "cta_title": "Participez au renouveau culturel au Maroc",
+    "cta_desc": "Rejoignez notre association en tant qu'adhérent, devenez bénévole ou collaborez comme partenaire institutionnel."
+  },
+  "areas": {
+    "arts": "Arts & Créativité",
+    "arts_desc": "Arts plastiques, peinture, photographie et ateliers créatifs stimulants.",
+    "music": "Musique & Patrimoine sonore",
+    "music_desc": "Préservation du patrimoine musical marocain, composition contemporaine et pratique instrumentale.",
+    "theatre": "Théâtre & Arts de la scène",
+    "theatre_desc": "Expression dramatique, conte, jeu théâtral et ateliers pour jeunes.",
+    "culture": "Culture & Patrimoine",
+    "culture_desc": "Promotion de la diversité culturelle marocaine, des traditions orales et de l'identité nationale.",
+    "youth": "Autonomisation des jeunes",
+    "youth_desc": "Développement des compétences, leadership créatif et mentorat artistique.",
+    "community": "Engagement & Bénévolat",
+    "community_desc": "Bénévolat civique, animation culturelle de proximité et actions solidaires."
+  },
+  "partners": {
+    "title": "Partenaires & Collaborateurs",
+    "subtitle": "Construire des collaborations institutionnelles pérennes pour la culture et la jeunesse",
+    "open_collaboration": "Partenariats institutionnels ouverts",
+    "open_collaboration_desc": "Nous accueillons les collaborations avec les institutions culturelles, écoles, universités et partenaires privés engagés.",
+    "apply_partnership": "Proposer un partenariat institutionnel"
   },
   "programs": {
     "title": "Nos Programmes",
@@ -36,7 +76,7 @@
     "past": "Événements passés",
     "register": "S'inscrire",
     "view_all": "Voir tous les événements",
-    "no_events": "Aucun événement à venir pour le moment."
+    "no_events": "Aucun événement prévu pour le moment."
   },
   "news": {
     "title": "Actualités",
@@ -80,7 +120,7 @@
     "rights": "Tous droits réservés",
     "privacy": "Politique de confidentialité",
     "legal": "Mentions légales",
-    "description": "Association à but non lucratif œuvrant pour la promotion des arts, de la culture et l'autonomisation de la jeunesse au Maroc."
+    "description": "Association culturelle à but non lucratif promouvant les arts, la culture et la jeunesse au Maroc."
   },
   "common": {
     "loading": "Chargement...",

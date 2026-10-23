@@ -20,22 +20,23 @@ export function LanguageSwitcher({ currentLocale }: LanguageSwitcherProps) {
 
   return (
     <div
-      className="inline-flex items-center p-1 bg-slate-100 rounded-lg border border-slate-200"
+      className="inline-flex items-center p-1 rounded-xl bg-[#f4ede2] border border-[#e5e0d6]"
       role="navigation"
       aria-label="Language selector"
     >
       {locales.map((locale) => {
-        const isActive = locale === currentLocale
+        const isCurrent = locale === currentLocale
         return (
           <button
             key={locale}
+            type="button"
             onClick={() => switchLocale(locale)}
-            className={`px-2.5 py-1 rounded-md text-xs font-semibold transition-all ${
-              isActive
-                ? 'bg-[#0068ff] text-white shadow-sm'
-                : 'text-slate-600 hover:text-slate-900 hover:bg-slate-200/60'
+            className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all ${
+              isCurrent
+                ? 'bg-[#0d3b43] text-white shadow-xs'
+                : 'text-[#445457] hover:text-[#0d3b43] hover:bg-[#ebe1d1]'
             }`}
-            aria-current={isActive ? 'true' : undefined}
+            aria-current={isCurrent ? 'true' : undefined}
             aria-label={localeNames[locale]}
             title={localeNames[locale]}
           >

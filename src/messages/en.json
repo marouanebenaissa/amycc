@@ -8,15 +8,16 @@
     "membership": "Membership",
     "volunteer": "Volunteer",
     "partnerships": "Partnerships",
+    "partners": "Partners",
     "support": "Support",
     "gallery": "Gallery",
     "contact": "Contact"
   },
   "hero": {
     "title": "Spirit of Arts & Culture Association",
-    "subtitle": "Towards a Creative and Culturally Diverse Society",
+    "subtitle": "Towards a Creative, Inclusive, and Culturally Vibrant Society",
     "cta_primary": "Explore Our Programs",
-    "cta_secondary": "Join Us"
+    "cta_secondary": "Join As Member"
   },
   "about": {
     "title": "About Us",
@@ -24,6 +25,45 @@
     "mission_title": "Our Mission",
     "vision_title": "Our Vision",
     "values_title": "Our Values"
+  },
+  "home": {
+    "intro_badge": "Moroccan Cultural Association",
+    "intro_title": "Nurturing Creativity, Inspiring Youth, Serving Communities",
+    "intro_p1": "The Spirit of Arts & Culture Association (AMYCC) is a Moroccan nonprofit association founded in 2026. We are dedicated to fostering cultural vitality, performing arts, musical heritage, and civic engagement among young people across Moroccan cities.",
+    "areas_title": "Six Core Areas of Intervention",
+    "areas_subtitle": "A multifaceted cultural approach designed to unlock creative potential and build inclusive communities.",
+    "featured_programs": "Featured Cultural Initiatives",
+    "upcoming_events": "Upcoming Cultural Events",
+    "latest_news": "Announcements & Cultural News",
+    "gallery_preview": "Visual Moments from Our Activities",
+    "youth_badge": "Flagship Program",
+    "youth_title": "Youth in Action Initiative",
+    "youth_desc": "Empowering young Moroccans through hands-on volunteering, artistic project management, and cultural community service.",
+    "partners_title": "Collaborative Network",
+    "partners_desc": "AMYCC actively builds national and international partnerships with cultural institutions, educational centers, public bodies, and civil society organizations.",
+    "cta_title": "Be Part of Morocco's Cultural Future",
+    "cta_desc": "Join as an active member, volunteer in community initiatives, or collaborate as an institutional partner."
+  },
+  "areas": {
+    "arts": "Arts & Creativity",
+    "arts_desc": "Visual arts, painting, photography, and creative workshops celebrating artistic innovation.",
+    "music": "Music & Sound",
+    "music_desc": "Traditional Moroccan musical heritage, contemporary composition, and instrumental mastery.",
+    "theatre": "Theatre & Performing Arts",
+    "theatre_desc": "Dramatic expression, storytelling, stage acting, and spoken-word performances.",
+    "culture": "Culture & Heritage",
+    "culture_desc": "Preserving and celebrating Moroccan cultural diversity, folklore, and historical identity.",
+    "youth": "Youth Empowerment",
+    "youth_desc": "Skill development, creative leadership, and mentorship pathways for emerging young creators.",
+    "community": "Community & Volunteering",
+    "community_desc": "Civic volunteering, neighborhood cultural events, and impactful social initiatives."
+  },
+  "partners": {
+    "title": "Partners & Collaborators",
+    "subtitle": "Building meaningful institutional collaborations for cultural and youth development",
+    "open_collaboration": "Open for Institutional Collaboration",
+    "open_collaboration_desc": "We welcome partnerships with public bodies, cultural institutes, schools, universities, and private sponsors aligned with our mission.",
+    "apply_partnership": "Propose an Institutional Partnership"
   },
   "programs": {
     "title": "Our Programs",
@@ -36,7 +76,7 @@
     "past": "Past Events",
     "register": "Register Now",
     "view_all": "View All Events",
-    "no_events": "No upcoming events at the moment."
+    "no_events": "No upcoming events scheduled at the moment."
   },
   "news": {
     "title": "News",
@@ -80,7 +120,7 @@
     "rights": "All rights reserved",
     "privacy": "Privacy Policy",
     "legal": "Legal",
-    "description": "A nonprofit association promoting arts, culture, and youth empowerment in Morocco."
+    "description": "A nonprofit cultural association promoting arts, culture, and youth empowerment in Morocco."
   },
   "common": {
     "loading": "Loading...",
