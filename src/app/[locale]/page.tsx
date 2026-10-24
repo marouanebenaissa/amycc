@@ -1,6 +1,7 @@
 import { getDictionary } from '@/lib/i18n/dictionaries'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
+import { getTopBarSettings } from '@/lib/settings'
 import { createPublicClient } from '@/lib/supabase/public'
 import { FaqAccordion } from '@/components/home/FaqAccordion'
 import { EventRegistrationModal } from '@/components/events/EventRegistrationModal'
@@ -46,7 +47,10 @@ interface NewsItem {
 
 export default async function HomePage(props: { params: Promise<{ locale: string }> }) {
   const { locale } = await props.params
-  const dict = await getDictionary(locale)
+  const [dict, topBar] = await Promise.all([
+    getDictionary(locale),
+    getTopBarSettings(),
+  ])
   const isAr = locale === 'ar'
   const isFr = locale === 'fr'
 
@@ -381,7 +385,7 @@ export default async function HomePage(props: { params: Promise<{ locale: string
 
   return (
     <>
-      <Header locale={locale} dict={dict} />
+      <Header locale={locale} dict={dict} topBar={topBar} />
 
       <main id="main-content" className="flex flex-col flex-1 bg-[#faf7f2]">
 

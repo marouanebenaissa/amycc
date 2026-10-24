@@ -1,6 +1,7 @@
 import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import { revalidatePath } from 'next/cache'
+import { defaultTopBarConfig, type TopBarConfig } from '@/lib/settings'
 
 interface SiteSettingRow {
   key: string
@@ -32,23 +33,57 @@ export default async function AdminSettingsPage() {
     const facebookUrl = (formData.get('facebookUrl') as string) || ''
     const instagramUrl = (formData.get('instagramUrl') as string) || ''
 
+    const topBarEnabled = formData.get('topBarEnabled') === 'on'
+    const topBarMessageAr = (formData.get('topBarMessageAr') as string) || ''
+    const topBarMessageFr = (formData.get('topBarMessageFr') as string) || ''
+    const topBarMessageEn = (formData.get('topBarMessageEn') as string) || ''
+    const topBarLinkTextAr = (formData.get('topBarLinkTextAr') as string) || ''
+    const topBarLinkTextFr = (formData.get('topBarLinkTextFr') as string) || ''
+    const topBarLinkTextEn = (formData.get('topBarLinkTextEn') as string) || ''
+    const topBarLinkUrl = (formData.get('topBarLinkUrl') as string) || ''
+    const topBarContact = (formData.get('topBarContact') as string) || ''
+
     await sb.from('site_settings').upsert([
-      { key: 'contact_info', value: { email: contactEmail, phone: contactPhone, address: contactAddress } },
-      { key: 'social_links', value: { facebook: facebookUrl, instagram: instagramUrl } },
+      {
+        key: 'contact_info',
+        value: { email: contactEmail, phone: contactPhone, address: contactAddress },
+      },
+      {
+        key: 'social_links',
+        value: { facebook: facebookUrl, instagram: instagramUrl },
+      },
+      {
+        key: 'top_bar',
+        value: {
+          enabled: topBarEnabled,
+          messageAr: topBarMessageAr,
+          messageFr: topBarMessageFr,
+          messageEn: topBarMessageEn,
+          linkTextAr: topBarLinkTextAr,
+          linkTextFr: topBarLinkTextFr,
+          linkTextEn: topBarLinkTextEn,
+          linkUrl: topBarLinkUrl,
+          contactEmail: topBarContact,
+        },
+      },
     ])
 
     revalidatePath('/admin/settings')
+    revalidatePath('/', 'layout')
+    revalidatePath('/[locale]', 'layout')
   }
 
   const contactVal = (settingsMap['contact_info'] as Record<string, string>) || {}
   const socialVal = (settingsMap['social_links'] as Record<string, string>) || {}
+  const topBarVal = (settingsMap['top_bar'] as Partial<TopBarConfig>) || {}
+  const isTopBarEnabled = typeof topBarVal.enabled === 'boolean' ? topBarVal.enabled : false
 
   return (
     <div className="space-y-8 max-w-4xl">
       <div>
         <h1 className="text-2xl font-black text-[#08242a]">Platform & Site Settings</h1>
         <p className="text-xs text-[#5f7174] mt-1">
-          Manage general association information, official contact channels, and system configuration.
+          إدارة إعدادات الموقع العام، أرقام وعناوين التواصل، والتحكم المباشر في الشريط العلوي للهيدر.
         </p>
       </div>
 
@@ -78,85 +113,264 @@ export default async function AdminSettingsPage() {
         </div>
       </div>
 
-      {/* Editable Contact & Social Information Form */}
-      <div className="bg-white p-8 rounded-2xl border border-[#e5e0d6] shadow-2xs">
-        <h2 className="text-sm font-bold text-[#08242a] mb-6 uppercase tracking-wider">
-          Official Channels & Social Links
-        </h2>
-
-        <form action={handleSaveSettings} className="space-y-5">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <form action={handleSaveSettings} className="space-y-8">
+        {/* NEW: Top Bar Notification & Institutional Banner Control */}
+        <div className="bg-white p-8 rounded-2xl border border-[#e5e0d6] shadow-2xs space-y-6">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-[#f0ebe1]">
             <div>
-              <label className="block text-2xs font-bold text-[#445457] mb-1">
-                Official Contact Email
-              </label>
-              <input
-                name="contactEmail"
-                type="email"
-                defaultValue={contactVal.email || 'contact@amycc.org'}
-                className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43]"
-              />
+              <div className="flex items-center gap-2">
+                <span className="text-base">📢</span>
+                <h2 className="text-sm font-bold text-[#08242a] uppercase tracking-wider">
+                  الشريط العلوي الترويجي للهيدر (Top Bar Control)
+                </h2>
+              </div>
+              <p className="text-xs text-[#5f7174] mt-1">
+                التحكم في إظهار أو إخفاء الشريط الترويجي المصغر الموجود أعلى الموقع مع تخصيص نصوصه وروابطه.
+              </p>
             </div>
+
             <div>
-              <label className="block text-2xs font-bold text-[#445457] mb-1">
-                Official Telephone Number
-              </label>
-              <input
-                name="contactPhone"
-                type="tel"
-                defaultValue={contactVal.phone || '+212 500-000000'}
-                className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43]"
-              />
+              {isTopBarEnabled ? (
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 text-3xs font-black rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200">
+                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                  مفعل حالياً ويظهر في الموقع
+                </span>
+              ) : (
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 text-3xs font-black rounded-full bg-zinc-100 text-zinc-700 border border-zinc-200">
+                  <span className="w-2 h-2 rounded-full bg-zinc-400" />
+                  متوقف حالياً (مخفي من الموقع)
+                </span>
+              )}
             </div>
           </div>
 
-          <div>
-            <label className="block text-2xs font-bold text-[#445457] mb-1">
-              Registered Association Office / City
+          {/* Toggle Switch Card */}
+          <div className="bg-[#faf7f2] p-5 rounded-xl border border-[#ebe1d1] flex items-center justify-between gap-4">
+            <div className="space-y-1">
+              <label htmlFor="topBarEnabled" className="text-xs font-bold text-[#08242a] cursor-pointer block">
+                تفعيل وإظهار الشريط العلوي (Show Top Announcement Bar)
+              </label>
+              <p className="text-3xs text-[#5f7174]">
+                إذا قمت بإلغاء التحديد، سيختفي الشريط فوراً من واجهة الموقع بالكامل لجميع الزوار.
+              </p>
+            </div>
+            <label className="relative inline-flex items-center cursor-pointer shrink-0">
+              <input
+                id="topBarEnabled"
+                name="topBarEnabled"
+                type="checkbox"
+                defaultChecked={isTopBarEnabled}
+                className="sr-only peer"
+              />
+              <div className="w-11 h-6 bg-[#d1cdc7] peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#0d3b43]"></div>
             </label>
-            <input
-              name="contactAddress"
-              type="text"
-              defaultValue={contactVal.address || 'Morocco / المملكة المغربية'}
-              className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43]"
-            />
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+          {/* Multilingual Announcement Messages */}
+          <div className="space-y-4 pt-2">
+            <h3 className="text-2xs font-bold text-[#445457] uppercase tracking-wider">
+              نص الإعلان أو الرسالة المؤسسية (Announcement Text)
+            </h3>
+            <div className="grid grid-cols-1 gap-4">
+              <div>
+                <label className="block text-2xs font-bold text-[#445457] mb-1">
+                  النص بالعربية (Arabic)
+                </label>
+                <input
+                  name="topBarMessageAr"
+                  type="text"
+                  defaultValue={topBarVal.messageAr ?? defaultTopBarConfig.messageAr}
+                  placeholder="المملكة المغربية • جمعية روح الفنون والثقافة (AMYCC)..."
+                  className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43]"
+                />
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-2xs font-bold text-[#445457] mb-1">
+                    النص بالفرنسية (French)
+                  </label>
+                  <input
+                    name="topBarMessageFr"
+                    type="text"
+                    defaultValue={topBarVal.messageFr ?? defaultTopBarConfig.messageFr}
+                    placeholder="Royaume du Maroc • Association Esprit des Arts..."
+                    className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43]"
+                  />
+                </div>
+                <div>
+                  <label className="block text-2xs font-bold text-[#445457] mb-1">
+                    النص بالإنجليزية (English)
+                  </label>
+                  <input
+                    name="topBarMessageEn"
+                    type="text"
+                    defaultValue={topBarVal.messageEn ?? defaultTopBarConfig.messageEn}
+                    placeholder="Kingdom of Morocco • Spirit of Arts & Culture..."
+                    className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43]"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Action Link & Contact */}
+          <div className="space-y-4 pt-2">
+            <h3 className="text-2xs font-bold text-[#445457] uppercase tracking-wider">
+              الرابط السريع وزر التوجيه (Action Link & Contact)
+            </h3>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div>
+                <label className="block text-2xs font-bold text-[#445457] mb-1">
+                  نص الرابط (بالعربية)
+                </label>
+                <input
+                  name="topBarLinkTextAr"
+                  type="text"
+                  defaultValue={topBarVal.linkTextAr ?? defaultTopBarConfig.linkTextAr}
+                  placeholder="مبادرة شباب في العمل"
+                  className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43]"
+                />
+              </div>
+              <div>
+                <label className="block text-2xs font-bold text-[#445457] mb-1">
+                  نص الرابط (بالفرنسية)
+                </label>
+                <input
+                  name="topBarLinkTextFr"
+                  type="text"
+                  defaultValue={topBarVal.linkTextFr ?? defaultTopBarConfig.linkTextFr}
+                  placeholder="Initiative Jeunesse en Action"
+                  className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43]"
+                />
+              </div>
+              <div>
+                <label className="block text-2xs font-bold text-[#445457] mb-1">
+                  نص الرابط (بالإنجليزية)
+                </label>
+                <input
+                  name="topBarLinkTextEn"
+                  type="text"
+                  defaultValue={topBarVal.linkTextEn ?? defaultTopBarConfig.linkTextEn}
+                  placeholder="Youth in Action Initiative"
+                  className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43]"
+                />
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-2xs font-bold text-[#445457] mb-1">
+                  وجهة الرابط (URL / Path)
+                </label>
+                <input
+                  name="topBarLinkUrl"
+                  type="text"
+                  defaultValue={topBarVal.linkUrl ?? defaultTopBarConfig.linkUrl}
+                  placeholder="/programs/youth-in-action"
+                  className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43]"
+                />
+              </div>
+              <div>
+                <label className="block text-2xs font-bold text-[#445457] mb-1">
+                  بريد التواصل في الشريط (Contact Email)
+                </label>
+                <input
+                  name="topBarContact"
+                  type="email"
+                  defaultValue={topBarVal.contactEmail ?? defaultTopBarConfig.contactEmail}
+                  placeholder="contact@amycc.org"
+                  className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43]"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Editable Contact & Social Information Form */}
+        <div className="bg-white p-8 rounded-2xl border border-[#e5e0d6] shadow-2xs">
+          <h2 className="text-sm font-bold text-[#08242a] mb-6 uppercase tracking-wider">
+            Official Channels & Social Links
+          </h2>
+
+          <div className="space-y-5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-2xs font-bold text-[#445457] mb-1">
+                  Official Contact Email
+                </label>
+                <input
+                  name="contactEmail"
+                  type="email"
+                  defaultValue={contactVal.email || 'contact@amycc.org'}
+                  className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43]"
+                />
+              </div>
+              <div>
+                <label className="block text-2xs font-bold text-[#445457] mb-1">
+                  Official Telephone Number
+                </label>
+                <input
+                  name="contactPhone"
+                  type="tel"
+                  defaultValue={contactVal.phone || '+212 500-000000'}
+                  className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43]"
+                />
+              </div>
+            </div>
+
             <div>
               <label className="block text-2xs font-bold text-[#445457] mb-1">
-                Facebook Page URL
+                Registered Association Office / City
               </label>
               <input
-                name="facebookUrl"
-                type="url"
-                defaultValue={socialVal.facebook || 'https://facebook.com/amycc'}
+                name="contactAddress"
+                type="text"
+                defaultValue={contactVal.address || 'Marrakech / مراكش، المملكة المغربية'}
                 className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43]"
               />
             </div>
-            <div>
-              <label className="block text-2xs font-bold text-[#445457] mb-1">
-                Instagram Profile URL
-              </label>
-              <input
-                name="instagramUrl"
-                type="url"
-                defaultValue={socialVal.instagram || 'https://instagram.com/amycc'}
-                className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43]"
-              />
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+              <div>
+                <label className="block text-2xs font-bold text-[#445457] mb-1">
+                  Facebook Page URL
+                </label>
+                <input
+                  name="facebookUrl"
+                  type="url"
+                  defaultValue={socialVal.facebook || 'https://facebook.com/amycc'}
+                  className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43]"
+                />
+              </div>
+              <div>
+                <label className="block text-2xs font-bold text-[#445457] mb-1">
+                  Instagram Profile URL
+                </label>
+                <input
+                  name="instagramUrl"
+                  type="url"
+                  defaultValue={socialVal.instagram || 'https://instagram.com/amycc'}
+                  className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43]"
+                />
+              </div>
             </div>
           </div>
+        </div>
 
-          <div className="pt-4 flex justify-end">
-            <button
-              type="submit"
-              className="px-6 py-2.5 text-xs font-bold text-white bg-[#0d3b43] hover:bg-[#14505b] active:scale-98 rounded-xl transition-all shadow-subtle hover:shadow-card"
-            >
-              Save Platform Settings
-            </button>
-          </div>
-        </form>
-      </div>
+        {/* Global Save Button */}
+        <div className="sticky bottom-6 z-20 bg-white/95 backdrop-blur-md p-4 rounded-2xl border border-[#e5e0d6] shadow-card flex items-center justify-between gap-4">
+          <p className="text-xs text-[#5f7174]">
+            اضغط حفظ لتطبيق التغييرات على الشريط العلوي وإعدادات المنصة فوراً.
+          </p>
+          <button
+            type="submit"
+            className="px-6 py-2.5 text-xs font-bold text-white bg-[#0d3b43] hover:bg-[#14505b] active:scale-98 rounded-xl transition-all shadow-subtle hover:shadow-card cursor-pointer"
+          >
+            حفظ وتحديث الإعدادات (Save Platform Settings)
+          </button>
+        </div>
+      </form>
     </div>
   )
 }

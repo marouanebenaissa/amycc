@@ -7,13 +7,15 @@ import { Logo } from '@/components/ui/Logo'
 import { LanguageSwitcher } from '@/components/navigation/LanguageSwitcher'
 import { IconWithFallback } from '@/components/ui/IconWithFallback'
 import type { Dictionary } from '@/lib/i18n/dictionaries'
+import type { TopBarConfig } from '@/lib/settings'
 
 interface HeaderProps {
   locale: string
   dict: Dictionary
+  topBar?: TopBarConfig
 }
 
-export function Header({ locale, dict }: HeaderProps) {
+export function Header({ locale, dict, topBar }: HeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [aboutDropdownOpen, setAboutDropdownOpen] = useState(false)
   const [programsDropdownOpen, setProgramsDropdownOpen] = useState(false)
@@ -22,6 +24,8 @@ export function Header({ locale, dict }: HeaderProps) {
   const [mobileProgramsOpen, setMobileProgramsOpen] = useState(false)
   const [mobileExploreOpen, setMobileExploreOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const [clientTopBar, setClientTopBar] = useState<TopBarConfig | null>(null)
+  const [dismissed, setDismissed] = useState(false)
   const pathname = usePathname()
   const [prevPathname, setPrevPathname] = useState(pathname)
 
@@ -55,6 +59,24 @@ export function Header({ locale, dict }: HeaderProps) {
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
+
+  // Dynamic top bar configuration — fetches from API if not passed via props
+  useEffect(() => {
+    if (topBar !== undefined) return
+
+    let isMounted = true
+    fetch('/api/settings/top-bar')
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data: TopBarConfig | null) => {
+        if (isMounted && data) {
+          setClientTopBar(data)
+        }
+      })
+      .catch(() => {})
+    return () => {
+      isMounted = false
+    }
+  }, [topBar])
 
   // Lock body scroll when mobile menu is open
   useEffect(() => {
@@ -265,6 +287,36 @@ export function Header({ locale, dict }: HeaderProps) {
     return pathname.startsWith(`/${locale}/${path}`)
   }
 
+  const effectiveTopBar = topBar ?? clientTopBar
+  const topBarVisible = !dismissed && (effectiveTopBar ? Boolean(effectiveTopBar.enabled) : false)
+
+  const topBarMessage =
+    isAr
+      ? (effectiveTopBar?.messageAr || 'المملكة المغربية • جمعية روح الفنون والثقافة (AMYCC) — تأسست سنة 2026')
+      : isFr
+      ? (effectiveTopBar?.messageFr || 'Royaume du Maroc • Association Esprit des Arts et de la Culture (AMYCC)')
+      : (effectiveTopBar?.messageEn || 'Kingdom of Morocco • Spirit of Arts & Culture Association (AMYCC)')
+
+  const topBarLinkText =
+    isAr
+      ? (effectiveTopBar?.linkTextAr || 'مبادرة شباب في العمل')
+      : isFr
+      ? (effectiveTopBar?.linkTextFr || 'Initiative Jeunesse en Action')
+      : (effectiveTopBar?.linkTextEn || 'Youth in Action Initiative')
+
+  const topBarLinkUrl = effectiveTopBar?.linkUrl || '/programs/youth-in-action'
+  const topBarContact = effectiveTopBar?.contactEmail || 'contact@amycc.org'
+
+  function resolveTopBarUrl(url: string) {
+    if (!url) return `/${locale}`
+    if (url.startsWith('http://') || url.startsWith('https://') || url.startsWith('mailto:')) {
+      return url
+    }
+    const clean = url.startsWith('/') ? url : `/${url}`
+    if (clean.startsWith(`/${locale}`)) return clean
+    return `/${locale}${clean}`
+  }
+
   return (
     <header
       className={`sticky top-0 z-50 transition-all duration-300 ${
@@ -281,39 +333,53 @@ export function Header({ locale, dict }: HeaderProps) {
         {dict.common.skip_to_content}
       </a>
 
-      {/* Top Institutional Micro-Bar */}
-      <div className="bg-[#08242a] text-[#d8f0f4] py-1.5 px-4 text-3xs border-b border-[#14505b]/40 hidden md:block">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <span className="flex items-center gap-1.5 font-medium">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#f4ce83]" />
-              <span>
-                {isAr
-                  ? 'المملكة المغربية • جمعية روح الفنون والثقافة (AMYCC) — تأسست سنة 2026'
-                  : isFr
-                  ? 'Royaume du Maroc • Association Esprit des Arts et de la Culture (AMYCC)'
-                  : 'Kingdom of Morocco • Spirit of Arts & Culture Association (AMYCC)'}
-              </span>
-            </span>
-          </div>
+      {/* Top Institutional Micro-Bar — Dynamically controlled via Admin Dashboard */}
+      {topBarVisible && (
+        <aside
+          aria-label={isAr ? 'شريط الإعلانات المؤسسي' : 'Announcement Bar'}
+          className="bg-[#08242a] text-[#d8f0f4] py-1.5 px-4 text-3xs border-b border-[#14505b]/40 animate-fade-in"
+        >
+          <div className="max-w-7xl mx-auto flex items-center justify-between gap-3">
+            <div className="flex items-center gap-2.5 min-w-0">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#f4ce83] shrink-0" aria-hidden="true" />
+              <p className="truncate font-medium text-xs sm:text-3xs">
+                {topBarMessage}
+              </p>
+            </div>
 
-          <div className="flex items-center gap-4 text-3xs">
-            <Link
-              href={`/${locale}/programs/youth-in-action`}
-              className="text-[#f4ce83] hover:underline font-bold transition-colors"
-            >
-              {isAr ? 'مبادرة شباب في العمل' : 'Youth in Action Initiative'}
-            </Link>
-            <span className="text-[#1c6875]">•</span>
-            <a
-              href="mailto:contact@amycc.org"
-              className="hover:text-white transition-colors"
-            >
-              contact@amycc.org
-            </a>
+            <div className="flex items-center gap-3 shrink-0 text-3xs">
+              {topBarLinkText && topBarLinkUrl && (
+                <Link
+                  href={resolveTopBarUrl(topBarLinkUrl)}
+                  className="text-[#f4ce83] hover:underline font-bold transition-colors truncate max-w-[180px] sm:max-w-none"
+                >
+                  {topBarLinkText}
+                </Link>
+              )}
+              {topBarContact && (
+                <>
+                  <span className="text-[#1c6875] hidden sm:inline" aria-hidden="true">•</span>
+                  <a
+                    href={`mailto:${topBarContact}`}
+                    className="hover:text-white transition-colors hidden sm:inline"
+                  >
+                    {topBarContact}
+                  </a>
+                </>
+              )}
+              <button
+                type="button"
+                onClick={() => setDismissed(true)}
+                className="text-[#819598] hover:text-white p-0.5 rounded transition-colors ms-1 cursor-pointer"
+                aria-label={isAr ? 'إخفاء الشريط' : 'Dismiss'}
+                title={isAr ? 'إخفاء الشريط' : 'Dismiss'}
+              >
+                ✕
+              </button>
+            </div>
           </div>
-        </div>
-      </div>
+        </aside>
+      )}
 
       {/* Main Navigation Bar */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
