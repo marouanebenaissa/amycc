@@ -117,7 +117,7 @@ export default async function TeamPage(props: { params: Promise<{ locale: string
               AMYCC Leadership & Governance
             </span>
             <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-[#08242a] tracking-tight">
-              {isAr ? 'فريق العمل والحكامة الجمعوية' : isFr ? 'Équipe & Gouvernance' : 'Our Team & Governance'}
+              {isAr ? 'أعضاء الفريق' : isFr ? 'Équipe' : 'Our Team'}
             </h1>
             <p className="text-base sm:text-lg text-[#445457] max-w-2xl mx-auto font-medium leading-relaxed">
               {isAr

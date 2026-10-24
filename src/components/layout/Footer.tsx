@@ -44,7 +44,7 @@ export function Footer({ locale, dict }: FooterProps) {
   // Explore Column Links (عمود استكشف)
   const exploreLinks = [
     { label: isAr ? 'من نحن' : isFr ? 'À propos' : 'About Us', path: 'about' },
-    { label: isAr ? 'فريق العمل والحكامة' : isFr ? 'Notre équipe' : 'Our Team', path: 'team' },
+    { label: isAr ? 'فريقنا' : isFr ? 'Notre équipe' : 'Our Team', path: 'team' },
     { label: isAr ? 'الفعاليات' : isFr ? 'Événements' : 'Events', path: 'events' },
     { label: isAr ? 'الأخبار والمستجدات' : isFr ? 'Actualités' : 'News', path: 'news' },
     { label: isAr ? 'الشراكات' : isFr ? 'Partenariats' : 'Partnerships', path: 'partnerships' },
