@@ -9,9 +9,12 @@ import {
   type HeroConfig,
   defaultFlagshipProgramConfig,
   type FlagshipProgramConfig,
+  defaultAboutHeroConfig,
+  type AboutHeroConfig,
 } from '@/lib/settings'
 import { HeroImageUploader } from '@/components/admin/HeroImageUploader'
 import { FlagshipImageUploader } from '@/components/admin/FlagshipImageUploader'
+import { AboutHeroImageUploader } from '@/components/admin/AboutHeroImageUploader'
 
 interface SiteSettingRow {
   key: string
@@ -106,6 +109,16 @@ export default async function AdminSettingsPage() {
     const heroBottomStripAr = (formData.get('heroBottomStripAr') as string) || ''
     const heroBottomStripFr = (formData.get('heroBottomStripFr') as string) || ''
     const heroBottomStripEn = (formData.get('heroBottomStripEn') as string) || ''
+
+    // About Page Hero Settings (صورة واجهة من نحن)
+    const aboutHeroImageUrl = (formData.get('aboutHeroImageUrl') as string) || ''
+    const aboutHeroShowImage = formData.get('aboutHeroShowImage') === 'on'
+    const aboutHeroCaptionAr = (formData.get('aboutHeroCaptionAr') as string) || ''
+    const aboutHeroCaptionFr = (formData.get('aboutHeroCaptionFr') as string) || ''
+    const aboutHeroCaptionEn = (formData.get('aboutHeroCaptionEn') as string) || ''
+    const aboutHeroBadgeAr = (formData.get('aboutHeroBadgeAr') as string) || ''
+    const aboutHeroBadgeFr = (formData.get('aboutHeroBadgeFr') as string) || ''
+    const aboutHeroBadgeEn = (formData.get('aboutHeroBadgeEn') as string) || ''
 
     // Flagship Program Settings (البرنامج الرائد ومبادرة الاستقطاب)
     const flagshipEnabled = formData.get('flagshipEnabled') === 'on'
@@ -271,11 +284,26 @@ export default async function AdminSettingsPage() {
           ctaSecondaryUrl: flagshipCtaSecondaryUrl,
         },
       },
+      {
+        key: 'about_hero',
+        value: {
+          imageUrl: aboutHeroImageUrl,
+          showImage: aboutHeroShowImage,
+          captionAr: aboutHeroCaptionAr,
+          captionFr: aboutHeroCaptionFr,
+          captionEn: aboutHeroCaptionEn,
+          badgeAr: aboutHeroBadgeAr,
+          badgeFr: aboutHeroBadgeFr,
+          badgeEn: aboutHeroBadgeEn,
+        },
+      },
     ])
 
     revalidatePath('/admin/settings')
     revalidatePath('/', 'layout')
     revalidatePath('/[locale]', 'layout')
+    revalidatePath('/about')
+    revalidatePath('/[locale]/about', 'page')
   }
 
   const contactVal = (settingsMap['contact_info'] as Record<string, string>) || {}
@@ -283,6 +311,8 @@ export default async function AdminSettingsPage() {
   const topBarVal = (settingsMap['top_bar'] as Partial<TopBarConfig>) || {}
   const isTopBarEnabled = typeof topBarVal.enabled === 'boolean' ? topBarVal.enabled : false
   const heroVal = (settingsMap['hero'] as Partial<HeroConfig>) || {}
+  const aboutHeroVal = (settingsMap['about_hero'] as Partial<AboutHeroConfig>) || {}
+  const isAboutHeroImageVisible = typeof aboutHeroVal.showImage === 'boolean' ? aboutHeroVal.showImage : true
   const flagshipVal = (settingsMap['flagship_program'] as Partial<FlagshipProgramConfig>) || {}
   const isFlagshipEnabled = typeof flagshipVal.enabled === 'boolean' ? flagshipVal.enabled : defaultFlagshipProgramConfig.enabled
 
@@ -597,6 +627,127 @@ export default async function AdminSettingsPage() {
                     className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43]"
                   />
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* About Page Hero Section Control (صورة الواجهة البارزة لصفحة من نحن) */}
+        <div className="bg-white p-8 rounded-2xl border border-[#e5e0d6] shadow-2xs space-y-6">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-[#f0ebe1]">
+            <div>
+              <div className="flex items-center gap-2">
+                <span className="text-lg">🏛️</span>
+                <h2 className="text-sm font-bold text-[#08242a] uppercase tracking-wider">
+                  صورة واجهة صفحة «من نحن» (About Us Hero Showcase)
+                </h2>
+              </div>
+              <p className="text-xs text-[#5f7174] mt-1">
+                تخصيص صورة البانر السينمائي الرئيسية أعلى صفحة &quot;من نحن&quot; مع إمكانية إضافة شارة ووصف بثلاث لغات.
+              </p>
+            </div>
+            <div>
+              {isAboutHeroImageVisible ? (
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 text-3xs font-black rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200">
+                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                  مفعل في صفحة من نحن
+                </span>
+              ) : (
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 text-3xs font-black rounded-full bg-amber-50 text-amber-800 border border-amber-200">
+                  <span className="w-2 h-2 rounded-full bg-amber-500" />
+                  مخفي
+                </span>
+              )}
+            </div>
+          </div>
+
+          {/* Toggle Enable / Disable */}
+          <div className="p-4 rounded-xl bg-[#faf7f2] border border-[#e5e0d6] flex items-center justify-between">
+            <div>
+              <label htmlFor="aboutHeroShowImage" className="text-xs font-bold text-[#08242a] block cursor-pointer">
+                عرض صورة البانر في أعلى صفحة «من نحن»
+              </label>
+              <p className="text-3xs text-[#5f7174] mt-0.5">
+                عند إلغاء التفعيل، سيتم إخفاء البانر الصوري من صفحة من نحن والاكتفاء بالخلفية الهندسية.
+              </p>
+            </div>
+            <input
+              id="aboutHeroShowImage"
+              name="aboutHeroShowImage"
+              type="checkbox"
+              defaultChecked={isAboutHeroImageVisible}
+              className="w-5 h-5 rounded text-[#0d3b43] focus:ring-[#0d3b43] cursor-pointer"
+            />
+          </div>
+
+          {/* About Hero Image Uploader */}
+          <AboutHeroImageUploader
+            initialImageUrl={aboutHeroVal.imageUrl}
+            defaultImageUrl={defaultAboutHeroConfig.imageUrl}
+          />
+
+          {/* Captions in 3 languages */}
+          <div className="space-y-4 pt-2 border-t border-[#f0ebe1]">
+            <h3 className="text-2xs font-bold text-[#445457] uppercase tracking-wider">
+              النص التوضيحي والشارة المرافقة للصورة (اختياري)
+            </h3>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div>
+                <label className="block text-3xs font-bold text-[#5f7174] mb-1">الشارة بالعربية (AR)</label>
+                <input
+                  name="aboutHeroBadgeAr"
+                  type="text"
+                  defaultValue={aboutHeroVal.badgeAr || defaultAboutHeroConfig.badgeAr}
+                  className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43]"
+                />
+              </div>
+              <div>
+                <label className="block text-3xs font-bold text-[#5f7174] mb-1">الشارة بالفرنسية (FR)</label>
+                <input
+                  name="aboutHeroBadgeFr"
+                  type="text"
+                  defaultValue={aboutHeroVal.badgeFr || defaultAboutHeroConfig.badgeFr}
+                  className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43]"
+                />
+              </div>
+              <div>
+                <label className="block text-3xs font-bold text-[#5f7174] mb-1">الشارة بالإنجليزية (EN)</label>
+                <input
+                  name="aboutHeroBadgeEn"
+                  type="text"
+                  defaultValue={aboutHeroVal.badgeEn || defaultAboutHeroConfig.badgeEn}
+                  className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43]"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-3xs font-bold text-[#5f7174] mb-1">الوصف أسفل الصورة بالعربية (AR)</label>
+              <input
+                name="aboutHeroCaptionAr"
+                type="text"
+                defaultValue={aboutHeroVal.captionAr || defaultAboutHeroConfig.captionAr}
+                className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43]"
+              />
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-3xs font-bold text-[#5f7174] mb-1">الوصف بالفرنسية (FR)</label>
+                <input
+                  name="aboutHeroCaptionFr"
+                  type="text"
+                  defaultValue={aboutHeroVal.captionFr || defaultAboutHeroConfig.captionFr}
+                  className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43]"
+                />
+              </div>
+              <div>
+                <label className="block text-3xs font-bold text-[#5f7174] mb-1">الوصف بالإنجليزية (EN)</label>
+                <input
+                  name="aboutHeroCaptionEn"
+                  type="text"
+                  defaultValue={aboutHeroVal.captionEn || defaultAboutHeroConfig.captionEn}
+                  className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43]"
+                />
               </div>
             </div>
           </div>

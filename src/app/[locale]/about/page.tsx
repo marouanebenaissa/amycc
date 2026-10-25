@@ -2,10 +2,15 @@ import { getDictionary } from '@/lib/i18n/dictionaries'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import Link from 'next/link'
+import { getAboutHeroSettings } from '@/lib/settings'
+import { ImageWithFallback } from '@/components/ui/ImageWithFallback'
 
 export default async function AboutPage(props: { params: Promise<{ locale: string }> }) {
   const { locale } = await props.params
-  const dict = await getDictionary(locale)
+  const [dict, aboutHero] = await Promise.all([
+    getDictionary(locale),
+    getAboutHeroSettings(),
+  ])
   const isAr = locale === 'ar'
   const isFr = locale === 'fr'
 
@@ -437,6 +442,60 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
                 {isAr ? '🏛️ الهيكلة والتنظيم' : isFr ? '🏛️ Organisation' : '🏛️ Structure'}
               </a>
             </div>
+
+            {/* Dynamic About Hero Image from Admin Control Panel */}
+            {aboutHero.showImage !== false && aboutHero.imageUrl && (
+              <div className="pt-4 max-w-5xl mx-auto">
+                <div className="relative aspect-[21/9] sm:aspect-[24/9] w-full rounded-3xl overflow-hidden border border-[#e5e0d6] shadow-card group">
+                  <ImageWithFallback
+                    src={aboutHero.imageUrl}
+                    alt={
+                      isAr
+                        ? aboutHero.captionAr || 'جمعية روح الفنون والثقافة'
+                        : isFr
+                        ? aboutHero.captionFr || 'Association Esprit des Arts et de la Culture'
+                        : aboutHero.captionEn || 'Spirit of Arts & Culture Association'
+                    }
+                    fill
+                    priority
+                    className="object-cover group-hover:scale-102 transition-transform duration-700"
+                    fallbackSrc="/images/youth-in-action.jpg"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent" />
+
+                  {/* Floating Badge & Caption Bar */}
+                  <div className="absolute bottom-4 sm:bottom-6 start-4 sm:start-8 end-4 sm:end-8 flex flex-col sm:flex-row sm:items-end justify-between gap-3 text-white">
+                    <div className="space-y-1.5 max-w-2xl text-start">
+                      {(aboutHero.badgeAr || aboutHero.badgeFr || aboutHero.badgeEn) && (
+                        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#c85a32] text-white text-3xs font-bold shadow-xs">
+                          <span>✦</span>
+                          <span>
+                            {isAr
+                              ? aboutHero.badgeAr
+                              : isFr
+                              ? aboutHero.badgeFr
+                              : aboutHero.badgeEn}
+                          </span>
+                        </span>
+                      )}
+                      {(aboutHero.captionAr || aboutHero.captionFr || aboutHero.captionEn) && (
+                        <p className="text-xs sm:text-sm font-bold text-white/95 leading-relaxed drop-shadow-xs">
+                          {isAr
+                            ? aboutHero.captionAr
+                            : isFr
+                            ? aboutHero.captionFr
+                            : aboutHero.captionEn}
+                        </p>
+                      )}
+                    </div>
+
+                    <span className="self-end px-3 py-1 rounded-xl bg-white/20 backdrop-blur-md border border-white/30 text-white font-mono text-3xs font-bold tracking-wider shrink-0">
+                      AMYCC 2026
+                    </span>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         </section>
 

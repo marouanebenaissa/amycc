@@ -936,3 +936,55 @@ export async function getAreasSettings(): Promise<AreasConfig> {
     return defaultAreasConfig
   }
 }
+
+export interface AboutHeroConfig {
+  imageUrl?: string
+  captionAr?: string
+  captionFr?: string
+  captionEn?: string
+  badgeAr?: string
+  badgeFr?: string
+  badgeEn?: string
+  showImage?: boolean
+}
+
+export const defaultAboutHeroConfig: AboutHeroConfig = {
+  imageUrl: '/images/youth-in-action.jpg',
+  captionAr: 'جمعية روح الفنون والثقافة — رعاية الإبداع وصون التراث وتأهيل الشباب قادة المستقبل',
+  captionFr: 'Association Esprit des Arts et de la Culture — Émancipation des jeunes et célébration du patrimoine marocain',
+  captionEn: 'Spirit of Arts & Culture Association — Nurturing creativity, Moroccan heritage and youth leadership',
+  badgeAr: 'مبادرات ميدانية متواصلة بالمملكة المغربية 🇲🇦',
+  badgeFr: 'Actions de terrain au Royaume du Maroc 🇲🇦',
+  badgeEn: 'Active field initiatives across Morocco 🇲🇦',
+  showImage: true,
+}
+
+export async function getAboutHeroSettings(): Promise<AboutHeroConfig> {
+  try {
+    const supabase = await createClient()
+    const { data, error } = await supabase
+      .from('site_settings')
+      .select('value')
+      .eq('key', 'about_hero')
+      .maybeSingle()
+
+    if (error || !data || !data.value) {
+      return defaultAboutHeroConfig
+    }
+
+    const val = data.value as Partial<AboutHeroConfig>
+    return {
+      imageUrl: typeof val.imageUrl === 'string' ? val.imageUrl : defaultAboutHeroConfig.imageUrl,
+      captionAr: val.captionAr || defaultAboutHeroConfig.captionAr,
+      captionFr: val.captionFr || defaultAboutHeroConfig.captionFr,
+      captionEn: val.captionEn || defaultAboutHeroConfig.captionEn,
+      badgeAr: val.badgeAr || defaultAboutHeroConfig.badgeAr,
+      badgeFr: val.badgeFr || defaultAboutHeroConfig.badgeFr,
+      badgeEn: val.badgeEn || defaultAboutHeroConfig.badgeEn,
+      showImage: typeof val.showImage === 'boolean' ? val.showImage : true,
+    }
+  } catch {
+    return defaultAboutHeroConfig
+  }
+}
+
