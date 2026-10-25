@@ -20,7 +20,6 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
   const hero = contactConfig.hero || defaultContactConfig.hero
   const channels = contactConfig.channels || defaultContactConfig.channels
   const social = contactConfig.social || defaultContactConfig.social
-  const departments = contactConfig.departments || defaultContactConfig.departments
   const formTopics = contactConfig.formTopics || defaultContactConfig.formTopics
 
   // Trilingual values
@@ -33,8 +32,6 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
   const city = isAr ? channels.cityAr : isFr ? (channels.cityFr || channels.cityAr) : (channels.cityEn || channels.cityAr)
   const workingHours = isAr ? channels.workingHoursAr : isFr ? (channels.workingHoursFr || channels.workingHoursAr) : (channels.workingHoursEn || channels.workingHoursAr)
   const responseTime = isAr ? channels.responseTimeAr : isFr ? (channels.responseTimeFr || channels.responseTimeAr) : (channels.responseTimeEn || channels.responseTimeAr)
-
-  const activeDepartments = departments.filter((d) => d.enabled !== false)
 
   // Clean WhatsApp number link
   const cleanWaNumber = (channels.whatsapp || '').replace(/[^0-9]/g, '')
@@ -239,71 +236,7 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
         </section>
 
         {/* ============================================================
-            3. SPECIALIZED DEPARTMENTS & INSTITUTIONAL DESKS
-            ============================================================ */}
-        {activeDepartments.length > 0 && (
-          <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-16">
-            <div className="p-6 sm:p-8 rounded-3xl bg-[#f7f2e9]/80 border border-[#e5e0d6] space-y-6">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-[#e5e0d6]">
-                <div>
-                  <span className="text-2xs font-bold uppercase tracking-wider text-[#c85a32] block">
-                    {isAr ? 'قنوات تواصل متخصصة' : 'Specialized Communication Desks'}
-                  </span>
-                  <h2 className="text-lg sm:text-xl font-black text-[#08242a]">
-                    {isAr ? 'تواصل مباشرة مع المصلحة المعنية بطلبك' : 'Contact the specific department for your inquiry'}
-                  </h2>
-                </div>
-                <span className="text-xs text-[#819598]">
-                  {isAr ? 'لتسريع معالجة الملفات والطلبات' : 'For faster processing'}
-                </span>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                {activeDepartments.map((dept) => {
-                  const deptTitle = isAr ? dept.titleAr : isFr ? (dept.titleFr || dept.titleAr) : (dept.titleEn || dept.titleAr)
-                  const deptDesc = isAr ? dept.descAr : isFr ? (dept.descFr || dept.descAr) : (dept.descEn || dept.descAr)
-                  const deptBadge = isAr ? dept.badgeAr : isFr ? (dept.badgeFr || dept.badgeAr) : (dept.badgeEn || dept.badgeAr)
-
-                  return (
-                    <div
-                      key={dept.id}
-                      className="p-5 rounded-2xl bg-white border border-[#e5e0d6] hover:border-[#0d3b43]/30 transition-all flex flex-col justify-between space-y-3 shadow-2xs group"
-                    >
-                      <div className="space-y-2">
-                        <div className="flex items-center justify-between">
-                          <span className="text-xl">{dept.icon || '📁'}</span>
-                          {deptBadge && (
-                            <span className="px-2 py-0.5 rounded-full bg-[#0d3b43]/10 text-[#0d3b43] text-3xs font-bold">
-                              {deptBadge}
-                            </span>
-                          )}
-                        </div>
-                        <h3 className="text-xs font-black text-[#08242a] leading-tight group-hover:text-[#c85a32] transition-colors">
-                          {deptTitle}
-                        </h3>
-                        {deptDesc && (
-                          <p className="text-3xs text-[#5f7174] leading-relaxed line-clamp-2">
-                            {deptDesc}
-                          </p>
-                        )}
-                      </div>
-
-                      <a
-                        href={`mailto:${dept.email}`}
-                        className="text-3xs font-mono font-bold text-[#0d3b43] hover:underline pt-2 border-t border-[#f0ebe1] block break-all"
-                      >
-                        {dept.email} ↗
-                      </a>
-                    </div>
-                  )
-                })}
-              </div>
-            </div>
-          </section>
-        )}
-
-        {/* ============================================================
-            4. MAIN SECTION: CONTACT FORM & INTERACTIVE LOCATION/SOCIAL
+            3. MAIN SECTION: CONTACT FORM & INTERACTIVE LOCATION/SOCIAL
             ============================================================ */}
         <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
