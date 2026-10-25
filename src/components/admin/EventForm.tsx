@@ -145,12 +145,12 @@ export function EventForm({ event }: EventFormProps) {
           </FormField>
         </div>
 
-        <FormField label="Cover Image URL" hint="Direct image link">
+        <FormField label="Cover Image URL" hint="Direct image URL or /uploads path">
           <Input
             name="cover_image"
-            type="url"
+            type="text"
             defaultValue={event?.cover_image || ''}
-            placeholder="https://images.unsplash.com/..."
+            placeholder="/uploads/... or https://..."
           />
         </FormField>
       </div>

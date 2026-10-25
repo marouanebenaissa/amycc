@@ -36,7 +36,7 @@ const programSchema = z.object({
   slug: z.string().min(1).max(100),
   category: z.string().min(1),
   city: z.string().optional(),
-  cover_image: z.string().url().optional().or(z.literal('')),
+  cover_image: z.string().optional().or(z.literal('')),
   start_date: z.string().optional(),
   end_date: z.string().optional(),
   // Translations
@@ -62,7 +62,7 @@ const programSchema = z.object({
 const newsSchema = z.object({
   slug: z.string().min(1).max(100),
   category: z.string().min(1),
-  cover_image: z.string().url().optional().or(z.literal('')),
+  cover_image: z.string().optional().or(z.literal('')),
   // Translations
   title_ar: z.string().min(1, 'Arabic title is required'),
   excerpt_ar: z.string().optional(),
@@ -84,7 +84,7 @@ const eventSchema = z.object({
   capacity: z.coerce.number().int().min(0).optional(),
   registration_open: z.coerce.boolean().optional(),
   registration_deadline: z.string().optional(),
-  cover_image: z.string().url().optional().or(z.literal('')),
+  cover_image: z.string().optional().or(z.literal('')),
   // Translations
   title_ar: z.string().min(1, 'Arabic title is required'),
   description_ar: z.string().optional(),

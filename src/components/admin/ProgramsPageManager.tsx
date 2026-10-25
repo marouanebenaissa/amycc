@@ -261,10 +261,10 @@ export function ProgramsPageManager({ initialConfig, defaultConfig }: ProgramsPa
                 </div>
 
                 <input
-                  type="url"
+                  type="text"
                   value={config.hero.imageUrl ?? ''}
                   onChange={(e) => updateHero('imageUrl', e.target.value)}
-                  placeholder="أو رابط صورة مباشر: /images/youth-in-action.jpg"
+                  placeholder="رابط أو مسار صورة الواجهة: /uploads/... أو https://..."
                   className="w-full px-3.5 py-2 rounded-xl bg-white border border-[#e5e0d6] text-xs font-mono text-[#08242a] focus:outline-none focus:border-[#0d3b43]"
                 />
               </div>

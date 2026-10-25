@@ -91,12 +91,12 @@ export function NewsForm({ article }: NewsFormProps) {
             />
           </FormField>
         </div>
-        <FormField label="Cover Image URL" hint="Direct image URL (Supabase Storage or external)">
+        <FormField label="Cover Image URL" hint="Direct image URL or /uploads path">
           <Input
             name="cover_image"
-            type="url"
+            type="text"
             defaultValue={article?.cover_image || ''}
-            placeholder="https://images.unsplash.com/..."
+            placeholder="/uploads/... or https://..."
           />
         </FormField>
       </div>

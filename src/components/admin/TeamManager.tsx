@@ -1186,7 +1186,7 @@ export function TeamManager({ initialConfig, defaultMembers = [] }: TeamManagerP
                         أو أدخل رابط الصورة المباشر (URL):
                       </label>
                       <input
-                        type="url"
+                        type="text"
                         value={modalForm.photoUrl || ''}
                         onChange={(e) => setModalForm((prev) => ({ ...prev, photoUrl: e.target.value }))}
                         placeholder="https://... أو /uploads/photo.jpg"

@@ -221,11 +221,11 @@ export function ProgramForm({ program }: ProgramFormProps) {
 
               <div className="relative">
                 <input
-                  type="url"
+                  type="text"
                   name="cover_image"
                   value={coverImageUrl}
                   onChange={(e) => setCoverImageUrl(e.target.value)}
-                  placeholder="أو أدخل رابط الصورة المباشر: https://images.unsplash.com/..."
+                  placeholder="رابط أو مسار الصورة: /uploads/... أو https://..."
                   className="w-full px-3.5 py-2 rounded-xl bg-white border border-[#e5e0d6] text-xs font-mono text-[#08242a] focus:outline-none focus:border-[#0d3b43]"
                 />
               </div>
