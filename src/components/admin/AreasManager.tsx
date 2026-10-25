@@ -44,6 +44,7 @@ export function AreasManager({ initialConfig, defaultItems = [] }: AreasManagerP
     actionLabelAr: 'اعرف أكثر',
     actionUrl: '/programs',
     enabled: true,
+    showInitiatives: true,
   })
 
   // Inputs for adding new objective / initiative in modal
@@ -55,6 +56,7 @@ export function AreasManager({ initialConfig, defaultItems = [] }: AreasManagerP
     setEditingArea(area)
     setModalForm({
       ...area,
+      showInitiatives: area.showInitiatives !== false,
       objectivesAr: [...(area.objectivesAr || [])],
       initiativesAr: [...(area.initiativesAr || [])],
     })
@@ -90,6 +92,7 @@ export function AreasManager({ initialConfig, defaultItems = [] }: AreasManagerP
       bgGlow: 'from-[#d8f0f4]/40 to-transparent',
       order: config.items.length + 1,
       enabled: true,
+      showInitiatives: true,
     })
     setModalTab('card')
     setIsModalOpen(true)
@@ -133,6 +136,7 @@ export function AreasManager({ initialConfig, defaultItems = [] }: AreasManagerP
       bgGlow: modalForm.bgGlow || 'from-[#d8f0f4]/40 to-transparent',
       order: modalForm.order || config.items.length + 1,
       enabled: modalForm.enabled ?? true,
+      showInitiatives: modalForm.showInitiatives !== false,
     }
 
     if (editingArea) {
@@ -190,6 +194,17 @@ export function AreasManager({ initialConfig, defaultItems = [] }: AreasManagerP
       ...prev,
       items: prev.items.map((item) =>
         item.key === key ? { ...item, enabled: !item.enabled } : item
+      ),
+    }))
+    setHasUnsavedChanges(true)
+  }
+
+  // Toggle show/hide initiatives (workshops) in modal for a specific area
+  function toggleShowInitiatives(key: string) {
+    setConfig((prev) => ({
+      ...prev,
+      items: prev.items.map((item) =>
+        item.key === key ? { ...item, showInitiatives: item.showInitiatives === false ? true : false } : item
       ),
     }))
     setHasUnsavedChanges(true)
@@ -435,6 +450,36 @@ export function AreasManager({ initialConfig, defaultItems = [] }: AreasManagerP
               />
             </div>
           </div>
+
+          {/* Global Workshops Visibility Switch */}
+          <div className="p-3.5 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6] flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div className="space-y-0.5">
+              <span className="text-xs font-bold text-[#08242a] flex items-center gap-1.5">
+                <span>✨</span>
+                <span>إظهار قسم البرامج والورشات في كافة المجالات (تحكم عام)</span>
+              </span>
+              <span className="text-3xs text-[#819598] block">
+                تفعيل أو تعطيل ظهور قسم &quot;أبرز البرامج والورشات الميدانية&quot; بالنوافذ المنبثقة لجميع مجالات التدخل دفعة واحدة
+              </span>
+            </div>
+            <button
+              type="button"
+              onClick={() => {
+                setConfig((prev) => ({
+                  ...prev,
+                  showInitiativesGlobally: prev.showInitiativesGlobally === false ? true : false,
+                }))
+                setHasUnsavedChanges(true)
+              }}
+              className={`px-3.5 py-1.5 rounded-xl text-xs font-bold border transition-colors cursor-pointer shrink-0 ${
+                config.showInitiativesGlobally !== false
+                  ? 'bg-emerald-50 text-emerald-800 border-emerald-300 hover:bg-emerald-100'
+                  : 'bg-red-50 text-red-700 border-red-300 hover:bg-red-100'
+              }`}
+            >
+              {config.showInitiativesGlobally !== false ? '✓ معروض عاماً بكافة النوافذ' : '✕ مخفي عاماً من كافة النوافذ'}
+            </button>
+          </div>
         </div>
       )}
 
@@ -499,6 +544,19 @@ export function AreasManager({ initialConfig, defaultItems = [] }: AreasManagerP
                     {area.enabled ? '✓ مفعّل ومعروض' : '✕ معطّل ومخفي'}
                   </button>
 
+                  <button
+                    type="button"
+                    onClick={() => toggleShowInitiatives(area.key)}
+                    className={`px-2.5 py-0.5 rounded-full text-4xs font-bold border transition-colors cursor-pointer ${
+                      area.showInitiatives !== false
+                        ? 'bg-amber-50 text-amber-900 border-amber-200 hover:bg-amber-100'
+                        : 'bg-gray-100 text-gray-500 border-gray-200 hover:bg-gray-200'
+                    }`}
+                    title="الضغط لإظهار أو إخفاء قسم البرامج والورشات الميدانية في النافذة المنبثقة لهذا المجال"
+                  >
+                    {area.showInitiatives !== false ? '✨ الورشات: معروضة بالنافذة' : '✨ الورشات: مخفية من النافذة'}
+                  </button>
+
                   <span className="text-4xs text-[#819598] font-mono">
                     key: {area.key}
                   </span>
@@ -517,8 +575,12 @@ export function AreasManager({ initialConfig, defaultItems = [] }: AreasManagerP
                   <span className="px-2 py-0.5 rounded-md bg-[#faf7f2] border border-[#e5e0d6] text-[#0d3b43] font-bold">
                     🎯 {area.objectivesAr?.length || 0} أهداف استراتيجية
                   </span>
-                  <span className="px-2 py-0.5 rounded-md bg-[#faf7f2] border border-[#e5e0d6] text-[#c85a32] font-bold">
-                    ✨ {area.initiativesAr?.length || 0} ورشات وبرامج
+                  <span className={`px-2 py-0.5 rounded-md border font-bold ${
+                    area.showInitiatives !== false
+                      ? 'bg-amber-50/70 border-amber-200 text-[#c85a32]'
+                      : 'bg-gray-100 border-gray-200 text-gray-400 line-through'
+                  }`}>
+                    ✨ {area.initiativesAr?.length || 0} ورشات وبرامج {area.showInitiatives === false ? '(مخفية)' : ''}
                   </span>
                   <span>•</span>
                   <span>رابط الزر: <code className="font-mono text-[#08242a]">{area.actionUrl}</code></span>
@@ -929,6 +991,34 @@ export function AreasManager({ initialConfig, defaultItems = [] }: AreasManagerP
                       <span className="text-3xs text-[#819598]">
                         ({modalForm.initiativesAr?.length || 0} ورشات محددة)
                       </span>
+                    </div>
+
+                    {/* Toggle show/hide for this area */}
+                    <div className="p-3 rounded-xl bg-[#faf7f2] border border-[#e5e0d6] flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
+                      <div className="space-y-0.5">
+                        <span className="text-xs font-bold text-[#08242a] block">
+                          إظهار قسم &quot;أبرز البرامج والورشات الميدانية&quot; بالنافذة
+                        </span>
+                        <span className="text-3xs text-[#819598] block">
+                          يمكنك إخفاء هذا القسم بالكامل في حال لم تتوفر ورشات حالية لهذا المجال
+                        </span>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() =>
+                          setModalForm((prev) => ({
+                            ...prev,
+                            showInitiatives: prev.showInitiatives === false ? true : false,
+                          }))
+                        }
+                        className={`px-3 py-1.5 rounded-xl text-xs font-bold border transition-colors cursor-pointer shrink-0 ${
+                          modalForm.showInitiatives !== false
+                            ? 'bg-emerald-50 text-emerald-800 border-emerald-300 hover:bg-emerald-100'
+                            : 'bg-red-50 text-red-700 border-red-300 hover:bg-red-100'
+                        }`}
+                      >
+                        {modalForm.showInitiatives !== false ? '✓ القسم معروض بالنافذة' : '✕ القسم مخفي من النافذة'}
+                      </button>
                     </div>
 
                     {/* List of current initiatives */}

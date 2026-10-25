@@ -171,6 +171,7 @@ const areaItemSchema = z.object({
   actionUrl: z.string().default('/programs'),
   order: z.number().int().min(1).default(1),
   enabled: z.boolean().default(true),
+  showInitiatives: z.boolean().default(true),
 })
 
 describe('Intervention Areas Validation Suite', () => {
@@ -186,9 +187,13 @@ describe('Intervention Areas Validation Suite', () => {
       actionUrl: '/programs',
       order: 1,
       enabled: true,
+      showInitiatives: false,
     }
     const result = areaItemSchema.safeParse(valid)
     assert.equal(result.success, true)
+    if (result.success) {
+      assert.equal(result.data.showInitiatives, false)
+    }
   })
 
   test('rejects area item with empty title or description', () => {

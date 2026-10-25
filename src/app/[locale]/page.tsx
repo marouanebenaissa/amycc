@@ -625,6 +625,7 @@ export default async function HomePage(props: { params: Promise<{ locale: string
               : areasConfig.eyebrowEn || 'Core Disciplines'
           }
           learnMoreText={dict.programs.learn_more}
+          showInitiativesGlobally={areasConfig.showInitiativesGlobally !== false}
           configuredItems={areasConfig.items}
         />
 

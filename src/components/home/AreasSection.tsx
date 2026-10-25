@@ -17,6 +17,7 @@ interface AreaItem {
   headline: string
   objectives: string[]
   initiatives: string[]
+  showInitiatives: boolean
   primaryActionLabel: string
   primaryActionUrl: string
 }
@@ -27,6 +28,7 @@ interface AreasSectionProps {
   sectionSubtitle: string
   eyebrowText: string
   learnMoreText: string
+  showInitiativesGlobally?: boolean
   configuredItems?: AreaItemConfig[]
 }
 
@@ -36,6 +38,7 @@ export function AreasSection({
   sectionSubtitle,
   eyebrowText,
   learnMoreText,
+  showInitiativesGlobally = true,
   configuredItems,
 }: AreasSectionProps) {
   const [selectedArea, setSelectedArea] = useState<AreaItem | null>(null)
@@ -114,6 +117,7 @@ export function AreasSection({
             'Heritage Documentary Photography Forum',
           ],
       primaryActionLabel: isAr ? 'استكشف برامج الفنون' : isFr ? 'Découvrir les programmes' : 'Explore Art Programs',
+      showInitiatives: true,
       primaryActionUrl: `/${locale}/programs`,
     },
     {
@@ -169,6 +173,7 @@ export function AreasSection({
             'Acoustic Sound Lab for Emerging Talent',
           ],
       primaryActionLabel: isAr ? 'استكشف فعاليات الموسيقى' : isFr ? 'Voir les événements musicaux' : 'Explore Music Events',
+      showInitiatives: true,
       primaryActionUrl: `/${locale}/events`,
     },
     {
@@ -224,6 +229,7 @@ export function AreasSection({
             'Interactive Youth Theatre Community Tour',
           ],
       primaryActionLabel: isAr ? 'شاهد مسرحيات الجمعية' : isFr ? 'Voir nos pièces de théâtre' : 'View Theatre Plays',
+      showInitiatives: true,
       primaryActionUrl: `/${locale}/events`,
     },
     {
@@ -279,6 +285,7 @@ export function AreasSection({
             'Moroccan Cultural Heritage Trail Guide',
           ],
       primaryActionLabel: isAr ? 'رؤية الجمعية للتراث' : isFr ? 'Notre vision du patrimoine' : 'Our Heritage Vision',
+      showInitiatives: true,
       primaryActionUrl: `/${locale}/about#vision`,
     },
     {
@@ -334,6 +341,7 @@ export function AreasSection({
             'Emerging Creatives Mentorship Cohort',
           ],
       primaryActionLabel: isAr ? 'انضم إلى برامج التمكين' : isFr ? 'Rejoindre l\'académie' : 'Join Leadership Programs',
+      showInitiatives: true,
       primaryActionUrl: `/${locale}/membership`,
     },
     {
@@ -389,6 +397,7 @@ export function AreasSection({
             'Annual Volunteer Appreciation & Community Awards',
           ],
       primaryActionLabel: isAr ? 'تطوع في شباب في العمل' : isFr ? 'Postuler au bénévolat' : 'Apply for Volunteering',
+      showInitiatives: true,
       primaryActionUrl: `/${locale}/programs/youth-in-action`,
     },
   ]
@@ -446,6 +455,7 @@ export function AreasSection({
               : isFr
               ? item.actionLabelFr || 'En savoir plus'
               : item.actionLabelEn || 'Learn More',
+            showInitiatives: item.showInitiatives !== false,
             primaryActionUrl: item.actionUrl || '/programs',
           }))
       : defaultAreasList
@@ -620,48 +630,41 @@ export function AreasSection({
               </div>
 
               {/* Key Initiatives & Workshops */}
-              <div className="space-y-3 pt-4 border-t border-[#f0ebe1]">
-                <div className="flex items-center gap-2">
-                  <span className="w-6 h-6 rounded-lg bg-[#c85a32] text-white flex items-center justify-center text-xs font-bold shrink-0">
-                    ✨
-                  </span>
-                  <h4 className="text-xs sm:text-sm font-black text-[#08242a] uppercase tracking-wide">
-                    {isAr
-                      ? 'أبرز البرامج والورشات الميدانية'
-                      : isFr
-                      ? 'Initiatives Phares & Ateliers'
-                      : 'Featured Initiatives & Workshops'}
-                  </h4>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
-                  {selectedArea.initiatives.map((init, i) => (
-                    <div
-                      key={i}
-                      className="p-3 rounded-xl bg-white border border-[#e5e0d6] shadow-2xs hover:border-[#0d3b43]/40 transition-colors"
-                    >
-                      <span className="text-3xs font-extrabold text-[#c85a32] block mb-1">
-                        0{i + 1}
+              {showInitiativesGlobally !== false &&
+                selectedArea.showInitiatives &&
+                selectedArea.initiatives &&
+                selectedArea.initiatives.length > 0 && (
+                  <div className="space-y-3 pt-4 border-t border-[#f0ebe1]">
+                    <div className="flex items-center gap-2">
+                      <span className="w-6 h-6 rounded-lg bg-[#c85a32] text-white flex items-center justify-center text-xs font-bold shrink-0">
+                        ✨
                       </span>
-                      <span className="text-2xs font-bold text-[#08242a] block leading-snug">
-                        {init}
-                      </span>
+                      <h4 className="text-xs sm:text-sm font-black text-[#08242a] uppercase tracking-wide">
+                        {isAr
+                          ? 'أبرز البرامج والورشات الميدانية'
+                          : isFr
+                          ? 'Initiatives Phares & Ateliers'
+                          : 'Featured Initiatives & Workshops'}
+                      </h4>
                     </div>
-                  ))}
-                </div>
-              </div>
 
-              {/* Note / Civic Framework */}
-              <div className="p-3.5 rounded-2xl bg-amber-50/70 border border-amber-200/80 text-3xs text-amber-900 leading-relaxed flex items-center gap-2.5">
-                <span className="text-base shrink-0">🏛️</span>
-                <span>
-                  {isAr
-                    ? 'تعمل الجمعية على تفعيل هذا المجال بالشراكة مع المراكز الثقافية، دور الشباب، والمؤسسات التعليمية لضمان إتاحة الفنون للجميع.'
-                    : isFr
-                    ? 'L\'AMYCC déploie cet axe en partenariat avec les centres culturels et les maisons de jeunes pour démocratiser l\'art.'
-                    : 'AMYCC implements this domain in partnership with cultural centers and schools to ensure open access to the arts.'}
-                </span>
-              </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+                      {selectedArea.initiatives.map((init, i) => (
+                        <div
+                          key={i}
+                          className="p-3 rounded-xl bg-white border border-[#e5e0d6] shadow-2xs hover:border-[#0d3b43]/40 transition-colors"
+                        >
+                          <span className="text-3xs font-extrabold text-[#c85a32] block mb-1">
+                            0{i + 1}
+                          </span>
+                          <span className="text-2xs font-bold text-[#08242a] block leading-snug">
+                            {init}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
             </div>
 
             {/* Modal Footer Bar */}

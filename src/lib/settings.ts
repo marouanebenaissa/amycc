@@ -500,6 +500,7 @@ export interface AreaItemConfig {
   bgGlow?: string
   order: number
   enabled: boolean
+  showInitiatives?: boolean
 }
 
 export interface AreasConfig {
@@ -512,6 +513,7 @@ export interface AreasConfig {
   eyebrowAr?: string
   eyebrowFr?: string
   eyebrowEn?: string
+  showInitiativesGlobally?: boolean
   items: AreaItemConfig[]
 }
 
@@ -525,6 +527,7 @@ export const defaultAreasConfig: AreasConfig = {
   eyebrowAr: 'مجالات النشاط الجمعوي',
   eyebrowFr: "Domaines d'Activité",
   eyebrowEn: 'Core Disciplines',
+  showInitiativesGlobally: true,
   items: [
     {
       key: 'arts',
@@ -580,6 +583,7 @@ export const defaultAreasConfig: AreasConfig = {
       bgGlow: 'from-[#fae4dc]/40 to-transparent',
       order: 1,
       enabled: true,
+      showInitiatives: true,
     },
     {
       key: 'music',
@@ -635,6 +639,7 @@ export const defaultAreasConfig: AreasConfig = {
       bgGlow: 'from-[#d8f0f4]/40 to-transparent',
       order: 2,
       enabled: true,
+      showInitiatives: true,
     },
     {
       key: 'theatre',
@@ -690,6 +695,7 @@ export const defaultAreasConfig: AreasConfig = {
       bgGlow: 'from-[#fdf2db]/40 to-transparent',
       order: 3,
       enabled: true,
+      showInitiatives: true,
     },
     {
       key: 'culture',
@@ -745,6 +751,7 @@ export const defaultAreasConfig: AreasConfig = {
       bgGlow: 'from-[#d8f0f4]/40 to-transparent',
       order: 4,
       enabled: true,
+      showInitiatives: true,
     },
     {
       key: 'youth',
@@ -800,6 +807,7 @@ export const defaultAreasConfig: AreasConfig = {
       bgGlow: 'from-[#fae4dc]/40 to-transparent',
       order: 5,
       enabled: true,
+      showInitiatives: true,
     },
     {
       key: 'community',
@@ -855,6 +863,7 @@ export const defaultAreasConfig: AreasConfig = {
       bgGlow: 'from-[#fdf2db]/40 to-transparent',
       order: 6,
       enabled: true,
+      showInitiatives: true,
     },
   ],
 }
@@ -887,6 +896,7 @@ export async function getAreasSettings(): Promise<AreasConfig> {
       eyebrowAr: val.eyebrowAr || defaultAreasConfig.eyebrowAr,
       eyebrowFr: val.eyebrowFr || defaultAreasConfig.eyebrowFr,
       eyebrowEn: val.eyebrowEn || defaultAreasConfig.eyebrowEn,
+      showInitiativesGlobally: val.showInitiativesGlobally !== false,
       items: val.items
         .map((item, index) => ({
           key: item.key || `area-${index + 1}`,
@@ -918,6 +928,7 @@ export async function getAreasSettings(): Promise<AreasConfig> {
           bgGlow: item.bgGlow || 'from-[#fae4dc]/40 to-transparent',
           order: typeof item.order === 'number' ? item.order : index + 1,
           enabled: typeof item.enabled === 'boolean' ? item.enabled : true,
+          showInitiatives: typeof item.showInitiatives === 'boolean' ? item.showInitiatives : true,
         }))
         .sort((a, b) => a.order - b.order),
     }
