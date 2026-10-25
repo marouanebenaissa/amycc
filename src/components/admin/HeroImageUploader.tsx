@@ -55,12 +55,6 @@ export function HeroImageUploader({
     }
   }
 
-  function handleResetDefault() {
-    setImageUrl(defaultImageUrl)
-    setError(null)
-    setSuccessMessage('تمت استعادة مسار الصورة الرسمية الافتراضية.')
-  }
-
   async function handleDeleteImage() {
     if (!imageUrl) return
 
@@ -107,7 +101,7 @@ export function HeroImageUploader({
             صورة الخلفية الرئيسية (Hero Background Image)
           </label>
           <span className="text-3xs text-[#819598]">
-            يمكنك استيراد صورة مباشرة من جهازك، استعادة الافتراضي، أو حذف الصورة بالكامل
+            يمكنك استيراد صورة مباشرة من جهازك أو حذف الصورة بالكامل
           </span>
         </div>
 
@@ -135,16 +129,6 @@ export function HeroImageUploader({
                 <span>استيراد صورة (Import)</span>
               </>
             )}
-          </button>
-
-          {/* Reset to official default */}
-          <button
-            type="button"
-            onClick={handleResetDefault}
-            disabled={uploading || deleting}
-            className="px-3 py-2 rounded-xl text-3xs font-bold text-[#5f7174] bg-[#faf7f2] border border-[#e5e0d6] hover:bg-[#f0ebe1] active:scale-98 transition-all cursor-pointer disabled:opacity-60"
-          >
-            استعادة الافتراضي
           </button>
 
           {/* DELETE BUTTON */}
@@ -263,9 +247,6 @@ export function HeroImageUploader({
         <ul className="list-disc list-inside space-y-1 ps-1">
           <li>
             زر <strong className="text-[#0d3b43]">استيراد صورة (Import)</strong>: لاختيار أي ملف صورة مباشرة من جهازك (JPG, PNG, WebP) ورفعه فورياً.
-          </li>
-          <li>
-            زر <strong className="text-[#5f7174]">استعادة الافتراضي</strong>: للرجوع لصورة شباب المغرب الرسمية.
           </li>
           <li>
             زر <strong className="text-red-600">حذف الصورة</strong>: يتيح لك حذف الصورة الحالية والرجوع إلى الخلفية الداكنة الفاخرة بدون صورة.
