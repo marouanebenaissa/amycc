@@ -3,7 +3,6 @@ import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { ContactForm } from '@/components/forms/ContactForm'
 import { getContactSettings, defaultContactConfig } from '@/lib/settings'
-import { ImageWithFallback } from '@/components/ui/ImageWithFallback'
 import Link from 'next/link'
 
 export const dynamic = 'force-dynamic'
@@ -47,47 +46,21 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
 
       <main id="main-content" className="flex-1 bg-[#faf7f2]">
         {/* ============================================================
-            1. HERO BANNER WITH MOROCCAN PATTERN & OPTIONAL IMAGE
+            1. HERO BANNER WITH MOROCCAN PATTERN & AMBIENT GLOW
             ============================================================ */}
-        <section className={`relative overflow-hidden border-b transition-colors ${
-          hero.imageUrl
-            ? 'min-h-[460px] sm:min-h-[500px] flex items-center bg-[#08242a] text-white pt-14 pb-16 lg:pt-20 lg:pb-24 border-[#0d3b43]'
-            : 'bg-gradient-to-b from-[#faf7f2] via-[#f7f2e9] to-[#faf7f2] border-[#e5e0d6] py-16 lg:py-20 text-[#08242a]'
-        }`}>
-          {/* Background layer */}
-          {hero.imageUrl ? (
-            <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
-              <ImageWithFallback
-                src={hero.imageUrl}
-                fallbackSrc="/images/youth-in-action.jpg"
-                alt="AMYCC Contact Hero"
-                fill
-                priority
-                sizes="100vw"
-                className="object-cover object-center"
-              />
-              <div className="absolute inset-0 bg-black/50" />
-              <div className="absolute inset-0 bg-gradient-to-b from-[#08242a]/95 via-[#08242a]/75 to-[#08242a]/95" />
-              <div className="absolute inset-0 moroccan-star-pattern opacity-15 pointer-events-none" />
-            </div>
-          ) : (
-            <>
-              <div className="absolute inset-0 moroccan-pattern-light opacity-60 pointer-events-none" aria-hidden="true" />
-              <div className="absolute top-1/3 start-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-[#c85a32]/10 rounded-full blur-3xl pointer-events-none" />
-              <div className="absolute bottom-0 end-12 w-72 h-72 bg-[#0d3b43]/10 rounded-full blur-3xl pointer-events-none" />
-            </>
-          )}
+        <section className="relative overflow-hidden bg-gradient-to-b from-[#faf7f2] via-[#f7f2e9] to-[#faf7f2] border-b border-[#e5e0d6] py-16 lg:py-20 text-[#08242a]">
+          <div className="absolute inset-0 moroccan-pattern-light opacity-60 pointer-events-none" aria-hidden="true" />
+          <div className="absolute top-1/3 start-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-[#c85a32]/10 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute bottom-0 end-12 w-72 h-72 bg-[#0d3b43]/10 rounded-full blur-3xl pointer-events-none" />
 
           <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 text-center">
             {/* Breadcrumb Navigation */}
-            <nav className={`flex items-center justify-center gap-2 text-xs sm:text-sm font-bold ${
-              hero.imageUrl ? 'text-white/80' : 'text-[#5f7174]'
-            }`}>
-              <Link href={`/${locale}`} className={`${hero.imageUrl ? 'hover:text-white' : 'hover:text-[#0d3b43]'} transition-colors`}>
+            <nav className="flex items-center justify-center gap-2 text-xs sm:text-sm font-bold text-[#5f7174]">
+              <Link href={`/${locale}`} className="hover:text-[#0d3b43] transition-colors">
                 {isAr ? 'الرئيسية' : isFr ? 'Accueil' : 'Home'}
               </Link>
               <span>/</span>
-              <span className={hero.imageUrl ? 'text-[#f4ce83]' : 'text-[#c85a32]'}>
+              <span className="text-[#c85a32]">
                 {isAr ? 'اتصل بنا' : isFr ? 'Contact' : 'Contact Us'}
               </span>
             </nav>
@@ -95,22 +68,14 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
             {/* Badges */}
             <div className="flex flex-wrap items-center justify-center gap-2.5">
               {heroTag && (
-                <span className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold shadow-2xs backdrop-blur-md ${
-                  hero.imageUrl
-                    ? 'bg-white/10 border border-white/20 text-[#f4ce83]'
-                    : 'bg-[#c85a32]/10 border border-[#c85a32]/20 text-[#c85a32]'
-                }`}>
-                  <span className={`w-2 h-2 rounded-full ${hero.imageUrl ? 'bg-[#f4ce83]' : 'bg-[#c85a32]'} animate-pulse`} />
+                <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold shadow-2xs bg-[#c85a32]/10 border border-[#c85a32]/20 text-[#c85a32]">
+                  <span className="w-2 h-2 rounded-full bg-[#c85a32] animate-pulse" />
                   <span>{heroTag}</span>
                 </span>
               )}
 
               {heroBadge && (
-                <span className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold shadow-2xs backdrop-blur-md ${
-                  hero.imageUrl
-                    ? 'bg-white/10 border border-white/20 text-white'
-                    : 'bg-[#0d3b43]/10 border border-[#0d3b43]/20 text-[#0d3b43]'
-                }`}>
+                <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold shadow-2xs bg-[#0d3b43]/10 border border-[#0d3b43]/20 text-[#0d3b43]">
                   <span>📍</span>
                   <span>{heroBadge}</span>
                 </span>
@@ -118,16 +83,12 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
             </div>
 
             {/* Headline Title */}
-            <h1 className={`text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-tight whitespace-pre-line ${
-              hero.imageUrl ? 'text-white drop-shadow-sm' : 'text-[#08242a]'
-            }`}>
+            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-[#08242a] tracking-tight leading-tight whitespace-pre-line">
               {heroTitle}
             </h1>
 
             {/* Description */}
-            <p className={`text-base sm:text-lg max-w-3xl mx-auto leading-relaxed text-balance ${
-              hero.imageUrl ? 'text-[#d8f0f4]/95 font-normal' : 'text-[#445457] font-medium'
-            }`}>
+            <p className="text-base sm:text-lg text-[#445457] max-w-3xl mx-auto leading-relaxed font-medium text-balance">
               {heroDesc}
             </p>
           </div>

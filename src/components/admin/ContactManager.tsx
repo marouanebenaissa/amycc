@@ -643,19 +643,6 @@ export function ContactManager({ initialConfig, defaultConfig }: ContactManagerP
                 </div>
               </>
             )}
-
-            <div>
-              <label className="block text-2xs font-bold text-[#5f7174] uppercase tracking-wider mb-1">
-                صورة خلفية الواجهة (Hero Image URL)
-              </label>
-              <input
-                type="text"
-                value={config.hero.imageUrl ?? ''}
-                onChange={(e) => updateHero('imageUrl', e.target.value)}
-                placeholder="/images/youth-in-action.jpg"
-                className="w-full px-3.5 py-2.5 rounded-xl bg-[#faf7f2] border border-[#e5e0d6] text-xs text-[#08242a] font-mono focus:bg-white focus:outline-none focus:border-[#0d3b43]"
-              />
-            </div>
           </div>
         </div>
       )}

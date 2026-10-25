@@ -1628,7 +1628,7 @@ export const defaultContactConfig: ContactConfig = {
     descriptionAr: 'فريق إدارة الجمعية ومكاتب التنسيق في خدمتكم للإجابة عن الاستفسارات، مناقشة الشراكات، مواكبة طلبات الانخراط، والتفاعل الإيجابي مع مقترحاتكم الإبداعية.',
     descriptionFr: "L'équipe de direction de l'AMYCC est à votre disposition pour répondre à vos questions, explorer des partenariats et soutenir vos initiatives artistiques.",
     descriptionEn: 'The AMYCC leadership team is at your disposal for general inquiries, institutional partnerships, membership coordination, and supporting creative ideas.',
-    imageUrl: '/images/youth-in-action.jpg',
+    imageUrl: '',
   },
   channels: {
     primaryEmail: 'contact@amycc.org',
@@ -1789,7 +1789,7 @@ export async function getContactSettings(): Promise<ContactConfig> {
         descriptionAr: heroVal.descriptionAr || defaultContactConfig.hero.descriptionAr,
         descriptionFr: heroVal.descriptionFr || defaultContactConfig.hero.descriptionFr,
         descriptionEn: heroVal.descriptionEn || defaultContactConfig.hero.descriptionEn,
-        imageUrl: typeof heroVal.imageUrl === 'string' ? heroVal.imageUrl : defaultContactConfig.hero.imageUrl,
+        imageUrl: typeof heroVal.imageUrl === 'string' ? heroVal.imageUrl : '',
       },
       channels: {
         primaryEmail: channelsVal.primaryEmail || defaultContactConfig.channels.primaryEmail,
