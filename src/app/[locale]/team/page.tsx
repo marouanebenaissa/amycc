@@ -463,27 +463,6 @@ export default async function TeamPage(props: { params: Promise<{ locale: string
                 )
               })}
             </div>
-
-            {/* Statutory Transparency Box */}
-            <div className="p-5 sm:p-6 rounded-2xl bg-amber-50/70 border border-amber-200/80 text-amber-900 flex flex-col sm:flex-row items-start sm:items-center gap-4 text-xs leading-relaxed shadow-2xs">
-              <span className="text-2xl shrink-0">📜</span>
-              <div className="space-y-1">
-                <strong className="block font-bold">
-                  {isAr
-                    ? 'إشعار الشفافية والمسطرة القانونية لانتخاب المكتب:'
-                    : isFr
-                    ? 'Notice de Transparence & Procédure Statutaire :'
-                    : 'Statutory Transparency & Election Procedure:'}
-                </strong>
-                <p className="text-amber-800">
-                  {isAr
-                    ? 'تخضع عضوية المكتب التنفيذي لمقتضيات القانون الأساسي والنظام الداخلي لجمعية روح الفنون والثقافة (AMYCC). يتم تجديد وانتخاب المناصب عبر الجمع العام العادي بالاقتراع المباشر والعلني، وتودع المحاضر القانونية ولائحة الأسماء المصادق عليها لدى السلطات الإدارية المحلية المختصة بمراكش والمملكة المغربية.'
-                    : isFr
-                    ? 'L’élection des membres du bureau exécutif s’effectue en assemblée générale ordinaire selon les statuts officiels de l’AMYCC. Les procès-verbaux et listes nominatives certifiées sont déposés auprès des autorités locales compétentes de Marrakech conformément à la loi marocaine.'
-                    : 'The election of executive officers is conducted during ordinary General Assembly sessions pursuant to AMYCC bylaws. Certified minutes and rosters are officially lodged with the relevant administrative authorities in Marrakech in accordance with Moroccan legislation.'}
-                </p>
-              </div>
-            </div>
           </div>
         </section>
 
