@@ -220,6 +220,7 @@ export function ProgramsPageManager({ initialConfig, defaultConfig }: ProgramsPa
                     src={config.hero.imageUrl}
                     alt="Hero Preview"
                     fill
+                    unoptimized
                     className="object-cover"
                   />
                 </div>

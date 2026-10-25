@@ -170,6 +170,7 @@ export default async function ProgramDetailPage(props: {
                   src={program.cover_image}
                   alt={translation?.title || ''}
                   fill
+                  unoptimized
                   className="object-cover"
                   priority
                 />

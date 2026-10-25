@@ -174,6 +174,7 @@ export default async function ProgramsPage(props: { params: Promise<{ locale: st
                 src={hero.imageUrl}
                 alt="Programs Hero Background"
                 fill
+                unoptimized
                 className="object-cover"
                 priority
               />

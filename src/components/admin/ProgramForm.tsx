@@ -179,6 +179,7 @@ export function ProgramForm({ program }: ProgramFormProps) {
                   src={coverImageUrl}
                   alt="Cover Preview"
                   fill
+                  unoptimized
                   className="object-cover"
                 />
               </div>

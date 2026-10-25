@@ -175,6 +175,7 @@ export function ProgramsListManager({
                                 src={prog.cover_image}
                                 alt={title}
                                 fill
+                                unoptimized
                                 className="object-cover"
                               />
                             </div>

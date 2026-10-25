@@ -41,6 +41,44 @@ const CATEGORY_MAP: Record<string, { ar: string; fr: string; en: string; icon: s
   education: { ar: 'التكوين والتطوير الفني', fr: 'Formation Artistique', en: 'Artistic Education', icon: '📚' },
 }
 
+function ProgramCoverImage({
+  coverImage,
+  title,
+  category,
+}: {
+  coverImage?: string | null
+  title: string
+  category: string
+}) {
+  const [imgError, setImgError] = useState(false)
+
+  if (!coverImage || imgError) {
+    return (
+      <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center text-white">
+        <div className="absolute inset-0 moroccan-star-pattern opacity-15 pointer-events-none" />
+        <span className="text-4xl sm:text-5xl mb-2 group-hover:scale-110 transition-transform">
+          {CATEGORY_MAP[category]?.icon || '🎨'}
+        </span>
+        <span className="text-xs sm:text-sm font-bold text-[#f4ce83] uppercase tracking-wider">
+          AMYCC Cultural Initiative
+        </span>
+      </div>
+    )
+  }
+
+  return (
+    <Image
+      src={coverImage}
+      alt={title}
+      fill
+      unoptimized
+      onError={() => setImgError(true)}
+      className="object-cover group-hover:scale-105 transition-transform duration-500"
+      sizes="(max-width: 768px) 100vw, 50vw"
+    />
+  )
+}
+
 export function ProgramsCatalog({ programs, locale, dict }: ProgramsCatalogProps) {
   const isAr = locale === 'ar'
   const isFr = locale === 'fr'
@@ -175,25 +213,11 @@ export function ProgramsCatalog({ programs, locale, dict }: ProgramsCatalogProps
                 <div>
                   {/* Program Cover Banner or Artistic Abstract Visual */}
                   <div className="relative aspect-[16/9] w-full overflow-hidden bg-gradient-to-br from-[#08242a] via-[#14505b] to-[#0d3b43]">
-                    {prog.cover_image ? (
-                      <Image
-                        src={prog.cover_image}
-                        alt={prog.title}
-                        fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-500"
-                        sizes="(max-width: 768px) 100vw, 50vw"
-                      />
-                    ) : (
-                      <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center text-white">
-                        <div className="absolute inset-0 moroccan-star-pattern opacity-15 pointer-events-none" />
-                        <span className="text-4xl sm:text-5xl mb-2 group-hover:scale-110 transition-transform">
-                          {getCategoryIcon(prog.category)}
-                        </span>
-                        <span className="text-xs sm:text-sm font-bold text-[#f4ce83] uppercase tracking-wider">
-                          AMYCC Cultural Initiative
-                        </span>
-                      </div>
-                    )}
+                    <ProgramCoverImage
+                      coverImage={prog.cover_image}
+                      title={prog.title}
+                      category={prog.category}
+                    />
 
                     {/* Gradient Overlay */}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
