@@ -447,16 +447,16 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
               {/* Card 1: 2026 */}
-              <div className="p-6 rounded-3xl bg-[#faf7f2] border border-[#e5e0d6] hover:border-[#0d3b43]/30 transition-all text-center flex flex-col justify-between group shadow-2xs">
-                <span className="text-xs sm:text-sm font-bold text-[#5f7174] block mb-1">
+              <div className="p-5 sm:p-6 rounded-3xl bg-[#faf7f2] border border-[#e5e0d6] hover:border-[#0d3b43]/30 transition-all text-center flex flex-col justify-between group shadow-2xs">
+                <span className="text-xs font-bold text-[#5f7174] block mb-1">
                   {isAr ? 'سنة التأسيس الرسمي' : isFr ? 'Année de Fondation' : 'Foundation Year'}
                 </span>
-                <div className="min-h-[3.25rem] flex items-center justify-center">
-                  <span className="text-3xl sm:text-4xl font-black text-[#0d3b43] group-hover:scale-105 transition-transform block">
+                <div className="min-h-[3rem] flex items-center justify-center">
+                  <span className="text-2xl sm:text-3xl font-black text-[#0d3b43] group-hover:scale-105 transition-transform block">
                     2026
                   </span>
                 </div>
-                <p className="text-xs sm:text-sm text-[#5f7174] leading-relaxed mt-2">
+                <p className="text-xs text-[#5f7174] leading-relaxed mt-2 text-balance">
                   {isAr
                     ? 'جمعية مدنية غير ربحية تأسست بالمغرب'
                     : isFr
@@ -466,16 +466,16 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
               </div>
 
               {/* Card 2: Marrakech • Morocco */}
-              <div className="p-6 rounded-3xl bg-[#faf7f2] border border-[#e5e0d6] hover:border-[#c85a32]/30 transition-all text-center flex flex-col justify-between group shadow-2xs">
-                <span className="text-xs sm:text-sm font-bold text-[#5f7174] block mb-1">
+              <div className="p-5 sm:p-6 rounded-3xl bg-[#faf7f2] border border-[#e5e0d6] hover:border-[#c85a32]/30 transition-all text-center flex flex-col justify-between group shadow-2xs">
+                <span className="text-xs font-bold text-[#5f7174] block mb-1">
                   {isAr ? 'نقطة الانطلاق والنطاق' : isFr ? 'Point de Départ & Rayonnement' : 'Origin & Reach'}
                 </span>
-                <div className="min-h-[3.25rem] flex items-center justify-center">
-                  <span className="text-xl sm:text-2xl font-black text-[#c85a32] group-hover:scale-105 transition-transform block whitespace-nowrap">
+                <div className="min-h-[3rem] flex items-center justify-center">
+                  <span className="text-base sm:text-lg lg:text-xl font-black text-[#c85a32] group-hover:scale-105 transition-transform block whitespace-nowrap">
                     {isAr ? 'مراكش • المغرب' : isFr ? 'Marrakech • Maroc' : 'Marrakech • Morocco'}
                   </span>
                 </div>
-                <p className="text-xs sm:text-sm text-[#5f7174] leading-relaxed mt-2">
+                <p className="text-xs text-[#5f7174] leading-relaxed mt-2 text-balance">
                   {isAr
                     ? 'من مراكش نحو مختلف جهات المملكة وشراكات دولية'
                     : isFr
@@ -485,16 +485,16 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
               </div>
 
               {/* Card 3: 7 Core Values */}
-              <div className="p-6 rounded-3xl bg-[#faf7f2] border border-[#e5e0d6] hover:border-[#d99b26]/30 transition-all text-center flex flex-col justify-between group shadow-2xs">
-                <span className="text-xs sm:text-sm font-bold text-[#5f7174] block mb-1">
+              <div className="p-5 sm:p-6 rounded-3xl bg-[#faf7f2] border border-[#e5e0d6] hover:border-[#d99b26]/30 transition-all text-center flex flex-col justify-between group shadow-2xs">
+                <span className="text-xs font-bold text-[#5f7174] block mb-1">
                   {isAr ? 'المنظومة التوجيهية' : isFr ? 'Cadre d’Orientation' : 'Core Framework'}
                 </span>
-                <div className="min-h-[3.25rem] flex items-center justify-center">
-                  <span className="text-2xl sm:text-3xl font-black text-[#d99b26] group-hover:scale-105 transition-transform block whitespace-nowrap">
-                    {isAr ? '7 قيم موجهة' : isFr ? '7 Valeurs Piliers' : '7 Core Values'}
+                <div className="min-h-[3rem] flex items-center justify-center">
+                  <span className="text-lg sm:text-xl font-black text-[#d99b26] group-hover:scale-105 transition-transform block whitespace-nowrap">
+                    {isAr ? '7 قيم موجهة' : isFr ? '7 Valeurs' : '7 Values'}
                   </span>
                 </div>
-                <p className="text-xs sm:text-sm text-[#5f7174] leading-relaxed mt-2">
+                <p className="text-xs text-[#5f7174] leading-relaxed mt-2 text-balance">
                   {isAr
                     ? 'الإبداع، الشمولية، التضامن، والشفافية'
                     : isFr
@@ -504,16 +504,16 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
               </div>
 
               {/* Card 4: Youth in Action */}
-              <div className="p-6 rounded-3xl bg-[#faf7f2] border border-[#e5e0d6] hover:border-[#0d3b43]/30 transition-all text-center flex flex-col justify-between group shadow-2xs">
-                <span className="text-xs sm:text-sm font-bold text-[#5f7174] block mb-1">
+              <div className="p-5 sm:p-6 rounded-3xl bg-[#faf7f2] border border-[#e5e0d6] hover:border-[#0d3b43]/30 transition-all text-center flex flex-col justify-between group shadow-2xs">
+                <span className="text-xs font-bold text-[#5f7174] block mb-1">
                   {isAr ? 'البرنامج الرائد والمبادرة' : isFr ? 'Programme Phare' : 'Flagship Initiative'}
                 </span>
-                <div className="min-h-[3.25rem] flex items-center justify-center">
-                  <span className="text-xl sm:text-2xl font-black text-[#0d3b43] group-hover:scale-105 transition-transform block whitespace-nowrap">
+                <div className="min-h-[3rem] flex items-center justify-center">
+                  <span className="text-base sm:text-lg lg:text-xl font-black text-[#0d3b43] group-hover:scale-105 transition-transform block whitespace-nowrap">
                     {isAr ? 'شباب في العمل' : isFr ? 'Jeunesse en Action' : 'Youth in Action'}
                   </span>
                 </div>
-                <p className="text-xs sm:text-sm text-[#5f7174] leading-relaxed mt-2">
+                <p className="text-xs text-[#5f7174] leading-relaxed mt-2 text-balance">
                   {isAr
                     ? 'التمكين القيادي والتطوع الميداني للشباب'
                     : isFr
