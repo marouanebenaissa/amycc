@@ -116,16 +116,16 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
     {
       key: 'transparency',
       number: '07',
-      title: isAr ? 'الشفافية والمسؤولية والحكامة' : isFr ? 'Transparence & Responsabilité' : 'Transparency & Accountability',
+      title: isAr ? 'الشفافية والمسؤولية' : isFr ? 'Transparence & Responsabilité' : 'Transparency & Accountability',
       desc: isAr
         ? 'الالتزام بالنزاهة والوضوح في تدبير موارد الجمعية وتنفيذ أنشطتها، وتحمل كامل المسؤولية تجاه المنخرطين والشركاء والمجتمع.'
         : isFr
         ? "Respecter l'intégrité et la rigueur dans la gestion des ressources et la mise en œuvre des actions, avec une responsabilité totale envers les bénéficiaires."
         : 'Committing to integrity and openness in managing resources and executing programs, upholding accountability to beneficiaries, partners, and society.',
       icon: '⚖️',
-      badgeAr: 'حكامة ونزاهة تامة',
-      badgeFr: 'Gouvernance rigoureuse',
-      badgeEn: 'Good Governance',
+      badgeAr: 'نزاهة ومسؤولية تامة',
+      badgeFr: 'Intégrité & Rigueur',
+      badgeEn: 'Integrity & Accountability',
       borderClass: 'border-[#d99b26]/30 hover:border-[#d99b26]',
       accentBg: 'bg-[#d99b26]/10 text-[#d99b26]',
       glowColor: 'from-[#fdf2db]/50 to-transparent',
@@ -380,7 +380,7 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
                 href="#governance"
                 className="px-3.5 py-1.5 rounded-xl text-3xs sm:text-xs font-bold bg-white border border-[#cfc7b9] text-[#0d3b43] hover:border-[#c85a32] hover:text-[#c85a32] transition-colors shadow-2xs"
               >
-                {isAr ? '🏛️ الحكامة والهيكلة' : 'Governance'}
+                {isAr ? '🏛️ الهيكلة والتنظيم' : 'Structure'}
               </a>
             </div>
           </div>
@@ -426,7 +426,7 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
                   7 {isAr ? 'قيم حاكمة' : 'Values'}
                 </span>
                 <p className="text-2xs sm:text-xs text-[#5f7174] mt-1.5 leading-snug">
-                  {isAr ? 'الإبداع، الشمولية، التضامن، والحكامة' : 'Creativity, Inclusivity, Solidarity & Integrity.'}
+                  {isAr ? 'الإبداع، الشمولية، التضامن، والشفافية' : 'Creativity, Inclusivity, Solidarity & Transparency.'}
                 </p>
               </div>
 
@@ -546,8 +546,8 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
                   </div>
                   <p className="text-xs text-[#5f7174] leading-relaxed">
                     {isAr
-                      ? 'التزام مطلق بالحكامة الرشيدة، التدبير المالي والإداري المدقق، ونشر التقارير الأدبية والمالية للمنخرطين والشركاء.'
-                      : 'Uncompromising commitment to good governance, transparent resource management, and annual public reporting.'}
+                      ? 'التزام مطلق بالنزاهة والمسؤولية، التدبير المالي والإداري المدقق، ونشر التقارير الأدبية والمالية للمنخرطين والشركاء.'
+                      : 'Uncompromising commitment to integrity, transparent resource management, and annual public reporting.'}
                   </p>
                 </div>
               </div>
@@ -1027,21 +1027,21 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
         </section>
 
         {/* ============================================================
-            9. ORGANIZATIONAL STRUCTURE & GOVERNANCE (الحكامة والهيكلة الإدارية)
+            9. ORGANIZATIONAL STRUCTURE & MANAGEMENT (الهيكلة والتنظيم الإداري)
             ============================================================ */}
         <section id="governance" className="py-20 bg-white border-b border-[#e5e0d6] scroll-mt-16">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
             <div className="text-center max-w-3xl mx-auto space-y-3">
               <span className="text-xs font-bold uppercase tracking-widest text-[#c85a32] px-3.5 py-1.5 rounded-full bg-[#c85a32]/10 border border-[#c85a32]/20">
-                {isAr ? 'الحكامة والهيكلة الإدارية' : 'Governance & Architecture'}
+                {isAr ? 'الهيكلة والتنظيم الإداري' : 'Organizational Architecture'}
               </span>
               <h2 className="text-3xl sm:text-4xl font-black text-[#08242a]">
-                {isAr ? 'الهيكلة التنظيمية والحكامة الديمقراطية' : 'Organizational Architecture'}
+                {isAr ? 'الهيكلة التنظيمية للجمعية' : 'Organizational Architecture'}
               </h2>
               <p className="text-sm sm:text-base text-[#445457] leading-relaxed">
                 {isAr
                   ? 'هيكلة ديمقراطية وشفافة تسهر على تسيير البرامج وتطبيق النظام الأساسي للجمعية بأعلى معايير النزاهة والمسؤولية:'
-                  : 'Democratic and transparent governance structure managing programs in accordance with association bylaws:'}
+                  : 'Democratic and transparent organizational structure managing programs in accordance with association bylaws:'}
               </p>
             </div>
 
@@ -1148,7 +1148,7 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
                   </span>
                   <div>
                     <h3 className="text-lg font-black text-[#08242a]">
-                      {isAr ? 'ميثاق النزاهة والشفافية والحكامة الرشيدة' : 'Charter of Integrity & Governance'}
+                      {isAr ? 'ميثاق النزاهة والشفافية والمسؤولية' : 'Charter of Integrity & Transparency'}
                     </h3>
                     <span className="text-3xs text-[#819598] font-bold">
                       {isAr ? 'التزام أخلاقي وقانوني صارم تجاه المجتمع والشركاء' : 'Ethical and transparent management pledge'}

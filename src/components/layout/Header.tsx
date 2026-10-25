@@ -515,7 +515,7 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
               {aboutDropdownOpen && (
                 <div className="absolute top-full start-0 mt-1.5 w-72 rounded-2xl bg-white border border-[#e5e0d6] shadow-xl p-2.5 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
                   <div className="px-3 py-1.5 text-4xs font-bold uppercase tracking-wider text-[#819598] border-b border-[#f4ede2] mb-1">
-                    {isAr ? 'الهوية والحكامة والتواصل' : 'Organization & Governance'}
+                    {isAr ? 'الهوية والتنظيم والتواصل' : 'Organization & Team'}
                   </div>
 
                   <div className="space-y-1">

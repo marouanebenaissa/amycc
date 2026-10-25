@@ -36,7 +36,7 @@ export default async function ImpactPage(props: { params: Promise<{ locale: stri
     {
       value: '100%',
       label: isAr ? 'عمل مدني غير ربحي وتطوعي' : isFr ? 'Engagement civique et non-lucratif' : 'Nonprofit Civic Commitment',
-      subtext: isAr ? 'شفافية الحكامة وفق القانون المغربي' : isFr ? 'Transparence et gouvernance citoyenne' : 'Transparent Moroccan governance',
+      subtext: isAr ? 'شفافية وتدبير وفق القانون المغربي' : isFr ? 'Transparence et engagement citoyen' : 'Transparent civic commitment',
       icon: '⚖️',
       iconSrc: '/icons/impact-governance.png',
     },
@@ -249,10 +249,10 @@ export default async function ImpactPage(props: { params: Promise<{ locale: stri
         <section className="py-16 bg-[#faf7f2]">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center space-y-4">
             <span className="text-xs font-bold uppercase tracking-widest text-[#c85a32]">
-              {isAr ? 'الشفافية والحكامة الجمعوية' : 'Governance & Transparency'}
+              {isAr ? 'الشفافية والنزاهة الجمعوية' : 'Integrity & Transparency'}
             </span>
             <h2 className="text-2xl sm:text-3xl font-extrabold text-[#08242a]">
-              {isAr ? 'التزام تام بأعلى معايير الحكامة والشفافية المدنية' : 'Committed to Highest Standards of Civil Governance'}
+              {isAr ? 'التزام تام بأعلى معايير النزاهة والشفافية المدنية' : 'Committed to Highest Standards of Civil Integrity'}
             </h2>
             <p className="text-xs sm:text-sm text-[#5f7174] leading-relaxed max-w-2xl mx-auto">
               {isAr
