@@ -315,18 +315,10 @@ export default async function TeamPage(props: { params: Promise<{ locale: string
                 const desc = isAr ? member.descAr : isFr ? (member.descFr || member.descAr) : (member.descEn || member.descAr)
                 const duties = (isAr ? member.dutiesAr : isFr ? (member.dutiesFr?.length ? member.dutiesFr : member.dutiesAr) : (member.dutiesEn?.length ? member.dutiesEn : member.dutiesAr)) || []
 
-                // Dynamic executive gradients and badge palettes per officer role
+                // Dynamic badge palettes per officer role
                 const isPresident = member.id === 'president' || role.includes('رئيس')
                 const isSecretary = member.id.includes('secretary') || role.includes('كاتب')
                 const isTreasurer = member.id.includes('treasurer') || role.includes('مال')
-
-                const gradientHeader = isPresident
-                  ? 'from-[#08242a] via-[#0d3b43] to-[#14505b]'
-                  : isSecretary
-                  ? 'from-[#7d3016] via-[#b84e27] to-[#c85a32]'
-                  : isTreasurer
-                  ? 'from-[#99620b] via-[#bd7d12] to-[#d99b26]'
-                  : 'from-[#08242a] via-[#1c6875] to-[#268292]'
 
                 const roleBadgeStyle = isPresident
                   ? 'bg-[#0d3b43] text-white shadow-[#0d3b43]/20'
@@ -343,92 +335,83 @@ export default async function TeamPage(props: { params: Promise<{ locale: string
                 return (
                   <div
                     key={member.id}
-                    className="group relative rounded-3xl bg-white border border-[#e5e0d6] hover:border-[#0d3b43]/30 shadow-subtle hover:shadow-xl hover:-translate-y-2 transition-all duration-300 overflow-hidden"
+                    className="group relative rounded-3xl bg-white border border-[#e5e0d6] hover:border-[#0d3b43]/30 shadow-subtle hover:shadow-xl hover:-translate-y-2 transition-all duration-300 p-6 sm:p-7 space-y-5"
                   >
-                    {/* 1. Moroccan Cover Header Banner */}
-                    <div className={`relative h-24 bg-gradient-to-r ${gradientHeader} overflow-hidden`}>
-                      <div className="absolute inset-0 moroccan-star-pattern opacity-25 pointer-events-none" />
-                      <div className="absolute -bottom-8 -end-8 w-28 h-28 rounded-full bg-white/10 blur-xl pointer-events-none" />
-                    </div>
-
-                    {/* 2. Elevated Portrait Avatar & Details */}
-                    <div className="px-6 sm:px-7 pb-7 space-y-4">
-                      {/* Overlapping Avatar Frame */}
-                      <div className="-mt-12 sm:-mt-14 flex flex-col items-center text-center">
-                        <div className="relative group/photo mb-3">
-                          {member.photoUrl ? (
-                            <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-3xl overflow-hidden border-4 border-white shadow-lg ring-2 ring-[#0d3b43]/15 group-hover:ring-[#c85a32]/50 transition-all relative bg-neutral-100">
-                              <ImageWithFallback
-                                src={member.photoUrl}
-                                alt={name || role}
-                                width={112}
-                                height={112}
-                                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                              />
-                            </div>
-                          ) : (
-                            <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-3xl bg-gradient-to-br from-[#faf7f2] via-white to-[#f4ede2] border-4 border-white shadow-lg ring-2 ring-[#0d3b43]/15 flex items-center justify-center relative overflow-hidden group-hover:scale-105 transition-transform duration-300">
-                              <div className="absolute inset-0 moroccan-pattern-light opacity-60" />
-                              <span className="text-3xl sm:text-4xl font-black text-[#08242a] relative z-10 font-arabic">
-                                {initial}
-                              </span>
-                            </div>
-                          )}
-                        </div>
-
-                        {/* Member Full Name */}
-                        {name ? (
-                          <h3 className="text-xl sm:text-2xl font-black text-[#08242a] tracking-tight group-hover:text-[#c85a32] transition-colors leading-tight">
-                            {name}
-                          </h3>
+                    {/* 1. Portrait Avatar & Details */}
+                    <div className="flex flex-col items-center text-center">
+                      <div className="relative group/photo mb-3">
+                        {member.photoUrl ? (
+                          <div className="w-28 h-28 sm:w-32 sm:h-32 rounded-3xl overflow-hidden border-2 border-[#e5e0d6] shadow-md ring-4 ring-[#faf7f2] group-hover:ring-[#c85a32]/30 transition-all relative bg-neutral-100">
+                            <ImageWithFallback
+                              src={member.photoUrl}
+                              alt={name || role}
+                              width={128}
+                              height={128}
+                              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                            />
+                          </div>
                         ) : (
-                          <h3 className="text-lg sm:text-xl font-bold text-[#819598] italic">
-                            {isAr ? 'عضوية معتمدة' : 'Mandat Nominatif'}
-                          </h3>
-                        )}
-
-                        {/* Role Pill Badge */}
-                        <div className="mt-2 flex items-center justify-center">
-                          <span className={`inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-black shadow-xs ${roleBadgeStyle}`}>
-                            <span>{role}</span>
-                          </span>
-                        </div>
-
-                        {/* Mandate / Scope */}
-                        {titleStatus && (
-                          <p className="text-2xs sm:text-xs font-bold text-[#5f7174] uppercase tracking-wider mt-2 max-w-xs">
-                            {titleStatus}
-                          </p>
+                          <div className="w-28 h-28 sm:w-32 sm:h-32 rounded-3xl bg-gradient-to-br from-[#faf7f2] via-white to-[#f4ede2] border-2 border-[#e5e0d6] shadow-md ring-4 ring-[#faf7f2] flex items-center justify-center relative overflow-hidden group-hover:scale-105 transition-transform duration-300">
+                            <div className="absolute inset-0 moroccan-pattern-light opacity-60" />
+                            <span className="text-4xl sm:text-5xl font-black text-[#08242a] relative z-10 font-arabic">
+                              {initial}
+                            </span>
+                          </div>
                         )}
                       </div>
 
-                      {/* 3. Bio / Editorial Description */}
-                      {desc && (
-                        <div className="p-3.5 rounded-2xl bg-[#faf7f2] border border-[#f0ebe1] text-xs sm:text-sm text-[#445457] leading-relaxed text-center sm:text-start">
-                          {desc}
-                        </div>
+                      {/* Member Full Name */}
+                      {name ? (
+                        <h3 className="text-xl sm:text-2xl font-black text-[#08242a] tracking-tight group-hover:text-[#c85a32] transition-colors leading-tight">
+                          {name}
+                        </h3>
+                      ) : (
+                        <h3 className="text-lg sm:text-xl font-bold text-[#819598] italic">
+                          {isAr ? 'عضوية معتمدة' : 'Mandat Nominatif'}
+                        </h3>
                       )}
 
-                      {/* 4. Core Duties / Focus Responsibilities */}
-                      {duties.length > 0 && (
-                        <div className="space-y-2 pt-2 border-t border-[#f0ebe1]">
-                          <span className="text-2xs font-bold text-[#819598] uppercase tracking-wider block">
-                            {isAr ? 'أبرز الصلاحيات والمهام:' : isFr ? 'Missions & Responsabilités :' : 'Key Responsibilities:'}
-                          </span>
-                          <ul className="space-y-1.5">
-                            {duties.map((duty, dIdx) => (
-                              <li
-                                key={dIdx}
-                                className="flex items-center gap-2.5 p-2 rounded-xl bg-white border border-[#e5e0d6] hover:border-[#0d3b43]/30 transition-colors text-xs text-[#08242a] font-medium shadow-2xs"
-                              >
-                                <span className="w-1.5 h-1.5 rounded-full bg-[#c85a32] shrink-0" />
-                                <span className="leading-snug">{duty}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
+                      {/* Role Pill Badge */}
+                      <div className="mt-2.5 flex items-center justify-center">
+                        <span className={`inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-black shadow-xs ${roleBadgeStyle}`}>
+                          <span>{role}</span>
+                        </span>
+                      </div>
+
+                      {/* Mandate / Scope */}
+                      {titleStatus && (
+                        <p className="text-2xs sm:text-xs font-bold text-[#5f7174] uppercase tracking-wider mt-2 max-w-xs">
+                          {titleStatus}
+                        </p>
                       )}
                     </div>
+
+                    {/* 2. Bio / Editorial Description */}
+                    {desc && (
+                      <div className="p-3.5 rounded-2xl bg-[#faf7f2] border border-[#f0ebe1] text-xs sm:text-sm text-[#445457] leading-relaxed text-center sm:text-start">
+                        {desc}
+                      </div>
+                    )}
+
+                    {/* 3. Core Duties / Focus Responsibilities */}
+                    {duties.length > 0 && (
+                      <div className="space-y-2 pt-2 border-t border-[#f0ebe1]">
+                        <span className="text-2xs font-bold text-[#819598] uppercase tracking-wider block">
+                          {isAr ? 'أبرز الصلاحيات والمهام:' : isFr ? 'Missions & Responsabilités :' : 'Key Responsibilities:'}
+                        </span>
+                        <ul className="space-y-1.5">
+                          {duties.map((duty, dIdx) => (
+                            <li
+                              key={dIdx}
+                              className="flex items-center gap-2.5 p-2 rounded-xl bg-white border border-[#e5e0d6] hover:border-[#0d3b43]/30 transition-colors text-xs text-[#08242a] font-medium shadow-2xs"
+                            >
+                              <span className="w-1.5 h-1.5 rounded-full bg-[#c85a32] shrink-0" />
+                              <span className="leading-snug">{duty}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
                   </div>
                 )
               })}
