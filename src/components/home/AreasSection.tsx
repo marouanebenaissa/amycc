@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { IconWithFallback } from '@/components/ui/IconWithFallback'
+import type { AreaItemConfig } from '@/lib/settings'
 
 interface AreaItem {
   key: string
@@ -26,6 +27,7 @@ interface AreasSectionProps {
   sectionSubtitle: string
   eyebrowText: string
   learnMoreText: string
+  configuredItems?: AreaItemConfig[]
 }
 
 export function AreasSection({
@@ -34,6 +36,7 @@ export function AreasSection({
   sectionSubtitle,
   eyebrowText,
   learnMoreText,
+  configuredItems,
 }: AreasSectionProps) {
   const [selectedArea, setSelectedArea] = useState<AreaItem | null>(null)
 
@@ -57,7 +60,7 @@ export function AreasSection({
     }
   }, [selectedArea])
 
-  const areasList: AreaItem[] = [
+  const defaultAreasList: AreaItem[] = [
     {
       key: 'arts',
       title: isAr ? 'الفنون والإبداع' : isFr ? 'Arts & Création' : 'Visual & Fine Arts',
@@ -390,6 +393,63 @@ export function AreasSection({
     },
   ]
 
+  const areas: AreaItem[] =
+    configuredItems && configuredItems.length > 0
+      ? configuredItems
+          .filter((item) => item.enabled !== false)
+          .map((item) => ({
+            key: item.key,
+            title: isAr
+              ? item.titleAr
+              : isFr
+              ? item.titleFr || item.titleAr
+              : item.titleEn || item.titleAr,
+            tag: isAr
+              ? item.tagAr
+              : isFr
+              ? item.tagFr || item.tagAr
+              : item.tagEn || item.tagAr,
+            desc: isAr
+              ? item.descAr
+              : isFr
+              ? item.descFr || item.descAr
+              : item.descEn || item.descAr,
+            icon: item.icon || '🎨',
+            iconImg: item.iconImg || '/icons/arts.png',
+            accent: item.accent || 'border-[#0d3b43]/30 text-[#0d3b43]',
+            bgGlow: item.bgGlow || 'from-[#fae4dc]/40 to-transparent',
+            headline: isAr
+              ? item.headlineAr
+              : isFr
+              ? item.headlineFr || item.headlineAr
+              : item.headlineEn || item.headlineAr,
+            objectives: isAr
+              ? item.objectivesAr || []
+              : isFr
+              ? item.objectivesFr && item.objectivesFr.length > 0
+                ? item.objectivesFr
+                : item.objectivesAr || []
+              : item.objectivesEn && item.objectivesEn.length > 0
+              ? item.objectivesEn
+              : item.objectivesAr || [],
+            initiatives: isAr
+              ? item.initiativesAr || []
+              : isFr
+              ? item.initiativesFr && item.initiativesFr.length > 0
+                ? item.initiativesFr
+                : item.initiativesAr || []
+              : item.initiativesEn && item.initiativesEn.length > 0
+              ? item.initiativesEn
+              : item.initiativesAr || [],
+            primaryActionLabel: isAr
+              ? item.actionLabelAr || 'اعرف أكثر'
+              : isFr
+              ? item.actionLabelFr || 'En savoir plus'
+              : item.actionLabelEn || 'Learn More',
+            primaryActionUrl: item.actionUrl || '/programs',
+          }))
+      : defaultAreasList
+
   return (
     <>
       <section className="py-20 lg:py-28 bg-white border-b border-[#e5e0d6]">
@@ -407,7 +467,7 @@ export function AreasSection({
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {areasList.map((area) => (
+            {areas.map((area) => (
               <div
                 key={area.key}
                 className="bg-[#faf7f2] p-7 rounded-3xl border border-[#e5e0d6] shadow-subtle hover:shadow-card hover:border-[#cfc7b9] transition-all flex flex-col justify-between group relative overflow-hidden text-start"

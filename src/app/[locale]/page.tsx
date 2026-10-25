@@ -1,7 +1,7 @@
 import { getDictionary } from '@/lib/i18n/dictionaries'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
-import { getTopBarSettings, getHeroSettings, getFlagshipProgramSettings, getFaqSettings } from '@/lib/settings'
+import { getTopBarSettings, getHeroSettings, getFlagshipProgramSettings, getFaqSettings, getAreasSettings } from '@/lib/settings'
 import { createPublicClient } from '@/lib/supabase/public'
 import { FaqAccordion } from '@/components/home/FaqAccordion'
 import { AreasSection } from '@/components/home/AreasSection'
@@ -299,6 +299,9 @@ export default async function HomePage(props: { params: Promise<{ locale: string
       },
     ]
   }
+
+  // Dynamic Areas of Intervention from database settings
+  const areasConfig = await getAreasSettings()
 
   // Dynamic FAQs from database settings
   const faqSettings = await getFaqSettings()
@@ -600,10 +603,29 @@ export default async function HomePage(props: { params: Promise<{ locale: string
             ============================================================ */}
         <AreasSection
           locale={locale}
-          sectionTitle={dict.home.areas_title}
-          sectionSubtitle={dict.home.areas_subtitle}
-          eyebrowText={isAr ? 'مجالات النشاط الجمعوي' : isFr ? 'Domaines d\'Activité' : 'Core Disciplines'}
+          sectionTitle={
+            isAr
+              ? areasConfig.sectionTitleAr || dict.home.areas_title
+              : isFr
+              ? areasConfig.sectionTitleFr || dict.home.areas_title
+              : areasConfig.sectionTitleEn || dict.home.areas_title
+          }
+          sectionSubtitle={
+            isAr
+              ? areasConfig.sectionSubtitleAr || dict.home.areas_subtitle
+              : isFr
+              ? areasConfig.sectionSubtitleFr || dict.home.areas_subtitle
+              : areasConfig.sectionSubtitleEn || dict.home.areas_subtitle
+          }
+          eyebrowText={
+            isAr
+              ? areasConfig.eyebrowAr || 'مجالات النشاط الجمعوي'
+              : isFr
+              ? areasConfig.eyebrowFr || "Domaines d'Activité"
+              : areasConfig.eyebrowEn || 'Core Disciplines'
+          }
           learnMoreText={dict.programs.learn_more}
+          configuredItems={areasConfig.items}
         />
 
         {/* ============================================================

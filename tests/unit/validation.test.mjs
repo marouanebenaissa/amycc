@@ -159,3 +159,47 @@ describe('FAQ Validation Suite', () => {
     assert.equal(result.success, false)
   })
 })
+
+const areaItemSchema = z.object({
+  key: z.string().min(1),
+  titleAr: z.string().min(2),
+  tagAr: z.string().min(2),
+  descAr: z.string().min(5),
+  headlineAr: z.string().min(5),
+  objectivesAr: z.array(z.string()).default([]),
+  initiativesAr: z.array(z.string()).default([]),
+  actionUrl: z.string().default('/programs'),
+  order: z.number().int().min(1).default(1),
+  enabled: z.boolean().default(true),
+})
+
+describe('Intervention Areas Validation Suite', () => {
+  test('accepts valid core discipline item with modal details', () => {
+    const valid = {
+      key: 'arts',
+      titleAr: 'الفنون والإبداع',
+      tagAr: 'محترفات تشكيلية ومعارض',
+      descAr: 'الفنون التشكيلية والرسم والابتكار.',
+      headlineAr: 'رعاية المواهب وصقل الحس الجمالي.',
+      objectivesAr: ['تنظيم ورشات الرسم', 'إقامة معارض'],
+      initiativesAr: ['محترف إعداد الفنانين'],
+      actionUrl: '/programs',
+      order: 1,
+      enabled: true,
+    }
+    const result = areaItemSchema.safeParse(valid)
+    assert.equal(result.success, true)
+  })
+
+  test('rejects area item with empty title or description', () => {
+    const invalid = {
+      key: 'arts',
+      titleAr: '',
+      tagAr: '',
+      descAr: '',
+      headlineAr: '',
+    }
+    const result = areaItemSchema.safeParse(invalid)
+    assert.equal(result.success, false)
+  })
+})

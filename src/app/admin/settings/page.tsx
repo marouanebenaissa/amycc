@@ -1105,6 +1105,27 @@ export default async function AdminSettingsPage() {
           </div>
         </div>
 
+        {/* Core Areas Management Card */}
+        <div className="bg-gradient-to-r from-[#0d3b43] to-[#14505b] text-white p-6 sm:p-8 rounded-2xl border border-[#268292]/40 shadow-md flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div className="space-y-1.5">
+            <div className="flex items-center gap-2">
+              <span className="text-xl">🎯</span>
+              <h3 className="text-sm font-bold uppercase tracking-wider text-white">
+                إدارة مجالات التدخل الستة والنوافذ المنبثقة (Areas CMS)
+              </h3>
+            </div>
+            <p className="text-xs text-[#d8f0f4]/85 max-w-xl leading-relaxed">
+              تخصيص نصوص بطاقات الواجهة، الأيقونات، والرؤية التفصيلية والأهداف والورشات الميدانية المعروضة داخل النافذة المنبثقة لكل مجال.
+            </p>
+          </div>
+          <Link
+            href="/admin/areas"
+            className="px-5 py-2.5 rounded-xl text-xs font-bold text-[#08242a] bg-[#f4ce83] hover:bg-white active:scale-98 transition-all shrink-0 text-center shadow-xs"
+          >
+            إدارة مجالات التدخل →
+          </Link>
+        </div>
+
         {/* FAQ Management Section Card */}
         <div className="bg-gradient-to-r from-[#08242a] to-[#0d3b43] text-white p-6 sm:p-8 rounded-2xl border border-[#14505b] shadow-md flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div className="space-y-1.5">

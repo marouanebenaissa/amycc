@@ -250,6 +250,20 @@ export default async function AdminPagesPage() {
                   {page.descriptionAr}
                 </p>
 
+                {page.key === 'home' && (
+                  <div className="mb-3 p-2.5 rounded-xl bg-emerald-50/70 border border-emerald-200/80 flex items-center justify-between gap-2">
+                    <span className="text-3xs font-bold text-emerald-900">
+                      🎯 إدارة مجالات التدخل الستة ومحتوى النوافذ المنبثقة
+                    </span>
+                    <Link
+                      href="/admin/areas"
+                      className="px-2.5 py-1 rounded-lg text-3xs font-bold text-white bg-[#0d3b43] hover:bg-[#14505b] transition-colors shrink-0"
+                    >
+                      إدارة مجالات التدخل →
+                    </Link>
+                  </div>
+                )}
+
                 {page.key === 'faq' && (
                   <div className="mb-3 p-2.5 rounded-xl bg-amber-50/70 border border-amber-200/80 flex items-center justify-between gap-2">
                     <span className="text-3xs font-bold text-amber-900">

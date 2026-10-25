@@ -469,3 +469,459 @@ export async function getFaqSettings(): Promise<FaqConfig> {
     return defaultFaqConfig
   }
 }
+
+export interface AreaItemConfig {
+  key: string
+  icon: string
+  iconImg: string
+  titleAr: string
+  titleFr?: string
+  titleEn?: string
+  tagAr: string
+  tagFr?: string
+  tagEn?: string
+  descAr: string
+  descFr?: string
+  descEn?: string
+  headlineAr: string
+  headlineFr?: string
+  headlineEn?: string
+  objectivesAr: string[]
+  objectivesFr?: string[]
+  objectivesEn?: string[]
+  initiativesAr: string[]
+  initiativesFr?: string[]
+  initiativesEn?: string[]
+  actionLabelAr?: string
+  actionLabelFr?: string
+  actionLabelEn?: string
+  actionUrl: string
+  accent?: string
+  bgGlow?: string
+  order: number
+  enabled: boolean
+}
+
+export interface AreasConfig {
+  sectionTitleAr?: string
+  sectionTitleFr?: string
+  sectionTitleEn?: string
+  sectionSubtitleAr?: string
+  sectionSubtitleFr?: string
+  sectionSubtitleEn?: string
+  eyebrowAr?: string
+  eyebrowFr?: string
+  eyebrowEn?: string
+  items: AreaItemConfig[]
+}
+
+export const defaultAreasConfig: AreasConfig = {
+  sectionTitleAr: 'مجالات التدخل الستة للجمعية',
+  sectionTitleFr: "Nos six domaines d'intervention",
+  sectionTitleEn: 'Six Core Areas of Intervention',
+  sectionSubtitleAr: 'رؤية ثقافية متكاملة تهدف إلى إطلاق الطاقات الإبداعية وبناء جسور التواصل المجتمعي.',
+  sectionSubtitleFr: 'Une approche culturelle intégrée conçue pour libérer le potentiel créatif et renforcer les liens communautaires.',
+  sectionSubtitleEn: 'A multifaceted cultural approach designed to unlock creative potential and build inclusive communities.',
+  eyebrowAr: 'مجالات النشاط الجمعوي',
+  eyebrowFr: "Domaines d'Activité",
+  eyebrowEn: 'Core Disciplines',
+  items: [
+    {
+      key: 'arts',
+      icon: '🎨',
+      iconImg: '/icons/arts.png',
+      titleAr: 'الفنون والإبداع',
+      titleFr: 'Arts & Création',
+      titleEn: 'Visual & Fine Arts',
+      tagAr: 'محترفات تشكيلية ومعارض',
+      tagFr: 'Arts Plastiques',
+      tagEn: 'Visual & Fine Arts',
+      descAr: 'الفنون التشكيلية، الرسم، التصوير الفوتوغرافي، والورشات الإبداعية المحفزة على الابتكار.',
+      descFr: "Arts plastiques, peinture, photographie et ateliers de créativité stimulant l'innovation.",
+      descEn: 'Visual arts, painting, photography, and creative masterclasses sparking youth innovation.',
+      headlineAr: 'رعاية المواهب التشكيلية والبصرية وصقل الحس الجمالي لدى الشباب',
+      headlineFr: 'Accompagnement des talents émergents et valorisation des arts visuels au Maroc',
+      headlineEn: 'Nurturing emerging visual arts talent and fostering creative expression across Morocco',
+      objectivesAr: [
+        'تنظيم محترفات تدريبية متخصصة في الرسم المعاصر، النحت، والخط العربي الأصيل.',
+        'إقامة معارض فردية وجماعية لإبراز إبداعات الفنانين الشباب وربطهم بسوق الفن.',
+        'توظيف الفنون البصرية في تجميل الفضاءات العمومية وجداريات الأحياء برؤية حضرية متجددة.',
+      ],
+      objectivesFr: [
+        "Organisation d'ateliers spécialisés en peinture contemporaine, sculpture et calligraphie.",
+        'Expositions collectives et individuelles pour propulser les jeunes artistes marocains.',
+        "Réalisation de fresques murales valorisant l'espace public et le vivre-ensemble.",
+      ],
+      objectivesEn: [
+        'Specialized masterclasses in contemporary painting, sculpture, and classical Arabic calligraphy.',
+        'Curated solo and collective exhibitions connecting emerging artists with art platforms.',
+        'Community mural initiatives transforming urban spaces through inspiring visual arts.',
+      ],
+      initiativesAr: [
+        'محترف الرسم التشكيلي للناشئة والشباب',
+        'المعرض السنوي "إشراقات بصرية"',
+        'ملتقى التصوير الفوتوغرافي لتوثيق التراث المغربي',
+      ],
+      initiativesFr: [
+        "Atelier d'arts plastiques pour les jeunes créateurs",
+        'Exposition annuelle "Reflets Visuels"',
+        'Rencontre photographique de sauvegarde du patrimoine',
+      ],
+      initiativesEn: [
+        'Youth Fine Arts & Illustration Studio',
+        'Annual "Visual Reflections" Art Showcase',
+        'Heritage Documentary Photography Forum',
+      ],
+      actionLabelAr: 'استكشف برامج الفنون',
+      actionLabelFr: 'Découvrir les programmes',
+      actionLabelEn: 'Explore Art Programs',
+      actionUrl: '/programs',
+      accent: 'border-[#c85a32]/30 text-[#c85a32]',
+      bgGlow: 'from-[#fae4dc]/40 to-transparent',
+      order: 1,
+      enabled: true,
+    },
+    {
+      key: 'music',
+      icon: '🎵',
+      iconImg: '/icons/music.png',
+      titleAr: 'الموسيقى والصوتيات',
+      titleFr: 'Musique & Acoustique',
+      titleEn: 'Heritage & Musical Arts',
+      tagAr: 'تراث وأداء موسيقي',
+      tagFr: 'Patrimoine Musical',
+      tagEn: 'Heritage & Musical Arts',
+      descAr: 'إحياء التراث الموسيقي المغربي الأصيل، والتأليف الموسيقي، والتدريب على الآلات.',
+      descFr: 'Renaissance du patrimoine musical marocain, composition et formation instrumentale.',
+      descEn: 'Reviving authentic Moroccan musical heritage, composition, and instrument training.',
+      headlineAr: 'إحياء المقامات والطبوع المغربية الأصيلة وتطوير مهارات العزف والتأليف',
+      headlineFr: 'Sauvegarde des répertoires traditionnels marocains et transmission instrumentale',
+      headlineEn: 'Preserving authentic Moroccan music genres and training the next generation of performers',
+      objectivesAr: [
+        'صون وتوثيق الأنغام والطبوع التراثية كالأندلسي، الملحون، كناوة، والأنماط الأمازيغية.',
+        'توفير دورات تدريبية وتطبيقية على الآلات الكلاسيكية (العود، الكمان، القانون، والإيقاعات).',
+        'تأطير الشباب في كتابة وتأليف الألحان الموسيقية الحديثة بروح مغربية متجذرة.',
+      ],
+      objectivesFr: [
+        'Préservation des patrimoines musicaux andalou, malhoun, gnawa et amazigh.',
+        'Formations instrumentales pratiques (luth, violon, qanun et percussions marocaines).',
+        'Accompagnement à la composition contemporaine inspirée de nos racines séculaires.',
+      ],
+      objectivesEn: [
+        'Preserving and documenting Andalusian, Malhoun, Gnawa, and Amazigh musical traditions.',
+        'Hands-on instrument masterclasses in Oud, classical strings, and traditional percussion.',
+        'Supporting youth in contemporary music composition infused with Moroccan identity.',
+      ],
+      initiativesAr: [
+        'أمسيات "ليالي الروح والمقام"',
+        'أكاديمية تدريب العزف على العود والوتريات',
+        'استوديو التسجيل الصوتي لدعم المواهب الشابة',
+      ],
+      initiativesFr: [
+        'Soirées musicales "Nuits Spirituelles"',
+        'Académie du luth et des instruments à cordes',
+        "Studio d'enregistrement pour les talents émergents",
+      ],
+      initiativesEn: [
+        '"Spiritual Melodies" Concert Series',
+        'Oud & Traditional Strings Youth Academy',
+        'Acoustic Sound Lab for Emerging Talent',
+      ],
+      actionLabelAr: 'استكشف فعاليات الموسيقى',
+      actionLabelFr: 'Voir les événements musicaux',
+      actionLabelEn: 'Explore Music Events',
+      actionUrl: '/events',
+      accent: 'border-[#0d3b43]/30 text-[#0d3b43]',
+      bgGlow: 'from-[#d8f0f4]/40 to-transparent',
+      order: 2,
+      enabled: true,
+    },
+    {
+      key: 'theatre',
+      icon: '🎭',
+      iconImg: '/icons/theatre.png',
+      titleAr: 'المسرح وفنون العرض',
+      titleFr: 'Théâtre & Arts Scéniques',
+      titleEn: 'Theatre & Scenic Expression',
+      tagAr: 'تعبير مسرحي وارتجال',
+      tagFr: 'Jeu Scénique',
+      tagEn: 'Theatre & Scenic Expression',
+      descAr: 'التعبير المسرحي، فن الحكاية، الأداء الركحي، والورشات الدرامية للناشئة والشباب.',
+      descFr: 'Expression théâtrale, art du conte, jeu scénique et ateliers dramatiques.',
+      descEn: 'Theatrical expression, traditional storytelling, stage performance, and drama workshops.',
+      headlineAr: 'المسرح كمرآة للمجتمع، وسيلة للتعبير الحر، ومدرسة لتنمية الثقة والخطابة',
+      headlineFr: "Le théâtre comme vecteur d'émancipation citoyenne, d'éloquence et de cohésion",
+      headlineEn: 'Theatre as a mirror of society, a catalyst for critical thinking and public eloquence',
+      objectivesAr: [
+        'تنمية مهارات التعبير الجسدي والصوتي، وفن الارتجال المسرحي لدى الشباب.',
+        'إحياء فن الحكاية الشعبية التراثية (الحلقة) بأساليب سينوغرافية معاصرة ومبتكرة.',
+        'إنتاج عروض مسرحية هادفة تعالج القضايا الإنسانية والمجتمعية الراهنة بروح نقدية.',
+      ],
+      objectivesFr: [
+        "Développement de l'expression corporelle, de la maîtrise vocale et de l'improvisation.",
+        'Réinvention scénographique contemporaine du conte traditionnel marocain (Halqa).',
+        'Production de spectacles engagés abordant avec sensibilité les enjeux de jeunesse.',
+      ],
+      objectivesEn: [
+        'Cultivating stage presence, vocal projection, and theatrical improvisation skills.',
+        'Reimagining classical Moroccan storytelling (Halqa) through contemporary staging.',
+        'Producing socially engaged stage productions that spark dialogue and empathy.',
+      ],
+      initiativesAr: [
+        'محترف إعداد الممثل والسينوغرافيا',
+        'ملتقى الحكواتي وفنون الركح',
+        'جولة المسرح التفاعلي بدور الشباب والمراكز الثقافية',
+      ],
+      initiativesFr: [
+        'Atelier du comédien et scénographie',
+        'Festival du conteur et des arts de la scène',
+        'Tournée de théâtre interactif dans les maisons de jeunes',
+      ],
+      initiativesEn: [
+        'Actor Training & Scenography Studio',
+        'Storytellers & Stage Arts Showcase',
+        'Interactive Youth Theatre Community Tour',
+      ],
+      actionLabelAr: 'شاهد مسرحيات الجمعية',
+      actionLabelFr: 'Voir nos pièces de théâtre',
+      actionLabelEn: 'View Theatre Plays',
+      actionUrl: '/events',
+      accent: 'border-[#d99b26]/40 text-[#d99b26]',
+      bgGlow: 'from-[#fdf2db]/40 to-transparent',
+      order: 3,
+      enabled: true,
+    },
+    {
+      key: 'culture',
+      icon: '🏛️',
+      iconImg: '/icons/culture.png',
+      titleAr: 'الثقافة والتراث',
+      titleFr: 'Culture & Patrimoine',
+      titleEn: 'Moroccan Cultural Heritage',
+      tagAr: 'صون الذاكرة والتراث',
+      tagFr: 'Patrimoine & Mémoire',
+      tagEn: 'Moroccan Cultural Heritage',
+      descAr: 'حماية وتثمين التنوع الثقافي المغربي، والموروث الشفهي، والتقاليد الوطنية الأصيلة.',
+      descFr: 'Sauvegarde et valorisation de la diversité culturelle marocaine et du patrimoine oral.',
+      descEn: 'Safeguarding and celebrating authentic Moroccan heritage, oral history, and traditions.',
+      headlineAr: 'حماية الذاكرة الوطنية، وتثمين التنوع الثقافي المغربي الزاخر عبر الأجيال',
+      headlineFr: 'Préservation de la mémoire nationale et valorisation de la riche diversité marocaine',
+      headlineEn: "Preserving national cultural memory and celebrating Morocco's diverse heritage",
+      objectivesAr: [
+        'توثيق الحرف والصناعات التقليدية وفنون العمارة التاريخية من خلال الأرشفة الرقمية.',
+        'ترسيخ الاعتزاز بالهوية المغربية المتعددة الروافد (العربية، الأمازيغية، الحسانية، والأندلسية).',
+        'تنظيم زيارات ميدانية استكشافية للمآثر والمدن العتيقة لربط الجيل الصاعد بجذوره.',
+      ],
+      objectivesFr: [
+        "Documentation et archivage numérique des savoir-faire artisanaux et de l'architecture.",
+        "Célébration des confluents pluriels de l'identité marocaine (arabe, amazigh, hassani).",
+        'Visites pédagogiques immersives dans les médinas historiques et monuments majeurs.',
+      ],
+      objectivesEn: [
+        'Digital documentation and archiving of traditional crafts, architecture, and folklore.',
+        'Celebrating the pluralistic foundations of Moroccan identity (Arab, Amazigh, Hassani).',
+        'Organizing educational immersive journeys to historic medinas and cultural landmarks.',
+      ],
+      initiativesAr: [
+        'منصة الأرشيف الرقمي للتراث الشفهي',
+        'سلسلة ندوات "ذاكرة المكان والمبدع"',
+        'دليل المسارات الثقافية بالمدن المغربية',
+      ],
+      initiativesFr: [
+        'Plateforme numérique des archives orales',
+        'Conférences "Mémoire des Lieux et Créateurs"',
+        'Guide des circuits culturels du Maroc',
+      ],
+      initiativesEn: [
+        'Oral History & Folklore Digital Archive',
+        '"Memory of Places & Makers" Symposia Series',
+        'Moroccan Cultural Heritage Trail Guide',
+      ],
+      actionLabelAr: 'رؤية الجمعية للتراث',
+      actionLabelFr: 'Notre vision du patrimoine',
+      actionLabelEn: 'Our Heritage Vision',
+      actionUrl: '/about#vision',
+      accent: 'border-[#0d3b43]/30 text-[#0d3b43]',
+      bgGlow: 'from-[#d8f0f4]/40 to-transparent',
+      order: 4,
+      enabled: true,
+    },
+    {
+      key: 'youth',
+      icon: '🚀',
+      iconImg: '/icons/youth.png',
+      titleAr: 'تمكين الشباب',
+      titleFr: 'Autonomisation des Jeunes',
+      titleEn: 'Youth Leadership & Skills',
+      tagAr: 'تكوين وقيادة شبابية',
+      tagFr: 'Leadership Jeunesse',
+      tagEn: 'Youth Leadership & Skills',
+      descAr: 'بناء القدرات القيادية، ورشات التكوين، والتوجيه المهني في المهن الفنية والثقافية.',
+      descFr: 'Renforcement du leadership, ateliers de formation et orientation dans les métiers créatifs.',
+      descEn: 'Building leadership capacity, professional mentorship, and creative career guidance.',
+      headlineAr: 'بناء القيادات الإبداعية وتأهيل الشباب لولوج المهن الثقافية والفنية باحترافية',
+      headlineFr: "Formation des leaders culturels et accompagnement à l'insertion professionnelle créative",
+      headlineEn: 'Fostering creative leaders and preparing youth for cultural career opportunities',
+      objectivesAr: [
+        'تأطير الشباب في إدارة المشاريع الثقافية، التدبير اللوجستي، والتسويق الرقمي للفعاليات.',
+        'توفير الإرشاد والمرافقة المهنية للمشاريع الإبداعية والشركات الناشئة في مجال الفنون.',
+        'صقل المهارات الحياتية كالتفاوض، القيادة التشاركية، والعمل الميداني المنظم.',
+      ],
+      objectivesFr: [
+        'Gestion de projets culturels, ingénierie événementielle et marketing digital.',
+        'Incubation et mentorat personnalisé pour les initiatives et startups créatives.',
+        "Développement des compétences de vie (leadership collaboratif, prise de parole, négociation).",
+      ],
+      objectivesEn: [
+        'Comprehensive training in cultural project management, logistics, and digital event marketing.',
+        'Professional mentorship and incubation for youth-led artistic ventures and cultural initiatives.',
+        'Strengthening soft skills: collaborative leadership, public speaking, and team problem-solving.',
+      ],
+      initiativesAr: [
+        'أكاديمية التدبير الثقافي للشباب',
+        'مختبر الابتكار الاجتماعي الإبداعي',
+        'برنامج التوجيه والمرافقة للمبدعين الصاعدين',
+      ],
+      initiativesFr: [
+        'Académie du management culturel pour jeunes',
+        "Laboratoire d'innovation sociale et artistique",
+        'Programme de mentorat pour artistes émergents',
+      ],
+      initiativesEn: [
+        'Youth Cultural Management Academy',
+        'Creative Social Innovation Incubator',
+        'Emerging Creatives Mentorship Cohort',
+      ],
+      actionLabelAr: 'انضم إلى برامج التمكين',
+      actionLabelFr: "Rejoindre l'académie",
+      actionLabelEn: 'Join Leadership Programs',
+      actionUrl: '/membership',
+      accent: 'border-[#c85a32]/30 text-[#c85a32]',
+      bgGlow: 'from-[#fae4dc]/40 to-transparent',
+      order: 5,
+      enabled: true,
+    },
+    {
+      key: 'community',
+      icon: '🤝',
+      iconImg: '/icons/community.png',
+      titleAr: 'العمل المجتمعي والتطوع',
+      titleFr: 'Action Communautaire',
+      titleEn: 'Civic Volunteering Program',
+      tagAr: 'مبادرة شباب في العمل',
+      tagFr: 'Jeunesse en Action',
+      tagEn: 'Civic Volunteering Program',
+      descAr: 'التطوع المدني، تنشيط الأحياء، والأنشطة الثقافية التضامنية ذات الأثر الإيجابي.',
+      descFr: 'Bénévolat civique, animation des quartiers et actions culturelles solidaires.',
+      descEn: 'Civic volunteering, neighborhood cultural outreach, and impactful community actions.',
+      headlineAr: 'إشاعة الفن في كل حي وترسيخ ثقافة التطوع الإيجابي لخدمة الصالح العام',
+      headlineFr: "Démocratisation de l'accès à la culture et engagement civique solidaire",
+      headlineEn: 'Democratizing cultural access and empowering youth through civic volunteering',
+      objectivesAr: [
+        'قيادة مبادرة "شباب في العمل" التطوعية لتنظيم وتأطير التظاهرات والمهرجانات الثقافية.',
+        'إطلاق قوافل ثقافية متنقلة تستهدف المراكز القروية والأحياء الأقل تجهيزاً.',
+        'منح المتطوعين شواهد خبرة وتجربة موثقة تفتح لهم آفاق الاندماج الاجتماعي والمهني.',
+      ],
+      objectivesFr: [
+        'Pilotage de l\'initiative citoyenne "Jeunesse en Action" pour animer les festivals.',
+        'Caravanes culturelles solidaires dans les zones rurales et quartiers prioritaires.',
+        "Délivrance d'attestations certifiées valorisant l'engagement civique et les compétences.",
+      ],
+      objectivesEn: [
+        'Leading the "Youth in Action" volunteering framework for cultural event production.',
+        'Mobile solidarity caravans delivering workshops to rural and underserved communities.',
+        'Providing verified volunteering certifications that enhance professional career prospects.',
+      ],
+      initiativesAr: [
+        'مبادرة "شباب في العمل" — AMYCC',
+        'قافلة الفنون المتنقلة للمدارس ودور الشباب',
+        'الملتقى السنوي للاحتفاء بالمتطوعين والشركاء',
+      ],
+      initiativesFr: [
+        'Initiative citoyenne "Jeunesse en Action"',
+        'Caravane artistique mobile pour les écoles',
+        'Célébration annuelle des bénévoles et partenaires',
+      ],
+      initiativesEn: [
+        '"Youth in Action" Civic Volunteering Hub',
+        'Mobile Arts Caravan for Schools & Community Centers',
+        'Annual Volunteer Appreciation & Community Awards',
+      ],
+      actionLabelAr: 'تطوع في شباب في العمل',
+      actionLabelFr: 'Postuler au bénévolat',
+      actionLabelEn: 'Apply for Volunteering',
+      actionUrl: '/programs/youth-in-action',
+      accent: 'border-[#d99b26]/40 text-[#d99b26]',
+      bgGlow: 'from-[#fdf2db]/40 to-transparent',
+      order: 6,
+      enabled: true,
+    },
+  ],
+}
+
+export async function getAreasSettings(): Promise<AreasConfig> {
+  try {
+    const supabase = await createClient()
+    const { data, error } = await supabase
+      .from('site_settings')
+      .select('value')
+      .eq('key', 'areas')
+      .maybeSingle()
+
+    if (error || !data || !data.value) {
+      return defaultAreasConfig
+    }
+
+    const val = data.value as Partial<AreasConfig>
+    if (!Array.isArray(val.items) || val.items.length === 0) {
+      return defaultAreasConfig
+    }
+
+    return {
+      sectionTitleAr: val.sectionTitleAr || defaultAreasConfig.sectionTitleAr,
+      sectionTitleFr: val.sectionTitleFr || defaultAreasConfig.sectionTitleFr,
+      sectionTitleEn: val.sectionTitleEn || defaultAreasConfig.sectionTitleEn,
+      sectionSubtitleAr: val.sectionSubtitleAr || defaultAreasConfig.sectionSubtitleAr,
+      sectionSubtitleFr: val.sectionSubtitleFr || defaultAreasConfig.sectionSubtitleFr,
+      sectionSubtitleEn: val.sectionSubtitleEn || defaultAreasConfig.sectionSubtitleEn,
+      eyebrowAr: val.eyebrowAr || defaultAreasConfig.eyebrowAr,
+      eyebrowFr: val.eyebrowFr || defaultAreasConfig.eyebrowFr,
+      eyebrowEn: val.eyebrowEn || defaultAreasConfig.eyebrowEn,
+      items: val.items
+        .map((item, index) => ({
+          key: item.key || `area-${index + 1}`,
+          icon: item.icon || '🎨',
+          iconImg: item.iconImg || '/icons/arts.png',
+          titleAr: item.titleAr || '',
+          titleFr: item.titleFr || '',
+          titleEn: item.titleEn || '',
+          tagAr: item.tagAr || '',
+          tagFr: item.tagFr || '',
+          tagEn: item.tagEn || '',
+          descAr: item.descAr || '',
+          descFr: item.descFr || '',
+          descEn: item.descEn || '',
+          headlineAr: item.headlineAr || '',
+          headlineFr: item.headlineFr || '',
+          headlineEn: item.headlineEn || '',
+          objectivesAr: Array.isArray(item.objectivesAr) ? item.objectivesAr : [],
+          objectivesFr: Array.isArray(item.objectivesFr) ? item.objectivesFr : [],
+          objectivesEn: Array.isArray(item.objectivesEn) ? item.objectivesEn : [],
+          initiativesAr: Array.isArray(item.initiativesAr) ? item.initiativesAr : [],
+          initiativesFr: Array.isArray(item.initiativesFr) ? item.initiativesFr : [],
+          initiativesEn: Array.isArray(item.initiativesEn) ? item.initiativesEn : [],
+          actionLabelAr: item.actionLabelAr || 'اعرف أكثر',
+          actionLabelFr: item.actionLabelFr || 'En savoir plus',
+          actionLabelEn: item.actionLabelEn || 'Learn More',
+          actionUrl: item.actionUrl || '/programs',
+          accent: item.accent || 'border-[#c85a32]/30 text-[#c85a32]',
+          bgGlow: item.bgGlow || 'from-[#fae4dc]/40 to-transparent',
+          order: typeof item.order === 'number' ? item.order : index + 1,
+          enabled: typeof item.enabled === 'boolean' ? item.enabled : true,
+        }))
+        .sort((a, b) => a.order - b.order),
+    }
+  } catch {
+    return defaultAreasConfig
+  }
+}

@@ -26,6 +26,7 @@ const navSections: NavSection[] = [
     items: [
       { href: '/admin', labelAr: 'نظرة عامة', labelEn: 'Overview', icon: '📊' },
       { href: '/admin/pages', labelAr: 'الصفحات والأقسام', labelEn: 'Pages & Sections', icon: '📄' },
+      { href: '/admin/areas', labelAr: 'مجالات التدخل', labelEn: 'Core Disciplines', icon: '🎯' },
       { href: '/admin/programs', labelAr: 'البرامج الثقافية', labelEn: 'Programs CMS', icon: '🎨' },
       { href: '/admin/events', labelAr: 'الفعاليات والورش', labelEn: 'Events CMS', icon: '📅' },
       { href: '/admin/news', labelAr: 'الأخبار والبيانات', labelEn: 'News & Press', icon: '📰' },
