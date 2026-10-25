@@ -66,11 +66,11 @@ export function ContactForm({ locale, topics = [], responseTime }: ContactFormPr
       {/* Decorative Moroccan subtle top border */}
       <div className="absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r from-[#0d3b43] via-[#c85a32] to-[#d99b26]" />
 
-      <div className="space-y-1 pb-2 border-b border-[#f0ebe1]">
+      <div className="space-y-1.5 pb-3 border-b border-[#f0ebe1]">
         <h3 className="text-xl sm:text-2xl font-black text-[#08242a] tracking-tight">
           {isAr ? 'استمارة المراسلة والاستفسار المباشر' : isFr ? 'Formulaire de Contact Direct' : 'Direct Inquiry Form'}
         </h3>
-        <p className="text-xs text-[#5f7174]">
+        <p className="text-xs sm:text-sm text-[#5f7174] leading-relaxed">
           {isAr
             ? 'املأ الاستمارة وسيتولى الفريق الإداري المختص الرد عليك في أقرب الآجال.'
             : isFr
@@ -92,7 +92,7 @@ export function ContactForm({ locale, topics = [], responseTime }: ContactFormPr
             <span>{result.message}</span>
           </div>
           {result.success && responseTime && (
-            <p className="text-3xs text-emerald-700 font-normal mt-1">
+            <p className="text-xs text-emerald-700 font-bold mt-1.5">
               {isAr ? `متوسط وقت الرد: ${responseTime}` : `Response time: ${responseTime}`}
             </p>
           )}
@@ -101,7 +101,7 @@ export function ContactForm({ locale, topics = [], responseTime }: ContactFormPr
 
       {/* Full Name */}
       <div>
-        <label className="block text-2xs font-bold uppercase tracking-wider text-[#08242a] mb-2">
+        <label className="block text-xs sm:text-sm font-bold uppercase tracking-wider text-[#08242a] mb-2">
           {isAr ? 'الاسم الكامل *' : isFr ? 'Nom complet *' : 'Full Name *'}
         </label>
         <input
@@ -109,17 +109,17 @@ export function ContactForm({ locale, topics = [], responseTime }: ContactFormPr
           name="name"
           required
           placeholder={isAr ? 'الاسم العائلي والشخصي' : 'e.g. Sara Mansouri'}
-          className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] bg-[#faf7f2]/50 text-xs text-[#08242a] focus:bg-white focus:border-[#0d3b43] focus:ring-2 focus:ring-[#0d3b43]/15 outline-none transition-all"
+          className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] bg-[#faf7f2]/50 text-sm text-[#08242a] focus:bg-white focus:border-[#0d3b43] focus:ring-2 focus:ring-[#0d3b43]/15 outline-none transition-all"
         />
         {result?.errors?.name && (
-          <p className="text-3xs text-rose-600 mt-1">{result.errors.name[0]}</p>
+          <p className="text-xs text-rose-600 font-bold mt-1">{result.errors.name[0]}</p>
         )}
       </div>
 
       {/* Email & Phone */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <div>
-          <label className="block text-2xs font-bold uppercase tracking-wider text-[#08242a] mb-2">
+          <label className="block text-xs sm:text-sm font-bold uppercase tracking-wider text-[#08242a] mb-2">
             {isAr ? 'البريد الإلكتروني *' : isFr ? 'Adresse e-mail *' : 'Email Address *'}
           </label>
           <input
@@ -127,22 +127,22 @@ export function ContactForm({ locale, topics = [], responseTime }: ContactFormPr
             name="email"
             required
             placeholder="name@example.com"
-            className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] bg-[#faf7f2]/50 text-xs text-[#08242a] font-mono focus:bg-white focus:border-[#0d3b43] focus:ring-2 focus:ring-[#0d3b43]/15 outline-none transition-all"
+            className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] bg-[#faf7f2]/50 text-sm text-[#08242a] font-mono focus:bg-white focus:border-[#0d3b43] focus:ring-2 focus:ring-[#0d3b43]/15 outline-none transition-all"
           />
           {result?.errors?.email && (
-            <p className="text-3xs text-rose-600 mt-1">{result.errors.email[0]}</p>
+            <p className="text-xs text-rose-600 font-bold mt-1">{result.errors.email[0]}</p>
           )}
         </div>
 
         <div>
-          <label className="block text-2xs font-bold uppercase tracking-wider text-[#08242a] mb-2">
+          <label className="block text-xs sm:text-sm font-bold uppercase tracking-wider text-[#08242a] mb-2">
             {isAr ? 'رقم الهاتف / الواتساب' : isFr ? 'Téléphone / WhatsApp' : 'Phone / WhatsApp'}
           </label>
           <input
             type="tel"
             name="phone"
             placeholder="+212 6..."
-            className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] bg-[#faf7f2]/50 text-xs text-[#08242a] font-mono focus:bg-white focus:border-[#0d3b43] focus:ring-2 focus:ring-[#0d3b43]/15 outline-none transition-all"
+            className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] bg-[#faf7f2]/50 text-sm text-[#08242a] font-mono focus:bg-white focus:border-[#0d3b43] focus:ring-2 focus:ring-[#0d3b43]/15 outline-none transition-all"
           />
         </div>
       </div>
@@ -150,13 +150,13 @@ export function ContactForm({ locale, topics = [], responseTime }: ContactFormPr
       {/* Inquiry Topic Dropdown */}
       {topics.length > 0 && (
         <div>
-          <label className="block text-2xs font-bold uppercase tracking-wider text-[#08242a] mb-2">
+          <label className="block text-xs sm:text-sm font-bold uppercase tracking-wider text-[#08242a] mb-2">
             {isAr ? 'موضوع / طبيعة الاستفسار *' : isFr ? 'Objet de la demande *' : 'Inquiry Category *'}
           </label>
           <select
             value={selectedTopic}
             onChange={(e) => setSelectedTopic(e.target.value)}
-            className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] bg-[#faf7f2]/50 text-xs text-[#08242a] focus:bg-white focus:border-[#0d3b43] focus:ring-2 focus:ring-[#0d3b43]/15 outline-none transition-all"
+            className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] bg-[#faf7f2]/50 text-sm text-[#08242a] focus:bg-white focus:border-[#0d3b43] focus:ring-2 focus:ring-[#0d3b43]/15 outline-none transition-all"
           >
             <option value="">{isAr ? '-- اختر موضوع الرسالة --' : '-- Select inquiry topic --'}</option>
             {topics.map((t) => {
@@ -175,7 +175,7 @@ export function ContactForm({ locale, topics = [], responseTime }: ContactFormPr
       {/* Custom Subject (if 'other' selected or no topics defined) */}
       {(selectedTopic === 'other' || topics.length === 0) && (
         <div>
-          <label className="block text-2xs font-bold uppercase tracking-wider text-[#08242a] mb-2">
+          <label className="block text-xs sm:text-sm font-bold uppercase tracking-wider text-[#08242a] mb-2">
             {isAr ? 'موضوع الرسالة بالتحديد' : isFr ? 'Précision du sujet' : 'Specific Subject'}
           </label>
           <input
@@ -183,14 +183,14 @@ export function ContactForm({ locale, topics = [], responseTime }: ContactFormPr
             value={customSubject}
             onChange={(e) => setCustomSubject(e.target.value)}
             placeholder={isAr ? 'مثال: استفسار حول ورشات الموسيقى والتراث' : 'e.g. Partnership inquiry'}
-            className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] bg-[#faf7f2]/50 text-xs text-[#08242a] focus:bg-white focus:border-[#0d3b43] focus:ring-2 focus:ring-[#0d3b43]/15 outline-none transition-all"
+            className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] bg-[#faf7f2]/50 text-sm text-[#08242a] focus:bg-white focus:border-[#0d3b43] focus:ring-2 focus:ring-[#0d3b43]/15 outline-none transition-all"
           />
         </div>
       )}
 
       {/* Message Textarea */}
       <div>
-        <label className="block text-2xs font-bold uppercase tracking-wider text-[#08242a] mb-2">
+        <label className="block text-xs sm:text-sm font-bold uppercase tracking-wider text-[#08242a] mb-2">
           {isAr ? 'نص الرسالة أو الاستفسار *' : isFr ? 'Votre message *' : 'Your Message *'}
         </label>
         <textarea
@@ -198,15 +198,15 @@ export function ContactForm({ locale, topics = [], responseTime }: ContactFormPr
           required
           rows={5}
           placeholder={isAr ? 'اكتب رسالتك، ملاحظتك، أو مقترحك بالتفصيل هنا...' : 'Write your inquiry or proposal in detail here...'}
-          className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] bg-[#faf7f2]/50 text-xs text-[#08242a] focus:bg-white focus:border-[#0d3b43] focus:ring-2 focus:ring-[#0d3b43]/15 outline-none resize-y transition-all"
+          className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] bg-[#faf7f2]/50 text-sm text-[#08242a] focus:bg-white focus:border-[#0d3b43] focus:ring-2 focus:ring-[#0d3b43]/15 outline-none resize-y transition-all leading-relaxed"
         />
         {result?.errors?.message && (
-          <p className="text-3xs text-rose-600 mt-1">{result.errors.message[0]}</p>
+          <p className="text-xs text-rose-600 font-bold mt-1">{result.errors.message[0]}</p>
         )}
       </div>
 
       {/* Privacy & Trust Assurance */}
-      <div className="p-3.5 rounded-xl bg-[#faf7f2] border border-[#f0ebe1] flex items-center gap-2.5 text-3xs text-[#5f7174]">
+      <div className="p-3.5 rounded-xl bg-[#faf7f2] border border-[#f0ebe1] flex items-center gap-2.5 text-xs text-[#5f7174]">
         <span className="text-sm">🔒</span>
         <span>
           {isAr
@@ -220,7 +220,7 @@ export function ContactForm({ locale, topics = [], responseTime }: ContactFormPr
       <button
         type="submit"
         disabled={loading}
-        className="w-full py-4 px-6 rounded-xl font-black text-white bg-[#0d3b43] hover:bg-[#08242a] disabled:opacity-60 transition-all text-xs sm:text-sm shadow-md hover:shadow-lg active:scale-98 cursor-pointer"
+        className="w-full py-4 px-6 rounded-xl font-black text-white bg-[#0d3b43] hover:bg-[#08242a] disabled:opacity-60 transition-all text-sm sm:text-base shadow-md hover:shadow-lg active:scale-98 cursor-pointer"
       >
         {loading
           ? (isAr ? '⏳ جارٍ إرسال الرسالة...' : isFr ? '⏳ Envoi en cours...' : '⏳ Sending...')
