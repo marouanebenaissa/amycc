@@ -1,7 +1,7 @@
 import { getDictionary } from '@/lib/i18n/dictionaries'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
-import { getTopBarSettings, getHeroSettings, getFlagshipProgramSettings } from '@/lib/settings'
+import { getTopBarSettings, getHeroSettings, getFlagshipProgramSettings, getFaqSettings } from '@/lib/settings'
 import { createPublicClient } from '@/lib/supabase/public'
 import { FaqAccordion } from '@/components/home/FaqAccordion'
 import { EventRegistrationModal } from '@/components/events/EventRegistrationModal'
@@ -363,63 +363,24 @@ export default async function HomePage(props: { params: Promise<{ locale: string
     },
   ]
 
-  // Home FAQs
-  const homeFaqs = isAr
-    ? [
-        {
-          q: 'ما هي جمعية روح الفنون والثقافة (AMYCC) وما هو إطارها القانوني؟',
-          a: 'جمعية روح الفنون والثقافة هي جمعية مدنية مغربية غير ربحية تأسست سنة 2026، تعمل وفق مقتضيات الظهير الشريف المنظم للحق في تأسيس الجمعيات بالمملكة المغربية، وتهدف إلى رعاية الفنون، صون التراث الثقافي، وتمكين الشباب من خلال المبادرات الإبداعية والمجتمعية.',
-        },
-        {
-          q: 'ما هي مبادرة "شباب في العمل" (Youth in Action) وكيف يمكنني الانضمام؟',
-          a: 'هي المبادرة التطوعية والمجتمعية الرائدة للجمعية، تهدف إلى إشراك الشباب في تخطيط وتنظيم الفعاليات الثقافية والورشات الفنية. يمكنك التقديم مجاناً عبر ملء استمارة التطوع المتاحة على المنصة، وتمنح الجمعية شواهد تطوع وتجربة جمعوية معتمدة لكافة المشاركين.',
-        },
-        {
-          q: 'كيف يمكن الانخراط والحصول على بطاقة العضوية في الجمعية؟',
-          a: 'يمكن للراغبين في الانخراط تعبئة استمارة العضوية الإلكترونية في قسم "العضوية". تتم دراسة الطلبات من طرف مكتب الجمعية وفقاً لمقتضيات النظام الأساسي والداخلي، ويتم التواصل مع مقدم الطلب لتأكيد انخراطه السنوي.',
-        },
-        {
-          q: 'كيف يمكن للمؤسسات والمراكز الثقافية والتعليمية عقد شراكة مع AMYCC؟',
-          a: 'نرحب بجميع الشراكات الهادفة مع المراكز الثقافية، دور الشباب، المدارس، الجامعات، والجهات الراعية من القطاع الخاص. يمكن تقديم مقترح شراكة مؤسساتية عبر صفحة الشراكات على المنصة أو التواصل المباشر عبر البريد الرسمي contact@amycc.org.',
-        },
-      ]
-    : isFr
-    ? [
-        {
-          q: 'Qu\'est-ce que l\'Association AMYCC et quel est son statut légal ?',
-          a: 'L\'Association Esprit des Arts et de la Culture (AMYCC) est une organisation marocaine à but non lucratif fondée en 2026. Elle œuvre pour la promotion des arts, la sauvegarde du patrimoine culturel et l\'autonomisation des jeunes à travers le Royaume.',
-        },
-        {
-          q: 'Comment participer à l\'initiative "Jeunesse en Action" ?',
-          a: 'Il s\'agit de notre initiative citoyenne phare. Vous pouvez postuler en ligne via notre formulaire de bénévolat pour participer activement à l\'organisation d\'événements et recevoir une attestation certifiée d\'engagement civique.',
-        },
-        {
-          q: 'Comment devenir membre adhérent de l\'AMYCC ?',
-          a: 'Remplissez le formulaire d\'adhésion en ligne. Votre candidature sera examinée par le bureau exécutif conformément aux statuts de l\'association.',
-        },
-        {
-          q: 'Comment proposer un partenariat institutionnel avec l\'association ?',
-          a: 'Nous collaborons étroitement avec les centres culturels, universités, écoles et mécènes. Déposez votre projet via notre page dédiée aux partenariats ou écrivez-nous à contact@amycc.org.',
-        },
-      ]
-    : [
-        {
-          q: 'What is the Spirit of Arts & Culture Association (AMYCC)?',
-          a: 'A Moroccan nonprofit association founded in 2026 dedicated to promoting visual arts, theatre, music, cultural heritage, and youth empowerment across Moroccan cities.',
-        },
-        {
-          q: 'What is the "Youth in Action" volunteering initiative?',
-          a: 'It is our flagship civic initiative empowering young Moroccans to co-create and lead cultural events, workshops, and community outreach projects with official volunteering certificates.',
-        },
-        {
-          q: 'How can I become an active member of AMYCC?',
-          a: 'Submit an online membership application through our portal. Applications are promptly reviewed by the association\'s executive board in accordance with our bylaws.',
-        },
-        {
-          q: 'How can organizations establish a partnership with AMYCC?',
-          a: 'Cultural centers, educational institutes, and private sponsors can submit formal collaboration proposals via our dedicated partnerships page or email us directly at contact@amycc.org.',
-        },
-      ]
+  // Dynamic FAQs from database settings
+  const faqSettings = await getFaqSettings()
+  const activeHomeFaqs = faqSettings.items.filter(
+    (item) => item.published !== false && item.showOnHome !== false
+  )
+
+  const homeFaqs = activeHomeFaqs.map((item) => ({
+    q: isAr
+      ? item.questionAr
+      : isFr
+      ? (item.questionFr || item.questionAr)
+      : (item.questionEn || item.questionAr),
+    a: isAr
+      ? item.answerAr
+      : isFr
+      ? (item.answerFr || item.answerAr)
+      : (item.answerEn || item.answerAr),
+  }))
 
   return (
     <>

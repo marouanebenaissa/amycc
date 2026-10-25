@@ -30,6 +30,7 @@ const navSections: NavSection[] = [
       { href: '/admin/events', labelAr: 'الفعاليات والورش', labelEn: 'Events CMS', icon: '📅' },
       { href: '/admin/news', labelAr: 'الأخبار والبيانات', labelEn: 'News & Press', icon: '📰' },
       { href: '/admin/gallery', labelAr: 'معرض الصور', labelEn: 'Gallery CMS', icon: '🖼️' },
+      { href: '/admin/faqs', labelAr: 'الأسئلة الشائعة', labelEn: 'FAQ CMS', icon: '❓' },
       { href: '/admin/media', labelAr: 'مكتبة الوسائط', labelEn: 'Media Library', icon: '📁' },
       { href: '/admin/translations', labelAr: 'تتبع الترجمات', labelEn: 'Translations Tracker', icon: '🌐' },
     ],

@@ -115,3 +115,47 @@ describe('Multilingual Directionality & Locales', () => {
     assert.deepEqual(locales, ['ar', 'fr', 'en'])
   })
 })
+
+const faqItemSchema = z.object({
+  id: z.string().min(1),
+  questionAr: z.string().min(3),
+  questionFr: z.string().optional(),
+  questionEn: z.string().optional(),
+  answerAr: z.string().min(5),
+  answerFr: z.string().optional(),
+  answerEn: z.string().optional(),
+  category: z.enum(['general', 'membership', 'volunteering', 'partnerships', 'events']).default('general'),
+  showOnHome: z.boolean().default(true),
+  published: z.boolean().default(true),
+  order: z.number().int().min(1).default(1),
+})
+
+describe('FAQ Validation Suite', () => {
+  test('accepts valid trilingual FAQ item', () => {
+    const valid = {
+      id: 'faq-1',
+      questionAr: 'ما هي الجمعية؟',
+      questionFr: "Qu'est-ce que l'association ?",
+      questionEn: 'What is the association?',
+      answerAr: 'جمعية روح الفنون والثقافة المغربية.',
+      answerFr: 'Association marocaine des arts.',
+      answerEn: 'Moroccan arts association.',
+      category: 'general',
+      showOnHome: true,
+      published: true,
+      order: 1,
+    }
+    const result = faqItemSchema.safeParse(valid)
+    assert.equal(result.success, true)
+  })
+
+  test('rejects FAQ with empty Arabic question or answer', () => {
+    const invalid = {
+      id: 'faq-invalid',
+      questionAr: '',
+      answerAr: '',
+    }
+    const result = faqItemSchema.safeParse(invalid)
+    assert.equal(result.success, false)
+  })
+})

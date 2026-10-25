@@ -339,3 +339,133 @@ export async function getFlagshipProgramSettings(): Promise<FlagshipProgramConfi
     return defaultFlagshipProgramConfig
   }
 }
+
+export interface FaqItemConfig {
+  id: string
+  questionAr: string
+  questionFr?: string
+  questionEn?: string
+  answerAr: string
+  answerFr?: string
+  answerEn?: string
+  category: 'general' | 'membership' | 'volunteering' | 'partnerships' | 'events'
+  showOnHome: boolean
+  published: boolean
+  order: number
+}
+
+export interface FaqConfig {
+  items: FaqItemConfig[]
+}
+
+export const defaultFaqConfig: FaqConfig = {
+  items: [
+    {
+      id: 'faq-amycc-about',
+      questionAr: 'ما هي جمعية روح الفنون والثقافة (AMYCC) وما هو إطارها القانوني؟',
+      questionFr: "Qu'est-ce que l'Association AMYCC et quel est son statut légal ?",
+      questionEn: 'What is the Spirit of Arts & Culture Association (AMYCC)?',
+      answerAr: 'جمعية روح الفنون والثقافة (AMYCC) هي منظمة مغربية مدنية غير ربحية تأسست سنة 2026 في إطار الظهير الشريف رقم 1.58.376 المنظم لحق تأسيس الجمعيات. تكرس جهودها لتمكين الشباب وصون التراث الثقافي المغربي، وإطلاق المبادرات الفنية والإبداعية والتطوعية في مختلف جهات المملكة.',
+      answerFr: "L'Association Esprit des Arts et de la Culture (AMYCC) est une organisation marocaine à but non lucratif fondée en 2026 en vertu du Dahir n° 1.58.376. Elle œuvre pour la promotion des arts, la sauvegarde du patrimoine culturel et l'autonomisation des jeunes à travers le Royaume.",
+      answerEn: 'Spirit of Arts & Culture Association (AMYCC) is a Moroccan nonprofit founded in 2026 under Dahir No. 1.58.376. It is dedicated to promoting visual arts, music, performing arts, cultural heritage preservation, and youth empowerment across Morocco.',
+      category: 'general',
+      showOnHome: true,
+      published: true,
+      order: 1,
+    },
+    {
+      id: 'faq-youth-in-action',
+      questionAr: 'ما هي مبادرة "شباب في العمل" وكيف يمكنني التطوع فيها؟',
+      questionFr: 'Comment participer à l\'initiative "Jeunesse en Action" ?',
+      questionEn: 'What is the "Youth in Action" volunteering initiative?',
+      answerAr: 'هي المبادرة التطوعية والمجتمعية الرائدة للجمعية، تهدف إلى إشراك الشباب في تخطيط وتنظيم الفعاليات الثقافية والورشات الفنية الميدانية. يمكنك التقديم مجاناً عبر ملء استمارة التطوع المتاحة على المنصة، وتمنح الجمعية شواهد تطوع وتجربة جمعوية معتمدة لكافة المشاركين.',
+      answerFr: "Il s'agit de notre initiative citoyenne phare. Vous pouvez postuler en ligne via notre formulaire de bénévolat pour participer activement à l'organisation d'événements et recevoir une attestation certifiée d'engagement civique.",
+      answerEn: 'It is our flagship civic initiative empowering young Moroccans to co-create and lead cultural events, workshops, and community outreach projects with official volunteering certificates.',
+      category: 'volunteering',
+      showOnHome: true,
+      published: true,
+      order: 2,
+    },
+    {
+      id: 'faq-membership',
+      questionAr: 'كيف يمكن الانخراط والحصول على بطاقة العضوية في الجمعية؟',
+      questionFr: 'Comment devenir membre adhérent de l\'AMYCC ?',
+      questionEn: 'How can I become an active member of AMYCC?',
+      answerAr: 'يمكن للراغبين في الانخراط تعبئة استمارة العضوية الإلكترونية في قسم "الانخراط". تتم دراسة الطلبات من طرف مكتب الجمعية وفقاً لمقتضيات النظام الأساسي والداخلي، ويتم التواصل مع مقدم الطلب لتأكيد انخراطه السنوي وتسليمه بطاقة العضوية.',
+      answerFr: "Remplissez le formulaire d'adhésion en ligne. Votre candidature sera examinée par le bureau exécutif conformément aux statuts de l'association, puis nous prendrons contact avec vous.",
+      answerEn: 'Submit an online membership application through our portal. Applications are promptly reviewed by the association\'s executive board in accordance with our bylaws.',
+      category: 'membership',
+      showOnHome: true,
+      published: true,
+      order: 3,
+    },
+    {
+      id: 'faq-partnerships',
+      questionAr: 'كيف يمكن للمؤسسات والمراكز الثقافية والتعليمية عقد شراكة مع AMYCC؟',
+      questionFr: 'Comment proposer un partenariat institutionnel avec l\'association ?',
+      questionEn: 'How can organizations establish a partnership with AMYCC?',
+      answerAr: 'نرحب بجميع الشراكات الهادفة مع المراكز الثقافية، دور الشباب، المدارس، الجامعات، والجهات الراعية من القطاعين العام والخاص. يمكن تقديم مقترح شراكة مؤسساتية عبر صفحة الشراكات على المنصة أو التواصل المباشر عبر البريد الرسمي contact@amycc.org.',
+      answerFr: 'Nous collaborons étroitement avec les centres culturels, universités, écoles et mécènes. Déposez votre projet via notre page dédiée aux partenariats ou écrivez-nous à contact@amycc.org.',
+      answerEn: 'Cultural centers, educational institutes, and private sponsors can submit formal collaboration proposals via our dedicated partnerships page or email us directly at contact@amycc.org.',
+      category: 'partnerships',
+      showOnHome: true,
+      published: true,
+      order: 4,
+    },
+    {
+      id: 'faq-events-tickets',
+      questionAr: 'هل حضور وتذاكر فعاليات وورشات الجمعية مجانية أم تتطلب رسوماً؟',
+      questionFr: 'L\'accès aux événements et ateliers est-il gratuit ?',
+      questionEn: 'Are AMYCC events and workshops free to attend?',
+      answerAr: 'معظم ورشات العمل والأنشطة الشبابية مجانية ومفتوحة للعموم عبر التسجيل المسبق على الموقع لضمان المقعد، في حين قد تتطلب بعض العروض الفنية الكبرى رسوم اشتراك رمزية لدعم صندوق الجمعية وتغطية التكاليف الإنتاجية واللوجستية.',
+      answerFr: 'La majorité des ateliers et événements sont gratuits sur inscription préalable sur notre site. Certaines représentations spéciales peuvent requérir une contribution symbolique pour soutenir la production.',
+      answerEn: 'Most cultural workshops and community events are free with advance online registration. Select major performances may require a symbolic contribution to support production costs.',
+      category: 'events',
+      showOnHome: false,
+      published: true,
+      order: 5,
+    },
+  ],
+}
+
+export async function getFaqSettings(): Promise<FaqConfig> {
+  try {
+    const supabase = await createClient()
+    const { data, error } = await supabase
+      .from('site_settings')
+      .select('value')
+      .eq('key', 'faqs')
+      .maybeSingle()
+
+    if (error || !data || !data.value) {
+      return defaultFaqConfig
+    }
+
+    const val = data.value as Partial<FaqConfig>
+    if (!Array.isArray(val.items) || val.items.length === 0) {
+      return defaultFaqConfig
+    }
+
+    return {
+      items: val.items
+        .map((item, index) => ({
+          id: item.id || `faq-${index + 1}`,
+          questionAr: item.questionAr || '',
+          questionFr: item.questionFr || '',
+          questionEn: item.questionEn || '',
+          answerAr: item.answerAr || '',
+          answerFr: item.answerFr || '',
+          answerEn: item.answerEn || '',
+          category: (['general', 'membership', 'volunteering', 'partnerships', 'events'].includes(item.category)
+            ? item.category
+            : 'general') as FaqItemConfig['category'],
+          showOnHome: typeof item.showOnHome === 'boolean' ? item.showOnHome : true,
+          published: typeof item.published === 'boolean' ? item.published : true,
+          order: typeof item.order === 'number' ? item.order : index + 1,
+        }))
+        .sort((a, b) => a.order - b.order),
+    }
+  } catch {
+    return defaultFaqConfig
+  }
+}

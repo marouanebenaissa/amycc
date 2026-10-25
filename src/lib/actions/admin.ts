@@ -3,6 +3,7 @@
 import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import { revalidatePath } from 'next/cache'
+import type { FaqItemConfig } from '@/lib/settings'
 
 export async function recordAuditLog(
   action: string,
@@ -153,6 +154,41 @@ export async function savePageConfiguration(
 
     await recordAuditLog('page_config_updated', 'site_settings', `page_${pageKey}`, { pageKey })
     revalidatePath('/admin/pages')
+    revalidatePath('/[locale]', 'layout')
+    return { success: true }
+  } catch (err) {
+    return { success: false, error: (err as Error).message }
+  }
+}
+
+export async function saveFaqConfiguration(
+  items: FaqItemConfig[]
+): Promise<{ success: boolean; error?: string }> {
+  try {
+    const supabase = await createClient()
+    const {
+      data: { user },
+    } = await supabase.auth.getUser()
+
+    if (!user) {
+      return { success: false, error: 'غير مصرح لك بتعديل الأسئلة الشائعة (Unauthorized)' }
+    }
+
+    const { error } = await supabase
+      .from('site_settings')
+      .upsert([
+        {
+          key: 'faqs',
+          value: { items },
+          updated_at: new Date().toISOString(),
+        },
+      ])
+
+    if (error) return { success: false, error: error.message }
+
+    await recordAuditLog('faqs_updated', 'site_settings', 'faqs', { count: items.length })
+    revalidatePath('/admin/faqs')
+    revalidatePath('/admin/settings')
     revalidatePath('/[locale]', 'layout')
     return { success: true }
   } catch (err) {

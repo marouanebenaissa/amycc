@@ -250,6 +250,20 @@ export default async function AdminPagesPage() {
                   {page.descriptionAr}
                 </p>
 
+                {page.key === 'faq' && (
+                  <div className="mb-3 p-2.5 rounded-xl bg-amber-50/70 border border-amber-200/80 flex items-center justify-between gap-2">
+                    <span className="text-3xs font-bold text-amber-900">
+                      💡 إدارة وتعديل بنك الأسئلة الشائعة بالكامل
+                    </span>
+                    <Link
+                      href="/admin/faqs"
+                      className="px-2.5 py-1 rounded-lg text-3xs font-bold text-white bg-[#0d3b43] hover:bg-[#14505b] transition-colors shrink-0"
+                    >
+                      إدارة الأسئلة (FAQ CMS) →
+                    </Link>
+                  </div>
+                )}
+
                 {/* SEO Form inline */}
                 <form action={handleUpdatePage} className="pt-3 border-t border-[#f4ede2] space-y-3">
                   <input type="hidden" name="pageKey" value={page.key} />

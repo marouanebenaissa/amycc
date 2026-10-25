@@ -1,6 +1,7 @@
 import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import { revalidatePath } from 'next/cache'
+import Link from 'next/link'
 import {
   defaultTopBarConfig,
   type TopBarConfig,
@@ -1102,6 +1103,27 @@ export default async function AdminSettingsPage() {
               </div>
             </div>
           </div>
+        </div>
+
+        {/* FAQ Management Section Card */}
+        <div className="bg-gradient-to-r from-[#08242a] to-[#0d3b43] text-white p-6 sm:p-8 rounded-2xl border border-[#14505b] shadow-md flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div className="space-y-1.5">
+            <div className="flex items-center gap-2">
+              <span className="text-xl">❓</span>
+              <h3 className="text-sm font-bold uppercase tracking-wider text-white">
+                إدارة بنك الأسئلة الشائعة (FAQ Management)
+              </h3>
+            </div>
+            <p className="text-xs text-[#d8f0f4]/85 max-w-xl leading-relaxed">
+              تحكم كامل في نصوص الأسئلة والإجابات بثلاث لغات (العربية، الفرنسية، الإنجليزية)، ترتيبها، واختيار ما يعرض منها في الواجهة الرئيسية.
+            </p>
+          </div>
+          <Link
+            href="/admin/faqs"
+            className="px-5 py-2.5 rounded-xl text-xs font-bold text-[#08242a] bg-[#f4ce83] hover:bg-white active:scale-98 transition-all shrink-0 text-center shadow-xs"
+          >
+            الانتقال لإدارة الأسئلة الشائعة →
+          </Link>
         </div>
 
         {/* Editable Contact & Social Information Form */}
