@@ -108,15 +108,15 @@ export default async function ProgramDetailPage(props: {
       program = {
         slug: 'theatre-scenic-expression',
         category: 'theatre',
-        city: isAr ? 'مراكش والجهات' : 'Marrakech & Regions',
+        city: isAr ? 'مراكش والجهات' : isFr ? 'Marrakech & Régions' : 'Marrakech & Regions',
         program_translations: [
           {
             locale,
             title: isAr ? 'برنامج المسرح وفنون الأداء التعبيري' : isFr ? 'Programme Théâtre & Arts de la Scène' : 'Theatre & Performing Arts Program',
-            description: isAr ? 'تكوين مسرحي شامل يغطي فن الحكاية (الحلقة)، الإلقاء الصوتي، التعبير الحركي، وكتابة النصوص الدرامية الهادفة.' : 'Stage and performing arts training program.',
-            objectives: isAr ? 'إنتاج عروض مسرحية شبابية، تنمية الثقة بالنفس، والمشاركة في المهرجانات الوطنية.' : 'Stage productions and youth talent incubation.',
-            target_audience: isAr ? 'هواة المسرح والشباب المهتم بالتمثيل والإخراج.' : 'Theatre enthusiasts and performers.',
-            activities: isAr ? 'تمارين الارتجال، تدريبات الإلقاء الصوتي، عروض مسرح الشارع والمسرح المدرسي.' : 'Improvisation, voice training, stage plays.'
+            description: isAr ? 'تكوين مسرحي شامل يغطي فن الحكاية (الحلقة)، الإلقاء الصوتي، التعبير الحركي، وكتابة النصوص الدرامية الهادفة.' : isFr ? 'Formation théâtrale couvrant le conte traditionnel (Halqa), la diction, le jeu corporel et l\'écriture dramatique.' : 'Stage and performing arts training program.',
+            objectives: isAr ? 'إنتاج عروض مسرحية شبابية، تنمية الثقة بالنفس، والمشاركة في المهرجانات الوطنية.' : isFr ? 'Production de spectacles de jeunes, développement de l\'éloquence et participation aux festivals nationaux.' : 'Stage productions and youth talent incubation.',
+            target_audience: isAr ? 'هواة المسرح والشباب المهتم بالتمثيل والإخراج.' : isFr ? 'Passionnés de théâtre, jeunes comédiens et metteurs en scène émergents.' : 'Theatre enthusiasts and performers.',
+            activities: isAr ? 'تمارين الارتجال، تدريبات الإلقاء الصوتي، عروض مسرح الشارع والمسرح المدرسي.' : isFr ? 'Exercices d\'improvisation, travail vocal et corporel, représentations de théâtre de rue.' : 'Improvisation, voice training, stage plays.'
           }
         ]
       }
@@ -124,15 +124,15 @@ export default async function ProgramDetailPage(props: {
       program = {
         slug: 'musical-heritage-revival',
         category: 'music',
-        city: isAr ? 'المملكة المغربية' : 'Morocco',
+        city: isAr ? 'المملكة المغربية' : isFr ? 'Royaume du Maroc' : 'Morocco',
         program_translations: [
           {
             locale,
             title: isAr ? 'مختبر إحياء التراث الموسيقي المغربي' : isFr ? 'Laboratoire du Patrimoine Musical Marocain' : 'Moroccan Musical Heritage Lab',
-            description: isAr ? 'ورشات تدريبية للتعريف بالآلات والمقامات والإيقاعات التراثية المغربية وتوثيق الأهازيج التقليدية ونقلها للشباب.' : 'Traditional Moroccan music laboratory and documentation.',
-            objectives: isAr ? 'صون التراث الشفهي الموسيقي، تدريب العازفين الشباب، وتوثيق الأنغام الأصيلة.' : 'Musical heritage preservation and youth training.',
-            target_audience: isAr ? 'الموسيقيون الشباب، الباحثون في التراث، والمهتمون بالنغم المغربي الأصيل.' : 'Young musicians and heritage researchers.',
-            activities: isAr ? 'دروس العزف على الآلات الوترية، تسجيلات تراثية ميدانية، حلقات استماع وتذوق نغمي.' : 'Instrument lessons, field recordings, musical listening circles.'
+            description: isAr ? 'ورشات تدريبية للتعريف بالآلات والمقامات والإيقاعات التراثية المغربية وتوثيق الأهازيج التقليدية ونقلها للشباب.' : isFr ? 'Ateliers de pratique instrumentale traditionnelle et de documentation des rythmes du terroir marocain.' : 'Traditional Moroccan music laboratory and documentation.',
+            objectives: isAr ? 'صون التراث الشفهي الموسيقي، تدريب العازفين الشباب، وتوثيق الأنغام الأصيلة.' : isFr ? 'Sauvegarde du patrimoine musical oral, formation des jeunes instrumentistes et valorisation des mélodies authentiques.' : 'Musical heritage preservation and youth training.',
+            target_audience: isAr ? 'الموسيقيون الشباب، الباحثون في التراث، والمهتمون بالنغم المغربي الأصيل.' : isFr ? 'Jeunes musiciens, chercheurs en patrimoine et passionnés de musique marocaine.' : 'Young musicians and heritage researchers.',
+            activities: isAr ? 'دروس العزف على الآلات الوترية، تسجيلات تراثية ميدانية، حلقات استماع وتذوق نغمي.' : isFr ? 'Cours de luth (oud), enregistrements sonores de terrain, conférences et écoutes commentées.' : 'Instrument lessons, field recordings, musical listening circles.'
           }
         ]
       }
@@ -184,7 +184,7 @@ export default async function ProgramDetailPage(props: {
                   {program.category}
                 </span>
                 <span className="px-3.5 py-1.5 rounded-full text-xs font-bold bg-[#faf7f2] border border-[#e5e0d6] text-[#5f7174]">
-                  📍 {program.city || (isAr ? 'المملكة المغربية' : 'Morocco')}
+                  📍 {program.city || (isAr ? 'المملكة المغربية' : isFr ? 'Royaume du Maroc' : 'Morocco')}
                 </span>
               </div>
 
@@ -206,7 +206,7 @@ export default async function ProgramDetailPage(props: {
               <div className="p-6 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6] space-y-2">
                 <h2 className="text-base sm:text-lg font-black text-[#08242a] flex items-center gap-2">
                   <span>🎯</span>
-                  <span>{isAr ? 'أهداف ومخرجات البرنامج' : 'Program Objectives'}</span>
+                  <span>{isAr ? 'أهداف ومخرجات البرنامج' : isFr ? 'Objectifs et résultats attendus' : 'Program Objectives'}</span>
                 </h2>
                 <p className="leading-relaxed text-[#445457]">{translation.objectives}</p>
               </div>
@@ -216,7 +216,7 @@ export default async function ProgramDetailPage(props: {
               <div className="p-6 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6] space-y-2">
                 <h2 className="text-base sm:text-lg font-black text-[#08242a] flex items-center gap-2">
                   <span>👥</span>
-                  <span>{isAr ? 'الفئة المستهدفة وشروط المشاركة' : 'Target Audience'}</span>
+                  <span>{isAr ? 'الفئة المستهدفة وشروط المشاركة' : isFr ? 'Public cible et conditions' : 'Target Audience'}</span>
                 </h2>
                 <p className="leading-relaxed text-[#445457]">{translation.target_audience}</p>
               </div>
@@ -226,7 +226,7 @@ export default async function ProgramDetailPage(props: {
               <div className="space-y-3">
                 <h2 className="text-base sm:text-lg font-black text-[#08242a] flex items-center gap-2">
                   <span>🎨</span>
-                  <span>{isAr ? 'الأنشطة والورشات المبرمجة' : 'Key Activities & Masterclasses'}</span>
+                  <span>{isAr ? 'الأنشطة والورشات المبرمجة' : isFr ? 'Activités et ateliers au programme' : 'Key Activities & Masterclasses'}</span>
                 </h2>
                 <p className="leading-relaxed text-[#445457]">{translation.activities}</p>
               </div>
@@ -246,7 +246,7 @@ export default async function ProgramDetailPage(props: {
                   href={`/${locale}/contact`}
                   className="inline-flex items-center justify-center px-8 py-3.5 rounded-xl font-bold text-[#08242a] bg-[#faf7f2] hover:bg-[#f0ebe1] border border-[#e5e0d6] transition-colors text-xs sm:text-sm w-full sm:w-auto"
                 >
-                  {isAr ? 'استفسر حول هذا البرنامج' : dict.nav.contact}
+                  {isAr ? 'استفسر حول هذا البرنامج' : isFr ? 'S\'informer sur ce programme' : dict.nav.contact}
                 </Link>
               </div>
 
@@ -254,7 +254,7 @@ export default async function ProgramDetailPage(props: {
                 href={`/${locale}/programs`}
                 className="text-xs font-bold text-[#c85a32] hover:underline"
               >
-                ← {isAr ? 'العودة لكافة البرامج' : 'Back to Programs'}
+                ← {isAr ? 'العودة لكافة البرامج' : isFr ? 'Retour à tous les programmes' : 'Back to Programs'}
               </Link>
             </div>
           </div>

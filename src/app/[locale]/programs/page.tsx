@@ -94,23 +94,23 @@ export default async function ProgramsPage(props: { params: Promise<{ locale: st
       id: 'p-1',
       slug: 'youth-in-action',
       category: 'youth',
-      city: isAr ? 'مختلف المدن المغربية' : 'Morocco',
+      city: isAr ? 'مختلف المدن المغربية' : isFr ? 'Plusieurs villes marocaines' : 'Various Moroccan Cities',
       cover_image: '/images/youth-in-action.jpg',
-      title: isAr ? 'مبادرة شباب في العمل (Youth in Action)' : isFr ? 'Initiative Jeunesse en Action' : 'Youth in Action Initiative',
+      title: isAr ? 'مبادرة شباب في العمل (Youth in Action)' : isFr ? 'Initiative Jeunesse en Action (Youth in Action)' : 'Youth in Action Initiative',
       description: isAr
         ? 'البرنامج التطوعي الرائد للجمعية الهادف إلى إدماج الشباب في الحياة الثقافية وتأطيرهم لقيادة المبادرات الإبداعية والمجتمعية بروح المواطنة الفاعلة.'
         : isFr
         ? 'Programme bénévole phare de l\'AMYCC engageant les jeunes dans la vie culturelle et le leadership associatif.'
         : 'Flagship volunteering initiative empowering youth to co-create and lead cultural and community projects.',
-      objectives: isAr ? 'تأهيل 200 شاب سنوياً، تنمية مهارات القيادة المدنية، وتعزيز التضامن الثقافي' : 'Skill building, cultural leadership, civic solidarity.',
-      target_audience: isAr ? 'الشباب والطلبة من 16 إلى 30 سنة من مختلف جهات المملكة' : 'Youth & students aged 16–30 across Morocco',
-      activities: isAr ? 'ورشات تدريبية، مخيمات تطوعية، تنظيم مهرجانات ومعارض فنية' : 'Training workshops, volunteer camps, artistic events',
+      objectives: isAr ? 'تأهيل 200 شاب سنوياً، تنمية مهارات القيادة المدنية، وتعزيز التضامن الثقافي' : isFr ? 'Formation de 200 jeunes par an, développement du leadership civique et renforcement de la solidarité culturelle.' : 'Skill building, cultural leadership, civic solidarity.',
+      target_audience: isAr ? 'الشباب والطلبة من 16 إلى 30 سنة من مختلف جهات المملكة' : isFr ? 'Jeunes et étudiants de 16 à 30 ans à travers le Royaume' : 'Youth & students aged 16–30 across Morocco',
+      activities: isAr ? 'ورشات تدريبية، مخيمات تطوعية، تنظيم مهرجانات ومعارض فنية' : isFr ? 'Ateliers de formation, chantiers bénévoles, festivals et expositions artistiques' : 'Training workshops, volunteer camps, artistic events',
     },
     {
       id: 'p-2',
       slug: 'arts-heritage-workshops',
       category: 'arts',
-      city: isAr ? 'المملكة المغربية' : 'Morocco',
+      city: isAr ? 'المملكة المغربية' : isFr ? 'Royaume du Maroc' : 'Morocco',
       cover_image: '/images/hero-art.jpg',
       title: isAr ? 'ورشات الفنون والتراث الإبداعي' : isFr ? 'Ateliers des Arts et du Patrimoine' : 'Arts & Creative Heritage Workshops',
       description: isAr
@@ -118,39 +118,39 @@ export default async function ProgramsPage(props: { params: Promise<{ locale: st
         : isFr
         ? 'Série d\'ateliers spécialisés en arts plastiques et calligraphie explorant le patrimoine visuel marocain.'
         : 'Specialized masterclasses in visual arts, calligraphy, and ceramics exploring the rich Moroccan visual heritage.',
-      objectives: isAr ? 'صقل المواهب التشكيلية، إنتاج معارض جماعية، وتوثيق التقنيات الفنية التقليدية' : 'Talent development, group exhibitions, technique mastery.',
-      target_audience: isAr ? 'الهواة والمبدعون الصاعدون وشباب الجمعيات الثقافية' : 'Emerging artists & creators',
-      activities: isAr ? 'محترفات الصباغة المائية والزيتية، دورات الخط المغربي، إقامات إبداعية' : 'Painting workshops, calligraphy courses, creative residencies',
+      objectives: isAr ? 'صقل المواهب التشكيلية، إنتاج معارض جماعية، وتوثيق التقنيات الفنية التقليدية' : isFr ? 'Développement des talents plastiques, expositions collectives et valorisation des techniques traditionnelles' : 'Talent development, group exhibitions, technique mastery.',
+      target_audience: isAr ? 'الهواة والمبدعون الصاعدون وشباب الجمعيات الثقافية' : isFr ? 'Créateurs émergents, passionnés d’art et jeunesse associative' : 'Emerging artists & creators',
+      activities: isAr ? 'محترفات الصباغة المائية والزيتية، دورات الخط المغربي، إقامات إبداعية' : isFr ? 'Ateliers de peinture à l’huile et aquarelle, calligraphie marocaine, résidences créatives' : 'Painting workshops, calligraphy courses, creative residencies',
     },
     {
       id: 'p-3',
       slug: 'theatre-scenic-expression',
       category: 'theatre',
-      city: isAr ? 'مراكش والجهات' : 'Marrakech & Regions',
+      city: isAr ? 'مراكش والجهات' : isFr ? 'Marrakech & Régions' : 'Marrakech & Regions',
       title: isAr ? 'برنامج المسرح وفنون الأداء التعبيري' : isFr ? 'Programme Théâtre & Arts de la Scène' : 'Theatre & Performing Arts Program',
       description: isAr
         ? 'تكوين مسرحي شامل يغطي فن الحكاية (الحلقة)، الإلقاء الصوتي، التعبير الحركي، وكتابة النصوص الدرامية الملتزمة بالقضايا المجتمعية.'
         : isFr
         ? 'Formation théâtrale couvrant le conte, la diction, le jeu corporel et l\'écriture dramatique.'
         : 'Comprehensive stage training covering storytelling, voice control, dramatic writing, and stage presence.',
-      objectives: isAr ? 'إنتاج عروض مسرحية شبابية والمشاركة في المهرجانات الوطنية والدولية' : 'Stage play productions and participation in youth festivals.',
-      target_audience: isAr ? 'هواة المسرح والشباب المهتم بالتمثيل والإخراج' : 'Theatre enthusiasts & performers',
-      activities: isAr ? 'تمارين الارتجال، تدريبات الصوت والجسد، إعداد عروض مسرح الشارع' : 'Improvisation exercises, voice training, street theatre',
+      objectives: isAr ? 'إنتاج عروض مسرحية شبابية والمشاركة في المهرجانات الوطنية والدولية' : isFr ? 'Production de spectacles théâtraux de jeunes et participation aux festivals nationaux et internationaux' : 'Stage play productions and participation in youth festivals.',
+      target_audience: isAr ? 'هواة المسرح والشباب المهتم بالتمثيل والإخراج' : isFr ? 'Passionnés de théâtre, jeunes comédiens et acteurs en herbe' : 'Theatre enthusiasts & performers',
+      activities: isAr ? 'تمارين الارتجال، تدريبات الصوت والجسد، إعداد عروض مسرح الشارع' : isFr ? 'Exercices d’improvisation, travail de la voix et du corps, spectacles de théâtre de rue' : 'Improvisation exercises, voice training, street theatre',
     },
     {
       id: 'p-4',
       slug: 'musical-heritage-revival',
       category: 'music',
-      city: isAr ? 'المملكة المغربية' : 'Morocco',
+      city: isAr ? 'المملكة المغربية' : isFr ? 'Royaume du Maroc' : 'Morocco',
       title: isAr ? 'مختبر إحياء التراث الموسيقي المغربي' : isFr ? 'Laboratoire du Patrimoine Musical Marocain' : 'Moroccan Musical Heritage Lab',
       description: isAr
         ? 'ورشات تدريبية للتعريف بالآلات والمقامات والإيقاعات التراثية المغربية وتوثيق الأهازيج التقليدية ونقلها للأجيال الصاعدة.'
         : isFr
         ? 'Ateliers de pratique instrumentale traditionnelle et de documentation des rythmes du terroir marocain.'
         : 'Instrumental masterclasses focusing on traditional Moroccan scales, rhythms, and folkloric melodies.',
-      objectives: isAr ? 'صون التراث الشفهي الموسيقي، تدريب العازفين الشباب، وتوثيق الأنغام الأصيلة' : 'Oral music heritage preservation & youth music training.',
-      target_audience: isAr ? 'الموسيقيون الشباب، الباحثون في التراث، والمهتمون بالنغم المغربي' : 'Young musicians & heritage lovers',
-      activities: isAr ? 'دروس العزف على العود والوتريات، تسجيلات صوتية ميدانية، ندوات تراثية' : 'Oud lessons, field audio recordings, heritage talks',
+      objectives: isAr ? 'صون التراث الشفهي الموسيقي، تدريب العازفين الشباب، وتوثيق الأنغام الأصيلة' : isFr ? 'Sauvegarde du patrimoine musical oral, formation des jeunes instrumentistes et valorisation des mélodies authentiques' : 'Oral music heritage preservation & youth music training.',
+      target_audience: isAr ? 'الموسيقيون الشباب، الباحثون في التراث، والمهتمون بالنغم المغربي' : isFr ? 'Jeunes musiciens, chercheurs en patrimoine et passionnés de musique marocaine' : 'Young musicians & heritage lovers',
+      activities: isAr ? 'دروس العزف على العود والوتريات، تسجيلات صوتية ميدانية، ندوات تراثية' : isFr ? 'Cours de luth (oud) et instruments à cordes, enregistrements sonores de terrain, conférences musicales' : 'Oud lessons, field audio recordings, heritage talks',
     },
   ]
 
@@ -307,16 +307,18 @@ export default async function ProgramsPage(props: { params: Promise<{ locale: st
               <div className="lg:col-span-8 space-y-4">
                 <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold bg-[#f4ce83] text-[#08242a] shadow-xs">
                   <span>★</span>
-                  <span>{isAr ? 'المبادرة الرائدة المستمرة للجمعية' : 'Flagship Continuous Initiative'}</span>
+                  <span>{isAr ? 'المبادرة الرائدة المستمرة للجمعية' : isFr ? 'Initiative Phare Continue de l\'AMYCC' : 'Flagship Continuous Initiative'}</span>
                 </span>
 
                 <h2 className="text-2xl sm:text-4xl font-black tracking-tight text-white">
-                  {isAr ? 'مبادرة شباب في العمل (Youth in Action)' : 'Youth in Action Initiative'}
+                  {isAr ? 'مبادرة شباب في العمل (Youth in Action)' : isFr ? 'Initiative Jeunesse en Action (Youth in Action)' : 'Youth in Action Initiative'}
                 </h2>
 
                 <p className="text-sm sm:text-base text-[#d8f0f4]/90 leading-relaxed max-w-2xl">
                   {isAr
                     ? 'المحرك التطوعي والتأطيري الأساسي لجمعية روح الفنون والثقافة، الذي يفتح آفاقاً واسعة أمام الشباب المغربي للمشاركة في تدبير الفعاليات الثقافية، قيادة الورشات الميدانية، وتطوير المهارات الحياتية.'
+                    : isFr
+                    ? 'Le cadre bénévole et citoyen phare de l\'AMYCC, offrant aux jeunes marocains l\'opportunité de participer à l\'animation culturelle, d\'animer des ateliers de terrain et de développer leurs compétences civiques et artistiques.'
                     : 'The premier youth-led volunteering framework at AMYCC, empowering active civic engagement and cultural leadership.'}
                 </p>
 
@@ -325,7 +327,7 @@ export default async function ProgramsPage(props: { params: Promise<{ locale: st
                     href={`/${locale}/programs/youth-in-action`}
                     className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-black text-xs sm:text-sm text-[#08242a] bg-[#f4ce83] hover:bg-[#eabf66] active:scale-98 transition-all shadow-md"
                   >
-                    <span>{isAr ? 'استكشف مسار المبادرة بالتفصيل' : 'Explore Initiative Details'}</span>
+                    <span>{isAr ? 'استكشف مسار المبادرة بالتفصيل' : isFr ? 'Découvrir l\'initiative en détail' : 'Explore Initiative Details'}</span>
                     <span className="rtl:rotate-180">→</span>
                   </Link>
 
@@ -333,7 +335,7 @@ export default async function ProgramsPage(props: { params: Promise<{ locale: st
                     href={`/${locale}/membership`}
                     className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-xs sm:text-sm text-white bg-white/10 hover:bg-white/20 border border-white/20 backdrop-blur-md transition-all"
                   >
-                    <span>{isAr ? 'انضم وتطوع معنا' : 'Volunteer With Us'}</span>
+                    <span>{isAr ? 'انضم وتطوع معنا' : isFr ? 'Devenir bénévole avec nous' : 'Volunteer With Us'}</span>
                   </Link>
                 </div>
               </div>
@@ -342,11 +344,13 @@ export default async function ProgramsPage(props: { params: Promise<{ locale: st
                 <div className="p-6 rounded-2xl bg-white/10 border border-white/15 backdrop-blur-md text-center space-y-3 w-full max-w-xs">
                   <span className="text-4xl sm:text-5xl block">🤝</span>
                   <h4 className="font-bold text-sm sm:text-base text-[#f4ce83]">
-                    {isAr ? 'تأطير مجتمعي وتضامني' : 'Civic Mentorship'}
+                    {isAr ? 'تأطير مجتمعي وتضامني' : isFr ? 'Mentorat Civique & Solidaire' : 'Civic Mentorship'}
                   </h4>
                   <p className="text-xs text-[#d8f0f4]/80 leading-relaxed">
                     {isAr
                       ? 'مواكبة دورية ومشاريع ميدانية لخدمة الثقافة والشباب بالمملكة المغربية.'
+                      : isFr
+                      ? 'Accompagnement continu et actions de terrain au service de la jeunesse et de la création culturelle au Maroc.'
                       : 'Structured cultural mentoring and fieldwork across Moroccan regions.'}
                   </p>
                 </div>
@@ -373,7 +377,7 @@ export default async function ProgramsPage(props: { params: Promise<{ locale: st
           <div className="absolute inset-0 moroccan-pattern-light opacity-30 pointer-events-none" aria-hidden="true" />
           <div className="relative max-w-4xl mx-auto px-4 sm:px-6 space-y-5">
             <span className="inline-block text-xs font-bold uppercase tracking-widest text-[#c85a32]">
-              AMYCC Partnership & Co-Creation
+              {isAr ? 'شراكات ومبادرات مشتركة • AMYCC' : isFr ? 'Partenariats & Co-Création • AMYCC' : 'AMYCC Partnership & Co-Creation'}
             </span>
 
             <h2 className="text-2xl sm:text-4xl font-black text-[#08242a] tracking-tight">

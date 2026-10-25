@@ -188,6 +188,8 @@ export function ProgramsCatalog({ programs, locale, dict }: ProgramsCatalogProps
         <span>
           {isAr
             ? `عرض ${filteredPrograms.length} من أصل ${programs.length} برنامج ومبادرة`
+            : isFr
+            ? `Affichage de ${filteredPrograms.length} sur ${programs.length} programmes et initiatives`
             : `Showing ${filteredPrograms.length} of ${programs.length} programs`}
         </span>
         {activeCategory !== 'all' && (
@@ -196,7 +198,7 @@ export function ProgramsCatalog({ programs, locale, dict }: ProgramsCatalogProps
             onClick={() => setActiveCategory('all')}
             className="text-[#c85a32] hover:underline cursor-pointer"
           >
-            {isAr ? 'عرض الكل' : 'Show All'}
+            {isAr ? 'عرض الكل' : isFr ? 'Tout afficher' : 'Show All'}
           </button>
         )}
       </div>
@@ -231,7 +233,7 @@ export function ProgramsCatalog({ programs, locale, dict }: ProgramsCatalogProps
 
                       <span className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-bold bg-[#08242a]/80 text-white backdrop-blur-md">
                         <span>📍</span>
-                        <span>{prog.city || (isAr ? 'المملكة المغربية' : 'Morocco')}</span>
+                        <span>{prog.city || (isAr ? 'المملكة المغربية' : isFr ? 'Royaume du Maroc' : 'Morocco')}</span>
                       </span>
                     </div>
 
@@ -258,7 +260,7 @@ export function ProgramsCatalog({ programs, locale, dict }: ProgramsCatalogProps
                           <div className="space-y-0.5">
                             <span className="font-bold text-[#08242a] flex items-center gap-1.5">
                               <span>🎯</span>
-                              <span>{isAr ? 'الأهداف والمخرجات:' : 'Key Objectives:'}</span>
+                              <span>{isAr ? 'الأهداف والمخرجات:' : isFr ? 'Objectifs et résultats :' : 'Key Objectives:'}</span>
                             </span>
                             <p className="text-[#5f7174] leading-relaxed line-clamp-2 ps-5">
                               {prog.objectives}
@@ -270,7 +272,7 @@ export function ProgramsCatalog({ programs, locale, dict }: ProgramsCatalogProps
                           <div className="space-y-0.5 pt-2 border-t border-[#f0ebe1]">
                             <span className="font-bold text-[#08242a] flex items-center gap-1.5">
                               <span>👥</span>
-                              <span>{isAr ? 'الفئة المستهدفة:' : 'Target Audience:'}</span>
+                              <span>{isAr ? 'الفئة المستهدفة:' : isFr ? 'Public cible :' : 'Target Audience:'}</span>
                             </span>
                             <p className="text-[#5f7174] leading-relaxed line-clamp-2 ps-5">
                               {prog.target_audience}
@@ -296,7 +298,7 @@ export function ProgramsCatalog({ programs, locale, dict }: ProgramsCatalogProps
                     href={`/${locale}/contact`}
                     className="px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold text-[#0d3b43] bg-[#faf7f2] hover:bg-[#0d3b43] hover:text-white border border-[#e5e0d6] transition-all shadow-2xs"
                   >
-                    {isAr ? 'استفسر أو انخرط' : isFr ? 'Participer' : 'Inquire or Join'}
+                    {isAr ? 'استفسر أو انخرط' : isFr ? 'Participer ou s\'informer' : 'Inquire or Join'}
                   </Link>
                 </div>
               </div>
@@ -307,11 +309,13 @@ export function ProgramsCatalog({ programs, locale, dict }: ProgramsCatalogProps
         <div className="p-12 sm:p-16 rounded-3xl bg-white border border-[#e5e0d6] text-center space-y-4">
           <span className="text-4xl sm:text-5xl block">🔍</span>
           <h3 className="text-xl font-black text-[#08242a]">
-            {isAr ? 'لم يتم العثور على مبادرات مطابقة لبحثك' : 'No matching programs found'}
+            {isAr ? 'لم يتم العثور على مبادرات مطابقة لبحثك' : isFr ? 'Aucun programme correspondant trouvé' : 'No matching programs found'}
           </h3>
           <p className="text-sm text-[#5f7174] max-w-md mx-auto leading-relaxed">
             {isAr
               ? 'يرجى تجربة كلمات بحث أخرى أو تصفح كافة البرامج والمشاريع الثقافية للجمعية.'
+              : isFr
+              ? 'Veuillez essayer d’autres mots-clés ou parcourir l’ensemble des programmes.'
               : 'Try different search keywords or view all ongoing cultural programs.'}
           </p>
           <button
@@ -322,7 +326,7 @@ export function ProgramsCatalog({ programs, locale, dict }: ProgramsCatalogProps
             }}
             className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#0d3b43] text-white text-xs sm:text-sm font-bold hover:bg-[#14505b] transition-all cursor-pointer shadow-xs"
           >
-            {isAr ? 'إعادة ضبط البحث والتصنيف' : 'Reset Filters'}
+            {isAr ? 'إعادة ضبط البحث والتصنيف' : isFr ? 'Réinitialiser les filtres' : 'Reset Filters'}
           </button>
         </div>
       )}
