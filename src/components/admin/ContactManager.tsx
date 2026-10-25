@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import type { ContactConfig, ContactDepartmentConfig, ContactFormTopicConfig } from '@/lib/settings'
+import type { ContactConfig, ContactFormTopicConfig } from '@/lib/settings'
 import { saveContactConfiguration } from '@/lib/actions/admin'
 
 interface ContactManagerProps {
@@ -12,7 +12,7 @@ interface ContactManagerProps {
 
 export function ContactManager({ initialConfig, defaultConfig }: ContactManagerProps) {
   const [config, setConfig] = useState<ContactConfig>(initialConfig)
-  const [activeTab, setActiveTab] = useState<'channels' | 'hero' | 'departments' | 'topics' | 'social'>('channels')
+  const [activeTab, setActiveTab] = useState<'channels' | 'hero' | 'topics' | 'social'>('channels')
   const [activeLangTab, setActiveLangTab] = useState<'ar' | 'fr' | 'en'>('ar')
   const [saving, setSaving] = useState(false)
   const [feedback, setFeedback] = useState<{ type: 'success' | 'error'; message: string } | null>(null)
@@ -35,45 +35,6 @@ export function ContactManager({ initialConfig, defaultConfig }: ContactManagerP
     setConfig((prev) => ({
       ...prev,
       social: { ...prev.social, [field]: val },
-    }))
-  }
-
-  function updateDepartment(id: string, updates: Partial<ContactDepartmentConfig>) {
-    setConfig((prev) => ({
-      ...prev,
-      departments: prev.departments.map((d) => (d.id === id ? { ...d, ...updates } : d)),
-    }))
-  }
-
-  function addDepartment() {
-    const newId = `dept-${Date.now()}`
-    const newDept: ContactDepartmentConfig = {
-      id: newId,
-      titleAr: 'مصلحة / قسم جديد',
-      titleFr: 'Nouveau département',
-      titleEn: 'New Department',
-      descAr: 'وصف مهام التواصل الخاصة بهذا القسم',
-      descFr: 'Description de la mission',
-      descEn: 'Department role description',
-      email: 'contact@amycc.org',
-      icon: '📁',
-      badgeAr: 'مصلحة تواصل',
-      badgeFr: 'Service',
-      badgeEn: 'Service',
-      order: config.departments.length + 1,
-      enabled: true,
-    }
-    setConfig((prev) => ({ ...prev, departments: [...prev.departments, newDept] }))
-  }
-
-  function removeDepartment(id: string) {
-    if (config.departments.length <= 1) {
-      alert('يجب الإبقاء على قسم تواصل واحد على الأقل.')
-      return
-    }
-    setConfig((prev) => ({
-      ...prev,
-      departments: prev.departments.filter((d) => d.id !== id),
     }))
   }
 
@@ -190,19 +151,6 @@ export function ContactManager({ initialConfig, defaultConfig }: ContactManagerP
         >
           <span>🖼️</span>
           <span>واجهة ورأس الصفحة (Hero)</span>
-        </button>
-
-        <button
-          type="button"
-          onClick={() => setActiveTab('departments')}
-          className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer ${
-            activeTab === 'departments'
-              ? 'bg-[#c85a32] text-white shadow-xs'
-              : 'text-[#445457] hover:text-[#08242a] hover:bg-[#faf7f2]'
-          }`}
-        >
-          <span>🏛️</span>
-          <span>المصالح المتخصصة ({config.departments.length})</span>
         </button>
 
         <button
@@ -648,117 +596,7 @@ export function ContactManager({ initialConfig, defaultConfig }: ContactManagerP
       )}
 
       {/* ============================================================
-          TAB 3: DEPARTMENTS & SPECIALIZED CHANNELS
-          ============================================================ */}
-      {activeTab === 'departments' && (
-        <div className="p-6 sm:p-8 rounded-3xl bg-white border border-[#e5e0d6] shadow-subtle space-y-6">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#f0ebe1] pb-4">
-            <div>
-              <h2 className="text-xl font-black text-[#08242a] tracking-tight flex items-center gap-2">
-                <span>🏛️</span>
-                <span>المصالح والأقسام المتخصصة للتواصل</span>
-              </h2>
-              <p className="text-xs text-[#5f7174] mt-1">
-                عرض قنوات مراسلة موجهة لكل فئة (الشراكات المؤسسية، الصحافة، التطوع، والكتابة العامة).
-              </p>
-            </div>
-
-            <button
-              type="button"
-              onClick={addDepartment}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#c85a32] hover:bg-[#a84424] text-white text-xs font-bold transition-all shadow-xs cursor-pointer"
-            >
-              <span>+</span>
-              <span>إضافة قسم جديد</span>
-            </button>
-          </div>
-
-          <div className="space-y-4">
-            {config.departments.map((dept, index) => (
-              <div
-                key={dept.id}
-                className="p-5 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6] hover:border-[#0d3b43]/30 transition-all space-y-4"
-              >
-                <div className="flex items-center justify-between gap-4">
-                  <div className="flex items-center gap-3">
-                    <span className="w-8 h-8 rounded-xl bg-white border border-[#e5e0d6] flex items-center justify-center text-sm shadow-2xs">
-                      {dept.icon || '✉️'}
-                    </span>
-                    <span className="text-xs font-black text-[#08242a]">
-                      {dept.titleAr || `قسم ${index + 1}`}
-                    </span>
-                  </div>
-
-                  <div className="flex items-center gap-2">
-                    <label className="flex items-center gap-2 text-2xs font-bold text-[#5f7174] cursor-pointer">
-                      <input
-                        type="checkbox"
-                        checked={dept.enabled}
-                        onChange={(e) => updateDepartment(dept.id, { enabled: e.target.checked })}
-                        className="w-4 h-4 rounded text-[#0d3b43]"
-                      />
-                      <span>تفعيل</span>
-                    </label>
-
-                    <button
-                      type="button"
-                      onClick={() => removeDepartment(dept.id)}
-                      className="px-2.5 py-1 rounded-lg text-rose-600 hover:bg-rose-50 text-xs font-bold transition-colors cursor-pointer"
-                    >
-                      حذف
-                    </button>
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                  <div>
-                    <label className="block text-3xs font-bold text-[#5f7174] uppercase mb-1">اسم القسم (عربي)</label>
-                    <input
-                      type="text"
-                      value={dept.titleAr}
-                      onChange={(e) => updateDepartment(dept.id, { titleAr: e.target.value })}
-                      className="w-full px-3 py-2 rounded-lg bg-white border border-[#e5e0d6] text-xs text-[#08242a]"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-3xs font-bold text-[#5f7174] uppercase mb-1">البريد الإلكتروني المخصص</label>
-                    <input
-                      type="email"
-                      value={dept.email}
-                      onChange={(e) => updateDepartment(dept.id, { email: e.target.value })}
-                      className="w-full px-3 py-2 rounded-lg bg-white border border-[#e5e0d6] text-xs font-mono text-[#08242a]"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-3xs font-bold text-[#5f7174] uppercase mb-1">الأيقونة (إيموجي)</label>
-                    <input
-                      type="text"
-                      value={dept.icon}
-                      onChange={(e) => updateDepartment(dept.id, { icon: e.target.value })}
-                      className="w-full px-3 py-2 rounded-lg bg-white border border-[#e5e0d6] text-xs text-center"
-                    />
-                  </div>
-
-                  <div className="sm:col-span-3">
-                    <label className="block text-3xs font-bold text-[#5f7174] uppercase mb-1">وصف موجز للمهام</label>
-                    <input
-                      type="text"
-                      value={dept.descAr ?? ''}
-                      onChange={(e) => updateDepartment(dept.id, { descAr: e.target.value })}
-                      className="w-full px-3 py-2 rounded-lg bg-white border border-[#e5e0d6] text-xs text-[#08242a]"
-                    />
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {/* ============================================================
-          TAB 4: FORM TOPIC CATEGORIES
+          TAB 3: FORM TOPIC CATEGORIES
           ============================================================ */}
       {activeTab === 'topics' && (
         <div className="p-6 sm:p-8 rounded-3xl bg-white border border-[#e5e0d6] shadow-subtle space-y-6">
@@ -825,7 +663,7 @@ export function ContactManager({ initialConfig, defaultConfig }: ContactManagerP
       )}
 
       {/* ============================================================
-          TAB 5: SOCIAL MEDIA CHANNELS
+          TAB 4: SOCIAL MEDIA CHANNELS
           ============================================================ */}
       {activeTab === 'social' && (
         <div className="p-6 sm:p-8 rounded-3xl bg-white border border-[#e5e0d6] shadow-subtle space-y-6">
