@@ -96,3 +96,47 @@ export async function POST(request: Request) {
     return NextResponse.json({ success: false, error: message }, { status: 500 })
   }
 }
+
+export async function DELETE(request: Request) {
+  try {
+    const supabase = await createClient()
+    const { data: { user } } = await supabase.auth.getUser()
+
+    if (!user) {
+      return NextResponse.json({ success: false, error: 'غير مصرح لك بحذف هذا الملف' }, { status: 401 })
+    }
+
+    const { searchParams } = new URL(request.url)
+    const urlToDelete = searchParams.get('url')
+
+    if (!urlToDelete) {
+      return NextResponse.json({ success: false, error: 'لم يتم تحديد رابط الملف' }, { status: 400 })
+    }
+
+    // If file is stored locally in /uploads/
+    if (urlToDelete.startsWith('/uploads/')) {
+      const filename = path.basename(urlToDelete)
+      const filePath = path.join(process.cwd(), 'public', 'uploads', filename)
+      if (fs.existsSync(filePath)) {
+        await fs.promises.unlink(filePath)
+      }
+    }
+
+    // Also attempt deletion from Supabase Storage if applicable
+    if (urlToDelete.includes('supabase.co')) {
+      try {
+        const parts = urlToDelete.split('/')
+        const filename = parts[parts.length - 1]
+        await supabase.storage.from('media').remove([`hero/${filename}`])
+      } catch {
+        // Ignore Supabase storage errors
+      }
+    }
+
+    return NextResponse.json({ success: true, message: 'تم حذف الملف بنجاح' })
+  } catch (err: unknown) {
+    const message = err instanceof Error ? err.message : 'حدث خطأ أثناء حذف الملف'
+    return NextResponse.json({ success: false, error: message }, { status: 500 })
+  }
+}
+

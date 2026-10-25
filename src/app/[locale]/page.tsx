@@ -412,19 +412,29 @@ export default async function HomePage(props: { params: Promise<{ locale: string
         <section className="relative overflow-hidden min-h-[620px] sm:min-h-[700px] lg:min-h-[760px] flex items-center bg-[#08242a] text-white">
           {/* Full-bleed background photo layer */}
           <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
-            <ImageWithFallback
-              src={hero.imageUrl || '/images/youth-in-action.jpg'}
-              fallbackSrc="/images/youth-in-action.jpg"
-              alt="AMYCC Hero Banner"
-              fill
-              priority
-              sizes="100vw"
-              className="object-cover object-center"
-            />
-            {/* Cinematic Morocco88 Vignette Overlays: clear faces + dark text backdrop */}
-            <div className="absolute inset-0 bg-black/35" />
-            <div className="absolute inset-0 bg-gradient-to-r from-[#08242a]/90 via-[#08242a]/50 to-transparent rtl:bg-gradient-to-l" />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#08242a]/80 via-transparent to-black/20" />
+            {hero.imageUrl ? (
+              <>
+                <ImageWithFallback
+                  src={hero.imageUrl}
+                  fallbackSrc="/images/youth-in-action.jpg"
+                  alt="AMYCC Hero Banner"
+                  fill
+                  priority
+                  sizes="100vw"
+                  className="object-cover object-center"
+                />
+                {/* Cinematic Morocco88 Vignette Overlays: clear faces + dark text backdrop */}
+                <div className="absolute inset-0 bg-black/35" />
+                <div className="absolute inset-0 bg-gradient-to-r from-[#08242a]/90 via-[#08242a]/50 to-transparent rtl:bg-gradient-to-l" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#08242a]/80 via-transparent to-black/20" />
+              </>
+            ) : (
+              <div className="absolute inset-0 bg-gradient-to-br from-[#08242a] via-[#0d3b43] to-[#08242a]">
+                <div className="absolute inset-0 moroccan-star-pattern opacity-15 pointer-events-none" />
+                <div className="absolute top-1/4 start-1/4 w-96 h-96 bg-[#c85a32]/10 rounded-full blur-3xl pointer-events-none" />
+                <div className="absolute bottom-10 end-10 w-96 h-96 bg-[#f4ce83]/10 rounded-full blur-3xl pointer-events-none" />
+              </div>
+            )}
           </div>
 
           <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-20 sm:py-24 lg:py-28">

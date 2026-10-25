@@ -117,7 +117,7 @@ export async function getHeroSettings(): Promise<HeroConfig> {
 
     const val = data.value as Partial<HeroConfig>
     return {
-      imageUrl: val.imageUrl || defaultHeroConfig.imageUrl,
+      imageUrl: typeof val.imageUrl === 'string' ? val.imageUrl : defaultHeroConfig.imageUrl,
       tagAr: val.tagAr || defaultHeroConfig.tagAr,
       tagFr: val.tagFr || defaultHeroConfig.tagFr,
       tagEn: val.tagEn || defaultHeroConfig.tagEn,
