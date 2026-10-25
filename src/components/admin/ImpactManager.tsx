@@ -3,6 +3,7 @@
 import { useState, useRef } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import type {
   ImpactConfig,
   ImpactMetricItem,
@@ -18,6 +19,7 @@ interface ImpactManagerProps {
 }
 
 export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerProps) {
+  const router = useRouter()
   const [config, setConfig] = useState<ImpactConfig>(initialConfig)
   const [activeTab, setActiveTab] = useState<'hero' | 'metrics' | 'pillars' | 'spotlight' | 'transparency_cta'>('hero')
   const [activeLangTab, setActiveLangTab] = useState<'ar' | 'fr' | 'en'>('ar')
@@ -246,9 +248,10 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
     try {
       const res = await saveImpactConfiguration(config)
       if (res.success) {
+        router.refresh()
         setFeedback({
           type: 'success',
-          message: 'تم حفظ كافة بيانات وإعدادات صفحة الأثر المجتمعي بنجاح وتحديث الموقع العام!',
+          message: 'تم حفظ كافة بيانات وإعدادات صفحة الأثر المجتمعي بنجاح وتحديث الموقع العام فوراً!',
         })
       } else {
         setFeedback({
@@ -1274,8 +1277,8 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
                 <label className="block text-2xs font-bold text-[#08242a] mb-1">
                   شهادة/اقتباس المستفيد ({activeLangTab.toUpperCase()}):
                 </label>
-                <input
-                  type="text"
+                <textarea
+                  rows={3}
                   value={
                     activeLangTab === 'ar'
                       ? config.spotlight.quoteAr
@@ -1293,7 +1296,8 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
                       e.target.value
                     )
                   }
-                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs outline-none"
+                  placeholder="أدخل نص الشهادة أو الاقتباس..."
+                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs leading-relaxed outline-none focus:border-[#0d3b43] focus:ring-1 focus:ring-[#0d3b43]"
                 />
               </div>
 
@@ -1320,7 +1324,7 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
                       e.target.value
                     )
                   }
-                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs outline-none"
+                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs outline-none focus:border-[#0d3b43]"
                 />
               </div>
 
@@ -1358,6 +1362,56 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
                   </button>
                 </div>
               </div>
+            </div>
+
+            {/* Live Visual Preview of the Quote Box */}
+            <div className="pt-4 border-t border-[#f4ede2] space-y-2">
+              <span className="text-3xs font-extrabold text-[#c85a32] uppercase tracking-wider block">
+                معاينة حية ومباشرة لشكل الاقتباس على الموقع (Live Quote Simulation):
+              </span>
+              <div className="p-4 rounded-xl bg-[#faf7f2] border-r-4 rtl:border-r-4 ltr:border-l-4 border-[#c85a32] shadow-2xs space-y-2">
+                <p className="text-xs sm:text-sm font-semibold italic text-[#08242a] leading-relaxed">
+                  &ldquo;
+                  {activeLangTab === 'ar'
+                    ? config.spotlight.quoteAr
+                    : activeLangTab === 'fr'
+                    ? config.spotlight.quoteFr
+                    : config.spotlight.quoteEn}
+                  &rdquo;
+                </p>
+                <div className="text-2xs font-bold text-[#c85a32]">
+                  — {activeLangTab === 'ar'
+                    ? config.spotlight.quoteAuthorAr
+                    : activeLangTab === 'fr'
+                    ? config.spotlight.quoteAuthorFr
+                    : config.spotlight.quoteAuthorEn}
+                </div>
+              </div>
+            </div>
+
+            {/* In-tab Save Button */}
+            <div className="flex items-center justify-between pt-3 border-t border-[#f4ede2]">
+              <span className="text-3xs text-[#819598]">
+                * اضغط حفظ ليتم نشر التعديلات فوراً على كافة صفحات الموقع.
+              </span>
+              <button
+                type="button"
+                onClick={handleSave}
+                disabled={saving}
+                className="px-5 py-2.5 rounded-xl text-xs font-bold text-white bg-[#0d3b43] hover:bg-[#14505b] disabled:opacity-50 transition-all shadow-xs flex items-center gap-2"
+              >
+                {saving ? (
+                  <>
+                    <span className="w-3.5 h-3.5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                    <span>جاري الحفظ...</span>
+                  </>
+                ) : (
+                  <>
+                    <span>💾</span>
+                    <span>حفظ تعديلات قصة الأثر والاقتباس</span>
+                  </>
+                )}
+              </button>
             </div>
           </div>
 
@@ -1710,6 +1764,41 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
           </div>
         </div>
       )}
+
+      {/* Sticky Bottom Save Bar for Immediate Action */}
+      <div className="sticky bottom-4 z-40 p-3 bg-white/95 backdrop-blur-md rounded-2xl border border-[#e5e0d6] shadow-card flex items-center justify-between gap-4">
+        <div className="flex items-center gap-2 text-2xs font-bold text-[#08242a]">
+          <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
+          <span>لوحة التحكم نشطة — أي تعديل تجريه جاهز للحفظ والنشر فوراً</span>
+        </div>
+        <div className="flex items-center gap-2">
+          <Link
+            href="/ar/impact"
+            target="_blank"
+            className="px-4 py-2 rounded-xl text-xs font-bold text-[#0d3b43] bg-[#d8f0f4] hover:bg-[#c2e8ef] transition-colors"
+          >
+            معاينة صفحة الأثر ↗
+          </Link>
+          <button
+            type="button"
+            onClick={handleSave}
+            disabled={saving}
+            className="px-6 py-2 rounded-xl text-xs font-bold text-white bg-[#0d3b43] hover:bg-[#14505b] disabled:opacity-50 transition-all shadow-xs flex items-center gap-2"
+          >
+            {saving ? (
+              <>
+                <span className="w-3.5 h-3.5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                <span>جاري الحفظ...</span>
+              </>
+            ) : (
+              <>
+                <span>💾</span>
+                <span>حفظ التعديلات ونشرها فوراً</span>
+              </>
+            )}
+          </button>
+        </div>
+      </div>
     </div>
   )
 }

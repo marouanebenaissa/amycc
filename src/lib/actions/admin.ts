@@ -438,10 +438,15 @@ export async function saveAnnualProgramConfiguration(
       titleAr: config.hero.titleAr,
     })
 
+    revalidatePath('/ar/annual-program')
+    revalidatePath('/fr/annual-program')
+    revalidatePath('/en/annual-program')
+    revalidatePath('/annual-program')
+    revalidatePath('/[locale]/annual-program', 'page')
     revalidatePath('/admin/annual-program')
     revalidatePath('/admin/pages')
-    revalidatePath('/[locale]/annual-program')
     revalidatePath('/[locale]', 'layout')
+    revalidatePath('/', 'layout')
     return { success: true }
   } catch (err) {
     return { success: false, error: (err as Error).message }
@@ -477,10 +482,17 @@ export async function saveImpactConfiguration(
       titleAr: config.hero.titleAr,
     })
 
+    // Revalidate all localized paths and layouts so edits appear instantly on the live site
+    revalidatePath('/ar/impact')
+    revalidatePath('/fr/impact')
+    revalidatePath('/en/impact')
+    revalidatePath('/impact')
+    revalidatePath('/[locale]/impact', 'page')
+    revalidatePath('/[locale]/impact', 'layout')
     revalidatePath('/admin/impact')
     revalidatePath('/admin/pages')
-    revalidatePath('/[locale]/impact')
     revalidatePath('/[locale]', 'layout')
+    revalidatePath('/', 'layout')
     return { success: true }
   } catch (err) {
     return { success: false, error: (err as Error).message }
