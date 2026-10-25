@@ -373,51 +373,7 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
                 </div>
               </div>
 
-              {/* Quick Institutional Guides (Help before writing) */}
-              <div className="p-6 rounded-3xl bg-[#faf7f2] border border-[#e5e0d6] space-y-3">
-                <span className="text-2xs font-bold text-[#819598] uppercase tracking-wider block">
-                  {isAr ? 'روابط وخدمات سريعة' : 'Quick Institutional Services'}
-                </span>
 
-                <ul className="space-y-2 text-xs font-medium">
-                  <li>
-                    <Link
-                      href={`/${locale}/membership`}
-                      className="p-2.5 rounded-xl bg-white border border-[#e5e0d6] hover:border-[#0d3b43] text-[#08242a] hover:text-[#0d3b43] flex items-center justify-between transition-colors shadow-2xs"
-                    >
-                      <span>👥 {isAr ? 'طلب الانخراط والعضوية بالجمعية' : 'Membership Application'}</span>
-                      <span className="text-3xs text-[#819598] rtl:rotate-180">→</span>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href={`/${locale}/programs/youth-in-action`}
-                      className="p-2.5 rounded-xl bg-white border border-[#e5e0d6] hover:border-[#c85a32] text-[#08242a] hover:text-[#c85a32] flex items-center justify-between transition-colors shadow-2xs"
-                    >
-                      <span>🤝 {isAr ? 'التطوع في مبادرة شباب في العمل' : 'Youth in Action Volunteering'}</span>
-                      <span className="text-3xs text-[#819598] rtl:rotate-180">→</span>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href={`/${locale}/partnerships`}
-                      className="p-2.5 rounded-xl bg-white border border-[#e5e0d6] hover:border-[#99620b] text-[#08242a] hover:text-[#99620b] flex items-center justify-between transition-colors shadow-2xs"
-                    >
-                      <span>🏛️ {isAr ? 'دليل الشراكات والتعاون الثقافي' : 'Institutional Partnerships'}</span>
-                      <span className="text-3xs text-[#819598] rtl:rotate-180">→</span>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href={`/${locale}/faq`}
-                      className="p-2.5 rounded-xl bg-white border border-[#e5e0d6] hover:border-[#0d3b43] text-[#08242a] hover:text-[#0d3b43] flex items-center justify-between transition-colors shadow-2xs"
-                    >
-                      <span>❓ {isAr ? 'الأسئلة الشائعة والأجوبة الفورية' : 'Frequently Asked Questions'}</span>
-                      <span className="text-3xs text-[#819598] rtl:rotate-180">→</span>
-                    </Link>
-                  </li>
-                </ul>
-              </div>
             </div>
           </div>
         </section>
