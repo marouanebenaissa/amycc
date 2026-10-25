@@ -936,3 +936,269 @@ export async function getAreasSettings(): Promise<AreasConfig> {
     return defaultAreasConfig
   }
 }
+
+// ============================================================
+// TEAM MEMBERS & LEADERSHIP SETTINGS (فريق العمل والهيكلة)
+// ============================================================
+
+export interface TeamMemberConfig {
+  id: string
+  nameAr: string
+  nameFr: string
+  nameEn: string
+  roleAr: string
+  roleFr: string
+  roleEn: string
+  category: 'executive' | 'committee' | 'advisor'
+  titleStatusAr?: string
+  titleStatusFr?: string
+  titleStatusEn?: string
+  badgeStatusAr?: string
+  badgeStatusFr?: string
+  badgeStatusEn?: string
+  descAr: string
+  descFr: string
+  descEn: string
+  dutiesAr?: string[]
+  dutiesFr?: string[]
+  dutiesEn?: string[]
+  photoUrl?: string
+  icon?: string
+  colorClass?: string
+  accentBg?: string
+  order: number
+  enabled: boolean
+}
+
+export interface TeamConfig {
+  members: TeamMemberConfig[]
+}
+
+export const defaultTeamConfig: TeamConfig = {
+  members: [
+    {
+      id: 'president',
+      nameAr: 'عضوية الرئاسة والتوجيه العام',
+      nameFr: 'Président(e) Fondateur(rice)',
+      nameEn: 'President & Founder',
+      roleAr: 'رئيس(ة) الجمعية',
+      roleFr: 'Président(e) de l’Association',
+      roleEn: 'President of the Association',
+      category: 'executive',
+      titleStatusAr: 'التمثيل القانوني والتوجيه الاستراتيجي',
+      titleStatusFr: 'Représentation Légale & Stratégie',
+      titleStatusEn: 'Legal Representation & Strategic Direction',
+      badgeStatusAr: 'عضوية معتمدة بالنظام الأساسي',
+      badgeStatusFr: 'Mandat Statutaire',
+      badgeStatusEn: 'Statutory Mandate',
+      descAr: 'التمثيل القانوني للجمعية أمام السلطات العمومية والشركاء، الإشراف العام على التوجهات الاستراتيجية، والدعوة لاجتماعات المكتب التنفيذي والجموع العامة.',
+      descFr: 'Représentation légale de l’association auprès des autorités et partenaires, coordination stratégique et convocation des assemblées générales et réunions du bureau.',
+      descEn: 'Official legal representative of the association before authorities and partners, overseeing strategic orientation and executive board coordination.',
+      icon: '🏛️',
+      colorClass: 'border-[#0d3b43]/30 hover:border-[#0d3b43]',
+      accentBg: 'bg-[#0d3b43]/10 text-[#0d3b43]',
+      dutiesAr: ['إبرام الشراكات والاتفاقيات الرسمية', 'السهر على احترام القانون الأساسي والداخلي', 'الناطق الرسمي باسم الجمعية'],
+      dutiesFr: ['Signature des accords officiels', 'Garant du respect des statuts associatifs', 'Porte-parole institutionnel'],
+      dutiesEn: ['Executing official agreements & partnerships', 'Safeguarding statutory bylaws compliance', 'Official association spokesperson'],
+      photoUrl: '',
+      order: 1,
+      enabled: true,
+    },
+    {
+      id: 'secretary_general',
+      nameAr: 'عضوية الكتابة العامة والتوثيق',
+      nameFr: 'Secrétaire Général(e)',
+      nameEn: 'Secretary General',
+      roleAr: 'الكاتب(ة) العام',
+      roleFr: 'Secrétaire Général(e)',
+      roleEn: 'Secretary General',
+      category: 'executive',
+      titleStatusAr: 'التدبير الإداري والتوثيق',
+      titleStatusFr: 'Administration & Documentation',
+      titleStatusEn: 'Administration & Documentation',
+      badgeStatusAr: 'عضوية معتمدة بالنظام الأساسي',
+      badgeStatusFr: 'Mandat Statutaire',
+      badgeStatusEn: 'Statutory Mandate',
+      descAr: 'تسيير الشؤون الإدارية للجمعية، تحرير وتوثيق محاضر الاجتماعات والجموع العامة، وحفظ السجلات الرسمية وملفات المنخرطين والأرشيف المؤسساتي.',
+      descFr: 'Gestion administrative, rédaction et conservation des procès-verbaux, tenue du registre des adhérents et correspondances institutionnelles officielles.',
+      descEn: 'Managing administrative operations, drafting official minutes, archiving records, and maintaining the verified membership registry.',
+      icon: '📜',
+      colorClass: 'border-[#c85a32]/30 hover:border-[#c85a32]',
+      accentBg: 'bg-[#c85a32]/10 text-[#c85a32]',
+      dutiesAr: ['تحرير وتوثيق المحاضر والتقارير الأدبية', 'ضبط سجلات الانخراط وملفات العضوية', 'التنسيق الإداري والمراسلات الرسمية'],
+      dutiesFr: ['Rédaction des procès-verbaux et rapports moraux', 'Tenue rigoureuse du registre des adhérents', 'Liaison administrative et correspondances officielles'],
+      dutiesEn: ['Drafting minutes and annual moral reports', 'Maintaining membership and volunteer registries', 'Managing administrative and official communications'],
+      photoUrl: '',
+      order: 2,
+      enabled: true,
+    },
+    {
+      id: 'treasurer',
+      nameAr: 'عضوية أمانة المال والتدبير المالي',
+      nameFr: 'Trésorier(ère) Général(e)',
+      nameEn: 'General Treasurer',
+      roleAr: 'أمين(ة) المال',
+      roleFr: 'Trésorier(ère) Général(e)',
+      roleEn: 'General Treasurer',
+      category: 'executive',
+      titleStatusAr: 'التدبير المالي والرقابة المحاسبية',
+      titleStatusFr: 'Gestion Financière & Comptabilité',
+      titleStatusEn: 'Financial Management & Accounting',
+      badgeStatusAr: 'عضوية معتمدة بالنظام الأساسي',
+      badgeStatusFr: 'Mandat Statutaire',
+      badgeStatusEn: 'Statutory Mandate',
+      descAr: 'التدبير المالي والمحاسباتي المدقق، إعداد الميزانيات التقديرية والتقارير المالية السنوية، والإشراف المباشر على الحساب البنكي الرسمي وسندات الصرف.',
+      descFr: 'Gestion financière et comptable rigoureuse, élaboration des bilans annuels certifiés et suivi transparent du compte bancaire officiel de l’association.',
+      descEn: 'Overseeing financial stewardship, maintaining verified bookkeeping, managing official bank operations, and presenting annual financial statements.',
+      icon: '💼',
+      colorClass: 'border-[#d99b26]/30 hover:border-[#d99b26]',
+      accentBg: 'bg-[#d99b26]/10 text-[#99620b]',
+      dutiesAr: ['المسك المحاسباتي والتدبير البنكي الرسمي', 'إعداد التقرير المالي السنوي للافتحاص', 'توثيق وصولات التبرعات وسندات النفقات'],
+      dutiesFr: ['Tenue de la comptabilité et gestion bancaire', 'Élaboration du rapport financier annuel pour audit', 'Émission des reçus officiels et suivi des dépenses'],
+      dutiesEn: ['Verified accounting & official bank administration', 'Compiling annual financial report for audit', 'Issuing receipts & tracking program budgets'],
+      photoUrl: '',
+      order: 3,
+      enabled: true,
+    },
+    {
+      id: 'vice_president',
+      nameAr: 'عضوية نيابة الرئاسة والتنسيق',
+      nameFr: 'Vice-Président(e)',
+      nameEn: 'Vice President',
+      roleAr: 'نائب(ة) الرئيس',
+      roleFr: 'Vice-Président(e)',
+      roleEn: 'Vice President',
+      category: 'executive',
+      titleStatusAr: 'التنسيق المؤسساتي والميداني',
+      titleStatusFr: 'Coordination Institutionnelle',
+      titleStatusEn: 'Institutional Coordination',
+      badgeStatusAr: 'عضوية معتمدة بالنظام الأساسي',
+      badgeStatusFr: 'Mandat Statutaire',
+      badgeStatusEn: 'Statutory Mandate',
+      descAr: 'مؤازرة الرئاسة في المهام التمثيلية والنيابة عنها عند الاقتضاء، وتنسيق العلاقات مع شبكة الفروع والمراكز الثقافية ودور الشباب الشريكة بالمملكة.',
+      descFr: 'Appui direct à la présidence, intérim statutaire et coordination des partenariats avec les centres culturels, maisons de jeunes et partenaires associatifs.',
+      descEn: 'Assisting executive leadership, serving as deputy, and steering collaborative alliances with youth centers and cultural venues.',
+      icon: '🤝',
+      colorClass: 'border-[#1c6875]/30 hover:border-[#1c6875]',
+      accentBg: 'bg-[#1c6875]/10 text-[#1c6875]',
+      dutiesAr: ['التنسيق الميداني للشراكات المؤسساتية', 'تتبع المبادرات في دور الشباب والمراكز', 'النيابة التمثيلية بتفويض من الرئاسة'],
+      dutiesFr: ['Coordination des partenariats institutionnels', 'Suivi des programmes dans les maisons de jeunes', 'Délégation légale de représentation'],
+      dutiesEn: ['Field coordination of institutional partnerships', 'Program monitoring across cultural centers', 'Delegated legal executive representation'],
+      photoUrl: '',
+      order: 4,
+      enabled: true,
+    },
+    {
+      id: 'deputy_secretary',
+      nameAr: 'عضوية نيابة الكتابة العامة',
+      nameFr: 'Secrétaire Général(e) Adjoint(e)',
+      nameEn: 'Deputy Secretary General',
+      roleAr: 'نائب(ة) الكاتب العام',
+      roleFr: 'Secrétaire Général(e) Adjoint(e)',
+      roleEn: 'Deputy Secretary General',
+      category: 'executive',
+      titleStatusAr: 'التنظيم الداخلي والتنسيق',
+      titleStatusFr: 'Coordination Interne',
+      titleStatusEn: 'Internal Coordination',
+      badgeStatusAr: 'عضوية معتمدة بالنظام الأساسي',
+      badgeStatusFr: 'Mandat Statutaire',
+      badgeStatusEn: 'Statutory Mandate',
+      descAr: 'مساندة الكتابة العامة في التواصل الإداري الداخلي، تدبير منصات التسجيل الرقمي، وإعداد الدعوات والمطبوعات الخاصة بالفعاليات والجموع العامة.',
+      descFr: 'Soutien aux fonctions du secrétariat général, gestion des plateformes d’inscription numérique et préparation des convocations aux assemblées.',
+      descEn: 'Supporting the secretary general, managing registration platforms, preparing official notices, and handling internal logistics.',
+      icon: '📋',
+      colorClass: 'border-[#08242a]/30 hover:border-[#08242a]',
+      accentBg: 'bg-[#08242a]/10 text-[#08242a]',
+      dutiesAr: ['تدبير طلبات العضوية والمنخرطين رقمياً', 'تنظيم الأرشيف والمستندات الورقية والإلكترونية', 'الإشراف على إشعارات ودعوات الأنشطة'],
+      dutiesFr: ['Traitement numérique des demandes d’adhésion', 'Archivage des documents physiques et digitaux', 'Diffusion des convocations et annonces officielles'],
+      dutiesEn: ['Digital intake of membership applications', 'Archiving physical and electronic documents', 'Circulating notices and formal callouts'],
+      photoUrl: '',
+      order: 5,
+      enabled: true,
+    },
+    {
+      id: 'deputy_treasurer',
+      nameAr: 'عضوية نيابة أمانة المال',
+      nameFr: 'Trésorier(ère) Adjoint(e)',
+      nameEn: 'Deputy Treasurer',
+      roleAr: 'نائب(ة) أمين المال',
+      roleFr: 'Trésorier(ère) Adjoint(e)',
+      roleEn: 'Deputy Treasurer',
+      category: 'executive',
+      titleStatusAr: 'التدبير اللوجستي والمالي للميدان',
+      titleStatusFr: 'Logistique Financière de Terrain',
+      titleStatusEn: 'Field Logistics & Budget Tracking',
+      badgeStatusAr: 'عضوية معتمدة بالنظام الأساسي',
+      badgeStatusFr: 'Mandat Statutaire',
+      badgeStatusEn: 'Statutory Mandate',
+      descAr: 'مساندة أمانة المال في تدبير لوجستيك المشتريات الميدانية، جرد ممتلكات وتجهيزات الجمعية، وضبط فواتير ومصروفات الورشات الفنية.',
+      descFr: 'Appui au trésorier général dans la gestion des achats de terrain, inventaire des équipements artistiques et suivi des justificatifs de dépenses.',
+      descEn: 'Assisting the treasurer in purchasing logistics, maintaining cultural assets inventory, and tracking receipts for field workshops.',
+      icon: '⚖️',
+      colorClass: 'border-[#99620b]/30 hover:border-[#99620b]',
+      accentBg: 'bg-[#99620b]/10 text-[#99620b]',
+      dutiesAr: ['جرد وصيانة التجهيزات والمواد الفنية', 'ضبط وصولات المصاريف الميدانية الصغرى', 'المطابقة الدورية لسجلات المقتنيات'],
+      dutiesFr: ['Inventaire et entretien du matériel artistique', 'Contrôle des pièces justificatives de terrain', 'Rapprochement des dépenses opérationnelles'],
+      dutiesEn: ['Inventory and upkeep of artistic equipment', 'Verification of field operational receipts', 'Periodic audit of program procurement'],
+      photoUrl: '',
+      order: 6,
+      enabled: true,
+    },
+  ],
+}
+
+export async function getTeamSettings(): Promise<TeamConfig> {
+  try {
+    const supabase = await createClient()
+    const { data, error } = await supabase
+      .from('site_settings')
+      .select('value')
+      .eq('key', 'team')
+      .maybeSingle()
+
+    if (error || !data || !data.value) {
+      return defaultTeamConfig
+    }
+
+    const val = data.value as Partial<TeamConfig>
+    if (!val || !Array.isArray(val.members)) {
+      return defaultTeamConfig
+    }
+
+    return {
+      members: val.members
+        .filter((item): item is TeamMemberConfig => typeof item === 'object' && item !== null && typeof item.id === 'string')
+        .map((item, index) => ({
+          id: item.id || `member-${index + 1}`,
+          nameAr: item.nameAr || '',
+          nameFr: item.nameFr || '',
+          nameEn: item.nameEn || '',
+          roleAr: item.roleAr || '',
+          roleFr: item.roleFr || '',
+          roleEn: item.roleEn || '',
+          category: (['executive', 'committee', 'advisor'].includes(item.category) ? item.category : 'executive') as 'executive' | 'committee' | 'advisor',
+          titleStatusAr: item.titleStatusAr || '',
+          titleStatusFr: item.titleStatusFr || '',
+          titleStatusEn: item.titleStatusEn || '',
+          badgeStatusAr: item.badgeStatusAr || '',
+          badgeStatusFr: item.badgeStatusFr || '',
+          badgeStatusEn: item.badgeStatusEn || '',
+          descAr: item.descAr || '',
+          descFr: item.descFr || '',
+          descEn: item.descEn || '',
+          dutiesAr: Array.isArray(item.dutiesAr) ? item.dutiesAr : [],
+          dutiesFr: Array.isArray(item.dutiesFr) ? item.dutiesFr : [],
+          dutiesEn: Array.isArray(item.dutiesEn) ? item.dutiesEn : [],
+          photoUrl: typeof item.photoUrl === 'string' ? item.photoUrl : '',
+          icon: item.icon || '👤',
+          colorClass: item.colorClass || 'border-[#0d3b43]/30 hover:border-[#0d3b43]',
+          accentBg: item.accentBg || 'bg-[#0d3b43]/10 text-[#0d3b43]',
+          order: typeof item.order === 'number' ? item.order : index + 1,
+          enabled: typeof item.enabled === 'boolean' ? item.enabled : true,
+        }))
+        .sort((a, b) => a.order - b.order),
+    }
+  } catch {
+    return defaultTeamConfig
+  }
+}

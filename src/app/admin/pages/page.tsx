@@ -36,6 +36,16 @@ const sitePages: PageDefinition[] = [
     descriptionAr: 'تاريخ التأسيس 2026، الرسالة، الرؤية، القيم، ومجالات النشاط الفني والشبابي في المغرب.',
   },
   {
+    key: 'team',
+    titleAr: 'فريق العمل والهيكلة',
+    titleFr: 'Notre Équipe & Direction',
+    titleEn: 'Team & Structure',
+    path: 'team',
+    icon: '👥',
+    category: 'مؤسسي',
+    descriptionAr: 'المكتب التنفيذي، اللجان الوظيفية، إضافة وتعديل الأعضاء ورفع صورهم الرسمية.',
+  },
+  {
     key: 'programs',
     titleAr: 'البرامج الثقافية والفنية',
     titleFr: 'Nos Programmes',

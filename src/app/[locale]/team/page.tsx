@@ -2,6 +2,8 @@ import { getDictionary } from '@/lib/i18n/dictionaries'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import Link from 'next/link'
+import { getTeamSettings } from '@/lib/settings'
+import { ImageWithFallback } from '@/components/ui/ImageWithFallback'
 
 export default async function TeamPage(props: { params: Promise<{ locale: string }> }) {
   const { locale } = await props.params
@@ -9,123 +11,19 @@ export default async function TeamPage(props: { params: Promise<{ locale: string
   const isAr = locale === 'ar'
   const isFr = locale === 'fr'
 
-  // Executive Board Roles (compliant with Moroccan Dahir No. 1.58.376 on Non-Profit Associations)
-  const executiveBoard = [
-    {
-      id: 'president',
-      role: isAr ? 'رئيس(ة) الجمعية' : isFr ? 'Président(e) de l’Association' : 'President of the Association',
-      titleStatus: isAr ? 'التمثيل القانوني والتوجيه الاستراتيجي' : isFr ? 'Représentation Légale & Stratégie' : 'Legal Representation & Strategic Direction',
-      badgeStatus: isAr ? 'عضوية معتمدة بالنظام الأساسي' : isFr ? 'Mandat Statutaire' : 'Statutory Mandate',
-      desc: isAr
-        ? 'التمثيل القانوني للجمعية أمام السلطات العمومية والشركاء، الإشراف العام على التوجهات الاستراتيجية، والدعوة لاجتماعات المكتب التنفيذي والجموع العامة.'
-        : isFr
-        ? 'Représentation légale de l’association auprès des autorités et partenaires, coordination stratégique et convocation des assemblées générales et réunions du bureau.'
-        : 'Official legal representative of the association before authorities and partners, overseeing strategic orientation and executive board coordination.',
-      icon: '🏛️',
-      colorClass: 'border-[#0d3b43]/30 hover:border-[#0d3b43]',
-      accentBg: 'bg-[#0d3b43]/10 text-[#0d3b43]',
-      duties: isAr
-        ? ['إبرام الشراكات والاتفاقيات الرسمية', 'السهر على احترام القانون الأساسي والداخلي', 'الناطق الرسمي باسم الجمعية']
-        : isFr
-        ? ['Signature des accords officiels', 'Garant du respect des statuts associatifs', 'Porte-parole institutionnel']
-        : ['Executing official agreements & partnerships', 'Safeguarding statutory bylaws compliance', 'Official association spokesperson'],
-    },
-    {
-      id: 'secretary_general',
-      role: isAr ? 'الكاتب(ة) العام' : isFr ? 'Secrétaire Général(e)' : 'Secretary General',
-      titleStatus: isAr ? 'التدبير الإداري والتوثيق' : isFr ? 'Administration & Documentation' : 'Administration & Documentation',
-      badgeStatus: isAr ? 'عضوية معتمدة بالنظام الأساسي' : isFr ? 'Mandat Statutaire' : 'Statutory Mandate',
-      desc: isAr
-        ? 'تسيير الشؤون الإدارية للجمعية، تحرير وتوثيق محاضر الاجتماعات والجموع العامة، وحفظ السجلات الرسمية وملفات المنخرطين والأرشيف المؤسساتي.'
-        : isFr
-        ? 'Gestion administrative, rédaction et conservation des procès-verbaux, tenue du registre des adhérents et correspondances institutionnelles officielles.'
-        : 'Managing administrative operations, drafting official minutes, archiving records, and maintaining the verified membership registry.',
-      icon: '📜',
-      colorClass: 'border-[#c85a32]/30 hover:border-[#c85a32]',
-      accentBg: 'bg-[#c85a32]/10 text-[#c85a32]',
-      duties: isAr
-        ? ['تحرير وتوثيق المحاضر والتقارير الأدبية', 'ضبط سجلات الانخراط وملفات العضوية', 'التنسيق الإداري والمراسلات الرسمية']
-        : isFr
-        ? ['Rédaction des procès-verbaux et rapports moraux', 'Tenue rigoureuse du registre des adhérents', 'Liaison administrative et correspondances officielles']
-        : ['Drafting minutes and annual moral reports', 'Maintaining membership and volunteer registries', 'Managing administrative and official communications'],
-    },
-    {
-      id: 'treasurer',
-      role: isAr ? 'أمين(ة) المال' : isFr ? 'Trésorier(ère) Général(e)' : 'General Treasurer',
-      titleStatus: isAr ? 'التدبير المالي والرقابة المحاسبية' : isFr ? 'Gestion Financière & Comptabilité' : 'Financial Management & Accounting',
-      badgeStatus: isAr ? 'عضوية معتمدة بالنظام الأساسي' : isFr ? 'Mandat Statutaire' : 'Statutory Mandate',
-      desc: isAr
-        ? 'التدبير المالي والمحاسباتي المدقق، إعداد الميزانيات التقديرية والتقارير المالية السنوية، والإشراف المباشر على الحساب البنكي الرسمي وسندات الصرف.'
-        : isFr
-        ? 'Gestion financière et comptable rigoureuse, élaboration des bilans annuels certifiés et suivi transparent du compte bancaire officiel de l’association.'
-        : 'Overseeing financial stewardship, maintaining verified bookkeeping, managing official bank operations, and presenting annual financial statements.',
-      icon: '💼',
-      colorClass: 'border-[#d99b26]/30 hover:border-[#d99b26]',
-      accentBg: 'bg-[#d99b26]/10 text-[#99620b]',
-      duties: isAr
-        ? ['المسك المحاسباتي والتدبير البنكي الرسمي', 'إعداد التقرير المالي السنوي للافتحاص', 'توثيق وصولات التبرعات وسندات النفقات']
-        : isFr
-        ? ['Tenue de la comptabilité et gestion bancaire', 'Élaboration du rapport financier annuel pour audit', 'Émission des reçus officiels et suivi des dépenses']
-        : ['Verified accounting & official bank administration', 'Compiling annual financial report for audit', 'Issuing receipts & tracking program budgets'],
-    },
-    {
-      id: 'vice_president',
-      role: isAr ? 'نائب(ة) الرئيس' : isFr ? 'Vice-Président(e)' : 'Vice President',
-      titleStatus: isAr ? 'التنسيق المؤسساتي والميداني' : isFr ? 'Coordination Institutionnelle' : 'Institutional Coordination',
-      badgeStatus: isAr ? 'عضوية معتمدة بالنظام الأساسي' : isFr ? 'Mandat Statutaire' : 'Statutory Mandate',
-      desc: isAr
-        ? 'مؤازرة الرئاسة في المهام التمثيلية والنيابة عنها عند الاقتضاء، وتنسيق العلاقات مع شبكة الفروع والمراكز الثقافية ودور الشباب الشريكة بالمملكة.'
-        : isFr
-        ? 'Appui direct à la présidence, intérim statutaire et coordination des partenariats avec les centres culturels, maisons de jeunes et partenaires associatifs.'
-        : 'Assisting executive leadership, serving as deputy, and steering collaborative alliances with youth centers and cultural venues.',
-      icon: '🤝',
-      colorClass: 'border-[#1c6875]/30 hover:border-[#1c6875]',
-      accentBg: 'bg-[#1c6875]/10 text-[#1c6875]',
-      duties: isAr
-        ? ['التنسيق الميداني للشراكات المؤسساتية', 'تتبع المبادرات في دور الشباب والمراكز', 'النيابة التمثيلية بتفويض من الرئاسة']
-        : isFr
-        ? ['Coordination des partenariats institutionnels', 'Suivi des programmes dans les maisons de jeunes', 'Délégation légale de représentation']
-        : ['Field coordination of institutional partnerships', 'Program monitoring across cultural centers', 'Delegated legal executive representation'],
-    },
-    {
-      id: 'deputy_secretary',
-      role: isAr ? 'نائب(ة) الكاتب العام' : isFr ? 'Secrétaire Général(e) Adjoint(e)' : 'Deputy Secretary General',
-      titleStatus: isAr ? 'التنظيم الداخلي والتنسيق' : isFr ? 'Coordination Interne' : 'Internal Coordination',
-      badgeStatus: isAr ? 'عضوية معتمدة بالنظام الأساسي' : isFr ? 'Mandat Statutaire' : 'Statutory Mandate',
-      desc: isAr
-        ? 'مساندة الكتابة العامة في التواصل الإداري الداخلي، تدبير منصات التسجيل الرقمي، وإعداد الدعوات والمطبوعات الخاصة بالفعاليات والجموع العامة.'
-        : isFr
-        ? 'Soutien aux fonctions du secrétariat général, gestion des plateformes d’inscription numérique et préparation des convocations aux assemblées.'
-        : 'Supporting the secretary general, managing registration platforms, preparing official notices, and handling internal logistics.',
-      icon: '📋',
-      colorClass: 'border-[#08242a]/30 hover:border-[#08242a]',
-      accentBg: 'bg-[#08242a]/10 text-[#08242a]',
-      duties: isAr
-        ? ['تدبير طلبات العضوية والمنخرطين رقمياً', 'تنظيم الأرشيف والمستندات الورقية والإلكترونية', 'الإشراف على إشعارات ودعوات الأنشطة']
-        : isFr
-        ? ['Traitement numérique des demandes d’adhésion', 'Archivage des documents physiques et digitaux', 'Diffusion des convocations et annonces officielles']
-        : ['Digital intake of membership applications', 'Archiving physical and electronic documents', 'Circulating notices and formal callouts'],
-    },
-    {
-      id: 'deputy_treasurer',
-      role: isAr ? 'نائب(ة) أمين المال' : isFr ? 'Trésorier(ère) Adjoint(e)' : 'Deputy Treasurer',
-      titleStatus: isAr ? 'التدبير اللوجستي والمالي للميدان' : isFr ? 'Logistique Financière de Terrain' : 'Field Logistics & Budget Tracking',
-      badgeStatus: isAr ? 'عضوية معتمدة بالنظام الأساسي' : isFr ? 'Mandat Statutaire' : 'Statutory Mandate',
-      desc: isAr
-        ? 'مساندة أمانة المال في تدبير لوجستيك المشتريات الميدانية، جرد ممتلكات وتجهيزات الجمعية، وضبط فواتير ومصروفات الورشات الفنية.'
-        : isFr
-        ? 'Appui au trésorier général dans la gestion des achats de terrain, inventaire des équipements artistiques et suivi des justificatifs de dépenses.'
-        : 'Assisting the treasurer in purchasing logistics, maintaining cultural assets inventory, and tracking receipts for field workshops.',
-      icon: '⚖️',
-      colorClass: 'border-[#99620b]/30 hover:border-[#99620b]',
-      accentBg: 'bg-[#99620b]/10 text-[#99620b]',
-      duties: isAr
-        ? ['جرد وصيانة التجهيزات والمواد الفنية', 'ضبط وصولات المصاريف الميدانية الصغرى', 'المطابقة الدورية لسجلات المقتنيات']
-        : isFr
-        ? ['Inventaire et entretien du matériel artistique', 'Contrôle des pièces justificatives de terrain', 'Rapprochement des dépenses opérationnelles']
-        : ['Inventory and upkeep of artistic equipment', 'Verification of field operational receipts', 'Periodic audit of program procurement'],
-    },
-  ]
+  // Fetch dynamic team configuration from site settings (Supabase / defaults)
+  const teamSettings = await getTeamSettings()
+  const enabledMembers = teamSettings.members.filter((m) => m.enabled !== false)
+
+  // Executive Board Members (fallback to default statutory members if empty)
+  const executiveMembers =
+    enabledMembers.filter((m) => m.category === 'executive').length > 0
+      ? enabledMembers.filter((m) => m.category === 'executive')
+      : enabledMembers
+  // Committee Coordinators & Working Members
+  const committeeMembers = enabledMembers.filter((m) => m.category === 'committee')
+  // Advisory Board & Mentors
+  const advisorMembers = enabledMembers.filter((m) => m.category === 'advisor')
 
   // The 6 Functional & Field Commissions
   const committees = [
@@ -516,64 +414,102 @@ export default async function TeamPage(props: { params: Promise<{ locale: string
               </p>
             </div>
 
-            {/* 6 Executive Board Cards Grid */}
+            {/* Executive Board Cards Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {executiveBoard.map((member) => (
-                <div
-                  key={member.id}
-                  className={`p-7 rounded-3xl bg-white border ${member.colorClass} shadow-subtle hover:shadow-card hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group relative overflow-hidden`}
-                >
-                  <div className="space-y-5">
-                    {/* Role Header & Icon */}
-                    <div className="flex items-start justify-between gap-3">
-                      <div className="flex items-center gap-3">
-                        <span className="w-14 h-14 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6] flex items-center justify-center text-2xl shadow-2xs group-hover:scale-110 transition-transform">
-                          {member.icon}
-                        </span>
-                        <div>
-                          <span className={`inline-block px-2.5 py-0.5 rounded-full text-xs font-bold ${member.accentBg}`}>
-                            {member.badgeStatus}
-                          </span>
-                          <h3 className="text-lg font-black text-[#08242a] mt-1 leading-snug">
-                            {member.role}
-                          </h3>
+              {executiveMembers.map((member) => {
+                const name = isAr ? member.nameAr : isFr ? (member.nameFr || member.nameAr) : (member.nameEn || member.nameAr)
+                const role = isAr ? member.roleAr : isFr ? (member.roleFr || member.roleAr) : (member.roleEn || member.roleAr)
+                const titleStatus = isAr ? member.titleStatusAr : isFr ? (member.titleStatusFr || member.titleStatusAr) : (member.titleStatusEn || member.titleStatusAr)
+                const badgeStatus = isAr ? member.badgeStatusAr : isFr ? (member.badgeStatusFr || member.badgeStatusAr) : (member.badgeStatusEn || member.badgeStatusAr)
+                const desc = isAr ? member.descAr : isFr ? (member.descFr || member.descAr) : (member.descEn || member.descAr)
+                const duties = (isAr ? member.dutiesAr : isFr ? (member.dutiesFr?.length ? member.dutiesFr : member.dutiesAr) : (member.dutiesEn?.length ? member.dutiesEn : member.dutiesAr)) || []
+
+                return (
+                  <div
+                    key={member.id}
+                    className={`p-7 rounded-3xl bg-white border ${member.colorClass} shadow-subtle hover:shadow-card hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group relative overflow-hidden`}
+                  >
+                    <div className="space-y-5">
+                      {/* Photo / Avatar & Role Header */}
+                      <div className="flex items-start justify-between gap-3">
+                        <div className="flex items-center gap-3.5">
+                          {member.photoUrl ? (
+                            <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl overflow-hidden border-2 border-white shadow-md ring-2 ring-[#0d3b43]/20 group-hover:ring-[#c85a32]/50 transition-all shrink-0 relative bg-neutral-100">
+                              <ImageWithFallback
+                                src={member.photoUrl}
+                                alt={name || role}
+                                width={80}
+                                height={80}
+                                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                              />
+                            </div>
+                          ) : (
+                            <span className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6] flex items-center justify-center text-3xl shadow-2xs group-hover:scale-110 transition-transform shrink-0">
+                              {member.icon || '👤'}
+                            </span>
+                          )}
+
+                          <div className="min-w-0">
+                            <span className={`inline-block px-2.5 py-0.5 rounded-full text-xs font-bold ${member.accentBg}`}>
+                              {badgeStatus || (isAr ? 'عضوية معتمدة' : isFr ? 'Mandat Statutaire' : 'Statutory Mandate')}
+                            </span>
+                            {name && (
+                              <h3 className="text-lg sm:text-xl font-black text-[#08242a] mt-1.5 leading-snug truncate">
+                                {name}
+                              </h3>
+                            )}
+                            <div className={`font-bold leading-snug ${name ? 'text-xs text-[#c85a32]' : 'text-base sm:text-lg font-black text-[#08242a] mt-1'}`}>
+                              {role}
+                            </div>
+                          </div>
                         </div>
                       </div>
+
+                      {/* Mandate & Scope */}
+                      {titleStatus && (
+                        <div>
+                          <span className="text-xs font-bold text-[#819598] uppercase tracking-wider block mb-1.5">
+                            {titleStatus}
+                          </span>
+                          {desc && (
+                            <p className="text-xs sm:text-sm text-[#445457] leading-relaxed">
+                              {desc}
+                            </p>
+                          )}
+                        </div>
+                      )}
+                      {!titleStatus && desc && (
+                        <p className="text-xs sm:text-sm text-[#445457] leading-relaxed">
+                          {desc}
+                        </p>
+                      )}
+
+                      {/* Responsibilities Checklist */}
+                      {duties.length > 0 && (
+                        <div className="space-y-2 pt-2 border-t border-[#f0ebe1]">
+                          <span className="text-xs font-bold text-[#08242a] block">
+                            {isAr ? 'المهام والمسؤوليات النظامية:' : isFr ? 'Missions & Responsabilités :' : 'Statutory Responsibilities:'}
+                          </span>
+                          <ul className="space-y-1.5 text-xs text-[#5f7174]">
+                            {duties.map((duty, dIdx) => (
+                              <li key={dIdx} className="flex items-start gap-2">
+                                <span className="text-emerald-600 font-bold">✓</span>
+                                <span className="leading-relaxed">{duty}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
                     </div>
 
-                    {/* Mandate & Scope */}
-                    <div>
-                      <span className="text-xs font-bold text-[#819598] uppercase tracking-wider block mb-2">
-                        {member.titleStatus}
-                      </span>
-                      <p className="text-xs sm:text-sm text-[#445457] leading-relaxed">
-                        {member.desc}
-                      </p>
-                    </div>
-
-                    {/* 3 Core Responsibilities Checklist */}
-                    <div className="space-y-2 pt-2 border-t border-[#f0ebe1]">
-                      <span className="text-xs font-bold text-[#08242a] block">
-                        {isAr ? 'المهام والمسؤوليات النظامية:' : isFr ? 'Missions & Responsabilités :' : 'Statutory Responsibilities:'}
-                      </span>
-                      <ul className="space-y-1.5 text-xs text-[#5f7174]">
-                        {member.duties.map((duty, dIdx) => (
-                          <li key={dIdx} className="flex items-start gap-2">
-                            <span className="text-emerald-600 font-bold">✓</span>
-                            <span className="leading-relaxed">{duty}</span>
-                          </li>
-                        ))}
-                      </ul>
+                    {/* Card Footer with Moroccan Legal Stamp */}
+                    <div className="pt-4 mt-6 border-t border-[#f0ebe1] flex items-center justify-between text-xs font-bold text-[#819598]">
+                      <span>{isAr ? 'المملكة المغربية • الظهير 1.58.376' : isFr ? 'Dahir n° 1-58-376 • Maroc' : 'Dahir 1.58.376 • Morocco'}</span>
+                      <span className="w-2 h-2 rounded-full bg-emerald-500" />
                     </div>
                   </div>
-
-                  {/* Card Footer with Moroccan Legal Stamp */}
-                  <div className="pt-4 mt-6 border-t border-[#f0ebe1] flex items-center justify-between text-xs font-bold text-[#819598]">
-                    <span>{isAr ? 'المملكة المغربية • الظهير 1.58.376' : isFr ? 'Dahir n° 1-58-376 • Maroc' : 'Dahir 1.58.376 • Morocco'}</span>
-                    <span className="w-2 h-2 rounded-full bg-emerald-500" />
-                  </div>
-                </div>
-              ))}
+                )
+              })}
             </div>
 
             {/* Statutory Transparency Box */}
@@ -671,8 +607,187 @@ export default async function TeamPage(props: { params: Promise<{ locale: string
                 </div>
               ))}
             </div>
+
+            {/* Specialized Coordinators / Committee Members (when configured in admin) */}
+            {committeeMembers.length > 0 && (
+              <div className="pt-8 border-t border-[#e5e0d6] space-y-6">
+                <div className="text-center max-w-2xl mx-auto space-y-2">
+                  <h3 className="text-xl sm:text-2xl font-black text-[#08242a]">
+                    {isAr ? 'منسقو ومؤطرو اللجان الوظيفية' : isFr ? 'Coordinateurs & Encadrants des Commissions' : 'Commission Coordinators & Mentors'}
+                  </h3>
+                  <p className="text-xs sm:text-sm text-[#5f7174]">
+                    {isAr
+                      ? 'كفاءات ميدانية شابة تسهر على التسيير العملياتي للبرامج والورشات الفنية'
+                      : isFr
+                      ? 'Énergies de terrain assurant l’animation opérationnelle des projets culturels'
+                      : 'Dedicated coordinators driving creative operations across artistic workshops'}
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {committeeMembers.map((member) => {
+                    const name = isAr ? member.nameAr : isFr ? (member.nameFr || member.nameAr) : (member.nameEn || member.nameAr)
+                    const role = isAr ? member.roleAr : isFr ? (member.roleFr || member.roleAr) : (member.roleEn || member.roleAr)
+                    const titleStatus = isAr ? member.titleStatusAr : isFr ? (member.titleStatusFr || member.titleStatusAr) : (member.titleStatusEn || member.titleStatusAr)
+                    const badgeStatus = isAr ? member.badgeStatusAr : isFr ? (member.badgeStatusFr || member.badgeStatusAr) : (member.badgeStatusEn || member.badgeStatusAr)
+                    const desc = isAr ? member.descAr : isFr ? (member.descFr || member.descAr) : (member.descEn || member.descAr)
+                    const duties = (isAr ? member.dutiesAr : isFr ? (member.dutiesFr?.length ? member.dutiesFr : member.dutiesAr) : (member.dutiesEn?.length ? member.dutiesEn : member.dutiesAr)) || []
+
+                    return (
+                      <div
+                        key={member.id}
+                        className={`p-6 rounded-3xl bg-white border ${member.colorClass} shadow-subtle hover:shadow-card hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group`}
+                      >
+                        <div className="space-y-4">
+                          <div className="flex items-center gap-3">
+                            {member.photoUrl ? (
+                              <div className="w-14 h-14 rounded-2xl overflow-hidden border-2 border-white shadow-xs ring-2 ring-[#c85a32]/20 group-hover:ring-[#c85a32]/50 transition-all shrink-0 relative bg-neutral-100">
+                                <ImageWithFallback
+                                  src={member.photoUrl}
+                                  alt={name || role}
+                                  width={56}
+                                  height={56}
+                                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                />
+                              </div>
+                            ) : (
+                              <span className="w-14 h-14 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6] flex items-center justify-center text-2xl shadow-2xs group-hover:scale-110 transition-transform shrink-0">
+                                {member.icon || '👤'}
+                              </span>
+                            )}
+
+                            <div className="min-w-0">
+                              <span className={`inline-block px-2.5 py-0.5 rounded-full text-xs font-bold ${member.accentBg}`}>
+                                {badgeStatus || (isAr ? 'تأطير وتنسيق' : isFr ? 'Coordination' : 'Coordination')}
+                              </span>
+                              {name && (
+                                <h4 className="text-base font-black text-[#08242a] mt-1 truncate">
+                                  {name}
+                                </h4>
+                              )}
+                              <div className={`font-bold ${name ? 'text-xs text-[#c85a32]' : 'text-base font-black text-[#08242a] mt-1'}`}>
+                                {role}
+                              </div>
+                            </div>
+                          </div>
+
+                          {titleStatus && (
+                            <div className="text-xs font-bold text-[#819598] uppercase tracking-wider">
+                              {titleStatus}
+                            </div>
+                          )}
+
+                          {desc && (
+                            <p className="text-xs text-[#445457] leading-relaxed">
+                              {desc}
+                            </p>
+                          )}
+
+                          {duties.length > 0 && (
+                            <ul className="space-y-1 pt-2 border-t border-[#f0ebe1] text-xs text-[#5f7174]">
+                              {duties.map((duty, dIdx) => (
+                                <li key={dIdx} className="flex items-start gap-1.5">
+                                  <span className="text-emerald-600 font-bold">✓</span>
+                                  <span>{duty}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          )}
+                        </div>
+                      </div>
+                    )
+                  })}
+                </div>
+              </div>
+            )}
           </div>
         </section>
+
+        {/* Advisory Board & Mentors (when configured in admin) */}
+        {advisorMembers.length > 0 && (
+          <section id="advisors" className="py-20 bg-white border-b border-[#e5e0d6] scroll-mt-16">
+            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+              <div className="text-center max-w-3xl mx-auto space-y-3">
+                <span className="text-xs font-bold uppercase tracking-widest text-[#d99b26] px-3.5 py-1.5 rounded-full bg-[#d99b26]/10 border border-[#d99b26]/20">
+                  {isAr ? 'الخبرة والمواكبة الاستراتيجية' : isFr ? 'Conseil & Mentorat' : 'Advisory & Mentorship'}
+                </span>
+                <h2 className="text-3xl sm:text-4xl font-black text-[#08242a]">
+                  {isAr ? 'الهيئة الاستشارية والخبراء' : isFr ? 'Cercle Consultatif & Experts' : 'Advisory & Mentorship Circle'}
+                </h2>
+                <p className="text-sm sm:text-base text-[#445457] leading-relaxed text-balance">
+                  {isAr
+                    ? 'شخصيات ثقافية وفنية وأكاديمية تواكب مسيرة الجمعية بخبرتها وتقدم التوجيه والمشورة لتطوير المبادرات المجتمعية.'
+                    : isFr
+                    ? 'Personnalités culturelles et académiques apportant leur expertise et conseil pour enrichir les initiatives associatives.'
+                    : 'Eminent cultural and academic figures lending their seasoned guidance and mentorship to AMYCC community initiatives.'}
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {advisorMembers.map((member) => {
+                  const name = isAr ? member.nameAr : isFr ? (member.nameFr || member.nameAr) : (member.nameEn || member.nameAr)
+                  const role = isAr ? member.roleAr : isFr ? (member.roleFr || member.roleAr) : (member.roleEn || member.roleAr)
+                  const titleStatus = isAr ? member.titleStatusAr : isFr ? (member.titleStatusFr || member.titleStatusAr) : (member.titleStatusEn || member.titleStatusAr)
+                  const badgeStatus = isAr ? member.badgeStatusAr : isFr ? (member.badgeStatusFr || member.badgeStatusAr) : (member.badgeStatusEn || member.badgeStatusAr)
+                  const desc = isAr ? member.descAr : isFr ? (member.descFr || member.descAr) : (member.descEn || member.descAr)
+
+                  return (
+                    <div
+                      key={member.id}
+                      className={`p-6 rounded-3xl bg-[#faf7f2] border ${member.colorClass} shadow-subtle hover:shadow-card hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group`}
+                    >
+                      <div className="space-y-4">
+                        <div className="flex items-center gap-3.5">
+                          {member.photoUrl ? (
+                            <div className="w-16 h-16 rounded-2xl overflow-hidden border-2 border-white shadow-xs ring-2 ring-[#d99b26]/30 group-hover:ring-[#d99b26]/60 transition-all shrink-0 relative bg-neutral-100">
+                              <ImageWithFallback
+                                src={member.photoUrl}
+                                alt={name || role}
+                                width={64}
+                                height={64}
+                                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                              />
+                            </div>
+                          ) : (
+                            <span className="w-16 h-16 rounded-2xl bg-white border border-[#e5e0d6] flex items-center justify-center text-3xl shadow-2xs group-hover:scale-110 transition-transform shrink-0">
+                              {member.icon || '🌟'}
+                            </span>
+                          )}
+
+                          <div className="min-w-0">
+                            <span className={`inline-block px-2.5 py-0.5 rounded-full text-xs font-bold ${member.accentBg}`}>
+                              {badgeStatus || (isAr ? 'عضوية شرفية واستشارية' : isFr ? 'Membre Consultatif' : 'Advisory Member')}
+                            </span>
+                            {name && (
+                              <h3 className="text-base sm:text-lg font-black text-[#08242a] mt-1 truncate">
+                                {name}
+                              </h3>
+                            )}
+                            <div className={`font-bold ${name ? 'text-xs text-[#c85a32]' : 'text-base font-black text-[#08242a] mt-1'}`}>
+                              {role}
+                            </div>
+                          </div>
+                        </div>
+
+                        {titleStatus && (
+                          <div className="text-xs font-bold text-[#819598] uppercase tracking-wider">
+                            {titleStatus}
+                          </div>
+                        )}
+
+                        {desc && (
+                          <p className="text-xs sm:text-sm text-[#445457] leading-relaxed">
+                            {desc}
+                          </p>
+                        )}
+                      </div>
+                    </div>
+                  )
+                })}
+              </div>
+            </div>
+          </section>
+        )}
 
         {/* ============================================================
             5. DEMOCRATIC ARCHITECTURE & PARTICIPATORY MODEL

@@ -208,3 +208,62 @@ describe('Intervention Areas Validation Suite', () => {
     assert.equal(result.success, false)
   })
 })
+
+const teamMemberSchema = z.object({
+  id: z.string().min(1),
+  nameAr: z.string().default(''),
+  nameFr: z.string().default(''),
+  nameEn: z.string().default(''),
+  roleAr: z.string().min(2),
+  roleFr: z.string().default(''),
+  roleEn: z.string().default(''),
+  category: z.enum(['executive', 'committee', 'advisor']).default('executive'),
+  titleStatusAr: z.string().default(''),
+  badgeStatusAr: z.string().default(''),
+  descAr: z.string().default(''),
+  dutiesAr: z.array(z.string()).default([]),
+  photoUrl: z.string().default(''),
+  icon: z.string().default('👤'),
+  colorClass: z.string().default('border-[#0d3b43]/30 hover:border-[#0d3b43]'),
+  accentBg: z.string().default('bg-[#0d3b43]/10 text-[#0d3b43]'),
+  order: z.number().int().min(1).default(1),
+  enabled: z.boolean().default(true),
+})
+
+describe('Team Validation Suite', () => {
+  test('accepts valid team member with uploaded photo and statutory role', () => {
+    const valid = {
+      id: 'member-101',
+      nameAr: 'أحمد المرابط',
+      nameFr: 'Ahmed El Mourabit',
+      nameEn: 'Ahmed El Mourabit',
+      roleAr: 'رئيس الجمعية',
+      roleFr: 'Président',
+      roleEn: 'President',
+      category: 'executive',
+      titleStatusAr: 'التمثيل القانوني والتوجيه الاستراتيجي',
+      badgeStatusAr: 'عضوية معتمدة بالنظام الأساسي',
+      descAr: 'التمثيل الرسمي للجمعية وتنسيق العمل التشاركي.',
+      dutiesAr: ['إبرام الشراكات', 'السهر على احترام القانون الأساسي'],
+      photoUrl: 'https://example.com/uploads/president.jpg',
+      icon: '🏛️',
+      order: 1,
+      enabled: true,
+    }
+    const result = teamMemberSchema.safeParse(valid)
+    assert.equal(result.success, true)
+    if (result.success) {
+      assert.equal(result.data.category, 'executive')
+      assert.equal(result.data.photoUrl, 'https://example.com/uploads/president.jpg')
+    }
+  })
+
+  test('rejects team member with missing or too short role title', () => {
+    const invalid = {
+      id: 'member-invalid',
+      roleAr: '',
+    }
+    const result = teamMemberSchema.safeParse(invalid)
+    assert.equal(result.success, false)
+  })
+})
