@@ -844,29 +844,35 @@ export default async function HomePage(props: { params: Promise<{ locale: string
                   </div>
                 </div>
 
-                {/* Visual Spotlight Card */}
-                <div className="lg:col-span-5 relative">
-                  <div className="relative rounded-3xl p-3 bg-white/10 border border-white/20 backdrop-blur-md shadow-2xl">
-                    <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-[#0d3b43]">
+                {/* Visual Spotlight Card — Grand Cultural Poster Showcase */}
+                <div className="lg:col-span-5 relative flex justify-center">
+                  {/* Subtle warm ambient glow behind poster */}
+                  <div
+                    className="absolute -inset-2 bg-gradient-to-tr from-[#f4ce83]/25 via-[#c85a32]/20 to-[#0d3b43]/30 rounded-[2.5rem] blur-2xl -z-10 opacity-70"
+                    aria-hidden="true"
+                  />
+
+                  <div className="w-full max-w-md relative rounded-3xl p-3.5 bg-white/10 border border-white/20 backdrop-blur-md shadow-2xl">
+                    <div className="relative aspect-[3/4] sm:aspect-[4/5] min-h-[460px] sm:min-h-[520px] lg:min-h-[580px] rounded-2xl overflow-hidden bg-[#0d3b43]">
                       {flagship.imageUrl ? (
                         <>
                           <ImageWithFallback
                             src={flagship.imageUrl}
-                            fallbackSrc="https://images.unsplash.com/photo-1460723237483-7a6dc9d0b212?auto=format&fit=crop&w=1200&q=80"
+                            fallbackSrc="/images/youth-in-action.jpg"
                             alt={flagshipTitle || 'Flagship Program'}
                             fill
-                            sizes="(max-width: 768px) 100vw, 40vw"
-                            className="object-cover"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 45vw, 480px"
+                            className="object-cover object-center"
                           />
-                          <div className="absolute inset-0 bg-gradient-to-t from-[#08242a] to-transparent opacity-80" />
-                          <div className="absolute bottom-4 start-4 end-4 text-white">
+                          <div className="absolute inset-0 bg-gradient-to-t from-[#08242a] via-[#08242a]/30 to-black/20 opacity-85" />
+                          <div className="absolute bottom-5 start-5 end-5 text-white">
                             {flagship.imageSubcaption && (
-                              <span className="text-3xs text-[#f4ce83] font-bold uppercase tracking-wider block">
+                              <span className="text-3xs text-[#f4ce83] font-bold uppercase tracking-widest block mb-1">
                                 {flagship.imageSubcaption}
                               </span>
                             )}
                             {flagshipCaption && (
-                              <span className="text-sm font-bold block mt-1">
+                              <span className="text-base sm:text-lg font-black block leading-snug drop-shadow-md">
                                 {flagshipCaption}
                               </span>
                             )}

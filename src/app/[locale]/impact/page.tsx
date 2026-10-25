@@ -223,7 +223,7 @@ export default async function ImpactPage(props: { params: Promise<{ locale: stri
               <div className="lg:col-span-5">
                 <div className="relative aspect-[4/3] rounded-3xl overflow-hidden border border-[#e5e0d6] shadow-card bg-[#08242a]">
                   <ImageWithFallback
-                    src="/images/youth-in-action.png"
+                    src="/images/youth-in-action.jpg"
                     fallbackSrc="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1200&q=80"
                     alt="Youth in Action Impact"
                     fill

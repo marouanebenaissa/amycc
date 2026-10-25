@@ -218,7 +218,7 @@ export const defaultFlagshipProgramConfig: FlagshipProgramConfig = {
   descriptionAr: 'برنامج تطوعي ومجتمعي أطلقته الجمعية لتمكين الشباب من القيادة الثقافية وتنظيم الأنشطة الميدانية وصقل المهارات الحياتية.',
   descriptionFr: 'Programme de bénévolat communautaire lancé par l\'association pour autonomiser les jeunes dans le leadership culturel.',
   descriptionEn: 'A civic volunteering initiative launched to empower Moroccan youth in cultural leadership, field management, and artistic production.',
-  imageUrl: '/images/youth-in-action.png',
+  imageUrl: '/images/youth-in-action.jpg',
   imageCaptionAr: 'طاقات شبابية تقود المشهد الثقافي',
   imageCaptionFr: 'Jeunes leaders de la scène culturelle',
   imageCaptionEn: 'Youth Leadership in Arts & Culture',
@@ -289,7 +289,9 @@ export async function getFlagshipProgramSettings(): Promise<FlagshipProgramConfi
       descriptionAr: val.descriptionAr || defaultFlagshipProgramConfig.descriptionAr,
       descriptionFr: val.descriptionFr || defaultFlagshipProgramConfig.descriptionFr,
       descriptionEn: val.descriptionEn || defaultFlagshipProgramConfig.descriptionEn,
-      imageUrl: typeof val.imageUrl === 'string' ? val.imageUrl : defaultFlagshipProgramConfig.imageUrl,
+      imageUrl: typeof val.imageUrl === 'string'
+        ? (val.imageUrl === '/images/youth-in-action.png' ? '/images/youth-in-action.jpg' : val.imageUrl)
+        : defaultFlagshipProgramConfig.imageUrl,
       imageCaptionAr: val.imageCaptionAr || defaultFlagshipProgramConfig.imageCaptionAr,
       imageCaptionFr: val.imageCaptionFr || defaultFlagshipProgramConfig.imageCaptionFr,
       imageCaptionEn: val.imageCaptionEn || defaultFlagshipProgramConfig.imageCaptionEn,

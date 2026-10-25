@@ -11,7 +11,7 @@ interface FlagshipImageUploaderProps {
 
 export function FlagshipImageUploader({
   initialImageUrl,
-  defaultImageUrl = '/images/youth-in-action.png',
+  defaultImageUrl = '/images/youth-in-action.jpg',
   imageCaption = 'طاقات شبابية تقود المشهد الثقافي',
 }: FlagshipImageUploaderProps) {
   const [imageUrl, setImageUrl] = useState(initialImageUrl ?? defaultImageUrl)
@@ -55,12 +55,6 @@ export function FlagshipImageUploader({
         fileInputRef.current.value = ''
       }
     }
-  }
-
-  function handleResetDefault() {
-    setImageUrl(defaultImageUrl)
-    setError(null)
-    setSuccessMessage('تمت استعادة الصورة الافتراضية للبرنامج الرائد.')
   }
 
   async function handleDeleteImage() {
@@ -134,21 +128,12 @@ export function FlagshipImageUploader({
             )}
           </button>
 
-          <button
-            type="button"
-            onClick={handleResetDefault}
-            disabled={uploading || deleting}
-            className="px-3 py-2 rounded-xl text-3xs font-bold text-[#5f7174] bg-[#faf7f2] border border-[#e5e0d6] hover:bg-[#f0ebe1] active:scale-98 transition-all cursor-pointer disabled:opacity-60"
-          >
-            استعادة الافتراضي
-          </button>
-
           {imageUrl ? (
             <button
               type="button"
               onClick={handleDeleteImage}
               disabled={uploading || deleting}
-              className="px-3 py-2 rounded-xl text-3xs font-bold text-red-600 bg-red-50 border border-red-200 hover:bg-red-100 hover:text-red-700 active:scale-98 transition-all inline-flex items-center gap-1.5 cursor-pointer disabled:opacity-50"
+              className="px-3.5 py-2 rounded-xl text-3xs font-bold text-red-600 bg-red-50 border border-red-200 hover:bg-red-100 hover:text-red-700 active:scale-98 transition-all inline-flex items-center gap-1.5 cursor-pointer disabled:opacity-50"
             >
               {deleting ? 'جاري الحذف...' : 'حذف الصورة'}
             </button>
@@ -166,7 +151,7 @@ export function FlagshipImageUploader({
             setSuccessMessage(null)
             setError(null)
           }}
-          placeholder="/images/youth-in-action.png"
+          placeholder="/images/youth-in-action.jpg"
           className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43] font-mono bg-white text-left"
         />
       </div>
@@ -183,32 +168,37 @@ export function FlagshipImageUploader({
         </div>
       )}
 
-      {/* Visual Preview Card styled exactly like the homepage card */}
-      <div className="max-w-md mx-auto rounded-3xl p-3 bg-white/10 border border-[#e5e0d6] bg-[#08242a] shadow-lg overflow-hidden">
-        <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-[#0d3b43]">
+      {/* Visual Preview Card — Poster Showcase format */}
+      <div className="max-w-xs sm:max-w-sm mx-auto rounded-3xl p-3 bg-gradient-to-b from-[#14505b]/30 to-[#08242a] border border-[#268292]/30 shadow-2xl overflow-hidden">
+        <div className="relative aspect-[3/4] min-h-[440px] rounded-2xl overflow-hidden bg-[#0d3b43]">
           {imageUrl ? (
             <>
               <ImageWithFallback
                 key={imageUrl}
                 src={imageUrl}
                 fallbackSrc={defaultImageUrl}
-                alt="Flagship Preview"
+                alt="Flagship Poster Preview"
                 fill
-                className="object-cover"
+                sizes="(max-width: 640px) 100vw, 360px"
+                className="object-cover object-center"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#08242a] to-transparent opacity-80" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#08242a] via-[#08242a]/30 to-black/20 opacity-85" />
+              <div className="absolute top-3 end-3 px-2.5 py-1 rounded-full bg-black/50 backdrop-blur-md border border-white/20 text-4xs font-bold text-[#f4ce83] uppercase tracking-wider">
+                معاينة ملصق Poster
+              </div>
               <div className="absolute bottom-4 start-4 end-4 text-white">
                 <span className="text-3xs text-[#f4ce83] font-bold uppercase tracking-wider block">
                   AMYCC Morocco
                 </span>
-                <span className="text-sm font-bold block mt-1">
+                <span className="text-sm sm:text-base font-black block mt-1 leading-snug drop-shadow-md">
                   {imageCaption}
                 </span>
               </div>
             </>
           ) : (
-            <div className="absolute inset-0 flex items-center justify-center text-center p-4 text-[#d8f0f4]">
+            <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center text-[#d8f0f4]">
               <span className="text-xs font-bold">لا توجد صورة محددة</span>
+              <span className="text-3xs text-[#819598] mt-1">انقر على &ldquo;استيراد صورة&rdquo; لرفع ملصق البرنامج</span>
             </div>
           )}
         </div>
