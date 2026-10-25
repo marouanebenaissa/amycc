@@ -1,7 +1,7 @@
 import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import { revalidatePath } from 'next/cache'
-import { defaultTopBarConfig, type TopBarConfig } from '@/lib/settings'
+import { defaultTopBarConfig, type TopBarConfig, defaultHeroConfig, type HeroConfig } from '@/lib/settings'
 
 interface SiteSettingRow {
   key: string
@@ -33,6 +33,7 @@ export default async function AdminSettingsPage() {
     const facebookUrl = (formData.get('facebookUrl') as string) || ''
     const instagramUrl = (formData.get('instagramUrl') as string) || ''
 
+    // Top Bar Settings
     const topBarEnabled = formData.get('topBarEnabled') === 'on'
     const topBarMessageAr = (formData.get('topBarMessageAr') as string) || ''
     const topBarMessageFr = (formData.get('topBarMessageFr') as string) || ''
@@ -42,6 +43,29 @@ export default async function AdminSettingsPage() {
     const topBarLinkTextEn = (formData.get('topBarLinkTextEn') as string) || ''
     const topBarLinkUrl = (formData.get('topBarLinkUrl') as string) || ''
     const topBarContact = (formData.get('topBarContact') as string) || ''
+
+    // Hero Section Settings (Morocco88 Full-Bleed Style)
+    const heroImageUrl = (formData.get('heroImageUrl') as string) || ''
+    const heroTagAr = (formData.get('heroTagAr') as string) || ''
+    const heroTagFr = (formData.get('heroTagFr') as string) || ''
+    const heroTagEn = (formData.get('heroTagEn') as string) || ''
+    const heroTitleAr = (formData.get('heroTitleAr') as string) || ''
+    const heroTitleFr = (formData.get('heroTitleFr') as string) || ''
+    const heroTitleEn = (formData.get('heroTitleEn') as string) || ''
+    const heroDescAr = (formData.get('heroDescAr') as string) || ''
+    const heroDescFr = (formData.get('heroDescFr') as string) || ''
+    const heroDescEn = (formData.get('heroDescEn') as string) || ''
+    const heroCtaPrimaryTextAr = (formData.get('heroCtaPrimaryTextAr') as string) || ''
+    const heroCtaPrimaryTextFr = (formData.get('heroCtaPrimaryTextFr') as string) || ''
+    const heroCtaPrimaryTextEn = (formData.get('heroCtaPrimaryTextEn') as string) || ''
+    const heroCtaPrimaryUrl = (formData.get('heroCtaPrimaryUrl') as string) || ''
+    const heroCtaSecondaryTextAr = (formData.get('heroCtaSecondaryTextAr') as string) || ''
+    const heroCtaSecondaryTextFr = (formData.get('heroCtaSecondaryTextFr') as string) || ''
+    const heroCtaSecondaryTextEn = (formData.get('heroCtaSecondaryTextEn') as string) || ''
+    const heroCtaSecondaryUrl = (formData.get('heroCtaSecondaryUrl') as string) || ''
+    const heroBottomStripAr = (formData.get('heroBottomStripAr') as string) || ''
+    const heroBottomStripFr = (formData.get('heroBottomStripFr') as string) || ''
+    const heroBottomStripEn = (formData.get('heroBottomStripEn') as string) || ''
 
     await sb.from('site_settings').upsert([
       {
@@ -66,6 +90,32 @@ export default async function AdminSettingsPage() {
           contactEmail: topBarContact,
         },
       },
+      {
+        key: 'hero',
+        value: {
+          imageUrl: heroImageUrl,
+          tagAr: heroTagAr,
+          tagFr: heroTagFr,
+          tagEn: heroTagEn,
+          titleAr: heroTitleAr,
+          titleFr: heroTitleFr,
+          titleEn: heroTitleEn,
+          descriptionAr: heroDescAr,
+          descriptionFr: heroDescFr,
+          descriptionEn: heroDescEn,
+          ctaPrimaryTextAr: heroCtaPrimaryTextAr,
+          ctaPrimaryTextFr: heroCtaPrimaryTextFr,
+          ctaPrimaryTextEn: heroCtaPrimaryTextEn,
+          ctaPrimaryUrl: heroCtaPrimaryUrl,
+          ctaSecondaryTextAr: heroCtaSecondaryTextAr,
+          ctaSecondaryTextFr: heroCtaSecondaryTextFr,
+          ctaSecondaryTextEn: heroCtaSecondaryTextEn,
+          ctaSecondaryUrl: heroCtaSecondaryUrl,
+          bottomStripAr: heroBottomStripAr,
+          bottomStripFr: heroBottomStripFr,
+          bottomStripEn: heroBottomStripEn,
+        },
+      },
     ])
 
     revalidatePath('/admin/settings')
@@ -77,13 +127,14 @@ export default async function AdminSettingsPage() {
   const socialVal = (settingsMap['social_links'] as Record<string, string>) || {}
   const topBarVal = (settingsMap['top_bar'] as Partial<TopBarConfig>) || {}
   const isTopBarEnabled = typeof topBarVal.enabled === 'boolean' ? topBarVal.enabled : false
+  const heroVal = (settingsMap['hero'] as Partial<HeroConfig>) || {}
 
   return (
     <div className="space-y-8 max-w-4xl">
       <div>
         <h1 className="text-2xl font-black text-[#08242a]">Platform & Site Settings</h1>
         <p className="text-xs text-[#5f7174] mt-1">
-          إدارة إعدادات الموقع العام، أرقام وعناوين التواصل، والتحكم المباشر في الشريط العلوي للهيدر.
+          إدارة إعدادات المنصة، الهوية المؤسسية، والتحكم الشامل في واجهة الاستقبال والشريط العلوي.
         </p>
       </div>
 
@@ -114,7 +165,300 @@ export default async function AdminSettingsPage() {
       </div>
 
       <form action={handleSaveSettings} className="space-y-8">
-        {/* NEW: Top Bar Notification & Institutional Banner Control */}
+        {/* ============================================================
+            HERO SECTION CONTROL (Full-Bleed Morocco88 Style)
+            ============================================================ */}
+        <div className="bg-white p-8 rounded-2xl border border-[#e5e0d6] shadow-2xs space-y-6">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-[#f0ebe1]">
+            <div>
+              <div className="flex items-center gap-2">
+                <span className="text-lg">🎬</span>
+                <h2 className="text-sm font-bold text-[#08242a] uppercase tracking-wider">
+                  واجهة الاستقبال الافتتاحية (Hero Section Showcase)
+                </h2>
+              </div>
+              <p className="text-xs text-[#5f7174] mt-1">
+                تخصيص صورة الخلفية السينمائية بكامل العرض، النصوص بثلاث لغات، وأزرار التوجيه (نمط Morocco88).
+              </p>
+            </div>
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 text-3xs font-black rounded-full bg-[#f4ce83]/20 text-[#855308] border border-[#f4ce83]/40">
+              واجهة سينمائية تفاعلية
+            </span>
+          </div>
+
+          {/* Background Image Input */}
+          <div className="space-y-2">
+            <label className="block text-2xs font-bold text-[#445457]">
+              رابط صورة الخلفية الرئيسية (Hero Background Image URL)
+            </label>
+            <div className="flex gap-2">
+              <input
+                name="heroImageUrl"
+                type="text"
+                defaultValue={heroVal.imageUrl || defaultHeroConfig.imageUrl}
+                placeholder="/images/youth-in-action.jpg أو رابط صورة خارجي عالي الدقة"
+                className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43]"
+              />
+            </div>
+            <p className="text-3xs text-[#819598]">
+              الصورة الافتراضية الرسمية هي <code className="bg-[#faf7f2] px-1.5 py-0.5 rounded text-[#0d3b43]">/images/youth-in-action.jpg</code>. يمكنك استبدالها برابط أي صورة أخرى.
+            </p>
+          </div>
+
+          {/* Eyebrow Tag (Golden Tag) */}
+          <div className="space-y-4 pt-2 border-t border-[#f0ebe1]">
+            <h3 className="text-2xs font-bold text-[#445457] uppercase tracking-wider">
+              الشارة التمهيدية الذهبية (Eyebrow Tag — e.g. MUSIC FOR IMPACT)
+            </h3>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div>
+                <label className="block text-3xs font-bold text-[#5f7174] mb-1">بالعربية (AR)</label>
+                <input
+                  name="heroTagAr"
+                  type="text"
+                  defaultValue={heroVal.tagAr || defaultHeroConfig.tagAr}
+                  placeholder="الفنون والثقافة للأثر والتمكين"
+                  className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43]"
+                />
+              </div>
+              <div>
+                <label className="block text-3xs font-bold text-[#5f7174] mb-1">بالفرنسية (FR)</label>
+                <input
+                  name="heroTagFr"
+                  type="text"
+                  defaultValue={heroVal.tagFr || defaultHeroConfig.tagFr}
+                  placeholder="ARTS ET CULTURE POUR L'IMPACT"
+                  className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43]"
+                />
+              </div>
+              <div>
+                <label className="block text-3xs font-bold text-[#5f7174] mb-1">بالإنجليزية (EN)</label>
+                <input
+                  name="heroTagEn"
+                  type="text"
+                  defaultValue={heroVal.tagEn || defaultHeroConfig.tagEn}
+                  placeholder="ARTS & CULTURE FOR IMPACT"
+                  className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43]"
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Main Headline */}
+          <div className="space-y-4 pt-2 border-t border-[#f0ebe1]">
+            <h3 className="text-2xs font-bold text-[#445457] uppercase tracking-wider">
+              العنوان الرئيسي الكبير (Grand Main Headline)
+            </h3>
+            <div className="space-y-3">
+              <div>
+                <label className="block text-3xs font-bold text-[#5f7174] mb-1">العنوان بالعربية (يمكن استخدام سطر جديد)</label>
+                <textarea
+                  name="heroTitleAr"
+                  rows={2}
+                  defaultValue={heroVal.titleAr || defaultHeroConfig.titleAr}
+                  placeholder="حيث يكتشف الشباب مواهبهم،&#10;ويقودون الإبداع الثقافي بالمغرب"
+                  className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43] font-arabic"
+                />
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-3xs font-bold text-[#5f7174] mb-1">العنوان بالفرنسية (FR)</label>
+                  <textarea
+                    name="heroTitleFr"
+                    rows={2}
+                    defaultValue={heroVal.titleFr || defaultHeroConfig.titleFr}
+                    placeholder="Où les jeunes découvrent leurs talents..."
+                    className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43]"
+                  />
+                </div>
+                <div>
+                  <label className="block text-3xs font-bold text-[#5f7174] mb-1">العنوان بالإنجليزية (EN)</label>
+                  <textarea
+                    name="heroTitleEn"
+                    rows={2}
+                    defaultValue={heroVal.titleEn || defaultHeroConfig.titleEn}
+                    placeholder="Where youth discover their talents..."
+                    className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43]"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Description Paragraph */}
+          <div className="space-y-4 pt-2 border-t border-[#f0ebe1]">
+            <h3 className="text-2xs font-bold text-[#445457] uppercase tracking-wider">
+              النص التعريفي والمهمة (Mission & Story Description)
+            </h3>
+            <div className="space-y-3">
+              <div>
+                <label className="block text-3xs font-bold text-[#5f7174] mb-1">النص بالعربية (AR)</label>
+                <textarea
+                  name="heroDescAr"
+                  rows={3}
+                  defaultValue={heroVal.descriptionAr || defaultHeroConfig.descriptionAr}
+                  className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43]"
+                />
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-3xs font-bold text-[#5f7174] mb-1">النص بالفرنسية (FR)</label>
+                  <textarea
+                    name="heroDescFr"
+                    rows={3}
+                    defaultValue={heroVal.descriptionFr || defaultHeroConfig.descriptionFr}
+                    className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43]"
+                  />
+                </div>
+                <div>
+                  <label className="block text-3xs font-bold text-[#5f7174] mb-1">النص بالإنجليزية (EN)</label>
+                  <textarea
+                    name="heroDescEn"
+                    rows={3}
+                    defaultValue={heroVal.descriptionEn || defaultHeroConfig.descriptionEn}
+                    className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43]"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* CTA Buttons */}
+          <div className="space-y-4 pt-2 border-t border-[#f0ebe1]">
+            <h3 className="text-2xs font-bold text-[#445457] uppercase tracking-wider">
+              أزرار الدعوة للعمل (CTA Buttons)
+            </h3>
+            {/* Primary Button */}
+            <div className="bg-[#faf7f2] p-4 rounded-xl border border-[#ebe1d1] space-y-3">
+              <span className="text-2xs font-black text-[#08242a] block">
+                الزر الرئيسي (الزر الذهبي المدور — مثل See our impact)
+              </span>
+              <div className="grid grid-cols-1 sm:grid-cols-4 gap-3">
+                <div>
+                  <label className="block text-3xs font-bold text-[#5f7174] mb-1">نص الزر (عربي)</label>
+                  <input
+                    name="heroCtaPrimaryTextAr"
+                    type="text"
+                    defaultValue={heroVal.ctaPrimaryTextAr || defaultHeroConfig.ctaPrimaryTextAr}
+                    className="w-full px-3 py-2 text-xs rounded-lg border border-[#e5e0d6] outline-none"
+                  />
+                </div>
+                <div>
+                  <label className="block text-3xs font-bold text-[#5f7174] mb-1">نص الزر (فرنسي)</label>
+                  <input
+                    name="heroCtaPrimaryTextFr"
+                    type="text"
+                    defaultValue={heroVal.ctaPrimaryTextFr || defaultHeroConfig.ctaPrimaryTextFr}
+                    className="w-full px-3 py-2 text-xs rounded-lg border border-[#e5e0d6] outline-none"
+                  />
+                </div>
+                <div>
+                  <label className="block text-3xs font-bold text-[#5f7174] mb-1">نص الزر (إنجليزي)</label>
+                  <input
+                    name="heroCtaPrimaryTextEn"
+                    type="text"
+                    defaultValue={heroVal.ctaPrimaryTextEn || defaultHeroConfig.ctaPrimaryTextEn}
+                    className="w-full px-3 py-2 text-xs rounded-lg border border-[#e5e0d6] outline-none"
+                  />
+                </div>
+                <div>
+                  <label className="block text-3xs font-bold text-[#5f7174] mb-1">الرابط الموجه</label>
+                  <input
+                    name="heroCtaPrimaryUrl"
+                    type="text"
+                    defaultValue={heroVal.ctaPrimaryUrl || defaultHeroConfig.ctaPrimaryUrl}
+                    className="w-full px-3 py-2 text-xs rounded-lg border border-[#e5e0d6] outline-none"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Secondary Button */}
+            <div className="bg-[#faf7f2] p-4 rounded-xl border border-[#ebe1d1] space-y-3">
+              <span className="text-2xs font-black text-[#08242a] block">
+                الزر الثانوي (الزر الشفاف بحدود بيضاء — مثل Partner with us)
+              </span>
+              <div className="grid grid-cols-1 sm:grid-cols-4 gap-3">
+                <div>
+                  <label className="block text-3xs font-bold text-[#5f7174] mb-1">نص الزر (عربي)</label>
+                  <input
+                    name="heroCtaSecondaryTextAr"
+                    type="text"
+                    defaultValue={heroVal.ctaSecondaryTextAr || defaultHeroConfig.ctaSecondaryTextAr}
+                    className="w-full px-3 py-2 text-xs rounded-lg border border-[#e5e0d6] outline-none"
+                  />
+                </div>
+                <div>
+                  <label className="block text-3xs font-bold text-[#5f7174] mb-1">نص الزر (فرنسي)</label>
+                  <input
+                    name="heroCtaSecondaryTextFr"
+                    type="text"
+                    defaultValue={heroVal.ctaSecondaryTextFr || defaultHeroConfig.ctaSecondaryTextFr}
+                    className="w-full px-3 py-2 text-xs rounded-lg border border-[#e5e0d6] outline-none"
+                  />
+                </div>
+                <div>
+                  <label className="block text-3xs font-bold text-[#5f7174] mb-1">نص الزر (إنجليزي)</label>
+                  <input
+                    name="heroCtaSecondaryTextEn"
+                    type="text"
+                    defaultValue={heroVal.ctaSecondaryTextEn || defaultHeroConfig.ctaSecondaryTextEn}
+                    className="w-full px-3 py-2 text-xs rounded-lg border border-[#e5e0d6] outline-none"
+                  />
+                </div>
+                <div>
+                  <label className="block text-3xs font-bold text-[#5f7174] mb-1">الرابط الموجه</label>
+                  <input
+                    name="heroCtaSecondaryUrl"
+                    type="text"
+                    defaultValue={heroVal.ctaSecondaryUrl || defaultHeroConfig.ctaSecondaryUrl}
+                    className="w-full px-3 py-2 text-xs rounded-lg border border-[#e5e0d6] outline-none"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom Sub-strip */}
+          <div className="space-y-4 pt-2 border-t border-[#f0ebe1]">
+            <h3 className="text-2xs font-bold text-[#445457] uppercase tracking-wider">
+              الشريط السفلي للمصداقية (Bottom Institutional Sub-strip)
+            </h3>
+            <div className="space-y-3">
+              <div>
+                <label className="block text-3xs font-bold text-[#5f7174] mb-1">النص بالعربية (AR)</label>
+                <input
+                  name="heroBottomStripAr"
+                  type="text"
+                  defaultValue={heroVal.bottomStripAr || defaultHeroConfig.bottomStripAr}
+                  className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43]"
+                />
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-3xs font-bold text-[#5f7174] mb-1">النص بالفرنسية (FR)</label>
+                  <input
+                    name="heroBottomStripFr"
+                    type="text"
+                    defaultValue={heroVal.bottomStripFr || defaultHeroConfig.bottomStripFr}
+                    className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43]"
+                  />
+                </div>
+                <div>
+                  <label className="block text-3xs font-bold text-[#5f7174] mb-1">النص بالإنجليزية (EN)</label>
+                  <input
+                    name="heroBottomStripEn"
+                    type="text"
+                    defaultValue={heroVal.bottomStripEn || defaultHeroConfig.bottomStripEn}
+                    className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43]"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Top Bar Notification & Institutional Banner Control */}
         <div className="bg-white p-8 rounded-2xl border border-[#e5e0d6] shadow-2xs space-y-6">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-[#f0ebe1]">
             <div>
@@ -361,7 +705,7 @@ export default async function AdminSettingsPage() {
         {/* Global Save Button */}
         <div className="sticky bottom-6 z-20 bg-white/95 backdrop-blur-md p-4 rounded-2xl border border-[#e5e0d6] shadow-card flex items-center justify-between gap-4">
           <p className="text-xs text-[#5f7174]">
-            اضغط حفظ لتطبيق التغييرات على الشريط العلوي وإعدادات المنصة فوراً.
+            اضغط حفظ لتطبيق التغييرات على واجهة الاستقبال والشريط العلوي والإعدادات فوراً.
           </p>
           <button
             type="submit"

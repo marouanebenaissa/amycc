@@ -1,7 +1,7 @@
 import { getDictionary } from '@/lib/i18n/dictionaries'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
-import { getTopBarSettings } from '@/lib/settings'
+import { getTopBarSettings, getHeroSettings } from '@/lib/settings'
 import { createPublicClient } from '@/lib/supabase/public'
 import { FaqAccordion } from '@/components/home/FaqAccordion'
 import { EventRegistrationModal } from '@/components/events/EventRegistrationModal'
@@ -44,14 +44,32 @@ interface NewsItem {
   }[]
 }
 
+function resolveLocaleUrl(url: string | undefined, loc: string): string {
+  if (!url) return `/${loc}`
+  if (url.startsWith('http://') || url.startsWith('https://') || url.startsWith('mailto:') || url.startsWith('#')) {
+    return url
+  }
+  const clean = url.startsWith('/') ? url : `/${url}`
+  if (clean.startsWith(`/${loc}/`) || clean === `/${loc}`) return clean
+  return `/${loc}${clean}`
+}
+
 export default async function HomePage(props: { params: Promise<{ locale: string }> }) {
   const { locale } = await props.params
-  const [dict, topBar] = await Promise.all([
+  const [dict, topBar, hero] = await Promise.all([
     getDictionary(locale),
     getTopBarSettings(),
+    getHeroSettings(),
   ])
   const isAr = locale === 'ar'
   const isFr = locale === 'fr'
+
+  const heroTag = isAr ? hero.tagAr : isFr ? hero.tagFr : hero.tagEn
+  const heroTitle = isAr ? hero.titleAr : isFr ? hero.titleFr : hero.titleEn
+  const heroDesc = isAr ? hero.descriptionAr : isFr ? hero.descriptionFr : hero.descriptionEn
+  const heroCtaPrimary = isAr ? hero.ctaPrimaryTextAr : isFr ? hero.ctaPrimaryTextFr : hero.ctaPrimaryTextEn
+  const heroCtaSecondary = isAr ? hero.ctaSecondaryTextAr : isFr ? hero.ctaSecondaryTextFr : hero.ctaSecondaryTextEn
+  const heroBottomStrip = isAr ? hero.bottomStripAr : isFr ? hero.bottomStripFr : hero.bottomStripEn
 
   let featuredPrograms: ProgramItem[] = []
   let upcomingEvents: EventItem[] = []
@@ -384,127 +402,81 @@ export default async function HomePage(props: { params: Promise<{ locale: string
 
   return (
     <>
-      <Header locale={locale} dict={dict} topBar={topBar} theme="dark" />
+      <Header locale={locale} dict={dict} topBar={topBar} />
 
       <main id="main-content" className="flex flex-col flex-1 bg-[#faf7f2]">
 
         {/* ============================================================
-            1. HERO SECTION — Full-Bleed 88 International Aesthetic
+            1. HERO SECTION — Full-bleed Morocco88 Style Cinematic Banner
             ============================================================ */}
-        <section className="relative min-h-[640px] sm:min-h-[700px] lg:min-h-[760px] flex items-center overflow-hidden bg-[#08242a] text-white border-b border-[#14505b]/60">
-          {/* Full-bleed high-res authentic youth photography */}
-          <div className="absolute inset-0 z-0">
+        <section className="relative overflow-hidden min-h-[620px] sm:min-h-[700px] lg:min-h-[760px] flex items-center bg-[#08242a] text-white">
+          {/* Full-bleed background photo layer */}
+          <div className="absolute inset-0 -z-10">
             <ImageWithFallback
-              src="/images/youth-in-action.jpg"
+              src={hero.imageUrl || '/images/youth-in-action.jpg'}
               fallbackSrc="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1920&q=85"
-              alt="AMYCC Youth in Action & Moroccan Cultural Expression"
+              alt="AMYCC Hero Banner"
               fill
               priority
               sizes="100vw"
               className="object-cover object-center"
             />
-
-            {/* Directional Cinematic Overlays for 100% typography legibility */}
-            {/* Mobile: bottom-to-top gradient */}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#08242a] via-[#08242a]/85 to-[#08242a]/40 lg:hidden" />
-
-            {/* Desktop RTL: Dark on Right (start), transparent towards Left */}
-            {/* Desktop LTR: Dark on Left (start), transparent towards Right */}
-            <div className="absolute inset-0 hidden lg:block rtl:bg-gradient-to-l rtl:from-[#08242a] rtl:via-[#08242a]/90 rtl:via-55% rtl:to-[#08242a]/30 ltr:bg-gradient-to-r ltr:from-[#08242a] ltr:via-[#08242a]/90 ltr:via-55% ltr:to-[#08242a]/30" />
-
-            {/* Subtle atmospheric blend & Moroccan star geometry watermark */}
-            <div className="absolute inset-0 bg-[#08242a]/30 mix-blend-multiply" />
-            <div className="absolute inset-0 moroccan-star-pattern opacity-10 pointer-events-none" aria-hidden="true" />
+            {/* Cinematic Gradient Overlays: dark vignette + directional contrast */}
+            <div className="absolute inset-0 bg-[#08242a]/65" />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#08242a]/95 via-[#08242a]/75 to-[#08242a]/30 rtl:bg-gradient-to-l" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#08242a] via-transparent to-[#08242a]/60" />
           </div>
 
-          {/* Hero Foreground Content */}
-          <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24">
-            <div className="max-w-3xl space-y-7 text-start">
+          <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-20 sm:py-24 lg:py-28">
+            <div className="max-w-3xl space-y-6 text-start">
+              {/* Category Eyebrow Tag (Morocco88 style golden uppercase) */}
+              {heroTag && (
+                <div className="inline-block">
+                  <span className="text-[#f4ce83] text-xs sm:text-sm font-extrabold tracking-widest uppercase font-mono">
+                    {heroTag}
+                  </span>
+                </div>
+              )}
 
-              {/* Eyebrow: Gold uppercase tracking banner */}
-              <div className="inline-flex items-center gap-2.5">
-                <span className="w-2 h-2 rounded-full bg-[#f4ce83] animate-pulse" aria-hidden="true" />
-                <span className="text-xs sm:text-sm font-extrabold tracking-widest uppercase text-[#f4ce83]">
-                  {isAr
-                    ? 'الموسيقى، الفنون، وتمكين الشباب بالمغرب'
-                    : isFr
-                    ? 'MUSIQUE, ARTS & ÉMANCIPATION DES JEUNES'
-                    : 'MUSIC, ARTS & YOUTH EMPOWERMENT'}
-                </span>
-              </div>
-
-              {/* Headline: Human-centric, inspiring white typography */}
-              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-[1.2] sm:leading-[1.18]">
-                {isAr ? (
-                  <>
-                    حيث يصنع الشباب الإبداع،<br className="hidden sm:inline" /> يُحيون التراث، ويقودون المستقبل
-                  </>
-                ) : isFr ? (
-                  <>
-                    Là où la jeunesse crée, célèbre le patrimoine et façonne l&apos;avenir
-                  </>
-                ) : (
-                  <>
-                    Where youth create art, celebrate heritage, and lead the future
-                  </>
-                )}
+              {/* Grand Bold Headline */}
+              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-white leading-[1.18] tracking-tight whitespace-pre-line font-arabic drop-shadow-sm">
+                {heroTitle}
               </h1>
 
-              {/* Mission Summary: Soft readable light teal tone */}
-              <p className="text-base sm:text-lg lg:text-xl text-[#d8f0f4] leading-relaxed max-w-2xl font-normal">
-                {isAr
-                  ? 'تُمكّن جمعية روح الفنون والثقافة (AMYCC) الشباب والناشئة في مختلف مدن المملكة المغربية من اكتشاف مواهبهم، وصقل مهاراتهم في مجالات الفنون التشكيلية، التعبير المسرحي، والتراث الموسيقي، وبناء جيل ملهم ومسؤول.'
-                  : isFr
-                  ? 'L\'AMYCC mobilise et émancipe la jeunesse marocaine à travers les arts plastiques, le théâtre, et la valorisation du patrimoine culturel pour former une génération inspirante et solidaire.'
-                  : 'AMYCC empowers Moroccan youth through visual arts, theatre, and musical heritage — nurturing creativity, civic leadership, and cultural dialogue across the Kingdom.'}
+              {/* Narrative Story Description */}
+              <p className="text-base sm:text-lg lg:text-xl text-[#d8f0f4]/95 leading-relaxed font-normal max-w-2xl">
+                {heroDesc}
               </p>
 
-              {/* Action Buttons: 88 International Pill Style */}
-              <div className="flex flex-wrap items-center gap-4 pt-2">
-                {/* Primary Gold Pill Button */}
+              {/* Action Buttons Cluster (Pill-shaped buttons like Morocco88) */}
+              <div className="flex flex-wrap items-center gap-4 pt-2 sm:pt-4">
                 <Link
-                  href={`/${locale}/programs`}
-                  className="px-8 py-4 rounded-full font-extrabold text-[#08242a] bg-[#f4ce83] hover:bg-[#ebd59b] active:scale-95 transition-all shadow-xl hover:shadow-2xl text-center text-sm sm:text-base inline-flex items-center justify-center gap-2.5 group"
+                  href={resolveLocaleUrl(hero.ctaPrimaryUrl, locale)}
+                  className="px-8 py-3.5 rounded-full font-bold text-[#08242a] bg-[#f4ce83] hover:bg-[#eabf66] active:scale-98 transition-all shadow-lg text-sm sm:text-base inline-flex items-center gap-2 group"
                 >
-                  <span>{dict.hero.cta_primary || (isAr ? 'اكتشف برامجنا' : 'Explore Programs')}</span>
-                  <span className="group-hover:translate-x-1 rtl:group-hover:-translate-x-1 transition-transform font-bold" aria-hidden="true">
+                  <span>{heroCtaPrimary}</span>
+                  <span className="group-hover:translate-x-1 rtl:group-hover:-translate-x-1 transition-transform" aria-hidden="true">
                     {isAr ? '←' : '→'}
                   </span>
                 </Link>
 
-                {/* Secondary Ghost Outline Pill Button */}
-                <Link
-                  href={`/${locale}/partnerships`}
-                  className="px-8 py-4 rounded-full font-bold text-white bg-transparent border-2 border-white/50 hover:border-white hover:bg-white/10 active:scale-95 transition-all text-center text-sm sm:text-base inline-flex items-center justify-center gap-2"
-                >
-                  <span>{isAr ? 'كن شريكاً معنا' : isFr ? 'Devenir Partenaire' : 'Partner With Us'}</span>
-                  <span aria-hidden="true">{isAr ? '←' : '→'}</span>
-                </Link>
-
-                {/* Membership link */}
-                <Link
-                  href={`/${locale}/membership`}
-                  className="text-xs sm:text-sm font-bold text-[#d8f0f4] hover:text-[#f4ce83] transition-colors inline-flex items-center gap-1.5 underline underline-offset-4 ms-1"
-                >
-                  <span>{isAr ? 'طلب الانخراط في الجمعية' : isFr ? 'Adhérer à l\'association' : 'Join as Member'}</span>
-                  <span aria-hidden="true">↗</span>
-                </Link>
+                {heroCtaSecondary && (
+                  <Link
+                    href={resolveLocaleUrl(hero.ctaSecondaryUrl, locale)}
+                    className="px-8 py-3.5 rounded-full font-bold text-white bg-transparent border-2 border-white/80 hover:bg-white/10 active:scale-98 transition-all text-sm sm:text-base inline-flex items-center gap-2"
+                  >
+                    <span>{heroCtaSecondary}</span>
+                  </Link>
+                )}
               </div>
 
-              {/* Bottom Partner Endorsement Strip with Gold Vertical Accent */}
-              <div className="pt-8 border-t border-white/15 max-w-2xl">
-                <div className="flex items-start gap-3.5">
-                  <span className="w-1.5 h-10 bg-[#f4ce83] rounded-full shrink-0" aria-hidden="true" />
-                  <p className="text-xs sm:text-sm text-[#d8f0f4]/90 font-medium leading-relaxed">
-                    {isAr
-                      ? 'نعمل بشراكة مع الفاعلين الثقافيين، المؤسسات التعليمية، وهيئات المجتمع المدني بالمملكة المغربية.'
-                      : isFr
-                      ? 'En partenariat avec les acteurs culturels, les établissements scolaires et la société civile à travers le Royaume du Maroc.'
-                      : 'Working in partnership with cultural actors, educational institutions, and civil society across Morocco.'}
-                  </p>
+              {/* Bottom Credibility Sub-strip with golden accent vertical line */}
+              {heroBottomStrip && (
+                <div className="pt-6 sm:pt-8 flex items-center gap-3 text-xs sm:text-sm text-[#d8f0f4]/85 font-medium border-t border-white/15 mt-8">
+                  <span className="w-1 h-5 sm:h-6 bg-[#f4ce83] rounded-full inline-block shrink-0" aria-hidden="true" />
+                  <p className="leading-snug">{heroBottomStrip}</p>
                 </div>
-              </div>
-
+              )}
             </div>
           </div>
         </section>
