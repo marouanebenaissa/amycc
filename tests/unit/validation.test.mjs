@@ -411,3 +411,72 @@ describe('Contact Configuration Validation Suite', () => {
     assert.equal(result.success, false)
   })
 })
+
+const programsPageConfigSchema = z.object({
+  hero: z.object({
+    tagAr: z.string().min(2),
+    titleAr: z.string().min(5),
+    descriptionAr: z.string().min(10),
+  }),
+  stats: z.array(
+    z.object({
+      id: z.string().min(1),
+      value: z.string().min(1),
+      labelAr: z.string().min(2),
+      icon: z.string(),
+    })
+  ).min(1),
+  cta: z.object({
+    titleAr: z.string().min(5),
+    descAr: z.string().min(10),
+    primaryBtnTextAr: z.string().min(2),
+    primaryBtnUrl: z.string().min(1),
+  }),
+})
+
+describe('Programs Page Validation Suite', () => {
+  test('accepts valid programs page configuration with hero, stats, and cta', () => {
+    const valid = {
+      hero: {
+        tagAr: 'بوابة البرامج والمشاريع الثقافية',
+        titleAr: 'برامجنا ومبادراتنا لاكتشاف المواهب وبناء الأثر',
+        descriptionAr: 'تضع جمعية روح الفنون والثقافة في صلب رسالتها إطلاق برامج ومبادرات مستمرة...',
+      },
+      stats: [
+        { id: 'stat-1', value: '+1,500', labelAr: 'مستفيد ومستفيدة من الورشات', icon: '👥' },
+        { id: 'stat-2', value: '12', labelAr: 'جهة مستهدفة بالمملكة', icon: '🇲🇦' },
+      ],
+      cta: {
+        titleAr: 'هل لديك فكرة مشروع ثقافي تود إطلاقها معنا؟',
+        descAr: 'تفتح جمعية روح الفنون والثقافة أبوابها لتبني ومواكبة الأفكار الإبداعية...',
+        primaryBtnTextAr: 'اقترح مبادرتك وتواصل معنا',
+        primaryBtnUrl: '/contact',
+      },
+    }
+    const result = programsPageConfigSchema.safeParse(valid)
+    assert.equal(result.success, true)
+    if (result.success) {
+      assert.equal(result.data.stats.length, 2)
+      assert.equal(result.data.hero.tagAr, 'بوابة البرامج والمشاريع الثقافية')
+    }
+  })
+
+  test('rejects programs page configuration with too short title or empty stats', () => {
+    const invalid = {
+      hero: {
+        tagAr: '',
+        titleAr: 'قصير',
+        descriptionAr: '',
+      },
+      stats: [],
+      cta: {
+        titleAr: '',
+        descAr: '',
+        primaryBtnTextAr: '',
+        primaryBtnUrl: '',
+      },
+    }
+    const result = programsPageConfigSchema.safeParse(invalid)
+    assert.equal(result.success, false)
+  })
+})

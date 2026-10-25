@@ -42,10 +42,21 @@ const programSchema = z.object({
   // Translations
   title_ar: z.string().min(1, 'Arabic title is required'),
   description_ar: z.string().optional(),
+  objectives_ar: z.string().optional(),
+  target_audience_ar: z.string().optional(),
+  activities_ar: z.string().optional(),
+
   title_fr: z.string().min(1, 'French title is required'),
   description_fr: z.string().optional(),
+  objectives_fr: z.string().optional(),
+  target_audience_fr: z.string().optional(),
+  activities_fr: z.string().optional(),
+
   title_en: z.string().min(1, 'English title is required'),
   description_en: z.string().optional(),
+  objectives_en: z.string().optional(),
+  target_audience_en: z.string().optional(),
+  activities_en: z.string().optional(),
 })
 
 const newsSchema = z.object({
@@ -98,11 +109,22 @@ export async function createProgram(formData: FormData): Promise<void> {
     start_date: (formData.get('start_date') as string) || undefined,
     end_date: (formData.get('end_date') as string) || undefined,
     title_ar: formData.get('title_ar') as string,
-    description_ar: formData.get('description_ar') as string,
+    description_ar: (formData.get('description_ar') as string) || undefined,
+    objectives_ar: (formData.get('objectives_ar') as string) || undefined,
+    target_audience_ar: (formData.get('target_audience_ar') as string) || undefined,
+    activities_ar: (formData.get('activities_ar') as string) || undefined,
+
     title_fr: formData.get('title_fr') as string,
-    description_fr: formData.get('description_fr') as string,
+    description_fr: (formData.get('description_fr') as string) || undefined,
+    objectives_fr: (formData.get('objectives_fr') as string) || undefined,
+    target_audience_fr: (formData.get('target_audience_fr') as string) || undefined,
+    activities_fr: (formData.get('activities_fr') as string) || undefined,
+
     title_en: formData.get('title_en') as string,
-    description_en: formData.get('description_en') as string,
+    description_en: (formData.get('description_en') as string) || undefined,
+    objectives_en: (formData.get('objectives_en') as string) || undefined,
+    target_audience_en: (formData.get('target_audience_en') as string) || undefined,
+    activities_en: (formData.get('activities_en') as string) || undefined,
   }
 
   const parsed = programSchema.safeParse(raw)
@@ -129,9 +151,30 @@ export async function createProgram(formData: FormData): Promise<void> {
   if (progErr) throw new Error(progErr.message)
 
   const translations = [
-    { locale: 'ar', title: d.title_ar, description: d.description_ar },
-    { locale: 'fr', title: d.title_fr, description: d.description_fr },
-    { locale: 'en', title: d.title_en, description: d.description_en },
+    {
+      locale: 'ar',
+      title: d.title_ar,
+      description: d.description_ar || null,
+      objectives: d.objectives_ar || null,
+      target_audience: d.target_audience_ar || null,
+      activities: d.activities_ar || null,
+    },
+    {
+      locale: 'fr',
+      title: d.title_fr,
+      description: d.description_fr || null,
+      objectives: d.objectives_fr || null,
+      target_audience: d.target_audience_fr || null,
+      activities: d.activities_fr || null,
+    },
+    {
+      locale: 'en',
+      title: d.title_en,
+      description: d.description_en || null,
+      objectives: d.objectives_en || null,
+      target_audience: d.target_audience_en || null,
+      activities: d.activities_en || null,
+    },
   ].map((t) => ({ ...t, program_id: program.id }))
 
   const { error: transErr } = await supabase.from('program_translations').insert(translations)
@@ -155,11 +198,22 @@ export async function updateProgram(id: string, formData: FormData): Promise<voi
     start_date: (formData.get('start_date') as string) || undefined,
     end_date: (formData.get('end_date') as string) || undefined,
     title_ar: formData.get('title_ar') as string,
-    description_ar: formData.get('description_ar') as string,
+    description_ar: (formData.get('description_ar') as string) || undefined,
+    objectives_ar: (formData.get('objectives_ar') as string) || undefined,
+    target_audience_ar: (formData.get('target_audience_ar') as string) || undefined,
+    activities_ar: (formData.get('activities_ar') as string) || undefined,
+
     title_fr: formData.get('title_fr') as string,
-    description_fr: formData.get('description_fr') as string,
+    description_fr: (formData.get('description_fr') as string) || undefined,
+    objectives_fr: (formData.get('objectives_fr') as string) || undefined,
+    target_audience_fr: (formData.get('target_audience_fr') as string) || undefined,
+    activities_fr: (formData.get('activities_fr') as string) || undefined,
+
     title_en: formData.get('title_en') as string,
-    description_en: formData.get('description_en') as string,
+    description_en: (formData.get('description_en') as string) || undefined,
+    objectives_en: (formData.get('objectives_en') as string) || undefined,
+    target_audience_en: (formData.get('target_audience_en') as string) || undefined,
+    activities_en: (formData.get('activities_en') as string) || undefined,
   }
 
   const parsed = programSchema.safeParse(raw)
@@ -183,20 +237,51 @@ export async function updateProgram(id: string, formData: FormData): Promise<voi
   if (progErr) throw new Error(progErr.message)
 
   for (const t of [
-    { locale: 'ar', title: d.title_ar, description: d.description_ar },
-    { locale: 'fr', title: d.title_fr, description: d.description_fr },
-    { locale: 'en', title: d.title_en, description: d.description_en },
+    {
+      locale: 'ar',
+      title: d.title_ar,
+      description: d.description_ar,
+      objectives: d.objectives_ar,
+      target_audience: d.target_audience_ar,
+      activities: d.activities_ar,
+    },
+    {
+      locale: 'fr',
+      title: d.title_fr,
+      description: d.description_fr,
+      objectives: d.objectives_fr,
+      target_audience: d.target_audience_fr,
+      activities: d.activities_fr,
+    },
+    {
+      locale: 'en',
+      title: d.title_en,
+      description: d.description_en,
+      objectives: d.objectives_en,
+      target_audience: d.target_audience_en,
+      activities: d.activities_en,
+    },
   ]) {
     await supabase
       .from('program_translations')
       .upsert(
-        { program_id: id, locale: t.locale, title: t.title, description: t.description || null },
+        {
+          program_id: id,
+          locale: t.locale,
+          title: t.title,
+          description: t.description || null,
+          objectives: t.objectives || null,
+          target_audience: t.target_audience || null,
+          activities: t.activities || null,
+        },
         { onConflict: 'program_id,locale' }
       )
   }
 
   revalidatePath('/admin/programs')
   revalidatePath('/ar/programs')
+  revalidatePath('/fr/programs')
+  revalidatePath('/en/programs')
   redirect('/admin/programs')
 }
 

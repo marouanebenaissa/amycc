@@ -1854,3 +1854,186 @@ export async function getContactSettings(): Promise<ContactConfig> {
     return defaultContactConfig
   }
 }
+
+// ============================================================
+// 10. PROGRAMS PAGE & INSTITUTIONAL CMS SETTINGS
+// ============================================================
+
+export interface ProgramStatItem {
+  id: string
+  value: string
+  labelAr: string
+  labelFr?: string
+  labelEn?: string
+  icon: string
+}
+
+export interface ProgramsPageConfig {
+  hero: {
+    tagAr: string
+    tagFr?: string
+    tagEn?: string
+    badgeAr: string
+    badgeFr?: string
+    badgeEn?: string
+    titleAr: string
+    titleFr?: string
+    titleEn?: string
+    descriptionAr: string
+    descriptionFr?: string
+    descriptionEn?: string
+    imageUrl?: string
+  }
+  stats: ProgramStatItem[]
+  cta: {
+    titleAr: string
+    titleFr?: string
+    titleEn?: string
+    descAr: string
+    descFr?: string
+    descEn?: string
+    primaryBtnTextAr: string
+    primaryBtnTextFr?: string
+    primaryBtnTextEn?: string
+    primaryBtnUrl: string
+    secondaryBtnTextAr: string
+    secondaryBtnTextFr?: string
+    secondaryBtnTextEn?: string
+    secondaryBtnUrl: string
+  }
+}
+
+export const defaultProgramsPageConfig: ProgramsPageConfig = {
+  hero: {
+    tagAr: 'بوابة البرامج والمشاريع الثقافية • AMYCC Programs',
+    tagFr: 'PROGRAMMES & INITIATIVES CULTURELLES',
+    tagEn: 'CULTURAL PROGRAMS & INITIATIVES',
+    badgeAr: 'المملكة المغربية • تمكين الشباب وصون التراث',
+    badgeFr: 'Royaume du Maroc • Jeunesse & Patrimoine',
+    badgeEn: 'Kingdom of Morocco • Youth & Heritage',
+    titleAr: 'برامجنا ومبادراتنا: فضاءات حية\nلاكتشاف المواهب وبناء الأثر الثقافي',
+    titleFr: 'Nos Programmes : Espaces Vivants pour la Création et l\'Épanouissement',
+    titleEn: 'Our Programs: Vibrant Spaces for Talent Discovery & Cultural Impact',
+    descriptionAr: 'تضع جمعية روح الفنون والثقافة في صلب رسالتها إطلاق برامج ومبادرات مستمرة تجمع بين التكوين الفني، التأطير الميداني، والعمل التطوعي الهادف، لتمكين شباب مختلف جهات المملكة وتثمين الموروث المغربي الأصيل.',
+    descriptionFr: 'L\'AMYCC conçoit et déploie des programmes pérennes mêlant formation artistique, encadrement citoyen et valorisation du patrimoine marocain pour la jeunesse.',
+    descriptionEn: 'AMYCC designs and leads enduring cultural initiatives that merge artistic training, youth mentorship, and Moroccan heritage preservation across the Kingdom.',
+    imageUrl: '',
+  },
+  stats: [
+    {
+      id: 'stat-1',
+      value: '+1,500',
+      labelAr: 'مستفيد ومستفيدة من الورشات',
+      labelFr: 'Bénéficiaires formés',
+      labelEn: 'Trained beneficiaries',
+      icon: '👥',
+    },
+    {
+      id: 'stat-2',
+      value: '12',
+      labelAr: 'جهة مستهدفة بالمملكة',
+      labelFr: 'Régions ciblées au Maroc',
+      labelEn: 'Targeted regions',
+      icon: '🇲🇦',
+    },
+    {
+      id: 'stat-3',
+      value: '+35',
+      labelAr: 'ورشة تكوينية سنوياً',
+      labelFr: 'Ateliers et résidences par an',
+      labelEn: 'Annual workshops & labs',
+      icon: '🎨',
+    },
+    {
+      id: 'stat-4',
+      value: '100%',
+      labelAr: 'تأطير مجاني وتطوعي',
+      labelFr: 'Encadrement associatif solidaire',
+      labelEn: 'Community-driven mentorship',
+      icon: '✨',
+    },
+  ],
+  cta: {
+    titleAr: 'هل لديك فكرة مشروع ثقافي أو مبادرة تود إطلاقها وتأطيرها معنا؟',
+    titleFr: 'Vous avez une idée de projet ou d\'initiative culturelle à lancer avec nous ?',
+    titleEn: 'Have a creative project or cultural initiative you want to launch with us?',
+    descAr: 'تفتح جمعية روح الفنون والثقافة أبوابها لتبني ومواكبة الأفكار الإبداعية وتوفير التأطير الفني والإداري والشراكات اللازمة لتحويلها إلى مبادرات مجتمعية مؤثرة.',
+    descFr: 'L\'AMYCC accueille et accompagne les porteurs de projets en leur apportant encadrement artistique, logistique et réseau de partenaires.',
+    descEn: 'AMYCC welcomes and mentors youth initiatives, providing artistic, organizational, and institutional backing to turn ideas into community impact.',
+    primaryBtnTextAr: 'اقترح مبادرتك وتواصل معنا',
+    primaryBtnTextFr: 'Proposez votre projet',
+    primaryBtnTextEn: 'Propose Your Initiative',
+    primaryBtnUrl: '/contact',
+    secondaryBtnTextAr: 'انخرط في الجمعية',
+    secondaryBtnTextFr: 'Devenir Membre',
+    secondaryBtnTextEn: 'Join as Member',
+    secondaryBtnUrl: '/membership',
+  },
+}
+
+export async function getProgramsPageSettings(): Promise<ProgramsPageConfig> {
+  try {
+    const supabase = await createClient()
+    const { data, error } = await supabase
+      .from('site_settings')
+      .select('value')
+      .eq('key', 'programs_page')
+      .maybeSingle()
+
+    if (error || !data || !data.value) {
+      return defaultProgramsPageConfig
+    }
+
+    const val = data.value as Partial<ProgramsPageConfig>
+    const heroVal = (val.hero || {}) as Partial<ProgramsPageConfig['hero']>
+    const ctaVal = (val.cta || {}) as Partial<ProgramsPageConfig['cta']>
+
+    return {
+      hero: {
+        tagAr: heroVal.tagAr || defaultProgramsPageConfig.hero.tagAr,
+        tagFr: heroVal.tagFr || defaultProgramsPageConfig.hero.tagFr,
+        tagEn: heroVal.tagEn || defaultProgramsPageConfig.hero.tagEn,
+        badgeAr: heroVal.badgeAr || defaultProgramsPageConfig.hero.badgeAr,
+        badgeFr: heroVal.badgeFr || defaultProgramsPageConfig.hero.badgeFr,
+        badgeEn: heroVal.badgeEn || defaultProgramsPageConfig.hero.badgeEn,
+        titleAr: heroVal.titleAr || defaultProgramsPageConfig.hero.titleAr,
+        titleFr: heroVal.titleFr || defaultProgramsPageConfig.hero.titleFr,
+        titleEn: heroVal.titleEn || defaultProgramsPageConfig.hero.titleEn,
+        descriptionAr: heroVal.descriptionAr || defaultProgramsPageConfig.hero.descriptionAr,
+        descriptionFr: heroVal.descriptionFr || defaultProgramsPageConfig.hero.descriptionFr,
+        descriptionEn: heroVal.descriptionEn || defaultProgramsPageConfig.hero.descriptionEn,
+        imageUrl: typeof heroVal.imageUrl === 'string' ? heroVal.imageUrl : defaultProgramsPageConfig.hero.imageUrl,
+      },
+      stats: Array.isArray(val.stats) && val.stats.length > 0
+        ? val.stats
+            .filter((s): s is ProgramStatItem => typeof s === 'object' && s !== null && typeof s.id === 'string')
+            .map((s) => ({
+              id: s.id,
+              value: s.value || '',
+              labelAr: s.labelAr || '',
+              labelFr: s.labelFr || '',
+              labelEn: s.labelEn || '',
+              icon: s.icon || '📌',
+            }))
+        : defaultProgramsPageConfig.stats,
+      cta: {
+        titleAr: ctaVal.titleAr || defaultProgramsPageConfig.cta.titleAr,
+        titleFr: ctaVal.titleFr || defaultProgramsPageConfig.cta.titleFr,
+        titleEn: ctaVal.titleEn || defaultProgramsPageConfig.cta.titleEn,
+        descAr: ctaVal.descAr || defaultProgramsPageConfig.cta.descAr,
+        descFr: ctaVal.descFr || defaultProgramsPageConfig.cta.descFr,
+        descEn: ctaVal.descEn || defaultProgramsPageConfig.cta.descEn,
+        primaryBtnTextAr: ctaVal.primaryBtnTextAr || defaultProgramsPageConfig.cta.primaryBtnTextAr,
+        primaryBtnTextFr: ctaVal.primaryBtnTextFr || defaultProgramsPageConfig.cta.primaryBtnTextFr,
+        primaryBtnTextEn: ctaVal.primaryBtnTextEn || defaultProgramsPageConfig.cta.primaryBtnTextEn,
+        primaryBtnUrl: ctaVal.primaryBtnUrl || defaultProgramsPageConfig.cta.primaryBtnUrl,
+        secondaryBtnTextAr: ctaVal.secondaryBtnTextAr || defaultProgramsPageConfig.cta.secondaryBtnTextAr,
+        secondaryBtnTextFr: ctaVal.secondaryBtnTextFr || defaultProgramsPageConfig.cta.secondaryBtnTextFr,
+        secondaryBtnTextEn: ctaVal.secondaryBtnTextEn || defaultProgramsPageConfig.cta.secondaryBtnTextEn,
+        secondaryBtnUrl: ctaVal.secondaryBtnUrl || defaultProgramsPageConfig.cta.secondaryBtnUrl,
+      },
+    }
+  } catch {
+    return defaultProgramsPageConfig
+  }
+}

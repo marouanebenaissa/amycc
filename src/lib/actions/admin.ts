@@ -3,7 +3,7 @@
 import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import { revalidatePath } from 'next/cache'
-import type { FaqItemConfig, AreasConfig, TeamConfig, CommissionsConfig, ContactConfig } from '@/lib/settings'
+import type { FaqItemConfig, AreasConfig, TeamConfig, CommissionsConfig, ContactConfig, ProgramsPageConfig } from '@/lib/settings'
 
 export async function recordAuditLog(
   action: string,
@@ -363,6 +363,44 @@ export async function saveContactConfiguration(
     revalidatePath('/admin/contacts')
     revalidatePath('/admin/settings')
     revalidatePath('/[locale]/contact')
+    revalidatePath('/[locale]', 'layout')
+    return { success: true }
+  } catch (err) {
+    return { success: false, error: (err as Error).message }
+  }
+}
+
+export async function saveProgramsPageConfiguration(
+  config: ProgramsPageConfig
+): Promise<{ success: boolean; error?: string }> {
+  try {
+    const supabase = await createClient()
+    const {
+      data: { user },
+    } = await supabase.auth.getUser()
+
+    if (!user) {
+      return { success: false, error: 'غير مصرح لك بتعديل إعدادات صفحة البرامج (Unauthorized)' }
+    }
+
+    const { error } = await supabase
+      .from('site_settings')
+      .upsert([
+        {
+          key: 'programs_page',
+          value: config,
+          updated_at: new Date().toISOString(),
+        },
+      ])
+
+    if (error) return { success: false, error: error.message }
+
+    await recordAuditLog('programs_page_updated', 'site_settings', 'programs_page', {
+      titleAr: config.hero.titleAr,
+    })
+
+    revalidatePath('/admin/programs')
+    revalidatePath('/[locale]/programs')
     revalidatePath('/[locale]', 'layout')
     return { success: true }
   } catch (err) {
