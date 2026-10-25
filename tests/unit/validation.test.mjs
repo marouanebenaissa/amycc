@@ -310,3 +310,40 @@ describe('Commissions Validation Suite', () => {
     assert.equal(result.success, false)
   })
 })
+
+const teamHeroSchema = z.object({
+  imageUrl: z.string().default(''),
+  showImage: z.boolean().default(true),
+  badge1Ar: z.string().optional(),
+  badge2Ar: z.string().optional(),
+  titleAr: z.string().min(5),
+  descriptionAr: z.string().min(10),
+})
+
+describe('Team Hero Validation Suite', () => {
+  test('accepts valid team hero configuration with image and typography', () => {
+    const valid = {
+      imageUrl: '/images/youth-in-action.jpg',
+      showImage: true,
+      badge1Ar: 'الهيكل الإداري والتنظيمي المعتمد • جمعية AMYCC',
+      badge2Ar: 'تأطير وطني بروح شبابية مسؤولة 🇲🇦',
+      titleAr: 'طاقات شبابية وكفاءات ثقافية تقود مسيرة الإبداع',
+      descriptionAr: 'يتألف فريق عمل جمعية روح الفنون والثقافة من كفاءات وطنية ملتزمة.',
+    }
+    const result = teamHeroSchema.safeParse(valid)
+    assert.equal(result.success, true)
+    if (result.success) {
+      assert.equal(result.data.showImage, true)
+      assert.equal(result.data.imageUrl, '/images/youth-in-action.jpg')
+    }
+  })
+
+  test('rejects hero configuration with too short title or description', () => {
+    const invalid = {
+      titleAr: 'قصير',
+      descriptionAr: 'قصير',
+    }
+    const result = teamHeroSchema.safeParse(invalid)
+    assert.equal(result.success, false)
+  })
+})

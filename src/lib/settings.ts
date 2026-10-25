@@ -970,11 +970,47 @@ export interface TeamMemberConfig {
   enabled: boolean
 }
 
+export interface TeamHeroConfig {
+  imageUrl?: string
+  showImage?: boolean
+  badge1Ar?: string
+  badge1Fr?: string
+  badge1En?: string
+  badge2Ar?: string
+  badge2Fr?: string
+  badge2En?: string
+  titleAr?: string
+  titleFr?: string
+  titleEn?: string
+  descriptionAr?: string
+  descriptionFr?: string
+  descriptionEn?: string
+}
+
+export const defaultTeamHeroConfig: TeamHeroConfig = {
+  imageUrl: '/images/youth-in-action.jpg',
+  showImage: true,
+  badge1Ar: 'الهيكل الإداري والتنظيمي المعتمد • جمعية AMYCC',
+  badge1Fr: 'Structure Administrative & Organisationnelle • AMYCC',
+  badge1En: 'Official Organizational Leadership • AMYCC',
+  badge2Ar: 'تأطير وطني بروح شبابية مسؤولة 🇲🇦',
+  badge2Fr: 'Engagement Civique & Jeunesse 🇲🇦',
+  badge2En: 'Nationwide Civic Leadership 🇲🇦',
+  titleAr: 'طاقات شبابية وكفاءات ثقافية\nتقود مسيرة الإبداع والتأهيل الميداني',
+  titleFr: 'Énergies Jeunes & Compétences Culturelles\nau Service de l’Art et de l’Engagement',
+  titleEn: 'Youth Energy & Cultural Leadership\nDriving Artistic Innovation in Morocco',
+  descriptionAr: 'يتألف فريق عمل جمعية روح الفنون والثقافة (AMYCC) من مكتب تنفيذي منتخب ولجان فنية متخصصة تجمع بين الخبرة الميدانية، الشغف الفني، والالتزام الصارم بمبادئ الشفافية والمسؤولية لخدمة قضايا الشباب والتراث المغربي.',
+  descriptionFr: "L'équipe de l'Association Marocaine des Jeunes, Culture & Créativité (AMYCC) réunit un bureau exécutif élu et des commissions spécialisées engagées pour l'animation culturelle, la valorisation du patrimoine et la formation des jeunes.",
+  descriptionEn: 'The team of the Spirit of Arts & Culture Association (AMYCC) comprises an elected executive board and specialized committees dedicated to arts education, heritage celebration, and empowering young creatives across Morocco.',
+}
+
 export interface TeamConfig {
+  hero?: TeamHeroConfig
   members: TeamMemberConfig[]
 }
 
 export const defaultTeamConfig: TeamConfig = {
+  hero: defaultTeamHeroConfig,
   members: [
     {
       id: 'president',
@@ -1165,7 +1201,26 @@ export async function getTeamSettings(): Promise<TeamConfig> {
       return defaultTeamConfig
     }
 
+    const heroVal = (val.hero || {}) as Partial<TeamHeroConfig>
+    const hero: TeamHeroConfig = {
+      imageUrl: typeof heroVal.imageUrl === 'string' ? heroVal.imageUrl : defaultTeamHeroConfig.imageUrl,
+      showImage: typeof heroVal.showImage === 'boolean' ? heroVal.showImage : true,
+      badge1Ar: heroVal.badge1Ar || defaultTeamHeroConfig.badge1Ar,
+      badge1Fr: heroVal.badge1Fr || defaultTeamHeroConfig.badge1Fr,
+      badge1En: heroVal.badge1En || defaultTeamHeroConfig.badge1En,
+      badge2Ar: heroVal.badge2Ar || defaultTeamHeroConfig.badge2Ar,
+      badge2Fr: heroVal.badge2Fr || defaultTeamHeroConfig.badge2Fr,
+      badge2En: heroVal.badge2En || defaultTeamHeroConfig.badge2En,
+      titleAr: heroVal.titleAr || defaultTeamHeroConfig.titleAr,
+      titleFr: heroVal.titleFr || defaultTeamHeroConfig.titleFr,
+      titleEn: heroVal.titleEn || defaultTeamHeroConfig.titleEn,
+      descriptionAr: heroVal.descriptionAr || defaultTeamHeroConfig.descriptionAr,
+      descriptionFr: heroVal.descriptionFr || defaultTeamHeroConfig.descriptionFr,
+      descriptionEn: heroVal.descriptionEn || defaultTeamHeroConfig.descriptionEn,
+    }
+
     return {
+      hero,
       members: val.members
         .filter((item): item is TeamMemberConfig => typeof item === 'object' && item !== null && typeof item.id === 'string')
         .map((item, index) => ({

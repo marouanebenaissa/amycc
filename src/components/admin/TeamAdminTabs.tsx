@@ -4,6 +4,7 @@ import { useState } from 'react'
 import type { TeamConfig, CommissionsConfig } from '@/lib/settings'
 import { TeamManager } from '@/components/admin/TeamManager'
 import { CommissionsManager } from '@/components/admin/CommissionsManager'
+import { TeamHeroManager } from '@/components/admin/TeamHeroManager'
 
 interface TeamAdminTabsProps {
   teamConfig: TeamConfig
@@ -18,29 +19,42 @@ export function TeamAdminTabs({
   defaultTeamMembers,
   defaultCommissions,
 }: TeamAdminTabsProps) {
-  const [activeTab, setActiveTab] = useState<'members' | 'commissions'>('members')
+  const [activeTab, setActiveTab] = useState<'hero' | 'members' | 'commissions'>('hero')
 
   return (
     <div className="space-y-6">
       {/* Primary Section Switcher Tabs */}
-      <div className="flex items-center gap-2 p-1.5 bg-[#faf7f2] rounded-2xl border border-[#e5e0d6] w-full sm:w-fit shadow-2xs">
+      <div className="flex flex-wrap items-center gap-2 p-1.5 bg-[#faf7f2] rounded-2xl border border-[#e5e0d6] w-full sm:w-fit shadow-2xs">
+        <button
+          type="button"
+          onClick={() => setActiveTab('hero')}
+          className={`flex-1 sm:flex-initial flex items-center justify-center gap-2 px-4 sm:px-5 py-2.5 rounded-xl text-xs sm:text-sm font-black transition-all cursor-pointer ${
+            activeTab === 'hero'
+              ? 'bg-[#0d3b43] text-white shadow-sm'
+              : 'text-[#445457] hover:text-[#08242a] hover:bg-[#eae4d9]'
+          }`}
+        >
+          <span>🖼️</span>
+          <span>واجهة وغلاف صفحة الفريق (Hero)</span>
+        </button>
+
         <button
           type="button"
           onClick={() => setActiveTab('members')}
-          className={`flex-1 sm:flex-initial flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-black transition-all cursor-pointer ${
+          className={`flex-1 sm:flex-initial flex items-center justify-center gap-2 px-4 sm:px-5 py-2.5 rounded-xl text-xs sm:text-sm font-black transition-all cursor-pointer ${
             activeTab === 'members'
               ? 'bg-[#0d3b43] text-white shadow-sm'
               : 'text-[#445457] hover:text-[#08242a] hover:bg-[#eae4d9]'
           }`}
         >
           <span>👥</span>
-          <span>فريق العمل والمكتب التنفيذي ({teamConfig.members.length})</span>
+          <span>أعضاء المكتب التنفيذي ({teamConfig.members.length})</span>
         </button>
 
         <button
           type="button"
           onClick={() => setActiveTab('commissions')}
-          className={`flex-1 sm:flex-initial flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-black transition-all cursor-pointer ${
+          className={`flex-1 sm:flex-initial flex items-center justify-center gap-2 px-4 sm:px-5 py-2.5 rounded-xl text-xs sm:text-sm font-black transition-all cursor-pointer ${
             activeTab === 'commissions'
               ? 'bg-[#c85a32] text-white shadow-sm'
               : 'text-[#445457] hover:text-[#08242a] hover:bg-[#eae4d9]'
@@ -52,7 +66,11 @@ export function TeamAdminTabs({
       </div>
 
       {/* Render Active Manager */}
-      {activeTab === 'members' ? (
+      {activeTab === 'hero' ? (
+        <TeamHeroManager
+          initialConfig={teamConfig}
+        />
+      ) : activeTab === 'members' ? (
         <TeamManager
           initialConfig={teamConfig}
           defaultMembers={defaultTeamMembers}

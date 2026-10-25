@@ -2,7 +2,7 @@ import { getDictionary } from '@/lib/i18n/dictionaries'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import Link from 'next/link'
-import { getTeamSettings, getCommissionsSettings } from '@/lib/settings'
+import { getTeamSettings, getCommissionsSettings, defaultTeamHeroConfig } from '@/lib/settings'
 import { ImageWithFallback } from '@/components/ui/ImageWithFallback'
 
 export default async function TeamPage(props: { params: Promise<{ locale: string }> }) {
@@ -34,6 +34,36 @@ export default async function TeamPage(props: { params: Promise<{ locale: string
   const commTitle = isAr ? commissionsSettings.sectionTitleAr : isFr ? (commissionsSettings.sectionTitleFr || commissionsSettings.sectionTitleAr) : (commissionsSettings.sectionTitleEn || commissionsSettings.sectionTitleAr)
   const commDesc = isAr ? commissionsSettings.sectionDescAr : isFr ? (commissionsSettings.sectionDescFr || commissionsSettings.sectionDescAr) : (commissionsSettings.sectionDescEn || commissionsSettings.sectionDescAr)
   const activeCommissions = commissionsSettings.items.filter((item) => item.enabled !== false)
+
+  // Dynamic Team Hero Settings
+  const teamHero = teamSettings.hero || defaultTeamHeroConfig
+  const heroImageUrl = teamHero.imageUrl
+  const hasHeroImage = Boolean(teamHero.showImage !== false && heroImageUrl)
+
+  // Hero texts with trilingual fallbacks
+  const heroBadge1 = isAr
+    ? (teamHero.badge1Ar || defaultTeamHeroConfig.badge1Ar)
+    : isFr
+    ? (teamHero.badge1Fr || teamHero.badge1Ar || defaultTeamHeroConfig.badge1Fr)
+    : (teamHero.badge1En || teamHero.badge1Ar || defaultTeamHeroConfig.badge1En)
+
+  const heroBadge2 = isAr
+    ? (teamHero.badge2Ar || defaultTeamHeroConfig.badge2Ar)
+    : isFr
+    ? (teamHero.badge2Fr || teamHero.badge2Ar || defaultTeamHeroConfig.badge2Fr)
+    : (teamHero.badge2En || teamHero.badge2Ar || defaultTeamHeroConfig.badge2En)
+
+  const heroTitle = isAr
+    ? (teamHero.titleAr || defaultTeamHeroConfig.titleAr)
+    : isFr
+    ? (teamHero.titleFr || teamHero.titleAr || defaultTeamHeroConfig.titleFr)
+    : (teamHero.titleEn || teamHero.titleAr || defaultTeamHeroConfig.titleEn)
+
+  const heroDesc = isAr
+    ? (teamHero.descriptionAr || defaultTeamHeroConfig.descriptionAr)
+    : isFr
+    ? (teamHero.descriptionFr || teamHero.descriptionAr || defaultTeamHeroConfig.descriptionFr)
+    : (teamHero.descriptionEn || teamHero.descriptionAr || defaultTeamHeroConfig.descriptionEn)
 
   // The 4 Collective Leadership Principles
   const principles = [
@@ -85,82 +115,95 @@ export default async function TeamPage(props: { params: Promise<{ locale: string
 
       <main id="main-content" className="flex-1 bg-[#faf7f2]">
         {/* ============================================================
-            1. HERO BANNER WITH MOROCCAN PATTERN & AMBIENT GLOW
+            1. HERO BANNER (Full-Bleed Moroccan Cinematic Hero or Ambient Pattern)
             ============================================================ */}
-        <section className="relative overflow-hidden bg-gradient-to-b from-[#faf7f2] via-[#f5ede1] to-[#faf7f2] border-b border-[#e5e0d6] pt-14 pb-16 lg:pt-20 lg:pb-24">
-          <div className="absolute inset-0 moroccan-pattern-light opacity-60 pointer-events-none" aria-hidden="true" />
-          
-          <div className="absolute top-1/3 start-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-[#c85a32]/10 rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute bottom-0 end-12 w-72 h-72 bg-[#0d3b43]/10 rounded-full blur-3xl pointer-events-none" />
+        <section className={`relative overflow-hidden border-b transition-colors ${
+          hasHeroImage
+            ? 'min-h-[540px] sm:min-h-[580px] lg:min-h-[640px] flex items-center bg-[#08242a] text-white pt-16 pb-20 lg:pt-24 lg:pb-28 border-[#0d3b43]'
+            : 'bg-gradient-to-b from-[#faf7f2] via-[#f5ede1] to-[#faf7f2] border-[#e5e0d6] pt-14 pb-16 lg:pt-20 lg:pb-24'
+        }`}>
+          {/* Background Layer */}
+          {hasHeroImage ? (
+            <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
+              <ImageWithFallback
+                src={heroImageUrl!}
+                fallbackSrc="/images/youth-in-action.jpg"
+                alt="AMYCC Team Hero Banner"
+                fill
+                priority
+                sizes="100vw"
+                className="object-cover object-center"
+              />
+              {/* Cinematic Moroccan Vignette & Dark Backdrops for perfect high-contrast typography */}
+              <div className="absolute inset-0 bg-black/45" />
+              <div className="absolute inset-0 bg-gradient-to-b from-[#08242a]/95 via-[#08242a]/70 to-[#08242a]/95" />
+              <div className="absolute inset-0 moroccan-star-pattern opacity-15 pointer-events-none" />
+              <div className="absolute top-1/4 start-1/4 w-96 h-96 bg-[#c85a32]/15 rounded-full blur-3xl pointer-events-none" />
+              <div className="absolute bottom-10 end-10 w-96 h-96 bg-[#f4ce83]/15 rounded-full blur-3xl pointer-events-none" />
+            </div>
+          ) : (
+            <>
+              <div className="absolute inset-0 moroccan-pattern-light opacity-60 pointer-events-none" aria-hidden="true" />
+              <div className="absolute top-1/3 start-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-[#c85a32]/10 rounded-full blur-3xl pointer-events-none" />
+              <div className="absolute bottom-0 end-12 w-72 h-72 bg-[#0d3b43]/10 rounded-full blur-3xl pointer-events-none" />
+            </>
+          )}
 
-          <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+          <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
             {/* Breadcrumb Navigation */}
-            <nav className="flex items-center justify-center gap-2 text-xs sm:text-sm font-bold text-[#5f7174]">
-              <Link href={`/${locale}`} className="hover:text-[#0d3b43] transition-colors">
+            <nav className={`flex items-center justify-center gap-2 text-xs sm:text-sm font-bold ${
+              hasHeroImage ? 'text-white/80' : 'text-[#5f7174]'
+            }`}>
+              <Link href={`/${locale}`} className={`${hasHeroImage ? 'hover:text-white' : 'hover:text-[#0d3b43]'} transition-colors`}>
                 {isAr ? 'الرئيسية' : isFr ? 'Accueil' : 'Home'}
               </Link>
               <span>/</span>
-              <Link href={`/${locale}/about`} className="hover:text-[#0d3b43] transition-colors">
+              <Link href={`/${locale}/about`} className={`${hasHeroImage ? 'hover:text-white' : 'hover:text-[#0d3b43]'} transition-colors`}>
                 {isAr ? 'عن الجمعية' : isFr ? 'Association' : 'About'}
               </Link>
               <span>/</span>
-              <span className="text-[#c85a32]">
+              <span className={hasHeroImage ? 'text-[#f4ce83]' : 'text-[#c85a32]'}>
                 {isAr ? 'فريق العمل والهيكلة' : isFr ? 'Équipe & Direction' : 'Our Team & Structure'}
               </span>
             </nav>
 
             {/* Badges Bar */}
             <div className="flex flex-wrap items-center justify-center gap-2.5">
-              <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0d3b43]/10 border border-[#0d3b43]/20 text-[#0d3b43] text-xs font-bold shadow-2xs">
-                <span className="w-2 h-2 rounded-full bg-[#c85a32] animate-pulse" />
-                <span>
-                  {isAr
-                    ? 'الهيكل الإداري والتنظيمي المعتمد • جمعية AMYCC'
-                    : isFr
-                    ? 'Structure Administrative & Organisationnelle • AMYCC'
-                    : 'Official Organizational Leadership • AMYCC'}
+              {heroBadge1 && (
+                <span className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold shadow-2xs backdrop-blur-md ${
+                  hasHeroImage
+                    ? 'bg-white/10 border border-white/20 text-white'
+                    : 'bg-[#0d3b43]/10 border border-[#0d3b43]/20 text-[#0d3b43]'
+                }`}>
+                  <span className={`w-2 h-2 rounded-full ${hasHeroImage ? 'bg-[#f4ce83]' : 'bg-[#c85a32]'} animate-pulse`} />
+                  <span>{heroBadge1}</span>
                 </span>
-              </span>
+              )}
 
-              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#d99b26]/10 border border-[#d99b26]/20 text-[#99620b] text-xs font-bold shadow-2xs">
-                <span>📍</span>
-                <span>
-                  {isAr
-                    ? 'تأطير وطني بروح شبابية مسؤولة 🇲🇦'
-                    : isFr
-                    ? 'Engagement Civique & Jeunesse 🇲🇦'
-                    : 'Nationwide Civic Leadership 🇲🇦'}
+              {heroBadge2 && (
+                <span className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold shadow-2xs backdrop-blur-md ${
+                  hasHeroImage
+                    ? 'bg-white/10 border border-white/20 text-[#f4ce83]'
+                    : 'bg-[#d99b26]/10 border border-[#d99b26]/20 text-[#99620b]'
+                }`}>
+                  <span>📍</span>
+                  <span>{heroBadge2}</span>
                 </span>
-              </span>
+              )}
             </div>
 
             {/* Main Headline */}
             <div className="text-center max-w-4xl mx-auto space-y-4">
-              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-[#08242a] tracking-tight leading-tight">
-                {isAr ? (
-                  <>
-                    طاقات شبابية وكفاءات ثقافية <br />
-                    <span className="text-[#c85a32]">تقود مسيرة الإبداع والتأهيل الميداني</span>
-                  </>
-                ) : isFr ? (
-                  <>
-                    Énergies Jeunes & Compétences Culturelles <br />
-                    <span className="text-[#c85a32]">au Service de l’Art et de l’Engagement</span>
-                  </>
-                ) : (
-                  <>
-                    Youth Energy & Cultural Leadership <br />
-                    <span className="text-[#c85a32]">Driving Artistic Innovation in Morocco</span>
-                  </>
-                )}
+              <h1 className={`text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-tight whitespace-pre-line ${
+                hasHeroImage ? 'text-white drop-shadow-sm' : 'text-[#08242a]'
+              }`}>
+                {heroTitle}
               </h1>
 
-              <p className="text-sm sm:text-base text-[#445457] max-w-3xl mx-auto leading-relaxed font-medium text-balance">
-                {isAr
-                  ? 'يتألف فريق عمل جمعية روح الفنون والثقافة (AMYCC) من مكتب تنفيذي منتخب ولجان فنية متخصصة تجمع بين الخبرة الميدانية، الشغف الفني، والالتزام الصارم بمبادئ الشفافية والمسؤولية لخدمة قضايا الشباب والتراث المغربي.'
-                  : isFr
-                  ? "L'équipe de l'Association Marocaine des Jeunes, Culture & Créativité (AMYCC) réunit un bureau exécutif élu et des commissions spécialisées engagées pour l'animation culturelle, la valorisation du patrimoine et la formation des jeunes."
-                  : 'The team of the Spirit of Arts & Culture Association (AMYCC) comprises an elected executive board and specialized committees dedicated to arts education, heritage celebration, and empowering young creatives across Morocco.'}
+              <p className={`text-sm sm:text-base lg:text-lg max-w-3xl mx-auto leading-relaxed text-balance ${
+                hasHeroImage ? 'text-[#d8f0f4]/95 font-normal' : 'text-[#445457] font-medium'
+              }`}>
+                {heroDesc}
               </p>
             </div>
 
@@ -168,31 +211,51 @@ export default async function TeamPage(props: { params: Promise<{ locale: string
             <div className="pt-2 flex flex-wrap items-center justify-center gap-2 sm:gap-3">
               <a
                 href="#executive-board"
-                className="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-white border border-[#cfc7b9] text-[#0d3b43] hover:border-[#c85a32] hover:text-[#c85a32] transition-colors shadow-2xs"
+                className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all shadow-2xs ${
+                  hasHeroImage
+                    ? 'bg-white/10 hover:bg-white hover:text-[#08242a] text-white border border-white/25 backdrop-blur-md'
+                    : 'bg-white border border-[#cfc7b9] text-[#0d3b43] hover:border-[#c85a32] hover:text-[#c85a32]'
+                }`}
               >
                 {isAr ? '🏛️ المكتب التنفيذي (6)' : isFr ? '🏛️ Bureau Exécutif (6)' : '🏛️ Executive Board (6)'}
               </a>
               <a
                 href="#commissions"
-                className="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-white border border-[#cfc7b9] text-[#0d3b43] hover:border-[#c85a32] hover:text-[#c85a32] transition-colors shadow-2xs"
+                className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all shadow-2xs ${
+                  hasHeroImage
+                    ? 'bg-white/10 hover:bg-white hover:text-[#08242a] text-white border border-white/25 backdrop-blur-md'
+                    : 'bg-white border border-[#cfc7b9] text-[#0d3b43] hover:border-[#c85a32] hover:text-[#c85a32]'
+                }`}
               >
                 {isAr ? '🎨 اللجان الوظيفية (6)' : isFr ? '🎨 Commissions Thématiques (6)' : '🎨 Specialized Commissions (6)'}
               </a>
               <a
                 href="#architecture"
-                className="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-white border border-[#cfc7b9] text-[#0d3b43] hover:border-[#c85a32] hover:text-[#c85a32] transition-colors shadow-2xs"
+                className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all shadow-2xs ${
+                  hasHeroImage
+                    ? 'bg-white/10 hover:bg-white hover:text-[#08242a] text-white border border-white/25 backdrop-blur-md'
+                    : 'bg-white border border-[#cfc7b9] text-[#0d3b43] hover:border-[#c85a32] hover:text-[#c85a32]'
+                }`}
               >
                 {isAr ? '⚖️ الهيكلة التشاركية' : isFr ? '⚖️ Modèle Démocratique' : '⚖️ Democratic Model'}
               </a>
               <a
                 href="#principles"
-                className="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-white border border-[#cfc7b9] text-[#0d3b43] hover:border-[#c85a32] hover:text-[#c85a32] transition-colors shadow-2xs"
+                className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all shadow-2xs ${
+                  hasHeroImage
+                    ? 'bg-white/10 hover:bg-white hover:text-[#08242a] text-white border border-white/25 backdrop-blur-md'
+                    : 'bg-white border border-[#cfc7b9] text-[#0d3b43] hover:border-[#c85a32] hover:text-[#c85a32]'
+                }`}
               >
                 {isAr ? '💎 مبادئ التسيير (4)' : isFr ? '💎 Piliers de Leadership (4)' : '💎 Leadership Pillars (4)'}
               </a>
               <a
                 href="#join"
-                className="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-white border border-[#cfc7b9] text-[#0d3b43] hover:border-[#c85a32] hover:text-[#c85a32] transition-colors shadow-2xs"
+                className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all shadow-2xs ${
+                  hasHeroImage
+                    ? 'bg-[#f4ce83] hover:bg-[#eabf66] text-[#08242a] border border-[#f4ce83]'
+                    : 'bg-white border border-[#cfc7b9] text-[#0d3b43] hover:border-[#c85a32] hover:text-[#c85a32]'
+                }`}
               >
                 {isAr ? '🚀 انضم لفريقنا' : isFr ? '🚀 Nous Rejoindre' : '🚀 Join Our Team'}
               </a>
