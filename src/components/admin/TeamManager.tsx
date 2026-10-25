@@ -616,8 +616,21 @@ export function TeamManager({ initialConfig, defaultMembers = [] }: TeamManagerP
               </div>
 
               {/* Card Footer Actions */}
-              <div className="pt-3 mt-4 border-t border-[#f0ebe1] flex items-center justify-between text-xs">
-                <div className="flex items-center gap-1">
+              <div className="pt-3 mt-4 border-t border-[#f0ebe1] flex items-center justify-between text-xs gap-2">
+                <div className="flex items-center gap-1.5 flex-wrap">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setActiveUploadMemberId(member.id)
+                      cardFileInputRef.current?.click()
+                    }}
+                    disabled={isUploadingThisCard}
+                    className="px-2.5 py-1 rounded-lg bg-[#0d3b43]/10 hover:bg-[#0d3b43] text-[#0d3b43] hover:text-white text-3xs font-bold transition-all flex items-center gap-1 cursor-pointer"
+                    title="رفع أو تغيير صورة العضو"
+                  >
+                    <span>📷</span>
+                    <span>{isUploadingThisCard ? 'جارٍ الرفع...' : member.photoUrl ? 'تغيير الصورة' : 'رفع صورة'}</span>
+                  </button>
                   <button
                     type="button"
                     onClick={() => handleEdit(member)}
@@ -641,7 +654,7 @@ export function TeamManager({ initialConfig, defaultMembers = [] }: TeamManagerP
                 <button
                   type="button"
                   onClick={() => handleDelete(member.id)}
-                  className="px-2 py-1 rounded-lg text-red-600 hover:bg-red-50 text-3xs font-bold transition-colors cursor-pointer"
+                  className="px-2 py-1 rounded-lg text-red-600 hover:bg-red-50 text-3xs font-bold transition-colors cursor-pointer shrink-0"
                   title="حذف العضو"
                 >
                   🗑️ حذف
