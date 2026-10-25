@@ -5,9 +5,83 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Logo } from '@/components/ui/Logo'
 import { LanguageSwitcher } from '@/components/navigation/LanguageSwitcher'
-import { IconWithFallback } from '@/components/ui/IconWithFallback'
 import type { Dictionary } from '@/lib/i18n/dictionaries'
 import type { TopBarConfig } from '@/lib/settings'
+
+function renderNavIcon(key: string, className = 'w-4 h-4') {
+  switch (key) {
+    case 'home':
+      return (
+        <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+        </svg>
+      )
+    case 'about':
+      return (
+        <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M12 21v-8m-7 8v-5a2 2 0 012-2h10a2 2 0 012 2v5M3 10l9-7 9 7" />
+        </svg>
+      )
+    case 'team':
+      return (
+        <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+        </svg>
+      )
+    case 'contact':
+      return (
+        <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+        </svg>
+      )
+    case 'programs':
+      return (
+        <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M7 21a4 4 0 01-4-4 4 4 0 014-4c.48 0 .936.084 1.358.24A8.003 8.003 0 0119.76 9.642 4 4 0 1121 17a4 4 0 01-4 4H7z" />
+        </svg>
+      )
+    case 'annual_program':
+    case 'annual-program':
+      return (
+        <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+        </svg>
+      )
+    case 'impact':
+      return (
+        <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+        </svg>
+      )
+    case 'explore':
+      return (
+        <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
+          <circle cx="12" cy="12" r="10" />
+          <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" />
+        </svg>
+      )
+    case 'events':
+      return (
+        <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z" />
+        </svg>
+      )
+    case 'news':
+      return (
+        <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
+        </svg>
+      )
+    case 'partnerships':
+      return (
+        <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+        </svg>
+      )
+    default:
+      return null
+  }
+}
 
 interface HeaderProps {
   locale: string
@@ -388,29 +462,17 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
           <Logo locale={locale} />
 
           {/* Desktop Navigation Links */}
-          <nav className="hidden lg:flex items-center gap-1 xl:gap-1.5" aria-label="Main navigation">
+          <nav className="hidden lg:flex items-center gap-1 xl:gap-2" aria-label="Main navigation">
             {/* 1. الرئيسية (Home) */}
             <Link
               href={`/${locale}`}
-              className={`group px-3 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 ${
+              className={`px-3 py-2 rounded-lg text-xs font-bold transition-all ${
                 isHomeActive
-                  ? 'bg-[#0d3b43]/8 text-[#c85a32] border border-[#c85a32]/25 shadow-2xs font-black'
+                  ? 'bg-[#0d3b43]/8 text-[#0d3b43] font-black'
                   : 'text-[#1b2628] hover:text-[#0d3b43] hover:bg-[#ebe1d1]/50'
               }`}
             >
-              <span className="w-4 h-4 shrink-0 flex items-center justify-center opacity-85 group-hover:scale-110 transition-transform">
-                <IconWithFallback
-                  src="/icons/nav/home.png"
-                  fallbackEmoji="🏠"
-                  alt={dict.nav.home}
-                  size={16}
-                  className="w-full h-full object-contain"
-                />
-              </span>
-              <span>{dict.nav.home}</span>
-              {isHomeActive && (
-                <span className="w-1.5 h-1.5 rounded-full bg-[#c85a32] shrink-0" aria-hidden="true" />
-              )}
+              {dict.nav.home}
             </Link>
 
             {/* 2. عن الجمعية (GROUPED DROPDOWN: من نحن + فريق العمل + تواصل معنا) */}
@@ -427,25 +489,15 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
                   setProgramsDropdownOpen(false)
                   setExploreDropdownOpen(false)
                 }}
-                className={`group px-3 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 ${
+                className={`px-3 py-2 rounded-lg text-xs font-bold transition-all inline-flex items-center gap-1.5 ${
                   isAboutActive || aboutDropdownOpen
-                    ? 'bg-[#0d3b43]/8 text-[#c85a32] border border-[#c85a32]/25 shadow-2xs font-black'
+                    ? 'bg-[#0d3b43]/8 text-[#0d3b43] font-black'
                     : 'text-[#1b2628] hover:text-[#0d3b43] hover:bg-[#ebe1d1]/50'
                 }`}
                 aria-expanded={aboutDropdownOpen}
                 aria-haspopup="true"
               >
-                <span className="w-4 h-4 shrink-0 flex items-center justify-center opacity-85 group-hover:scale-110 transition-transform">
-                  <IconWithFallback
-                    src="/icons/nav/about.png"
-                    fallbackEmoji="✦"
-                    alt={isAr ? 'عن الجمعية' : 'About Us'}
-                    size={16}
-                    className="w-full h-full object-contain"
-                  />
-                </span>
                 <span>{dict.nav.about_group || (isAr ? 'عن الجمعية' : isFr ? "L'Association" : 'About Us')}</span>
-
                 <svg
                   className={`w-3.5 h-3.5 transition-transform duration-200 ${
                     aboutDropdownOpen ? 'rotate-180 text-[#c85a32]' : 'text-[#819598]'
@@ -453,14 +505,10 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
-                  strokeWidth={2.5}
+                  strokeWidth={2}
                 >
                   <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
                 </svg>
-
-                {isAboutActive && (
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#c85a32] shrink-0" aria-hidden="true" />
-                )}
               </button>
 
               {/* Floating Luxury Dropdown for About */}
@@ -486,14 +534,8 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
                               : 'hover:bg-[#faf7f2] text-[#1b2628]'
                           }`}
                         >
-                          <div className="w-8 h-8 rounded-lg bg-[#faf7f2] border border-[#e5e0d6] flex items-center justify-center shrink-0 p-1.5 shadow-2xs group-hover/item:scale-105 transition-transform">
-                            <IconWithFallback
-                              src={sub.iconSrc}
-                              fallbackEmoji={sub.icon}
-                              alt={sub.title}
-                              size={18}
-                              className="w-full h-full object-contain"
-                            />
+                          <div className="w-8 h-8 rounded-lg bg-[#faf7f2] border border-[#e5e0d6] flex items-center justify-center shrink-0 p-1.5 shadow-2xs group-hover/item:scale-105 transition-transform text-[#0d3b43] group-hover/item:text-[#c85a32]">
+                            {renderNavIcon(sub.key, 'w-4 h-4')}
                           </div>
 
                           <div className="flex-1 min-w-0">
@@ -530,25 +572,15 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
                   setAboutDropdownOpen(false)
                   setExploreDropdownOpen(false)
                 }}
-                className={`group px-3 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 ${
+                className={`px-3 py-2 rounded-lg text-xs font-bold transition-all inline-flex items-center gap-1.5 ${
                   isProgramsActive || programsDropdownOpen
-                    ? 'bg-[#0d3b43]/8 text-[#c85a32] border border-[#c85a32]/25 shadow-2xs font-black'
+                    ? 'bg-[#0d3b43]/8 text-[#0d3b43] font-black'
                     : 'text-[#1b2628] hover:text-[#0d3b43] hover:bg-[#ebe1d1]/50'
                 }`}
                 aria-expanded={programsDropdownOpen}
                 aria-haspopup="true"
               >
-                <span className="w-4 h-4 shrink-0 flex items-center justify-center opacity-85 group-hover:scale-110 transition-transform">
-                  <IconWithFallback
-                    src="/icons/nav/programs.png"
-                    fallbackEmoji="🎨"
-                    alt={dict.nav.programs_group || dict.nav.programs}
-                    size={16}
-                    className="w-full h-full object-contain"
-                  />
-                </span>
                 <span>{dict.nav.programs_group || dict.nav.programs}</span>
-
                 <svg
                   className={`w-3.5 h-3.5 transition-transform duration-200 ${
                     programsDropdownOpen ? 'rotate-180 text-[#c85a32]' : 'text-[#819598]'
@@ -556,14 +588,10 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
-                  strokeWidth={2.5}
+                  strokeWidth={2}
                 >
                   <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
                 </svg>
-
-                {isProgramsActive && (
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#c85a32] shrink-0" aria-hidden="true" />
-                )}
               </button>
 
               {/* Floating Luxury Dropdown for Programs */}
@@ -589,14 +617,8 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
                               : 'hover:bg-[#faf7f2] text-[#1b2628]'
                           }`}
                         >
-                          <div className="w-8 h-8 rounded-lg bg-[#faf7f2] border border-[#e5e0d6] flex items-center justify-center shrink-0 p-1.5 shadow-2xs group-hover/item:scale-105 transition-transform">
-                            <IconWithFallback
-                              src={sub.iconSrc}
-                              fallbackEmoji={sub.icon}
-                              alt={sub.title}
-                              size={18}
-                              className="w-full h-full object-contain"
-                            />
+                          <div className="w-8 h-8 rounded-lg bg-[#faf7f2] border border-[#e5e0d6] flex items-center justify-center shrink-0 p-1.5 shadow-2xs group-hover/item:scale-105 transition-transform text-[#0d3b43] group-hover/item:text-[#c85a32]">
+                            {renderNavIcon(sub.key, 'w-4 h-4')}
                           </div>
 
                           <div className="flex-1 min-w-0">
@@ -619,7 +641,7 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
               )}
             </div>
 
-            {/* 4. استكشف (GROUPED DROPDOWN: الفعاليات + الأخبار + المعرض) */}
+            {/* 4. استكشف (GROUPED DROPDOWN: الفعاليات + الأخبار) */}
             <div
               ref={exploreDropdownRef}
               className="relative"
@@ -633,25 +655,15 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
                   setAboutDropdownOpen(false)
                   setProgramsDropdownOpen(false)
                 }}
-                className={`group px-3 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 ${
+                className={`px-3 py-2 rounded-lg text-xs font-bold transition-all inline-flex items-center gap-1.5 ${
                   isExploreActive || exploreDropdownOpen
-                    ? 'bg-[#0d3b43]/8 text-[#c85a32] border border-[#c85a32]/25 shadow-2xs font-black'
+                    ? 'bg-[#0d3b43]/8 text-[#0d3b43] font-black'
                     : 'text-[#1b2628] hover:text-[#0d3b43] hover:bg-[#ebe1d1]/50'
                 }`}
                 aria-expanded={exploreDropdownOpen}
                 aria-haspopup="true"
               >
-                <span className="w-4 h-4 shrink-0 flex items-center justify-center opacity-85 group-hover:scale-110 transition-transform">
-                  <IconWithFallback
-                    src="/icons/nav/explore.png"
-                    fallbackEmoji="🧭"
-                    alt={dict.nav.explore || (isAr ? 'استكشف' : isFr ? 'Explorer' : 'Explore')}
-                    size={16}
-                    className="w-full h-full object-contain"
-                  />
-                </span>
                 <span>{dict.nav.explore || (isAr ? 'استكشف' : isFr ? 'Explorer' : 'Explore')}</span>
-
                 <svg
                   className={`w-3.5 h-3.5 transition-transform duration-200 ${
                     exploreDropdownOpen ? 'rotate-180 text-[#c85a32]' : 'text-[#819598]'
@@ -659,14 +671,10 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
-                  strokeWidth={2.5}
+                  strokeWidth={2}
                 >
                   <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
                 </svg>
-
-                {isExploreActive && (
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#c85a32] shrink-0" aria-hidden="true" />
-                )}
               </button>
 
               {/* Floating Luxury Dropdown for Explore */}
@@ -692,14 +700,8 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
                               : 'hover:bg-[#faf7f2] text-[#1b2628]'
                           }`}
                         >
-                          <div className="w-8 h-8 rounded-lg bg-[#faf7f2] border border-[#e5e0d6] flex items-center justify-center shrink-0 p-1.5 shadow-2xs group-hover/item:scale-105 transition-transform">
-                            <IconWithFallback
-                              src={sub.iconSrc}
-                              fallbackEmoji={sub.icon}
-                              alt={sub.title}
-                              size={18}
-                              className="w-full h-full object-contain"
-                            />
+                          <div className="w-8 h-8 rounded-lg bg-[#faf7f2] border border-[#e5e0d6] flex items-center justify-center shrink-0 p-1.5 shadow-2xs group-hover/item:scale-105 transition-transform text-[#0d3b43] group-hover/item:text-[#c85a32]">
+                            {renderNavIcon(sub.key, 'w-4 h-4')}
                           </div>
 
                           <div className="flex-1 min-w-0">
@@ -722,8 +724,8 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
               )}
             </div>
 
-            {/* Direct Navigation Links (Volunteer + Partnerships) */}
-            {directNavLinks.map(({ key, title, path, icon, iconSrc }) => {
+            {/* 5. الشراكات (Partnerships) */}
+            {directNavLinks.map(({ key, title, path }) => {
               const fullPath = `/${locale}/${path}`
               const isActive = isPathActive(path)
 
@@ -731,25 +733,13 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
                 <Link
                   key={key}
                   href={fullPath}
-                  className={`group px-3 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 ${
+                  className={`px-3 py-2 rounded-lg text-xs font-bold transition-all ${
                     isActive
-                      ? 'bg-[#0d3b43]/8 text-[#c85a32] border border-[#c85a32]/25 shadow-2xs font-black'
+                      ? 'bg-[#0d3b43]/8 text-[#0d3b43] font-black'
                       : 'text-[#1b2628] hover:text-[#0d3b43] hover:bg-[#ebe1d1]/50'
                   }`}
                 >
-                  <span className="w-4 h-4 shrink-0 flex items-center justify-center opacity-85 group-hover:scale-110 transition-transform">
-                    <IconWithFallback
-                      src={iconSrc}
-                      fallbackEmoji={icon}
-                      alt={title}
-                      size={16}
-                      className="w-full h-full object-contain"
-                    />
-                  </span>
-                  <span>{title}</span>
-                  {isActive && (
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#c85a32] shrink-0" aria-hidden="true" />
-                  )}
+                  {title}
                 </Link>
               )
             })}
@@ -807,14 +797,8 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
                 }`}
               >
                 <div className="flex items-center gap-3">
-                  <span className="w-5 h-5 flex items-center justify-center">
-                    <IconWithFallback
-                      src="/icons/nav/home.png"
-                      fallbackEmoji="🏠"
-                      alt={dict.nav.home}
-                      size={18}
-                      className="w-full h-full object-contain"
-                    />
+                  <span className="w-5 h-5 flex items-center justify-center text-[#0d3b43]">
+                    {renderNavIcon('home', 'w-5 h-5')}
                   </span>
                   <span>{dict.nav.home}</span>
                 </div>
@@ -835,14 +819,8 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
                   }`}
                 >
                   <div className="flex items-center gap-3">
-                    <span className="w-5 h-5 flex items-center justify-center">
-                      <IconWithFallback
-                        src="/icons/nav/about.png"
-                        fallbackEmoji="✦"
-                        alt={isAr ? 'عن الجمعية' : 'About'}
-                        size={18}
-                        className="w-full h-full object-contain"
-                      />
+                    <span className="w-5 h-5 flex items-center justify-center text-[#0d3b43]">
+                      {renderNavIcon('about', 'w-5 h-5')}
                     </span>
                     <span>{dict.nav.about_group || (isAr ? 'عن الجمعية' : isFr ? "L'Association" : 'About Us')}</span>
                   </div>
@@ -874,14 +852,8 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
                               : 'text-[#445457] hover:bg-white'
                           }`}
                         >
-                          <span className="w-4 h-4 flex items-center justify-center">
-                            <IconWithFallback
-                              src={sub.iconSrc}
-                              fallbackEmoji={sub.icon}
-                              alt={sub.title}
-                              size={16}
-                              className="w-full h-full object-contain"
-                            />
+                          <span className="w-4 h-4 flex items-center justify-center text-[#0d3b43]">
+                            {renderNavIcon(sub.key, 'w-4 h-4')}
                           </span>
                           <span>{sub.title}</span>
                         </Link>
@@ -901,14 +873,8 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
                   }`}
                 >
                   <div className="flex items-center gap-3">
-                    <span className="w-5 h-5 flex items-center justify-center">
-                      <IconWithFallback
-                        src="/icons/nav/programs.png"
-                        fallbackEmoji="🎨"
-                        alt={dict.nav.programs_group || dict.nav.programs}
-                        size={18}
-                        className="w-full h-full object-contain"
-                      />
+                    <span className="w-5 h-5 flex items-center justify-center text-[#0d3b43]">
+                      {renderNavIcon('programs', 'w-5 h-5')}
                     </span>
                     <span>{dict.nav.programs_group || dict.nav.programs}</span>
                   </div>
@@ -940,14 +906,8 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
                               : 'text-[#445457] hover:bg-white'
                           }`}
                         >
-                          <span className="w-4 h-4 flex items-center justify-center">
-                            <IconWithFallback
-                              src={sub.iconSrc}
-                              fallbackEmoji={sub.icon}
-                              alt={sub.title}
-                              size={16}
-                              className="w-full h-full object-contain"
-                            />
+                          <span className="w-4 h-4 flex items-center justify-center text-[#0d3b43]">
+                            {renderNavIcon(sub.key, 'w-4 h-4')}
                           </span>
                           <span>{sub.title}</span>
                         </Link>
@@ -957,7 +917,7 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
                 )}
               </div>
 
-              {/* Accordion 3: استكشف (Explore: Events + News + Gallery) */}
+              {/* Accordion 3: استكشف (Explore: Events + News) */}
               <div className="rounded-xl border border-[#e5e0d6] overflow-hidden bg-white">
                 <button
                   type="button"
@@ -967,14 +927,8 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
                   }`}
                 >
                   <div className="flex items-center gap-3">
-                    <span className="w-5 h-5 flex items-center justify-center">
-                      <IconWithFallback
-                        src="/icons/nav/explore.png"
-                        fallbackEmoji="🧭"
-                        alt={dict.nav.explore || (isAr ? 'استكشف' : 'Explore')}
-                        size={18}
-                        className="w-full h-full object-contain"
-                      />
+                    <span className="w-5 h-5 flex items-center justify-center text-[#0d3b43]">
+                      {renderNavIcon('explore', 'w-5 h-5')}
                     </span>
                     <span>{dict.nav.explore || (isAr ? 'استكشف' : isFr ? 'Explorer' : 'Explore')}</span>
                   </div>
@@ -1006,14 +960,8 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
                               : 'text-[#445457] hover:bg-white'
                           }`}
                         >
-                          <span className="w-4 h-4 flex items-center justify-center">
-                            <IconWithFallback
-                              src={sub.iconSrc}
-                              fallbackEmoji={sub.icon}
-                              alt={sub.title}
-                              size={16}
-                              className="w-full h-full object-contain"
-                            />
+                          <span className="w-4 h-4 flex items-center justify-center text-[#0d3b43]">
+                            {renderNavIcon(sub.key, 'w-4 h-4')}
                           </span>
                           <span>{sub.title}</span>
                         </Link>
@@ -1034,14 +982,8 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
                 }`}
               >
                 <div className="flex items-center gap-3">
-                  <span className="w-5 h-5 flex items-center justify-center">
-                    <IconWithFallback
-                      src="/icons/nav/partnerships.png"
-                      fallbackEmoji="🏛️"
-                      alt={dict.nav.partnerships}
-                      size={18}
-                      className="w-full h-full object-contain"
-                    />
+                  <span className="w-5 h-5 flex items-center justify-center text-[#0d3b43]">
+                    {renderNavIcon('partnerships', 'w-5 h-5')}
                   </span>
                   <span>{dict.nav.partnerships}</span>
                 </div>
