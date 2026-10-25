@@ -2,7 +2,7 @@ import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import { revalidatePath } from 'next/cache'
 import { defaultTopBarConfig, type TopBarConfig, defaultHeroConfig, type HeroConfig } from '@/lib/settings'
-import { ImageWithFallback } from '@/components/ui/ImageWithFallback'
+import { HeroImageUploader } from '@/components/admin/HeroImageUploader'
 
 interface SiteSettingRow {
   key: string
@@ -187,67 +187,11 @@ export default async function AdminSettingsPage() {
             </span>
           </div>
 
-          {/* Background Image Input */}
-          <div className="space-y-3">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
-              <label className="block text-2xs font-bold text-[#445457]">
-                صورة الخلفية الرئيسية (Hero Background Image)
-              </label>
-              <span className="text-3xs text-[#819598]">
-                يقبل روابط خارجية (HTTPS) أو مسارات محلية (/images/...)
-              </span>
-            </div>
-
-            <div className="flex gap-2">
-              <input
-                name="heroImageUrl"
-                id="heroImageUrlInput"
-                type="text"
-                defaultValue={heroVal.imageUrl || defaultHeroConfig.imageUrl}
-                placeholder="/images/youth-in-action.jpg أو رابط صورة خارجي عالي الدقة"
-                className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43] font-mono"
-              />
-            </div>
-
-            {/* Current Image Visual Preview */}
-            <div className="relative rounded-2xl overflow-hidden border border-[#e5e0d6] bg-[#08242a] aspect-[21/9] max-h-48 shadow-2xs">
-              <ImageWithFallback
-                src={heroVal.imageUrl || defaultHeroConfig.imageUrl}
-                fallbackSrc="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1200&q=80"
-                alt="Current Hero Background Preview"
-                fill
-                className="object-cover object-center opacity-85"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#08242a]/95 via-[#08242a]/40 to-transparent flex items-end p-4">
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 w-full">
-                  <span className="text-3xs text-[#d8f0f4] font-medium bg-[#08242a]/80 px-2.5 py-1 rounded-md border border-white/10 w-fit">
-                    معاينة الصورة المعتمدة حالياً
-                  </span>
-                  <span className="text-3xs font-mono text-[#f4ce83] truncate max-w-sm bg-black/40 px-2 py-0.5 rounded">
-                    {heroVal.imageUrl || defaultHeroConfig.imageUrl}
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            {/* Practical Guide Tips */}
-            <div className="p-3.5 rounded-xl bg-[#faf7f2] border border-[#e5e0d6] text-3xs space-y-1.5 text-[#5f7174]">
-              <div className="font-bold text-[#08242a] flex items-center gap-1.5">
-                <span>💡 طرق استبدال الصورة:</span>
-              </div>
-              <ul className="list-disc list-inside space-y-1 ps-1">
-                <li>
-                  <strong className="text-[#08242a]">رابط مباشر من الإنترنت (أسهل طريقة):</strong> انسخ رابط أي صورة عالية الدقة بصيغة JPG أو WebP (مثل صور Unsplash أو مواقع استضافة الصور) والصقه في الحقل أعلاه.
-                </li>
-                <li>
-                  <strong className="text-[#08242a]">صورة داخل مجلد المشروع:</strong> ضع ملف صورتك في مجلد <code className="bg-white px-1 py-0.5 rounded border border-[#e5e0d6] text-[#0d3b43]">public/images/</code> واكتب مسارها هنا مثل: <code className="bg-white px-1 py-0.5 rounded border border-[#e5e0d6] text-[#0d3b43]">/images/my-photo.jpg</code>.
-                </li>
-                <li>
-                  <strong className="text-[#08242a]">العودة للصورة الرسمية:</strong> اكتب <code className="bg-white px-1 py-0.5 rounded border border-[#e5e0d6] text-[#0d3b43]">/images/youth-in-action.jpg</code> لاستعادة صورة شباب في العمل الافتراضية.
-                </li>
-              </ul>
-            </div>
-          </div>
+          {/* Background Image Uploader with Import Button & Live Preview */}
+          <HeroImageUploader
+            initialImageUrl={heroVal.imageUrl}
+            defaultImageUrl={defaultHeroConfig.imageUrl || '/images/youth-in-action.jpg'}
+          />
 
           {/* Eyebrow Tag (Golden Tag) */}
           <div className="space-y-4 pt-2 border-t border-[#f0ebe1]">
