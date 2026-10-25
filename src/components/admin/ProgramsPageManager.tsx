@@ -20,7 +20,10 @@ export function ProgramsPageManager({ initialConfig, defaultConfig }: ProgramsPa
   const [feedback, setFeedback] = useState<{ type: 'success' | 'error'; message: string } | null>(null)
   const fileInputRef = useRef<HTMLInputElement>(null)
 
-  function updateHero(field: keyof ProgramsPageConfig['hero'], val: string) {
+  function updateHero<K extends keyof ProgramsPageConfig['hero']>(
+    field: K,
+    val: ProgramsPageConfig['hero'][K]
+  ) {
     setConfig((prev) => ({
       ...prev,
       hero: { ...prev.hero, [field]: val },
@@ -208,10 +211,20 @@ export function ProgramsPageManager({ initialConfig, defaultConfig }: ProgramsPa
           </div>
 
           {/* Hero Visual Image */}
-          <div className="space-y-3 p-5 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6]">
-            <label className="block text-xs font-bold text-[#08242a]">
-              صورة خلفية أو بصرية لقسم رأس الصفحة (Hero Visual Image)
-            </label>
+          <div className="space-y-4 p-5 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6]">
+            <div className="flex items-center justify-between">
+              <label className="block text-xs font-bold text-[#08242a]">
+                صورة خلفية أو بصرية لقسم رأس الصفحة (Hero Visual Image)
+              </label>
+              <Link
+                href="/ar/programs"
+                target="_blank"
+                className="text-xs font-bold text-[#0d3b43] hover:underline flex items-center gap-1"
+              >
+                <span>معاينة صفحة البرامج</span>
+                <span>↗</span>
+              </Link>
+            </div>
 
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5">
               {config.hero.imageUrl ? (
@@ -231,7 +244,7 @@ export function ProgramsPageManager({ initialConfig, defaultConfig }: ProgramsPa
                 </div>
               )}
 
-              <div className="flex-1 space-y-2 w-full">
+              <div className="flex-1 space-y-2.5 w-full">
                 <div className="flex items-center gap-2 flex-wrap">
                   <input
                     type="file"
@@ -262,11 +275,78 @@ export function ProgramsPageManager({ initialConfig, defaultConfig }: ProgramsPa
 
                 <input
                   type="text"
+                  dir="ltr"
                   value={config.hero.imageUrl ?? ''}
                   onChange={(e) => updateHero('imageUrl', e.target.value)}
-                  placeholder="رابط أو مسار صورة الواجهة: /uploads/... أو https://..."
-                  className="w-full px-3.5 py-2 rounded-xl bg-white border border-[#e5e0d6] text-xs font-mono text-[#08242a] focus:outline-none focus:border-[#0d3b43]"
+                  placeholder="/uploads/... or https://..."
+                  className="w-full px-3.5 py-2 rounded-xl bg-white border border-[#e5e0d6] text-xs font-mono text-[#08242a] focus:outline-none focus:border-[#0d3b43] text-left"
                 />
+
+                <label className="flex items-center gap-3 p-2.5 rounded-xl bg-white border border-[#e5e0d6] cursor-pointer hover:bg-[#f5ede1] transition-colors">
+                  <input
+                    type="checkbox"
+                    checked={config.hero.showImage !== false}
+                    onChange={(e) => updateHero('showImage', e.target.checked)}
+                    className="w-4 h-4 rounded text-[#0d3b43] focus:ring-[#0d3b43]"
+                  />
+                  <div className="text-xs">
+                    <span className="font-bold text-[#08242a] block">تفعيل صورة الغلاف على واجهة البرامج المنشورة</span>
+                    <span className="text-[#819598] block">إذا تم التعطيل، ستظهر واجهة البرامج بنمط الزخرفة المغربية الأنيق.</span>
+                  </div>
+                </label>
+              </div>
+            </div>
+
+            {/* Live Interactive Simulation Preview */}
+            <div className="pt-3 border-t border-[#e5e0d6] space-y-2">
+              <span className="text-2xs font-bold text-[#819598] block">معاينة حية لشكل رأس الصفحة (Live Preview):</span>
+              <div
+                className={`relative rounded-2xl overflow-hidden p-6 text-center border transition-all ${
+                  config.hero.showImage !== false && config.hero.imageUrl
+                    ? 'bg-[#08242a] text-white border-[#0d3b43] min-h-[190px] flex flex-col justify-center items-center'
+                    : 'bg-gradient-to-b from-[#faf7f2] via-[#f7f2e9] to-[#faf7f2] text-[#08242a] border-[#e5e0d6] min-h-[160px] flex flex-col justify-center items-center'
+                }`}
+              >
+                {config.hero.showImage !== false && config.hero.imageUrl && (
+                  <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+                    <Image
+                      src={config.hero.imageUrl}
+                      alt="Hero Simulation"
+                      fill
+                      unoptimized
+                      className="object-cover object-center"
+                    />
+                    <div className="absolute inset-0 bg-black/45" />
+                    <div className="absolute inset-0 bg-gradient-to-b from-[#08242a]/90 via-[#08242a]/65 to-[#08242a]/95" />
+                  </div>
+                )}
+                <div className="relative z-10 space-y-2 max-w-xl mx-auto">
+                  <div className="flex items-center justify-center gap-2">
+                    <span
+                      className={`px-3 py-1 rounded-full text-3xs font-bold ${
+                        config.hero.showImage !== false && config.hero.imageUrl
+                          ? 'bg-white/10 text-[#f4ce83] border border-white/20'
+                          : 'bg-[#c85a32]/10 text-[#c85a32]'
+                      }`}
+                    >
+                      {config.hero.tagAr || 'بوابة البرامج والمشاريع الثقافية'}
+                    </span>
+                  </div>
+                  <h3
+                    className={`text-base sm:text-lg font-black leading-snug ${
+                      config.hero.showImage !== false && config.hero.imageUrl ? 'text-white' : 'text-[#08242a]'
+                    }`}
+                  >
+                    {config.hero.titleAr || 'عنوان رأس صفحة البرامج'}
+                  </h3>
+                  <p
+                    className={`text-xs line-clamp-2 ${
+                      config.hero.showImage !== false && config.hero.imageUrl ? 'text-[#d8f0f4]/95' : 'text-[#5f7174]'
+                    }`}
+                  >
+                    {config.hero.descriptionAr || 'وصف رأس صفحة البرامج...'}
+                  </p>
+                </div>
               </div>
             </div>
           </div>

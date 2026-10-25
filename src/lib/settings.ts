@@ -1582,6 +1582,7 @@ export interface ContactConfig {
     descriptionFr?: string
     descriptionEn?: string
     imageUrl?: string
+    showImage?: boolean
   }
   channels: {
     primaryEmail: string
@@ -1629,6 +1630,7 @@ export const defaultContactConfig: ContactConfig = {
     descriptionFr: "L'équipe de direction de l'AMYCC est à votre disposition pour répondre à vos questions, explorer des partenariats et soutenir vos initiatives artistiques.",
     descriptionEn: 'The AMYCC leadership team is at your disposal for general inquiries, institutional partnerships, membership coordination, and supporting creative ideas.',
     imageUrl: '',
+    showImage: true,
   },
   channels: {
     primaryEmail: 'contact@amycc.org',
@@ -1883,6 +1885,7 @@ export interface ProgramsPageConfig {
     descriptionFr?: string
     descriptionEn?: string
     imageUrl?: string
+    showImage?: boolean
   }
   stats: ProgramStatItem[]
   cta: {
@@ -1918,6 +1921,7 @@ export const defaultProgramsPageConfig: ProgramsPageConfig = {
     descriptionFr: 'L\'AMYCC conçoit et déploie des programmes pérennes mêlant formation artistique, encadrement citoyen et valorisation du patrimoine marocain pour la jeunesse.',
     descriptionEn: 'AMYCC designs and leads enduring cultural initiatives that merge artistic training, youth mentorship, and Moroccan heritage preservation across the Kingdom.',
     imageUrl: '',
+    showImage: true,
   },
   stats: [
     {
@@ -2003,6 +2007,7 @@ export async function getProgramsPageSettings(): Promise<ProgramsPageConfig> {
         descriptionFr: heroVal.descriptionFr || defaultProgramsPageConfig.hero.descriptionFr,
         descriptionEn: heroVal.descriptionEn || defaultProgramsPageConfig.hero.descriptionEn,
         imageUrl: typeof heroVal.imageUrl === 'string' ? heroVal.imageUrl : defaultProgramsPageConfig.hero.imageUrl,
+        showImage: heroVal.showImage !== false,
       },
       stats: Array.isArray(val.stats) && val.stats.length > 0
         ? val.stats

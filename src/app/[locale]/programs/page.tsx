@@ -5,7 +5,7 @@ import { createPublicClient } from '@/lib/supabase/public'
 import { getProgramsPageSettings, defaultProgramsPageConfig } from '@/lib/settings'
 import { ProgramsCatalog, type ProgramDisplayItem } from '@/components/programs/ProgramsCatalog'
 import Link from 'next/link'
-import Image from 'next/image'
+import { ImageWithFallback } from '@/components/ui/ImageWithFallback'
 
 export const dynamic = 'force-dynamic'
 
@@ -39,6 +39,8 @@ export default async function ProgramsPage(props: { params: Promise<{ locale: st
   const hero = pageSettings.hero || defaultProgramsPageConfig.hero
   const stats = pageSettings.stats || defaultProgramsPageConfig.stats
   const cta = pageSettings.cta || defaultProgramsPageConfig.cta
+
+  const hasHeroImage = Boolean(hero.showImage !== false && hero.imageUrl && hero.imageUrl.trim() !== '')
 
   // Trilingual values for Hero
   const heroTag = isAr ? hero.tagAr : isFr ? (hero.tagFr || hero.tagAr) : (hero.tagEn || hero.tagAr)
@@ -160,35 +162,57 @@ export default async function ProgramsPage(props: { params: Promise<{ locale: st
 
       <main id="main-content" className="flex-1 bg-[#faf7f2]">
         {/* ============================================================
-            1. HERO BANNER WITH MOROCCAN PATTERN & AMBIENT GLOW
+            1. HERO BANNER (Full-Bleed Moroccan Cinematic Hero or Ambient Pattern)
             ============================================================ */}
-        <section className="relative overflow-hidden bg-gradient-to-b from-[#faf7f2] via-[#f7f2e9] to-[#faf7f2] border-b border-[#e5e0d6] pt-16 pb-20 lg:pt-20 lg:pb-28 text-[#08242a]">
-          <div className="absolute inset-0 moroccan-pattern-light opacity-60 pointer-events-none" aria-hidden="true" />
-          <div className="absolute top-1/3 start-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-[#c85a32]/10 rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute bottom-0 end-12 w-72 h-72 bg-[#0d3b43]/10 rounded-full blur-3xl pointer-events-none" />
-
-          {/* Optional Background visual if set in CMS */}
-          {hero.imageUrl && (
-            <div className="absolute inset-0 opacity-15 mix-blend-overlay pointer-events-none">
-              <Image
-                src={hero.imageUrl}
-                alt="Programs Hero Background"
+        <section
+          className={`relative overflow-hidden border-b transition-colors ${
+            hasHeroImage
+              ? 'min-h-[500px] sm:min-h-[540px] lg:min-h-[600px] flex items-center bg-[#08242a] text-white pt-16 pb-24 lg:pt-20 lg:pb-32 border-[#0d3b43]'
+              : 'bg-gradient-to-b from-[#faf7f2] via-[#f7f2e9] to-[#faf7f2] border-[#e5e0d6] pt-16 pb-20 lg:pt-20 lg:pb-28 text-[#08242a]'
+          }`}
+        >
+          {/* Background Layer */}
+          {hasHeroImage ? (
+            <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
+              <ImageWithFallback
+                src={hero.imageUrl!}
+                fallbackSrc="/images/youth-in-action.jpg"
+                alt="AMYCC Programs Hero Banner"
                 fill
-                unoptimized
-                className="object-cover"
                 priority
+                sizes="100vw"
+                className="object-cover object-center"
               />
+              {/* Cinematic Moroccan Vignette & Dark Backdrops for perfect high-contrast typography and clear visual */}
+              <div className="absolute inset-0 bg-black/45" />
+              <div className="absolute inset-0 bg-gradient-to-b from-[#08242a]/90 via-[#08242a]/65 to-[#08242a]/95" />
+              <div className="absolute inset-0 moroccan-star-pattern opacity-15 pointer-events-none" />
+              <div className="absolute top-1/4 start-1/4 w-96 h-96 bg-[#c85a32]/20 rounded-full blur-3xl pointer-events-none" />
+              <div className="absolute bottom-10 end-10 w-96 h-96 bg-[#f4ce83]/20 rounded-full blur-3xl pointer-events-none" />
             </div>
+          ) : (
+            <>
+              <div className="absolute inset-0 moroccan-pattern-light opacity-60 pointer-events-none" aria-hidden="true" />
+              <div className="absolute top-1/3 start-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-[#c85a32]/10 rounded-full blur-3xl pointer-events-none" />
+              <div className="absolute bottom-0 end-12 w-72 h-72 bg-[#0d3b43]/10 rounded-full blur-3xl pointer-events-none" />
+            </>
           )}
 
-          <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 text-center">
+          <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 text-center w-full">
             {/* Breadcrumb Navigation */}
-            <nav className="flex items-center justify-center gap-2 text-xs sm:text-sm font-bold text-[#5f7174]">
-              <Link href={`/${locale}`} className="hover:text-[#0d3b43] transition-colors">
+            <nav
+              className={`flex items-center justify-center gap-2 text-xs sm:text-sm font-bold ${
+                hasHeroImage ? 'text-white/80' : 'text-[#5f7174]'
+              }`}
+            >
+              <Link
+                href={`/${locale}`}
+                className={`transition-colors ${hasHeroImage ? 'hover:text-white' : 'hover:text-[#0d3b43]'}`}
+              >
                 {isAr ? 'الرئيسية' : isFr ? 'Accueil' : 'Home'}
               </Link>
               <span>/</span>
-              <span className="text-[#c85a32]">
+              <span className={hasHeroImage ? 'text-[#f4ce83]' : 'text-[#c85a32]'}>
                 {isAr ? 'البرامج والمشاريع الثقافية' : isFr ? 'Programmes' : 'Programs'}
               </span>
             </nav>
@@ -196,14 +220,28 @@ export default async function ProgramsPage(props: { params: Promise<{ locale: st
             {/* Badges */}
             <div className="flex flex-wrap items-center justify-center gap-2.5">
               {heroTag && (
-                <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs sm:text-sm font-bold shadow-2xs bg-[#c85a32]/10 border border-[#c85a32]/20 text-[#c85a32]">
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#c85a32] animate-pulse" />
+                <span
+                  className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs sm:text-sm font-bold shadow-2xs backdrop-blur-md ${
+                    hasHeroImage
+                      ? 'bg-white/10 border border-white/20 text-[#f4ce83]'
+                      : 'bg-[#c85a32]/10 border border-[#c85a32]/20 text-[#c85a32]'
+                  }`}
+                >
+                  <span
+                    className={`w-2.5 h-2.5 rounded-full ${hasHeroImage ? 'bg-[#f4ce83]' : 'bg-[#c85a32]'} animate-pulse`}
+                  />
                   <span>{heroTag}</span>
                 </span>
               )}
 
               {heroBadge && (
-                <span className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs sm:text-sm font-bold shadow-2xs bg-[#0d3b43]/10 border border-[#0d3b43]/20 text-[#0d3b43]">
+                <span
+                  className={`inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs sm:text-sm font-bold shadow-2xs backdrop-blur-md ${
+                    hasHeroImage
+                      ? 'bg-white/10 border border-white/20 text-white'
+                      : 'bg-[#0d3b43]/10 border border-[#0d3b43]/20 text-[#0d3b43]'
+                  }`}
+                >
                   <span>🇲🇦</span>
                   <span>{heroBadge}</span>
                 </span>
@@ -211,12 +249,20 @@ export default async function ProgramsPage(props: { params: Promise<{ locale: st
             </div>
 
             {/* Headline Title */}
-            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-[#08242a] tracking-tight leading-tight whitespace-pre-line">
+            <h1
+              className={`text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-tight whitespace-pre-line ${
+                hasHeroImage ? 'text-white drop-shadow-md' : 'text-[#08242a]'
+              }`}
+            >
               {heroTitle}
             </h1>
 
             {/* Description */}
-            <p className="text-base sm:text-lg lg:text-xl text-[#445457] max-w-3xl mx-auto leading-relaxed font-medium text-balance">
+            <p
+              className={`text-base sm:text-lg lg:text-xl max-w-3xl mx-auto leading-relaxed text-balance ${
+                hasHeroImage ? 'text-[#d8f0f4]/95 font-normal drop-shadow-xs' : 'text-[#445457] font-medium'
+              }`}
+            >
               {heroDesc}
             </p>
           </div>
