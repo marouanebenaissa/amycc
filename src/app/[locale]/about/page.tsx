@@ -321,31 +321,52 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
 
       <main id="main-content" className="flex-1 bg-[#faf7f2]">
         {/* ============================================================
-            1. PAGE HERO HEADER WITH MOROCCAN GEOMETRIC ACCENTS
+            1. PAGE HERO HEADER — Full-bleed Morocco88 Style Cinematic Banner
             ============================================================ */}
-        <section className="relative overflow-hidden bg-gradient-to-b from-[#faf7f2] via-[#f5ede1] to-[#faf7f2] border-b border-[#e5e0d6] pt-14 pb-16 lg:pt-20 lg:pb-24">
-          <div className="absolute inset-0 moroccan-pattern-light opacity-60 pointer-events-none" aria-hidden="true" />
+        <section className="relative overflow-hidden min-h-[580px] sm:min-h-[640px] lg:min-h-[720px] flex items-center justify-center bg-[#08242a] text-white border-b border-[#0d3b43] py-16 sm:py-20 lg:py-24">
+          {/* Full-bleed background photo layer */}
+          <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
+            {aboutHero.showImage !== false && aboutHero.imageUrl ? (
+              <>
+                <ImageWithFallback
+                  src={aboutHero.imageUrl}
+                  fallbackSrc="/images/youth-in-action.jpg"
+                  alt="AMYCC About Hero"
+                  fill
+                  priority
+                  sizes="100vw"
+                  className="object-cover object-center"
+                />
+                {/* Cinematic Morocco88 Vignette Overlays matching Homepage */}
+                <div className="absolute inset-0 bg-black/45" />
+                <div className="absolute inset-0 bg-gradient-to-r from-[#08242a]/95 via-[#08242a]/70 to-[#08242a]/50 rtl:bg-gradient-to-l" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#08242a] via-transparent to-black/30" />
+              </>
+            ) : (
+              <div className="absolute inset-0 bg-gradient-to-br from-[#08242a] via-[#0d3b43] to-[#08242a]">
+                <div className="absolute inset-0 moroccan-star-pattern opacity-15 pointer-events-none" />
+                <div className="absolute top-1/4 start-1/4 w-96 h-96 bg-[#c85a32]/10 rounded-full blur-3xl pointer-events-none" />
+                <div className="absolute bottom-10 end-10 w-96 h-96 bg-[#f4ce83]/10 rounded-full blur-3xl pointer-events-none" />
+              </div>
+            )}
+          </div>
 
-          {/* Subtle Ambient Radial Lighting */}
-          <div className="absolute top-1/4 start-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-[#c85a32]/10 rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute bottom-0 end-10 w-72 h-72 bg-[#0d3b43]/10 rounded-full blur-3xl pointer-events-none" />
-
-          <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+          <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full space-y-6 sm:space-y-8">
             {/* Breadcrumb Navigation */}
-            <nav className="flex items-center justify-center gap-2 text-xs sm:text-sm font-bold text-[#5f7174]">
-              <Link href={`/${locale}`} className="hover:text-[#0d3b43] transition-colors">
+            <nav className="flex items-center justify-center gap-2 text-xs sm:text-sm font-bold text-white/70">
+              <Link href={`/${locale}`} className="hover:text-[#f4ce83] transition-colors">
                 {isAr ? 'الرئيسية' : isFr ? 'Accueil' : 'Home'}
               </Link>
-              <span>/</span>
-              <span className="text-[#819598]">{isAr ? 'عن الجمعية' : isFr ? 'Association' : 'About'}</span>
-              <span>/</span>
-              <span className="text-[#c85a32]">{isAr ? 'من نحن' : isFr ? 'Qui sommes-nous' : 'About Us'}</span>
+              <span className="text-white/40">/</span>
+              <span className="text-white/70">{isAr ? 'عن الجمعية' : isFr ? 'Association' : 'About'}</span>
+              <span className="text-white/40">/</span>
+              <span className="text-[#f4ce83]">{isAr ? 'من نحن' : isFr ? 'Qui sommes-nous' : 'About Us'}</span>
             </nav>
 
             {/* Badges Bar */}
             <div className="flex flex-wrap items-center justify-center gap-2.5">
-              <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0d3b43]/10 border border-[#0d3b43]/20 text-[#0d3b43] text-xs font-bold shadow-2xs">
-                <span className="w-2 h-2 rounded-full bg-[#c85a32] animate-pulse" />
+              <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white text-xs font-bold shadow-xs">
+                <span className="w-2 h-2 rounded-full bg-[#f4ce83] animate-pulse" />
                 <span>
                   {isAr
                     ? 'جمعية غير ربحية رسمية بالمغرب • تأسست 2026'
@@ -355,7 +376,7 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
                 </span>
               </span>
 
-              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#d99b26]/10 border border-[#d99b26]/20 text-[#99620b] text-xs font-bold shadow-2xs">
+              <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-[#f4ce83]/40 text-[#f4ce83] text-xs font-bold shadow-xs">
                 <span>📍</span>
                 <span>
                   {isAr
@@ -365,30 +386,43 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
                     : 'Origin: Marrakech, Morocco 🇲🇦'}
                 </span>
               </span>
+
+              {(aboutHero.badgeAr || aboutHero.badgeFr || aboutHero.badgeEn) && (
+                <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#c85a32]/85 backdrop-blur-md border border-[#c85a32] text-white text-xs font-bold shadow-xs">
+                  <span>✦</span>
+                  <span>
+                    {isAr
+                      ? aboutHero.badgeAr
+                      : isFr
+                      ? aboutHero.badgeFr
+                      : aboutHero.badgeEn}
+                  </span>
+                </span>
+              )}
             </div>
 
             {/* Main Headline */}
             <div className="text-center max-w-4xl mx-auto space-y-4">
-              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-[#08242a] tracking-tight leading-tight">
+              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-[1.2] drop-shadow-sm font-arabic">
                 {isAr ? (
                   <>
                     رعاية الإبداع، تمكين الشباب، <br />
-                    <span className="text-[#c85a32]">وصون التراث الثقافي المغربي</span>
+                    <span className="text-[#f4ce83]">وصون التراث الثقافي المغربي</span>
                   </>
                 ) : isFr ? (
                   <>
                     Cultiver la Créativité, Émanciper la Jeunesse <br />
-                    <span className="text-[#c85a32]">& Célébrer le Patrimoine Marocain</span>
+                    <span className="text-[#f4ce83]">& Célébrer le Patrimoine Marocain</span>
                   </>
                 ) : (
                   <>
                     Nurturing Creativity, Empowering Youth <br />
-                    <span className="text-[#c85a32]">& Celebrating Moroccan Heritage</span>
+                    <span className="text-[#f4ce83]">& Celebrating Moroccan Heritage</span>
                   </>
                 )}
               </h1>
 
-              <p className="text-sm sm:text-lg text-[#445457] max-w-3xl mx-auto leading-relaxed font-medium">
+              <p className="text-sm sm:text-lg lg:text-xl text-[#d8f0f4]/95 max-w-3xl mx-auto leading-relaxed font-normal">
                 {isAr
                   ? 'جمعية روح الفنون والثقافة (AMYCC) منظمة مدنية مغربية غير ربحية، تأسست عام 2026، تعمل برؤية متجددة للنهوض بالمشهد الثقافي والفني وتأهيل الطاقات الشبابية عبر محترفات الإبداع والمبادرات الميدانية.'
                   : isFr
@@ -401,99 +435,59 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
             <div className="pt-2 flex flex-wrap items-center justify-center gap-2 sm:gap-3">
               <a
                 href="#profile"
-                className="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-white border border-[#cfc7b9] text-[#0d3b43] hover:border-[#c85a32] hover:text-[#c85a32] transition-colors shadow-2xs"
+                className="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-[#f4ce83] hover:text-[#08242a] hover:border-[#f4ce83] transition-all shadow-xs"
               >
                 {isAr ? '🏷️ الهوية والنبذة' : isFr ? '🏷️ Identité & Statut' : '🏷️ Identity'}
               </a>
               <a
                 href="#values"
-                className="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-white border border-[#cfc7b9] text-[#0d3b43] hover:border-[#c85a32] hover:text-[#c85a32] transition-colors shadow-2xs"
+                className="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-[#f4ce83] hover:text-[#08242a] hover:border-[#f4ce83] transition-all shadow-xs"
               >
                 {isAr ? '💎 قيمنا الجوهرية (7)' : isFr ? '💎 Valeurs Piliers (7)' : '💎 Core Values (7)'}
               </a>
               <a
                 href="#mission"
-                className="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-white border border-[#cfc7b9] text-[#0d3b43] hover:border-[#c85a32] hover:text-[#c85a32] transition-colors shadow-2xs"
+                className="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-[#f4ce83] hover:text-[#08242a] hover:border-[#f4ce83] transition-all shadow-xs"
               >
                 {isAr ? '🎯 رسالتنا الميدانية' : isFr ? '🎯 Notre Mission' : '🎯 Our Mission'}
               </a>
               <a
                 href="#vision"
-                className="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-white border border-[#cfc7b9] text-[#0d3b43] hover:border-[#c85a32] hover:text-[#c85a32] transition-colors shadow-2xs"
+                className="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-[#f4ce83] hover:text-[#08242a] hover:border-[#f4ce83] transition-all shadow-xs"
               >
                 {isAr ? '🔭 رؤيتنا المستقبلية' : isFr ? '🔭 Vision Stratégique' : '🔭 Our Vision'}
               </a>
               <a
                 href="#roadmap"
-                className="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-white border border-[#cfc7b9] text-[#0d3b43] hover:border-[#c85a32] hover:text-[#c85a32] transition-colors shadow-2xs"
+                className="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-[#f4ce83] hover:text-[#08242a] hover:border-[#f4ce83] transition-all shadow-xs"
               >
                 {isAr ? '🗺️ خارطة التوسع' : isFr ? '🗺️ Feuille de Route' : '🗺️ Roadmap'}
               </a>
               <a
                 href="#objectives"
-                className="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-white border border-[#cfc7b9] text-[#0d3b43] hover:border-[#c85a32] hover:text-[#c85a32] transition-colors shadow-2xs"
+                className="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-[#f4ce83] hover:text-[#08242a] hover:border-[#f4ce83] transition-all shadow-xs"
               >
                 {isAr ? '🎯 أهدافنا (6)' : isFr ? '🎯 Nos Objectifs (6)' : '🎯 Objectives (6)'}
               </a>
               <a
                 href="#governance"
-                className="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-white border border-[#cfc7b9] text-[#0d3b43] hover:border-[#c85a32] hover:text-[#c85a32] transition-colors shadow-2xs"
+                className="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-[#f4ce83] hover:text-[#08242a] hover:border-[#f4ce83] transition-all shadow-xs"
               >
                 {isAr ? '🏛️ الهيكلة والتنظيم' : isFr ? '🏛️ Organisation' : '🏛️ Structure'}
               </a>
             </div>
 
-            {/* Dynamic About Hero Image from Admin Control Panel */}
-            {aboutHero.showImage !== false && aboutHero.imageUrl && (
-              <div className="pt-4 max-w-5xl mx-auto">
-                <div className="relative aspect-[21/9] sm:aspect-[24/9] w-full rounded-3xl overflow-hidden border border-[#e5e0d6] shadow-card group">
-                  <ImageWithFallback
-                    src={aboutHero.imageUrl}
-                    alt={
-                      isAr
-                        ? aboutHero.captionAr || 'جمعية روح الفنون والثقافة'
-                        : isFr
-                        ? aboutHero.captionFr || 'Association Esprit des Arts et de la Culture'
-                        : aboutHero.captionEn || 'Spirit of Arts & Culture Association'
-                    }
-                    fill
-                    priority
-                    className="object-cover group-hover:scale-102 transition-transform duration-700"
-                    fallbackSrc="/images/youth-in-action.jpg"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent" />
-
-                  {/* Floating Badge & Caption Bar */}
-                  <div className="absolute bottom-4 sm:bottom-6 start-4 sm:start-8 end-4 sm:end-8 flex flex-col sm:flex-row sm:items-end justify-between gap-3 text-white">
-                    <div className="space-y-1.5 max-w-2xl text-start">
-                      {(aboutHero.badgeAr || aboutHero.badgeFr || aboutHero.badgeEn) && (
-                        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#c85a32] text-white text-3xs font-bold shadow-xs">
-                          <span>✦</span>
-                          <span>
-                            {isAr
-                              ? aboutHero.badgeAr
-                              : isFr
-                              ? aboutHero.badgeFr
-                              : aboutHero.badgeEn}
-                          </span>
-                        </span>
-                      )}
-                      {(aboutHero.captionAr || aboutHero.captionFr || aboutHero.captionEn) && (
-                        <p className="text-xs sm:text-sm font-bold text-white/95 leading-relaxed drop-shadow-xs">
-                          {isAr
-                            ? aboutHero.captionAr
-                            : isFr
-                            ? aboutHero.captionFr
-                            : aboutHero.captionEn}
-                        </p>
-                      )}
-                    </div>
-
-                    <span className="self-end px-3 py-1 rounded-xl bg-white/20 backdrop-blur-md border border-white/30 text-white font-mono text-3xs font-bold tracking-wider shrink-0">
-                      AMYCC 2026
-                    </span>
-                  </div>
-                </div>
+            {/* Bottom Credibility / Mission Strip (Matching Home's bottom strip) */}
+            {(aboutHero.captionAr || aboutHero.captionFr || aboutHero.captionEn) && (
+              <div className="pt-6 sm:pt-8 flex items-center justify-center gap-3 text-xs sm:text-sm text-[#d8f0f4]/90 font-medium border-t border-white/15 max-w-3xl mx-auto">
+                <span className="w-1.5 h-5 sm:h-6 bg-[#f4ce83] rounded-full inline-block shrink-0" aria-hidden="true" />
+                <p className="leading-snug text-center">
+                  {isAr
+                    ? aboutHero.captionAr
+                    : isFr
+                    ? aboutHero.captionFr
+                    : aboutHero.captionEn}
+                </p>
               </div>
             )}
           </div>
