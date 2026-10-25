@@ -2,7 +2,7 @@ import { getDictionary } from '@/lib/i18n/dictionaries'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import Link from 'next/link'
-import { getTeamSettings } from '@/lib/settings'
+import { getTeamSettings, getCommissionsSettings } from '@/lib/settings'
 import { ImageWithFallback } from '@/components/ui/ImageWithFallback'
 
 export default async function TeamPage(props: { params: Promise<{ locale: string }> }) {
@@ -11,8 +11,12 @@ export default async function TeamPage(props: { params: Promise<{ locale: string
   const isAr = locale === 'ar'
   const isFr = locale === 'fr'
 
-  // Fetch dynamic team configuration from site settings (Supabase / defaults)
-  const teamSettings = await getTeamSettings()
+  // Fetch dynamic team configuration & commissions from site settings (Supabase / defaults)
+  const [teamSettings, commissionsSettings] = await Promise.all([
+    getTeamSettings(),
+    getCommissionsSettings(),
+  ])
+
   const enabledMembers = teamSettings.members.filter((m) => m.enabled !== false)
 
   // Executive Board Members (fallback to default statutory members if empty)
@@ -25,123 +29,11 @@ export default async function TeamPage(props: { params: Promise<{ locale: string
   // Advisory Board & Mentors
   const advisorMembers = enabledMembers.filter((m) => m.category === 'advisor')
 
-  // The 6 Functional & Field Commissions
-  const committees = [
-    {
-      id: 'visual-arts',
-      title: isAr ? 'لجنة الفنون البصرية والتشكيلية' : isFr ? 'Commission Arts Visuels & Calligraphie' : 'Visual Arts & Calligraphy Committee',
-      tag: isAr ? 'محترفات إبداعية' : isFr ? 'Ateliers Créatifs' : 'Creative Labs',
-      desc: isAr
-        ? 'تأطير ورشات الرسم التشكيلي، الصباغة المائية والزيتية، النحت، وفنون الخط المغربي الأصيل، وتنظيم المعارض الدورية للمواهب الصاعدة.'
-        : isFr
-        ? 'Conception et animation des ateliers de peinture, sculpture, dessin et calligraphie marocaine, accompagnés d’expositions collectives régulières.'
-        : 'Curating masterclasses in fine arts, watercolor, sculpture, and Moroccan calligraphy, organizing seasonal exhibitions for emerging talents.',
-      icon: '🎨',
-      borderClass: 'border-[#c85a32]/30 hover:border-[#c85a32]',
-      accentColor: 'text-[#c85a32]',
-      accentBg: 'bg-[#c85a32]/10',
-      points: isAr
-        ? ['ورشات تطبيقية دورية في دور الشباب والمراكز الثقافية', 'تنظيم معارض جماعية ومسابقات تشكيلية سنوية', 'صون وتثمين أساليب الخط والزخرفة المغربية']
-        : isFr
-        ? ['Ateliers pratiques réguliers dans les structures partenaires', 'Organisation d’expositions collectives et concours d’art', 'Mise en valeur de la calligraphie et du patrimoine visuel']
-        : ['Regular practical workshops across community cultural centers', 'Annual group exhibitions and youth art showcases', 'Preserving Moroccan calligraphy and decorative traditions'],
-    },
-    {
-      id: 'theatre',
-      title: isAr ? 'لجنة المسرح وفنون الأداء التعبيري' : isFr ? 'Commission Théâtre & Arts Scéniques' : 'Theatre & Performing Arts Committee',
-      tag: isAr ? 'أداء تعبيري وخشبة' : isFr ? 'Scène & Dramaturgie' : 'Stage & Drama',
-      desc: isAr
-        ? 'إعداد محترفات التشخيص المسرحي، الإلقاء، السينوغرافيا، والارتجال، وإنتاج عروض مسرحية هادفة تعالج قضايا الشباب وتنمي حس التواصل.'
-        : isFr
-        ? 'Encadrement des ateliers de dramaturgie, scénographie, diction et improvisation, avec création de spectacles citoyens portés par les jeunes.'
-        : 'Leading masterclasses in stage acting, dramatic improvisation, voice projection, and producing thought-provoking civic youth plays.',
-      icon: '🎭',
-      borderClass: 'border-[#0d3b43]/30 hover:border-[#0d3b43]',
-      accentColor: 'text-[#0d3b43]',
-      accentBg: 'bg-[#0d3b43]/10',
-      points: isAr
-        ? ['محترفات الارتجال المسرحي والتعبير الجسدي', 'كتابة وإنتاج مسرحيات شبابية ذات طابع توعوي', 'المشاركة في المهرجانات والملتقيات الثقافية الوطنية']
-        : isFr
-        ? ['Ateliers d’improvisation et d’expression corporelle', 'Écriture et production de pièces théâtrales engagées', 'Participation aux festivals et rencontres artistiques nationales']
-        : ['Stage improvisation and body expression clinics', 'Scripting and producing awareness-raising youth plays', 'Participating in national and regional theatre festivals'],
-    },
-    {
-      id: 'music-heritage',
-      title: isAr ? 'لجنة التراث الموسيقي والغناء الأصيل' : isFr ? 'Commission Patrimoine Musical & Rythmes' : 'Musical Heritage & Rhythms Committee',
-      tag: isAr ? 'هوية وأصالة مغربية' : isFr ? 'Patrimoine Vivant' : 'Living Heritage',
-      desc: isAr
-        ? 'صون الموروث النغمي والموسيقي المغربي بروافده المتنوعة (الأندلسي، الملحون، كناوة، الأمازيغي، والحساني)، وتدريب الناشئة على الآلات الأصيلة.'
-        : isFr
-        ? 'Préservation des répertoires musicaux marocains pluriels (andalou, malhoun, gnawa, amazigh et hassani) et initiation aux instruments traditionnels.'
-        : 'Safeguarding Moroccan musical traditions (Andalusian, Malhoun, Gnawa, Amazigh, Hassani) and training youth on acoustic instruments.',
-      icon: '🎵',
-      borderClass: 'border-[#d99b26]/30 hover:border-[#d99b26]',
-      accentColor: 'text-[#99620b]',
-      accentBg: 'bg-[#d99b26]/10',
-      points: isAr
-        ? ['تكوين عملي في العزف على العود والوتريات والإيقاعات', 'توثيق القصائد والأهازيج التراثية الأصيلة', 'تنظيم أمسيات موسيقية وسماع فني راقٍ']
-        : isFr
-        ? ['Apprentissage du oud et des percussions traditionnelles', 'Collecte et documentation des chants ancestraux', 'Organisation de soirées de musique acoustique et patrimoniale']
-        : ['Hands-on training in Oud, strings, and heritage percussions', 'Documenting oral musical traditions and classical poetry', 'Curating refined acoustic musical showcases and recitals'],
-    },
-    {
-      id: 'media-communication',
-      title: isAr ? 'لجنة الإعلام والتواصل الرقمي والتوثيق' : isFr ? 'Commission Médias & Communication Numérique' : 'Media, Digital Communication & Documentation',
-      tag: isAr ? 'صناعة المحتوى والتوثيق' : isFr ? 'Création Digitale' : 'Digital Content & Storytelling',
-      desc: isAr
-        ? 'التغطية الإعلامية الاحترافية لكافة التظاهرات، صناعة المحتوى المرئي، إدارة المنصات الرقمية للجمعية، وأرشفة الأثر الميداني للبرامج.'
-        : isFr
-        ? 'Couverture audiovisuelle des initiatives, production de contenus digitaux valorisants, gestion des plateformes en ligne et archivage de l’impact.'
-        : 'Professional audiovisual coverage, digital storytelling, managing institutional web channels, and archiving associative field impact.',
-      icon: '📸',
-      borderClass: 'border-[#1c6875]/30 hover:border-[#1c6875]',
-      accentColor: 'text-[#1c6875]',
-      accentBg: 'bg-[#1c6875]/10',
-      points: isAr
-        ? ['تصوير وتوثيق كافة الورشات والفعاليات بجودة عالية', 'تدبير المنصة الرقمية الرسمية وشبكات التواصل الاجتماعي', 'إعداد النشرات الدورية والبيانات الصحفية']
-        : isFr
-        ? ['Photographie et vidéo haute définition des activités', 'Gestion éditoriale du portail web et des réseaux sociaux', 'Publication des communiqués et synthèses d’impact']
-        : ['High-definition photography and videography across all workshops', 'Content curation for the trilingual portal and social channels', 'Publishing regular newsletters, press releases, and media dossiers'],
-    },
-    {
-      id: 'youth-in-action',
-      title: isAr ? 'منسقية مبادرة "شباب في العمل" والتطوع' : isFr ? 'Coordination Jeunesse en Action & Volontariat' : 'Youth in Action & Civic Volunteering Coordination',
-      tag: isAr ? 'البرنامج الرائد والميدان' : isFr ? 'Volontariat Actif' : 'Civic Action Hub',
-      desc: isAr
-        ? 'الإشراف على شبكة المتطوعين، تأهيل قادة الفرق الميدانية، وتدبير العمليات اللوجستية للمبادرات الثقافية والاجتماعية في الميدان.'
-        : isFr
-        ? 'Encadrement du réseau des bénévoles, formation des jeunes chefs d’équipe et déploiement logistique sur le terrain des actions culturelles.'
-        : 'Mobilizing our volunteer network, training youth leaders, and coordinating on-site logistics for cultural and community outreach.',
-      icon: '🚀',
-      borderClass: 'border-[#c85a32]/30 hover:border-[#c85a32]',
-      accentColor: 'text-[#c85a32]',
-      accentBg: 'bg-[#c85a32]/10',
-      points: isAr
-        ? ['استقبال وتأطير المتطوعين الجدد وتوزيع الأدوار', 'تنسيق الفرق اللوجستية أثناء التظاهرات الكبرى', 'إصدار شواهد المشاركة والتطوع الميداني المعتمدة']
-        : isFr
-        ? ['Accueil et mentorat des nouveaux bénévoles', 'Coordination opérationnelle lors des grands événements', 'Délivrance des attestations officielles d’engagement civique']
-        : ['Intake, onboarding, and role placement for new volunteers', 'Operational deployment during major cultural initiatives', 'Awarding certified certificates of civic volunteering hours'],
-    },
-    {
-      id: 'capacity-building',
-      title: isAr ? 'لجنة التكوين وتأهيل الكفاءات الحياتية' : isFr ? 'Commission Formation & Compétences Clés' : 'Capacity Building & Youth Skills Commission',
-      tag: isAr ? 'ريادة وتمكين شبابي' : isFr ? 'Développement Personnel' : 'Youth Empowerment & Leadership',
-      desc: isAr
-        ? 'تنظيم دورات تدريبية متقدمة في المهارات الحياتية، القيادة التشاركية، إدارة المشاريع الثقافية، وتأهيل الشباب لولوج مهن الصناعات الإبداعية.'
-        : isFr
-        ? 'Organisation de formations en soft skills, gestion de projets culturels, prise de parole et accompagnement vers les métiers créatifs.'
-        : 'Organizing masterclasses in life skills, participatory leadership, cultural project management, and creative industries career readiness.',
-      icon: '📚',
-      borderClass: 'border-[#08242a]/30 hover:border-[#08242a]',
-      accentColor: 'text-[#08242a]',
-      accentBg: 'bg-[#08242a]/10',
-      points: isAr
-        ? ['ورشات في المهارات الشخصية (Soft Skills) والتواصل الفعال', 'تدريب على إعداد وإدارة المشاريع الثقافية المصغرة', 'استضافة مؤطرين وخبراء لمواكبة طموحات الشباب']
-        : isFr
-        ? ['Formations en communication interpersonnelle et leadership', 'Méthodologie de montage de projets artistiques', 'Rencontres professionnelles avec des experts et créateurs']
-        : ['Masterclasses in soft skills, negotiation, and teamwork', 'Cultural project incubation and management clinics', 'Hosting master workshops with established professionals'],
-    },
-  ]
+  // Dynamic Commissions & Section texts
+  const commTag = isAr ? commissionsSettings.sectionTagAr : isFr ? (commissionsSettings.sectionTagFr || commissionsSettings.sectionTagAr) : (commissionsSettings.sectionTagEn || commissionsSettings.sectionTagAr)
+  const commTitle = isAr ? commissionsSettings.sectionTitleAr : isFr ? (commissionsSettings.sectionTitleFr || commissionsSettings.sectionTitleAr) : (commissionsSettings.sectionTitleEn || commissionsSettings.sectionTitleAr)
+  const commDesc = isAr ? commissionsSettings.sectionDescAr : isFr ? (commissionsSettings.sectionDescFr || commissionsSettings.sectionDescAr) : (commissionsSettings.sectionDescEn || commissionsSettings.sectionDescAr)
+  const activeCommissions = commissionsSettings.items.filter((item) => item.enabled !== false)
 
   // The 4 Collective Leadership Principles
   const principles = [
@@ -596,76 +488,86 @@ export default async function TeamPage(props: { params: Promise<{ locale: string
         </section>
 
         {/* ============================================================
-            4. THE 6 SPECIALIZED COMMISSIONS (اللجان الوظيفية والميدانية)
+            4. THE SPECIALIZED COMMISSIONS (اللجان الوظيفية والميدانية)
             ============================================================ */}
         <section id="commissions" className="py-20 bg-white border-b border-[#e5e0d6] scroll-mt-16">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
             <div className="text-center max-w-3xl mx-auto space-y-3">
               <span className="text-xs font-bold uppercase tracking-widest text-[#c85a32] px-3.5 py-1.5 rounded-full bg-[#c85a32]/10 border border-[#c85a32]/20">
-                {isAr ? 'الأذرع الميدانية والفنية' : isFr ? 'Pôles Opérationnels & Artistiques' : 'Artistic & Operational Hubs'}
+                {commTag}
               </span>
               <h2 className="text-3xl sm:text-4xl font-black text-[#08242a]">
-                {isAr ? 'اللجان الوظيفية وفرق التأطير المتخصصة' : isFr ? 'Commissions Thématiques de Terrain' : 'Specialized Working Commissions'}
+                {commTitle}
               </h2>
               <p className="text-sm sm:text-base text-[#445457] leading-relaxed text-balance">
-                {isAr
-                  ? 'تشكل هذه اللجان الست المحرك الميداني الحقيقي لأنشطة الجمعية؛ حيث تسهر على التصميم الفني للورشات، مواكبة المواهب الصاعدة، وتنسيق الفعاليات المباشرة بشراكة مع دور الشباب، المراكز الثقافية، والجامعات.'
-                  : isFr
-                  ? 'Ces six commissions spécialisées constituent le cœur battant de l’AMYCC : conception pédagogique des ateliers, tutorat des talents émergents et déploiement d’événements en partenariat avec les maisons de jeunes et les universités.'
-                  : 'These six dedicated commissions represent the active engine of AMYCC: designing practical syllabi, mentoring young creators, and coordinating live events across cultural centers and universities.'}
+                {commDesc}
               </p>
             </div>
 
-            {/* 6 Commissions Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {committees.map((comm) => (
-                <div
-                  key={comm.id}
-                  className={`p-7 rounded-3xl bg-[#faf7f2] border ${comm.borderClass} shadow-subtle hover:shadow-card hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group relative overflow-hidden`}
-                >
-                  <div className="space-y-4">
-                    {/* Header: Icon & Category Tag */}
-                    <div className="flex items-center justify-between">
-                      <span className="w-12 h-12 rounded-2xl bg-white border border-[#e5e0d6] flex items-center justify-center text-2xl shadow-2xs group-hover:scale-110 transition-transform">
-                        {comm.icon}
-                      </span>
-                      <span className={`px-2.5 py-1 rounded-full text-xs font-bold ${comm.accentBg} ${comm.accentColor}`}>
-                        {comm.tag}
-                      </span>
+            {/* Commissions Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+              {activeCommissions.map((comm) => {
+                const title = isAr ? comm.titleAr : isFr ? (comm.titleFr || comm.titleAr) : (comm.titleEn || comm.titleAr)
+                const tag = isAr ? comm.tagAr : isFr ? (comm.tagFr || comm.tagAr) : (comm.tagEn || comm.tagAr)
+                const desc = isAr ? comm.descAr : isFr ? (comm.descFr || comm.descAr) : (comm.descEn || comm.descAr)
+                const points = (isAr ? comm.pointsAr : isFr ? (comm.pointsFr?.length ? comm.pointsFr : comm.pointsAr) : (comm.pointsEn?.length ? comm.pointsEn : comm.pointsAr)) || []
+                const targetLocales = isAr ? comm.targetLocalesAr : isFr ? (comm.targetLocalesFr || comm.targetLocalesAr) : (comm.targetLocalesEn || comm.targetLocalesAr)
+                const statusBadge = isAr ? comm.statusBadgeAr : isFr ? (comm.statusBadgeFr || comm.statusBadgeAr) : (comm.statusBadgeEn || comm.statusBadgeAr)
+
+                return (
+                  <div
+                    key={comm.id}
+                    className={`p-7 rounded-3xl bg-[#faf7f2] border ${comm.borderClass || 'border-[#c85a32]/30 hover:border-[#c85a32]'} shadow-subtle hover:shadow-card hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group relative overflow-hidden`}
+                  >
+                    <div className="space-y-4">
+                      {/* Header: Icon & Category Tag */}
+                      <div className="flex items-center justify-between">
+                        <span className="w-14 h-14 rounded-2xl bg-white border border-[#e5e0d6] flex items-center justify-center text-3xl shadow-2xs group-hover:scale-110 transition-transform">
+                          {comm.icon}
+                        </span>
+                        <span className={`px-3 py-1 rounded-full text-xs font-bold ${comm.accentBg || 'bg-[#c85a32]/10'} ${comm.accentColor || 'text-[#c85a32]'} border border-current/20`}>
+                          {tag}
+                        </span>
+                      </div>
+
+                      <div>
+                        <h3 className="text-xl font-black text-[#08242a] mb-2 leading-snug">
+                          {title}
+                        </h3>
+                        <p className="text-xs sm:text-sm text-[#445457] leading-relaxed">
+                          {desc}
+                        </p>
+                      </div>
+
+                      {/* Operational Pillars Checklist */}
+                      {points.length > 0 && (
+                        <div className="space-y-2 pt-3 border-t border-[#e5e0d6]">
+                          <span className="text-2xs font-bold text-[#819598] uppercase tracking-wider block">
+                            {isAr ? 'أبرز التدخلات والأنشطة الميدانية:' : isFr ? 'Interventions Clés sur le Terrain :' : 'Key Field Interventions:'}
+                          </span>
+                          <ul className="space-y-1.5 text-xs text-[#08242a]">
+                            {points.map((pt, pIdx) => (
+                              <li key={pIdx} className="flex items-start gap-2.5 p-2 rounded-xl bg-white border border-[#e5e0d6] shadow-2xs">
+                                <span className={`${comm.accentColor || 'text-[#c85a32]'} font-bold text-sm shrink-0 leading-none`}>✦</span>
+                                <span className="leading-snug">{pt}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
                     </div>
 
-                    <div>
-                      <h3 className="text-lg font-black text-[#08242a] mb-2 leading-snug">
-                        {comm.title}
-                      </h3>
-                      <p className="text-xs sm:text-sm text-[#445457] leading-relaxed">
-                        {comm.desc}
-                      </p>
-                    </div>
-
-                    {/* Operational Pillars Checklist */}
-                    <div className="space-y-2 pt-3 border-t border-[#e5e0d6]">
-                      <span className="text-xs font-bold text-[#08242a] block">
-                        {isAr ? 'أبرز التدخلات والأنشطة الميدانية:' : isFr ? 'Interventions Clés sur le Terrain :' : 'Key Field Interventions:'}
+                    {/* Commission Target Locales Footer */}
+                    <div className="pt-4 mt-6 border-t border-[#e5e0d6] flex items-center justify-between text-2xs font-bold text-[#819598]">
+                      <span>{targetLocales || (isAr ? 'فضاءات الثقافة ودور الشباب' : 'Centres Culturels & Jeunesse')}</span>
+                      <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-700 text-3xs font-bold border border-emerald-200">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                        <span>{statusBadge || (isAr ? 'تأطير نشط' : 'Actif')}</span>
                       </span>
-                      <ul className="space-y-1.5 text-xs text-[#5f7174]">
-                        {comm.points.map((pt, pIdx) => (
-                          <li key={pIdx} className="flex items-start gap-2">
-                            <span className={`${comm.accentColor} font-bold`}>✦</span>
-                            <span className="leading-relaxed">{pt}</span>
-                          </li>
-                        ))}
-                      </ul>
                     </div>
                   </div>
-
-                  {/* Commission Target Locales Footer */}
-                  <div className="pt-4 mt-6 border-t border-[#e5e0d6] flex items-center justify-between text-xs font-bold text-[#819598]">
-                    <span>{isAr ? 'فضاءات الثقافة ودور الشباب' : isFr ? 'Centres Culturels & Jeunesse' : 'Community & Cultural Hubs'}</span>
-                    <span className="text-emerald-600">● {isAr ? 'تأطير نشط' : isFr ? 'Actif' : 'Active'}</span>
-                  </div>
-                </div>
-              ))}
+                )
+              })}
             </div>
 
             {/* Specialized Coordinators / Committee Members (when configured in admin) */}

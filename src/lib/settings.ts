@@ -1202,3 +1202,284 @@ export async function getTeamSettings(): Promise<TeamConfig> {
     return defaultTeamConfig
   }
 }
+
+export interface CommissionItemConfig {
+  id: string
+  titleAr: string
+  titleFr?: string
+  titleEn?: string
+  tagAr: string
+  tagFr?: string
+  tagEn?: string
+  descAr: string
+  descFr?: string
+  descEn?: string
+  icon: string
+  borderClass?: string
+  accentColor?: string
+  accentBg?: string
+  pointsAr: string[]
+  pointsFr?: string[]
+  pointsEn?: string[]
+  targetLocalesAr?: string
+  targetLocalesFr?: string
+  targetLocalesEn?: string
+  statusBadgeAr?: string
+  statusBadgeFr?: string
+  statusBadgeEn?: string
+  order: number
+  enabled: boolean
+}
+
+export interface CommissionsConfig {
+  sectionTitleAr?: string
+  sectionTitleFr?: string
+  sectionTitleEn?: string
+  sectionTagAr?: string
+  sectionTagFr?: string
+  sectionTagEn?: string
+  sectionDescAr?: string
+  sectionDescFr?: string
+  sectionDescEn?: string
+  items: CommissionItemConfig[]
+}
+
+export const defaultCommissionsConfig: CommissionsConfig = {
+  sectionTagAr: 'الأذرع الميدانية والفنية',
+  sectionTagFr: 'Pôles Opérationnels & Artistiques',
+  sectionTagEn: 'Artistic & Operational Hubs',
+  sectionTitleAr: 'اللجان الوظيفية وفرق التأطير المتخصصة',
+  sectionTitleFr: 'Commissions Thématiques de Terrain',
+  sectionTitleEn: 'Specialized Working Commissions',
+  sectionDescAr: 'تشكل هذه اللجان الست المحرك الميداني الحقيقي لأنشطة الجمعية؛ حيث تسهر على التصميم الفني للورشات، مواكبة المواهب الصاعدة، وتنسيق الفعاليات المباشرة بشراكة مع دور الشباب، المراكز الثقافية، والجامعات.',
+  sectionDescFr: 'Ces six commissions spécialisées constituent le cœur battant de l’AMYCC : conception pédagogique des ateliers, tutorat des talents émergents et déploiement d’événements en partenariat avec les maisons de jeunes et les universités.',
+  sectionDescEn: 'These six dedicated commissions represent the active engine of AMYCC: designing practical syllabi, mentoring young creators, and coordinating live events across cultural centers and universities.',
+  items: [
+    {
+      id: 'visual-arts',
+      titleAr: 'لجنة الفنون البصرية والتشكيلية',
+      titleFr: 'Commission Arts Visuels & Calligraphie',
+      titleEn: 'Visual Arts & Calligraphy Committee',
+      tagAr: 'محترفات إبداعية',
+      tagFr: 'Ateliers Créatifs',
+      tagEn: 'Creative Labs',
+      descAr: 'تأطير ورشات الرسم التشكيلي، الصباغة المائية والزيتية، النحت، وفنون الخط المغربي الأصيل، وتنظيم المعارض الدورية للمواهب الصاعدة.',
+      descFr: 'Conception et animation des ateliers de peinture, sculpture, dessin et calligraphie marocaine, accompagnés d’expositions collectives régulières.',
+      descEn: 'Curating masterclasses in fine arts, watercolor, sculpture, and Moroccan calligraphy, organizing seasonal exhibitions for emerging talents.',
+      icon: '🎨',
+      borderClass: 'border-[#c85a32]/30 hover:border-[#c85a32]',
+      accentColor: 'text-[#c85a32]',
+      accentBg: 'bg-[#c85a32]/10',
+      pointsAr: ['ورشات تطبيقية دورية في دور الشباب والمراكز الثقافية', 'تنظيم معارض جماعية ومسابقات تشكيلية سنوية', 'صون وتثمين أساليب الخط والزخرفة المغربية'],
+      pointsFr: ['Ateliers pratiques réguliers dans les structures partenaires', 'Organisation d’expositions collectives et concours d’art', 'Mise en valeur de la calligraphie et du patrimoine visuel'],
+      pointsEn: ['Regular practical workshops across community cultural centers', 'Annual group exhibitions and youth art showcases', 'Preserving Moroccan calligraphy and decorative traditions'],
+      targetLocalesAr: 'فضاءات الثقافة ودور الشباب',
+      targetLocalesFr: 'Centres Culturels & Jeunesse',
+      targetLocalesEn: 'Community & Cultural Hubs',
+      statusBadgeAr: 'تأطير نشط',
+      statusBadgeFr: 'Actif',
+      statusBadgeEn: 'Active',
+      order: 1,
+      enabled: true,
+    },
+    {
+      id: 'theatre',
+      titleAr: 'لجنة المسرح وفنون الأداء التعبيري',
+      titleFr: 'Commission Théâtre & Arts Scéniques',
+      titleEn: 'Theatre & Performing Arts Committee',
+      tagAr: 'أداء تعبيري وخشبة',
+      tagFr: 'Scène & Dramaturgie',
+      tagEn: 'Stage & Drama',
+      descAr: 'إعداد محترفات التشخيص المسرحي، الإلقاء، السينوغرافيا، والارتجال، وإنتاج عروض مسرحية هادفة تعالج قضايا الشباب وتنمي حس التواصل.',
+      descFr: 'Encadrement des ateliers de dramaturgie, scénographie, diction et improvisation, avec création de spectacles citoyens portés par les jeunes.',
+      descEn: 'Leading masterclasses in stage acting, dramatic improvisation, voice projection, and producing thought-provoking civic youth plays.',
+      icon: '🎭',
+      borderClass: 'border-[#0d3b43]/30 hover:border-[#0d3b43]',
+      accentColor: 'text-[#0d3b43]',
+      accentBg: 'bg-[#0d3b43]/10',
+      pointsAr: ['محترفات الارتجال المسرحي والتعبير الجسدي', 'كتابة وإنتاج مسرحيات شبابية ذات طابع توعوي', 'المشاركة في المهرجانات والملتقيات الثقافية الوطنية'],
+      pointsFr: ['Ateliers d’improvisation et d’expression corporelle', 'Écriture et production de pièces théâtrales engagées', 'Participation aux festivals et rencontres artistiques nationales'],
+      pointsEn: ['Stage improvisation and body expression clinics', 'Scripting and producing awareness-raising youth plays', 'Participating in national and regional theatre festivals'],
+      targetLocalesAr: 'فضاءات الثقافة ودور الشباب',
+      targetLocalesFr: 'Centres Culturels & Jeunesse',
+      targetLocalesEn: 'Community & Cultural Hubs',
+      statusBadgeAr: 'تأطير نشط',
+      statusBadgeFr: 'Actif',
+      statusBadgeEn: 'Active',
+      order: 2,
+      enabled: true,
+    },
+    {
+      id: 'music-heritage',
+      titleAr: 'لجنة التراث الموسيقي والغناء الأصيل',
+      titleFr: 'Commission Patrimoine Musical & Rythmes',
+      titleEn: 'Musical Heritage & Rhythms Committee',
+      tagAr: 'هوية وأصالة مغربية',
+      tagFr: 'Patrimoine Vivant',
+      tagEn: 'Living Heritage',
+      descAr: 'صون الموروث النغمي والموسيقي المغربي بروافده المتنوعة (الأندلسي، الملحون، كناوة، الأمازيغي، والحساني)، وتدريب الناشئة على الآلات الأصيلة.',
+      descFr: 'Préservation des répertoires musicaux marocains pluriels (andalou, malhoun, gnawa, amazigh et hassani) et initiation aux instruments traditionnels.',
+      descEn: 'Safeguarding Moroccan musical traditions (Andalusian, Malhoun, Gnawa, Amazigh, Hassani) and training youth on acoustic instruments.',
+      icon: '🎵',
+      borderClass: 'border-[#d99b26]/30 hover:border-[#d99b26]',
+      accentColor: 'text-[#99620b]',
+      accentBg: 'bg-[#d99b26]/10',
+      pointsAr: ['تكوين عملي في العزف على العود والوتريات والإيقاعات', 'توثيق القصائد والأهازيج التراثية الأصيلة', 'تنظيم أمسيات موسيقية وسماع فني راقٍ'],
+      pointsFr: ['Apprentissage du oud et des percussions traditionnelles', 'Collecte et documentation des chants ancestraux', 'Organisation de soirées de musique acoustique et patrimoniale'],
+      pointsEn: ['Hands-on training in Oud, strings, and heritage percussions', 'Documenting oral musical traditions and classical poetry', 'Curating refined acoustic musical showcases and recitals'],
+      targetLocalesAr: 'فضاءات الثقافة ودور الشباب',
+      targetLocalesFr: 'Centres Culturels & Jeunesse',
+      targetLocalesEn: 'Community & Cultural Hubs',
+      statusBadgeAr: 'تأطير نشط',
+      statusBadgeFr: 'Actif',
+      statusBadgeEn: 'Active',
+      order: 3,
+      enabled: true,
+    },
+    {
+      id: 'media-communication',
+      titleAr: 'لجنة الإعلام والتواصل الرقمي والتوثيق',
+      titleFr: 'Commission Médias & Communication Numérique',
+      titleEn: 'Media, Digital Communication & Documentation',
+      tagAr: 'صناعة المحتوى والتوثيق',
+      tagFr: 'Création Digitale',
+      tagEn: 'Digital Content & Storytelling',
+      descAr: 'التغطية الإعلامية الاحترافية لكافة التظاهرات، صناعة المحتوى المرئي، إدارة المنصات الرقمية للجمعية، وأرشفة الأثر الميداني للبرامج.',
+      descFr: 'Couverture audiovisuelle des initiatives, production de contenus digitaux valorisants, gestion des plateformes en ligne et archivage de l’impact.',
+      descEn: 'Professional audiovisual coverage, digital storytelling, managing institutional web channels, and archiving associative field impact.',
+      icon: '📸',
+      borderClass: 'border-[#1c6875]/30 hover:border-[#1c6875]',
+      accentColor: 'text-[#1c6875]',
+      accentBg: 'bg-[#1c6875]/10',
+      pointsAr: ['تصوير وتوثيق كافة الورشات والفعاليات بجودة عالية', 'تدبير المنصة الرقمية الرسمية وشبكات التواصل الاجتماعي', 'إعداد النشرات الدورية والبيانات الصحفية'],
+      pointsFr: ['Photographie et vidéo haute définition des activités', 'Gestion éditoriale du portail web et des réseaux sociaux', 'Publication des communiqués et synthèses d’impact'],
+      pointsEn: ['High-definition photography and videography across all workshops', 'Content curation for the trilingual portal and social channels', 'Publishing regular newsletters, press releases, and media dossiers'],
+      targetLocalesAr: 'فضاءات الثقافة ودور الشباب',
+      targetLocalesFr: 'Centres Culturels & Jeunesse',
+      targetLocalesEn: 'Community & Cultural Hubs',
+      statusBadgeAr: 'تأطير نشط',
+      statusBadgeFr: 'Actif',
+      statusBadgeEn: 'Active',
+      order: 4,
+      enabled: true,
+    },
+    {
+      id: 'youth-in-action',
+      titleAr: 'منسقية مبادرة "شباب في العمل" والتطوع',
+      titleFr: 'Coordination Jeunesse en Action & Volontariat',
+      titleEn: 'Youth in Action & Civic Volunteering Coordination',
+      tagAr: 'البرنامج الرائد والميدان',
+      tagFr: 'Volontariat Actif',
+      tagEn: 'Civic Action Hub',
+      descAr: 'الإشراف على شبكة المتطوعين، تأهيل قادة الفرق الميدانية، وتدبير العمليات اللوجستية للمبادرات الثقافية والاجتماعية في الميدان.',
+      descFr: 'Encadrement du réseau des bénévoles, formation des jeunes chefs d’équipe et déploiement logistique sur le terrain des actions culturelles.',
+      descEn: 'Mobilizing our volunteer network, training youth leaders, and coordinating on-site logistics for cultural and community outreach.',
+      icon: '🚀',
+      borderClass: 'border-[#c85a32]/30 hover:border-[#c85a32]',
+      accentColor: 'text-[#c85a32]',
+      accentBg: 'bg-[#c85a32]/10',
+      pointsAr: ['استقبال وتأطير المتطوعين الجدد وتوزيع الأدوار', 'تنسيق الفرق اللوجستية أثناء التظاهرات الكبرى', 'إصدار شواهد المشاركة والتطوع الميداني المعتمدة'],
+      pointsFr: ['Accueil et mentorat des nouveaux bénévoles', 'Coordination opérationnelle lors des grands événements', 'Délivrance des attestations officielles d’engagement civique'],
+      pointsEn: ['Intake, onboarding, and role placement for new volunteers', 'Operational deployment during major cultural initiatives', 'Awarding certified certificates of civic volunteering hours'],
+      targetLocalesAr: 'فضاءات الثقافة ودور الشباب',
+      targetLocalesFr: 'Centres Culturels & Jeunesse',
+      targetLocalesEn: 'Community & Cultural Hubs',
+      statusBadgeAr: 'تأطير نشط',
+      statusBadgeFr: 'Actif',
+      statusBadgeEn: 'Active',
+      order: 5,
+      enabled: true,
+    },
+    {
+      id: 'capacity-building',
+      titleAr: 'لجنة التكوين وتأهيل الكفاءات الحياتية',
+      titleFr: 'Commission Formation & Compétences Clés',
+      titleEn: 'Capacity Building & Youth Skills Commission',
+      tagAr: 'ريادة وتمكين شبابي',
+      tagFr: 'Développement Personnel',
+      tagEn: 'Youth Empowerment & Leadership',
+      descAr: 'تنظيم دورات تدريبية متقدمة في المهارات الحياتية، القيادة التشاركية، إدارة المشاريع الثقافية، وتأهيل الشباب لولوج مهن الصناعات الإبداعية.',
+      descFr: 'Organisation de formations en soft skills, gestion de projets culturels, prise de parole et accompagnement vers les métiers créatifs.',
+      descEn: 'Organizing masterclasses in life skills, participatory leadership, cultural project management, and creative industries career readiness.',
+      icon: '📚',
+      borderClass: 'border-[#08242a]/30 hover:border-[#08242a]',
+      accentColor: 'text-[#08242a]',
+      accentBg: 'bg-[#08242a]/10',
+      pointsAr: ['ورشات في المهارات الشخصية (Soft Skills) والتواصل الفعال', 'تدريب على إعداد وإدارة المشاريع الثقافية المصغرة', 'استضافة مؤطرين وخبراء لمواكبة طموحات الشباب'],
+      pointsFr: ['Formations en communication interpersonnelle et leadership', 'Méthodologie de montage de projets artistiques', 'Rencontres professionnelles avec des experts et créateurs'],
+      pointsEn: ['Masterclasses in soft skills, negotiation, and teamwork', 'Cultural project incubation and management clinics', 'Hosting master workshops with established professionals'],
+      targetLocalesAr: 'فضاءات الثقافة ودور الشباب',
+      targetLocalesFr: 'Centres Culturels & Jeunesse',
+      targetLocalesEn: 'Community & Cultural Hubs',
+      statusBadgeAr: 'تأطير نشط',
+      statusBadgeFr: 'Actif',
+      statusBadgeEn: 'Active',
+      order: 6,
+      enabled: true,
+    },
+  ],
+}
+
+export async function getCommissionsSettings(): Promise<CommissionsConfig> {
+  try {
+    const supabase = await createClient()
+    const { data, error } = await supabase
+      .from('site_settings')
+      .select('value')
+      .eq('key', 'commissions')
+      .maybeSingle()
+
+    if (error || !data || !data.value) {
+      return defaultCommissionsConfig
+    }
+
+    const val = data.value as Partial<CommissionsConfig>
+    if (!val || !Array.isArray(val.items)) {
+      return defaultCommissionsConfig
+    }
+
+    return {
+      sectionTagAr: val.sectionTagAr || defaultCommissionsConfig.sectionTagAr,
+      sectionTagFr: val.sectionTagFr || defaultCommissionsConfig.sectionTagFr,
+      sectionTagEn: val.sectionTagEn || defaultCommissionsConfig.sectionTagEn,
+      sectionTitleAr: val.sectionTitleAr || defaultCommissionsConfig.sectionTitleAr,
+      sectionTitleFr: val.sectionTitleFr || defaultCommissionsConfig.sectionTitleFr,
+      sectionTitleEn: val.sectionTitleEn || defaultCommissionsConfig.sectionTitleEn,
+      sectionDescAr: val.sectionDescAr || defaultCommissionsConfig.sectionDescAr,
+      sectionDescFr: val.sectionDescFr || defaultCommissionsConfig.sectionDescFr,
+      sectionDescEn: val.sectionDescEn || defaultCommissionsConfig.sectionDescEn,
+      items: val.items
+        .filter((item): item is CommissionItemConfig => typeof item === 'object' && item !== null && typeof item.id === 'string')
+        .map((item, index) => ({
+          id: item.id || `commission-${index + 1}`,
+          titleAr: item.titleAr || '',
+          titleFr: item.titleFr || '',
+          titleEn: item.titleEn || '',
+          tagAr: item.tagAr || '',
+          tagFr: item.tagFr || '',
+          tagEn: item.tagEn || '',
+          descAr: item.descAr || '',
+          descFr: item.descFr || '',
+          descEn: item.descEn || '',
+          icon: item.icon || '🎨',
+          borderClass: item.borderClass || 'border-[#c85a32]/30 hover:border-[#c85a32]',
+          accentColor: item.accentColor || 'text-[#c85a32]',
+          accentBg: item.accentBg || 'bg-[#c85a32]/10',
+          pointsAr: Array.isArray(item.pointsAr) ? item.pointsAr : [],
+          pointsFr: Array.isArray(item.pointsFr) ? item.pointsFr : [],
+          pointsEn: Array.isArray(item.pointsEn) ? item.pointsEn : [],
+          targetLocalesAr: item.targetLocalesAr || 'فضاءات الثقافة ودور الشباب',
+          targetLocalesFr: item.targetLocalesFr || 'Centres Culturels & Jeunesse',
+          targetLocalesEn: item.targetLocalesEn || 'Community & Cultural Hubs',
+          statusBadgeAr: item.statusBadgeAr || 'تأطير نشط',
+          statusBadgeFr: item.statusBadgeFr || 'Actif',
+          statusBadgeEn: item.statusBadgeEn || 'Active',
+          order: typeof item.order === 'number' ? item.order : index + 1,
+          enabled: typeof item.enabled === 'boolean' ? item.enabled : true,
+        }))
+        .sort((a, b) => a.order - b.order),
+    }
+  } catch {
+    return defaultCommissionsConfig
+  }
+}

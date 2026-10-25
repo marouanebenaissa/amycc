@@ -267,3 +267,46 @@ describe('Team Validation Suite', () => {
     assert.equal(result.success, false)
   })
 })
+
+const commissionItemSchema = z.object({
+  id: z.string().min(1),
+  titleAr: z.string().min(2),
+  tagAr: z.string().min(2),
+  descAr: z.string().min(5),
+  icon: z.string().default('🎨'),
+  pointsAr: z.array(z.string()).default([]),
+  order: z.number().int().min(1).default(1),
+  enabled: z.boolean().default(true),
+})
+
+describe('Commissions Validation Suite', () => {
+  test('accepts valid working commission with field interventions', () => {
+    const valid = {
+      id: 'theatre',
+      titleAr: 'لجنة المسرح وفنون الأداء',
+      tagAr: 'أداء تعبيري وخشبة',
+      descAr: 'تأطير ورشات التشخيص المسرحي والإلقاء.',
+      icon: '🎭',
+      pointsAr: ['محترفات الارتجال المسرحي', 'إنتاج مسرحيات شبابية'],
+      order: 1,
+      enabled: true,
+    }
+    const result = commissionItemSchema.safeParse(valid)
+    assert.equal(result.success, true)
+    if (result.success) {
+      assert.equal(result.data.icon, '🎭')
+      assert.equal(result.data.pointsAr.length, 2)
+    }
+  })
+
+  test('rejects commission with empty title or description', () => {
+    const invalid = {
+      id: 'comm-invalid',
+      titleAr: '',
+      tagAr: '',
+      descAr: '',
+    }
+    const result = commissionItemSchema.safeParse(invalid)
+    assert.equal(result.success, false)
+  })
+})

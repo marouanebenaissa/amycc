@@ -1,8 +1,13 @@
 import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import Link from 'next/link'
-import { getTeamSettings, defaultTeamConfig } from '@/lib/settings'
-import { TeamManager } from '@/components/admin/TeamManager'
+import {
+  getTeamSettings,
+  defaultTeamConfig,
+  getCommissionsSettings,
+  defaultCommissionsConfig,
+} from '@/lib/settings'
+import { TeamAdminTabs } from '@/components/admin/TeamAdminTabs'
 
 export const dynamic = 'force-dynamic'
 
@@ -17,6 +22,7 @@ export default async function AdminTeamPage() {
   }
 
   const teamConfig = await getTeamSettings()
+  const commissionsConfig = await getCommissionsSettings()
 
   return (
     <div className="space-y-6">
@@ -28,19 +34,19 @@ export default async function AdminTeamPage() {
             <span>/</span>
             <Link href="/admin/pages" className="hover:text-[#0d3b43] transition-colors">الصفحات والأقسام</Link>
             <span>/</span>
-            <span className="text-[#08242a]">فريق العمل والهيكلة (Team CMS)</span>
+            <span className="text-[#08242a]">فريق العمل واللجان (Team & Commissions)</span>
           </div>
           <h1 className="text-2xl font-black text-[#08242a] tracking-tight">
-            هيكلة الفريق والمكتب التنفيذي — Team & Governance CMS
+            هيكلة الفريق واللجان الوظيفية المتخصصة — Team & Commissions CMS
           </h1>
           <p className="text-xs text-[#5f7174] mt-1">
-            إدارة أعضاء المكتب التنفيذي، اللجان الوظيفية، والهيئة الاستشارية. يمكنك إضافة أعضاء جدد، رفع صورهم الشخصية، وتعديل مهامهم ومناصبهم مباشرة.
+            إدارة متكاملة لأعضاء المكتب التنفيذي ورفع صورهم، إلى جانب التحكم الكامل في اللجان الوظيفية الست وتدخلاتها الميدانية.
           </p>
         </div>
 
         {/* Public Preview Links */}
         <div className="flex items-center gap-2">
-          <span className="text-3xs text-[#819598] font-bold">معاينة صفحة فريقنا:</span>
+          <span className="text-3xs text-[#819598] font-bold">معاينة الواجهة العامة:</span>
           <Link
             href="/ar/team"
             target="_blank"
@@ -65,11 +71,14 @@ export default async function AdminTeamPage() {
         </div>
       </div>
 
-      {/* Main Interactive Manager */}
-      <TeamManager
-        initialConfig={teamConfig}
-        defaultMembers={defaultTeamConfig.members}
+      {/* Main Interactive Manager with Tabs */}
+      <TeamAdminTabs
+        teamConfig={teamConfig}
+        commissionsConfig={commissionsConfig}
+        defaultTeamMembers={defaultTeamConfig.members}
+        defaultCommissions={defaultCommissionsConfig.items}
       />
     </div>
   )
 }
+

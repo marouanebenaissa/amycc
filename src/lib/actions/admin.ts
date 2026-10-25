@@ -3,7 +3,7 @@
 import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import { revalidatePath } from 'next/cache'
-import type { FaqItemConfig, AreasConfig, TeamConfig } from '@/lib/settings'
+import type { FaqItemConfig, AreasConfig, TeamConfig, CommissionsConfig } from '@/lib/settings'
 
 export async function recordAuditLog(
   action: string,
@@ -257,6 +257,42 @@ export async function saveTeamConfiguration(
     if (error) return { success: false, error: error.message }
 
     await recordAuditLog('team_updated', 'site_settings', 'team', { count: config.members.length })
+    revalidatePath('/admin/team')
+    revalidatePath('/admin/settings')
+    revalidatePath('/[locale]/team')
+    revalidatePath('/[locale]', 'layout')
+    return { success: true }
+  } catch (err) {
+    return { success: false, error: (err as Error).message }
+  }
+}
+
+export async function saveCommissionsConfiguration(
+  config: CommissionsConfig
+): Promise<{ success: boolean; error?: string }> {
+  try {
+    const supabase = await createClient()
+    const {
+      data: { user },
+    } = await supabase.auth.getUser()
+
+    if (!user) {
+      return { success: false, error: 'غير مصرح لك بتعديل بيانات اللجان الوظيفية (Unauthorized)' }
+    }
+
+    const { error } = await supabase
+      .from('site_settings')
+      .upsert([
+        {
+          key: 'commissions',
+          value: config,
+          updated_at: new Date().toISOString(),
+        },
+      ])
+
+    if (error) return { success: false, error: error.message }
+
+    await recordAuditLog('commissions_updated', 'site_settings', 'commissions', { count: config.items.length })
     revalidatePath('/admin/team')
     revalidatePath('/admin/settings')
     revalidatePath('/[locale]/team')
