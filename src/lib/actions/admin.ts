@@ -3,7 +3,7 @@
 import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import { revalidatePath } from 'next/cache'
-import type { FaqItemConfig, AreasConfig, TeamConfig, CommissionsConfig } from '@/lib/settings'
+import type { FaqItemConfig, AreasConfig, TeamConfig, CommissionsConfig, ContactConfig } from '@/lib/settings'
 
 export async function recordAuditLog(
   action: string,
@@ -296,6 +296,73 @@ export async function saveCommissionsConfiguration(
     revalidatePath('/admin/team')
     revalidatePath('/admin/settings')
     revalidatePath('/[locale]/team')
+    revalidatePath('/[locale]', 'layout')
+    return { success: true }
+  } catch (err) {
+    return { success: false, error: (err as Error).message }
+  }
+}
+
+
+export async function saveContactConfiguration(
+  config: ContactConfig
+): Promise<{ success: boolean; error?: string }> {
+  try {
+    const supabase = await createClient()
+    const {
+      data: { user },
+    } = await supabase.auth.getUser()
+
+    if (!user) {
+      return { success: false, error: 'غير مصرح لك بتعديل بيانات التواصل (Unauthorized)' }
+    }
+
+    const now = new Date().toISOString()
+
+    // 1. Save rich contact config
+    const { error: mainErr } = await supabase
+      .from('site_settings')
+      .upsert([
+        {
+          key: 'contact',
+          value: config,
+          updated_at: now,
+        },
+      ])
+
+    if (mainErr) return { success: false, error: mainErr.message }
+
+    // 2. Synchronize legacy contact_info and social_links for layout & footer
+    await supabase.from('site_settings').upsert([
+      {
+        key: 'contact_info',
+        value: {
+          email: config.channels.primaryEmail,
+          phone: config.channels.phone,
+          address: config.channels.addressAr,
+        },
+        updated_at: now,
+      },
+      {
+        key: 'social_links',
+        value: {
+          facebook: config.social.facebook || '',
+          instagram: config.social.instagram || '',
+          linkedin: config.social.linkedin || '',
+          youtube: config.social.youtube || '',
+        },
+        updated_at: now,
+      },
+    ])
+
+    await recordAuditLog('contact_settings_updated', 'site_settings', 'contact', {
+      email: config.channels.primaryEmail,
+      phone: config.channels.phone,
+    })
+
+    revalidatePath('/admin/contacts')
+    revalidatePath('/admin/settings')
+    revalidatePath('/[locale]/contact')
     revalidatePath('/[locale]', 'layout')
     return { success: true }
   } catch (err) {

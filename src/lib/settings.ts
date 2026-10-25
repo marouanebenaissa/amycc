@@ -1538,3 +1538,319 @@ export async function getCommissionsSettings(): Promise<CommissionsConfig> {
     return defaultCommissionsConfig
   }
 }
+
+// ============================================================
+// CONTACT PAGE CONFIGURATION & CMS SETTINGS
+// ============================================================
+
+export interface ContactDepartmentConfig {
+  id: string
+  titleAr: string
+  titleFr?: string
+  titleEn?: string
+  descAr?: string
+  descFr?: string
+  descEn?: string
+  email: string
+  icon: string
+  badgeAr?: string
+  badgeFr?: string
+  badgeEn?: string
+  order: number
+  enabled: boolean
+}
+
+export interface ContactFormTopicConfig {
+  id: string
+  labelAr: string
+  labelFr?: string
+  labelEn?: string
+}
+
+export interface ContactConfig {
+  hero: {
+    tagAr?: string
+    tagFr?: string
+    tagEn?: string
+    badgeAr?: string
+    badgeFr?: string
+    badgeEn?: string
+    titleAr?: string
+    titleFr?: string
+    titleEn?: string
+    descriptionAr?: string
+    descriptionFr?: string
+    descriptionEn?: string
+    imageUrl?: string
+  }
+  channels: {
+    primaryEmail: string
+    secondaryEmail?: string
+    phone: string
+    phoneSecondary?: string
+    whatsapp?: string
+    addressAr: string
+    addressFr?: string
+    addressEn?: string
+    cityAr?: string
+    cityFr?: string
+    cityEn?: string
+    workingHoursAr: string
+    workingHoursFr?: string
+    workingHoursEn?: string
+    responseTimeAr: string
+    responseTimeFr?: string
+    responseTimeEn?: string
+    mapLinkUrl?: string
+    mapEmbedUrl?: string
+  }
+  social: {
+    facebook?: string
+    instagram?: string
+    linkedin?: string
+    youtube?: string
+  }
+  departments: ContactDepartmentConfig[]
+  formTopics: ContactFormTopicConfig[]
+}
+
+export const defaultContactConfig: ContactConfig = {
+  hero: {
+    tagAr: 'بوابة التواصل والإنصات المؤسسي',
+    tagFr: 'CANAL DE COMMUNICATION OFFICIEL',
+    tagEn: 'OFFICIAL CONTACT GATEWAY',
+    badgeAr: 'المملكة المغربية • جمعية روح الفنون والثقافة',
+    badgeFr: 'Royaume du Maroc • AMYCC',
+    badgeEn: 'Kingdom of Morocco • AMYCC',
+    titleAr: 'يسعدنا التواصل معكم وبناء جسور التعاون الثقافي والفني',
+    titleFr: 'Contactez-nous & Développons la Création Culturelle',
+    titleEn: 'Connect with Us & Co-Create Cultural Impact in Morocco',
+    descriptionAr: 'فريق إدارة الجمعية ومكاتب التنسيق في خدمتكم للإجابة عن الاستفسارات، مناقشة الشراكات، مواكبة طلبات الانخراط، والتفاعل الإيجابي مع مقترحاتكم الإبداعية.',
+    descriptionFr: "L'équipe de direction de l'AMYCC est à votre disposition pour répondre à vos questions, explorer des partenariats et soutenir vos initiatives artistiques.",
+    descriptionEn: 'The AMYCC leadership team is at your disposal for general inquiries, institutional partnerships, membership coordination, and supporting creative ideas.',
+    imageUrl: '/images/youth-in-action.jpg',
+  },
+  channels: {
+    primaryEmail: 'contact@amycc.org',
+    secondaryEmail: 'direction@amycc.org',
+    phone: '+212 5 24 00 00 00',
+    phoneSecondary: '+212 6 00 00 00 00',
+    whatsapp: '+212 6 00 00 00 00',
+    addressAr: 'شارع محمد السادس، جليز، مراكش، المملكة المغربية',
+    addressFr: 'Avenue Mohammed VI, Guéliz, Marrakech, Maroc',
+    addressEn: 'Mohammed VI Avenue, Gueliz, Marrakech, Morocco',
+    cityAr: 'مراكش • جهات المملكة',
+    cityFr: 'Marrakech • Maroc',
+    cityEn: 'Marrakech • Morocco',
+    workingHoursAr: 'من الاثنين إلى الجمعة: 09:00 - 18:00 (السبت مخصص للورشات الميدانية)',
+    workingHoursFr: 'Du Lundi au Vendredi : 09h00 - 18h00 (Samedi ateliers terrain)',
+    workingHoursEn: 'Monday to Friday: 09:00 - 18:00 (Saturdays for field workshops)',
+    responseTimeAr: 'خلال 24 إلى 48 ساعة كحد أقصى (أيام العمل الرسمية)',
+    responseTimeFr: 'Sous 24h à 48h ouvrées',
+    responseTimeEn: 'Within 24 to 48 business hours',
+    mapLinkUrl: 'https://maps.google.com/?q=Marrakech,Morocco',
+    mapEmbedUrl: '',
+  },
+  social: {
+    facebook: 'https://facebook.com',
+    instagram: 'https://instagram.com',
+    linkedin: 'https://linkedin.com',
+    youtube: 'https://youtube.com',
+  },
+  departments: [
+    {
+      id: 'general',
+      titleAr: 'الكتابة العامة والاستفسارات',
+      titleFr: 'Secrétariat Général & Accueil',
+      titleEn: 'General Secretariat & Inquiries',
+      descAr: 'الاستفسارات العامة، مواعيد الجمع العام، وتتبع المراسلات الرسمية.',
+      descFr: 'Renseignements généraux, calendrier et courriers officiels.',
+      descEn: 'General inquiries, statutory updates, and administrative coordination.',
+      email: 'contact@amycc.org',
+      icon: '✉️',
+      badgeAr: 'استفسارات عامة',
+      badgeFr: 'Général',
+      badgeEn: 'General',
+      order: 1,
+      enabled: true,
+    },
+    {
+      id: 'partnerships',
+      titleAr: 'العلاقات المؤسسية والشراكات',
+      titleFr: 'Partenariats & Coopération',
+      titleEn: 'Institutional Partnerships',
+      descAr: 'تنسيق اتفاقيات التعاون مع المراكز الثقافية، المؤسسات، والهيئات الدولية.',
+      descFr: 'Conventions de partenariat, mécénat et coopérations culturelles.',
+      descEn: 'Strategic alliances, cultural sponsorships, and institutional agreements.',
+      email: 'direction@amycc.org',
+      icon: '🏛️',
+      badgeAr: 'اتفاقيات وتعاون',
+      badgeFr: 'Partenariats',
+      badgeEn: 'Partnerships',
+      order: 2,
+      enabled: true,
+    },
+    {
+      id: 'programs',
+      titleAr: 'مبادرة شباب في العمل والتطوع',
+      titleFr: 'Jeunesse en Action & Volontariat',
+      titleEn: 'Youth in Action & Volunteers',
+      descAr: 'تأطير المتطوعين، التسجيل في الورشات الفنية، والمشاريع الميدانية.',
+      descFr: 'Mobilisation des bénévoles et inscription aux ateliers culturels.',
+      descEn: 'Volunteer engagement, workshop participation, and grassroots projects.',
+      email: 'programs@amycc.org',
+      icon: '🎨',
+      badgeAr: 'تطوع وورشات',
+      badgeFr: 'Bénévolat',
+      badgeEn: 'Volunteering',
+      order: 3,
+      enabled: true,
+    },
+    {
+      id: 'press',
+      titleAr: 'التواصل الإعلامي والصحافة',
+      titleFr: 'Relations Presse & Médias',
+      titleEn: 'Press & Media Relations',
+      descAr: 'البيانات الصحفية، التغطيات الإعلامية، والملفات الصحفية لتظاهرات الجمعية.',
+      descFr: 'Communiqués, accréditations et dossiers de presse des événements.',
+      descEn: 'Press releases, media kits, event accreditations, and interviews.',
+      email: 'press@amycc.org',
+      icon: '📰',
+      badgeAr: 'صحافة وإعلام',
+      badgeFr: 'Presse',
+      badgeEn: 'Press',
+      order: 4,
+      enabled: true,
+    },
+  ],
+  formTopics: [
+    { id: 'general', labelAr: 'استفسار عام حول أنشطة وبرامج الجمعية', labelFr: 'Renseignement général sur les activités', labelEn: 'General inquiry on AMYCC activities' },
+    { id: 'youth_in_action', labelAr: 'المشاركة والتطوع في مبادرة "شباب في العمل"', labelFr: 'Participer au programme Jeunesse en Action', labelEn: 'Join the Youth in Action initiative' },
+    { id: 'membership', labelAr: 'طلب الانخراط والعضوية في الجمعية', labelFr: 'Demande d’adhésion à l’association', labelEn: 'Membership and association enrollment' },
+    { id: 'partnership', labelAr: 'مقترح شراكة مؤسسية أو رعاية ثقافية', labelFr: 'Proposition de partenariat ou mécénat', labelEn: 'Partnership or cultural sponsorship proposal' },
+    { id: 'workshop', labelAr: 'اقتراح ورشة فنية أو مبادرة إبداعية', labelFr: 'Proposition d’atelier ou projet artistique', labelEn: 'Suggest an art workshop or creative initiative' },
+    { id: 'press', labelAr: 'تغطية إعلامية أو تصريح صحفي', labelFr: 'Demande média ou presse', labelEn: 'Press coverage or media inquiry' },
+  ],
+}
+
+export async function getContactSettings(): Promise<ContactConfig> {
+  try {
+    const supabase = await createClient()
+    const { data, error } = await supabase
+      .from('site_settings')
+      .select('value')
+      .eq('key', 'contact')
+      .maybeSingle()
+
+    if (error || !data || !data.value) {
+      // Fallback: check legacy contact_info and social_links
+      const [infoRes, socialRes] = await Promise.all([
+        supabase.from('site_settings').select('value').eq('key', 'contact_info').maybeSingle(),
+        supabase.from('site_settings').select('value').eq('key', 'social_links').maybeSingle(),
+      ])
+
+      const infoVal = (infoRes.data?.value || {}) as Record<string, string>
+      const socialVal = (socialRes.data?.value || {}) as Record<string, string>
+
+      return {
+        ...defaultContactConfig,
+        channels: {
+          ...defaultContactConfig.channels,
+          primaryEmail: infoVal.email || defaultContactConfig.channels.primaryEmail,
+          phone: infoVal.phone || defaultContactConfig.channels.phone,
+          addressAr: infoVal.address || defaultContactConfig.channels.addressAr,
+        },
+        social: {
+          ...defaultContactConfig.social,
+          facebook: socialVal.facebook || defaultContactConfig.social.facebook,
+          instagram: socialVal.instagram || defaultContactConfig.social.instagram,
+          linkedin: socialVal.linkedin || defaultContactConfig.social.linkedin,
+          youtube: socialVal.youtube || defaultContactConfig.social.youtube,
+        },
+      }
+    }
+
+    const val = data.value as Partial<ContactConfig>
+    const heroVal = (val.hero || {}) as Partial<ContactConfig['hero']>
+    const channelsVal = (val.channels || {}) as Partial<ContactConfig['channels']>
+    const socialVal = (val.social || {}) as Partial<ContactConfig['social']>
+
+    return {
+      hero: {
+        tagAr: heroVal.tagAr || defaultContactConfig.hero.tagAr,
+        tagFr: heroVal.tagFr || defaultContactConfig.hero.tagFr,
+        tagEn: heroVal.tagEn || defaultContactConfig.hero.tagEn,
+        badgeAr: heroVal.badgeAr || defaultContactConfig.hero.badgeAr,
+        badgeFr: heroVal.badgeFr || defaultContactConfig.hero.badgeFr,
+        badgeEn: heroVal.badgeEn || defaultContactConfig.hero.badgeEn,
+        titleAr: heroVal.titleAr || defaultContactConfig.hero.titleAr,
+        titleFr: heroVal.titleFr || defaultContactConfig.hero.titleFr,
+        titleEn: heroVal.titleEn || defaultContactConfig.hero.titleEn,
+        descriptionAr: heroVal.descriptionAr || defaultContactConfig.hero.descriptionAr,
+        descriptionFr: heroVal.descriptionFr || defaultContactConfig.hero.descriptionFr,
+        descriptionEn: heroVal.descriptionEn || defaultContactConfig.hero.descriptionEn,
+        imageUrl: typeof heroVal.imageUrl === 'string' ? heroVal.imageUrl : defaultContactConfig.hero.imageUrl,
+      },
+      channels: {
+        primaryEmail: channelsVal.primaryEmail || defaultContactConfig.channels.primaryEmail,
+        secondaryEmail: channelsVal.secondaryEmail || defaultContactConfig.channels.secondaryEmail,
+        phone: channelsVal.phone || defaultContactConfig.channels.phone,
+        phoneSecondary: channelsVal.phoneSecondary || defaultContactConfig.channels.phoneSecondary,
+        whatsapp: channelsVal.whatsapp || defaultContactConfig.channels.whatsapp,
+        addressAr: channelsVal.addressAr || defaultContactConfig.channels.addressAr,
+        addressFr: channelsVal.addressFr || defaultContactConfig.channels.addressFr,
+        addressEn: channelsVal.addressEn || defaultContactConfig.channels.addressEn,
+        cityAr: channelsVal.cityAr || defaultContactConfig.channels.cityAr,
+        cityFr: channelsVal.cityFr || defaultContactConfig.channels.cityFr,
+        cityEn: channelsVal.cityEn || defaultContactConfig.channels.cityEn,
+        workingHoursAr: channelsVal.workingHoursAr || defaultContactConfig.channels.workingHoursAr,
+        workingHoursFr: channelsVal.workingHoursFr || defaultContactConfig.channels.workingHoursFr,
+        workingHoursEn: channelsVal.workingHoursEn || defaultContactConfig.channels.workingHoursEn,
+        responseTimeAr: channelsVal.responseTimeAr || defaultContactConfig.channels.responseTimeAr,
+        responseTimeFr: channelsVal.responseTimeFr || defaultContactConfig.channels.responseTimeFr,
+        responseTimeEn: channelsVal.responseTimeEn || defaultContactConfig.channels.responseTimeEn,
+        mapLinkUrl: channelsVal.mapLinkUrl || defaultContactConfig.channels.mapLinkUrl,
+        mapEmbedUrl: typeof channelsVal.mapEmbedUrl === 'string' ? channelsVal.mapEmbedUrl : defaultContactConfig.channels.mapEmbedUrl,
+      },
+      social: {
+        facebook: typeof socialVal.facebook === 'string' ? socialVal.facebook : defaultContactConfig.social.facebook,
+        instagram: typeof socialVal.instagram === 'string' ? socialVal.instagram : defaultContactConfig.social.instagram,
+        linkedin: typeof socialVal.linkedin === 'string' ? socialVal.linkedin : defaultContactConfig.social.linkedin,
+        youtube: typeof socialVal.youtube === 'string' ? socialVal.youtube : defaultContactConfig.social.youtube,
+      },
+      departments: Array.isArray(val.departments) && val.departments.length > 0
+        ? val.departments
+            .filter((d): d is ContactDepartmentConfig => typeof d === 'object' && d !== null && typeof d.id === 'string')
+            .map((d, idx) => ({
+              id: d.id,
+              titleAr: d.titleAr || '',
+              titleFr: d.titleFr || '',
+              titleEn: d.titleEn || '',
+              descAr: d.descAr || '',
+              descFr: d.descFr || '',
+              descEn: d.descEn || '',
+              email: d.email || '',
+              icon: d.icon || '✉️',
+              badgeAr: d.badgeAr || '',
+              badgeFr: d.badgeFr || '',
+              badgeEn: d.badgeEn || '',
+              order: typeof d.order === 'number' ? d.order : idx + 1,
+              enabled: typeof d.enabled === 'boolean' ? d.enabled : true,
+            }))
+            .sort((a, b) => a.order - b.order)
+        : defaultContactConfig.departments,
+      formTopics: Array.isArray(val.formTopics) && val.formTopics.length > 0
+        ? val.formTopics
+            .filter((t): t is ContactFormTopicConfig => typeof t === 'object' && t !== null && typeof t.id === 'string')
+            .map((t) => ({
+              id: t.id,
+              labelAr: t.labelAr || '',
+              labelFr: t.labelFr || '',
+              labelEn: t.labelEn || '',
+            }))
+        : defaultContactConfig.formTopics,
+    }
+  } catch {
+    return defaultContactConfig
+  }
+}

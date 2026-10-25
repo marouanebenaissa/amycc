@@ -347,3 +347,67 @@ describe('Team Hero Validation Suite', () => {
     assert.equal(result.success, false)
   })
 })
+
+const contactConfigSchema = z.object({
+  channels: z.object({
+    primaryEmail: z.string().email(),
+    phone: z.string().min(5),
+    addressAr: z.string().min(5),
+    workingHoursAr: z.string().min(5),
+  }),
+  departments: z.array(
+    z.object({
+      id: z.string().min(1),
+      titleAr: z.string().min(2),
+      email: z.string().email(),
+      icon: z.string(),
+    })
+  ).min(1),
+  formTopics: z.array(
+    z.object({
+      id: z.string().min(1),
+      labelAr: z.string().min(3),
+    })
+  ).min(1),
+})
+
+describe('Contact Configuration Validation Suite', () => {
+  test('accepts valid contact configuration with channels and departments', () => {
+    const valid = {
+      channels: {
+        primaryEmail: 'contact@amycc.org',
+        phone: '+212 5 24 00 00 00',
+        addressAr: 'مراكش، المملكة المغربية',
+        workingHoursAr: 'من الاثنين إلى الجمعة: 09:00 - 18:00',
+      },
+      departments: [
+        { id: 'general', titleAr: 'الكتابة العامة', email: 'contact@amycc.org', icon: '✉️' },
+        { id: 'press', titleAr: 'الصحافة والإعلام', email: 'press@amycc.org', icon: '📰' },
+      ],
+      formTopics: [
+        { id: 'general', labelAr: 'استفسار عام حول أنشطة الجمعية' },
+      ],
+    }
+    const result = contactConfigSchema.safeParse(valid)
+    assert.equal(result.success, true)
+    if (result.success) {
+      assert.equal(result.data.channels.primaryEmail, 'contact@amycc.org')
+      assert.equal(result.data.departments.length, 2)
+    }
+  })
+
+  test('rejects contact configuration with invalid email or empty channels', () => {
+    const invalid = {
+      channels: {
+        primaryEmail: 'invalid-email',
+        phone: '',
+        addressAr: '',
+        workingHoursAr: '',
+      },
+      departments: [],
+      formTopics: [],
+    }
+    const result = contactConfigSchema.safeParse(invalid)
+    assert.equal(result.success, false)
+  })
+})
