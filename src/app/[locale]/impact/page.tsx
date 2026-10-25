@@ -48,6 +48,11 @@ export default async function ImpactPage(props: { params: Promise<{ locale: stri
   const isAr = locale === 'ar'
   const isFr = locale === 'fr'
   const config = await getImpactSettings()
+  const hasHeroImage = Boolean(
+    config.hero.hasHeroImage &&
+      config.hero.heroImageUrl &&
+      config.hero.heroImageUrl.trim() !== ''
+  )
 
   return (
     <>
@@ -55,12 +60,18 @@ export default async function ImpactPage(props: { params: Promise<{ locale: stri
 
       <main id="main-content" className="flex-1 bg-[#faf7f2]">
         {/* ========================================================= */}
-        {/* Moroccan Cinematic Ambient Hero Section                   */}
+        {/* Moroccan Cinematic Ambient Hero Section (Clean Non-Green) */}
         {/* ========================================================= */}
-        <section className="relative overflow-hidden bg-gradient-to-b from-[#061d22] via-[#0d3b43] to-[#08242a] text-white py-20 lg:py-28">
+        <section
+          className={`relative overflow-hidden border-b transition-colors ${
+            hasHeroImage
+              ? 'min-h-[500px] sm:min-h-[540px] lg:min-h-[600px] flex items-center bg-[#1c1917] text-white pt-16 pb-24 lg:pt-20 lg:pb-32 border-[#292524]'
+              : 'bg-gradient-to-b from-[#faf7f2] via-[#f7f2e9] to-[#faf7f2] border-[#e5e0d6] pt-16 pb-20 lg:pt-20 lg:pb-28 text-[#08242a]'
+          }`}
+        >
           {/* Custom Hero Image with Overlay */}
-          {config.hero.hasHeroImage && config.hero.heroImageUrl ? (
-            <div className="absolute inset-0 z-0">
+          {hasHeroImage ? (
+            <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
               <ImageWithFallback
                 src={config.hero.heroImageUrl}
                 fallbackSrc="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1920&q=80"
@@ -69,39 +80,61 @@ export default async function ImpactPage(props: { params: Promise<{ locale: stri
                 priority
                 className="object-cover object-center"
               />
-              <div className="absolute inset-0 bg-gradient-to-b from-[#061d22]/90 via-[#0d3b43]/85 to-[#08242a]/95" />
+              <div className="absolute inset-0 bg-black/45" />
+              <div className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/55 to-black/90" />
+              <div className="absolute inset-0 moroccan-star-pattern opacity-15 pointer-events-none" />
+              <div className="absolute top-1/4 start-1/4 w-96 h-96 bg-[#c85a32]/20 rounded-full blur-3xl pointer-events-none" />
+              <div className="absolute bottom-10 end-10 w-96 h-96 bg-[#f4ce83]/20 rounded-full blur-3xl pointer-events-none" />
             </div>
           ) : (
-            <div className="absolute inset-0 moroccan-pattern-dark opacity-35 pointer-events-none" aria-hidden="true" />
+            <>
+              <div className="absolute inset-0 moroccan-pattern-light opacity-60 pointer-events-none" aria-hidden="true" />
+              <div className="absolute top-1/3 start-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-[#c85a32]/10 rounded-full blur-3xl pointer-events-none" />
+              <div className="absolute bottom-0 end-12 w-72 h-72 bg-[#f4ce83]/15 rounded-full blur-3xl pointer-events-none" />
+            </>
           )}
-
-          {/* Ambient Lighting Gradients */}
-          <div className="absolute -top-32 start-1/4 w-96 h-96 bg-[#c85a32]/20 rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute -bottom-32 end-1/4 w-96 h-96 bg-[#74bfcd]/20 rounded-full blur-3xl pointer-events-none" />
 
           <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
             {/* Top Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-xs sm:text-sm font-bold text-[#f4ce83] shadow-inner">
-              <span className="w-2 h-2 rounded-full bg-[#f4ce83] animate-pulse" />
-              <span>
-                {isAr ? config.hero.badgeAr : isFr ? config.hero.badgeFr : config.hero.badgeEn}
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full shadow-2xs backdrop-blur-md">
+              <span
+                className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs sm:text-sm font-bold ${
+                  hasHeroImage
+                    ? 'bg-white/10 border border-white/20 text-[#f4ce83]'
+                    : 'bg-[#c85a32]/10 border border-[#c85a32]/20 text-[#c85a32]'
+                }`}
+              >
+                <span className={`w-2 h-2 rounded-full ${hasHeroImage ? 'bg-[#f4ce83]' : 'bg-[#c85a32]'} animate-pulse`} />
+                <span>{isAr ? config.hero.badgeAr : isFr ? config.hero.badgeFr : config.hero.badgeEn}</span>
               </span>
             </div>
 
             {/* Main Headline */}
-            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight sm:leading-tight">
+            <h1
+              className={`text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-tight sm:leading-tight ${
+                hasHeroImage ? 'text-white drop-shadow-md' : 'text-[#08242a]'
+              }`}
+            >
               {isAr ? config.hero.titleAr : isFr ? config.hero.titleFr : config.hero.titleEn}
             </h1>
 
             {/* Subtitle */}
             {(isAr ? config.hero.subtitleAr : isFr ? config.hero.subtitleFr : config.hero.subtitleEn) && (
-              <p className="text-base sm:text-xl font-bold text-[#f4ce83] max-w-3xl mx-auto leading-relaxed">
+              <p
+                className={`text-base sm:text-xl font-bold max-w-3xl mx-auto leading-relaxed ${
+                  hasHeroImage ? 'text-[#f4ce83]' : 'text-[#c85a32]'
+                }`}
+              >
                 {isAr ? config.hero.subtitleAr : isFr ? config.hero.subtitleFr : config.hero.subtitleEn}
               </p>
             )}
 
             {/* Detailed Description */}
-            <p className="text-sm sm:text-base text-white/80 max-w-3xl mx-auto leading-relaxed font-medium">
+            <p
+              className={`text-sm sm:text-base max-w-3xl mx-auto leading-relaxed font-medium ${
+                hasHeroImage ? 'text-white/85' : 'text-[#5f7174]'
+              }`}
+            >
               {isAr ? config.hero.descriptionAr : isFr ? config.hero.descriptionFr : config.hero.descriptionEn}
             </p>
 
@@ -109,7 +142,11 @@ export default async function ImpactPage(props: { params: Promise<{ locale: stri
             <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
               <Link
                 href={config.hero.primaryBtnUrl.startsWith('/') ? `/${locale}${config.hero.primaryBtnUrl}` : config.hero.primaryBtnUrl}
-                className="px-6 py-3.5 rounded-xl font-bold text-[#08242a] bg-[#f4ce83] hover:bg-[#eec26e] transition-all text-xs sm:text-sm shadow-card hover:scale-105 active:scale-95"
+                className={`px-6 py-3.5 rounded-xl font-bold transition-all text-xs sm:text-sm shadow-card hover:scale-105 active:scale-95 ${
+                  hasHeroImage
+                    ? 'text-[#08242a] bg-[#f4ce83] hover:bg-[#eec26e]'
+                    : 'text-white bg-[#c85a32] hover:bg-[#b04b26]'
+                }`}
               >
                 {isAr ? config.hero.primaryBtnTextAr : isFr ? config.hero.primaryBtnTextFr : config.hero.primaryBtnTextEn}
               </Link>
@@ -119,7 +156,11 @@ export default async function ImpactPage(props: { params: Promise<{ locale: stri
                   href={config.hero.reportPdfUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl font-bold text-white bg-white/10 hover:bg-white/20 border border-white/20 backdrop-blur-md transition-all text-xs sm:text-sm hover:scale-105 active:scale-95"
+                  className={`inline-flex items-center gap-2 px-6 py-3.5 rounded-xl font-bold transition-all text-xs sm:text-sm hover:scale-105 active:scale-95 ${
+                    hasHeroImage
+                      ? 'text-white bg-white/10 hover:bg-white/20 border border-white/20 backdrop-blur-md'
+                      : 'text-[#08242a] bg-white hover:bg-[#faf7f2] border border-[#cfc7b9] shadow-2xs'
+                  }`}
                 >
                   <span>📄</span>
                   <span>{isAr ? config.hero.secondaryBtnTextAr : isFr ? config.hero.secondaryBtnTextFr : config.hero.secondaryBtnTextEn}</span>
@@ -148,13 +189,13 @@ export default async function ImpactPage(props: { params: Promise<{ locale: stri
                     className="w-full h-full object-contain"
                   />
                 </div>
-                <div className="text-3xl sm:text-4xl font-black text-[#0d3b43] mb-1 tracking-tight">
+                <div className="text-3xl sm:text-4xl font-black text-[#08242a] mb-1 tracking-tight">
                   {metric.value}
                 </div>
                 <div className="text-xs sm:text-sm font-bold text-[#08242a] leading-snug mb-1">
                   {isAr ? metric.labelAr : isFr ? metric.labelFr : metric.labelEn}
                 </div>
-                <div className="text-3xs sm:text-2xs text-[#74bfcd] font-semibold leading-relaxed">
+                <div className="text-3xs sm:text-2xs text-[#819598] font-semibold leading-relaxed">
                   {isAr ? metric.subtextAr : isFr ? metric.subtextFr : metric.subtextEn}
                 </div>
               </div>
@@ -195,7 +236,7 @@ export default async function ImpactPage(props: { params: Promise<{ locale: stri
               return (
                 <div
                   key={pillar.id}
-                  className="luxury-card p-6 sm:p-8 bg-white border border-[#e5e0d6] rounded-2xl flex flex-col justify-between group hover:border-[#0d3b43]/50 hover:shadow-card transition-all"
+                  className="luxury-card p-6 sm:p-8 bg-white border border-[#e5e0d6] rounded-2xl flex flex-col justify-between group hover:border-[#c85a32]/40 hover:shadow-card transition-all"
                 >
                   <div>
                     <div className="flex items-center justify-between gap-3 mb-4">
@@ -209,7 +250,7 @@ export default async function ImpactPage(props: { params: Promise<{ locale: stri
                         />
                       </div>
                       {badge && (
-                        <span className="px-3 py-1 rounded-full text-3xs font-extrabold bg-[#d8f0f4] text-[#0d3b43] border border-[#a2d8e1]">
+                        <span className="px-3 py-1 rounded-full text-3xs font-extrabold bg-[#faece7] text-[#c85a32] border border-[#f0cbbd]">
                           {badge}
                         </span>
                       )}
@@ -237,7 +278,7 @@ export default async function ImpactPage(props: { params: Promise<{ locale: stri
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
               {/* Text & Testimonial Column */}
               <div className="lg:col-span-7 space-y-6">
-                <span className="inline-block px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-widest bg-[#d8f0f4] text-[#0d3b43] border border-[#a2d8e1]">
+                <span className="inline-block px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-widest bg-[#faece7] text-[#c85a32] border border-[#f0cbbd]">
                   {isAr ? config.spotlight.badgeAr : isFr ? config.spotlight.badgeFr : config.spotlight.badgeEn}
                 </span>
 
@@ -271,7 +312,7 @@ export default async function ImpactPage(props: { params: Promise<{ locale: stri
                         ? `/${locale}${config.spotlight.primaryBtnUrl}`
                         : config.spotlight.primaryBtnUrl
                     }
-                    className="px-6 py-3 rounded-xl font-bold text-white bg-[#0d3b43] hover:bg-[#14505b] transition-all text-xs shadow-xs hover:scale-105 active:scale-95"
+                    className="px-6 py-3 rounded-xl font-bold text-white bg-[#c85a32] hover:bg-[#b04b26] transition-all text-xs shadow-xs hover:scale-105 active:scale-95"
                   >
                     {isAr ? config.spotlight.primaryBtnTextAr : isFr ? config.spotlight.primaryBtnTextFr : config.spotlight.primaryBtnTextEn}
                   </Link>
@@ -320,7 +361,7 @@ export default async function ImpactPage(props: { params: Promise<{ locale: stri
         {/* ========================================================= */}
         <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
           <div className="max-w-3xl mx-auto text-center mb-14 space-y-3">
-            <span className="inline-block text-xs font-bold uppercase tracking-widest text-[#0d3b43] px-3.5 py-1 rounded-full bg-[#d8f0f4] border border-[#a2d8e1]">
+            <span className="inline-block text-xs font-bold uppercase tracking-widest text-[#c85a32] px-3.5 py-1 rounded-full bg-[#faece7] border border-[#f0cbbd]">
               {isAr ? config.methodology.badgeAr : isFr ? config.methodology.badgeFr : config.methodology.badgeEn}
             </span>
             <h2 className="text-2xl sm:text-4xl font-black text-[#08242a]">
@@ -390,7 +431,7 @@ export default async function ImpactPage(props: { params: Promise<{ locale: stri
                 return (
                   <div
                     key={item.id}
-                    className="p-5 sm:p-6 rounded-2xl bg-white border border-[#e5e0d6] shadow-2xs flex items-start gap-4 hover:border-[#0d3b43]/30 transition-all"
+                    className="p-5 sm:p-6 rounded-2xl bg-white border border-[#e5e0d6] shadow-2xs flex items-start gap-4 hover:border-[#c85a32]/30 transition-all"
                   >
                     <div className="text-2xl p-2.5 rounded-xl bg-[#faf7f2] border border-[#e5e0d6] shrink-0">
                       {item.icon}
@@ -415,8 +456,10 @@ export default async function ImpactPage(props: { params: Promise<{ locale: stri
         {/* ========================================================= */}
         <section className="py-20 bg-[#faf7f2] relative overflow-hidden">
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="relative rounded-3xl overflow-hidden bg-gradient-to-r from-[#0d3b43] via-[#0f4650] to-[#08242a] text-white p-8 sm:p-12 lg:p-14 shadow-card text-center space-y-6">
-              <div className="absolute inset-0 moroccan-pattern-dark opacity-20 pointer-events-none" aria-hidden="true" />
+            <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-[#1c1917] via-[#292524] to-[#1c1917] text-white p-8 sm:p-12 lg:p-14 shadow-card text-center space-y-6">
+              <div className="absolute inset-0 moroccan-pattern-dark opacity-15 pointer-events-none" aria-hidden="true" />
+              <div className="absolute top-0 end-0 w-96 h-96 bg-[#c85a32]/20 rounded-full blur-3xl pointer-events-none" />
+              <div className="absolute bottom-0 start-0 w-96 h-96 bg-[#f4ce83]/15 rounded-full blur-3xl pointer-events-none" />
               
               <div className="relative z-10 space-y-4 max-w-3xl mx-auto">
                 <span className="inline-block px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-widest bg-white/10 text-[#f4ce83] border border-white/20 backdrop-blur-sm">

@@ -175,6 +175,11 @@ export default async function EventsPage(props: { params: Promise<{ locale: stri
   ]
 
   const displayEvents = dbEvents.length > 0 ? dbEvents : defaultSampleEvents
+  const hasHeroImage = Boolean(
+    pageSettings.hero.hasHeroImage &&
+      pageSettings.hero.imageUrl &&
+      pageSettings.hero.imageUrl.trim() !== ''
+  )
 
   return (
     <>
@@ -182,44 +187,90 @@ export default async function EventsPage(props: { params: Promise<{ locale: stri
 
       <main id="main-content" className="flex-1 bg-[#faf7f2]">
         {/* ========================================================= */}
-        {/* Moroccan Cinematic Ambient Hero Section                   */}
+        {/* Moroccan Cinematic Ambient Hero Section (Clean Non-Green) */}
         {/* ========================================================= */}
-        <section className="relative overflow-hidden bg-gradient-to-b from-[#061d22] via-[#0d3b43] to-[#08242a] text-white py-20 lg:py-28">
-          {pageSettings.hero.hasHeroImage && pageSettings.hero.imageUrl ? (
-            <div className="absolute inset-0 z-0">
+        <section
+          className={`relative overflow-hidden border-b transition-colors ${
+            hasHeroImage
+              ? 'min-h-[500px] sm:min-h-[540px] lg:min-h-[600px] flex items-center bg-[#1c1917] text-white pt-16 pb-24 lg:pt-20 lg:pb-32 border-[#292524]'
+              : 'bg-gradient-to-b from-[#faf7f2] via-[#f7f2e9] to-[#faf7f2] border-[#e5e0d6] pt-16 pb-20 lg:pt-20 lg:pb-28 text-[#08242a]'
+          }`}
+        >
+          {/* Background Layer */}
+          {hasHeroImage ? (
+            <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
               <ImageWithFallback
-                src={pageSettings.hero.imageUrl}
+                src={pageSettings.hero.imageUrl!}
                 fallbackSrc="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=1920&q=80"
                 alt={isAr ? pageSettings.hero.titleAr : isFr ? pageSettings.hero.titleFr : pageSettings.hero.titleEn}
                 fill
                 priority
                 className="object-cover object-center"
               />
-              <div className="absolute inset-0 bg-gradient-to-b from-[#061d22]/90 via-[#0d3b43]/85 to-[#08242a]/95" />
+              <div className="absolute inset-0 bg-black/45" />
+              <div className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/55 to-black/90" />
+              <div className="absolute inset-0 moroccan-star-pattern opacity-15 pointer-events-none" />
+              <div className="absolute top-1/4 start-1/4 w-96 h-96 bg-[#c85a32]/20 rounded-full blur-3xl pointer-events-none" />
+              <div className="absolute bottom-10 end-10 w-96 h-96 bg-[#f4ce83]/20 rounded-full blur-3xl pointer-events-none" />
             </div>
           ) : (
-            <div className="absolute inset-0 moroccan-pattern-dark opacity-35 pointer-events-none" aria-hidden="true" />
+            <>
+              <div className="absolute inset-0 moroccan-pattern-light opacity-60 pointer-events-none" aria-hidden="true" />
+              <div className="absolute top-1/3 start-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-[#c85a32]/10 rounded-full blur-3xl pointer-events-none" />
+              <div className="absolute bottom-0 end-12 w-72 h-72 bg-[#f4ce83]/15 rounded-full blur-3xl pointer-events-none" />
+            </>
           )}
 
-          {/* Ambient Lighting Gradients */}
-          <div className="absolute -top-32 start-1/4 w-96 h-96 bg-[#c85a32]/20 rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute -bottom-32 end-1/4 w-96 h-96 bg-[#74bfcd]/20 rounded-full blur-3xl pointer-events-none" />
-
           <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
-            {/* Top Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-xs sm:text-sm font-bold text-[#f4ce83] shadow-inner">
-              <span className="w-2 h-2 rounded-full bg-[#f4ce83] animate-pulse" />
-              <span>
-                {isAr
-                  ? pageSettings.hero.badgeAr
-                  : isFr
-                  ? pageSettings.hero.badgeFr
-                  : pageSettings.hero.badgeEn}
-              </span>
+            {/* Top Badges */}
+            <div className="flex flex-wrap items-center justify-center gap-2.5">
+              {(pageSettings.hero.tagAr || pageSettings.hero.tagFr || pageSettings.hero.tagEn) && (
+                <span
+                  className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs sm:text-sm font-bold shadow-2xs backdrop-blur-md ${
+                    hasHeroImage
+                      ? 'bg-white/10 border border-white/20 text-[#f4ce83]'
+                      : 'bg-[#c85a32]/10 border border-[#c85a32]/20 text-[#c85a32]'
+                  }`}
+                >
+                  <span
+                    className={`w-2 h-2 rounded-full ${hasHeroImage ? 'bg-[#f4ce83]' : 'bg-[#c85a32]'} animate-pulse`}
+                  />
+                  <span>
+                    {isAr
+                      ? pageSettings.hero.tagAr
+                      : isFr
+                      ? pageSettings.hero.tagFr
+                      : pageSettings.hero.tagEn}
+                  </span>
+                </span>
+              )}
+
+              {(pageSettings.hero.badgeAr || pageSettings.hero.badgeFr || pageSettings.hero.badgeEn) && (
+                <span
+                  className={`inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs sm:text-sm font-bold shadow-2xs backdrop-blur-md ${
+                    hasHeroImage
+                      ? 'bg-white/10 border border-white/20 text-white'
+                      : 'bg-[#08242a]/5 border border-[#08242a]/15 text-[#08242a]'
+                  }`}
+                >
+                  <span>🇲🇦</span>
+                  <span>
+                    {isAr
+                      ? pageSettings.hero.badgeAr
+                      : isFr
+                      ? pageSettings.hero.badgeFr
+                      : pageSettings.hero.badgeEn}
+                  </span>
+                </span>
+              )}
             </div>
 
             {/* Headline */}
-            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight sm:leading-tight">
+            <h1
+              className={`text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-tight sm:leading-tight ${
+                hasHeroImage ? 'text-white drop-shadow-md' : 'text-[#08242a]'
+              }`}
+            >
               {isAr
                 ? pageSettings.hero.titleAr
                 : isFr
@@ -229,7 +280,11 @@ export default async function EventsPage(props: { params: Promise<{ locale: stri
 
             {/* Subtitle */}
             {(isAr ? pageSettings.hero.subtitleAr : isFr ? pageSettings.hero.subtitleFr : pageSettings.hero.subtitleEn) && (
-              <p className="text-base sm:text-xl font-bold text-[#f4ce83] max-w-3xl mx-auto leading-relaxed">
+              <p
+                className={`text-base sm:text-xl font-bold max-w-3xl mx-auto leading-relaxed ${
+                  hasHeroImage ? 'text-[#f4ce83]' : 'text-[#c85a32]'
+                }`}
+              >
                 {isAr
                   ? pageSettings.hero.subtitleAr
                   : isFr
@@ -239,7 +294,11 @@ export default async function EventsPage(props: { params: Promise<{ locale: stri
             )}
 
             {/* Description */}
-            <p className="text-sm sm:text-base text-white/80 max-w-3xl mx-auto leading-relaxed font-medium">
+            <p
+              className={`text-sm sm:text-base max-w-3xl mx-auto leading-relaxed font-medium ${
+                hasHeroImage ? 'text-white/85' : 'text-[#5f7174]'
+              }`}
+            >
               {isAr
                 ? pageSettings.hero.descriptionAr
                 : isFr
@@ -247,11 +306,15 @@ export default async function EventsPage(props: { params: Promise<{ locale: stri
                 : pageSettings.hero.descriptionEn}
             </p>
 
-            {/* Action Button */}
+            {/* Action Buttons */}
             <div className="pt-4 flex flex-wrap items-center justify-center gap-4">
               <a
                 href="#events-catalog"
-                className="px-6 py-3.5 rounded-xl font-bold text-[#08242a] bg-[#f4ce83] hover:bg-[#eec26e] transition-all text-xs sm:text-sm shadow-card hover:scale-105 active:scale-95 flex items-center gap-2"
+                className={`px-6 py-3.5 rounded-xl font-bold transition-all text-xs sm:text-sm shadow-card hover:scale-105 active:scale-95 flex items-center gap-2 ${
+                  hasHeroImage
+                    ? 'text-[#08242a] bg-[#f4ce83] hover:bg-[#eec26e]'
+                    : 'text-white bg-[#c85a32] hover:bg-[#b04b26]'
+                }`}
               >
                 <span>📅</span>
                 <span>
@@ -265,7 +328,11 @@ export default async function EventsPage(props: { params: Promise<{ locale: stri
 
               <Link
                 href={`/${locale}/annual-program`}
-                className="px-6 py-3.5 rounded-xl font-bold text-white bg-white/10 hover:bg-white/20 border border-white/20 backdrop-blur-md transition-all text-xs sm:text-sm hover:scale-105 active:scale-95"
+                className={`px-6 py-3.5 rounded-xl font-bold transition-all text-xs sm:text-sm hover:scale-105 active:scale-95 ${
+                  hasHeroImage
+                    ? 'text-white bg-white/10 hover:bg-white/20 border border-white/20 backdrop-blur-md'
+                    : 'text-[#08242a] bg-white hover:bg-[#faf7f2] border border-[#cfc7b9] shadow-2xs'
+                }`}
               >
                 {isAr ? 'البرنامج السنوي للموسم' : isFr ? 'Programme Annuel' : 'Annual Program'}
               </Link>
@@ -286,10 +353,10 @@ export default async function EventsPage(props: { params: Promise<{ locale: stri
                 <div className="w-12 h-12 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6] flex items-center justify-center p-2 mb-3 shadow-2xs group-hover:scale-110 transition-transform overflow-hidden text-2xl">
                   {stat.icon}
                 </div>
-                <div className="text-3xl sm:text-4xl font-black text-[#0d3b43] mb-1 tracking-tight">
+                <div className="text-3xl sm:text-4xl font-black text-[#08242a] mb-1 tracking-tight">
                   {stat.value}
                 </div>
-                <div className="text-xs sm:text-sm font-bold text-[#08242a] leading-snug">
+                <div className="text-xs sm:text-sm font-bold text-[#5f7174] leading-snug">
                   {isAr ? stat.labelAr : isFr ? stat.labelFr : stat.labelEn}
                 </div>
               </div>
@@ -313,8 +380,10 @@ export default async function EventsPage(props: { params: Promise<{ locale: stri
         {/* ========================================================= */}
         <section className="py-20 bg-white border-t border-[#e5e0d6] relative overflow-hidden">
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="relative rounded-3xl overflow-hidden bg-gradient-to-r from-[#0d3b43] via-[#0f4650] to-[#08242a] text-white p-8 sm:p-12 lg:p-14 shadow-card text-center space-y-6">
-              <div className="absolute inset-0 moroccan-pattern-dark opacity-20 pointer-events-none" aria-hidden="true" />
+            <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-[#1c1917] via-[#292524] to-[#1c1917] text-white p-8 sm:p-12 lg:p-14 shadow-card text-center space-y-6">
+              <div className="absolute inset-0 moroccan-pattern-dark opacity-15 pointer-events-none" aria-hidden="true" />
+              <div className="absolute top-0 end-0 w-96 h-96 bg-[#c85a32]/20 rounded-full blur-3xl pointer-events-none" />
+              <div className="absolute bottom-0 start-0 w-96 h-96 bg-[#f4ce83]/15 rounded-full blur-3xl pointer-events-none" />
               
               <div className="relative z-10 space-y-4 max-w-3xl mx-auto">
                 <span className="inline-block px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-widest bg-white/10 text-[#f4ce83] border border-white/20 backdrop-blur-sm">

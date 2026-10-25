@@ -95,7 +95,7 @@ export function EventsCatalog({ events, locale, buttonLabel }: EventsCatalogProp
                   ? 'Rechercher par titre, ville ou lieu...'
                   : 'Search by title, city, or venue...'
               }
-              className="w-full ps-11 pe-4 py-3 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6] text-xs sm:text-sm text-[#08242a] focus:bg-white focus:border-[#0d3b43] focus:ring-1 focus:ring-[#0d3b43] outline-none transition-all placeholder:text-slate-400 font-medium"
+              className="w-full ps-11 pe-4 py-3 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6] text-xs sm:text-sm text-[#08242a] focus:bg-white focus:border-[#c85a32] focus:ring-1 focus:ring-[#c85a32] outline-none transition-all placeholder:text-slate-400 font-medium"
             />
             {searchQuery && (
               <button
@@ -115,7 +115,7 @@ export function EventsCatalog({ events, locale, buttonLabel }: EventsCatalogProp
               onClick={() => setSelectedFilter('all')}
               className={`px-4 py-2 rounded-xl text-xs font-bold transition-all whitespace-nowrap ${
                 selectedFilter === 'all'
-                  ? 'bg-[#0d3b43] text-white shadow-xs'
+                  ? 'bg-[#08242a] text-white shadow-xs'
                   : 'text-[#5f7174] hover:text-[#08242a]'
               }`}
             >
@@ -126,11 +126,11 @@ export function EventsCatalog({ events, locale, buttonLabel }: EventsCatalogProp
               onClick={() => setSelectedFilter('open')}
               className={`px-4 py-2 rounded-xl text-xs font-bold transition-all whitespace-nowrap flex items-center gap-1.5 ${
                 selectedFilter === 'open'
-                  ? 'bg-emerald-700 text-white shadow-xs'
+                  ? 'bg-[#c85a32] text-white shadow-xs'
                   : 'text-[#5f7174] hover:text-[#08242a]'
               }`}
             >
-              <span className="w-2 h-2 rounded-full bg-emerald-500" />
+              <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
               <span>{isAr ? 'التسجيل مفتوح' : isFr ? 'Inscriptions ouvertes' : 'Registration Open'}</span>
             </button>
             <button
@@ -138,7 +138,7 @@ export function EventsCatalog({ events, locale, buttonLabel }: EventsCatalogProp
               onClick={() => setSelectedFilter('closed')}
               className={`px-4 py-2 rounded-xl text-xs font-bold transition-all whitespace-nowrap ${
                 selectedFilter === 'closed'
-                  ? 'bg-[#08242a] text-white shadow-xs'
+                  ? 'bg-[#5f7174] text-white shadow-xs'
                   : 'text-[#5f7174] hover:text-[#08242a]'
               }`}
             >
@@ -158,7 +158,7 @@ export function EventsCatalog({ events, locale, buttonLabel }: EventsCatalogProp
               onClick={() => setSelectedCity('all')}
               className={`px-3 py-1 rounded-lg font-bold transition-all whitespace-nowrap ${
                 selectedCity === 'all'
-                  ? 'bg-[#0d3b43] text-white'
+                  ? 'bg-[#08242a] text-white'
                   : 'bg-[#faf7f2] text-[#5f7174] hover:bg-[#ede5d8]'
               }`}
             >
@@ -171,7 +171,7 @@ export function EventsCatalog({ events, locale, buttonLabel }: EventsCatalogProp
                 onClick={() => setSelectedCity(city)}
                 className={`px-3 py-1 rounded-lg font-bold transition-all whitespace-nowrap ${
                   selectedCity === city
-                    ? 'bg-[#0d3b43] text-white'
+                    ? 'bg-[#08242a] text-white'
                     : 'bg-[#faf7f2] text-[#5f7174] hover:bg-[#ede5d8]'
                 }`}
               >
@@ -237,8 +237,8 @@ export function EventsCatalog({ events, locale, buttonLabel }: EventsCatalogProp
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       />
                     ) : (
-                      <div className="absolute inset-0 bg-gradient-to-br from-[#0d3b43] via-[#08242a] to-[#041316] flex items-center justify-center p-6 text-center">
-                        <div className="absolute inset-0 moroccan-pattern-dark opacity-35" />
+                      <div className="absolute inset-0 bg-gradient-to-br from-[#1c1917] via-[#292524] to-[#1c1917] flex items-center justify-center p-6 text-center">
+                        <div className="absolute inset-0 moroccan-pattern-dark opacity-25" />
                         <span className="relative text-3xl sm:text-4xl">🎭</span>
                       </div>
                     )}
@@ -246,7 +246,7 @@ export function EventsCatalog({ events, locale, buttonLabel }: EventsCatalogProp
 
                     {/* Date Tag Floating over Photo */}
                     <div className="absolute top-3.5 start-3.5 z-10">
-                      <span className="px-3 py-1.5 rounded-xl text-3xs font-black bg-white/90 backdrop-blur-md border border-white/20 text-[#0d3b43] shadow-md flex items-center gap-1.5">
+                      <span className="px-3 py-1.5 rounded-xl text-3xs font-black bg-white/95 backdrop-blur-md border border-white/20 text-[#08242a] shadow-md flex items-center gap-1.5">
                         <span>📅</span>
                         <span>
                           {dateObj.toLocaleDateString(locale, { month: 'short', day: 'numeric' })}
@@ -259,7 +259,7 @@ export function EventsCatalog({ events, locale, buttonLabel }: EventsCatalogProp
                       <span
                         className={`text-3xs font-extrabold px-3 py-1.5 rounded-xl backdrop-blur-md shadow-md ${
                           ev.registration_open
-                            ? 'bg-emerald-500/90 text-white border border-emerald-400/30'
+                            ? 'bg-[#c85a32] text-white border border-[#e5a085]'
                             : 'bg-black/60 text-white/80 border border-white/20'
                         }`}
                       >
@@ -293,7 +293,7 @@ export function EventsCatalog({ events, locale, buttonLabel }: EventsCatalogProp
 
                   {/* Card Content */}
                   <div className="p-6 space-y-3">
-                    <h3 className="text-lg sm:text-xl font-black text-[#08242a] leading-snug line-clamp-2 group-hover:text-[#0d3b43] transition-colors">
+                    <h3 className="text-lg sm:text-xl font-black text-[#08242a] leading-snug line-clamp-2 group-hover:text-[#c85a32] transition-colors">
                       {trans.title}
                     </h3>
 
@@ -337,7 +337,7 @@ export function EventsCatalog({ events, locale, buttonLabel }: EventsCatalogProp
                             ? 'Réserver ma place gratuite'
                             : 'Reserve Free Seat Now')
                         }
-                        className="w-full py-3 px-4 rounded-xl font-bold text-white bg-[#0d3b43] hover:bg-[#14505b] active:scale-95 transition-all text-xs shadow-xs flex items-center justify-center gap-2"
+                        className="w-full py-3 px-4 rounded-xl font-bold text-white bg-[#c85a32] hover:bg-[#b04b26] active:scale-95 transition-all text-xs shadow-xs flex items-center justify-center gap-2"
                       />
                     ) : (
                       <span className="block text-center py-3 text-2xs text-[#819598] font-bold bg-[#faf7f2] rounded-xl border border-[#e5e0d6]">
@@ -379,7 +379,7 @@ export function EventsCatalog({ events, locale, buttonLabel }: EventsCatalogProp
               setSelectedFilter('all')
               setSelectedCity('all')
             }}
-            className="px-5 py-2.5 rounded-xl text-xs font-bold text-white bg-[#0d3b43] hover:bg-[#14505b] transition-all"
+            className="px-5 py-2.5 rounded-xl text-xs font-bold text-white bg-[#08242a] hover:bg-[#1a3a40] transition-all"
           >
             {isAr ? 'عرض كافة الفعاليات' : isFr ? 'Voir tous les événements' : 'Show All Events'}
           </button>

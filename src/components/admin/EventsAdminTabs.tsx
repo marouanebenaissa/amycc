@@ -421,7 +421,13 @@ export function EventsAdminTabs({
               <span>معاينة حية ومباشرة لهيدر صفحة الفعاليات (Live Hero Simulation)</span>
             </h3>
 
-            <div className="relative rounded-2xl overflow-hidden bg-gradient-to-b from-[#061d22] via-[#0d3b43] to-[#08242a] text-white p-8 sm:p-12 text-center min-h-[280px] flex flex-col justify-center items-center shadow-inner">
+            <div
+              className={`relative rounded-2xl overflow-hidden p-8 sm:p-12 text-center min-h-[280px] flex flex-col justify-center items-center shadow-inner transition-colors ${
+                config.hero.hasHeroImage && config.hero.imageUrl
+                  ? 'bg-[#1c1917] text-white'
+                  : 'bg-gradient-to-b from-[#faf7f2] via-[#f7f2e9] to-[#faf7f2] border border-[#e5e0d6] text-[#08242a]'
+              }`}
+            >
               {config.hero.hasHeroImage && config.hero.imageUrl ? (
                 <>
                   <Image
@@ -431,14 +437,24 @@ export function EventsAdminTabs({
                     className="object-cover object-center"
                     unoptimized
                   />
-                  <div className="absolute inset-0 bg-gradient-to-b from-[#061d22]/90 via-[#0d3b43]/85 to-[#08242a]/95" />
+                  <div className="absolute inset-0 bg-black/45" />
+                  <div className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/55 to-black/90 pointer-events-none" />
                 </>
               ) : (
-                <div className="absolute inset-0 moroccan-pattern-dark opacity-35 pointer-events-none" />
+                <>
+                  <div className="absolute inset-0 moroccan-pattern-light opacity-60 pointer-events-none" />
+                  <div className="absolute top-1/3 start-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-[#c85a32]/10 rounded-full blur-3xl pointer-events-none" />
+                </>
               )}
 
               <div className="relative z-10 max-w-3xl space-y-3">
-                <span className="inline-block px-3 py-1 rounded-full bg-white/10 text-[#f4ce83] text-2xs font-bold border border-white/20">
+                <span
+                  className={`inline-block px-3 py-1 rounded-full text-2xs font-bold ${
+                    config.hero.hasHeroImage && config.hero.imageUrl
+                      ? 'bg-white/10 text-[#f4ce83] border border-white/20'
+                      : 'bg-[#faece7] text-[#c85a32] border border-[#f0cbbd]'
+                  }`}
+                >
                   {activeLangTab === 'ar'
                     ? config.hero.badgeAr
                     : activeLangTab === 'fr'
@@ -446,7 +462,11 @@ export function EventsAdminTabs({
                     : config.hero.badgeEn}
                 </span>
 
-                <h1 className="text-2xl sm:text-4xl font-black text-white leading-tight">
+                <h1
+                  className={`text-2xl sm:text-4xl font-black leading-tight ${
+                    config.hero.hasHeroImage && config.hero.imageUrl ? 'text-white' : 'text-[#08242a]'
+                  }`}
+                >
                   {activeLangTab === 'ar'
                     ? config.hero.titleAr
                     : activeLangTab === 'fr'
@@ -459,7 +479,11 @@ export function EventsAdminTabs({
                   : activeLangTab === 'fr'
                   ? config.hero.subtitleFr
                   : config.hero.subtitleEn) && (
-                  <p className="text-xs sm:text-sm font-bold text-[#f4ce83]">
+                  <p
+                    className={`text-xs sm:text-sm font-bold ${
+                      config.hero.hasHeroImage && config.hero.imageUrl ? 'text-[#f4ce83]' : 'text-[#c85a32]'
+                    }`}
+                  >
                     {activeLangTab === 'ar'
                       ? config.hero.subtitleAr
                       : activeLangTab === 'fr'
@@ -468,7 +492,11 @@ export function EventsAdminTabs({
                   </p>
                 )}
 
-                <p className="text-2xs sm:text-xs text-white/80 line-clamp-3 leading-relaxed">
+                <p
+                  className={`text-2xs sm:text-xs line-clamp-3 leading-relaxed ${
+                    config.hero.hasHeroImage && config.hero.imageUrl ? 'text-white/80' : 'text-[#5f7174]'
+                  }`}
+                >
                   {activeLangTab === 'ar'
                     ? config.hero.descriptionAr
                     : activeLangTab === 'fr'
@@ -477,12 +505,21 @@ export function EventsAdminTabs({
                 </p>
 
                 <div className="pt-2">
-                  <span className="px-5 py-2.5 rounded-xl bg-[#f4ce83] text-[#08242a] text-2xs font-bold shadow-md">
-                    📅 {activeLangTab === 'ar'
-                      ? config.hero.primaryBtnTextAr
-                      : activeLangTab === 'fr'
-                      ? config.hero.primaryBtnTextFr
-                      : config.hero.primaryBtnTextEn}
+                  <span
+                    className={`px-5 py-2.5 rounded-xl text-2xs font-bold shadow-md inline-flex items-center gap-1.5 ${
+                      config.hero.hasHeroImage && config.hero.imageUrl
+                        ? 'bg-[#f4ce83] text-[#08242a]'
+                        : 'bg-[#c85a32] text-white'
+                    }`}
+                  >
+                    <span>📅</span>
+                    <span>
+                      {activeLangTab === 'ar'
+                        ? config.hero.primaryBtnTextAr
+                        : activeLangTab === 'fr'
+                        ? config.hero.primaryBtnTextFr
+                        : config.hero.primaryBtnTextEn}
+                    </span>
                   </span>
                 </div>
               </div>
