@@ -4,6 +4,7 @@ import { Footer } from '@/components/layout/Footer'
 import { getTopBarSettings, getHeroSettings, getFlagshipProgramSettings, getFaqSettings } from '@/lib/settings'
 import { createPublicClient } from '@/lib/supabase/public'
 import { FaqAccordion } from '@/components/home/FaqAccordion'
+import { AreasSection } from '@/components/home/AreasSection'
 import { EventRegistrationModal } from '@/components/events/EventRegistrationModal'
 import { IconWithFallback } from '@/components/ui/IconWithFallback'
 import { ImageWithFallback } from '@/components/ui/ImageWithFallback'
@@ -298,70 +299,6 @@ export default async function HomePage(props: { params: Promise<{ locale: string
       },
     ]
   }
-
-  // 6 Core Disciplines with elevated artistic metadata and custom PNG icon support
-  const areasList = [
-    {
-      key: 'arts',
-      title: dict.areas.arts,
-      desc: dict.areas.arts_desc,
-      icon: '🎨',
-      iconImg: '/icons/arts.png',
-      tag: isAr ? 'محترفات تشكيلية ومعارض' : 'Visual & Fine Arts',
-      accent: 'border-[#c85a32]/30 text-[#c85a32]',
-      bgGlow: 'from-[#fae4dc]/40 to-transparent',
-    },
-    {
-      key: 'music',
-      title: dict.areas.music,
-      desc: dict.areas.music_desc,
-      icon: '🎵',
-      iconImg: '/icons/music.png',
-      tag: isAr ? 'تراث وأداء موسيقي' : 'Heritage & Musical Arts',
-      accent: 'border-[#0d3b43]/30 text-[#0d3b43]',
-      bgGlow: 'from-[#d8f0f4]/40 to-transparent',
-    },
-    {
-      key: 'theatre',
-      title: dict.areas.theatre,
-      desc: dict.areas.theatre_desc,
-      icon: '🎭',
-      iconImg: '/icons/theatre.png',
-      tag: isAr ? 'تعبير مسرحي وارتجال' : 'Theatre & Scenic Expression',
-      accent: 'border-[#d99b26]/40 text-[#d99b26]',
-      bgGlow: 'from-[#fdf2db]/40 to-transparent',
-    },
-    {
-      key: 'culture',
-      title: dict.areas.culture,
-      desc: dict.areas.culture_desc,
-      icon: '🏛️',
-      iconImg: '/icons/culture.png',
-      tag: isAr ? 'صون الذاكرة والتراث' : 'Moroccan Cultural Heritage',
-      accent: 'border-[#0d3b43]/30 text-[#0d3b43]',
-      bgGlow: 'from-[#d8f0f4]/40 to-transparent',
-    },
-    {
-      key: 'youth',
-      title: dict.areas.youth,
-      desc: dict.areas.youth_desc,
-      icon: '🚀',
-      iconImg: '/icons/youth.png',
-      tag: isAr ? 'تكوين وقيادة شبابية' : 'Youth Leadership & Skills',
-      accent: 'border-[#c85a32]/30 text-[#c85a32]',
-      bgGlow: 'from-[#fae4dc]/40 to-transparent',
-    },
-    {
-      key: 'community',
-      title: dict.areas.community,
-      desc: dict.areas.community_desc,
-      icon: '🤝',
-      iconImg: '/icons/community.png',
-      tag: isAr ? 'مبادرة شباب في العمل' : 'Civic Volunteering Program',
-      accent: 'border-[#d99b26]/40 text-[#d99b26]',
-      bgGlow: 'from-[#fdf2db]/40 to-transparent',
-    },
-  ]
 
   // Dynamic FAQs from database settings
   const faqSettings = await getFaqSettings()
@@ -661,66 +598,13 @@ export default async function HomePage(props: { params: Promise<{ locale: string
         {/* ============================================================
             4. SIX CORE DOMAINS OF WORK (مجالات التدخل الستة)
             ============================================================ */}
-        <section className="py-20 lg:py-28 bg-white border-b border-[#e5e0d6]">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="max-w-3xl mx-auto text-center mb-16">
-              <span className="text-xs font-bold uppercase tracking-widest text-[#0d3b43]">
-                {isAr ? 'مجالات النشاط الجمعوي' : 'Core Disciplines'}
-              </span>
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-[#08242a] mt-2 mb-4">
-                {dict.home.areas_title}
-              </h2>
-              <p className="text-base text-[#445457] leading-relaxed">
-                {dict.home.areas_subtitle}
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {areasList.map(({ key, title, desc, icon, iconImg, tag, accent, bgGlow }) => (
-                <div
-                  key={key}
-                  className="bg-[#faf7f2] p-7 rounded-3xl border border-[#e5e0d6] shadow-subtle hover:shadow-card hover:border-[#cfc7b9] transition-all flex flex-col justify-between group relative overflow-hidden"
-                >
-                  <div className={`absolute top-0 end-0 w-32 h-32 bg-gradient-to-bl ${bgGlow} rounded-bl-full pointer-events-none`} />
-
-                  <div className="relative z-10">
-                    <div className="flex items-center justify-between mb-5">
-                      <div className="w-14 h-14 rounded-2xl bg-white border border-[#e5e0d6] flex items-center justify-center p-2.5 text-3xl shadow-2xs group-hover:scale-105 transition-transform overflow-hidden">
-                        <IconWithFallback
-                          src={iconImg}
-                          fallbackEmoji={icon}
-                          alt={title}
-                          size={36}
-                          className="w-full h-full object-contain"
-                        />
-                      </div>
-                      <span className={`text-4xs font-black uppercase tracking-wider px-2.5 py-1 rounded-full border bg-white ${accent}`}>
-                        {tag}
-                      </span>
-                    </div>
-
-                    <h3 className="text-xl font-black text-[#08242a] mb-2.5">
-                      {title}
-                    </h3>
-                    <p className="text-xs sm:text-sm text-[#445457] leading-relaxed mb-6">
-                      {desc}
-                    </p>
-                  </div>
-
-                  <div className="pt-4 border-t border-[#e5e0d6] relative z-10">
-                    <Link
-                      href={`/${locale}/programs`}
-                      className="inline-flex items-center text-xs font-bold text-[#0d3b43] hover:text-[#c85a32] transition-colors"
-                    >
-                      <span>{dict.programs.learn_more}</span>
-                      <span aria-hidden="true" className="ms-1">→</span>
-                    </Link>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
+        <AreasSection
+          locale={locale}
+          sectionTitle={dict.home.areas_title}
+          sectionSubtitle={dict.home.areas_subtitle}
+          eyebrowText={isAr ? 'مجالات النشاط الجمعوي' : isFr ? 'Domaines d\'Activité' : 'Core Disciplines'}
+          learnMoreText={dict.programs.learn_more}
+        />
 
         {/* ============================================================
             5. FLAGSHIP PROGRAM INITIATIVE SPOTLIGHT (البرنامج الرائد)
