@@ -1,12 +1,30 @@
 import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import { revalidatePath } from 'next/cache'
-import { defaultTopBarConfig, type TopBarConfig, defaultHeroConfig, type HeroConfig } from '@/lib/settings'
+import {
+  defaultTopBarConfig,
+  type TopBarConfig,
+  defaultHeroConfig,
+  type HeroConfig,
+  defaultFlagshipProgramConfig,
+  type FlagshipProgramConfig,
+} from '@/lib/settings'
 import { HeroImageUploader } from '@/components/admin/HeroImageUploader'
+import { FlagshipImageUploader } from '@/components/admin/FlagshipImageUploader'
 
 interface SiteSettingRow {
   key: string
   value: Record<string, unknown>
+}
+
+interface DbProgramRecord {
+  id: string
+  slug: string
+  status: string
+  program_translations?: {
+    locale: string
+    title: string
+  }[]
 }
 
 export default async function AdminSettingsPage() {
@@ -17,7 +35,27 @@ export default async function AdminSettingsPage() {
     redirect('/admin/login')
   }
 
-  const { data: settings } = await supabase.from('site_settings').select('*')
+  const [settingsRes, programsRes] = await Promise.all([
+    supabase.from('site_settings').select('*'),
+    supabase
+      .from('programs')
+      .select('id, slug, status, program_translations(locale, title)')
+      .eq('status', 'published'),
+  ])
+
+  const settings = settingsRes.data
+  const dbProgramsData = (programsRes.data || []) as unknown as DbProgramRecord[]
+
+  const availablePrograms = dbProgramsData.map((p) => {
+    const arTrans = p.program_translations?.find((t) => t.locale === 'ar')
+    const fallbackTrans = p.program_translations?.[0]
+    return {
+      id: p.id,
+      slug: p.slug,
+      title: arTrans?.title || fallbackTrans?.title || p.slug,
+    }
+  })
+
   const settingsMap: Record<string, unknown> = {}
   if (settings) {
     (settings as SiteSettingRow[]).forEach((s) => {
@@ -68,6 +106,62 @@ export default async function AdminSettingsPage() {
     const heroBottomStripFr = (formData.get('heroBottomStripFr') as string) || ''
     const heroBottomStripEn = (formData.get('heroBottomStripEn') as string) || ''
 
+    // Flagship Program Settings (البرنامج الرائد ومبادرة الاستقطاب)
+    const flagshipEnabled = formData.get('flagshipEnabled') === 'on'
+    const flagshipProgramSlug = (formData.get('flagshipProgramSlug') as string) || defaultFlagshipProgramConfig.programSlug
+    const flagshipBadgeAr = (formData.get('flagshipBadgeAr') as string) || ''
+    const flagshipBadgeFr = (formData.get('flagshipBadgeFr') as string) || ''
+    const flagshipBadgeEn = (formData.get('flagshipBadgeEn') as string) || ''
+    const flagshipTitleAr = (formData.get('flagshipTitleAr') as string) || ''
+    const flagshipTitleFr = (formData.get('flagshipTitleFr') as string) || ''
+    const flagshipTitleEn = (formData.get('flagshipTitleEn') as string) || ''
+    const flagshipDescAr = (formData.get('flagshipDescAr') as string) || ''
+    const flagshipDescFr = (formData.get('flagshipDescFr') as string) || ''
+    const flagshipDescEn = (formData.get('flagshipDescEn') as string) || ''
+    const flagshipImageUrl = (formData.get('flagshipImageUrl') as string) || ''
+    const flagshipImageCaptionAr = (formData.get('flagshipImageCaptionAr') as string) || ''
+    const flagshipImageCaptionFr = (formData.get('flagshipImageCaptionFr') as string) || ''
+    const flagshipImageCaptionEn = (formData.get('flagshipImageCaptionEn') as string) || ''
+    const flagshipImageSubcaption = (formData.get('flagshipImageSubcaption') as string) || ''
+
+    const step1TitleAr = (formData.get('step1TitleAr') as string) || ''
+    const step1TitleFr = (formData.get('step1TitleFr') as string) || ''
+    const step1TitleEn = (formData.get('step1TitleEn') as string) || ''
+    const step1DescAr = (formData.get('step1DescAr') as string) || ''
+    const step1DescFr = (formData.get('step1DescFr') as string) || ''
+    const step1DescEn = (formData.get('step1DescEn') as string) || ''
+
+    const step2TitleAr = (formData.get('step2TitleAr') as string) || ''
+    const step2TitleFr = (formData.get('step2TitleFr') as string) || ''
+    const step2TitleEn = (formData.get('step2TitleEn') as string) || ''
+    const step2DescAr = (formData.get('step2DescAr') as string) || ''
+    const step2DescFr = (formData.get('step2DescFr') as string) || ''
+    const step2DescEn = (formData.get('step2DescEn') as string) || ''
+
+    const step3TitleAr = (formData.get('step3TitleAr') as string) || ''
+    const step3TitleFr = (formData.get('step3TitleFr') as string) || ''
+    const step3TitleEn = (formData.get('step3TitleEn') as string) || ''
+    const step3DescAr = (formData.get('step3DescAr') as string) || ''
+    const step3DescFr = (formData.get('step3DescFr') as string) || ''
+    const step3DescEn = (formData.get('step3DescEn') as string) || ''
+
+    const step4TitleAr = (formData.get('step4TitleAr') as string) || ''
+    const step4TitleFr = (formData.get('step4TitleFr') as string) || ''
+    const step4TitleEn = (formData.get('step4TitleEn') as string) || ''
+    const step4DescAr = (formData.get('step4DescAr') as string) || ''
+    const step4DescFr = (formData.get('step4DescFr') as string) || ''
+    const step4DescEn = (formData.get('step4DescEn') as string) || ''
+
+    const flagshipCtaPrimaryTextAr = (formData.get('flagshipCtaPrimaryTextAr') as string) || ''
+    const flagshipCtaPrimaryTextFr = (formData.get('flagshipCtaPrimaryTextFr') as string) || ''
+    const flagshipCtaPrimaryTextEn = (formData.get('flagshipCtaPrimaryTextEn') as string) || ''
+    const flagshipCtaPrimaryUrl = (formData.get('flagshipCtaPrimaryUrl') as string) || ''
+
+    const flagshipCtaSecondaryTextAr = (formData.get('flagshipCtaSecondaryTextAr') as string) || ''
+    const flagshipCtaSecondaryTextFr = (formData.get('flagshipCtaSecondaryTextFr') as string) || ''
+    const flagshipCtaSecondaryTextEn = (formData.get('flagshipCtaSecondaryTextEn') as string) || ''
+    const flagshipCtaSecondaryUrl = (formData.get('flagshipCtaSecondaryUrl') as string) || ''
+
     await sb.from('site_settings').upsert([
       {
         key: 'contact_info',
@@ -117,6 +211,65 @@ export default async function AdminSettingsPage() {
           bottomStripEn: heroBottomStripEn,
         },
       },
+      {
+        key: 'flagship_program',
+        value: {
+          enabled: flagshipEnabled,
+          programSlug: flagshipProgramSlug,
+          badgeAr: flagshipBadgeAr,
+          badgeFr: flagshipBadgeFr,
+          badgeEn: flagshipBadgeEn,
+          titleAr: flagshipTitleAr,
+          titleFr: flagshipTitleFr,
+          titleEn: flagshipTitleEn,
+          descriptionAr: flagshipDescAr,
+          descriptionFr: flagshipDescFr,
+          descriptionEn: flagshipDescEn,
+          imageUrl: flagshipImageUrl,
+          imageCaptionAr: flagshipImageCaptionAr,
+          imageCaptionFr: flagshipImageCaptionFr,
+          imageCaptionEn: flagshipImageCaptionEn,
+          imageSubcaption: flagshipImageSubcaption,
+
+          step1TitleAr,
+          step1TitleFr,
+          step1TitleEn,
+          step1DescAr,
+          step1DescFr,
+          step1DescEn,
+
+          step2TitleAr,
+          step2TitleFr,
+          step2TitleEn,
+          step2DescAr,
+          step2DescFr,
+          step2DescEn,
+
+          step3TitleAr,
+          step3TitleFr,
+          step3TitleEn,
+          step3DescAr,
+          step3DescFr,
+          step3DescEn,
+
+          step4TitleAr,
+          step4TitleFr,
+          step4TitleEn,
+          step4DescAr,
+          step4DescFr,
+          step4DescEn,
+
+          ctaPrimaryTextAr: flagshipCtaPrimaryTextAr,
+          ctaPrimaryTextFr: flagshipCtaPrimaryTextFr,
+          ctaPrimaryTextEn: flagshipCtaPrimaryTextEn,
+          ctaPrimaryUrl: flagshipCtaPrimaryUrl,
+
+          ctaSecondaryTextAr: flagshipCtaSecondaryTextAr,
+          ctaSecondaryTextFr: flagshipCtaSecondaryTextFr,
+          ctaSecondaryTextEn: flagshipCtaSecondaryTextEn,
+          ctaSecondaryUrl: flagshipCtaSecondaryUrl,
+        },
+      },
     ])
 
     revalidatePath('/admin/settings')
@@ -129,6 +282,8 @@ export default async function AdminSettingsPage() {
   const topBarVal = (settingsMap['top_bar'] as Partial<TopBarConfig>) || {}
   const isTopBarEnabled = typeof topBarVal.enabled === 'boolean' ? topBarVal.enabled : false
   const heroVal = (settingsMap['hero'] as Partial<HeroConfig>) || {}
+  const flagshipVal = (settingsMap['flagship_program'] as Partial<FlagshipProgramConfig>) || {}
+  const isFlagshipEnabled = typeof flagshipVal.enabled === 'boolean' ? flagshipVal.enabled : defaultFlagshipProgramConfig.enabled
 
   return (
     <div className="space-y-8 max-w-4xl">
@@ -442,6 +597,336 @@ export default async function AdminSettingsPage() {
                   />
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Flagship Program Spotlight Control (البرنامج الرائد ومبادرة الاستقطاب) */}
+        <div className="bg-white p-8 rounded-2xl border border-[#e5e0d6] shadow-2xs space-y-6">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-[#f0ebe1]">
+            <div>
+              <div className="flex items-center gap-2">
+                <span className="text-base">⭐</span>
+                <h2 className="text-sm font-bold text-[#08242a] uppercase tracking-wider">
+                  البرنامج الرائد ومبادرة الاستقطاب (Flagship Program Spotlight)
+                </h2>
+              </div>
+              <p className="text-xs text-[#5f7174] mt-1">
+                التحكم الكامل في قسم المبادرة الرئيسية (مبادرة شباب في العمل)، اختيار البرنامج من قاعدة البيانات، الصور، النصوص، ومراحل المشاركة.
+              </p>
+            </div>
+
+            <div>
+              {isFlagshipEnabled ? (
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 text-3xs font-black rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200">
+                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                  مفعل ويظهر في الموقع
+                </span>
+              ) : (
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 text-3xs font-black rounded-full bg-amber-50 text-amber-800 border border-amber-200">
+                  <span className="w-2 h-2 rounded-full bg-amber-500" />
+                  معطل ومخفي
+                </span>
+              )}
+            </div>
+          </div>
+
+          {/* Toggle Enable / Disable */}
+          <div className="p-4 rounded-xl bg-[#faf7f2] border border-[#e5e0d6] flex items-center justify-between">
+            <div>
+              <label htmlFor="flagshipEnabled" className="text-xs font-bold text-[#08242a] block cursor-pointer">
+                عرض قسم البرنامج الرائد في الصفحة الرئيسية
+              </label>
+              <p className="text-3xs text-[#5f7174] mt-0.5">
+                عند إلغاء التحديد، سيتم إخفاء هذا القسم بالكامل من الواجهة الرئيسية دون فقدان بياناته.
+              </p>
+            </div>
+            <input
+              id="flagshipEnabled"
+              name="flagshipEnabled"
+              type="checkbox"
+              defaultChecked={isFlagshipEnabled}
+              className="w-5 h-5 rounded text-[#0d3b43] focus:ring-[#0d3b43] cursor-pointer"
+            />
+          </div>
+
+          {/* Select Database Program */}
+          <div className="space-y-2">
+            <label className="block text-2xs font-bold text-[#445457]">
+              اختيار البرنامج من قاعدة البيانات (Choose Program)
+            </label>
+            <select
+              name="flagshipProgramSlug"
+              defaultValue={flagshipVal.programSlug || defaultFlagshipProgramConfig.programSlug}
+              className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43] bg-white cursor-pointer"
+            >
+              <option value="youth-in-action">مبادرة شباب في العمل (Youth in Action) — الافتراضي</option>
+              {availablePrograms
+                .filter((p) => p.slug !== 'youth-in-action')
+                .map((p) => (
+                  <option key={p.id} value={p.slug}>
+                    {p.title} ({p.slug})
+                  </option>
+                ))}
+            </select>
+            <p className="text-3xs text-[#819598]">
+              يمكنك ربط هذا القسم بأي برنامج مسجل في قاعدة البيانات، مع تخصيص نصوصه وصورته بالكامل في الحقول أدناه.
+            </p>
+          </div>
+
+          {/* Image Uploader */}
+          <div className="pt-2 border-t border-[#f0ebe1]">
+            <FlagshipImageUploader
+              initialImageUrl={flagshipVal.imageUrl}
+              defaultImageUrl={defaultFlagshipProgramConfig.imageUrl}
+              imageCaption={flagshipVal.imageCaptionAr || defaultFlagshipProgramConfig.imageCaptionAr}
+            />
+          </div>
+
+          {/* Badge & Caption */}
+          <div className="space-y-4 pt-2 border-t border-[#f0ebe1]">
+            <h3 className="text-2xs font-bold text-[#445457] uppercase tracking-wider">
+              شارة وتسميات البرنامج الرائد (Badge & Card Labels)
+            </h3>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div>
+                <label className="block text-3xs font-bold text-[#5f7174] mb-1">الشارة بالعربية (AR)</label>
+                <input
+                  name="flagshipBadgeAr"
+                  type="text"
+                  defaultValue={flagshipVal.badgeAr || defaultFlagshipProgramConfig.badgeAr}
+                  placeholder="البرنامج الرائد"
+                  className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43]"
+                />
+              </div>
+              <div>
+                <label className="block text-3xs font-bold text-[#5f7174] mb-1">الشارة بالفرنسية (FR)</label>
+                <input
+                  name="flagshipBadgeFr"
+                  type="text"
+                  defaultValue={flagshipVal.badgeFr || defaultFlagshipProgramConfig.badgeFr}
+                  placeholder="Programme Phare"
+                  className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43]"
+                />
+              </div>
+              <div>
+                <label className="block text-3xs font-bold text-[#5f7174] mb-1">الشارة بالإنجليزية (EN)</label>
+                <input
+                  name="flagshipBadgeEn"
+                  type="text"
+                  defaultValue={flagshipVal.badgeEn || defaultFlagshipProgramConfig.badgeEn}
+                  placeholder="Flagship Program"
+                  className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43]"
+                />
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
+              <div>
+                <label className="block text-3xs font-bold text-[#5f7174] mb-1">التسمية فوق الصورة (AR)</label>
+                <input
+                  name="flagshipImageCaptionAr"
+                  type="text"
+                  defaultValue={flagshipVal.imageCaptionAr || defaultFlagshipProgramConfig.imageCaptionAr}
+                  placeholder="طاقات شبابية تقود المشهد الثقافي"
+                  className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43]"
+                />
+              </div>
+              <div>
+                <label className="block text-3xs font-bold text-[#5f7174] mb-1">التسمية فوق الصورة (FR)</label>
+                <input
+                  name="flagshipImageCaptionFr"
+                  type="text"
+                  defaultValue={flagshipVal.imageCaptionFr || defaultFlagshipProgramConfig.imageCaptionFr}
+                  placeholder="Jeunes leaders de la scène culturelle"
+                  className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43]"
+                />
+              </div>
+              <div>
+                <label className="block text-3xs font-bold text-[#5f7174] mb-1">التسمية فوق الصورة (EN)</label>
+                <input
+                  name="flagshipImageCaptionEn"
+                  type="text"
+                  defaultValue={flagshipVal.imageCaptionEn || defaultFlagshipProgramConfig.imageCaptionEn}
+                  placeholder="Youth Leadership in Arts & Culture"
+                  className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43]"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-3xs font-bold text-[#5f7174] mb-1">الشعار الفرعي للبطاقة (Subcaption e.g. AMYCC Morocco)</label>
+              <input
+                name="flagshipImageSubcaption"
+                type="text"
+                defaultValue={flagshipVal.imageSubcaption || defaultFlagshipProgramConfig.imageSubcaption}
+                placeholder="AMYCC Morocco"
+                className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43]"
+              />
+            </div>
+          </div>
+
+          {/* Title & Description */}
+          <div className="space-y-4 pt-2 border-t border-[#f0ebe1]">
+            <h3 className="text-2xs font-bold text-[#445457] uppercase tracking-wider">
+              العنوان والوصف التعريفي (Title & Description)
+            </h3>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div>
+                <label className="block text-3xs font-bold text-[#5f7174] mb-1">العنوان بالعربية (AR)</label>
+                <input
+                  name="flagshipTitleAr"
+                  type="text"
+                  defaultValue={flagshipVal.titleAr || defaultFlagshipProgramConfig.titleAr}
+                  placeholder="مبادرة شباب في العمل"
+                  className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43]"
+                />
+              </div>
+              <div>
+                <label className="block text-3xs font-bold text-[#5f7174] mb-1">العنوان بالفرنسية (FR)</label>
+                <input
+                  name="flagshipTitleFr"
+                  type="text"
+                  defaultValue={flagshipVal.titleFr || defaultFlagshipProgramConfig.titleFr}
+                  placeholder="Initiative Jeunesse en Action"
+                  className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43]"
+                />
+              </div>
+              <div>
+                <label className="block text-3xs font-bold text-[#5f7174] mb-1">العنوان بالإنجليزية (EN)</label>
+                <input
+                  name="flagshipTitleEn"
+                  type="text"
+                  defaultValue={flagshipVal.titleEn || defaultFlagshipProgramConfig.titleEn}
+                  placeholder="Youth in Action Initiative"
+                  className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43]"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-3xs font-bold text-[#5f7174] mb-1">الوصف بالعربية (AR)</label>
+              <textarea
+                name="flagshipDescAr"
+                rows={2}
+                defaultValue={flagshipVal.descriptionAr || defaultFlagshipProgramConfig.descriptionAr}
+                className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43]"
+              />
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-3xs font-bold text-[#5f7174] mb-1">الوصف بالفرنسية (FR)</label>
+                <textarea
+                  name="flagshipDescFr"
+                  rows={2}
+                  defaultValue={flagshipVal.descriptionFr || defaultFlagshipProgramConfig.descriptionFr}
+                  className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43]"
+                />
+              </div>
+              <div>
+                <label className="block text-3xs font-bold text-[#5f7174] mb-1">الوصف بالإنجليزية (EN)</label>
+                <textarea
+                  name="flagshipDescEn"
+                  rows={2}
+                  defaultValue={flagshipVal.descriptionEn || defaultFlagshipProgramConfig.descriptionEn}
+                  className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43]"
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* 4 Steps Journey */}
+          <div className="space-y-4 pt-2 border-t border-[#f0ebe1]">
+            <h3 className="text-2xs font-bold text-[#445457] uppercase tracking-wider">
+              المراحل والخطوات الأربع (The 4 Journey Steps)
+            </h3>
+
+            {/* Step 1 */}
+            <div className="p-3.5 rounded-xl bg-[#faf7f2] border border-[#e5e0d6] space-y-3">
+              <span className="text-2xs font-bold text-[#0d3b43] block">المرحلة 1:</span>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <input name="step1TitleAr" placeholder="العنوان (AR)" defaultValue={flagshipVal.step1TitleAr || defaultFlagshipProgramConfig.step1TitleAr} className="px-3 py-1.5 text-xs rounded-lg border border-[#e5e0d6] bg-white" />
+                <input name="step1TitleFr" placeholder="Titre (FR)" defaultValue={flagshipVal.step1TitleFr || defaultFlagshipProgramConfig.step1TitleFr} className="px-3 py-1.5 text-xs rounded-lg border border-[#e5e0d6] bg-white" />
+                <input name="step1TitleEn" placeholder="Title (EN)" defaultValue={flagshipVal.step1TitleEn || defaultFlagshipProgramConfig.step1TitleEn} className="px-3 py-1.5 text-xs rounded-lg border border-[#e5e0d6] bg-white" />
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <input name="step1DescAr" placeholder="الوصف المصغر (AR)" defaultValue={flagshipVal.step1DescAr || defaultFlagshipProgramConfig.step1DescAr} className="px-3 py-1.5 text-xs rounded-lg border border-[#e5e0d6] bg-white" />
+                <input name="step1DescFr" placeholder="Description courte (FR)" defaultValue={flagshipVal.step1DescFr || defaultFlagshipProgramConfig.step1DescFr} className="px-3 py-1.5 text-xs rounded-lg border border-[#e5e0d6] bg-white" />
+                <input name="step1DescEn" placeholder="Short description (EN)" defaultValue={flagshipVal.step1DescEn || defaultFlagshipProgramConfig.step1DescEn} className="px-3 py-1.5 text-xs rounded-lg border border-[#e5e0d6] bg-white" />
+              </div>
+            </div>
+
+            {/* Step 2 */}
+            <div className="p-3.5 rounded-xl bg-[#faf7f2] border border-[#e5e0d6] space-y-3">
+              <span className="text-2xs font-bold text-[#0d3b43] block">المرحلة 2:</span>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <input name="step2TitleAr" placeholder="العنوان (AR)" defaultValue={flagshipVal.step2TitleAr || defaultFlagshipProgramConfig.step2TitleAr} className="px-3 py-1.5 text-xs rounded-lg border border-[#e5e0d6] bg-white" />
+                <input name="step2TitleFr" placeholder="Titre (FR)" defaultValue={flagshipVal.step2TitleFr || defaultFlagshipProgramConfig.step2TitleFr} className="px-3 py-1.5 text-xs rounded-lg border border-[#e5e0d6] bg-white" />
+                <input name="step2TitleEn" placeholder="Title (EN)" defaultValue={flagshipVal.step2TitleEn || defaultFlagshipProgramConfig.step2TitleEn} className="px-3 py-1.5 text-xs rounded-lg border border-[#e5e0d6] bg-white" />
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <input name="step2DescAr" placeholder="الوصف المصغر (AR)" defaultValue={flagshipVal.step2DescAr || defaultFlagshipProgramConfig.step2DescAr} className="px-3 py-1.5 text-xs rounded-lg border border-[#e5e0d6] bg-white" />
+                <input name="step2DescFr" placeholder="Description courte (FR)" defaultValue={flagshipVal.step2DescFr || defaultFlagshipProgramConfig.step2DescFr} className="px-3 py-1.5 text-xs rounded-lg border border-[#e5e0d6] bg-white" />
+                <input name="step2DescEn" placeholder="Short description (EN)" defaultValue={flagshipVal.step2DescEn || defaultFlagshipProgramConfig.step2DescEn} className="px-3 py-1.5 text-xs rounded-lg border border-[#e5e0d6] bg-white" />
+              </div>
+            </div>
+
+            {/* Step 3 */}
+            <div className="p-3.5 rounded-xl bg-[#faf7f2] border border-[#e5e0d6] space-y-3">
+              <span className="text-2xs font-bold text-[#0d3b43] block">المرحلة 3:</span>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <input name="step3TitleAr" placeholder="العنوان (AR)" defaultValue={flagshipVal.step3TitleAr || defaultFlagshipProgramConfig.step3TitleAr} className="px-3 py-1.5 text-xs rounded-lg border border-[#e5e0d6] bg-white" />
+                <input name="step3TitleFr" placeholder="Titre (FR)" defaultValue={flagshipVal.step3TitleFr || defaultFlagshipProgramConfig.step3TitleFr} className="px-3 py-1.5 text-xs rounded-lg border border-[#e5e0d6] bg-white" />
+                <input name="step3TitleEn" placeholder="Title (EN)" defaultValue={flagshipVal.step3TitleEn || defaultFlagshipProgramConfig.step3TitleEn} className="px-3 py-1.5 text-xs rounded-lg border border-[#e5e0d6] bg-white" />
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <input name="step3DescAr" placeholder="الوصف المصغر (AR)" defaultValue={flagshipVal.step3DescAr || defaultFlagshipProgramConfig.step3DescAr} className="px-3 py-1.5 text-xs rounded-lg border border-[#e5e0d6] bg-white" />
+                <input name="step3DescFr" placeholder="Description courte (FR)" defaultValue={flagshipVal.step3DescFr || defaultFlagshipProgramConfig.step3DescFr} className="px-3 py-1.5 text-xs rounded-lg border border-[#e5e0d6] bg-white" />
+                <input name="step3DescEn" placeholder="Short description (EN)" defaultValue={flagshipVal.step3DescEn || defaultFlagshipProgramConfig.step3DescEn} className="px-3 py-1.5 text-xs rounded-lg border border-[#e5e0d6] bg-white" />
+              </div>
+            </div>
+
+            {/* Step 4 */}
+            <div className="p-3.5 rounded-xl bg-[#faf7f2] border border-[#e5e0d6] space-y-3">
+              <span className="text-2xs font-bold text-[#0d3b43] block">المرحلة 4:</span>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <input name="step4TitleAr" placeholder="العنوان (AR)" defaultValue={flagshipVal.step4TitleAr || defaultFlagshipProgramConfig.step4TitleAr} className="px-3 py-1.5 text-xs rounded-lg border border-[#e5e0d6] bg-white" />
+                <input name="step4TitleFr" placeholder="Titre (FR)" defaultValue={flagshipVal.step4TitleFr || defaultFlagshipProgramConfig.step4TitleFr} className="px-3 py-1.5 text-xs rounded-lg border border-[#e5e0d6] bg-white" />
+                <input name="step4TitleEn" placeholder="Title (EN)" defaultValue={flagshipVal.step4TitleEn || defaultFlagshipProgramConfig.step4TitleEn} className="px-3 py-1.5 text-xs rounded-lg border border-[#e5e0d6] bg-white" />
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <input name="step4DescAr" placeholder="الوصف المصغر (AR)" defaultValue={flagshipVal.step4DescAr || defaultFlagshipProgramConfig.step4DescAr} className="px-3 py-1.5 text-xs rounded-lg border border-[#e5e0d6] bg-white" />
+                <input name="step4DescFr" placeholder="Description courte (FR)" defaultValue={flagshipVal.step4DescFr || defaultFlagshipProgramConfig.step4DescFr} className="px-3 py-1.5 text-xs rounded-lg border border-[#e5e0d6] bg-white" />
+                <input name="step4DescEn" placeholder="Short description (EN)" defaultValue={flagshipVal.step4DescEn || defaultFlagshipProgramConfig.step4DescEn} className="px-3 py-1.5 text-xs rounded-lg border border-[#e5e0d6] bg-white" />
+              </div>
+            </div>
+          </div>
+
+          {/* Action Buttons */}
+          <div className="space-y-4 pt-2 border-t border-[#f0ebe1]">
+            <h3 className="text-2xs font-bold text-[#445457] uppercase tracking-wider">
+              أزرار التوجيه (Action Buttons)
+            </h3>
+            {/* Primary Button */}
+            <div className="space-y-2">
+              <span className="text-3xs font-bold text-[#0d3b43] block">الزر الرئيسي (Primary CTA):</span>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <input name="flagshipCtaPrimaryTextAr" placeholder="نص الزر (AR)" defaultValue={flagshipVal.ctaPrimaryTextAr || defaultFlagshipProgramConfig.ctaPrimaryTextAr} className="px-3 py-1.5 text-xs rounded-lg border border-[#e5e0d6]" />
+                <input name="flagshipCtaPrimaryTextFr" placeholder="Texte (FR)" defaultValue={flagshipVal.ctaPrimaryTextFr || defaultFlagshipProgramConfig.ctaPrimaryTextFr} className="px-3 py-1.5 text-xs rounded-lg border border-[#e5e0d6]" />
+                <input name="flagshipCtaPrimaryTextEn" placeholder="Text (EN)" defaultValue={flagshipVal.ctaPrimaryTextEn || defaultFlagshipProgramConfig.ctaPrimaryTextEn} className="px-3 py-1.5 text-xs rounded-lg border border-[#e5e0d6]" />
+              </div>
+              <input name="flagshipCtaPrimaryUrl" placeholder="الرابط الموجه (مثال: /programs/youth-in-action)" defaultValue={flagshipVal.ctaPrimaryUrl || defaultFlagshipProgramConfig.ctaPrimaryUrl} className="w-full px-3.5 py-1.5 text-xs rounded-lg border border-[#e5e0d6] font-mono" />
+            </div>
+
+            {/* Secondary Button */}
+            <div className="space-y-2 pt-2">
+              <span className="text-3xs font-bold text-[#0d3b43] block">الزر الثانوي (Secondary CTA):</span>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <input name="flagshipCtaSecondaryTextAr" placeholder="نص الزر (AR)" defaultValue={flagshipVal.ctaSecondaryTextAr || defaultFlagshipProgramConfig.ctaSecondaryTextAr} className="px-3 py-1.5 text-xs rounded-lg border border-[#e5e0d6]" />
+                <input name="flagshipCtaSecondaryTextFr" placeholder="Texte (FR)" defaultValue={flagshipVal.ctaSecondaryTextFr || defaultFlagshipProgramConfig.ctaSecondaryTextFr} className="px-3 py-1.5 text-xs rounded-lg border border-[#e5e0d6]" />
+                <input name="flagshipCtaSecondaryTextEn" placeholder="Text (EN)" defaultValue={flagshipVal.ctaSecondaryTextEn || defaultFlagshipProgramConfig.ctaSecondaryTextEn} className="px-3 py-1.5 text-xs rounded-lg border border-[#e5e0d6]" />
+              </div>
+              <input name="flagshipCtaSecondaryUrl" placeholder="الرابط الموجه (مثال: /about)" defaultValue={flagshipVal.ctaSecondaryUrl || defaultFlagshipProgramConfig.ctaSecondaryUrl} className="w-full px-3.5 py-1.5 text-xs rounded-lg border border-[#e5e0d6] font-mono" />
             </div>
           </div>
         </div>

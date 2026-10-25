@@ -1,7 +1,7 @@
 import { getDictionary } from '@/lib/i18n/dictionaries'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
-import { getTopBarSettings, getHeroSettings } from '@/lib/settings'
+import { getTopBarSettings, getHeroSettings, getFlagshipProgramSettings } from '@/lib/settings'
 import { createPublicClient } from '@/lib/supabase/public'
 import { FaqAccordion } from '@/components/home/FaqAccordion'
 import { EventRegistrationModal } from '@/components/events/EventRegistrationModal'
@@ -56,10 +56,11 @@ function resolveLocaleUrl(url: string | undefined, loc: string): string {
 
 export default async function HomePage(props: { params: Promise<{ locale: string }> }) {
   const { locale } = await props.params
-  const [dict, topBar, hero] = await Promise.all([
+  const [dict, topBar, hero, flagship] = await Promise.all([
     getDictionary(locale),
     getTopBarSettings(),
     getHeroSettings(),
+    getFlagshipProgramSettings(),
   ])
   const isAr = locale === 'ar'
   const isFr = locale === 'fr'
@@ -70,6 +71,26 @@ export default async function HomePage(props: { params: Promise<{ locale: string
   const heroCtaPrimary = isAr ? hero.ctaPrimaryTextAr : isFr ? hero.ctaPrimaryTextFr : hero.ctaPrimaryTextEn
   const heroCtaSecondary = isAr ? hero.ctaSecondaryTextAr : isFr ? hero.ctaSecondaryTextFr : hero.ctaSecondaryTextEn
   const heroBottomStrip = isAr ? hero.bottomStripAr : isFr ? hero.bottomStripFr : hero.bottomStripEn
+
+  const flagshipBadge = isAr ? flagship.badgeAr : isFr ? flagship.badgeFr : flagship.badgeEn
+  const flagshipTitle = isAr ? flagship.titleAr : isFr ? flagship.titleFr : flagship.titleEn
+  const flagshipDesc = isAr ? flagship.descriptionAr : isFr ? flagship.descriptionFr : flagship.descriptionEn
+  const flagshipCaption = isAr ? flagship.imageCaptionAr : isFr ? flagship.imageCaptionFr : flagship.imageCaptionEn
+
+  const step1Title = isAr ? flagship.step1TitleAr : isFr ? flagship.step1TitleFr : flagship.step1TitleEn
+  const step1Desc = isAr ? flagship.step1DescAr : isFr ? flagship.step1DescFr : flagship.step1DescEn
+
+  const step2Title = isAr ? flagship.step2TitleAr : isFr ? flagship.step2TitleFr : flagship.step2TitleEn
+  const step2Desc = isAr ? flagship.step2DescAr : isFr ? flagship.step2DescFr : flagship.step2DescEn
+
+  const step3Title = isAr ? flagship.step3TitleAr : isFr ? flagship.step3TitleFr : flagship.step3TitleEn
+  const step3Desc = isAr ? flagship.step3DescAr : isFr ? flagship.step3DescFr : flagship.step3DescEn
+
+  const step4Title = isAr ? flagship.step4TitleAr : isFr ? flagship.step4TitleFr : flagship.step4TitleEn
+  const step4Desc = isAr ? flagship.step4DescAr : isFr ? flagship.step4DescFr : flagship.step4DescEn
+
+  const flagshipCtaPrimary = isAr ? flagship.ctaPrimaryTextAr : isFr ? flagship.ctaPrimaryTextFr : flagship.ctaPrimaryTextEn
+  const flagshipCtaSecondary = isAr ? flagship.ctaSecondaryTextAr : isFr ? flagship.ctaSecondaryTextFr : flagship.ctaSecondaryTextEn
 
   let featuredPrograms: ProgramItem[] = []
   let upcomingEvents: EventItem[] = []
@@ -741,109 +762,129 @@ export default async function HomePage(props: { params: Promise<{ locale: string
         </section>
 
         {/* ============================================================
-            5. YOUTH IN ACTION INITIATIVE SPOTLIGHT (شباب في العمل)
+            5. FLAGSHIP PROGRAM INITIATIVE SPOTLIGHT (البرنامج الرائد)
             ============================================================ */}
-        <section className="py-20 lg:py-24 bg-[#08242a] text-white relative overflow-hidden">
-          {/* Subtle Decorative Pattern */}
-          <div className="absolute inset-0 moroccan-pattern opacity-15 pointer-events-none" aria-hidden="true" />
+        {flagship.enabled && (
+          <section className="py-20 lg:py-24 bg-[#08242a] text-white relative overflow-hidden">
+            {/* Subtle Decorative Pattern */}
+            <div className="absolute inset-0 moroccan-pattern opacity-15 pointer-events-none" aria-hidden="true" />
 
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
 
-              {/* Spotlight Content */}
-              <div className="lg:col-span-7 space-y-6">
-                <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-bold bg-[#14505b] text-[#f4ce83] border border-[#268292]/40">
-                  <span>★</span>
-                  <span>{dict.home.youth_badge}</span>
+                {/* Spotlight Content */}
+                <div className="lg:col-span-7 space-y-6">
+                  {flagshipBadge && (
+                    <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-bold bg-[#14505b] text-[#f4ce83] border border-[#268292]/40">
+                      <span>★</span>
+                      <span>{flagshipBadge}</span>
+                    </div>
+                  )}
+
+                  <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white leading-tight">
+                    {flagshipTitle}
+                  </h2>
+
+                  <p className="text-sm sm:text-base text-[#d8f0f4] leading-relaxed">
+                    {flagshipDesc}
+                  </p>
+
+                  {/* 4-Step Volunteering Journey */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 pt-2">
+                    <div className="p-4 rounded-2xl bg-[#0d3b43]/80 border border-[#14505b] flex items-start gap-3 hover:border-[#f4ce83]/50 transition-colors">
+                      <span className="w-7 h-7 rounded-lg bg-[#c85a32] text-white flex items-center justify-center font-black text-xs shrink-0 shadow-xs">1</span>
+                      <div>
+                        <span className="font-bold text-xs block text-white">{step1Title}</span>
+                        <span className="text-3xs text-[#74bfcd]">{step1Desc}</span>
+                      </div>
+                    </div>
+
+                    <div className="p-4 rounded-2xl bg-[#0d3b43]/80 border border-[#14505b] flex items-start gap-3 hover:border-[#f4ce83]/50 transition-colors">
+                      <span className="w-7 h-7 rounded-lg bg-[#c85a32] text-white flex items-center justify-center font-black text-xs shrink-0 shadow-xs">2</span>
+                      <div>
+                        <span className="font-bold text-xs block text-white">{step2Title}</span>
+                        <span className="text-3xs text-[#74bfcd]">{step2Desc}</span>
+                      </div>
+                    </div>
+
+                    <div className="p-4 rounded-2xl bg-[#0d3b43]/80 border border-[#14505b] flex items-start gap-3 hover:border-[#f4ce83]/50 transition-colors">
+                      <span className="w-7 h-7 rounded-lg bg-[#c85a32] text-white flex items-center justify-center font-black text-xs shrink-0 shadow-xs">3</span>
+                      <div>
+                        <span className="font-bold text-xs block text-white">{step3Title}</span>
+                        <span className="text-3xs text-[#74bfcd]">{step3Desc}</span>
+                      </div>
+                    </div>
+
+                    <div className="p-4 rounded-2xl bg-[#0d3b43]/80 border border-[#14505b] flex items-start gap-3 hover:border-[#f4ce83]/50 transition-colors">
+                      <span className="w-7 h-7 rounded-lg bg-[#c85a32] text-white flex items-center justify-center font-black text-xs shrink-0 shadow-xs">4</span>
+                      <div>
+                        <span className="font-bold text-xs block text-white">{step4Title}</span>
+                        <span className="text-3xs text-[#74bfcd]">{step4Desc}</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-col sm:flex-row gap-3 pt-3">
+                    {flagshipCtaPrimary && (
+                      <Link
+                        href={resolveLocaleUrl(flagship.ctaPrimaryUrl, locale)}
+                        className="px-8 py-3.5 rounded-xl font-bold text-center text-[#08242a] bg-[#f4ce83] hover:bg-white active:scale-95 transition-all shadow-md text-xs sm:text-sm"
+                      >
+                        {flagshipCtaPrimary}
+                      </Link>
+                    )}
+                    {flagshipCtaSecondary && (
+                      <Link
+                        href={resolveLocaleUrl(flagship.ctaSecondaryUrl, locale)}
+                        className="px-6 py-3.5 rounded-xl font-bold text-center text-white border border-[#268292] hover:bg-[#14505b] transition-all text-xs sm:text-sm"
+                      >
+                        {flagshipCtaSecondary}
+                      </Link>
+                    )}
+                  </div>
                 </div>
 
-                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white leading-tight">
-                  {dict.home.youth_title}
-                </h2>
-
-                <p className="text-sm sm:text-base text-[#d8f0f4] leading-relaxed">
-                  {dict.home.youth_desc}
-                </p>
-
-                {/* 4-Step Volunteering Journey */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 pt-2">
-                  <div className="p-4 rounded-2xl bg-[#0d3b43]/80 border border-[#14505b] flex items-start gap-3 hover:border-[#f4ce83]/50 transition-colors">
-                    <span className="w-7 h-7 rounded-lg bg-[#c85a32] text-white flex items-center justify-center font-black text-xs shrink-0 shadow-xs">1</span>
-                    <div>
-                      <span className="font-bold text-xs block text-white">{isAr ? 'التقديم السهل عبر المنصة' : 'Online Registration'}</span>
-                      <span className="text-3xs text-[#74bfcd]">{isAr ? 'تعبئة استمارة التطوع الإلكترونية' : 'Simple trilingual application'}</span>
-                    </div>
-                  </div>
-
-                  <div className="p-4 rounded-2xl bg-[#0d3b43]/80 border border-[#14505b] flex items-start gap-3 hover:border-[#f4ce83]/50 transition-colors">
-                    <span className="w-7 h-7 rounded-lg bg-[#c85a32] text-white flex items-center justify-center font-black text-xs shrink-0 shadow-xs">2</span>
-                    <div>
-                      <span className="font-bold text-xs block text-white">{isAr ? 'المواكبة والتأطير الميداني' : 'Field Training & Mentorship'}</span>
-                      <span className="text-3xs text-[#74bfcd]">{isAr ? 'جلسات توجيه وصقل المهارات القيادية' : 'Artistic & leadership development'}</span>
-                    </div>
-                  </div>
-
-                  <div className="p-4 rounded-2xl bg-[#0d3b43]/80 border border-[#14505b] flex items-start gap-3 hover:border-[#f4ce83]/50 transition-colors">
-                    <span className="w-7 h-7 rounded-lg bg-[#c85a32] text-white flex items-center justify-center font-black text-xs shrink-0 shadow-xs">3</span>
-                    <div>
-                      <span className="font-bold text-xs block text-white">{isAr ? 'تنظيم التظاهرات الفنية' : 'Event Production'}</span>
-                      <span className="text-3xs text-[#74bfcd]">{isAr ? 'المشاركة الفاعلة في الورش والمهرجانات' : 'Hands-on cultural coordination'}</span>
-                    </div>
-                  </div>
-
-                  <div className="p-4 rounded-2xl bg-[#0d3b43]/80 border border-[#14505b] flex items-start gap-3 hover:border-[#f4ce83]/50 transition-colors">
-                    <span className="w-7 h-7 rounded-lg bg-[#c85a32] text-white flex items-center justify-center font-black text-xs shrink-0 shadow-xs">4</span>
-                    <div>
-                      <span className="font-bold text-xs block text-white">{isAr ? 'شهادة تطوع وتجربة موثقة' : 'Certified Experience'}</span>
-                      <span className="text-3xs text-[#74bfcd]">{isAr ? 'إثراء المسار الأكاديمي والمهني' : 'Formal volunteering certificate'}</span>
+                {/* Visual Spotlight Card */}
+                <div className="lg:col-span-5 relative">
+                  <div className="relative rounded-3xl p-3 bg-white/10 border border-white/20 backdrop-blur-md shadow-2xl">
+                    <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-[#0d3b43]">
+                      {flagship.imageUrl ? (
+                        <>
+                          <ImageWithFallback
+                            src={flagship.imageUrl}
+                            fallbackSrc="https://images.unsplash.com/photo-1460723237483-7a6dc9d0b212?auto=format&fit=crop&w=1200&q=80"
+                            alt={flagshipTitle || 'Flagship Program'}
+                            fill
+                            sizes="(max-width: 768px) 100vw, 40vw"
+                            className="object-cover"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-[#08242a] to-transparent opacity-80" />
+                          <div className="absolute bottom-4 start-4 end-4 text-white">
+                            {flagship.imageSubcaption && (
+                              <span className="text-3xs text-[#f4ce83] font-bold uppercase tracking-wider block">
+                                {flagship.imageSubcaption}
+                              </span>
+                            )}
+                            {flagshipCaption && (
+                              <span className="text-sm font-bold block mt-1">
+                                {flagshipCaption}
+                              </span>
+                            )}
+                          </div>
+                        </>
+                      ) : (
+                        <div className="absolute inset-0 flex items-center justify-center p-6 text-center text-white/80">
+                          <span className="text-xs font-bold">{flagshipTitle}</span>
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>
 
-                <div className="flex flex-col sm:flex-row gap-3 pt-3">
-                  <Link
-                    href={`/${locale}/programs/youth-in-action`}
-                    className="px-8 py-3.5 rounded-xl font-bold text-center text-[#08242a] bg-[#f4ce83] hover:bg-white active:scale-95 transition-all shadow-md text-xs sm:text-sm"
-                  >
-                    {isAr ? 'اكتشف تفاصيل المبادرة' : 'Discover Initiative Details'}
-                  </Link>
-                  <Link
-                    href={`/${locale}/about`}
-                    className="px-6 py-3.5 rounded-xl font-bold text-center text-white border border-[#268292] hover:bg-[#14505b] transition-all text-xs sm:text-sm"
-                  >
-                    {dict.about.title}
-                  </Link>
-                </div>
               </div>
-
-              {/* Visual Spotlight Card */}
-              <div className="lg:col-span-5 relative">
-                <div className="relative rounded-3xl p-3 bg-white/10 border border-white/20 backdrop-blur-md shadow-2xl">
-                  <div className="relative aspect-[4/3] rounded-2xl overflow-hidden">
-                    <ImageWithFallback
-                      src="/images/youth-in-action.png"
-                      fallbackSrc="https://images.unsplash.com/photo-1460723237483-7a6dc9d0b212?auto=format&fit=crop&w=1200&q=80"
-                      alt="Youth in Action Performing Arts"
-                      fill
-                      sizes="(max-width: 768px) 100vw, 40vw"
-                      className="object-cover"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#08242a] to-transparent opacity-80" />
-                    <div className="absolute bottom-4 start-4 end-4 text-white">
-                      <span className="text-3xs text-[#f4ce83] font-bold uppercase tracking-wider block">
-                        AMYCC Morocco
-                      </span>
-                      <span className="text-sm font-bold block mt-1">
-                        {isAr ? 'طاقات شبابية تقود المشهد الثقافي' : 'Youth Leadership in Arts & Culture'}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
             </div>
-          </div>
-        </section>
+          </section>
+        )}
 
         {/* ============================================================
             6. FEATURED PROGRAMS (DYNAMIC FROM DATABASE)
