@@ -7,6 +7,7 @@ export default async function PartnershipsPage(props: { params: Promise<{ locale
   const { locale } = await props.params
   const dict = await getDictionary(locale)
   const isAr = locale === 'ar'
+  const isFr = locale === 'fr'
 
   return (
     <>
@@ -35,40 +36,40 @@ export default async function PartnershipsPage(props: { params: Promise<{ locale
             <div className="p-5 rounded-2xl bg-white border border-[#e5e0d6] shadow-2xs">
               <span className="text-2xl mb-1 block">🏛️</span>
               <span className="text-xs font-bold text-[#08242a] block">
-                {isAr ? 'المراكز الثقافية' : 'Cultural Centers'}
+                {isAr ? 'المراكز الثقافية' : isFr ? 'Centres Culturels' : 'Cultural Centers'}
               </span>
               <span className="text-4xs text-[#819598] font-medium">
-                {isAr ? 'برمجة مشتركة' : 'Joint curation'}
+                {isAr ? 'برمجة مشتركة' : isFr ? 'Co-programmation' : 'Joint curation'}
               </span>
             </div>
 
             <div className="p-5 rounded-2xl bg-white border border-[#e5e0d6] shadow-2xs">
               <span className="text-2xl mb-1 block">🎓</span>
               <span className="text-xs font-bold text-[#08242a] block">
-                {isAr ? 'المؤسسات التعليمية' : 'Educational Institutes'}
+                {isAr ? 'المؤسسات التعليمية' : isFr ? 'Établissements Éducatifs' : 'Educational Institutes'}
               </span>
               <span className="text-4xs text-[#819598] font-medium">
-                {isAr ? 'مدارس وجامعات' : 'Schools & Unis'}
+                {isAr ? 'مدارس وجامعات' : isFr ? 'Écoles & Universités' : 'Schools & Unis'}
               </span>
             </div>
 
             <div className="p-5 rounded-2xl bg-white border border-[#e5e0d6] shadow-2xs">
               <span className="text-2xl mb-1 block">🤝</span>
               <span className="text-xs font-bold text-[#08242a] block">
-                {isAr ? 'المجتمع المدني' : 'Civil Society'}
+                {isAr ? 'المجتمع المدني' : isFr ? 'Société Civile' : 'Civil Society'}
               </span>
               <span className="text-4xs text-[#819598] font-medium">
-                {isAr ? 'جمعيات صديقة' : 'NGOs & Alliances'}
+                {isAr ? 'جمعيات صديقة' : isFr ? 'ONGs & Alliances' : 'NGOs & Alliances'}
               </span>
             </div>
 
             <div className="p-5 rounded-2xl bg-white border border-[#e5e0d6] shadow-2xs">
               <span className="text-2xl mb-1 block">🏢</span>
               <span className="text-xs font-bold text-[#08242a] block">
-                {isAr ? 'القطاع الخاص' : 'Private Sector'}
+                {isAr ? 'القطاع الخاص' : isFr ? 'Secteur Privé' : 'Private Sector'}
               </span>
               <span className="text-4xs text-[#819598] font-medium">
-                {isAr ? 'رعاية ثقافية' : 'Sponsorship'}
+                {isAr ? 'رعاية ثقافية' : isFr ? 'Mécénat Culturel' : 'Sponsorship'}
               </span>
             </div>
           </div>

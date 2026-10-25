@@ -7,6 +7,7 @@ export default async function MembershipPage(props: { params: Promise<{ locale: 
   const { locale } = await props.params
   const dict = await getDictionary(locale)
   const isAr = locale === 'ar'
+  const isFr = locale === 'fr'
 
   return (
     <>
@@ -35,30 +36,30 @@ export default async function MembershipPage(props: { params: Promise<{ locale: 
             <div className="p-5 rounded-2xl bg-white border border-[#e5e0d6] shadow-2xs">
               <span className="w-8 h-8 rounded-full bg-[#0d3b43] text-white flex items-center justify-center font-bold text-xs mx-auto mb-2">1</span>
               <span className="text-xs font-bold text-[#08242a] block">
-                {isAr ? 'تعبئة الاستمارة' : 'Fill Form'}
+                {isAr ? 'تعبئة الاستمارة' : isFr ? 'Remplir le Formulaire' : 'Fill Form'}
               </span>
               <span className="text-3xs text-[#5f7174]">
-                {isAr ? 'إدخال البيانات والمجالات' : 'Provide your details & interests'}
+                {isAr ? 'إدخال البيانات والمجالات' : isFr ? 'Saisie des coordonnées & centres d’intérêt' : 'Provide your details & interests'}
               </span>
             </div>
 
             <div className="p-5 rounded-2xl bg-white border border-[#e5e0d6] shadow-2xs">
               <span className="w-8 h-8 rounded-full bg-[#c85a32] text-white flex items-center justify-center font-bold text-xs mx-auto mb-2">2</span>
               <span className="text-xs font-bold text-[#08242a] block">
-                {isAr ? 'مراجعة مكتب الجمعية' : 'Board Review'}
+                {isAr ? 'مراجعة مكتب الجمعية' : isFr ? 'Examen par le Bureau' : 'Board Review'}
               </span>
               <span className="text-3xs text-[#5f7174]">
-                {isAr ? 'المطابقة مع النظام الأساسي' : 'Review as per association bylaws'}
+                {isAr ? 'المطابقة مع النظام الأساسي' : isFr ? 'Conformité avec les statuts' : 'Review as per association bylaws'}
               </span>
             </div>
 
             <div className="p-5 rounded-2xl bg-white border border-[#e5e0d6] shadow-2xs">
               <span className="w-8 h-8 rounded-full bg-[#d99b26] text-white flex items-center justify-center font-bold text-xs mx-auto mb-2">3</span>
               <span className="text-xs font-bold text-[#08242a] block">
-                {isAr ? 'تأكيد العضوية' : 'Confirmation'}
+                {isAr ? 'تأكيد العضوية' : isFr ? 'Validation de l’Adhésion' : 'Confirmation'}
               </span>
               <span className="text-3xs text-[#5f7174]">
-                {isAr ? 'تسليم بطاقة الانخراط السنوي' : 'Issuance of membership confirmation'}
+                {isAr ? 'تسليم بطاقة الانخراط السنوي' : isFr ? 'Délivrance de la carte d’adhérent' : 'Issuance of membership confirmation'}
               </span>
             </div>
           </div>

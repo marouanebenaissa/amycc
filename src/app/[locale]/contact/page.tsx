@@ -7,6 +7,7 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
   const { locale } = await props.params
   const dict = await getDictionary(locale)
   const isAr = locale === 'ar'
+  const isFr = locale === 'fr'
 
   return (
     <>
@@ -37,7 +38,7 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
             <div className="p-6 rounded-3xl bg-white border border-[#e5e0d6] shadow-subtle">
               <span className="text-2xl mb-2 block">✉️</span>
               <span className="text-xs font-bold text-[#08242a] block">
-                {isAr ? 'البريد الإلكتروني الرسمي' : 'Official Email'}
+                {isAr ? 'البريد الإلكتروني الرسمي' : isFr ? 'Email Officiel' : 'Official Email'}
               </span>
               <a
                 href="mailto:contact@amycc.org"
@@ -50,17 +51,17 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
             <div className="p-6 rounded-3xl bg-white border border-[#e5e0d6] shadow-subtle">
               <span className="text-2xl mb-2 block">📍</span>
               <span className="text-xs font-bold text-[#08242a] block">
-                {isAr ? 'المقر والنطاق' : 'Headquarters & Scope'}
+                {isAr ? 'المقر والنطاق' : isFr ? 'Siège & Rayonnement' : 'Headquarters & Scope'}
               </span>
               <span className="text-xs text-[#5f7174] font-medium mt-1 block">
-                {isAr ? 'المملكة المغربية • مختلف الجهات' : 'Kingdom of Morocco • Nationwide'}
+                {isAr ? 'المملكة المغربية • مختلف الجهات' : isFr ? 'Royaume du Maroc • Toutes Régions' : 'Kingdom of Morocco • Nationwide'}
               </span>
             </div>
 
             <div className="p-6 rounded-3xl bg-white border border-[#e5e0d6] shadow-subtle">
               <span className="text-2xl mb-2 block">🌐</span>
               <span className="text-xs font-bold text-[#08242a] block">
-                {isAr ? 'التواصل الاجتماعي' : 'Social Channels'}
+                {isAr ? 'التواصل الاجتماعي' : isFr ? 'Réseaux Sociaux' : 'Social Channels'}
               </span>
               <span className="text-xs font-bold text-[#0d3b43] mt-1 block">
                 @amycc.morocco
