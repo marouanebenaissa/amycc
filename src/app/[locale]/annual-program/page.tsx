@@ -23,7 +23,7 @@ export default async function AnnualProgramPage(props: { params: Promise<{ local
         {
           title: isAr ? 'الإطلاق الرسمي للمنصة والبرامج الثقافية' : isFr ? 'Lancement officiel de la plateforme et des programmes' : 'Official Launch of Platform & Programs',
           desc: isAr ? 'تدشين المنصة الرقمية وبدء استقبال طلبات الانخراط والتطوع بالمملكة المغربية.' : 'Inauguration of digital trilingual platform and opening membership drive.',
-          category: isAr ? 'تأسيس وحكامة' : 'Governance',
+          category: isAr ? 'تأسيس وتسيير' : 'Organization',
         },
         {
           title: isAr ? 'انطلاق مبادرة "شباب في العمل" (Youth in Action)' : isFr ? 'Lancement de l\'initiative Jeunesse en Action' : 'Youth in Action Volunteering Kickoff',
@@ -111,7 +111,7 @@ export default async function AnnualProgramPage(props: { params: Promise<{ local
         {
           title: isAr ? 'الجمع العام السنوي وعرض التقريرين الأدبي والمالي' : isFr ? 'Assemblée Générale Ordinaire & Bilans' : 'Annual General Assembly & Reports',
           desc: isAr ? 'عرض حصيلة الأنشطة والتدبير المالي بكل شفافية والمصادقة على برنامج 2027.' : 'Transparent reporting of moral and financial stewardship before the general assembly.',
-          category: isAr ? 'حكامة وشفافية' : 'Governance',
+          category: isAr ? 'تسيير وشفافية' : 'Transparency',
         },
       ],
     },

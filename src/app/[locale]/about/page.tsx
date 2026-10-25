@@ -285,7 +285,7 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
 
           <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
             {/* Breadcrumb Navigation */}
-            <nav className="flex items-center justify-center gap-2 text-3xs sm:text-2xs font-bold text-[#5f7174]">
+            <nav className="flex items-center justify-center gap-2 text-xs sm:text-sm font-bold text-[#5f7174]">
               <Link href={`/${locale}`} className="hover:text-[#0d3b43] transition-colors">
                 {isAr ? 'الرئيسية' : isFr ? 'Accueil' : 'Home'}
               </Link>
@@ -297,12 +297,12 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
 
             {/* Badges Bar */}
             <div className="flex flex-wrap items-center justify-center gap-2.5">
-              <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0d3b43]/10 border border-[#0d3b43]/20 text-[#0d3b43] text-2xs sm:text-xs font-bold shadow-2xs">
+              <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0d3b43]/10 border border-[#0d3b43]/20 text-[#0d3b43] text-xs font-bold shadow-2xs">
                 <span className="w-2 h-2 rounded-full bg-[#c85a32] animate-pulse" />
                 <span>{isAr ? 'جمعية غير ربحية رسمية بالمغرب • تأسست 2026' : 'Official Non-Profit Association in Morocco • Est. 2026'}</span>
               </span>
 
-              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#d99b26]/10 border border-[#d99b26]/20 text-[#99620b] text-2xs sm:text-xs font-bold shadow-2xs">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#d99b26]/10 border border-[#d99b26]/20 text-[#99620b] text-xs font-bold shadow-2xs">
                 <span>📍</span>
                 <span>{isAr ? 'الانطلاق: مراكش الحمراء 🇲🇦' : 'Origin: Marrakech, Morocco 🇲🇦'}</span>
               </span>
@@ -342,43 +342,43 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
             <div className="pt-2 flex flex-wrap items-center justify-center gap-2 sm:gap-3">
               <a
                 href="#profile"
-                className="px-3.5 py-1.5 rounded-xl text-3xs sm:text-xs font-bold bg-white border border-[#cfc7b9] text-[#0d3b43] hover:border-[#c85a32] hover:text-[#c85a32] transition-colors shadow-2xs"
+                className="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-white border border-[#cfc7b9] text-[#0d3b43] hover:border-[#c85a32] hover:text-[#c85a32] transition-colors shadow-2xs"
               >
                 {isAr ? '🏷️ الهوية والنبذة' : 'Identity'}
               </a>
               <a
                 href="#values"
-                className="px-3.5 py-1.5 rounded-xl text-3xs sm:text-xs font-bold bg-white border border-[#cfc7b9] text-[#0d3b43] hover:border-[#c85a32] hover:text-[#c85a32] transition-colors shadow-2xs"
+                className="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-white border border-[#cfc7b9] text-[#0d3b43] hover:border-[#c85a32] hover:text-[#c85a32] transition-colors shadow-2xs"
               >
-                {isAr ? '💎 قيمنا الحاكمة (7)' : 'Core Values (7)'}
+                {isAr ? '💎 قيمنا الجوهرية (7)' : 'Core Values (7)'}
               </a>
               <a
                 href="#mission"
-                className="px-3.5 py-1.5 rounded-xl text-3xs sm:text-xs font-bold bg-white border border-[#cfc7b9] text-[#0d3b43] hover:border-[#c85a32] hover:text-[#c85a32] transition-colors shadow-2xs"
+                className="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-white border border-[#cfc7b9] text-[#0d3b43] hover:border-[#c85a32] hover:text-[#c85a32] transition-colors shadow-2xs"
               >
                 {isAr ? '🎯 رسالتنا الميدانية' : 'Our Mission'}
               </a>
               <a
                 href="#vision"
-                className="px-3.5 py-1.5 rounded-xl text-3xs sm:text-xs font-bold bg-white border border-[#cfc7b9] text-[#0d3b43] hover:border-[#c85a32] hover:text-[#c85a32] transition-colors shadow-2xs"
+                className="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-white border border-[#cfc7b9] text-[#0d3b43] hover:border-[#c85a32] hover:text-[#c85a32] transition-colors shadow-2xs"
               >
                 {isAr ? '🔭 رؤيتنا المستقبلية' : 'Our Vision'}
               </a>
               <a
                 href="#roadmap"
-                className="px-3.5 py-1.5 rounded-xl text-3xs sm:text-xs font-bold bg-white border border-[#cfc7b9] text-[#0d3b43] hover:border-[#c85a32] hover:text-[#c85a32] transition-colors shadow-2xs"
+                className="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-white border border-[#cfc7b9] text-[#0d3b43] hover:border-[#c85a32] hover:text-[#c85a32] transition-colors shadow-2xs"
               >
                 {isAr ? '🗺️ خارطة التوسع' : 'Roadmap'}
               </a>
               <a
                 href="#objectives"
-                className="px-3.5 py-1.5 rounded-xl text-3xs sm:text-xs font-bold bg-white border border-[#cfc7b9] text-[#0d3b43] hover:border-[#c85a32] hover:text-[#c85a32] transition-colors shadow-2xs"
+                className="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-white border border-[#cfc7b9] text-[#0d3b43] hover:border-[#c85a32] hover:text-[#c85a32] transition-colors shadow-2xs"
               >
                 {isAr ? '🎯 أهدافنا (6)' : 'Objectives'}
               </a>
               <a
                 href="#governance"
-                className="px-3.5 py-1.5 rounded-xl text-3xs sm:text-xs font-bold bg-white border border-[#cfc7b9] text-[#0d3b43] hover:border-[#c85a32] hover:text-[#c85a32] transition-colors shadow-2xs"
+                className="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-white border border-[#cfc7b9] text-[#0d3b43] hover:border-[#c85a32] hover:text-[#c85a32] transition-colors shadow-2xs"
               >
                 {isAr ? '🏛️ الهيكلة والتنظيم' : 'Structure'}
               </a>
@@ -389,55 +389,67 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
         {/* ============================================================
             2. KEY METRICS & INSTITUTIONAL STRIP
             ============================================================ */}
-        <section className="py-10 bg-white border-b border-[#e5e0d6]">
+        <section className="py-12 bg-white border-b border-[#e5e0d6]">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-              <div className="p-5 sm:p-6 rounded-3xl bg-[#faf7f2] border border-[#e5e0d6] hover:border-[#0d3b43]/30 transition-all text-center group">
-                <span className="text-3xs font-extrabold uppercase tracking-wider text-[#5f7174] block mb-1">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
+              {/* Card 1: 2026 */}
+              <div className="p-6 rounded-3xl bg-[#faf7f2] border border-[#e5e0d6] hover:border-[#0d3b43]/30 transition-all text-center flex flex-col justify-between group shadow-2xs">
+                <span className="text-xs sm:text-sm font-bold text-[#5f7174] block mb-1">
                   {isAr ? 'سنة التأسيس الرسمي' : 'Foundation Year'}
                 </span>
-                <span className="text-3xl sm:text-4xl font-black text-[#0d3b43] group-hover:scale-105 transition-transform block">
-                  2026
-                </span>
-                <p className="text-2xs sm:text-xs text-[#5f7174] mt-1.5 leading-snug">
+                <div className="min-h-[3.25rem] flex items-center justify-center">
+                  <span className="text-3xl sm:text-4xl font-black text-[#0d3b43] group-hover:scale-105 transition-transform block">
+                    2026
+                  </span>
+                </div>
+                <p className="text-xs sm:text-sm text-[#5f7174] leading-relaxed mt-2">
                   {isAr ? 'جمعية مدنية غير ربحية تأسست بالمغرب' : 'Nonprofit cultural association founded in Morocco.'}
                 </p>
               </div>
 
-              <div className="p-5 sm:p-6 rounded-3xl bg-[#faf7f2] border border-[#e5e0d6] hover:border-[#c85a32]/30 transition-all text-center group">
-                <span className="text-3xs font-extrabold uppercase tracking-wider text-[#5f7174] block mb-1">
+              {/* Card 2: Marrakech • Morocco */}
+              <div className="p-6 rounded-3xl bg-[#faf7f2] border border-[#e5e0d6] hover:border-[#c85a32]/30 transition-all text-center flex flex-col justify-between group shadow-2xs">
+                <span className="text-xs sm:text-sm font-bold text-[#5f7174] block mb-1">
                   {isAr ? 'نقطة الانطلاق والنطاق' : 'Origin & Reach'}
                 </span>
-                <span className="text-2xl sm:text-3xl font-black text-[#c85a32] group-hover:scale-105 transition-transform block">
-                  {isAr ? 'مراكش • المغرب' : 'Marrakech • Morocco'}
-                </span>
-                <p className="text-2xs sm:text-xs text-[#5f7174] mt-1.5 leading-snug">
+                <div className="min-h-[3.25rem] flex items-center justify-center">
+                  <span className="text-xl sm:text-2xl font-black text-[#c85a32] group-hover:scale-105 transition-transform block whitespace-nowrap">
+                    {isAr ? 'مراكش • المغرب' : 'Marrakech • Morocco'}
+                  </span>
+                </div>
+                <p className="text-xs sm:text-sm text-[#5f7174] leading-relaxed mt-2">
                   {isAr
                     ? 'من مراكش نحو مختلف جهات المملكة وشراكات دولية'
                     : 'From Marrakech across Morocco with global partnerships.'}
                 </p>
               </div>
 
-              <div className="p-5 sm:p-6 rounded-3xl bg-[#faf7f2] border border-[#e5e0d6] hover:border-[#d99b26]/30 transition-all text-center group">
-                <span className="text-3xs font-extrabold uppercase tracking-wider text-[#5f7174] block mb-1">
+              {/* Card 3: 7 Core Values */}
+              <div className="p-6 rounded-3xl bg-[#faf7f2] border border-[#e5e0d6] hover:border-[#d99b26]/30 transition-all text-center flex flex-col justify-between group shadow-2xs">
+                <span className="text-xs sm:text-sm font-bold text-[#5f7174] block mb-1">
                   {isAr ? 'المنظومة التوجيهية' : 'Core Framework'}
                 </span>
-                <span className="text-3xl sm:text-4xl font-black text-[#d99b26] group-hover:scale-105 transition-transform block">
-                  7 {isAr ? 'قيم حاكمة' : 'Values'}
-                </span>
-                <p className="text-2xs sm:text-xs text-[#5f7174] mt-1.5 leading-snug">
+                <div className="min-h-[3.25rem] flex items-center justify-center">
+                  <span className="text-2xl sm:text-3xl font-black text-[#d99b26] group-hover:scale-105 transition-transform block whitespace-nowrap">
+                    7 {isAr ? 'قيم موجهة' : 'Values'}
+                  </span>
+                </div>
+                <p className="text-xs sm:text-sm text-[#5f7174] leading-relaxed mt-2">
                   {isAr ? 'الإبداع، الشمولية، التضامن، والشفافية' : 'Creativity, Inclusivity, Solidarity & Transparency.'}
                 </p>
               </div>
 
-              <div className="p-5 sm:p-6 rounded-3xl bg-[#faf7f2] border border-[#e5e0d6] hover:border-[#0d3b43]/30 transition-all text-center group">
-                <span className="text-3xs font-extrabold uppercase tracking-wider text-[#5f7174] block mb-1">
+              {/* Card 4: Youth in Action */}
+              <div className="p-6 rounded-3xl bg-[#faf7f2] border border-[#e5e0d6] hover:border-[#0d3b43]/30 transition-all text-center flex flex-col justify-between group shadow-2xs">
+                <span className="text-xs sm:text-sm font-bold text-[#5f7174] block mb-1">
                   {isAr ? 'البرنامج الرائد والمبادرة' : 'Flagship Initiative'}
                 </span>
-                <span className="text-xl sm:text-2xl font-black text-[#0d3b43] group-hover:scale-105 transition-transform block mt-0.5">
-                  {isAr ? 'شباب في العمل' : 'Youth in Action'}
-                </span>
-                <p className="text-2xs sm:text-xs text-[#5f7174] mt-1.5 leading-snug">
+                <div className="min-h-[3.25rem] flex items-center justify-center">
+                  <span className="text-xl sm:text-2xl font-black text-[#0d3b43] group-hover:scale-105 transition-transform block whitespace-nowrap">
+                    {isAr ? 'شباب في العمل' : 'Youth in Action'}
+                  </span>
+                </div>
+                <p className="text-xs sm:text-sm text-[#5f7174] leading-relaxed mt-2">
                   {isAr ? 'التمكين القيادي والتطوع الميداني للشباب' : 'Civic volunteering & cultural leadership framework.'}
                 </p>
               </div>
@@ -450,14 +462,14 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
             ============================================================ */}
         <section id="profile" className="py-20 bg-[#faf7f2] border-b border-[#e5e0d6] scroll-mt-16">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-            <div className="text-center max-w-3xl mx-auto space-y-3">
+            <div className="text-center max-w-4xl mx-auto space-y-3">
               <span className="text-xs font-bold uppercase tracking-widest text-[#0d3b43] px-3.5 py-1.5 rounded-full bg-[#0d3b43]/10 border border-[#0d3b43]/20">
                 {isAr ? 'النبذة والهوية المؤسساتية' : 'Institutional Profile & Charter'}
               </span>
-              <h2 className="text-3xl sm:text-4xl font-black text-[#08242a]">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#08242a] leading-snug text-balance">
                 {isAr ? 'من نحن؟ — جمعية روح الفنون والثقافة المغربية' : 'Who We Are — The AMYCC Identity'}
               </h2>
-              <p className="text-sm sm:text-base text-[#445457] leading-relaxed">
+              <p className="text-sm sm:text-base text-[#445457] leading-relaxed max-w-3xl mx-auto text-balance">
                 {isAr
                   ? 'منظمة مدنية مستقلة تأسست بروح وطنية مسؤولة للنهوض بالعمل الثقافي والاجتماعي وتأهيل الشباب ليكونوا قادة التغيير الإيجابي.'
                   : 'An independent civic organization founded with deep Moroccan cultural roots to elevate artistic expression and empower youth.'}
@@ -556,13 +568,13 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
         </section>
 
         {/* ============================================================
-            4. أولاً: قيمنا الحاكمة (OUR 7 CORE VALUES)
+            4. أولاً: قيمنا الجوهرية (OUR 7 CORE VALUES)
             ============================================================ */}
         <section id="values" className="py-20 bg-white border-b border-[#e5e0d6] scroll-mt-16">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
             <div className="text-center max-w-3xl mx-auto space-y-3">
               <span className="text-xs font-bold uppercase tracking-widest text-[#c85a32] px-3.5 py-1.5 rounded-full bg-[#c85a32]/10 border border-[#c85a32]/20">
-                {isAr ? 'أولاً: قيمنا الحاكمة' : 'I. Our Core Values'}
+                {isAr ? 'أولاً: قيمنا الجوهرية' : 'I. Our Core Values'}
               </span>
               <h2 className="text-3xl sm:text-4xl font-black text-[#08242a]">
                 {isAr ? 'المنظومة الأخلاقية والمبادئ الموجهة لأنشطتنا' : 'Core Values Guiding Our Cultural Work'}
@@ -590,7 +602,7 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
                         {v.icon}
                       </span>
                       <div className="flex items-center gap-2">
-                        <span className={`px-2.5 py-0.5 rounded-full text-4xs font-black uppercase tracking-wider ${v.accentBg}`}>
+                        <span className={`px-2.5 py-1 rounded-full text-xs font-bold ${v.accentBg}`}>
                           {isAr ? v.badgeAr : isFr ? v.badgeFr : v.badgeEn}
                         </span>
                         <span className="text-xs font-black text-[#819598] font-mono">
@@ -609,7 +621,7 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
                     </div>
                   </div>
 
-                  <div className="relative z-10 pt-4 mt-4 border-t border-[#e5e0d6] flex items-center justify-between text-4xs font-bold text-[#819598] uppercase tracking-wider">
+                  <div className="relative z-10 pt-4 mt-4 border-t border-[#e5e0d6] flex items-center justify-between text-xs font-bold text-[#819598]">
                     <span>AMYCC Ethical Pillar</span>
                     <span className="w-2 h-2 rounded-full bg-[#c85a32]" />
                   </div>
@@ -649,7 +661,7 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
                     ✦
                   </div>
 
-                  <span className="text-4xs font-extrabold uppercase tracking-widest text-[#f4ce83] block">
+                  <span className="text-xs font-bold uppercase tracking-wider text-[#f4ce83] block">
                     {isAr ? 'المبدأ الجوهري المؤسس' : 'Founding Premise'}
                   </span>
 
@@ -666,7 +678,7 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
                   </p>
                 </div>
 
-                <div className="pt-6 mt-6 border-t border-[#14505b] text-3xs text-[#f4ce83] flex items-center justify-between relative z-10">
+                <div className="pt-6 mt-6 border-t border-[#14505b] text-xs font-bold text-[#f4ce83] flex items-center justify-between relative z-10">
                   <div className="flex items-center gap-2">
                     <span>📍</span>
                     <span>{isAr ? 'انطلاقاً من مراكش نحو مختلف جهات المملكة' : 'From Marrakech to all Moroccan Regions'}</span>
@@ -756,7 +768,7 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
                     <span className="w-12 h-12 rounded-2xl bg-[#0d3b43] text-white flex items-center justify-center font-black text-xl shadow-xs">
                       01
                     </span>
-                    <span className="text-4xs font-bold px-2.5 py-1 rounded-full bg-[#0d3b43]/10 text-[#0d3b43]">
+                    <span className="text-xs font-bold px-3 py-1 rounded-full bg-[#0d3b43]/10 text-[#0d3b43]">
                       {isAr ? 'تدرج جغرافي' : 'Staged Network'}
                     </span>
                   </div>
@@ -769,7 +781,7 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
                       : 'AMYCC envisions becoming a leading cultural organization by constructing an integrated network of chapters starting provincially, expanding across all Moroccan regions, and scaling globally.'}
                   </p>
                 </div>
-                <div className="pt-4 border-t border-[#e5e0d6] text-3xs font-extrabold uppercase text-[#0d3b43]">
+                <div className="pt-4 border-t border-[#e5e0d6] text-xs font-bold text-[#0d3b43]">
                   {isAr ? '✓ تدرج هيكلي منظم' : 'Structured Growth'}
                 </div>
               </div>
@@ -780,7 +792,7 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
                     <span className="w-12 h-12 rounded-2xl bg-[#c85a32] text-white flex items-center justify-center font-black text-xl shadow-xs">
                       02
                     </span>
-                    <span className="text-4xs font-bold px-2.5 py-1 rounded-full bg-[#c85a32]/10 text-[#c85a32]">
+                    <span className="text-xs font-bold px-3 py-1 rounded-full bg-[#c85a32]/10 text-[#c85a32]">
                       {isAr ? 'تكافؤ الفرص' : 'Territorial Equity'}
                     </span>
                   </div>
@@ -793,7 +805,7 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
                       : 'We strive to establish an enduring footprint across diverse territories, ensuring fair access for young people to discover skills and participate in cultural enrichment.'}
                   </p>
                 </div>
-                <div className="pt-4 border-t border-[#e5e0d6] text-3xs font-extrabold uppercase text-[#c85a32]">
+                <div className="pt-4 border-t border-[#e5e0d6] text-xs font-bold text-[#c85a32]">
                   {isAr ? '✓ عدالة مجالية ثقافية' : 'Territorial Justice'}
                 </div>
               </div>
@@ -804,7 +816,7 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
                     <span className="w-12 h-12 rounded-2xl bg-[#d99b26] text-white flex items-center justify-center font-black text-xl shadow-xs">
                       03
                     </span>
-                    <span className="text-4xs font-bold px-2.5 py-1 rounded-full bg-[#d99b26]/10 text-[#99620b]">
+                    <span className="text-xs font-bold px-3 py-1 rounded-full bg-[#d99b26]/10 text-[#99620b]">
                       {isAr ? 'أفق عالمي' : 'Global Reach'}
                     </span>
                   </div>
@@ -817,7 +829,7 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
                       : 'We aspire to cultivate an internationally reaching organization uniting youth around creativity, using arts as bridges for intercultural dialogue and friendship.'}
                   </p>
                 </div>
-                <div className="pt-4 border-t border-[#e5e0d6] text-3xs font-extrabold uppercase text-[#d99b26]">
+                <div className="pt-4 border-t border-[#e5e0d6] text-xs font-bold text-[#d99b26]">
                   {isAr ? '✓ هوية أصيلة وانفتاح عالمي' : 'Authentic Roots, Global Reach'}
                 </div>
               </div>
@@ -828,7 +840,7 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
               <div className="absolute top-0 end-0 w-80 h-80 bg-[#c85a32]/10 rounded-full blur-3xl pointer-events-none" />
 
               <div className="text-center max-w-2xl mx-auto space-y-2 relative z-10">
-                <span className="text-3xs font-bold uppercase tracking-widest text-[#f4ce83] px-3 py-1 rounded-full bg-[#f4ce83]/10 border border-[#f4ce83]/20">
+                <span className="text-xs font-bold uppercase tracking-wider text-[#f4ce83] px-3.5 py-1.5 rounded-full bg-[#f4ce83]/10 border border-[#f4ce83]/20">
                   {isAr ? 'خارطة التوسع والتدرج الجغرافي' : 'Strategic Network Phasing'}
                 </span>
                 <h3 className="text-2xl sm:text-3xl font-black text-white">
@@ -845,7 +857,7 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-2 relative z-10">
                 <div className="p-5 rounded-2xl bg-[#0d3b43] border border-[#14505b] space-y-3 relative group hover:border-[#f4ce83]/60 transition-colors">
                   <div className="flex items-center justify-between">
-                    <span className="px-2.5 py-0.5 rounded-full text-4xs font-black bg-[#f4ce83] text-[#08242a]">
+                    <span className="px-2.5 py-1 rounded-full text-xs font-bold bg-[#f4ce83] text-[#08242a]">
                       {isAr ? 'المرحلة 01' : 'Phase 01'}
                     </span>
                     <span className="text-xs">📍</span>
@@ -853,19 +865,19 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
                   <h4 className="font-black text-base text-white">
                     {isAr ? 'المستوى الإقليمي' : 'Provincial Launch'}
                   </h4>
-                  <p className="text-3xs sm:text-2xs text-[#d8f0f4] leading-relaxed">
+                  <p className="text-xs sm:text-sm text-[#d8f0f4] leading-relaxed">
                     {isAr
                       ? 'ترسيخ الحضور والانطلاق من مدينة مراكش ونواحيها عبر محترفات نموذجية وشراكات محلية.'
                       : 'Marrakech foundation, launching flagship model workshops and building municipal alliances.'}
                   </p>
-                  <div className="pt-2 text-4xs font-bold text-[#f4ce83]">
+                  <div className="pt-2 text-xs font-bold text-[#f4ce83]">
                     {isAr ? '● جاري التفعيل' : '● In Progress'}
                   </div>
                 </div>
 
                 <div className="p-5 rounded-2xl bg-[#0d3b43] border border-[#14505b] space-y-3 relative group hover:border-[#f4ce83]/60 transition-colors">
                   <div className="flex items-center justify-between">
-                    <span className="px-2.5 py-0.5 rounded-full text-4xs font-black bg-[#74bfcd] text-[#08242a]">
+                    <span className="px-2.5 py-1 rounded-full text-xs font-bold bg-[#74bfcd] text-[#08242a]">
                       {isAr ? 'المرحلة 02' : 'Phase 02'}
                     </span>
                     <span className="text-xs">🏛️</span>
@@ -873,19 +885,19 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
                   <h4 className="font-black text-base text-white">
                     {isAr ? 'جهات المملكة' : 'Regional Reach'}
                   </h4>
-                  <p className="text-3xs sm:text-2xs text-[#d8f0f4] leading-relaxed">
+                  <p className="text-xs sm:text-sm text-[#d8f0f4] leading-relaxed">
                     {isAr
                       ? 'الامتداد نحو مختلف جهات المغرب بالشراكة مع المراكز الثقافية ودور الشباب والفضاءات الجمعوية.'
                       : 'Expanding across Moroccan regions through institutional pacts with cultural hubs.'}
                   </p>
-                  <div className="pt-2 text-4xs font-bold text-[#74bfcd]">
+                  <div className="pt-2 text-xs font-bold text-[#74bfcd]">
                     {isAr ? '○ أفق التوسع' : '○ Target Milestone'}
                   </div>
                 </div>
 
                 <div className="p-5 rounded-2xl bg-[#0d3b43] border border-[#14505b] space-y-3 relative group hover:border-[#f4ce83]/60 transition-colors">
                   <div className="flex items-center justify-between">
-                    <span className="px-2.5 py-0.5 rounded-full text-4xs font-black bg-[#aedfe7] text-[#08242a]">
+                    <span className="px-2.5 py-1 rounded-full text-xs font-bold bg-[#aedfe7] text-[#08242a]">
                       {isAr ? 'المرحلة 03' : 'Phase 03'}
                     </span>
                     <span className="text-xs">🇲🇦</span>
@@ -893,19 +905,19 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
                   <h4 className="font-black text-base text-white">
                     {isAr ? 'المستوى الوطني' : 'National Scale'}
                   </h4>
-                  <p className="text-3xs sm:text-2xs text-[#d8f0f4] leading-relaxed">
+                  <p className="text-xs sm:text-sm text-[#d8f0f4] leading-relaxed">
                     {isAr
                       ? 'بناء شبكة وطنية موحدة للفروع، وتنسيق مهرجانات وملتقيات كبرى تجمع مبدعي الوطن.'
                       : 'Unified national chapter framework, large-scale annual showcases, and nation-wide civic volunteer network.'}
                   </p>
-                  <div className="pt-2 text-4xs font-bold text-[#aedfe7]">
+                  <div className="pt-2 text-xs font-bold text-[#aedfe7]">
                     {isAr ? '○ الهدف الوطني' : '○ Strategic Goal'}
                   </div>
                 </div>
 
                 <div className="p-5 rounded-2xl bg-[#0d3b43] border border-[#14505b] space-y-3 relative group hover:border-[#f4ce83]/60 transition-colors">
                   <div className="flex items-center justify-between">
-                    <span className="px-2.5 py-0.5 rounded-full text-4xs font-black bg-[#c85a32] text-white">
+                    <span className="px-2.5 py-1 rounded-full text-xs font-bold bg-[#c85a32] text-white">
                       {isAr ? 'المرحلة 04' : 'Phase 04'}
                     </span>
                     <span className="text-xs">🌍</span>
@@ -913,12 +925,12 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
                   <h4 className="font-black text-base text-white">
                     {isAr ? 'الامتداد الدولي' : 'Global Reach'}
                   </h4>
-                  <p className="text-3xs sm:text-2xs text-[#d8f0f4] leading-relaxed">
+                  <p className="text-xs sm:text-sm text-[#d8f0f4] leading-relaxed">
                     {isAr
                       ? 'إحداث فروع بالخارج، وإبرام شراكات دولية للتبادل الثقافي ومشاركة الشباب بالمهرجانات العالمية.'
                       : 'International chapters, diaspora engagement, and cross-cultural exchanges celebrating Moroccan culture.'}
                   </p>
-                  <div className="pt-2 text-4xs font-bold text-[#c85a32]">
+                  <div className="pt-2 text-xs font-bold text-[#c85a32]">
                     {isAr ? '○ الأفق العالمي' : '○ Global Horizon'}
                   </div>
                 </div>
@@ -963,7 +975,7 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
                     </div>
 
                     <div>
-                      <span className="text-4xs font-bold uppercase tracking-wider text-[#c85a32] block mb-1">
+                      <span className="text-xs font-bold uppercase tracking-wider text-[#c85a32] block mb-1">
                         {obj.tag}
                       </span>
                       <h3 className="text-base sm:text-lg font-black text-[#08242a] mb-2 leading-snug">
@@ -975,7 +987,7 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
                     </div>
                   </div>
 
-                  <div className="pt-4 mt-4 border-t border-[#f0ebe1] flex items-center justify-between text-4xs font-bold text-[#819598]">
+                  <div className="pt-4 mt-4 border-t border-[#f0ebe1] flex items-center justify-between text-xs font-bold text-[#819598]">
                     <span>{isAr ? 'محور عمل رسمي' : 'Official Priority'}</span>
                     <span className="text-[#0d3b43]">✓</span>
                   </div>
@@ -994,7 +1006,7 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
           <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
               <div className="space-y-3 max-w-2xl text-center lg:text-start">
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-4xs font-bold bg-[#c85a32] text-white">
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-[#c85a32] text-white">
                   <span>★</span>
                   <span>{isAr ? 'البرنامج الرائد والمبادرة الميدانية' : 'Flagship Civic Initiative'}</span>
                 </span>
@@ -1051,7 +1063,7 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
                   <div className="w-14 h-14 rounded-2xl bg-[#0d3b43]/10 text-[#0d3b43] text-2xl flex items-center justify-center mx-auto shadow-2xs">
                     🏛️
                   </div>
-                  <span className="text-4xs font-bold uppercase tracking-wider text-[#0d3b43] block">
+                  <span className="text-xs font-bold uppercase tracking-wider text-[#0d3b43] block">
                     {isAr ? 'الهيئة العليا' : 'Supreme Body'}
                   </span>
                   <h3 className="text-lg font-black text-[#08242a]">
@@ -1063,7 +1075,7 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
                       : 'Supreme decision-making body comprising all active members, approving annual narrative and financial reports.'}
                   </p>
                 </div>
-                <div className="pt-4 border-t border-[#e5e0d6] text-3xs font-bold text-[#819598]">
+                <div className="pt-4 border-t border-[#e5e0d6] text-xs font-bold text-[#819598]">
                   {isAr ? 'الديمقراطية التشاركية' : 'Participatory Democracy'}
                 </div>
               </div>
@@ -1073,7 +1085,7 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
                   <div className="w-14 h-14 rounded-2xl bg-[#c85a32]/10 text-[#c85a32] text-2xl flex items-center justify-center mx-auto shadow-2xs">
                     👥
                   </div>
-                  <span className="text-4xs font-bold uppercase tracking-wider text-[#c85a32] block">
+                  <span className="text-xs font-bold uppercase tracking-wider text-[#c85a32] block">
                     {isAr ? 'التسيير والتنفيذ' : 'Executive Leadership'}
                   </span>
                   <h3 className="text-lg font-black text-[#08242a]">
@@ -1085,7 +1097,7 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
                       : 'Elected executive board responsible for day-to-day management, legal representation, and strategic implementation.'}
                   </p>
                 </div>
-                <div className="pt-4 border-t border-[#e5e0d6] text-3xs font-bold text-[#819598]">
+                <div className="pt-4 border-t border-[#e5e0d6] text-xs font-bold text-[#819598]">
                   {isAr ? 'الإشراف والتمثيل القانوني' : 'Legal Oversight'}
                 </div>
               </div>
@@ -1095,7 +1107,7 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
                   <div className="w-14 h-14 rounded-2xl bg-[#d99b26]/10 text-[#99620b] text-2xl flex items-center justify-center mx-auto shadow-2xs">
                     🎨
                   </div>
-                  <span className="text-4xs font-bold uppercase tracking-wider text-[#99620b] block">
+                  <span className="text-xs font-bold uppercase tracking-wider text-[#99620b] block">
                     {isAr ? 'المحاور الميدانية' : 'Action Hubs'}
                   </span>
                   <h3 className="text-lg font-black text-[#08242a]">
@@ -1107,7 +1119,7 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
                       : 'Working committees dedicated to performing arts, music, media, and Youth in Action coordination.'}
                   </p>
                 </div>
-                <div className="pt-4 border-t border-[#e5e0d6] text-3xs font-bold text-[#819598]">
+                <div className="pt-4 border-t border-[#e5e0d6] text-xs font-bold text-[#819598]">
                   {isAr ? 'التنفيذ الميداني التخصصي' : 'Specialized Operations'}
                 </div>
               </div>
@@ -1150,13 +1162,13 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
                     <h3 className="text-lg font-black text-[#08242a]">
                       {isAr ? 'ميثاق النزاهة والشفافية والمسؤولية' : 'Charter of Integrity & Transparency'}
                     </h3>
-                    <span className="text-3xs text-[#819598] font-bold">
+                    <span className="text-xs font-bold text-[#819598]">
                       {isAr ? 'التزام أخلاقي وقانوني صارم تجاه المجتمع والشركاء' : 'Ethical and transparent management pledge'}
                     </span>
                   </div>
                 </div>
 
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-3xs font-bold self-start sm:self-auto">
+                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-bold self-start sm:self-auto">
                   <span>✓</span>
                   <span>{isAr ? 'التزام رسمي مصادق عليه' : 'Officially Certified'}</span>
                 </div>

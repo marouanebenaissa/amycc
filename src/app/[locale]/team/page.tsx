@@ -136,7 +136,7 @@ export default async function TeamPage(props: { params: Promise<{ locale: string
               {isAr ? 'المكتب التنفيذي للجمعية' : 'Executive Board'}
             </span>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-[#08242a] mt-2 mb-4">
-              {isAr ? 'حكامة مدنية مسؤولة وشفافة' : 'Committed Non-Profit Leadership'}
+              {isAr ? 'إدارة مدنية مسؤولة وشفافة' : 'Committed Non-Profit Leadership'}
             </h2>
             <p className="text-sm sm:text-base text-[#445457] leading-relaxed">
               {isAr
