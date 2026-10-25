@@ -87,9 +87,11 @@ interface HeaderProps {
   locale: string
   dict: Dictionary
   topBar?: TopBarConfig
+  theme?: 'light' | 'dark'
 }
 
-export function Header({ locale, dict, topBar }: HeaderProps) {
+export function Header({ locale, dict, topBar, theme = 'light' }: HeaderProps) {
+  const isDark = theme === 'dark'
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [aboutDropdownOpen, setAboutDropdownOpen] = useState(false)
   const [programsDropdownOpen, setProgramsDropdownOpen] = useState(false)
@@ -394,9 +396,13 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
   return (
     <header
       className={`sticky top-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? 'bg-[#faf7f2]/95 backdrop-blur-md border-b border-[#e5e0d6] shadow-sm'
-          : 'bg-[#faf7f2] border-b border-[#ebe1d1]'
+        isDark
+          ? scrolled
+            ? 'bg-[#08242a]/95 backdrop-blur-md border-b border-[#14505b]/60 shadow-lg text-white'
+            : 'bg-[#08242a] border-b border-[#14505b]/40 text-white'
+          : scrolled
+          ? 'bg-[#faf7f2]/95 backdrop-blur-md border-b border-[#e5e0d6] shadow-sm text-[#1b2628]'
+          : 'bg-[#faf7f2] border-b border-[#ebe1d1] text-[#1b2628]'
       }`}
     >
       {/* Skip to main content — accessibility */}
@@ -459,7 +465,7 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           {/* Logo with Brand Seal */}
-          <Logo locale={locale} />
+          <Logo locale={locale} variant={isDark ? 'dark' : 'light'} />
 
           {/* Desktop Navigation Links */}
           <nav className="hidden lg:flex items-center gap-1 xl:gap-2" aria-label="Main navigation">
@@ -467,7 +473,11 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
             <Link
               href={`/${locale}`}
               className={`px-3 py-2 rounded-lg text-xs font-bold transition-all ${
-                isHomeActive
+                isDark
+                  ? isHomeActive
+                    ? 'bg-[#14505b]/60 text-[#f4ce83] font-black'
+                    : 'text-[#d8f0f4] hover:text-white hover:bg-[#14505b]/40'
+                  : isHomeActive
                   ? 'bg-[#0d3b43]/8 text-[#0d3b43] font-black'
                   : 'text-[#1b2628] hover:text-[#0d3b43] hover:bg-[#ebe1d1]/50'
               }`}
@@ -490,7 +500,11 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
                   setExploreDropdownOpen(false)
                 }}
                 className={`px-3 py-2 rounded-lg text-xs font-bold transition-all inline-flex items-center gap-1.5 ${
-                  isAboutActive || aboutDropdownOpen
+                  isDark
+                    ? isAboutActive || aboutDropdownOpen
+                      ? 'bg-[#14505b]/60 text-[#f4ce83] font-black'
+                      : 'text-[#d8f0f4] hover:text-white hover:bg-[#14505b]/40'
+                    : isAboutActive || aboutDropdownOpen
                     ? 'bg-[#0d3b43]/8 text-[#0d3b43] font-black'
                     : 'text-[#1b2628] hover:text-[#0d3b43] hover:bg-[#ebe1d1]/50'
                 }`}
@@ -500,7 +514,7 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
                 <span>{dict.nav.about_group || (isAr ? 'عن الجمعية' : isFr ? "L'Association" : 'About Us')}</span>
                 <svg
                   className={`w-3.5 h-3.5 transition-transform duration-200 ${
-                    aboutDropdownOpen ? 'rotate-180 text-[#c85a32]' : 'text-[#819598]'
+                    aboutDropdownOpen ? 'rotate-180 text-[#f4ce83]' : isDark ? 'text-[#74bfcd]' : 'text-[#819598]'
                   }`}
                   fill="none"
                   viewBox="0 0 24 24"
@@ -573,7 +587,11 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
                   setExploreDropdownOpen(false)
                 }}
                 className={`px-3 py-2 rounded-lg text-xs font-bold transition-all inline-flex items-center gap-1.5 ${
-                  isProgramsActive || programsDropdownOpen
+                  isDark
+                    ? isProgramsActive || programsDropdownOpen
+                      ? 'bg-[#14505b]/60 text-[#f4ce83] font-black'
+                      : 'text-[#d8f0f4] hover:text-white hover:bg-[#14505b]/40'
+                    : isProgramsActive || programsDropdownOpen
                     ? 'bg-[#0d3b43]/8 text-[#0d3b43] font-black'
                     : 'text-[#1b2628] hover:text-[#0d3b43] hover:bg-[#ebe1d1]/50'
                 }`}
@@ -583,7 +601,11 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
                 <span>{dict.nav.programs_group || dict.nav.programs}</span>
                 <svg
                   className={`w-3.5 h-3.5 transition-transform duration-200 ${
-                    programsDropdownOpen ? 'rotate-180 text-[#c85a32]' : 'text-[#819598]'
+                    programsDropdownOpen
+                      ? 'rotate-180 text-[#f4ce83]'
+                      : isDark
+                      ? 'text-[#74bfcd]'
+                      : 'text-[#819598]'
                   }`}
                   fill="none"
                   viewBox="0 0 24 24"
@@ -656,7 +678,11 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
                   setProgramsDropdownOpen(false)
                 }}
                 className={`px-3 py-2 rounded-lg text-xs font-bold transition-all inline-flex items-center gap-1.5 ${
-                  isExploreActive || exploreDropdownOpen
+                  isDark
+                    ? isExploreActive || exploreDropdownOpen
+                      ? 'bg-[#14505b]/60 text-[#f4ce83] font-black'
+                      : 'text-[#d8f0f4] hover:text-white hover:bg-[#14505b]/40'
+                    : isExploreActive || exploreDropdownOpen
                     ? 'bg-[#0d3b43]/8 text-[#0d3b43] font-black'
                     : 'text-[#1b2628] hover:text-[#0d3b43] hover:bg-[#ebe1d1]/50'
                 }`}
@@ -666,7 +692,11 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
                 <span>{dict.nav.explore || (isAr ? 'استكشف' : isFr ? 'Explorer' : 'Explore')}</span>
                 <svg
                   className={`w-3.5 h-3.5 transition-transform duration-200 ${
-                    exploreDropdownOpen ? 'rotate-180 text-[#c85a32]' : 'text-[#819598]'
+                    exploreDropdownOpen
+                      ? 'rotate-180 text-[#f4ce83]'
+                      : isDark
+                      ? 'text-[#74bfcd]'
+                      : 'text-[#819598]'
                   }`}
                   fill="none"
                   viewBox="0 0 24 24"
@@ -734,7 +764,11 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
                   key={key}
                   href={fullPath}
                   className={`px-3 py-2 rounded-lg text-xs font-bold transition-all ${
-                    isActive
+                    isDark
+                      ? isActive
+                        ? 'bg-[#14505b]/60 text-[#f4ce83] font-black'
+                        : 'text-[#d8f0f4] hover:text-white hover:bg-[#14505b]/40'
+                      : isActive
                       ? 'bg-[#0d3b43]/8 text-[#0d3b43] font-black'
                       : 'text-[#1b2628] hover:text-[#0d3b43] hover:bg-[#ebe1d1]/50'
                   }`}
@@ -747,11 +781,15 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
 
           {/* Right side: Language switcher + Primary CTA */}
           <div className="flex items-center gap-3">
-            <LanguageSwitcher currentLocale={locale} />
+            <LanguageSwitcher currentLocale={locale} variant={isDark ? 'dark' : 'light'} />
 
             <Link
               href={`/${locale}/membership`}
-              className="hidden sm:inline-flex items-center justify-center px-4 py-2.5 rounded-xl text-xs font-bold text-white bg-[#0d3b43] hover:bg-[#14505b] active:scale-95 transition-all shadow-subtle hover:shadow-card gap-1.5 group"
+              className={`hidden sm:inline-flex items-center justify-center px-4 py-2.5 rounded-xl text-xs font-bold transition-all shadow-subtle hover:shadow-card gap-1.5 group active:scale-95 ${
+                isDark
+                  ? 'text-[#08242a] bg-[#f4ce83] hover:bg-[#ebd59b]'
+                  : 'text-white bg-[#0d3b43] hover:bg-[#14505b]'
+              }`}
             >
               <span>{dict.membership.apply}</span>
               <span className="group-hover:translate-x-0.5 transition-transform" aria-hidden="true">
@@ -763,7 +801,11 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
             <button
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden p-2.5 rounded-xl text-[#0d3b43] hover:bg-[#ebe1d1] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c85a32]"
+              className={`lg:hidden p-2.5 rounded-xl transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f4ce83] ${
+                isDark
+                  ? 'text-white hover:bg-[#14505b]/60'
+                  : 'text-[#0d3b43] hover:bg-[#ebe1d1]'
+              }`}
               aria-expanded={mobileMenuOpen}
               aria-label={mobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
             >

@@ -384,159 +384,124 @@ export default async function HomePage(props: { params: Promise<{ locale: string
 
   return (
     <>
-      <Header locale={locale} dict={dict} topBar={topBar} />
+      <Header locale={locale} dict={dict} topBar={topBar} theme="dark" />
 
       <main id="main-content" className="flex flex-col flex-1 bg-[#faf7f2]">
 
         {/* ============================================================
-            1. HERO SECTION — Asymmetric Master Editorial Showcase
+            1. HERO SECTION — Full-Bleed 88 International Aesthetic
             ============================================================ */}
-        <section className="relative overflow-hidden bg-gradient-to-b from-[#faf7f2] via-[#f7f2e9] to-[#faf7f2] border-b border-[#e5e0d6] pt-12 pb-16 lg:pt-18 lg:pb-24">
-          {/* Subtle decorative Moroccan pattern overlay — luxury watermark */}
-          <div className="absolute inset-0 moroccan-star-pattern opacity-15 pointer-events-none" aria-hidden="true" />
+        <section className="relative min-h-[640px] sm:min-h-[700px] lg:min-h-[760px] flex items-center overflow-hidden bg-[#08242a] text-white border-b border-[#14505b]/60">
+          {/* Full-bleed high-res authentic youth photography */}
+          <div className="absolute inset-0 z-0">
+            <ImageWithFallback
+              src="/images/youth-in-action.jpg"
+              fallbackSrc="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1920&q=85"
+              alt="AMYCC Youth in Action & Moroccan Cultural Expression"
+              fill
+              priority
+              sizes="100vw"
+              className="object-cover object-center"
+            />
 
-          {/* Ambient Lighting Glow Behind Hero */}
-          <div className="absolute top-1/4 start-1/4 w-96 h-96 bg-[#c85a32]/6 rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute bottom-10 end-10 w-96 h-96 bg-[#0d3b43]/6 rounded-full blur-3xl pointer-events-none" />
+            {/* Directional Cinematic Overlays for 100% typography legibility */}
+            {/* Mobile: bottom-to-top gradient */}
+            <div className="absolute inset-0 bg-gradient-to-t from-[#08242a] via-[#08242a]/85 to-[#08242a]/40 lg:hidden" />
 
-          <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-center">
+            {/* Desktop RTL: Dark on Right (start), transparent towards Left */}
+            {/* Desktop LTR: Dark on Left (start), transparent towards Right */}
+            <div className="absolute inset-0 hidden lg:block rtl:bg-gradient-to-l rtl:from-[#08242a] rtl:via-[#08242a]/90 rtl:via-55% rtl:to-[#08242a]/30 ltr:bg-gradient-to-r ltr:from-[#08242a] ltr:via-[#08242a]/90 ltr:via-55% ltr:to-[#08242a]/30" />
 
-              {/* Text & Content Column (7 cols) */}
-              <div className="lg:col-span-7 space-y-6 text-start">
-                {/* Official Verification Pill */}
-                <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-white/90 border border-[#e5e0d6] text-[#0d3b43] text-xs font-semibold shadow-2xs">
-                  <span className="w-2 h-2 rounded-full bg-[#c85a32]" aria-hidden="true" />
-                  <span className="font-mono text-3xs px-2 py-0.5 rounded-md bg-[#0d3b43] text-[#f4ce83] font-black">
-                    2026
-                  </span>
-                  <span>
-                    {isAr
-                      ? 'المملكة المغربية • جمعية مدنية غير ربحية — تأسست بمراكش'
-                      : isFr
-                      ? 'Royaume du Maroc • Organisation non lucrative — Marrakech'
-                      : 'Kingdom of Morocco • Non-Profit Organization — Marrakech'}
-                  </span>
-                </div>
+            {/* Subtle atmospheric blend & Moroccan star geometry watermark */}
+            <div className="absolute inset-0 bg-[#08242a]/30 mix-blend-multiply" />
+            <div className="absolute inset-0 moroccan-star-pattern opacity-10 pointer-events-none" aria-hidden="true" />
+          </div>
 
-                {/* Grand Cultural Headline — Perfectly Balanced Typography */}
-                <div className="space-y-3">
-                  <span className="inline-block text-base sm:text-lg lg:text-xl font-extrabold text-[#c85a32] tracking-tight">
-                    {isAr
-                      ? 'جمعية روح الفنون والثقافة (AMYCC)'
-                      : isFr
-                      ? 'Association Esprit des Arts et de la Culture (AMYCC)'
-                      : 'Spirit of Arts & Culture Association (AMYCC)'}
-                  </span>
-                  <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#08242a] tracking-tight leading-[1.25]">
-                    <span className="block">
-                      {isAr ? 'نحو مجتمع مبدع، متضامن،' : dict.hero.title}
-                    </span>
-                    <span className="block text-transparent bg-clip-text bg-gradient-to-r from-[#0d3b43] via-[#14505b] to-[#c85a32] mt-1 font-black">
-                      {isAr ? 'ومتنوع ثقافياً بالمملكة المغربية' : dict.hero.subtitle}
-                    </span>
-                  </h1>
-                </div>
+          {/* Hero Foreground Content */}
+          <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24">
+            <div className="max-w-3xl space-y-7 text-start">
 
-                {/* Mission Summary */}
-                <p className="text-sm sm:text-base lg:text-lg text-[#3f5255] leading-relaxed max-w-2xl font-normal">
+              {/* Eyebrow: Gold uppercase tracking banner */}
+              <div className="inline-flex items-center gap-2.5">
+                <span className="w-2 h-2 rounded-full bg-[#f4ce83] animate-pulse" aria-hidden="true" />
+                <span className="text-xs sm:text-sm font-extrabold tracking-widest uppercase text-[#f4ce83]">
                   {isAr
-                    ? 'منصة ثقافية وفنية مدنية غير ربحية تأسست سنة 2026 بالمغرب، تكرّس جهودها لترسيخ الإبداع المعاصر، صون التراث الموسيقي والمسرحي، وتمكين الشباب عبر مبادرة "شباب في العمل" وشبكة شراكات وطنية ودولية.'
-                    : dict.home.intro_p1}
-                </p>
-
-                {/* Action Buttons Cluster */}
-                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 pt-2">
-                  <Link
-                    href={`/${locale}/programs`}
-                    className="px-7 py-3.5 rounded-xl font-bold text-white bg-[#0d3b43] hover:bg-[#14505b] active:scale-98 transition-all shadow-card hover:shadow-card-hover text-center text-sm inline-flex items-center justify-center gap-2 group"
-                  >
-                    <span>{dict.hero.cta_primary}</span>
-                    <span className="group-hover:translate-x-1 rtl:group-hover:-translate-x-1 transition-transform" aria-hidden="true">
-                      {isAr ? '←' : '→'}
-                    </span>
-                  </Link>
-
-                  <Link
-                    href={`/${locale}/about`}
-                    className="px-7 py-3.5 rounded-xl font-bold text-[#08242a] bg-white border border-[#e5e0d6] hover:bg-[#faf7f2] hover:border-[#0d3b43]/30 active:scale-98 transition-all shadow-2xs text-center text-sm inline-flex items-center justify-center gap-2"
-                  >
-                    <span>{isAr ? 'عن الجمعية ورؤيتنا' : isFr ? 'Notre Mission & Vision' : 'About Our Mission'}</span>
-                    <span aria-hidden="true">{isAr ? '←' : '→'}</span>
-                  </Link>
-                </div>
-
-                {/* Key Institutional Trust Highlights (Pillars) */}
-                <div className="pt-6 border-t border-[#e5e0d6]/80 grid grid-cols-3 gap-4 text-start">
-                  <div className="space-y-0.5">
-                    <span className="block text-base sm:text-lg font-black text-[#0d3b43]">مراكش • المغرب</span>
-                    <span className="block text-3xs sm:text-2xs text-[#5f7174] font-medium">
-                      {isAr ? 'المقر والانطلاقة الوطنية' : 'Headquarters & Origin'}
-                    </span>
-                  </div>
-                  <div className="border-s border-[#e5e0d6] ps-4 space-y-0.5">
-                    <span className="block text-base sm:text-lg font-black text-[#c85a32]">تأسيس 2026</span>
-                    <span className="block text-3xs sm:text-2xs text-[#5f7174] font-medium">
-                      {isAr ? 'ظهير شريف 1.58.376' : 'Dahir Sharif 1.58.376'}
-                    </span>
-                  </div>
-                  <div className="border-s border-[#e5e0d6] ps-4 space-y-0.5">
-                    <span className="block text-base sm:text-lg font-black text-[#bd7d12]">7 قيم أصيلة</span>
-                    <span className="block text-3xs sm:text-2xs text-[#5f7174] font-medium">
-                      {isAr ? 'إبداع، شمولية، وتضامن' : 'Creativity & Solidarity'}
-                    </span>
-                  </div>
-                </div>
+                    ? 'الموسيقى، الفنون، وتمكين الشباب بالمغرب'
+                    : isFr
+                    ? 'MUSIQUE, ARTS & ÉMANCIPATION DES JEUNES'
+                    : 'MUSIC, ARTS & YOUTH EMPOWERMENT'}
+                </span>
               </div>
 
-              {/* Visual Showcase Feature (5 cols) — High Luxury Editorial Composition */}
-              <div className="lg:col-span-5 relative">
-                <div className="relative mx-auto max-w-md lg:max-w-none">
-                  {/* Ambient soft glow */}
-                  <div className="absolute -inset-1.5 bg-gradient-to-tr from-[#0d3b43]/15 to-[#c85a32]/15 rounded-3xl blur-md -z-10" />
+              {/* Headline: Human-centric, inspiring white typography */}
+              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-[1.2] sm:leading-[1.18]">
+                {isAr ? (
+                  <>
+                    حيث يصنع الشباب الإبداع،<br className="hidden sm:inline" /> يُحيون التراث، ويقودون المستقبل
+                  </>
+                ) : isFr ? (
+                  <>
+                    Là où la jeunesse crée, célèbre le patrimoine et façonne l&apos;avenir
+                  </>
+                ) : (
+                  <>
+                    Where youth create art, celebrate heritage, and lead the future
+                  </>
+                )}
+              </h1>
 
-                  {/* Gallery Showcase Frame */}
-                  <div className="relative rounded-3xl p-3 bg-white border border-[#e5e0d6] shadow-card-hover backdrop-blur-xs overflow-hidden">
-                    {/* Main Photographic Canvas */}
-                    <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-[#08242a]">
-                      <ImageWithFallback
-                        src="/images/youth-in-action.jpg"
-                        fallbackSrc="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1200&q=80"
-                        alt="AMYCC Youth in Action & Cultural Expression"
-                        fill
-                        sizes="(max-width: 768px) 100vw, 40vw"
-                        className="object-cover transition-transform duration-700 hover:scale-105"
-                        priority
-                      />
-                      {/* Cinematic Gradient Overlay */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#08242a]/90 via-[#08242a]/30 to-transparent" />
+              {/* Mission Summary: Soft readable light teal tone */}
+              <p className="text-base sm:text-lg lg:text-xl text-[#d8f0f4] leading-relaxed max-w-2xl font-normal">
+                {isAr
+                  ? 'تُمكّن جمعية روح الفنون والثقافة (AMYCC) الشباب والناشئة في مختلف مدن المملكة المغربية من اكتشاف مواهبهم، وصقل مهاراتهم في مجالات الفنون التشكيلية، التعبير المسرحي، والتراث الموسيقي، وبناء جيل ملهم ومسؤول.'
+                  : isFr
+                  ? 'L\'AMYCC mobilise et émancipe la jeunesse marocaine à travers les arts plastiques, le théâtre, et la valorisation du patrimoine culturel pour former une génération inspirante et solidaire.'
+                  : 'AMYCC empowers Moroccan youth through visual arts, theatre, and musical heritage — nurturing creativity, civic leadership, and cultural dialogue across the Kingdom.'}
+              </p>
 
-                      {/* Brand & Initiative Floating Pill (Top) */}
-                      <div className="absolute top-3.5 start-3.5 inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/95 backdrop-blur-md shadow-sm border border-white/40 text-3xs font-bold text-[#08242a]">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#c85a32]" aria-hidden="true" />
-                        <span>{isAr ? 'مبادرة شباب في العمل' : 'Youth in Action'}</span>
-                      </div>
+              {/* Action Buttons: 88 International Pill Style */}
+              <div className="flex flex-wrap items-center gap-4 pt-2">
+                {/* Primary Gold Pill Button */}
+                <Link
+                  href={`/${locale}/programs`}
+                  className="px-8 py-4 rounded-full font-extrabold text-[#08242a] bg-[#f4ce83] hover:bg-[#ebd59b] active:scale-95 transition-all shadow-xl hover:shadow-2xl text-center text-sm sm:text-base inline-flex items-center justify-center gap-2.5 group"
+                >
+                  <span>{dict.hero.cta_primary || (isAr ? 'اكتشف برامجنا' : 'Explore Programs')}</span>
+                  <span className="group-hover:translate-x-1 rtl:group-hover:-translate-x-1 transition-transform font-bold" aria-hidden="true">
+                    {isAr ? '←' : '→'}
+                  </span>
+                </Link>
 
-                      {/* Floating Editorial Glass Card (Bottom) */}
-                      <div className="absolute bottom-3.5 inset-x-3.5 p-3.5 sm:p-4 rounded-xl bg-[#08242a]/85 backdrop-blur-md border border-[#14505b]/60 text-white flex items-center justify-between gap-3">
-                        <div className="min-w-0">
-                          <span className="text-3xs uppercase tracking-wider text-[#f4ce83] font-extrabold block">
-                            {isAr ? 'البرنامج الرائد 2026' : 'Flagship Program 2026'}
-                          </span>
-                          <span className="text-xs sm:text-sm font-bold block text-white mt-0.5 truncate">
-                            {isAr ? 'تمكين الشباب وصون التراث الثقافي' : 'Youth Empowerment & Cultural Heritage'}
-                          </span>
-                        </div>
-                        <Link
-                          href={`/${locale}/programs/youth-in-action`}
-                          className="shrink-0 px-3.5 py-1.5 rounded-lg bg-[#c85a32] hover:bg-[#d6653c] text-white text-3xs font-bold transition-all inline-flex items-center gap-1 shadow-sm"
-                        >
-                          <span>{isAr ? 'اكتشف' : 'Explore'}</span>
-                          <span aria-hidden="true">{isAr ? '←' : '→'}</span>
-                        </Link>
-                      </div>
-                    </div>
-                  </div>
+                {/* Secondary Ghost Outline Pill Button */}
+                <Link
+                  href={`/${locale}/partnerships`}
+                  className="px-8 py-4 rounded-full font-bold text-white bg-transparent border-2 border-white/50 hover:border-white hover:bg-white/10 active:scale-95 transition-all text-center text-sm sm:text-base inline-flex items-center justify-center gap-2"
+                >
+                  <span>{isAr ? 'كن شريكاً معنا' : isFr ? 'Devenir Partenaire' : 'Partner With Us'}</span>
+                  <span aria-hidden="true">{isAr ? '←' : '→'}</span>
+                </Link>
+
+                {/* Membership link */}
+                <Link
+                  href={`/${locale}/membership`}
+                  className="text-xs sm:text-sm font-bold text-[#d8f0f4] hover:text-[#f4ce83] transition-colors inline-flex items-center gap-1.5 underline underline-offset-4 ms-1"
+                >
+                  <span>{isAr ? 'طلب الانخراط في الجمعية' : isFr ? 'Adhérer à l\'association' : 'Join as Member'}</span>
+                  <span aria-hidden="true">↗</span>
+                </Link>
+              </div>
+
+              {/* Bottom Partner Endorsement Strip with Gold Vertical Accent */}
+              <div className="pt-8 border-t border-white/15 max-w-2xl">
+                <div className="flex items-start gap-3.5">
+                  <span className="w-1.5 h-10 bg-[#f4ce83] rounded-full shrink-0" aria-hidden="true" />
+                  <p className="text-xs sm:text-sm text-[#d8f0f4]/90 font-medium leading-relaxed">
+                    {isAr
+                      ? 'نعمل بشراكة مع الفاعلين الثقافيين، المؤسسات التعليمية، وهيئات المجتمع المدني بالمملكة المغربية.'
+                      : isFr
+                      ? 'En partenariat avec les acteurs culturels, les établissements scolaires et la société civile à travers le Royaume du Maroc.'
+                      : 'Working in partnership with cultural actors, educational institutions, and civil society across Morocco.'}
+                  </p>
                 </div>
               </div>
 
