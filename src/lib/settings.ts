@@ -2042,3 +2042,661 @@ export async function getProgramsPageSettings(): Promise<ProgramsPageConfig> {
     return defaultProgramsPageConfig
   }
 }
+
+// ============================================================
+// 10. ANNUAL PROGRAM CONFIGURATION (البرنامج السنوي)
+// ============================================================
+
+export interface AnnualProgramEventItem {
+  id: string
+  titleAr: string
+  titleFr?: string
+  titleEn?: string
+  descAr: string
+  descFr?: string
+  descEn?: string
+  categoryAr: string
+  categoryFr?: string
+  categoryEn?: string
+  venueAr?: string
+  venueFr?: string
+  venueEn?: string
+  status?: 'upcoming' | 'in_progress' | 'completed'
+  highlight?: boolean
+}
+
+export interface AnnualProgramQuarter {
+  id: string
+  quarterNumber: number
+  quarterAr: string
+  quarterFr?: string
+  quarterEn?: string
+  periodAr: string
+  periodFr?: string
+  periodEn?: string
+  badgeAr: string
+  badgeFr?: string
+  badgeEn?: string
+  themeAr?: string
+  themeFr?: string
+  themeEn?: string
+  icon: string
+  iconSrc?: string
+  color: string
+  accentBg: string
+  events: AnnualProgramEventItem[]
+}
+
+export interface AnnualProgramStatItem {
+  id: string
+  value: string
+  labelAr: string
+  labelFr?: string
+  labelEn?: string
+  icon: string
+}
+
+export interface AnnualProgramPillarItem {
+  id: string
+  icon: string
+  titleAr: string
+  titleFr?: string
+  titleEn?: string
+  descAr: string
+  descFr?: string
+  descEn?: string
+}
+
+export interface AnnualProgramConfig {
+  hero: {
+    year: string
+    tagAr: string
+    tagFr?: string
+    tagEn?: string
+    badgeAr: string
+    badgeFr?: string
+    badgeEn?: string
+    titleAr: string
+    titleFr?: string
+    titleEn?: string
+    descriptionAr: string
+    descriptionFr?: string
+    descriptionEn?: string
+    imageUrl?: string
+    showImage?: boolean
+    brochureUrl?: string
+    brochureLabelAr?: string
+    brochureLabelFr?: string
+    brochureLabelEn?: string
+  }
+  stats: AnnualProgramStatItem[]
+  pillars: AnnualProgramPillarItem[]
+  quarters: AnnualProgramQuarter[]
+  cta: {
+    badgeAr: string
+    badgeFr?: string
+    badgeEn?: string
+    titleAr: string
+    titleFr?: string
+    titleEn?: string
+    descAr: string
+    descFr?: string
+    descEn?: string
+    primaryBtnTextAr: string
+    primaryBtnTextFr?: string
+    primaryBtnTextEn?: string
+    primaryBtnUrl: string
+    secondaryBtnTextAr: string
+    secondaryBtnTextFr?: string
+    secondaryBtnTextEn?: string
+    secondaryBtnUrl: string
+  }
+}
+
+export const defaultAnnualProgramConfig: AnnualProgramConfig = {
+  hero: {
+    year: '2026',
+    tagAr: 'الأجندة السنوية الرسمية • AMYCC 2026',
+    tagFr: 'AGENDA ANNUEL OFFICIEL • AMYCC 2026',
+    tagEn: 'OFFICIAL ANNUAL ROADMAP • AMYCC 2026',
+    badgeAr: 'المملكة المغربية • موسم ثقافي وفني شامل',
+    badgeFr: 'Royaume du Maroc • Saison Culturelle & Artistique',
+    badgeEn: 'Kingdom of Morocco • Full Cultural & Artistic Season',
+    titleAr: 'البرنامج السنوي للموسم الثقافي 2026:\nإشعاع فني وتأطير شبابي متواصل',
+    titleFr: 'Programme Annuel 2026 : Rayonnement Artistique et Engagement Citoyen',
+    titleEn: '2026 Annual Cultural Program: Artistic Innovation & Civic Youth Mentorship',
+    descriptionAr: 'تسطر جمعية روح الفنون والثقافة (AMYCC) برنامجها السنوي لسنة 2026 وفق برمجة فصلية محكمة تمتد على أربعة مواسم إبداعية متكاملة، تجمع بين التكوين الميداني في المسرح والموسيقى والفنون التشكيلية، وإشراك الشباب في الحياة المدنية والتطوع التضامني بمختلف جهات المملكة المغربية.',
+    descriptionFr: "L'AMYCC déploie son programme annuel 2026 articulé autour de 4 trimestres créatifs majeurs, alliant formations pratiques en théâtre, musique et arts plastiques, au renforcement de l'engagement citoyen et du bénévolat solidaire à travers le Maroc.",
+    descriptionEn: 'AMYCC unfolds its 2026 annual roadmap structured across four cohesive quarterly seasons, blending hands-on masterclasses in theatre, musical arts, and painting with youth civic empowerment across Morocco.',
+    imageUrl: '/images/youth-in-action.jpg',
+    showImage: true,
+    brochureUrl: '',
+    brochureLabelAr: 'تحميل دليل البرنامج السنوي (PDF)',
+    brochureLabelFr: 'Télécharger la brochure annuelle (PDF)',
+    brochureLabelEn: 'Download Annual Program Brochure (PDF)',
+  },
+  stats: [
+    {
+      id: 'stat-seasons',
+      value: '4',
+      labelAr: 'فصول ومواسم ثقافية كبرى',
+      labelFr: 'Trimestres artistiques majeurs',
+      labelEn: 'Major artistic quarters',
+      icon: '🗓️',
+    },
+    {
+      id: 'stat-workshops',
+      value: '+50',
+      labelAr: 'فعالية وورشة عمل مبرمجة',
+      labelFr: 'Événements & ateliers au programme',
+      labelEn: 'Programmed events & labs',
+      icon: '🎨',
+    },
+    {
+      id: 'stat-regions',
+      value: '12',
+      labelAr: 'جهة مستهدفة بالمملكة',
+      labelFr: 'Régions ciblées au Maroc',
+      labelEn: 'Targeted Moroccan regions',
+      icon: '🇲🇦',
+    },
+    {
+      id: 'stat-volunteers',
+      value: '100%',
+      labelAr: 'مبادرات تطوعية وتكوينية مجانية',
+      labelFr: 'Initiatives bénévoles ouvertes et gratuites',
+      labelEn: 'Open & free civic youth drives',
+      icon: '✨',
+    },
+  ],
+  pillars: [
+    {
+      id: 'pillar-arts',
+      icon: '🎨',
+      titleAr: 'الفنون التشكيلية والتراث الإبداعي',
+      titleFr: 'Arts Plastiques & Créativité',
+      titleEn: 'Visual Arts & Creative Heritage',
+      descAr: 'محترفات الرسم، المعارض التشكيلية السنوية، واستكشاف التقنيات الجمالية للموروث المغربي الأصيل.',
+      descFr: 'Ateliers de peinture contemporaine, expositions collectives annuelles et valorisation du patrimoine visuel.',
+      descEn: 'Painting workshops, annual art showcases, and creative preservation of Moroccan visual identity.',
+    },
+    {
+      id: 'pillar-theatre',
+      icon: '🎭',
+      titleAr: 'المسرح وفنون الأداء التعبيري',
+      titleFr: 'Théâtre & Arts de la Scène',
+      titleEn: 'Theatre & Performing Arts',
+      descAr: 'تدريبات الإلقاء الصوتي، فن الحلقة والحكاية الشعبية، مسرح الشارع، وبناء الثقة لدى المواهب الصاعدة.',
+      descFr: 'Diction, conte traditionnel (Halqa), théâtre de rue engagé et incubation de jeunes comédiens.',
+      descEn: 'Voice training, storytelling, street performances, and talent incubation for emerging performers.',
+    },
+    {
+      id: 'pillar-music',
+      icon: '🎵',
+      titleAr: 'التراث الموسيقي المغربي الأصيل',
+      titleFr: 'Patrimoine Musical Marocain',
+      titleEn: 'Moroccan Musical Heritage',
+      descAr: 'حلقات العزف على الآلات الوترية، توثيق المقامات والأهازيج الجهوية، والأمسيات السماع التراثية.',
+      descFr: 'Pratique instrumentale traditionnelle (luth), documentation des rythmes du terroir et soirées musicales.',
+      descEn: 'Traditional string instrument mastery, melodic archiving, and authentic musical evenings.',
+    },
+    {
+      id: 'pillar-youth',
+      icon: '🤝',
+      titleAr: 'تمكين الشباب والتطوع الميداني',
+      titleFr: 'Autonomisation & Bénévolat',
+      titleEn: 'Youth Leadership & Volunteering',
+      descAr: 'مبادرة "شباب في العمل"، تنظيم الجامعة الصيفية، وصقل كفاءات التأطير والتنظيم الميداني للشباب.',
+      descFr: "Initiative 'Jeunesse en Action', université d'été culturelle et formation de jeunes coordinateurs civiques.",
+      descEn: "'Youth in Action' framework, summer academy, and field event management leadership training.",
+    },
+  ],
+  quarters: [
+    {
+      id: 'q1',
+      quarterNumber: 1,
+      quarterAr: 'الربع الأول',
+      quarterFr: '1er Trimestre',
+      quarterEn: 'Quarter 1',
+      periodAr: 'يناير — مارس 2026',
+      periodFr: 'Janvier — Mars 2026',
+      periodEn: 'January — March 2026',
+      badgeAr: 'المرحلة التأسيسية والانطلاق',
+      badgeFr: 'Phase de Lancement',
+      badgeEn: 'Foundation & Kickoff',
+      themeAr: 'بناء المنصة الرقمية، هيكلة اللجان، وإطلاق محترفات التكوين الأولى',
+      themeFr: 'Déploiement de la plateforme, structuration des commissions et premiers ateliers',
+      themeEn: 'Platform launch, committee structuring, and inaugural workshop cycles',
+      icon: '🌱',
+      iconSrc: '/icons/season-q1.png',
+      color: 'border-[#0d3b43]',
+      accentBg: 'bg-[#d8f0f4] text-[#0d3b43]',
+      events: [
+        {
+          id: 'q1-e1',
+          titleAr: 'الإطلاق الرسمي للمنصة والبرامج الثقافية 2026',
+          titleFr: 'Lancement officiel de la plateforme et des programmes',
+          titleEn: 'Official Launch of Platform & Cultural Programs',
+          descAr: 'تدشين المنصة الرقمية التفاعلية وبدء استقبال طلبات الانخراط والتطوع بمختلف جهات المملكة المغربية.',
+          descFr: 'Inauguration de la plateforme numérique trilingue et ouverture des adhésions à travers le Maroc.',
+          descEn: 'Inauguration of the interactive trilingual platform and national membership campaign.',
+          categoryAr: 'تأسيس وتسيير',
+          categoryFr: 'Organisation & Lancement',
+          categoryEn: 'Organization & Launch',
+          venueAr: 'المقر المركزي والمنصة الرقمية',
+          venueFr: 'Siège central & En ligne',
+          venueEn: 'Headquarters & Digital Platform',
+          status: 'completed',
+          highlight: true,
+        },
+        {
+          id: 'q1-e2',
+          titleAr: 'انطلاق مبادرة "شباب في العمل" (Youth in Action)',
+          titleFr: 'Coup d\'envoi de l\'initiative Jeunesse en Action',
+          titleEn: 'Youth in Action Volunteering Kickoff',
+          descAr: 'دورات تدريبية للشباب المتطوع حول تقنيات تدبير الفعاليات والأنشطة الثقافية والمجتمعية.',
+          descFr: 'Masterclasses pour les jeunes bénévoles sur l\'animation et la coordination culturelle de terrain.',
+          descEn: 'Orientation masterclasses for youth volunteers in cultural event management and civic engagement.',
+          categoryAr: 'تطوع وتمكين',
+          categoryFr: 'Bénévolat & Leadership',
+          categoryEn: 'Youth Leadership',
+          venueAr: 'دور الشباب والمراكز الثقافية الشريكة',
+          venueFr: 'Maisons de jeunes partenaires',
+          venueEn: 'Partner Community Centers',
+          status: 'in_progress',
+          highlight: true,
+        },
+        {
+          id: 'q1-e3',
+          titleAr: 'محترفات المسرح والأداء التعبيري (الدورة التأسيسية)',
+          titleFr: 'Ateliers de théâtre et d\'art dramatique (Session 1)',
+          titleEn: 'Theatre & Stage Expression Lab (Session 1)',
+          descAr: 'تدريب عملي على تقنيات الإلقاء والتعبير الجسدي والارتجال المسرحي الملتزم بالقضايا المجتمعية.',
+          descFr: 'Formation pratique sur la diction, le mouvement corporel et l\'improvisation théâtrale citoyenne.',
+          descEn: 'Practical workshops on dramatic improvisation, voice projection, and expressive stage movement.',
+          categoryAr: 'مسرح وفنون العرض',
+          categoryFr: 'Arts Scéniques',
+          categoryEn: 'Theatre Arts',
+          venueAr: 'محترف الإبداع المسرحي',
+          venueFr: 'Studio d\'art dramatique',
+          venueEn: 'Drama Studio',
+          status: 'in_progress',
+          highlight: false,
+        },
+      ],
+    },
+    {
+      id: 'q2',
+      quarterNumber: 2,
+      quarterAr: 'الربع الثاني',
+      quarterFr: '2ème Trimestre',
+      quarterEn: 'Quarter 2',
+      periodAr: 'أبريل — يونيو 2026',
+      periodFr: 'Avril — Juin 2026',
+      periodEn: 'April — June 2026',
+      badgeAr: 'ربيع الإبداع والتراث المغربي',
+      badgeFr: 'Printemps Créatif & Patrimoine',
+      badgeEn: 'Spring Creativity & Heritage',
+      themeAr: 'معارض تشكيلية، أمسيات التراث الموسيقي، والملتقيات التشاركية',
+      themeFr: 'Expositions d\'art, soirées musicales patrimoniales et rencontres participatives',
+      themeEn: 'Fine art showcases, acoustic music evenings, and community networking',
+      icon: '🎨',
+      iconSrc: '/icons/season-q2.png',
+      color: 'border-[#c85a32]',
+      accentBg: 'bg-[#fae4dc] text-[#c85a32]',
+      events: [
+        {
+          id: 'q2-e1',
+          titleAr: 'أمسيات التراث الموسيقي المغربي الأصيل',
+          titleFr: 'Soirées du Patrimoine Musical Marocain',
+          titleEn: 'Moroccan Musical Heritage Evenings',
+          descAr: 'حلقات عزف واستماع مخصصة للروافد الموسيقية المغربية بمشاركة مواهب وعازفين صاعدين.',
+          descFr: 'Rencontres acoustiques et écoutes commentées dédiées à la richesse du patrimoine musical marocain.',
+          descEn: 'Acoustic sessions and masterclasses celebrating traditional Moroccan musical diversity.',
+          categoryAr: 'موسيقى وتراث',
+          categoryFr: 'Musique & Terroir',
+          categoryEn: 'Music & Heritage',
+          venueAr: 'الفضاءات التراثية والرياضات الثقافية',
+          venueFr: 'Espaces patrimoniaux',
+          venueEn: 'Historic Heritage Venues',
+          status: 'upcoming',
+          highlight: true,
+        },
+        {
+          id: 'q2-e2',
+          titleAr: 'معرض الفنون التشكيلية والخط العربي "إشراقات"',
+          titleFr: 'Exposition des Arts Plastiques et Calligraphie',
+          titleEn: 'Youth Fine Arts & Calligraphy Exhibition',
+          descAr: 'معرض تفاعلي وورشات حية تبرز الموتيفات الهندسية والجمالية المغربية برؤية معاصرة.',
+          descFr: 'Exposition interactive et démonstrations en direct valorisant les motifs traditionnels marocains.',
+          descEn: 'Showcase of emerging painters exploring Moroccan visual motifs and contemporary aesthetics.',
+          categoryAr: 'فنون بصرية',
+          categoryFr: 'Arts Visuels',
+          categoryEn: 'Visual Arts',
+          venueAr: 'أروقة المعارض الشريكة',
+          venueFr: 'Galeries d\'art partenaires',
+          venueEn: 'Partner Art Galleries',
+          status: 'upcoming',
+          highlight: true,
+        },
+        {
+          id: 'q2-e3',
+          titleAr: 'الملتقى التشاركي للمجتمع المدني الثقافي',
+          titleFr: 'Forum participatif des acteurs culturels',
+          titleEn: 'Civic Cultural Actors Forum',
+          descAr: 'جلسات تشاورية مع المراكز الثقافية والمؤسسات الشريكة لتعزيز التعاون والعمل المشترك.',
+          descFr: 'Tables rondes collaboratives avec les centres culturels et partenaires institutionnels.',
+          descEn: 'Collaborative roundtables with partner cultural centers and youth institutes.',
+          categoryAr: 'شراكات وتنسيق',
+          categoryFr: 'Partenariats & Réseau',
+          categoryEn: 'Partnerships & Networking',
+          venueAr: 'مقر الشركاء المؤسساتيين',
+          venueFr: 'Centres institutionnels',
+          venueEn: 'Partner Institutions',
+          status: 'upcoming',
+          highlight: false,
+        },
+      ],
+    },
+    {
+      id: 'q3',
+      quarterNumber: 3,
+      quarterAr: 'الربع الثالث',
+      quarterFr: '3ème Trimestre',
+      quarterEn: 'Quarter 3',
+      periodAr: 'يوليو — سبتمبر 2026',
+      periodFr: 'Juillet — Septembre 2026',
+      periodEn: 'July — September 2026',
+      badgeAr: 'الجامعة الصيفية والتنشيط المفتوح',
+      badgeFr: 'Saison Estivale & Université d\'Été',
+      badgeEn: 'Summer Academy & Public Arts',
+      themeAr: 'تكوينات صيفية مكثفة، مسرح الشارع، وحملات التطوع الثقافي التضامني',
+      themeFr: 'Formations intensives d\'été, théâtre de rue et bénévolat culturel solidaire',
+      themeEn: 'Intensive summer bootcamps, street theatre, and cultural volunteering drives',
+      icon: '☀️',
+      iconSrc: '/icons/season-q3.png',
+      color: 'border-[#d99b26]',
+      accentBg: 'bg-[#fdf2db] text-[#bd7d12]',
+      events: [
+        {
+          id: 'q3-e1',
+          titleAr: 'الجامعة الصيفية للإبداع والتمكين الشبابي',
+          titleFr: 'Université d\'Été de la Jeunesse Créative',
+          titleEn: 'Summer Academy of Youth Creativity',
+          descAr: 'محترفات مكثفة وإقامات تدريبية في الفنون المسرحية، التصوير الفوتوغرافي، والصوتيات.',
+          descFr: 'Résidences et stages immersifs en arts dramatiques, photographie et métiers du spectacle.',
+          descEn: 'Immersive summer bootcamps in performing arts, sound design, and documentary photography.',
+          categoryAr: 'تكوين مكثف',
+          categoryFr: 'Formation Intensive',
+          categoryEn: 'Summer Academy',
+          venueAr: 'مخيمات التكوين والشباب',
+          venueFr: 'Centres de villégiature et jeunesse',
+          venueEn: 'Summer Youth Campuses',
+          status: 'upcoming',
+          highlight: true,
+        },
+        {
+          id: 'q3-e2',
+          titleAr: 'عروض مسرح الشارع والتنشيط الثقافي المفتوح',
+          titleFr: 'Spectacles de théâtre de rue et animation en plein air',
+          titleEn: 'Open Air & Street Theatre Performances',
+          descAr: 'عروض فنية حية في الفضاءات العامة ودور الشباب لتيسير الولوج الثقافي الحر لعموم المواطنين.',
+          descFr: 'Représentations artistiques dans l\'espace public pour démocratiser l\'accès à l\'art.',
+          descEn: 'Free community performances in public squares and youth centers for broad cultural access.',
+          categoryAr: 'ديمقراطية الثقافة',
+          categoryFr: 'Culture pour Tous',
+          categoryEn: 'Community Arts',
+          venueAr: 'الساحات العمومية والحدائق الثقافية',
+          venueFr: 'Places publiques et jardins culturels',
+          venueEn: 'Public Squares & Cultural Parks',
+          status: 'upcoming',
+          highlight: false,
+        },
+        {
+          id: 'q3-e3',
+          titleAr: 'قافلة التطوع الثقافي والتضامن الميداني',
+          titleFr: 'Caravane du bénévolat culturel solidaire',
+          titleEn: 'Civic Solidarity Cultural Caravan',
+          descAr: 'أنشطة فنية تطوعية متنقلة لإشاعة البهجة وصقل مهارات الأطفال والشباب بالمناطق القروية والشبه حضرية.',
+          descFr: 'Actions itinérantes au bénéfice des jeunes et enfants des zones périurbaines et rurales.',
+          descEn: 'Mobile artistic outreach sessions designed to inspire children and youth across regions.',
+          categoryAr: 'شباب في العمل',
+          categoryFr: 'Jeunesse en Action',
+          categoryEn: 'Youth Outreach',
+          venueAr: 'المراكز الجمعوية والقرى المستهدفة',
+          venueFr: 'Villages et centres associatifs',
+          venueEn: 'Community Centers & Rural Hubs',
+          status: 'upcoming',
+          highlight: true,
+        },
+      ],
+    },
+    {
+      id: 'q4',
+      quarterNumber: 4,
+      quarterAr: 'الربع الرابع',
+      quarterFr: '4ème Trimestre',
+      quarterEn: 'Quarter 4',
+      periodAr: 'أكتوبر — ديسمبر 2026',
+      periodFr: 'Octobre — Décembre 2026',
+      periodEn: 'October — December 2026',
+      badgeAr: 'المهرجان السنوي وحصيلة الأثر',
+      badgeFr: 'Festival Annuel & Bilan d\'Impact',
+      badgeEn: 'Annual Festival & Impact Review',
+      themeAr: 'تتويج المخرجات، تكريم المتطوعين، وعرض التقريرين الأدبي والمالي',
+      themeFr: 'Consécration des créations, hommage aux bénévoles et bilans moraux et financiers',
+      themeEn: 'Grand festival showcase, volunteer honors, and moral & financial stewardship reports',
+      icon: '🏆',
+      iconSrc: '/icons/season-q4.png',
+      color: 'border-[#0d3b43]',
+      accentBg: 'bg-[#d8f0f4] text-[#0d3b43]',
+      events: [
+        {
+          id: 'q4-e1',
+          titleAr: 'المهرجان الثقافي السنوي لجمعية روح الفنون والثقافة',
+          titleFr: 'Festival Annuel de l\'AMYCC',
+          titleEn: 'AMYCC Annual Cultural Festival',
+          descAr: 'احتفالية فنية شاملة تتوج مخرجات ورشات المسرح والموسيقى والفنون التشكيلية طيلة الموسم.',
+          descFr: 'Grand gala artistique mettant en valeur les créations théâtrales, musicales et plastiques de l\'année.',
+          descEn: 'Major artistic festival showcasing the annual fruits of theatre, music, and painting labs.',
+          categoryAr: 'مهرجان سنوي',
+          categoryFr: 'Festival Majeur',
+          categoryEn: 'Annual Festival',
+          venueAr: 'المسرح البلدي والقاعات الكبرى',
+          venueFr: 'Théâtre municipal & grandes salles',
+          venueEn: 'Municipal Theatres & Grand Halls',
+          status: 'upcoming',
+          highlight: true,
+        },
+        {
+          id: 'q4-e2',
+          titleAr: 'الملتقى الوطني للمتطوعين وتوزيع شواهد التميز',
+          titleFr: 'Cérémonie de remise des attestations de bénévolat',
+          titleEn: 'National Volunteer Awards Ceremony',
+          descAr: 'الاحتفاء بالشباب المتطوعين وتكريم المساهمات الميدانية المتميزة في مبادرة شباب في العمل.',
+          descFr: 'Hommage solennel aux bénévoles et remise des certificats officiels d\'engagement civique.',
+          descEn: 'Honoring youth volunteers and awarding official certificates of civic engagement.',
+          categoryAr: 'تقدير وشواهد',
+          categoryFr: 'Reconnaissance & Prix',
+          categoryEn: 'Recognition & Awards',
+          venueAr: 'قاعة المؤتمرات الرسمية',
+          venueFr: 'Salle des conférences',
+          venueEn: 'Conference Center',
+          status: 'upcoming',
+          highlight: false,
+        },
+        {
+          id: 'q4-e3',
+          titleAr: 'الجمع العام السنوي وعرض التقريرين الأدبي والمالي',
+          titleFr: 'Assemblée Générale Ordinaire & Bilans',
+          titleEn: 'Annual General Assembly & Reports',
+          descAr: 'عرض حصيلة الأنشطة والتدبير المالي بكل وضوح وشفافية، والمصادقة التشاركية على مخطط موسم 2027.',
+          descFr: 'Présentation transparente du bilan moral et financier et approbation concertée du plan 2027.',
+          descEn: 'Transparent reporting of moral and financial stewardship before the general assembly.',
+          categoryAr: 'تسيير وشفافية',
+          categoryFr: 'Transparence & Gestion',
+          categoryEn: 'Transparency & Review',
+          venueAr: 'المقر المركزي للجمعية',
+          venueFr: 'Siège social de l\'AMYCC',
+          venueEn: 'AMYCC Headquarters',
+          status: 'upcoming',
+          highlight: false,
+        },
+      ],
+    },
+  ],
+  cta: {
+    badgeAr: 'المشاركة واحتضان الفعاليات',
+    badgeFr: 'Participer & Accueillir nos Événements',
+    badgeEn: 'Host or Join our Activities',
+    titleAr: 'هل ترغب في احتضان أو المشاركة في فعاليات هذا البرنامج السنوي؟',
+    titleFr: 'Vous souhaitez accueillir ou participer aux activités de notre saison 2026 ?',
+    titleEn: 'Interested in Hosting or Participating in our 2026 Season?',
+    descAr: 'نرحب بمقترحات المراكز الثقافية ودور الشباب والجمعيات الشريكة لاحتضان الورشات الفنية والعروض، كما نفتح باب التطوع والانخراط للجميع بدون شروط مسبقة.',
+    descFr: "Les centres culturels, maisons de jeunes et bénévoles sont chaleureusement invités à collaborer avec l'AMYCC pour donner vie à ces initiatives artistiques.",
+    descEn: 'Cultural institutions, community venues, and volunteers are warmly welcomed to collaborate and bring these cultural initiatives to life.',
+    primaryBtnTextAr: 'استكشف أجندة الفعاليات القادمة',
+    primaryBtnTextFr: "Consulter l'agenda des événements",
+    primaryBtnTextEn: 'Explore Upcoming Events',
+    primaryBtnUrl: '/events',
+    secondaryBtnTextAr: 'قدّم طلب الانخراط في الجمعية',
+    secondaryBtnTextFr: "Devenir membre de l'AMYCC",
+    secondaryBtnTextEn: 'Apply for Membership',
+    secondaryBtnUrl: '/membership',
+  },
+}
+
+export async function getAnnualProgramSettings(): Promise<AnnualProgramConfig> {
+  try {
+    const supabase = await createClient()
+    const { data, error } = await supabase
+      .from('site_settings')
+      .select('value')
+      .eq('key', 'annual_program')
+      .maybeSingle()
+
+    if (error || !data || !data.value) {
+      return defaultAnnualProgramConfig
+    }
+
+    const val = data.value as Partial<AnnualProgramConfig>
+    const heroVal = (val.hero || {}) as Partial<AnnualProgramConfig['hero']>
+    const ctaVal = (val.cta || {}) as Partial<AnnualProgramConfig['cta']>
+
+    return {
+      hero: {
+        year: heroVal.year || defaultAnnualProgramConfig.hero.year,
+        tagAr: heroVal.tagAr || defaultAnnualProgramConfig.hero.tagAr,
+        tagFr: heroVal.tagFr || defaultAnnualProgramConfig.hero.tagFr,
+        tagEn: heroVal.tagEn || defaultAnnualProgramConfig.hero.tagEn,
+        badgeAr: heroVal.badgeAr || defaultAnnualProgramConfig.hero.badgeAr,
+        badgeFr: heroVal.badgeFr || defaultAnnualProgramConfig.hero.badgeFr,
+        badgeEn: heroVal.badgeEn || defaultAnnualProgramConfig.hero.badgeEn,
+        titleAr: heroVal.titleAr || defaultAnnualProgramConfig.hero.titleAr,
+        titleFr: heroVal.titleFr || defaultAnnualProgramConfig.hero.titleFr,
+        titleEn: heroVal.titleEn || defaultAnnualProgramConfig.hero.titleEn,
+        descriptionAr: heroVal.descriptionAr || defaultAnnualProgramConfig.hero.descriptionAr,
+        descriptionFr: heroVal.descriptionFr || defaultAnnualProgramConfig.hero.descriptionFr,
+        descriptionEn: heroVal.descriptionEn || defaultAnnualProgramConfig.hero.descriptionEn,
+        imageUrl: typeof heroVal.imageUrl === 'string' ? heroVal.imageUrl : defaultAnnualProgramConfig.hero.imageUrl,
+        showImage: heroVal.showImage !== false,
+        brochureUrl: typeof heroVal.brochureUrl === 'string' ? heroVal.brochureUrl : defaultAnnualProgramConfig.hero.brochureUrl,
+        brochureLabelAr: heroVal.brochureLabelAr || defaultAnnualProgramConfig.hero.brochureLabelAr,
+        brochureLabelFr: heroVal.brochureLabelFr || defaultAnnualProgramConfig.hero.brochureLabelFr,
+        brochureLabelEn: heroVal.brochureLabelEn || defaultAnnualProgramConfig.hero.brochureLabelEn,
+      },
+      stats: Array.isArray(val.stats) && val.stats.length > 0
+        ? val.stats
+            .filter((s): s is AnnualProgramStatItem => typeof s === 'object' && s !== null && typeof s.id === 'string')
+            .map((s) => ({
+              id: s.id,
+              value: s.value || '',
+              labelAr: s.labelAr || '',
+              labelFr: s.labelFr || '',
+              labelEn: s.labelEn || '',
+              icon: s.icon || '📌',
+            }))
+        : defaultAnnualProgramConfig.stats,
+      pillars: Array.isArray(val.pillars) && val.pillars.length > 0
+        ? val.pillars
+            .filter((p): p is AnnualProgramPillarItem => typeof p === 'object' && p !== null && typeof p.id === 'string')
+            .map((p) => ({
+              id: p.id,
+              icon: p.icon || '🎨',
+              titleAr: p.titleAr || '',
+              titleFr: p.titleFr || '',
+              titleEn: p.titleEn || '',
+              descAr: p.descAr || '',
+              descFr: p.descFr || '',
+              descEn: p.descEn || '',
+            }))
+        : defaultAnnualProgramConfig.pillars,
+      quarters: Array.isArray(val.quarters) && val.quarters.length > 0
+        ? val.quarters
+            .filter((q): q is AnnualProgramQuarter => typeof q === 'object' && q !== null && typeof q.id === 'string')
+            .map((q) => ({
+              id: q.id,
+              quarterNumber: q.quarterNumber || 1,
+              quarterAr: q.quarterAr || '',
+              quarterFr: q.quarterFr || '',
+              quarterEn: q.quarterEn || '',
+              periodAr: q.periodAr || '',
+              periodFr: q.periodFr || '',
+              periodEn: q.periodEn || '',
+              badgeAr: q.badgeAr || '',
+              badgeFr: q.badgeFr || '',
+              badgeEn: q.badgeEn || '',
+              themeAr: q.themeAr || '',
+              themeFr: q.themeFr || '',
+              themeEn: q.themeEn || '',
+              icon: q.icon || '🗓️',
+              iconSrc: q.iconSrc || '',
+              color: q.color || 'border-[#0d3b43]',
+              accentBg: q.accentBg || 'bg-[#d8f0f4] text-[#0d3b43]',
+              events: Array.isArray(q.events)
+                ? q.events
+                    .filter((e): e is AnnualProgramEventItem => typeof e === 'object' && e !== null && typeof e.id === 'string')
+                    .map((e) => ({
+                      id: e.id,
+                      titleAr: e.titleAr || '',
+                      titleFr: e.titleFr || '',
+                      titleEn: e.titleEn || '',
+                      descAr: e.descAr || '',
+                      descFr: e.descFr || '',
+                      descEn: e.descEn || '',
+                      categoryAr: e.categoryAr || '',
+                      categoryFr: e.categoryFr || '',
+                      categoryEn: e.categoryEn || '',
+                      venueAr: e.venueAr || '',
+                      venueFr: e.venueFr || '',
+                      venueEn: e.venueEn || '',
+                      status: e.status || 'upcoming',
+                      highlight: Boolean(e.highlight),
+                    }))
+                : [],
+            }))
+        : defaultAnnualProgramConfig.quarters,
+      cta: {
+        badgeAr: ctaVal.badgeAr || defaultAnnualProgramConfig.cta.badgeAr,
+        badgeFr: ctaVal.badgeFr || defaultAnnualProgramConfig.cta.badgeFr,
+        badgeEn: ctaVal.badgeEn || defaultAnnualProgramConfig.cta.badgeEn,
+        titleAr: ctaVal.titleAr || defaultAnnualProgramConfig.cta.titleAr,
+        titleFr: ctaVal.titleFr || defaultAnnualProgramConfig.cta.titleFr,
+        titleEn: ctaVal.titleEn || defaultAnnualProgramConfig.cta.titleEn,
+        descAr: ctaVal.descAr || defaultAnnualProgramConfig.cta.descAr,
+        descFr: ctaVal.descFr || defaultAnnualProgramConfig.cta.descFr,
+        descEn: ctaVal.descEn || defaultAnnualProgramConfig.cta.descEn,
+        primaryBtnTextAr: ctaVal.primaryBtnTextAr || defaultAnnualProgramConfig.cta.primaryBtnTextAr,
+        primaryBtnTextFr: ctaVal.primaryBtnTextFr || defaultAnnualProgramConfig.cta.primaryBtnTextFr,
+        primaryBtnTextEn: ctaVal.primaryBtnTextEn || defaultAnnualProgramConfig.cta.primaryBtnTextEn,
+        primaryBtnUrl: ctaVal.primaryBtnUrl || defaultAnnualProgramConfig.cta.primaryBtnUrl,
+        secondaryBtnTextAr: ctaVal.secondaryBtnTextAr || defaultAnnualProgramConfig.cta.secondaryBtnTextAr,
+        secondaryBtnTextFr: ctaVal.secondaryBtnTextFr || defaultAnnualProgramConfig.cta.secondaryBtnTextFr,
+        secondaryBtnTextEn: ctaVal.secondaryBtnTextEn || defaultAnnualProgramConfig.cta.secondaryBtnTextEn,
+        secondaryBtnUrl: ctaVal.secondaryBtnUrl || defaultAnnualProgramConfig.cta.secondaryBtnUrl,
+      },
+    }
+  } catch {
+    return defaultAnnualProgramConfig
+  }
+}

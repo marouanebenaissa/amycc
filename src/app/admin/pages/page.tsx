@@ -56,6 +56,16 @@ const sitePages: PageDefinition[] = [
     descriptionAr: 'دليل المبادرات الفنية المستمرة وورش العمل والتطوير الإبداعي في المدن المغربية.',
   },
   {
+    key: 'annual-program',
+    titleAr: 'البرنامج الثقافي السنوي',
+    titleFr: 'Programme Culturel Annuel',
+    titleEn: 'Annual Cultural Program',
+    path: 'annual-program',
+    icon: '🗓️',
+    category: 'أنشطة',
+    descriptionAr: 'الأجندة السنوية الرباعية، الفصول الأربعة، المحاور الاستراتيجية ومؤشرات الإنجاز، مع تحميل الدليل الرسمي.',
+  },
+  {
     key: 'events',
     titleAr: 'أجندة الفعاليات',
     titleFr: 'Événements',
@@ -270,6 +280,34 @@ export default async function AdminPagesPage() {
                       className="px-2.5 py-1 rounded-lg text-3xs font-bold text-white bg-[#0d3b43] hover:bg-[#14505b] transition-colors shrink-0"
                     >
                       إدارة مجالات التدخل →
+                    </Link>
+                  </div>
+                )}
+
+                {page.key === 'annual-program' && (
+                  <div className="mb-3 p-2.5 rounded-xl bg-teal-50/70 border border-teal-200/80 flex items-center justify-between gap-2">
+                    <span className="text-3xs font-bold text-teal-900">
+                      🗓️ إدارة فصول ومحاور وأنشطة البرنامج السنوي بالكامل
+                    </span>
+                    <Link
+                      href="/admin/annual-program"
+                      className="px-2.5 py-1 rounded-lg text-3xs font-bold text-white bg-[#0d3b43] hover:bg-[#14505b] transition-colors shrink-0"
+                    >
+                      إدارة البرنامج السنوي →
+                    </Link>
+                  </div>
+                )}
+
+                {page.key === 'programs' && (
+                  <div className="mb-3 p-2.5 rounded-xl bg-indigo-50/70 border border-indigo-200/80 flex items-center justify-between gap-2">
+                    <span className="text-3xs font-bold text-indigo-900">
+                      🎨 إدارة كتالوج البرامج وإعدادات رأس الصفحة
+                    </span>
+                    <Link
+                      href="/admin/programs"
+                      className="px-2.5 py-1 rounded-lg text-3xs font-bold text-white bg-[#0d3b43] hover:bg-[#14505b] transition-colors shrink-0"
+                    >
+                      إدارة البرامج →
                     </Link>
                   </div>
                 )}

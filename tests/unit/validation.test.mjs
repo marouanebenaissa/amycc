@@ -480,3 +480,123 @@ describe('Programs Page Validation Suite', () => {
     assert.equal(result.success, false)
   })
 })
+
+const annualProgramConfigSchema = z.object({
+  hero: z.object({
+    badgeAr: z.string().min(1),
+    titleAr: z.string().min(3),
+    descriptionAr: z.string().min(10),
+    seasonYear: z.string().min(1),
+    brochurePdfUrl: z.string(),
+    heroImageUrl: z.string(),
+    hasHeroImage: z.boolean(),
+  }),
+  stats: z.array(
+    z.object({
+      id: z.string().min(1),
+      value: z.string().min(1),
+      labelAr: z.string().min(2),
+      icon: z.string(),
+    })
+  ).min(1),
+  pillars: z.array(
+    z.object({
+      id: z.string().min(1),
+      titleAr: z.string().min(2),
+      descAr: z.string().min(5),
+      icon: z.string(),
+    })
+  ).min(1),
+  quarters: z.array(
+    z.object({
+      id: z.string().min(1),
+      code: z.string().min(1),
+      titleAr: z.string().min(2),
+      events: z.array(
+        z.object({
+          id: z.string().min(1),
+          titleAr: z.string().min(2),
+          status: z.enum(['completed', 'in_progress', 'upcoming']),
+        })
+      ),
+    })
+  ).min(1),
+  cta: z.object({
+    titleAr: z.string().min(5),
+    descAr: z.string().min(10),
+    primaryBtnTextAr: z.string().min(2),
+    primaryBtnUrl: z.string().min(1),
+  }),
+})
+
+describe('Annual Program Page Validation Suite', () => {
+  test('accepts valid annual program configuration with quarters, pillars, and events', () => {
+    const valid = {
+      hero: {
+        badgeAr: 'الموسم الثقافي والشبابي الرسمي',
+        titleAr: 'البرنامج الثقافي السنوي 2026',
+        descriptionAr: 'برنامج ثقافي شامل على مدار فصول السنة لترسيخ الهوية الفنية بالمغرب.',
+        seasonYear: '2026',
+        brochurePdfUrl: '/documents/programme-annuel-2026.pdf',
+        heroImageUrl: '',
+        hasHeroImage: false,
+      },
+      stats: [
+        { id: 'stat-1', value: '+40', labelAr: 'فعالية كبرى', icon: '🎭' },
+        { id: 'stat-2', value: '12', labelAr: 'جهة مستفيدة', icon: '🇲🇦' },
+      ],
+      pillars: [
+        { id: 'pillar-1', titleAr: 'الفنون التشكيلية', descAr: 'معارض وورش حية للمواهب الصاعدة', icon: '🎨' },
+        { id: 'pillar-2', titleAr: 'المسرح وفنون الأداء', descAr: 'عروض ومهرجانات وطنية بالجهات', icon: '🎭' },
+      ],
+      quarters: [
+        {
+          id: 'q1',
+          code: 'Q1',
+          titleAr: 'فصل الانطلاق والنهضة الفنية',
+          events: [
+            { id: 'ev-1', titleAr: 'منتدى الإبداع الشبابي 2026', status: 'completed' },
+            { id: 'ev-2', titleAr: 'ورشات الفنون المسرحية', status: 'in_progress' },
+          ],
+        },
+      ],
+      cta: {
+        titleAr: 'استضف فعاليات البرنامج السنوي بجهتك',
+        descAr: 'تفتح جمعية روح الفنون والثقافة باب الشراكة مع المراكز الثقافية والجماعات.',
+        primaryBtnTextAr: 'طلب شراكة مؤسسية',
+        primaryBtnUrl: '/partnerships',
+      },
+    }
+    const result = annualProgramConfigSchema.safeParse(valid)
+    assert.equal(result.success, true)
+    if (result.success) {
+      assert.equal(result.data.quarters[0].events.length, 2)
+      assert.equal(result.data.pillars.length, 2)
+    }
+  })
+
+  test('rejects annual program configuration with missing quarters or empty fields', () => {
+    const invalid = {
+      hero: {
+        badgeAr: '',
+        titleAr: 'ق',
+        descriptionAr: 'قصير',
+        seasonYear: '',
+        brochurePdfUrl: '',
+        heroImageUrl: '',
+        hasHeroImage: false,
+      },
+      stats: [],
+      pillars: [],
+      quarters: [],
+      cta: {
+        titleAr: '',
+        descAr: '',
+        primaryBtnTextAr: '',
+        primaryBtnUrl: '',
+      },
+    }
+    const result = annualProgramConfigSchema.safeParse(invalid)
+    assert.equal(result.success, false)
+  })
+})

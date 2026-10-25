@@ -1,254 +1,392 @@
 import { getDictionary } from '@/lib/i18n/dictionaries'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
-import { IconWithFallback } from '@/components/ui/IconWithFallback'
+import { ImageWithFallback } from '@/components/ui/ImageWithFallback'
+import { getAnnualProgramSettings, defaultAnnualProgramConfig } from '@/lib/settings'
+import { AnnualProgramTimeline } from '@/components/annual-program/AnnualProgramTimeline'
 import Link from 'next/link'
+
+export const dynamic = 'force-dynamic'
 
 export default async function AnnualProgramPage(props: { params: Promise<{ locale: string }> }) {
   const { locale } = await props.params
-  const dict = await getDictionary(locale)
+  const [dict, config] = await Promise.all([
+    getDictionary(locale),
+    getAnnualProgramSettings(),
+  ])
+
   const isAr = locale === 'ar'
   const isFr = locale === 'fr'
 
-  const seasons = [
-    {
-      quarter: isAr ? 'الربع الأول' : isFr ? '1er Trimestre' : 'Quarter 1',
-      period: isAr ? 'يناير — مارس 2026' : isFr ? 'Janvier — Mars 2026' : 'January — March 2026',
-      badge: isAr ? 'المرحلة التأسيسية' : isFr ? 'Lancement' : 'Foundation Phase',
-      color: 'border-[#0d3b43]',
-      accentBg: 'bg-[#d8f0f4] text-[#0d3b43]',
-      icon: '🌱',
-      iconSrc: '/icons/season-q1.png',
-      events: [
-        {
-          title: isAr ? 'الإطلاق الرسمي للمنصة والبرامج الثقافية' : isFr ? 'Lancement officiel de la plateforme et des programmes' : 'Official Launch of Platform & Programs',
-          desc: isAr ? 'تدشين المنصة الرقمية وبدء استقبال طلبات الانخراط والتطوع بالمملكة المغربية.' : 'Inauguration of digital trilingual platform and opening membership drive.',
-          category: isAr ? 'تأسيس وتسيير' : 'Organization',
-        },
-        {
-          title: isAr ? 'انطلاق مبادرة "شباب في العمل" (Youth in Action)' : isFr ? 'Lancement de l\'initiative Jeunesse en Action' : 'Youth in Action Volunteering Kickoff',
-          desc: isAr ? 'ورشات تدريبية للشباب المتطوع حول تنظيم وإدارة الفعاليات الثقافية والمجتمعية.' : 'Orientation masterclasses for youth volunteers in cultural event management.',
-          category: isAr ? 'تطوع وتمكين' : 'Youth Leadership',
-        },
-        {
-          title: isAr ? 'محترفات المسرح والأداء التعبيري (الدورة الأولى)' : isFr ? 'Ateliers de théâtre et d\'art dramatique (Session 1)' : 'Theatre & Dramatic Arts Lab (Session 1)',
-          desc: isAr ? 'تدريب عملي على تقنيات الإلقاء والتعبير الجسدي والارتجال المسرحي.' : 'Practical workshops on dramatic improvisation and stage movement.',
-          category: isAr ? 'مسرح وفنون العرض' : 'Theatre Arts',
-        },
-      ],
-    },
-    {
-      quarter: isAr ? 'الربع الثاني' : isFr ? '2ème Trimestre' : 'Quarter 2',
-      period: isAr ? 'أبريل — يونيو 2026' : isFr ? 'Avril — Juin 2026' : 'April — June 2026',
-      badge: isAr ? 'ربيع الإبداع والتراث' : isFr ? 'Printemps Créatif' : 'Spring Creativity',
-      color: 'border-[#c85a32]',
-      accentBg: 'bg-[#fae4dc] text-[#c85a32]',
-      icon: '🎨',
-      iconSrc: '/icons/season-q2.png',
-      events: [
-        {
-          title: isAr ? 'أمسيات التراث الموسيقي المغربي الأصيل' : isFr ? 'Soirées du Patrimoine Musical Marocain' : 'Moroccan Heritage Musical Evenings',
-          desc: isAr ? 'حلقات عزف واستماع مخصصة للروافد الموسيقية المغربية بمشاركة مواهب صاعدة.' : 'Acoustic sessions celebrating traditional Moroccan musical diversity.',
-          category: isAr ? 'موسيقى وتراث' : 'Music Heritage',
-        },
-        {
-          title: isAr ? 'معرض الفنون التشكيلية والخط العربي للشباب' : isFr ? 'Exposition des Arts Plastiques et Calligraphie' : 'Youth Fine Arts & Calligraphy Exhibition',
-          desc: isAr ? 'معرض تفاعلي وورشات حية تبرز الموتيفات الهندسية والتراثية برؤية معاصرة.' : 'Showcase of emerging painters exploring Moroccan motifs and contemporary aesthetics.',
-          category: isAr ? 'فنون بصرية' : 'Visual Arts',
-        },
-        {
-          title: isAr ? 'الملتقى التشاركي للمجتمع المدني الثقافي' : isFr ? 'Rencontre participative des acteurs culturels' : 'Civic Cultural Actors Forum',
-          desc: isAr ? 'جلسات تشاورية مع المراكز الثقافية والمؤسسات الشريكة لتعزيز التعاون.' : 'Collaborative roundtable with partner cultural centers and youth institutes.',
-          category: isAr ? 'شراكات وتنسيق' : 'Partnerships',
-        },
-      ],
-    },
-    {
-      quarter: isAr ? 'الربع الثالث' : isFr ? '3ème Trimestre' : 'Quarter 3',
-      period: isAr ? 'يوليو — سبتمبر 2026' : isFr ? 'Juillet — Septembre 2026' : 'July — September 2026',
-      badge: isAr ? 'الأنشطة الصيفية والتنشيط' : isFr ? 'Saison Estivale' : 'Summer Outreach',
-      color: 'border-[#d99b26]',
-      accentBg: 'bg-[#fdf2db] text-[#bd7d12]',
-      icon: '☀️',
-      iconSrc: '/icons/season-q3.png',
-      events: [
-        {
-          title: isAr ? 'الجامعة الصيفية للإبداع والتمكين الشبابي' : isFr ? 'Université d\'Été de la Jeunesse Créative' : 'Summer School of Youth Creativity',
-          desc: isAr ? 'محترفات مكثفة في الفنون المسرحية، التصوير الفوتوغرافي، والصوتيات.' : 'Intensive summer bootcamps in performing arts, sound design, and photography.',
-          category: isAr ? 'تكوين مكثف' : 'Summer Training',
-        },
-        {
-          title: isAr ? 'عروض مسرح الشارع والتنشيط الثقافي المفتوح' : isFr ? 'Spectacles de théâtre de rue et animation' : 'Open Air & Street Theatre Performances',
-          desc: isAr ? 'عروض فنية في الفضاءات العامة ودور الشباب لتيسير الولوج الثقافي الحر.' : 'Free community performances in public squares and youth centers.',
-          category: isAr ? 'ديمقراطية الثقافة' : 'Community Arts',
-        },
-        {
-          title: isAr ? 'حملة التطوع الثقافي التضامني' : isFr ? 'Campagne de solidarité culturelle' : 'Civic Solidarity Cultural Drive',
-          desc: isAr ? 'أنشطة فنية تطوعية مشتركة لإشاعة البهجة وصقل مهارات الأطفال والشباب.' : 'Artistic outreach sessions designed to inspire children and youth.',
-          category: isAr ? 'شباب في العمل' : 'Youth Outreach',
-        },
-      ],
-    },
-    {
-      quarter: isAr ? 'الربع الرابع' : isFr ? '4ème Trimestre' : 'Quarter 4',
-      period: isAr ? 'أكتوبر — ديسمبر 2026' : isFr ? 'Octobre — Décembre 2026' : 'October — December 2026',
-      badge: isAr ? 'المهرجان والتقييم السنوي' : isFr ? 'Clôture & Bilan' : 'Annual Festival & Review',
-      color: 'border-[#0d3b43]',
-      accentBg: 'bg-[#d8f0f4] text-[#0d3b43]',
-      icon: '🏆',
-      iconSrc: '/icons/season-q4.png',
-      events: [
-        {
-          title: isAr ? 'المهرجان الثقافي السنوي لجمعية روح الفنون والثقافة' : isFr ? 'Festival Annuel de l\'AMYCC' : 'AMYCC Annual Cultural Festival',
-          desc: isAr ? 'تتويج مخرجات ورشات المسرح والموسيقى والفنون في احتفالية فنية شاملة.' : 'Grand finale showcasing all artistic outputs from theatre, music, and painting masterclasses.',
-          category: isAr ? 'مهرجان سنوي' : 'Annual Festival',
-        },
-        {
-          title: isAr ? 'الملتقى الوطني للمتطوعين وتوزيع شواهد التميز' : isFr ? 'Cérémonie de remise des attestations de bénévolat' : 'National Volunteer Awards Ceremony',
-          desc: isAr ? 'الاحتفاء بالشباب المتطوعين وتكريم المساهمات الميدانية في مبادرة شباب في العمل.' : 'Honoring youth volunteers and awarding official certificates of civic engagement.',
-          category: isAr ? 'تقدير وشواهد' : 'Recognition',
-        },
-        {
-          title: isAr ? 'الجمع العام السنوي وعرض التقريرين الأدبي والمالي' : isFr ? 'Assemblée Générale Ordinaire & Bilans' : 'Annual General Assembly & Reports',
-          desc: isAr ? 'عرض حصيلة الأنشطة والتدبير المالي بكل شفافية والمصادقة على برنامج 2027.' : 'Transparent reporting of moral and financial stewardship before the general assembly.',
-          category: isAr ? 'تسيير وشفافية' : 'Transparency',
-        },
-      ],
-    },
-  ]
+  const hero = config.hero || defaultAnnualProgramConfig.hero
+  const stats = config.stats || defaultAnnualProgramConfig.stats
+  const pillars = config.pillars || defaultAnnualProgramConfig.pillars
+  const quarters = config.quarters || defaultAnnualProgramConfig.quarters
+  const cta = config.cta || defaultAnnualProgramConfig.cta
+
+  const hasHeroImage = Boolean(hero.showImage !== false && hero.imageUrl && hero.imageUrl.trim() !== '')
+
+  // Localized values for Hero
+  const heroYear = hero.year || '2026'
+  const heroTag = isAr ? hero.tagAr : isFr ? (hero.tagFr || hero.tagAr) : (hero.tagEn || hero.tagAr)
+  const heroBadge = isAr ? hero.badgeAr : isFr ? (hero.badgeFr || hero.badgeAr) : (hero.badgeEn || hero.badgeAr)
+  const heroTitle = isAr ? hero.titleAr : isFr ? (hero.titleFr || hero.titleAr) : (hero.titleEn || hero.titleAr)
+  const heroDesc = isAr ? hero.descriptionAr : isFr ? (hero.descriptionFr || hero.descriptionAr) : (hero.descriptionEn || hero.descriptionAr)
+  const brochureLabel = isAr ? (hero.brochureLabelAr || 'تحميل دليل البرنامج السنوي (PDF)') : isFr ? (hero.brochureLabelFr || 'Télécharger la brochure annuelle (PDF)') : (hero.brochureLabelEn || 'Download Annual Brochure (PDF)')
+
+  // Localized values for CTA
+  const ctaBadge = isAr ? cta.badgeAr : isFr ? (cta.badgeFr || cta.badgeAr) : (cta.badgeEn || cta.badgeAr)
+  const ctaTitle = isAr ? cta.titleAr : isFr ? (cta.titleFr || cta.titleAr) : (cta.titleEn || cta.titleAr)
+  const ctaDesc = isAr ? cta.descAr : isFr ? (cta.descFr || cta.descAr) : (cta.descEn || cta.descAr)
+  const ctaPrimaryText = isAr ? cta.primaryBtnTextAr : isFr ? (cta.primaryBtnTextFr || cta.primaryBtnTextAr) : (cta.primaryBtnTextEn || cta.primaryBtnTextAr)
+  const ctaSecondaryText = isAr ? cta.secondaryBtnTextAr : isFr ? (cta.secondaryBtnTextFr || cta.secondaryBtnTextAr) : (cta.secondaryBtnTextEn || cta.secondaryBtnTextAr)
 
   return (
     <>
       <Header locale={locale} dict={dict} />
 
       <main id="main-content" className="flex-1 bg-[#faf7f2]">
-        {/* Header Banner */}
-        <section className="relative overflow-hidden bg-gradient-to-b from-[#faf7f2] via-[#f7f2e9] to-[#faf7f2] border-b border-[#e5e0d6] py-16 lg:py-24 text-center">
-          <div className="absolute inset-0 moroccan-pattern-light opacity-50 pointer-events-none" aria-hidden="true" />
-          <div className="relative max-w-4xl mx-auto px-4 sm:px-6 space-y-4">
-            <span className="inline-block text-xs font-bold uppercase tracking-widest text-[#c85a32]">
-              AMYCC 2026 Agenda
-            </span>
-            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-[#08242a] tracking-tight">
-              {isAr ? 'البرنامج السنوي للموسم الثقافي 2026' : isFr ? 'Programme Annuel 2026' : 'Annual Cultural Program 2026'}
+        {/* ============================================================
+            1. HERO BANNER (Full-Bleed Moroccan Cinematic Hero or Ambient Pattern)
+            ============================================================ */}
+        <section
+          className={`relative overflow-hidden border-b transition-colors ${
+            hasHeroImage
+              ? 'min-h-[500px] sm:min-h-[560px] lg:min-h-[620px] flex items-center bg-[#08242a] text-white pt-16 pb-24 lg:pt-20 lg:pb-32 border-[#0d3b43]'
+              : 'bg-gradient-to-b from-[#faf7f2] via-[#f7f2e9] to-[#faf7f2] border-[#e5e0d6] pt-16 pb-20 lg:pt-20 lg:pb-28 text-[#08242a]'
+          }`}
+        >
+          {/* Background Layer */}
+          {hasHeroImage ? (
+            <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
+              <ImageWithFallback
+                src={hero.imageUrl!}
+                fallbackSrc="/images/youth-in-action.jpg"
+                alt="AMYCC Annual Program Hero Banner"
+                fill
+                priority
+                sizes="100vw"
+                className="object-cover object-center"
+              />
+              <div className="absolute inset-0 bg-black/45" />
+              <div className="absolute inset-0 bg-gradient-to-b from-[#08242a]/90 via-[#08242a]/65 to-[#08242a]/95" />
+              <div className="absolute inset-0 moroccan-star-pattern opacity-15 pointer-events-none" />
+              <div className="absolute top-1/4 start-1/4 w-96 h-96 bg-[#c85a32]/20 rounded-full blur-3xl pointer-events-none" />
+              <div className="absolute bottom-10 end-10 w-96 h-96 bg-[#f4ce83]/20 rounded-full blur-3xl pointer-events-none" />
+            </div>
+          ) : (
+            <>
+              <div className="absolute inset-0 moroccan-pattern-light opacity-60 pointer-events-none" aria-hidden="true" />
+              <div className="absolute top-1/3 start-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-[#c85a32]/10 rounded-full blur-3xl pointer-events-none" />
+              <div className="absolute bottom-0 end-12 w-72 h-72 bg-[#0d3b43]/10 rounded-full blur-3xl pointer-events-none" />
+            </>
+          )}
+
+          <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 text-center w-full">
+            {/* Breadcrumb Navigation */}
+            <nav
+              className={`flex items-center justify-center gap-2 text-xs sm:text-sm font-bold ${
+                hasHeroImage ? 'text-white/80' : 'text-[#5f7174]'
+              }`}
+            >
+              <Link
+                href={`/${locale}`}
+                className={`transition-colors ${hasHeroImage ? 'hover:text-white' : 'hover:text-[#0d3b43]'}`}
+              >
+                {isAr ? 'الرئيسية' : isFr ? 'Accueil' : 'Home'}
+              </Link>
+              <span>/</span>
+              <span className={hasHeroImage ? 'text-[#f4ce83]' : 'text-[#c85a32]'}>
+                {isAr ? 'البرنامج السنوي 2026' : isFr ? 'Programme Annuel 2026' : 'Annual Program 2026'}
+              </span>
+            </nav>
+
+            {/* Badges Bar */}
+            <div className="flex flex-wrap items-center justify-center gap-2.5">
+              <span
+                className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-black shadow-2xs backdrop-blur-md ${
+                  hasHeroImage
+                    ? 'bg-[#c85a32] text-white shadow-sm'
+                    : 'bg-[#c85a32] text-white'
+                }`}
+              >
+                <span>🗓️</span>
+                <span>{heroYear}</span>
+              </span>
+
+              {heroTag && (
+                <span
+                  className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs sm:text-sm font-bold shadow-2xs backdrop-blur-md ${
+                    hasHeroImage
+                      ? 'bg-white/10 border border-white/20 text-[#f4ce83]'
+                      : 'bg-[#c85a32]/10 border border-[#c85a32]/20 text-[#c85a32]'
+                  }`}
+                >
+                  <span
+                    className={`w-2.5 h-2.5 rounded-full ${hasHeroImage ? 'bg-[#f4ce83]' : 'bg-[#c85a32]'} animate-pulse`}
+                  />
+                  <span>{heroTag}</span>
+                </span>
+              )}
+
+              {heroBadge && (
+                <span
+                  className={`inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs sm:text-sm font-bold shadow-2xs backdrop-blur-md ${
+                    hasHeroImage
+                      ? 'bg-white/10 border border-white/20 text-white'
+                      : 'bg-[#0d3b43]/10 border border-[#0d3b43]/20 text-[#0d3b43]'
+                  }`}
+                >
+                  <span>🇲🇦</span>
+                  <span>{heroBadge}</span>
+                </span>
+              )}
+            </div>
+
+            {/* Headline Title */}
+            <h1
+              className={`text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-tight whitespace-pre-line ${
+                hasHeroImage ? 'text-white drop-shadow-md' : 'text-[#08242a]'
+              }`}
+            >
+              {heroTitle}
             </h1>
-            <p className="text-base sm:text-lg text-[#445457] max-w-2xl mx-auto font-medium leading-relaxed">
-              {isAr
-                ? 'الأجندة السنوية للورشات الفنية، العروض المسرحية، الأمسيات الموسيقية، ومبادرات التطوع المدني بمختلف المدن المغربية.'
-                : isFr
-                ? 'Calendrier complet de nos ateliers artistiques, représentations théâtrales et actions de bénévolat culturel pour la saison 2026.'
-                : 'Comprehensive annual calendar of cultural masterclasses, theatre performances, musical showcases, and youth civic engagement across Morocco.'}
+
+            {/* Description */}
+            <p
+              className={`text-base sm:text-lg lg:text-xl max-w-3xl mx-auto leading-relaxed text-balance ${
+                hasHeroImage ? 'text-[#d8f0f4]/95 font-normal drop-shadow-xs' : 'text-[#445457] font-medium'
+              }`}
+            >
+              {heroDesc}
             </p>
+
+            {/* Action Buttons in Hero */}
+            <div className="pt-2 flex flex-wrap items-center justify-center gap-3">
+              {hero.brochureUrl ? (
+                <a
+                  href={hero.brochureUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-black text-xs sm:text-sm text-[#08242a] bg-[#f4ce83] hover:bg-[#fae0a5] active:scale-98 transition-all shadow-md"
+                >
+                  <span>📄</span>
+                  <span>{brochureLabel}</span>
+                  <span>↓</span>
+                </a>
+              ) : (
+                <Link
+                  href={`/${locale}/events`}
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-black text-xs sm:text-sm text-[#08242a] bg-[#f4ce83] hover:bg-[#fae0a5] active:scale-98 transition-all shadow-md"
+                >
+                  <span>📅</span>
+                  <span>{dict.events.view_all}</span>
+                  <span className="rtl:rotate-180">→</span>
+                </Link>
+              )}
+
+              <Link
+                href={`/${locale}/membership`}
+                className={`inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-xs sm:text-sm transition-all ${
+                  hasHeroImage
+                    ? 'text-white bg-white/10 hover:bg-white/20 border border-white/20 backdrop-blur-md'
+                    : 'text-[#0d3b43] bg-white hover:bg-[#faf7f2] border border-[#e5e0d6]'
+                }`}
+              >
+                <span>👥</span>
+                <span>{dict.membership.apply}</span>
+              </Link>
+            </div>
           </div>
         </section>
 
-        {/* 4 Seasons Interactive Timeline */}
-        <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-12">
-          {seasons.map((season, sIdx) => (
-            <div
-              key={sIdx}
-              className={`luxury-card p-6 sm:p-10 bg-white border-2 ${season.color}/20 hover:border-${season.color} transition-all space-y-6`}
-            >
-              {/* Season Header */}
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-6 border-b border-[#f4ede2] gap-4">
-                <div className="flex items-center gap-3.5">
-                  <div className="w-12 h-12 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6] flex items-center justify-center text-2xl shadow-2xs overflow-hidden">
-                    <IconWithFallback
-                      src={season.iconSrc}
-                      fallbackEmoji={season.icon}
-                      alt={season.quarter}
-                      size={28}
-                      className="w-full h-full object-contain"
-                    />
+        {/* ============================================================
+            2. IMPACT STATS RIBBON (CMS DRIVEN)
+            ============================================================ */}
+        <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 -mt-10 sm:-mt-12 relative z-20">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+            {stats.map((st) => {
+              const label = isAr ? st.labelAr : isFr ? (st.labelFr || st.labelAr) : (st.labelEn || st.labelAr)
+              return (
+                <div
+                  key={st.id}
+                  className="p-5 sm:p-6 rounded-3xl bg-white border border-[#e5e0d6] hover:border-[#0d3b43]/40 shadow-subtle hover:shadow-lg transition-all text-center flex flex-col justify-center items-center group"
+                >
+                  <div className="w-12 h-12 rounded-2xl bg-[#0d3b43]/10 text-[#0d3b43] flex items-center justify-center text-2xl mb-2.5 group-hover:scale-110 transition-transform">
+                    {st.icon || '📌'}
                   </div>
-                  <div>
-                    <div className="flex items-center gap-2">
-                      <h2 className="text-xl sm:text-2xl font-black text-[#08242a]">
-                        {season.quarter}
-                      </h2>
-                      <span className={`text-3xs font-black uppercase tracking-wider px-2.5 py-0.5 rounded-full ${season.accentBg}`}>
-                        {season.badge}
-                      </span>
-                    </div>
-                    <span className="text-xs font-bold text-[#5f7174]">
-                      {season.period}
-                    </span>
-                  </div>
+                  <span className="text-2xl sm:text-3xl font-black text-[#08242a] tracking-tight block">
+                    {st.value}
+                  </span>
+                  <span className="text-xs sm:text-sm font-bold text-[#5f7174] mt-1 leading-snug">
+                    {label}
+                  </span>
                 </div>
-
-                <div className="text-xs text-[#819598] font-medium">
-                  {isAr ? 'المملكة المغربية • مختلف الجهات' : 'Kingdom of Morocco • Nationwide'}
-                </div>
-              </div>
-
-              {/* Event Highlights List for this Season */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {season.events.map((event, eIdx) => (
-                  <div
-                    key={eIdx}
-                    className="p-5 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6] flex flex-col justify-between hover:border-[#cfc7b9] transition-colors"
-                  >
-                    <div>
-                      <span className="inline-block text-4xs font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-white border border-[#e5e0d6] text-[#0d3b43] mb-3">
-                        {event.category}
-                      </span>
-                      <h3 className="text-sm font-bold text-[#08242a] mb-2 leading-snug">
-                        {event.title}
-                      </h3>
-                      <p className="text-xs text-[#445457] leading-relaxed">
-                        {event.desc}
-                      </p>
-                    </div>
-
-                    <div className="pt-4 mt-4 border-t border-[#e5e0d6]/70 flex items-center justify-between text-3xs">
-                      <span className="text-[#819598] font-medium">AMYCC 2026</span>
-                      <Link
-                        href={`/${locale}/events`}
-                        className="font-bold text-[#c85a32] hover:underline"
-                      >
-                        {dict.events.register} →
-                      </Link>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          ))}
+              )
+            })}
+          </div>
         </section>
 
-        {/* Program Participation & Partnership Banner */}
-        <section className="bg-white border-t border-[#e5e0d6] py-16">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center space-y-6">
-            <span className="inline-block px-3.5 py-1 rounded-full text-xs font-bold bg-[#14505b] text-[#f4ce83] border border-[#268292]/40">
-              {isAr ? 'المشاركة في الأنشطة والبرمجة' : 'Join our Annual Program'}
+        {/* ============================================================
+            3. STRATEGIC THEMATIC PILLARS (المحاور الاستراتيجية الأربعة للموسم)
+            ============================================================ */}
+        <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 lg:pt-20">
+          <div className="text-center max-w-3xl mx-auto space-y-3 mb-10">
+            <span className="inline-block px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-[#c85a32]/10 text-[#c85a32] border border-[#c85a32]/20">
+              {isAr ? 'رؤية ومحاور الموسم الثقافي 2026' : isFr ? 'Axes Stratégiques 2026' : 'Strategic Thematic Pillars'}
             </span>
-            <h2 className="text-3xl sm:text-4xl font-black text-[#08242a]">
-              {isAr ? 'هل ترغب في احتضان أو المشاركة في فعاليات هذا البرنامج؟' : 'Interested in Hosting or Participating in our 2026 Season?'}
-            </h2>
-            <p className="text-sm sm:text-base text-[#445457] max-w-2xl mx-auto leading-relaxed">
+            <h2 className="text-2xl sm:text-4xl font-black text-[#08242a] tracking-tight">
               {isAr
-                ? 'نرحب بمقترحات المراكز الثقافية ودور الشباب لاستضافة الورشات، كما نفتح باب التطوع والانخراط للجميع بدون شروط مسبقة.'
-                : 'Cultural institutions, community venues, and volunteers are warmly welcomed to collaborate and bring these cultural initiatives to life.'}
+                ? 'أربعة محاور كبرى تقود مسيرة الإبداع والتأهيل الميداني'
+                : isFr
+                ? 'Quatre axes majeurs pour l’épanouissement culturel et citoyen'
+                : 'Four Strategic Pillars Driving Cultural Innovation & Leadership'}
+            </h2>
+            <p className="text-xs sm:text-sm text-[#5f7174] leading-relaxed">
+              {isAr
+                ? 'برمجة متكاملة تستهدف تمكين الشباب وصون التراث المغربي عبر مجالات الفن والأداء والتطوع المسؤول.'
+                : isFr
+                ? 'Une programmation globale alliant transmission patrimoniale, excellence artistique et engagement civique.'
+                : 'A cohesive framework fostering Moroccan heritage, artistic expression, and civic volunteering.'}
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {pillars.map((pillar) => {
+              const title = isAr ? pillar.titleAr : isFr ? (pillar.titleFr || pillar.titleAr) : (pillar.titleEn || pillar.titleAr)
+              const desc = isAr ? pillar.descAr : isFr ? (pillar.descFr || pillar.descAr) : (pillar.descEn || pillar.descAr)
+
+              return (
+                <div
+                  key={pillar.id}
+                  className="p-6 rounded-3xl bg-white border border-[#e5e0d6] hover:border-[#0d3b43]/40 shadow-subtle hover:shadow-card transition-all flex flex-col justify-between group space-y-4"
+                >
+                  <div className="space-y-3">
+                    <div className="w-12 h-12 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6] flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
+                      {pillar.icon || '🎨'}
+                    </div>
+                    <h3 className="text-base font-black text-[#08242a] group-hover:text-[#0d3b43] transition-colors leading-snug">
+                      {title}
+                    </h3>
+                    <p className="text-xs text-[#5f7174] leading-relaxed">
+                      {desc}
+                    </p>
+                  </div>
+                  <div className="pt-2 border-t border-[#f4ede2] text-3xs font-bold text-[#819598]">
+                    AMYCC Season 2026
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+        </section>
+
+        {/* ============================================================
+            4. INTERACTIVE 4 SEASONS QUARTERLY TIMELINE (CMS DRIVEN)
+            ============================================================ */}
+        <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
+          <AnnualProgramTimeline
+            quarters={quarters}
+            locale={locale}
+            dict={dict}
+          />
+        </section>
+
+        {/* ============================================================
+            5. DOWNLOADABLE ANNUAL PROSPECTUS / PDF SHOWCASE
+            ============================================================ */}
+        <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
+          <div className="p-8 sm:p-12 rounded-3xl bg-gradient-to-br from-[#faf7f2] via-[#f7f2e9] to-[#faf7f2] border border-[#e5e0d6] shadow-subtle flex flex-col md:flex-row items-center justify-between gap-8">
+            <div className="flex items-start sm:items-center gap-5">
+              <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-3xl bg-[#0d3b43] text-white flex items-center justify-center text-3xl sm:text-4xl shadow-md shrink-0">
+                📑
+              </div>
+              <div className="space-y-1.5">
+                <span className="text-3xs font-black uppercase tracking-wider text-[#c85a32]">
+                  {isAr ? 'الوثيقة التوجيهية الرسمية' : isFr ? 'Document Officiel' : 'Official Framework Document'}
+                </span>
+                <h3 className="text-xl sm:text-2xl font-black text-[#08242a]">
+                  {isAr ? 'دليل وأجندة البرنامج السنوي 2026' : isFr ? 'Brochure et Calendrier de la Saison 2026' : 'Annual Program Roadmap & Prospectus'}
+                </h3>
+                <p className="text-xs sm:text-sm text-[#5f7174] max-w-xl leading-relaxed">
+                  {isAr
+                    ? 'يتضمن الدليل التفصيلي مواعيد المحترفات، معايير المشاركة، بطاقات التوصيف الفني، وآليات التعاون المشترك مع المؤسسات.'
+                    : isFr
+                    ? 'Retrouvez les fiches descriptives des ateliers, les dates clés, les critères de participation et les modalités de partenariat.'
+                    : 'Includes detailed masterclass timetables, participation criteria, technical profiles, and institutional partnership frameworks.'}
+                </p>
+              </div>
+            </div>
+
+            <div className="shrink-0 flex items-center gap-3 w-full md:w-auto">
+              {hero.brochureUrl ? (
+                <a
+                  href={hero.brochureUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full md:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-black text-xs sm:text-sm text-white bg-[#0d3b43] hover:bg-[#14505b] active:scale-98 transition-all shadow-md cursor-pointer"
+                >
+                  <span>📥</span>
+                  <span>{brochureLabel}</span>
+                </a>
+              ) : (
+                <Link
+                  href={`/${locale}/contact`}
+                  className="w-full md:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-black text-xs sm:text-sm text-white bg-[#0d3b43] hover:bg-[#14505b] active:scale-98 transition-all shadow-md cursor-pointer"
+                >
+                  <span>📩</span>
+                  <span>{isAr ? 'اطلب النسخة الرسمية للدليل' : isFr ? 'Demander la brochure officielle' : 'Request Official Brochure'}</span>
+                </Link>
+              )}
+            </div>
+          </div>
+        </section>
+
+        {/* ============================================================
+            6. INSTITUTIONAL COLLABORATION & HOSTING CTA BANNER (CMS DRIVEN)
+            ============================================================ */}
+        <section className="bg-gradient-to-br from-[#08242a] via-[#0d3b43] to-[#14505b] text-white py-16 lg:py-20 relative overflow-hidden">
+          <div className="absolute inset-0 moroccan-star-pattern opacity-15 pointer-events-none" />
+          <div className="absolute top-0 end-0 w-96 h-96 bg-[#c85a32]/20 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute bottom-0 start-0 w-96 h-96 bg-[#f4ce83]/15 rounded-full blur-3xl pointer-events-none" />
+
+          <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 text-center space-y-6">
+            {ctaBadge && (
+              <span className="inline-block px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-wider bg-[#f4ce83] text-[#08242a] shadow-xs">
+                {ctaBadge}
+              </span>
+            )}
+
+            <h2 className="text-2xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-tight">
+              {ctaTitle}
+            </h2>
+
+            <p className="text-sm sm:text-base text-[#d8f0f4]/90 max-w-2xl mx-auto leading-relaxed">
+              {ctaDesc}
             </p>
 
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
               <Link
-                href={`/${locale}/events`}
-                className="w-full sm:w-auto px-7 py-3.5 rounded-xl font-bold text-white bg-[#0d3b43] hover:bg-[#14505b] transition-all text-xs shadow-xs"
+                href={`/${locale}${cta.primaryBtnUrl || '/events'}`}
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-black text-xs sm:text-sm text-[#08242a] bg-[#f4ce83] hover:bg-[#fae0a5] active:scale-98 transition-all shadow-md cursor-pointer"
               >
-                {dict.events.view_all}
+                <span>{ctaPrimaryText}</span>
+                <span className="rtl:rotate-180">→</span>
               </Link>
+
               <Link
-                href={`/${locale}/membership`}
-                className="w-full sm:w-auto px-7 py-3.5 rounded-xl font-bold text-[#08242a] bg-[#f4ce83] hover:bg-[#fae0a5] transition-all text-xs shadow-subtle"
+                href={`/${locale}${cta.secondaryBtnUrl || '/membership'}`}
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-bold text-xs sm:text-sm text-white bg-white/10 hover:bg-white/20 border border-white/20 backdrop-blur-md transition-all cursor-pointer"
               >
-                {dict.membership.apply}
+                <span>{ctaSecondaryText}</span>
               </Link>
+
               <Link
                 href={`/${locale}/partnerships`}
-                className="w-full sm:w-auto px-6 py-3.5 rounded-xl font-bold text-[#0d3b43] bg-white border border-[#cfc7b9] hover:bg-[#faf7f2] transition-all text-xs"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl font-bold text-xs sm:text-sm text-[#f4ce83] hover:text-white transition-colors"
               >
-                {dict.partnerships.title}
+                <span>{dict.partnerships.title}</span>
+                <span className="rtl:rotate-180">↗</span>
               </Link>
             </div>
           </div>

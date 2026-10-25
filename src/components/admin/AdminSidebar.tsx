@@ -29,6 +29,7 @@ const navSections: NavSection[] = [
       { href: '/admin/areas', labelAr: 'مجالات التدخل', labelEn: 'Core Disciplines', icon: '🎯' },
       { href: '/admin/team', labelAr: 'فريق العمل والهيكلة', labelEn: 'Team & Structure', icon: '👥' },
       { href: '/admin/programs', labelAr: 'البرامج الثقافية', labelEn: 'Programs CMS', icon: '🎨' },
+      { href: '/admin/annual-program', labelAr: 'البرنامج السنوي', labelEn: 'Annual Program CMS', icon: '🗓️' },
       { href: '/admin/events', labelAr: 'الفعاليات والورش', labelEn: 'Events CMS', icon: '📅' },
       { href: '/admin/news', labelAr: 'الأخبار والبيانات', labelEn: 'News & Press', icon: '📰' },
       { href: '/admin/gallery', labelAr: 'معرض الصور', labelEn: 'Gallery CMS', icon: '🖼️' },
