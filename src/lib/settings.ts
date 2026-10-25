@@ -3363,3 +3363,225 @@ export async function getImpactSettings(): Promise<ImpactConfig> {
     return defaultImpactConfig
   }
 }
+
+// ==========================================
+// Events Page CMS Config
+// ==========================================
+
+export interface EventsPageStatItem {
+  id: string
+  value: string
+  labelAr: string
+  labelFr: string
+  labelEn: string
+  icon: string
+}
+
+export interface EventsPageConfig {
+  hero: {
+    tagAr: string
+    tagFr: string
+    tagEn: string
+    badgeAr: string
+    badgeFr: string
+    badgeEn: string
+    titleAr: string
+    titleFr: string
+    titleEn: string
+    subtitleAr: string
+    subtitleFr: string
+    subtitleEn: string
+    descriptionAr: string
+    descriptionFr: string
+    descriptionEn: string
+    imageUrl: string
+    hasHeroImage: boolean
+    primaryBtnTextAr: string
+    primaryBtnTextFr: string
+    primaryBtnTextEn: string
+    primaryBtnUrl: string
+  }
+  stats: EventsPageStatItem[]
+  cta: {
+    badgeAr: string
+    badgeFr: string
+    badgeEn: string
+    titleAr: string
+    titleFr: string
+    titleEn: string
+    descAr: string
+    descFr: string
+    descEn: string
+    primaryBtnTextAr: string
+    primaryBtnTextFr: string
+    primaryBtnTextEn: string
+    primaryBtnUrl: string
+    secondaryBtnTextAr: string
+    secondaryBtnTextFr: string
+    secondaryBtnTextEn: string
+    secondaryBtnUrl: string
+  }
+}
+
+export const defaultEventsPageConfig: EventsPageConfig = {
+  hero: {
+    tagAr: 'أجندة الفعاليات والمواعيد الثقافية',
+    tagFr: 'Agenda Culturel & Masterclasses',
+    tagEn: 'Cultural Events & Workshops Agenda',
+    badgeAr: 'الموسم الثقافي 2026 • AMYCC Events',
+    badgeFr: 'Saison Culturelle 2026',
+    badgeEn: 'Cultural Season 2026',
+    titleAr: 'الفعاليات والورشات الثقافية والفنية',
+    titleFr: 'Événements & Ateliers Culturels',
+    titleEn: 'Cultural Events & Artistic Masterclasses',
+    subtitleAr: 'فضاءات حية للإبداع، التعبير المسرحي، الموسيقى التراثية، والتكوين الفني بالمغرب',
+    subtitleFr: 'Espaces vivants de création, théâtre, musique patrimoniale et formation artistique',
+    subtitleEn: 'Vibrant spaces for creative expression, theatre, heritage music, and youth mentorship',
+    descriptionAr:
+      'استكشف المواعيد والورشات التكوينية القادمة التي تنظمها جمعية روح الفنون والثقافة، واحجز مقعدك مجاناً وبشكل فوري مع تأكيد الحضور المباشر.',
+    descriptionFr:
+      'Découvrez les prochains ateliers, représentations et festivals organisés par l’AMYCC et réservez votre place gratuitement en ligne.',
+    descriptionEn:
+      'Discover upcoming workshops, live performances, and forums hosted by AMYCC, and secure your free registration with instant confirmation.',
+    imageUrl: '',
+    hasHeroImage: false,
+    primaryBtnTextAr: 'استكشف الفعاليات المجدولة',
+    primaryBtnTextFr: 'Explorer les événements',
+    primaryBtnTextEn: 'Explore Scheduled Events',
+    primaryBtnUrl: '#events-catalog',
+  },
+  stats: [
+    {
+      id: 'stat-free',
+      value: '100%',
+      labelAr: 'ولوج ومشاركة مجانية للجميع',
+      labelFr: 'Accès et ateliers 100% gratuits',
+      labelEn: '100% Free Public Participation',
+      icon: '🎟️',
+    },
+    {
+      id: 'stat-workshops',
+      value: '+50',
+      labelAr: 'ورشة وعرض مسرحي وموسيقي',
+      labelFr: 'Ateliers et spectacles programmés',
+      labelEn: 'Workshops & Performances',
+      icon: '🎭',
+    },
+    {
+      id: 'stat-regions',
+      value: '12',
+      labelAr: 'جهة مستهدفة بأنشطة القرب',
+      labelFr: 'Régions ciblées au Maroc',
+      labelEn: 'Targeted Moroccan Regions',
+      icon: '🇲🇦',
+    },
+    {
+      id: 'stat-instant',
+      value: 'فوري',
+      labelAr: 'تأكيد التسجيل وتتبع المقاعد',
+      labelFr: 'Confirmation d’inscription immédiate',
+      labelEn: 'Instant Digital Confirmation',
+      icon: '⚡',
+    },
+  ],
+  cta: {
+    badgeAr: 'اقتراح فعالية أو شراكة فنية',
+    badgeFr: 'Proposer une Collaboration',
+    badgeEn: 'Propose a Collaboration',
+    titleAr: 'هل ترغب في تنظيم ورشة عمل أو استضافة فعالية بمدينتك؟',
+    titleFr: 'Vous souhaitez accueillir un atelier ou organiser un événement ?',
+    titleEn: 'Interested in Hosting an Event or Artistic Masterclass?',
+    descAr:
+      'تفتح جمعية روح الفنون والثقافة باب التعاون والشراكة مع المراكز الثقافية، دور الشباب، والفنانين والمدربين لتوسيع رقعة الأنشطة الفنية عبر ربوع المملكة.',
+    descFr:
+      'L’AMYCC accueille avec enthousiasme les propositions des artistes, formateurs et centres culturels pour coconstruire des projets enrichissants.',
+    descEn:
+      'AMYCC invites artists, trainers, and regional cultural centers to partner with us in expanding creative opportunities for youth across Morocco.',
+    primaryBtnTextAr: 'طلب شراكة أو استضافة فعالية',
+    primaryBtnTextFr: 'Proposer un partenariat',
+    primaryBtnTextEn: 'Propose a Partnership',
+    primaryBtnUrl: '/partnerships',
+    secondaryBtnTextAr: 'تواصل مع إدارة الفعاليات',
+    secondaryBtnTextFr: 'Contacter l’équipe',
+    secondaryBtnTextEn: 'Contact Events Team',
+    secondaryBtnUrl: '/contact',
+  },
+}
+
+export async function getEventsPageSettings(): Promise<EventsPageConfig> {
+  try {
+    const supabase = await createClient()
+    const { data, error } = await supabase
+      .from('site_settings')
+      .select('value')
+      .eq('key', 'events_page')
+      .maybeSingle()
+
+    if (error || !data || !data.value) {
+      return defaultEventsPageConfig
+    }
+
+    const val = data.value as Partial<EventsPageConfig>
+    const heroVal = (val.hero || {}) as Partial<EventsPageConfig['hero']>
+    const ctaVal = (val.cta || {}) as Partial<EventsPageConfig['cta']>
+
+    return {
+      hero: {
+        tagAr: typeof heroVal.tagAr === 'string' ? heroVal.tagAr : defaultEventsPageConfig.hero.tagAr,
+        tagFr: typeof heroVal.tagFr === 'string' ? heroVal.tagFr : defaultEventsPageConfig.hero.tagFr,
+        tagEn: typeof heroVal.tagEn === 'string' ? heroVal.tagEn : defaultEventsPageConfig.hero.tagEn,
+        badgeAr: typeof heroVal.badgeAr === 'string' ? heroVal.badgeAr : defaultEventsPageConfig.hero.badgeAr,
+        badgeFr: typeof heroVal.badgeFr === 'string' ? heroVal.badgeFr : defaultEventsPageConfig.hero.badgeFr,
+        badgeEn: typeof heroVal.badgeEn === 'string' ? heroVal.badgeEn : defaultEventsPageConfig.hero.badgeEn,
+        titleAr: typeof heroVal.titleAr === 'string' ? heroVal.titleAr : defaultEventsPageConfig.hero.titleAr,
+        titleFr: typeof heroVal.titleFr === 'string' ? heroVal.titleFr : defaultEventsPageConfig.hero.titleFr,
+        titleEn: typeof heroVal.titleEn === 'string' ? heroVal.titleEn : defaultEventsPageConfig.hero.titleEn,
+        subtitleAr: typeof heroVal.subtitleAr === 'string' ? heroVal.subtitleAr : defaultEventsPageConfig.hero.subtitleAr,
+        subtitleFr: typeof heroVal.subtitleFr === 'string' ? heroVal.subtitleFr : defaultEventsPageConfig.hero.subtitleFr,
+        subtitleEn: typeof heroVal.subtitleEn === 'string' ? heroVal.subtitleEn : defaultEventsPageConfig.hero.subtitleEn,
+        descriptionAr: typeof heroVal.descriptionAr === 'string' ? heroVal.descriptionAr : defaultEventsPageConfig.hero.descriptionAr,
+        descriptionFr: typeof heroVal.descriptionFr === 'string' ? heroVal.descriptionFr : defaultEventsPageConfig.hero.descriptionFr,
+        descriptionEn: typeof heroVal.descriptionEn === 'string' ? heroVal.descriptionEn : defaultEventsPageConfig.hero.descriptionEn,
+        imageUrl: typeof heroVal.imageUrl === 'string' ? heroVal.imageUrl : defaultEventsPageConfig.hero.imageUrl,
+        hasHeroImage: typeof heroVal.hasHeroImage === 'boolean' ? heroVal.hasHeroImage : defaultEventsPageConfig.hero.hasHeroImage,
+        primaryBtnTextAr: typeof heroVal.primaryBtnTextAr === 'string' ? heroVal.primaryBtnTextAr : defaultEventsPageConfig.hero.primaryBtnTextAr,
+        primaryBtnTextFr: typeof heroVal.primaryBtnTextFr === 'string' ? heroVal.primaryBtnTextFr : defaultEventsPageConfig.hero.primaryBtnTextFr,
+        primaryBtnTextEn: typeof heroVal.primaryBtnTextEn === 'string' ? heroVal.primaryBtnTextEn : defaultEventsPageConfig.hero.primaryBtnTextEn,
+        primaryBtnUrl: typeof heroVal.primaryBtnUrl === 'string' ? heroVal.primaryBtnUrl : defaultEventsPageConfig.hero.primaryBtnUrl,
+      },
+      stats: Array.isArray(val.stats) && val.stats.length > 0
+        ? (val.stats as EventsPageStatItem[])
+            .filter((s): s is EventsPageStatItem => typeof s === 'object' && s !== null && typeof s.id === 'string')
+            .map((s) => ({
+              id: s.id,
+              value: s.value || '',
+              labelAr: s.labelAr || '',
+              labelFr: s.labelFr || '',
+              labelEn: s.labelEn || '',
+              icon: s.icon || '📅',
+            }))
+        : defaultEventsPageConfig.stats,
+      cta: {
+        badgeAr: typeof ctaVal.badgeAr === 'string' ? ctaVal.badgeAr : defaultEventsPageConfig.cta.badgeAr,
+        badgeFr: typeof ctaVal.badgeFr === 'string' ? ctaVal.badgeFr : defaultEventsPageConfig.cta.badgeFr,
+        badgeEn: typeof ctaVal.badgeEn === 'string' ? ctaVal.badgeEn : defaultEventsPageConfig.cta.badgeEn,
+        titleAr: typeof ctaVal.titleAr === 'string' ? ctaVal.titleAr : defaultEventsPageConfig.cta.titleAr,
+        titleFr: typeof ctaVal.titleFr === 'string' ? ctaVal.titleFr : defaultEventsPageConfig.cta.titleFr,
+        titleEn: typeof ctaVal.titleEn === 'string' ? ctaVal.titleEn : defaultEventsPageConfig.cta.titleEn,
+        descAr: typeof ctaVal.descAr === 'string' ? ctaVal.descAr : defaultEventsPageConfig.cta.descAr,
+        descFr: typeof ctaVal.descFr === 'string' ? ctaVal.descFr : defaultEventsPageConfig.cta.descFr,
+        descEn: typeof ctaVal.descEn === 'string' ? ctaVal.descEn : defaultEventsPageConfig.cta.descEn,
+        primaryBtnTextAr: typeof ctaVal.primaryBtnTextAr === 'string' ? ctaVal.primaryBtnTextAr : defaultEventsPageConfig.cta.primaryBtnTextAr,
+        primaryBtnTextFr: typeof ctaVal.primaryBtnTextFr === 'string' ? ctaVal.primaryBtnTextFr : defaultEventsPageConfig.cta.primaryBtnTextFr,
+        primaryBtnTextEn: typeof ctaVal.primaryBtnTextEn === 'string' ? ctaVal.primaryBtnTextEn : defaultEventsPageConfig.cta.primaryBtnTextEn,
+        primaryBtnUrl: typeof ctaVal.primaryBtnUrl === 'string' ? ctaVal.primaryBtnUrl : defaultEventsPageConfig.cta.primaryBtnUrl,
+        secondaryBtnTextAr: typeof ctaVal.secondaryBtnTextAr === 'string' ? ctaVal.secondaryBtnTextAr : defaultEventsPageConfig.cta.secondaryBtnTextAr,
+        secondaryBtnTextFr: typeof ctaVal.secondaryBtnTextFr === 'string' ? ctaVal.secondaryBtnTextFr : defaultEventsPageConfig.cta.secondaryBtnTextFr,
+        secondaryBtnTextEn: typeof ctaVal.secondaryBtnTextEn === 'string' ? ctaVal.secondaryBtnTextEn : defaultEventsPageConfig.cta.secondaryBtnTextEn,
+        secondaryBtnUrl: typeof ctaVal.secondaryBtnUrl === 'string' ? ctaVal.secondaryBtnUrl : defaultEventsPageConfig.cta.secondaryBtnUrl,
+      },
+    }
+  } catch {
+    return defaultEventsPageConfig
+  }
+}

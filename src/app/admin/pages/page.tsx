@@ -336,6 +336,20 @@ export default async function AdminPagesPage() {
                   </div>
                 )}
 
+                {page.key === 'events' && (
+                  <div className="mb-3 p-2.5 rounded-xl bg-teal-50/70 border border-teal-200/80 flex items-center justify-between gap-2">
+                    <span className="text-3xs font-bold text-teal-900">
+                      📅 إدارة أجندة الفعاليات والورش وبوابات التسجيل
+                    </span>
+                    <Link
+                      href="/admin/events"
+                      className="px-2.5 py-1 rounded-lg text-3xs font-bold text-white bg-[#0d3b43] hover:bg-[#14505b] transition-colors shrink-0"
+                    >
+                      إدارة الفعاليات (Events CMS) →
+                    </Link>
+                  </div>
+                )}
+
                 {page.key === 'faq' && (
                   <div className="mb-3 p-2.5 rounded-xl bg-amber-50/70 border border-amber-200/80 flex items-center justify-between gap-2">
                     <span className="text-3xs font-bold text-amber-900">

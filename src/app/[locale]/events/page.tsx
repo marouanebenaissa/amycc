@@ -1,23 +1,46 @@
+import type { Metadata } from 'next'
+import Link from 'next/link'
 import { getDictionary } from '@/lib/i18n/dictionaries'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { createPublicClient } from '@/lib/supabase/public'
-import { EventRegistrationModal } from '@/components/events/EventRegistrationModal'
-import Link from 'next/link'
+import { getEventsPageSettings } from '@/lib/settings'
+import { ImageWithFallback } from '@/components/ui/ImageWithFallback'
+import { EventsCatalog, type EventItemData } from '@/components/events/EventsCatalog'
 
-interface EventItem {
-  id: string
-  slug: string
-  start_date: string
-  end_date?: string | null
-  venue?: string | null
-  city?: string | null
-  capacity?: number | null
-  registration_open: boolean
-  event_translations?: {
-    title: string
-    description?: string | null
-  }[]
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
+export const fetchCache = 'force-no-store'
+
+export async function generateMetadata(props: {
+  params: Promise<{ locale: string }>
+}): Promise<Metadata> {
+  const { locale } = await props.params
+  const config = await getEventsPageSettings()
+  const isAr = locale === 'ar'
+  const isFr = locale === 'fr'
+
+  const title = isAr
+    ? `${config.hero.titleAr} | جمعية روح الفنون والثقافة`
+    : isFr
+    ? `${config.hero.titleFr} | Association Esprit des Arts et de la Culture`
+    : `${config.hero.titleEn} | Spirit of Arts and Culture Association`
+
+  const description = isAr
+    ? config.hero.descriptionAr
+    : isFr
+    ? config.hero.descriptionFr
+    : config.hero.descriptionEn
+
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      type: 'website',
+    },
+  }
 }
 
 export default async function EventsPage(props: { params: Promise<{ locale: string }> }) {
@@ -26,37 +49,73 @@ export default async function EventsPage(props: { params: Promise<{ locale: stri
   const isAr = locale === 'ar'
   const isFr = locale === 'fr'
 
-  let events: EventItem[] = []
+  const [pageSettings, dbEvents] = await Promise.all([
+    getEventsPageSettings(),
+    (async (): Promise<EventItemData[]> => {
+      try {
+        const supabase = createPublicClient()
+        const { data } = await supabase
+          .from('events')
+          .select(
+            'id, slug, start_date, end_date, venue, city, capacity, registration_open, cover_image, event_translations(locale, title, description)'
+          )
+          .eq('status', 'published')
+          .order('start_date', { ascending: true })
 
-  try {
-    const supabase = createPublicClient()
-    const { data } = await supabase
-      .from('events')
-      .select('id, slug, start_date, end_date, venue, city, capacity, registration_open, event_translations!inner(title, description)')
-      .eq('status', 'published')
-      .eq('event_translations.locale', locale)
-      .order('start_date', { ascending: true })
+        if (data && data.length > 0) {
+          // Format translations according to current locale
+          return data.map((ev) => {
+            const translations = Array.isArray(ev.event_translations) ? ev.event_translations : []
+            const currentTrans =
+              translations.find((t) => t.locale === locale) ||
+              translations.find((t) => t.locale === 'ar') ||
+              translations[0] || { title: ev.slug, description: '' }
 
-    if (data && data.length > 0) {
-      events = data as unknown as EventItem[]
-    }
-  } catch {
-    // Graceful fallback during static build
-  }
+            return {
+              id: ev.id,
+              slug: ev.slug,
+              start_date: ev.start_date,
+              end_date: ev.end_date,
+              venue: ev.venue,
+              city: ev.city,
+              capacity: ev.capacity,
+              registration_open: ev.registration_open,
+              cover_image: ev.cover_image,
+              event_translations: [
+                {
+                  locale,
+                  title: currentTrans.title || ev.slug,
+                  description: currentTrans.description || '',
+                },
+              ],
+            }
+          })
+        }
+      } catch {
+        // Fallback gracefully
+      }
+      return []
+    })(),
+  ])
 
-  // Fallback sample events if none in DB yet
-  const defaultEvents: EventItem[] = [
+  // Sample default events if none in DB
+  const defaultSampleEvents: EventItemData[] = [
     {
       id: 'e-1',
       slug: 'performing-arts-masterclass',
       start_date: '2026-11-15T16:00:00Z',
-      venue: isAr ? 'المركز الثقافي' : 'Cultural Center',
-      city: isAr ? 'المغرب' : 'Morocco',
+      venue: isAr ? 'المركز الثقافي' : isFr ? 'Centre Culturel' : 'Cultural Center',
+      city: isAr ? 'الرباط' : isFr ? 'Rabat' : 'Rabat',
       capacity: 40,
       registration_open: true,
+      cover_image: 'https://images.unsplash.com/photo-1507676184212-d03ab07a01bf?auto=format&fit=crop&w=800&q=80',
       event_translations: [
         {
-          title: isAr ? 'ورشة المسرح والأداء التعبيري للشباب' : isFr ? 'Atelier Théâtre & Expression Scénique' : 'Theatre & Performing Arts Youth Masterclass',
+          title: isAr
+            ? 'ورشة المسرح والأداء التعبيري للشباب'
+            : isFr
+            ? 'Atelier Théâtre & Expression Scénique'
+            : 'Theatre & Performing Arts Youth Masterclass',
           description: isAr
             ? 'تدريب عملي تفاعلي على تقنيات الارتجال المسرحي، الإلقاء، والتحكم في الفضاء الركحي تحت إشراف أطر فنية معتمدة.'
             : isFr
@@ -69,13 +128,18 @@ export default async function EventsPage(props: { params: Promise<{ locale: stri
       id: 'e-2',
       slug: 'heritage-music-evening',
       start_date: '2026-12-05T18:30:00Z',
-      venue: isAr ? 'فضاء الفنون والعروض' : 'Arts & Performance Hall',
-      city: isAr ? 'المغرب' : 'Morocco',
+      venue: isAr ? 'فضاء الفنون والعروض' : isFr ? 'Espace des Arts et Spectacles' : 'Arts & Performance Hall',
+      city: isAr ? 'الدار البيضاء' : isFr ? 'Casablanca' : 'Casablanca',
       capacity: 80,
       registration_open: true,
+      cover_image: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=800&q=80',
       event_translations: [
         {
-          title: isAr ? 'أمسية التراث الموسيقي المغربي الأصيل' : isFr ? 'Soirée du Patrimoine Musical Marocain' : 'Moroccan Heritage Music Evening',
+          title: isAr
+            ? 'أمسية التراث الموسيقي المغربي الأصيل'
+            : isFr
+            ? 'Soirée du Patrimoine Musical Marocain'
+            : 'Moroccan Heritage Music Evening',
           description: isAr
             ? 'حفل موسيقي شبابي يحتفي بالروافد الموسيقية المغربية الأصيلة، بمشاركة مواهب صاعدة في العزف والغناء التراثي.'
             : isFr
@@ -88,13 +152,18 @@ export default async function EventsPage(props: { params: Promise<{ locale: stri
       id: 'e-3',
       slug: 'youth-creative-forum',
       start_date: '2026-12-20T10:00:00Z',
-      venue: isAr ? 'دار الشباب والأنشطة الثقافية' : 'Youth & Cultural Center',
-      city: isAr ? 'المغرب' : 'Morocco',
+      venue: isAr ? 'دار الشباب والأنشطة الثقافية' : isFr ? 'Maison des Jeunes et de la Culture' : 'Youth & Cultural Center',
+      city: isAr ? 'مراكش' : isFr ? 'Marrakech' : 'Marrakech',
       capacity: 60,
       registration_open: true,
+      cover_image: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=800&q=80',
       event_translations: [
         {
-          title: isAr ? 'ملتقى مبادرة شباب في العمل للتطوع الثقافي' : isFr ? 'Forum Jeunesse en Action pour le Bénévolat' : 'Youth in Action Cultural Volunteering Forum',
+          title: isAr
+            ? 'ملتقى مبادرة شباب في العمل للتطوع الثقافي'
+            : isFr
+            ? 'Forum Jeunesse en Action pour le Bénévolat'
+            : 'Youth in Action Cultural Volunteering Forum',
           description: isAr
             ? 'يوم دراسي وورشات تدريبية تجمع متطوعي مبادرة شباب في العمل لتقييم المبادرات وتخطيط الأنشطة الثقافية المقبلة.'
             : isFr
@@ -105,148 +174,205 @@ export default async function EventsPage(props: { params: Promise<{ locale: stri
     },
   ]
 
-  const displayEvents = events.length > 0 ? events : defaultEvents
+  const displayEvents = dbEvents.length > 0 ? dbEvents : defaultSampleEvents
 
   return (
     <>
       <Header locale={locale} dict={dict} />
 
       <main id="main-content" className="flex-1 bg-[#faf7f2]">
-        {/* Header Banner */}
-        <section className="relative overflow-hidden bg-gradient-to-b from-[#faf7f2] via-[#f7f2e9] to-[#faf7f2] border-b border-[#e5e0d6] py-16 lg:py-24 text-center">
-          <div className="absolute inset-0 moroccan-pattern-light opacity-50 pointer-events-none" aria-hidden="true" />
-          <div className="relative max-w-4xl mx-auto px-4 sm:px-6 space-y-4">
-            <span className="inline-block text-xs font-bold uppercase tracking-widest text-[#c85a32]">
-              AMYCC Events
-            </span>
-            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-[#08242a] tracking-tight">
-              {dict.events.title}
-            </h1>
-            <p className="text-base sm:text-lg text-[#445457] max-w-2xl mx-auto font-medium">
-              {isAr
-                ? 'استكشف الفعاليات الثقافية والورشات الفنية القادمة وسجل حضورك مجاناً وبشكل مباشر.'
-                : 'Explore upcoming cultural events, masterclasses, and register your attendance directly.'}
-            </p>
-          </div>
-        </section>
+        {/* ========================================================= */}
+        {/* Moroccan Cinematic Ambient Hero Section                   */}
+        {/* ========================================================= */}
+        <section className="relative overflow-hidden bg-gradient-to-b from-[#061d22] via-[#0d3b43] to-[#08242a] text-white py-20 lg:py-28">
+          {pageSettings.hero.hasHeroImage && pageSettings.hero.imageUrl ? (
+            <div className="absolute inset-0 z-0">
+              <ImageWithFallback
+                src={pageSettings.hero.imageUrl}
+                fallbackSrc="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=1920&q=80"
+                alt={isAr ? pageSettings.hero.titleAr : isFr ? pageSettings.hero.titleFr : pageSettings.hero.titleEn}
+                fill
+                priority
+                className="object-cover object-center"
+              />
+              <div className="absolute inset-0 bg-gradient-to-b from-[#061d22]/90 via-[#0d3b43]/85 to-[#08242a]/95" />
+            </div>
+          ) : (
+            <div className="absolute inset-0 moroccan-pattern-dark opacity-35 pointer-events-none" aria-hidden="true" />
+          )}
 
-        {/* Events Grid */}
-        <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
-          <div className="flex items-center justify-between mb-10 pb-4 border-b border-[#e5e0d6]">
-            <div>
-              <h2 className="text-xl font-black text-[#08242a]">
-                {dict.events.upcoming}
-              </h2>
-              <span className="text-3xs text-[#5f7174]">
-                {isAr ? 'حجز مباشر وفوري للمقاعد' : 'Real-time seat reservation'}
+          {/* Ambient Lighting Gradients */}
+          <div className="absolute -top-32 start-1/4 w-96 h-96 bg-[#c85a32]/20 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute -bottom-32 end-1/4 w-96 h-96 bg-[#74bfcd]/20 rounded-full blur-3xl pointer-events-none" />
+
+          <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
+            {/* Top Badge */}
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-xs sm:text-sm font-bold text-[#f4ce83] shadow-inner">
+              <span className="w-2 h-2 rounded-full bg-[#f4ce83] animate-pulse" />
+              <span>
+                {isAr
+                  ? pageSettings.hero.badgeAr
+                  : isFr
+                  ? pageSettings.hero.badgeFr
+                  : pageSettings.hero.badgeEn}
               </span>
             </div>
-            <span className="px-3 py-1 rounded-full text-xs font-bold bg-white border border-[#e5e0d6] text-[#08242a] shadow-2xs">
-              {displayEvents.length} {isAr ? 'فعاليات مجدولة' : 'Scheduled Events'}
-            </span>
-          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {displayEvents.map((ev) => {
-              const trans = ev.event_translations?.[0] || { title: ev.slug, description: '' }
-              const dateObj = new Date(ev.start_date)
-              const formattedDate = dateObj.toLocaleDateString(locale, {
-                weekday: 'long',
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-              })
+            {/* Headline */}
+            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight sm:leading-tight">
+              {isAr
+                ? pageSettings.hero.titleAr
+                : isFr
+                ? pageSettings.hero.titleFr
+                : pageSettings.hero.titleEn}
+            </h1>
 
-              return (
-                <div
-                  key={ev.id}
-                  className="rounded-3xl border border-[#e5e0d6] bg-white p-7 shadow-subtle hover:shadow-card hover:border-[#cfc7b9] transition-all flex flex-col justify-between"
-                >
-                  <div>
-                    {/* Top Status & Date */}
-                    <div className="flex items-center justify-between mb-4">
-                      <span className="px-3 py-1 rounded-full text-3xs font-bold bg-[#faf7f2] border border-[#e5e0d6] text-[#0d3b43]">
-                        📅 {dateObj.toLocaleDateString(locale, { month: 'short', day: 'numeric' })}
-                      </span>
-                      <span
-                        className={`text-3xs font-bold px-2.5 py-0.5 rounded-full ${
-                          ev.registration_open
-                            ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
-                            : 'bg-slate-100 text-slate-600'
-                        }`}
-                      >
-                        {ev.registration_open ? (isAr ? 'التسجيل مفتوح' : 'Open') : 'Closed'}
-                      </span>
-                    </div>
+            {/* Subtitle */}
+            {(isAr ? pageSettings.hero.subtitleAr : isFr ? pageSettings.hero.subtitleFr : pageSettings.hero.subtitleEn) && (
+              <p className="text-base sm:text-xl font-bold text-[#f4ce83] max-w-3xl mx-auto leading-relaxed">
+                {isAr
+                  ? pageSettings.hero.subtitleAr
+                  : isFr
+                  ? pageSettings.hero.subtitleFr
+                  : pageSettings.hero.subtitleEn}
+              </p>
+            )}
 
-                    <h3 className="text-xl font-bold text-[#08242a] mb-2 leading-snug">
-                      {trans.title}
-                    </h3>
+            {/* Description */}
+            <p className="text-sm sm:text-base text-white/80 max-w-3xl mx-auto leading-relaxed font-medium">
+              {isAr
+                ? pageSettings.hero.descriptionAr
+                : isFr
+                ? pageSettings.hero.descriptionFr
+                : pageSettings.hero.descriptionEn}
+            </p>
 
-                    {/* Venue & City */}
-                    <div className="space-y-1 text-2xs text-[#5f7174] mb-4">
-                      <div className="flex items-center gap-1.5">
-                        <span>📍</span>
-                        <span>{ev.venue || 'Cultural Center'} • {ev.city || 'Morocco'}</span>
-                      </div>
-                      {ev.capacity && (
-                        <div className="flex items-center gap-1.5 text-3xs text-[#819598]">
-                          <span>👥</span>
-                          <span>{isAr ? `الطاقة الاستيعابية: ${ev.capacity} مقعد` : `Capacity: ${ev.capacity} seats`}</span>
-                        </div>
-                      )}
-                    </div>
+            {/* Action Button */}
+            <div className="pt-4 flex flex-wrap items-center justify-center gap-4">
+              <a
+                href="#events-catalog"
+                className="px-6 py-3.5 rounded-xl font-bold text-[#08242a] bg-[#f4ce83] hover:bg-[#eec26e] transition-all text-xs sm:text-sm shadow-card hover:scale-105 active:scale-95 flex items-center gap-2"
+              >
+                <span>📅</span>
+                <span>
+                  {isAr
+                    ? pageSettings.hero.primaryBtnTextAr
+                    : isFr
+                    ? pageSettings.hero.primaryBtnTextFr
+                    : pageSettings.hero.primaryBtnTextEn}
+                </span>
+              </a>
 
-                    {trans.description && (
-                      <p className="text-xs text-[#445457] leading-relaxed mb-6 line-clamp-3">
-                        {trans.description}
-                      </p>
-                    )}
-                  </div>
-
-                  {/* Register Button with Modal */}
-                  <div className="pt-4 border-t border-[#f4ede2]">
-                    {ev.registration_open ? (
-                      <EventRegistrationModal
-                        eventId={ev.id}
-                        eventTitle={trans.title}
-                        eventDate={formattedDate}
-                        eventVenue={ev.venue || ev.city || undefined}
-                        locale={locale}
-                        buttonLabel={dict.events.register}
-                        className="w-full py-3 px-4 rounded-xl font-bold text-white bg-[#0d3b43] hover:bg-[#14505b] active:scale-95 transition-all text-xs shadow-xs flex items-center justify-center gap-2"
-                      />
-                    ) : (
-                      <span className="block text-center py-2.5 text-2xs text-[#819598] font-semibold bg-[#faf7f2] rounded-xl">
-                        {isAr ? 'التسجيل مغلق حالياً' : 'Registration Closed'}
-                      </span>
-                    )}
-                  </div>
-                </div>
-              )
-            })}
+              <Link
+                href={`/${locale}/annual-program`}
+                className="px-6 py-3.5 rounded-xl font-bold text-white bg-white/10 hover:bg-white/20 border border-white/20 backdrop-blur-md transition-all text-xs sm:text-sm hover:scale-105 active:scale-95"
+              >
+                {isAr ? 'البرنامج السنوي للموسم' : isFr ? 'Programme Annuel' : 'Annual Program'}
+              </Link>
+            </div>
           </div>
         </section>
 
-        {/* Suggest Event or Host Workshop Banner */}
-        <section className="bg-white border-t border-[#e5e0d6] py-16 text-center">
-          <div className="max-w-4xl mx-auto px-4 space-y-4">
-            <h2 className="text-2xl font-black text-[#08242a]">
-              {isAr ? 'هل ترغب في اقتراح ورشة عمل أو شراكة فنية؟' : 'Propose a Workshop or Cultural Collaboration'}
-            </h2>
-            <p className="text-xs sm:text-sm text-[#5f7174] max-w-xl mx-auto leading-relaxed">
-              {isAr
-                ? 'ترحب جمعية روح الفنون والثقافة بالمقترحات الإبداعية من الفنانين والمدربين والمراكز الثقافية.'
-                : 'AMYCC welcomes creative proposals from artists, trainers, and cultural institutions.'}
-            </p>
-            <div className="pt-2">
-              <Link
-                href={`/${locale}/partnerships`}
-                className="inline-flex items-center px-6 py-3 rounded-xl font-bold text-xs text-white bg-[#c85a32] hover:bg-[#b84e27] transition-all shadow-subtle gap-2"
+        {/* ========================================================= */}
+        {/* 4 Overlapping Key Indicators (KPIs)                       */}
+        {/* ========================================================= */}
+        <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 -mt-10 lg:-mt-12 relative z-20">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+            {pageSettings.stats.map((stat) => (
+              <div
+                key={stat.id}
+                className="luxury-card p-5 sm:p-6 text-center flex flex-col justify-between items-center group bg-white shadow-card border border-[#e5e0d6] hover:border-[#c85a32]/40 transition-all rounded-2xl"
               >
-                <span>{dict.partnerships.apply}</span>
-                <span aria-hidden="true">→</span>
-              </Link>
+                <div className="w-12 h-12 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6] flex items-center justify-center p-2 mb-3 shadow-2xs group-hover:scale-110 transition-transform overflow-hidden text-2xl">
+                  {stat.icon}
+                </div>
+                <div className="text-3xl sm:text-4xl font-black text-[#0d3b43] mb-1 tracking-tight">
+                  {stat.value}
+                </div>
+                <div className="text-xs sm:text-sm font-bold text-[#08242a] leading-snug">
+                  {isAr ? stat.labelAr : isFr ? stat.labelFr : stat.labelEn}
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* ========================================================= */}
+        {/* Interactive Events Catalog with Search & Filters          */}
+        {/* ========================================================= */}
+        <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
+          <EventsCatalog
+            events={displayEvents}
+            locale={locale}
+            buttonLabel={dict.events.register}
+          />
+        </section>
+
+        {/* ========================================================= */}
+        {/* Suggest Event / Institutional Collaboration CTA Banner    */}
+        {/* ========================================================= */}
+        <section className="py-20 bg-white border-t border-[#e5e0d6] relative overflow-hidden">
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="relative rounded-3xl overflow-hidden bg-gradient-to-r from-[#0d3b43] via-[#0f4650] to-[#08242a] text-white p-8 sm:p-12 lg:p-14 shadow-card text-center space-y-6">
+              <div className="absolute inset-0 moroccan-pattern-dark opacity-20 pointer-events-none" aria-hidden="true" />
+              
+              <div className="relative z-10 space-y-4 max-w-3xl mx-auto">
+                <span className="inline-block px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-widest bg-white/10 text-[#f4ce83] border border-white/20 backdrop-blur-sm">
+                  {isAr
+                    ? pageSettings.cta.badgeAr
+                    : isFr
+                    ? pageSettings.cta.badgeFr
+                    : pageSettings.cta.badgeEn}
+                </span>
+
+                <h2 className="text-2xl sm:text-4xl font-black text-white leading-tight">
+                  {isAr
+                    ? pageSettings.cta.titleAr
+                    : isFr
+                    ? pageSettings.cta.titleFr
+                    : pageSettings.cta.titleEn}
+                </h2>
+
+                <p className="text-xs sm:text-base text-white/80 leading-relaxed font-medium">
+                  {isAr
+                    ? pageSettings.cta.descAr
+                    : isFr
+                    ? pageSettings.cta.descFr
+                    : pageSettings.cta.descEn}
+                </p>
+
+                <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
+                  <Link
+                    href={
+                      pageSettings.cta.primaryBtnUrl.startsWith('/')
+                        ? `/${locale}${pageSettings.cta.primaryBtnUrl}`
+                        : pageSettings.cta.primaryBtnUrl
+                    }
+                    className="px-6 py-3.5 rounded-xl font-bold text-[#08242a] bg-[#f4ce83] hover:bg-[#eec26e] transition-all text-xs sm:text-sm shadow-card hover:scale-105 active:scale-95"
+                  >
+                    {isAr
+                      ? pageSettings.cta.primaryBtnTextAr
+                      : isFr
+                      ? pageSettings.cta.primaryBtnTextFr
+                      : pageSettings.cta.primaryBtnTextEn}
+                  </Link>
+
+                  <Link
+                    href={
+                      pageSettings.cta.secondaryBtnUrl.startsWith('/')
+                        ? `/${locale}${pageSettings.cta.secondaryBtnUrl}`
+                        : pageSettings.cta.secondaryBtnUrl
+                    }
+                    className="px-6 py-3.5 rounded-xl font-bold text-white bg-white/10 hover:bg-white/20 border border-white/20 backdrop-blur-md transition-all text-xs sm:text-sm hover:scale-105 active:scale-95"
+                  >
+                    {isAr
+                      ? pageSettings.cta.secondaryBtnTextAr
+                      : isFr
+                      ? pageSettings.cta.secondaryBtnTextFr
+                      : pageSettings.cta.secondaryBtnTextEn}
+                  </Link>
+                </div>
+              </div>
             </div>
           </div>
         </section>

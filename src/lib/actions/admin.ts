@@ -3,7 +3,7 @@
 import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import { revalidatePath } from 'next/cache'
-import type { FaqItemConfig, AreasConfig, TeamConfig, CommissionsConfig, ContactConfig, ProgramsPageConfig, AnnualProgramConfig, ImpactConfig } from '@/lib/settings'
+import type { FaqItemConfig, AreasConfig, TeamConfig, CommissionsConfig, ContactConfig, ProgramsPageConfig, AnnualProgramConfig, ImpactConfig, EventsPageConfig } from '@/lib/settings'
 
 export async function recordAuditLog(
   action: string,
@@ -490,6 +490,52 @@ export async function saveImpactConfiguration(
     revalidatePath('/[locale]/impact', 'page')
     revalidatePath('/[locale]/impact', 'layout')
     revalidatePath('/admin/impact')
+    revalidatePath('/admin/pages')
+    revalidatePath('/[locale]', 'layout')
+    revalidatePath('/', 'layout')
+    return { success: true }
+  } catch (err) {
+    return { success: false, error: (err as Error).message }
+  }
+}
+
+export async function saveEventsPageConfiguration(
+  config: EventsPageConfig
+): Promise<{ success: boolean; error?: string }> {
+  try {
+    const supabase = await createClient()
+    const {
+      data: { user },
+    } = await supabase.auth.getUser()
+
+    if (!user) {
+      return { success: false, error: 'غير مصرح لك بتعديل واجهة الفعاليات (Unauthorized)' }
+    }
+
+    const { error } = await supabase
+      .from('site_settings')
+      .upsert([
+        {
+          key: 'events_page',
+          value: config,
+          updated_at: new Date().toISOString(),
+        },
+      ])
+
+    if (error) return { success: false, error: error.message }
+
+    await recordAuditLog('events_page_updated', 'site_settings', 'events_page', {
+      titleAr: config.hero.titleAr,
+    })
+
+    // Revalidate all localized paths and layouts so edits appear instantly on the live site
+    revalidatePath('/ar/events')
+    revalidatePath('/fr/events')
+    revalidatePath('/en/events')
+    revalidatePath('/events')
+    revalidatePath('/[locale]/events', 'page')
+    revalidatePath('/[locale]/events', 'layout')
+    revalidatePath('/admin/events')
     revalidatePath('/admin/pages')
     revalidatePath('/[locale]', 'layout')
     revalidatePath('/', 'layout')

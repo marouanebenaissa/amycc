@@ -730,3 +730,119 @@ describe('Community Impact Page Validation Suite', () => {
     assert.equal(result.success, false)
   })
 })
+
+const eventsPageConfigSchema = z.object({
+  hero: z.object({
+    tagAr: z.string().min(1),
+    tagFr: z.string().min(1),
+    tagEn: z.string().min(1),
+    badgeAr: z.string().min(1),
+    titleAr: z.string().min(3),
+    titleFr: z.string().min(3),
+    titleEn: z.string().min(3),
+    subtitleAr: z.string().min(3),
+    subtitleFr: z.string().min(3),
+    subtitleEn: z.string().min(3),
+    descriptionAr: z.string().min(10),
+    descriptionFr: z.string().min(10),
+    descriptionEn: z.string().min(10),
+    imageUrl: z.string(),
+    hasHeroImage: z.boolean(),
+  }),
+  stats: z.array(
+    z.object({
+      id: z.string().min(1),
+      value: z.string().min(1),
+      labelAr: z.string().min(2),
+      labelFr: z.string().min(2),
+      labelEn: z.string().min(2),
+      icon: z.string(),
+    })
+  ).min(1),
+  cta: z.object({
+    badgeAr: z.string().min(1),
+    titleAr: z.string().min(5),
+    descAr: z.string().min(10),
+    primaryBtnTextAr: z.string().min(2),
+    primaryBtnUrl: z.string().min(1),
+    secondaryBtnTextAr: z.string().min(2),
+    secondaryBtnUrl: z.string().min(1),
+  }),
+})
+
+describe('Events Page Validation Suite', () => {
+  test('accepts valid events configuration with hero, Moroccan cultural KPIs, and CTA', () => {
+    const valid = {
+      hero: {
+        tagAr: 'الأجندة الثقافية الحية',
+        tagFr: 'Agenda Culturel Vivant',
+        tagEn: 'Living Cultural Agenda',
+        badgeAr: 'فعاليات وورشات جمعية روح الفنون',
+        titleAr: 'الفعاليات والتظاهرات الثقافية والفنية',
+        titleFr: 'Événements & Manifestations Artistiques',
+        titleEn: 'Cultural Events & Artistic Manifestations',
+        subtitleAr: 'منصات للإبداع والتلاقي الشبابي وإحياء التراث عبر مختلف جهات المملكة',
+        subtitleFr: 'Des plateformes de création et de dialogue pour la jeunesse au Maroc',
+        subtitleEn: 'Platforms for youth creativity and artistic dialogue across Morocco',
+        descriptionAr: 'ندعوكم للمشاركة في باقة متنوعة من التظاهرات الفنية، الورشات التكوينية، والمعارض والمهرجانات الهادفة إلى صقل المواهب المغربية.',
+        descriptionFr: 'Découvrez notre riche programmation culturelle : ateliers, résidences, concerts et festivals.',
+        descriptionEn: 'Explore our vibrant cultural calendar of masterclasses, exhibitions, and musical residencies.',
+        imageUrl: '',
+        hasHeroImage: false,
+      },
+      stats: [
+        { id: 'ev-stat-1', value: '100%', labelAr: 'مشاركة مجانية', labelFr: 'Participation Gratuite', labelEn: '100% Free Access', icon: '✨' },
+        { id: 'ev-stat-2', value: '+50', labelAr: 'ورشة وعرض سنوي', labelFr: 'Ateliers & Spectacles', labelEn: 'Workshops & Shows', icon: '🎭' },
+      ],
+      cta: {
+        badgeAr: 'اقتراح تعاون وشراكة',
+        titleAr: 'هل ترغب في تنظيم ورشة عمل أو استضافة فعالية بمدينتك؟',
+        descAr: 'تفتح جمعية روح الفنون والثقافة باب التعاون والشراكة مع المراكز الثقافية ودور الشباب.',
+        primaryBtnTextAr: 'طلب شراكة أو استضافة فعالية',
+        primaryBtnUrl: '/partnerships',
+        secondaryBtnTextAr: 'تواصل مع إدارة الفعاليات',
+        secondaryBtnUrl: '/contact',
+      },
+    }
+    const result = eventsPageConfigSchema.safeParse(valid)
+    assert.equal(result.success, true)
+    if (result.success) {
+      assert.equal(result.data.stats.length, 2)
+      assert.equal(result.data.hero.tagAr, 'الأجندة الثقافية الحية')
+    }
+  })
+
+  test('rejects events configuration with missing required fields or empty stats', () => {
+    const invalid = {
+      hero: {
+        tagAr: '',
+        tagFr: '',
+        tagEn: '',
+        badgeAr: '',
+        titleAr: 'ق',
+        titleFr: 'a',
+        titleEn: 'b',
+        subtitleAr: 'c',
+        subtitleFr: 'd',
+        subtitleEn: 'e',
+        descriptionAr: 'قصير',
+        descriptionFr: 'court',
+        descriptionEn: 'short',
+        imageUrl: '',
+        hasHeroImage: false,
+      },
+      stats: [],
+      cta: {
+        badgeAr: '',
+        titleAr: '',
+        descAr: '',
+        primaryBtnTextAr: '',
+        primaryBtnUrl: '',
+        secondaryBtnTextAr: '',
+        secondaryBtnUrl: '',
+      },
+    }
+    const result = eventsPageConfigSchema.safeParse(invalid)
+    assert.equal(result.success, false)
+  })
+})
