@@ -3,7 +3,7 @@
 import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import { revalidatePath } from 'next/cache'
-import type { FaqItemConfig, AreasConfig, TeamConfig, CommissionsConfig, ContactConfig, ProgramsPageConfig, AnnualProgramConfig } from '@/lib/settings'
+import type { FaqItemConfig, AreasConfig, TeamConfig, CommissionsConfig, ContactConfig, ProgramsPageConfig, AnnualProgramConfig, ImpactConfig } from '@/lib/settings'
 
 export async function recordAuditLog(
   action: string,
@@ -441,6 +441,45 @@ export async function saveAnnualProgramConfiguration(
     revalidatePath('/admin/annual-program')
     revalidatePath('/admin/pages')
     revalidatePath('/[locale]/annual-program')
+    revalidatePath('/[locale]', 'layout')
+    return { success: true }
+  } catch (err) {
+    return { success: false, error: (err as Error).message }
+  }
+}
+
+export async function saveImpactConfiguration(
+  config: ImpactConfig
+): Promise<{ success: boolean; error?: string }> {
+  try {
+    const supabase = await createClient()
+    const {
+      data: { user },
+    } = await supabase.auth.getUser()
+
+    if (!user) {
+      return { success: false, error: 'غير مصرح لك بتعديل بيانات الأثر المجتمعي (Unauthorized)' }
+    }
+
+    const { error } = await supabase
+      .from('site_settings')
+      .upsert([
+        {
+          key: 'impact',
+          value: config,
+          updated_at: new Date().toISOString(),
+        },
+      ])
+
+    if (error) return { success: false, error: error.message }
+
+    await recordAuditLog('impact_updated', 'site_settings', 'impact', {
+      titleAr: config.hero.titleAr,
+    })
+
+    revalidatePath('/admin/impact')
+    revalidatePath('/admin/pages')
+    revalidatePath('/[locale]/impact')
     revalidatePath('/[locale]', 'layout')
     return { success: true }
   } catch (err) {

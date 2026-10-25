@@ -66,6 +66,16 @@ const sitePages: PageDefinition[] = [
     descriptionAr: 'الأجندة السنوية الرباعية، الفصول الأربعة، المحاور الاستراتيجية ومؤشرات الإنجاز، مع تحميل الدليل الرسمي.',
   },
   {
+    key: 'impact',
+    titleAr: 'الأثر المجتمعي والثقافي',
+    titleFr: 'Impact Communautaire',
+    titleEn: 'Community Impact',
+    path: 'impact',
+    icon: '🌟',
+    category: 'مؤسسي',
+    descriptionAr: 'مؤشرات الأثر بالمملكة، المحاور الاستراتيجية، قصة شباب في العمل، ومنهجية الشفافية والنزاهة المدنية.',
+  },
+  {
     key: 'events',
     titleAr: 'أجندة الفعاليات',
     titleFr: 'Événements',
@@ -294,6 +304,20 @@ export default async function AdminPagesPage() {
                       className="px-2.5 py-1 rounded-lg text-3xs font-bold text-white bg-[#0d3b43] hover:bg-[#14505b] transition-colors shrink-0"
                     >
                       إدارة البرنامج السنوي →
+                    </Link>
+                  </div>
+                )}
+
+                {page.key === 'impact' && (
+                  <div className="mb-3 p-2.5 rounded-xl bg-amber-50/70 border border-amber-200/80 flex items-center justify-between gap-2">
+                    <span className="text-3xs font-bold text-amber-900">
+                      🌟 إدارة مؤشرات الأثر، محاور العمل، وقصة شباب في العمل
+                    </span>
+                    <Link
+                      href="/admin/impact"
+                      className="px-2.5 py-1 rounded-lg text-3xs font-bold text-white bg-[#0d3b43] hover:bg-[#14505b] transition-colors shrink-0"
+                    >
+                      إدارة الأثر المجتمعي →
                     </Link>
                   </div>
                 )}

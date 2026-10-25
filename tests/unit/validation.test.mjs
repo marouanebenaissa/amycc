@@ -600,3 +600,133 @@ describe('Annual Program Page Validation Suite', () => {
     assert.equal(result.success, false)
   })
 })
+
+const impactConfigSchema = z.object({
+  hero: z.object({
+    badgeAr: z.string().min(1),
+    titleAr: z.string().min(3),
+    descriptionAr: z.string().min(10),
+    reportPdfUrl: z.string(),
+    heroImageUrl: z.string(),
+    hasHeroImage: z.boolean(),
+  }),
+  metrics: z.array(
+    z.object({
+      id: z.string().min(1),
+      value: z.string().min(1),
+      labelAr: z.string().min(2),
+      subtextAr: z.string(),
+      icon: z.string(),
+    })
+  ).min(1),
+  pillars: z.array(
+    z.object({
+      id: z.string().min(1),
+      titleAr: z.string().min(2),
+      descAr: z.string().min(5),
+      icon: z.string(),
+    })
+  ).min(1),
+  spotlight: z.object({
+    badgeAr: z.string().min(1),
+    titleAr: z.string().min(3),
+    descAr: z.string().min(10),
+  }),
+  methodology: z.object({
+    titleAr: z.string().min(3),
+    steps: z.array(
+      z.object({
+        id: z.string().min(1),
+        stepNumber: z.string().min(1),
+        titleAr: z.string().min(2),
+      })
+    ).min(1),
+  }),
+  transparency: z.object({
+    titleAr: z.string().min(3),
+    items: z.array(
+      z.object({
+        id: z.string().min(1),
+        titleAr: z.string().min(2),
+      })
+    ).min(1),
+  }),
+  cta: z.object({
+    titleAr: z.string().min(5),
+    descAr: z.string().min(10),
+    primaryBtnTextAr: z.string().min(2),
+    primaryBtnUrl: z.string().min(1),
+  }),
+})
+
+describe('Community Impact Page Validation Suite', () => {
+  test('accepts valid impact configuration with metrics, pillars, spotlight, and methodology', () => {
+    const valid = {
+      hero: {
+        badgeAr: 'الأثر والالتزام المجتمعي',
+        titleAr: 'الأثر المجتمعي والثقافي بالمملكة المغربية',
+        descriptionAr: 'تسعى جمعية روح الفنون والثقافة إلى جعل الفنون والإبداع رافعة للتنمية البشرية.',
+        reportPdfUrl: '/documents/rapport-impact-2026.pdf',
+        heroImageUrl: '',
+        hasHeroImage: false,
+      },
+      metrics: [
+        { id: 'm-1', value: '2026', labelAr: 'سنة التأسيس', subtextAr: 'إطار مدني معتمد بالمغرب', icon: '🏛️' },
+        { id: 'm-2', value: '+1,500', labelAr: 'مستفيد ومستفيدة', subtextAr: 'في مختلف جهات المملكة', icon: '👥' },
+      ],
+      pillars: [
+        { id: 'p-1', titleAr: 'التمكين الشبابي', descAr: 'فتح المجال أمام الطاقات الشابة للتعبير الحر والتأطير الجمعوي.', icon: '🚀' },
+      ],
+      spotlight: {
+        badgeAr: 'أثر ميداني ملموس',
+        titleAr: 'مبادرة شباب في العمل',
+        descAr: 'المشاركة الحية في بلورة المبادرات وتأطير الورشات والتنظيم الميداني.',
+      },
+      methodology: {
+        titleAr: 'دورة صناعة الأثر',
+        steps: [
+          { id: 's-1', stepNumber: '01', titleAr: 'التشخيص ورصد المواهب' },
+        ],
+      },
+      transparency: {
+        titleAr: 'النزاهة والشفافية المدنية',
+        items: [
+          { id: 't-1', titleAr: 'الشرعية المؤسسية والإيداع القانوني' },
+        ],
+      },
+      cta: {
+        titleAr: 'شاركنا في توسيع دائرة الأثر الثقافي بالمغرب',
+        descAr: 'تفتح الجمعية أبوابها للشراكة الاستراتيجية مع المؤسسات والجماعات.',
+        primaryBtnTextAr: 'طلب شراكة مؤسسية',
+        primaryBtnUrl: '/partnerships',
+      },
+    }
+    const result = impactConfigSchema.safeParse(valid)
+    assert.equal(result.success, true)
+    if (result.success) {
+      assert.equal(result.data.metrics.length, 2)
+      assert.equal(result.data.methodology.steps.length, 1)
+    }
+  })
+
+  test('rejects impact configuration with empty metrics or short description', () => {
+    const invalid = {
+      hero: {
+        badgeAr: '',
+        titleAr: 'ق',
+        descriptionAr: 'قصير',
+        reportPdfUrl: '',
+        heroImageUrl: '',
+        hasHeroImage: false,
+      },
+      metrics: [],
+      pillars: [],
+      spotlight: { badgeAr: '', titleAr: '', descAr: '' },
+      methodology: { titleAr: '', steps: [] },
+      transparency: { titleAr: '', items: [] },
+      cta: { titleAr: '', descAr: '', primaryBtnTextAr: '', primaryBtnUrl: '' },
+    }
+    const result = impactConfigSchema.safeParse(invalid)
+    assert.equal(result.success, false)
+  })
+})

@@ -2700,3 +2700,666 @@ export async function getAnnualProgramSettings(): Promise<AnnualProgramConfig> {
     return defaultAnnualProgramConfig
   }
 }
+
+// ==========================================
+// Community Impact Page CMS Config
+// ==========================================
+
+export interface ImpactMetricItem {
+  id: string
+  value: string
+  labelAr: string
+  labelFr: string
+  labelEn: string
+  subtextAr: string
+  subtextFr: string
+  subtextEn: string
+  icon: string
+  iconSrc?: string
+}
+
+export interface ImpactPillarItem {
+  id: string
+  badgeAr?: string
+  badgeFr?: string
+  badgeEn?: string
+  titleAr: string
+  titleFr: string
+  titleEn: string
+  descAr: string
+  descFr: string
+  descEn: string
+  icon: string
+  iconSrc?: string
+}
+
+export interface ImpactStepItem {
+  id: string
+  stepNumber: string
+  titleAr: string
+  titleFr: string
+  titleEn: string
+  descAr: string
+  descFr: string
+  descEn: string
+  icon: string
+}
+
+export interface ImpactTransparencyItem {
+  id: string
+  titleAr: string
+  titleFr: string
+  titleEn: string
+  descAr: string
+  descFr: string
+  descEn: string
+  icon: string
+}
+
+export interface ImpactConfig {
+  hero: {
+    badgeAr: string
+    badgeFr: string
+    badgeEn: string
+    titleAr: string
+    titleFr: string
+    titleEn: string
+    subtitleAr: string
+    subtitleFr: string
+    subtitleEn: string
+    descriptionAr: string
+    descriptionFr: string
+    descriptionEn: string
+    heroImageUrl: string
+    hasHeroImage: boolean
+    reportPdfUrl: string
+    primaryBtnTextAr: string
+    primaryBtnTextFr: string
+    primaryBtnTextEn: string
+    primaryBtnUrl: string
+    secondaryBtnTextAr: string
+    secondaryBtnTextFr: string
+    secondaryBtnTextEn: string
+    secondaryBtnUrl: string
+  }
+  metrics: ImpactMetricItem[]
+  pillars: ImpactPillarItem[]
+  spotlight: {
+    badgeAr: string
+    badgeFr: string
+    badgeEn: string
+    titleAr: string
+    titleFr: string
+    titleEn: string
+    descAr: string
+    descFr: string
+    descEn: string
+    quoteAr: string
+    quoteFr: string
+    quoteEn: string
+    quoteAuthorAr: string
+    quoteAuthorFr: string
+    quoteAuthorEn: string
+    imageUrl: string
+    imageCaptionAr: string
+    imageCaptionFr: string
+    imageCaptionEn: string
+    primaryBtnTextAr: string
+    primaryBtnTextFr: string
+    primaryBtnTextEn: string
+    primaryBtnUrl: string
+    secondaryBtnTextAr: string
+    secondaryBtnTextFr: string
+    secondaryBtnTextEn: string
+    secondaryBtnUrl: string
+  }
+  methodology: {
+    badgeAr: string
+    badgeFr: string
+    badgeEn: string
+    titleAr: string
+    titleFr: string
+    titleEn: string
+    descAr: string
+    descFr: string
+    descEn: string
+    steps: ImpactStepItem[]
+  }
+  transparency: {
+    badgeAr: string
+    badgeFr: string
+    badgeEn: string
+    titleAr: string
+    titleFr: string
+    titleEn: string
+    descAr: string
+    descFr: string
+    descEn: string
+    items: ImpactTransparencyItem[]
+  }
+  cta: {
+    badgeAr: string
+    badgeFr: string
+    badgeEn: string
+    titleAr: string
+    titleFr: string
+    titleEn: string
+    descAr: string
+    descFr: string
+    descEn: string
+    primaryBtnTextAr: string
+    primaryBtnTextFr: string
+    primaryBtnTextEn: string
+    primaryBtnUrl: string
+    secondaryBtnTextAr: string
+    secondaryBtnTextFr: string
+    secondaryBtnTextEn: string
+    secondaryBtnUrl: string
+  }
+}
+
+export const defaultImpactConfig: ImpactConfig = {
+  hero: {
+    badgeAr: 'الأثر والالتزام المجتمعي • AMYCC Impact',
+    badgeFr: 'Impact et Engagement Communautaire',
+    badgeEn: 'Impact & Community Engagement',
+    titleAr: 'الأثر المجتمعي والثقافي بالمملكة المغربية',
+    titleFr: 'Notre Impact Culturel et Communautaire',
+    titleEn: 'Our Cultural & Community Impact',
+    subtitleAr: 'بناء الوعي الفني، تمكين الشباب، وترسيخ قيم المواطنة الإيجابية والتضامن',
+    subtitleFr: 'Éveil artistique, autonomisation des jeunes et citoyenneté active',
+    subtitleEn: 'Artistic awakening, youth empowerment, and active citizenship',
+    descriptionAr:
+      'تسعى جمعية روح الفنون والثقافة (AMYCC) منذ تأسيسها سنة 2026 إلى جعل الفنون والإبداع رافعة حقيقية للتنمية البشرية، وتحقيق العدالة المجالية في الولوج للثقافة، وتثمين التراث اللامادي الوطني عبر كافة جهات المملكة.',
+    descriptionFr:
+      "Depuis sa création en 2026, l'AMYCC fait des arts et de la créativité un véritable levier de développement humain, d'équité territoriale et de rayonnement culturel à travers tout le Royaume du Maroc.",
+    descriptionEn:
+      'Since its foundation in 2026, AMYCC has leveraged arts and creativity as catalysts for human development, territorial cultural access, and the promotion of Moroccan intangible heritage across the Kingdom.',
+    heroImageUrl: '',
+    hasHeroImage: false,
+    reportPdfUrl: '/documents/rapport-impact-amycc-2026.pdf',
+    primaryBtnTextAr: 'استكشف مبادراتنا الميدانية',
+    primaryBtnTextFr: 'Découvrir nos initiatives',
+    primaryBtnTextEn: 'Explore Field Initiatives',
+    primaryBtnUrl: '/programs',
+    secondaryBtnTextAr: 'تحميل تقرير الأثر المجتمعي (PDF)',
+    secondaryBtnTextFr: "Télécharger le Rapport d'Impact (PDF)",
+    secondaryBtnTextEn: 'Download Impact Report (PDF)',
+    secondaryBtnUrl: '/documents/rapport-impact-amycc-2026.pdf',
+  },
+  metrics: [
+    {
+      id: 'metric-foundation',
+      value: '2026',
+      labelAr: 'سنة التأسيس والانطلاق الرسمي',
+      labelFr: 'Année de fondation officielle',
+      labelEn: 'Official Foundation Year',
+      subtextAr: 'إطار جمعوي مدني معتمد بالمغرب',
+      subtextFr: 'Cadre associatif reconnu au Maroc',
+      subtextEn: 'Recognized Moroccan civil non-profit',
+      icon: '🏛️',
+      iconSrc: '/icons/impact-founding.png',
+    },
+    {
+      id: 'metric-disciplines',
+      value: '6',
+      labelAr: 'مجالات عمل فني وثقافي رئيسية',
+      labelFr: "Domaines d'intervention culturelle",
+      labelEn: 'Core Cultural Disciplines',
+      subtextAr: 'مسرح، موسيقى، تشكيل، تراث، شباب، وتطوع',
+      subtextFr: 'Théâtre, musique, arts visuels, patrimoine, jeunesse',
+      subtextEn: 'Theatre, music, fine arts, heritage, youth, volunteering',
+      icon: '🎨',
+      iconSrc: '/icons/impact-disciplines.png',
+    },
+    {
+      id: 'metric-beneficiaries',
+      value: '+1,500',
+      labelAr: 'مستفيد ومستفيدة من الورشات',
+      labelFr: 'Bénéficiaires directs des ateliers',
+      labelEn: 'Direct Workshop Beneficiaries',
+      subtextAr: 'طاقات شبابية وأطفال في مختلف الجهات',
+      subtextFr: 'Jeunes et enfants dans les régions du Royaume',
+      subtextEn: 'Youth and children across Moroccan regions',
+      icon: '👥',
+      iconSrc: '/icons/impact-hours.png',
+    },
+    {
+      id: 'metric-nonprofit',
+      value: '100%',
+      labelAr: 'عمل مدني غير ربحي وتطوعي',
+      labelFr: 'Engagement civique et non-lucratif',
+      labelEn: 'Non-profit Civic Commitment',
+      subtextAr: 'التزام تام بالنزاهة والشفافية وتكافؤ الفرص',
+      subtextFr: 'Transparence totale et égalité des chances',
+      subtextEn: 'Full transparency, equity, and civic commitment',
+      icon: '⚖️',
+      iconSrc: '/icons/impact-governance.png',
+    },
+  ],
+  pillars: [
+    {
+      id: 'pillar-youth',
+      badgeAr: 'الريادة الشبابية',
+      badgeFr: 'Leadership Jeunesse',
+      badgeEn: 'Youth Leadership',
+      titleAr: 'التمكين الشبابي والقيادة الثقافية',
+      titleFr: 'Autonomisation et leadership des jeunes',
+      titleEn: 'Youth Empowerment & Leadership',
+      descAr:
+        'فتح المجال أمام الطاقات الشابة للتعبير الحر وصقل مهاراتهم في التواصل، إدارة التظاهرات الفنية، والعمل الجماعي من خلال مبادرة "شباب في العمل"، مع منح شواهد تطوع وتجربة جمعوية موثقة تدعم مسارهم المهني.',
+      descFr:
+        "Permettre aux jeunes d'acquérir des compétences concrètes en gestion culturelle et en leadership participatif avec attestations d'engagement certifiées.",
+      descEn:
+        'Empowering Moroccan youth through hands-on cultural project management, teamwork, and artistic leadership, with official volunteering certificates.',
+      icon: '🚀',
+      iconSrc: '/icons/youth.png',
+    },
+    {
+      id: 'pillar-heritage',
+      badgeAr: 'الهوية الوطنية',
+      badgeFr: 'Patrimoine National',
+      badgeEn: 'National Heritage',
+      titleAr: 'صون الذاكرة والتراث المغربي الأصيل',
+      titleFr: 'Préservation du patrimoine marocain',
+      titleEn: 'Preserving Moroccan Cultural Heritage',
+      descAr:
+        'الاحتفاء بالروافد المتنوعة للهوية الثقافية المغربية عبر ورشات الموسيقى التراثية، الفنون التشكيلية المستوحاة من المعمار والزخرفة المغربية، ونقل هذا الغنى الحضاري بين الأجيال.',
+      descFr:
+        'Célébrer la diversité du patrimoine culturel marocain à travers des ateliers musicaux, des arts visuels et la transmission intergénérationnelle.',
+      descEn:
+        'Celebrating the richness of Moroccan cultural diversity through heritage music, architecture-inspired visual arts, and intergenerational knowledge transmission.',
+      icon: '🏛️',
+      iconSrc: '/icons/culture.png',
+    },
+    {
+      id: 'pillar-access',
+      badgeAr: 'العدالة المجالية',
+      badgeFr: 'Équité Territoriale',
+      badgeEn: 'Territorial Equity',
+      titleAr: 'العدالة المجالية والولوج الثقافي الشامل',
+      titleFr: "Démocratisation de l'accès culturel",
+      titleEn: 'Territorial Equity & Cultural Access',
+      descAr:
+        'توسيع دائرة المستفيدين من الورشات والعروض الفنية لتشمل فضاءات القرب، دور الشباب، والمراكز الثقافية بمختلف المدن والمناطق الهشة بالمملكة دون تمييز، لضمان ديمقراطية الثقافة للجميع.',
+      descFr:
+        'Déployer des activités artistiques gratuites dans les maisons de jeunes et centres de proximité à travers différentes régions du Royaume.',
+      descEn:
+        'Expanding free workshops and performances to local youth centers and cultural venues across multiple Moroccan cities and regions.',
+      icon: '📍',
+      iconSrc: '/icons/impact-access.png',
+    },
+    {
+      id: 'pillar-solidarity',
+      badgeAr: 'المواطنة الفاعلة',
+      badgeFr: 'Citoyenneté Active',
+      badgeEn: 'Active Citizenship',
+      titleAr: 'التضامن المجتمعي وترسيخ المواطنة الفاعلة',
+      titleFr: 'Solidarité citoyenne et cohésion sociale',
+      titleEn: 'Civic Solidarity & Social Cohesion',
+      descAr:
+        'استثمار الفنون والمسرح والموسيقى كأدوات لبناء التماسك الاجتماعي، ونشر قيم التسامح والتعايش، وترسيخ روح المبادرة الإيجابية في خدمة الصالح العام والمجتمع المغربي.',
+      descFr:
+        "Utiliser l'art et le théâtre comme leviers de cohésion sociale, de citoyenneté positive et de dialogue intergénérationnel.",
+      descEn:
+        'Harnessing the power of arts and theatre as vehicles for social cohesion, civic pride, and positive community engagement.',
+      icon: '♥',
+      iconSrc: '/icons/values.png',
+    },
+  ],
+  spotlight: {
+    badgeAr: 'أثر ميداني ملموس',
+    badgeFr: 'Impact Terrain Mesurable',
+    badgeEn: 'Tangible Field Impact',
+    titleAr: 'مبادرة "شباب في العمل": من المشاركة الفردية إلى القيادة المجتمعية',
+    titleFr: 'Initiative Jeunesse en Action : de la participation individuelle au leadership collectif',
+    titleEn: 'Youth in Action Initiative: From Individual Participation to Civic Leadership',
+    descAr:
+      'لا يقتصر دور الشباب في أنشطة جمعية روح الفنون والثقافة على الحضور السلبي، بل يتعداه إلى المشاركة الحية في بلورة الأفكار، تأطير الورشات، والتنظيم الميداني للتظاهرات، مما يزرع الثقة بالنفس، ويطور مهارات القيادة، ويوثق ساعات التطوع بشواهد رسمية معتمدة تدعم مسارهم الدراسي والمهني.',
+    descFr:
+      "Les jeunes participants évoluent de spectateurs passifs à coordinateurs et facilitateurs d'événements culturels, développant des compétences concrètes en gestion de projet et en prise de parole en public.",
+    descEn:
+      'Young participants evolve from passive spectators to active cultural organizers, developing public speaking, artistic curating, and leadership skills while earning verified civic credentials.',
+    quoteAr: 'منحني التطوع في أنشطة الجمعية فضاءً حقيقياً للتعبير واكتساب مهارات القيادة وتدبير الفعاليات الثقافية بكل احترافية وثقة.',
+    quoteFr: "L'engagement bénévole au sein de l'AMYCC m'a offert un cadre stimulant pour exprimer ma créativité et coordonner des projets à fort impact.",
+    quoteEn: 'Volunteering with AMYCC gave me a genuine platform for artistic self-expression and professional project leadership.',
+    quoteAuthorAr: 'أحد الشباب المتطوعين في مبادرة شباب في العمل (موسم 2026)',
+    quoteAuthorFr: 'Bénévole engagé au sein de l’initiative Jeunesse en Action (2026)',
+    quoteAuthorEn: 'Active Youth Volunteer, Youth in Action Initiative (2026)',
+    imageUrl: '/images/youth-in-action.jpg',
+    imageCaptionAr: 'طاقات شبابية تصنع التغيير الثقافي الميداني بالمغرب',
+    imageCaptionFr: 'Jeunesse marocaine actrice du dynamisme culturel',
+    imageCaptionEn: 'Moroccan youth driving grassroots cultural momentum',
+    primaryBtnTextAr: 'اكتشف المبادرة بالكامل',
+    primaryBtnTextFr: "Découvrir l'initiative",
+    primaryBtnTextEn: 'Discover Initiative',
+    primaryBtnUrl: '/programs/youth-in-action',
+    secondaryBtnTextAr: 'انضم كمتطوع ميداني',
+    secondaryBtnTextFr: 'Rejoindre comme bénévole',
+    secondaryBtnTextEn: 'Join as a Volunteer',
+    secondaryBtnUrl: '/volunteer',
+  },
+  methodology: {
+    badgeAr: 'منهجية العمل الميداني',
+    badgeFr: 'Méthodologie d’Impact',
+    badgeEn: 'Impact Methodology',
+    titleAr: 'دورة صناعة الأثر الثقافي والمجتمعي المستدام',
+    titleFr: 'Cycle de Création d’Impact Culturel Durable',
+    titleEn: 'Sustainable Cultural & Civic Impact Cycle',
+    descAr:
+      'نعتمد في جمعية روح الفنون والثقافة نموذج عمل متكامل يقوم على التدرج من رصد الاحتياج المحلي إلى تحقيق الأثر المستدام.',
+    descFr:
+      'Notre méthodologie repose sur une démarche structurée en quatre étapes, garantissant des retombées mesurables et pérennes.',
+    descEn:
+      'A structured four-phase methodology ensuring tangible, measurable, and enduring civic and artistic impact.',
+    steps: [
+      {
+        id: 'step-1',
+        stepNumber: '01',
+        titleAr: 'التشخيص ورصد المواهب',
+        titleFr: 'Diagnostic et Repérage',
+        titleEn: 'Needs Assessment & Talent Discovery',
+        descAr: 'رصد الطاقات والمواهب الصاعدة والاحتياجات الثقافية الملحة بمختلف الأحياء وفضاءات القرب ودور الشباب.',
+        descFr: 'Cartographie des besoins locaux et repérage des jeunes talents dans les maisons de jeunes et centres de quartier.',
+        descEn: 'Mapping community cultural needs and discovering emerging artistic talent in local neighborhoods.',
+        icon: '🔍',
+      },
+      {
+        id: 'step-2',
+        stepNumber: '02',
+        titleAr: 'التأطير والتكوين التفاعلي',
+        titleFr: 'Encadrement et Ateliers',
+        titleEn: 'Mentorship & Creative Workshops',
+        descAr: 'تنظيم ورش عمل تدريبية وتطبيقية مكثفة يؤطرها فنانون وخبراء معتمدون في المسرح والموسيقى والفنون التشكيلية.',
+        descFr: 'Organisation d’ateliers pratiques dirigés par des artistes professionnels et experts confirmés.',
+        descEn: 'Hands-on training and artistic masterclasses mentored by established cultural practitioners.',
+        icon: '🎓',
+      },
+      {
+        id: 'step-3',
+        stepNumber: '03',
+        titleAr: 'الإنتاج والإبداع التشاركي',
+        titleFr: 'Production et Création Partagée',
+        titleEn: 'Collaborative Production & Creation',
+        descAr: 'تمكين الشباب من بلورة وإنتاج عروض مسرحية وأعمال تشكيلية وأمسيات فنية تعبر عن قضاياهم وتطلعاتهم.',
+        descFr: 'Production conjointe d’œuvres, spectacles vivants et performances reflétant les aspirations citoyennes.',
+        descEn: 'Co-creating original theatrical plays, visual art exhibitions, and cultural showcases.',
+        icon: '🎭',
+      },
+      {
+        id: 'step-4',
+        stepNumber: '04',
+        titleAr: 'الأثر والاستدامة والتوثيق',
+        titleFr: 'Pérennité et Reconnaissance',
+        titleEn: 'Sustainability & Civic Recognition',
+        descAr: 'تتويج المسار بمعارض وعروض عامة مفتوحة للجمهور، ومنح شواهد تجربة جمعوية وتطوعية رسمية معتمدة.',
+        descFr: 'Restitutions publiques ouvertes, valorisation des acquis et remise d’attestations d’engagement certifiées.',
+        descEn: 'Public showcases, festival exhibitions, and certified civic recognition supporting career pathways.',
+        icon: '🌟',
+      },
+    ],
+  },
+  transparency: {
+    badgeAr: 'النزاهة والمسؤولية الجمعوية',
+    badgeFr: 'Intégrité et Responsabilité Civique',
+    badgeEn: 'Civil Integrity & Stewardship',
+    titleAr: 'التزام تام بأعلى معايير النزاهة والشفافية المدنية',
+    titleFr: 'Engagement Rigoureux envers l’Intégrité et la Transparence',
+    titleEn: 'Strict Commitment to Civil Integrity & Transparency',
+    descAr:
+      'تعمل جمعية روح الفنون والثقافة وفق القوانين والأنظمة الجاري بها العمل بالمملكة المغربية المنظمة للعمل الجمعوي، وتلتزم بأقصى درجات الشفافية والانضباط الأخلاقي والإداري وصون ثقة المنخرطين والشركاء.',
+    descFr:
+      'L’AMYCC opère dans le strict respect de la législation marocaine régissant le tissu associatif, appliquant des règles rigoureuses de gestion transparente et responsable.',
+    descEn:
+      'AMYCC operates strictly under Moroccan civil society legislation, committed to full operational integrity, transparent financial reporting, and ethical community stewardship.',
+    items: [
+      {
+        id: 'transparency-legal',
+        titleAr: 'الشرعية المؤسسية والإيداع القانوني',
+        titleFr: 'Légalité Institutionnelle et Dépôt Légal',
+        titleEn: 'Institutional Legality & Regulatory Compliance',
+        descAr: 'تأسيس رسمي وفق ظهير الحريات العامة لسنة 1958 وتعديلاته بالمملكة المغربية مع وصل الإيداع القانوني المعتمد.',
+        descFr: 'Conformité totale avec le dahir régissant le droit d’association au Maroc avec récépissé légal.',
+        descEn: 'Official compliance with Moroccan non-profit association laws and validated statutory records.',
+        icon: '⚖️',
+      },
+      {
+        id: 'transparency-reports',
+        titleAr: 'التقارير الأدبية والمالية السنوية',
+        titleFr: 'Rapports Moraux et Financiers Annuels',
+        titleEn: 'Annual Narrative & Financial Reports',
+        descAr: 'عرض دوري ومفصل لكافة المداخيل والمصارف ومخرجات الأنشطة خلال الجمع العام السنوي بحضور المنخرطين.',
+        descFr: 'Présentation rigoureuse et validée de l’ensemble des bilans d’activité et états financiers en assemblée générale.',
+        descEn: 'Transparent reporting of all revenues, expenditures, and project metrics during annual general assemblies.',
+        icon: '📋',
+      },
+      {
+        id: 'transparency-privacy',
+        titleAr: 'حماية المعطيات الشخصية (قانون 09-08)',
+        titleFr: 'Protection des Données Personnelles (Loi 09-08)',
+        titleEn: 'Personal Data Protection (Law 09-08)',
+        descAr: 'احترام تام لمعايير حماية المعطيات ذات الطابع الشخصي لكافة المشاركين والمنخرطين والمتطوعين بالموقع.',
+        descFr: 'Respect strict de la législation marocaine sur la protection des données personnelles de nos membres et usagers.',
+        descEn: 'Full compliance with Moroccan Law 09-08 regarding data privacy and security for all platform participants.',
+        icon: '🔒',
+      },
+      {
+        id: 'transparency-audit',
+        titleAr: 'توثيق ساعات التطوع والأنشطة الميدانية',
+        titleFr: 'Traçabilité et Certification du Bénévolat',
+        titleEn: 'Civic Traceability & Verified Volunteering',
+        descAr: 'سجل تدقيق رقمي موثق لكل الفعاليات وورش العمل وساعات المشاركة التطوعية بمبادرة شباب في العمل.',
+        descFr: 'Registre numérique rigoureux certifiant les heures d’engagement citoyen de chaque jeune bénévole.',
+        descEn: 'Audited digital tracking of volunteer project hours and field contributions with formal certifications.',
+        icon: '📜',
+      },
+    ],
+  },
+  cta: {
+    badgeAr: 'شراكة الأثر المجتمعي',
+    badgeFr: 'Partenariat d’Impact',
+    badgeEn: 'Impact Partnership',
+    titleAr: 'شاركنا في توسيع دائرة الأثر الثقافي والمجتمعي بالمغرب',
+    titleFr: 'Participez à l’Élargissement de notre Impact Culturel',
+    titleEn: 'Join Us in Amplifying Grassroots Cultural Impact',
+    descAr:
+      'تفتح جمعية روح الفنون والثقافة أبوابها أمام المؤسسات العمومية، الجماعات الترابية، والفاعلين الخواص لبناء شراكات استراتيجية تثمر مشاريع نوعية تعود بالنفع على الشباب والناشئة.',
+    descFr:
+      'L’AMYCC s’associe aux collectivités territoriales, institutions culturelles et mécènes pour coconstruire des programmes à fort impact social et artistique.',
+    descEn:
+      'AMYCC collaborates with municipalities, cultural institutions, and private partners to co-create transformative programs for youth and emerging artists.',
+    primaryBtnTextAr: 'طلب شراكة مؤسسية',
+    primaryBtnTextFr: 'Proposer un partenariat',
+    primaryBtnTextEn: 'Request Institutional Partnership',
+    primaryBtnUrl: '/partnerships',
+    secondaryBtnTextAr: 'تواصل مع فريق الجمعية',
+    secondaryBtnTextFr: 'Contacter l’équipe',
+    secondaryBtnTextEn: 'Contact AMYCC Team',
+    secondaryBtnUrl: '/contact',
+  },
+}
+
+export async function getImpactSettings(): Promise<ImpactConfig> {
+  try {
+    const supabase = await createClient()
+    const { data, error } = await supabase
+      .from('site_settings')
+      .select('value')
+      .eq('key', 'impact')
+      .maybeSingle()
+
+    if (error || !data || !data.value) {
+      return defaultImpactConfig
+    }
+
+    const val = data.value as Partial<ImpactConfig>
+    const heroVal = (val.hero || {}) as Partial<ImpactConfig['hero']>
+    const spotlightVal = (val.spotlight || {}) as Partial<ImpactConfig['spotlight']>
+    const methodologyVal = (val.methodology || {}) as Partial<ImpactConfig['methodology']>
+    const transparencyVal = (val.transparency || {}) as Partial<ImpactConfig['transparency']>
+    const ctaVal = (val.cta || {}) as Partial<ImpactConfig['cta']>
+
+    return {
+      hero: {
+        badgeAr: heroVal.badgeAr || defaultImpactConfig.hero.badgeAr,
+        badgeFr: heroVal.badgeFr || defaultImpactConfig.hero.badgeFr,
+        badgeEn: heroVal.badgeEn || defaultImpactConfig.hero.badgeEn,
+        titleAr: heroVal.titleAr || defaultImpactConfig.hero.titleAr,
+        titleFr: heroVal.titleFr || defaultImpactConfig.hero.titleFr,
+        titleEn: heroVal.titleEn || defaultImpactConfig.hero.titleEn,
+        subtitleAr: heroVal.subtitleAr || defaultImpactConfig.hero.subtitleAr,
+        subtitleFr: heroVal.subtitleFr || defaultImpactConfig.hero.subtitleFr,
+        subtitleEn: heroVal.subtitleEn || defaultImpactConfig.hero.subtitleEn,
+        descriptionAr: heroVal.descriptionAr || defaultImpactConfig.hero.descriptionAr,
+        descriptionFr: heroVal.descriptionFr || defaultImpactConfig.hero.descriptionFr,
+        descriptionEn: heroVal.descriptionEn || defaultImpactConfig.hero.descriptionEn,
+        heroImageUrl: typeof heroVal.heroImageUrl === 'string' ? heroVal.heroImageUrl : defaultImpactConfig.hero.heroImageUrl,
+        hasHeroImage: typeof heroVal.hasHeroImage === 'boolean' ? heroVal.hasHeroImage : defaultImpactConfig.hero.hasHeroImage,
+        reportPdfUrl: heroVal.reportPdfUrl || defaultImpactConfig.hero.reportPdfUrl,
+        primaryBtnTextAr: heroVal.primaryBtnTextAr || defaultImpactConfig.hero.primaryBtnTextAr,
+        primaryBtnTextFr: heroVal.primaryBtnTextFr || defaultImpactConfig.hero.primaryBtnTextFr,
+        primaryBtnTextEn: heroVal.primaryBtnTextEn || defaultImpactConfig.hero.primaryBtnTextEn,
+        primaryBtnUrl: heroVal.primaryBtnUrl || defaultImpactConfig.hero.primaryBtnUrl,
+        secondaryBtnTextAr: heroVal.secondaryBtnTextAr || defaultImpactConfig.hero.secondaryBtnTextAr,
+        secondaryBtnTextFr: heroVal.secondaryBtnTextFr || defaultImpactConfig.hero.secondaryBtnTextFr,
+        secondaryBtnTextEn: heroVal.secondaryBtnTextEn || defaultImpactConfig.hero.secondaryBtnTextEn,
+        secondaryBtnUrl: heroVal.secondaryBtnUrl || defaultImpactConfig.hero.secondaryBtnUrl,
+      },
+      metrics: Array.isArray(val.metrics) && val.metrics.length > 0
+        ? val.metrics
+            .filter((m): m is ImpactMetricItem => typeof m === 'object' && m !== null && typeof m.id === 'string')
+            .map((m) => ({
+              id: m.id,
+              value: m.value || '',
+              labelAr: m.labelAr || '',
+              labelFr: m.labelFr || '',
+              labelEn: m.labelEn || '',
+              subtextAr: m.subtextAr || '',
+              subtextFr: m.subtextFr || '',
+              subtextEn: m.subtextEn || '',
+              icon: m.icon || '📊',
+              iconSrc: m.iconSrc || '',
+            }))
+        : defaultImpactConfig.metrics,
+      pillars: Array.isArray(val.pillars) && val.pillars.length > 0
+        ? val.pillars
+            .filter((p): p is ImpactPillarItem => typeof p === 'object' && p !== null && typeof p.id === 'string')
+            .map((p) => ({
+              id: p.id,
+              badgeAr: p.badgeAr || '',
+              badgeFr: p.badgeFr || '',
+              badgeEn: p.badgeEn || '',
+              titleAr: p.titleAr || '',
+              titleFr: p.titleFr || '',
+              titleEn: p.titleEn || '',
+              descAr: p.descAr || '',
+              descFr: p.descFr || '',
+              descEn: p.descEn || '',
+              icon: p.icon || '🌟',
+              iconSrc: p.iconSrc || '',
+            }))
+        : defaultImpactConfig.pillars,
+      spotlight: {
+        badgeAr: spotlightVal.badgeAr || defaultImpactConfig.spotlight.badgeAr,
+        badgeFr: spotlightVal.badgeFr || defaultImpactConfig.spotlight.badgeFr,
+        badgeEn: spotlightVal.badgeEn || defaultImpactConfig.spotlight.badgeEn,
+        titleAr: spotlightVal.titleAr || defaultImpactConfig.spotlight.titleAr,
+        titleFr: spotlightVal.titleFr || defaultImpactConfig.spotlight.titleFr,
+        titleEn: spotlightVal.titleEn || defaultImpactConfig.spotlight.titleEn,
+        descAr: spotlightVal.descAr || defaultImpactConfig.spotlight.descAr,
+        descFr: spotlightVal.descFr || defaultImpactConfig.spotlight.descFr,
+        descEn: spotlightVal.descEn || defaultImpactConfig.spotlight.descEn,
+        quoteAr: spotlightVal.quoteAr || defaultImpactConfig.spotlight.quoteAr,
+        quoteFr: spotlightVal.quoteFr || defaultImpactConfig.spotlight.quoteFr,
+        quoteEn: spotlightVal.quoteEn || defaultImpactConfig.spotlight.quoteEn,
+        quoteAuthorAr: spotlightVal.quoteAuthorAr || defaultImpactConfig.spotlight.quoteAuthorAr,
+        quoteAuthorFr: spotlightVal.quoteAuthorFr || defaultImpactConfig.spotlight.quoteAuthorFr,
+        quoteAuthorEn: spotlightVal.quoteAuthorEn || defaultImpactConfig.spotlight.quoteAuthorEn,
+        imageUrl: typeof spotlightVal.imageUrl === 'string' ? spotlightVal.imageUrl : defaultImpactConfig.spotlight.imageUrl,
+        imageCaptionAr: spotlightVal.imageCaptionAr || defaultImpactConfig.spotlight.imageCaptionAr,
+        imageCaptionFr: spotlightVal.imageCaptionFr || defaultImpactConfig.spotlight.imageCaptionFr,
+        imageCaptionEn: spotlightVal.imageCaptionEn || defaultImpactConfig.spotlight.imageCaptionEn,
+        primaryBtnTextAr: spotlightVal.primaryBtnTextAr || defaultImpactConfig.spotlight.primaryBtnTextAr,
+        primaryBtnTextFr: spotlightVal.primaryBtnTextFr || defaultImpactConfig.spotlight.primaryBtnTextFr,
+        primaryBtnTextEn: spotlightVal.primaryBtnTextEn || defaultImpactConfig.spotlight.primaryBtnTextEn,
+        primaryBtnUrl: spotlightVal.primaryBtnUrl || defaultImpactConfig.spotlight.primaryBtnUrl,
+        secondaryBtnTextAr: spotlightVal.secondaryBtnTextAr || defaultImpactConfig.spotlight.secondaryBtnTextAr,
+        secondaryBtnTextFr: spotlightVal.secondaryBtnTextFr || defaultImpactConfig.spotlight.secondaryBtnTextFr,
+        secondaryBtnTextEn: spotlightVal.secondaryBtnTextEn || defaultImpactConfig.spotlight.secondaryBtnTextEn,
+        secondaryBtnUrl: spotlightVal.secondaryBtnUrl || defaultImpactConfig.spotlight.secondaryBtnUrl,
+      },
+      methodology: {
+        badgeAr: methodologyVal.badgeAr || defaultImpactConfig.methodology.badgeAr,
+        badgeFr: methodologyVal.badgeFr || defaultImpactConfig.methodology.badgeFr,
+        badgeEn: methodologyVal.badgeEn || defaultImpactConfig.methodology.badgeEn,
+        titleAr: methodologyVal.titleAr || defaultImpactConfig.methodology.titleAr,
+        titleFr: methodologyVal.titleFr || defaultImpactConfig.methodology.titleFr,
+        titleEn: methodologyVal.titleEn || defaultImpactConfig.methodology.titleEn,
+        descAr: methodologyVal.descAr || defaultImpactConfig.methodology.descAr,
+        descFr: methodologyVal.descFr || defaultImpactConfig.methodology.descFr,
+        descEn: methodologyVal.descEn || defaultImpactConfig.methodology.descEn,
+        steps: Array.isArray(methodologyVal.steps) && methodologyVal.steps.length > 0
+          ? (methodologyVal.steps as ImpactStepItem[])
+              .filter((s): s is ImpactStepItem => typeof s === 'object' && s !== null && typeof s.id === 'string')
+              .map((s) => ({
+                id: s.id,
+                stepNumber: s.stepNumber || '',
+                titleAr: s.titleAr || '',
+                titleFr: s.titleFr || '',
+                titleEn: s.titleEn || '',
+                descAr: s.descAr || '',
+                descFr: s.descFr || '',
+                descEn: s.descEn || '',
+                icon: s.icon || '📌',
+              }))
+          : defaultImpactConfig.methodology.steps,
+      },
+      transparency: {
+        badgeAr: transparencyVal.badgeAr || defaultImpactConfig.transparency.badgeAr,
+        badgeFr: transparencyVal.badgeFr || defaultImpactConfig.transparency.badgeFr,
+        badgeEn: transparencyVal.badgeEn || defaultImpactConfig.transparency.badgeEn,
+        titleAr: transparencyVal.titleAr || defaultImpactConfig.transparency.titleAr,
+        titleFr: transparencyVal.titleFr || defaultImpactConfig.transparency.titleFr,
+        titleEn: transparencyVal.titleEn || defaultImpactConfig.transparency.titleEn,
+        descAr: transparencyVal.descAr || defaultImpactConfig.transparency.descAr,
+        descFr: transparencyVal.descFr || defaultImpactConfig.transparency.descFr,
+        descEn: transparencyVal.descEn || defaultImpactConfig.transparency.descEn,
+        items: Array.isArray(transparencyVal.items) && transparencyVal.items.length > 0
+          ? (transparencyVal.items as ImpactTransparencyItem[])
+              .filter((item): item is ImpactTransparencyItem => typeof item === 'object' && item !== null && typeof item.id === 'string')
+              .map((item) => ({
+                id: item.id,
+                titleAr: item.titleAr || '',
+                titleFr: item.titleFr || '',
+                titleEn: item.titleEn || '',
+                descAr: item.descAr || '',
+                descFr: item.descFr || '',
+                descEn: item.descEn || '',
+                icon: item.icon || '⚖️',
+              }))
+          : defaultImpactConfig.transparency.items,
+      },
+      cta: {
+        badgeAr: ctaVal.badgeAr || defaultImpactConfig.cta.badgeAr,
+        badgeFr: ctaVal.badgeFr || defaultImpactConfig.cta.badgeFr,
+        badgeEn: ctaVal.badgeEn || defaultImpactConfig.cta.badgeEn,
+        titleAr: ctaVal.titleAr || defaultImpactConfig.cta.titleAr,
+        titleFr: ctaVal.titleFr || defaultImpactConfig.cta.titleFr,
+        titleEn: ctaVal.titleEn || defaultImpactConfig.cta.titleEn,
+        descAr: ctaVal.descAr || defaultImpactConfig.cta.descAr,
+        descFr: ctaVal.descFr || defaultImpactConfig.cta.descFr,
+        descEn: ctaVal.descEn || defaultImpactConfig.cta.descEn,
+        primaryBtnTextAr: ctaVal.primaryBtnTextAr || defaultImpactConfig.cta.primaryBtnTextAr,
+        primaryBtnTextFr: ctaVal.primaryBtnTextFr || defaultImpactConfig.cta.primaryBtnTextFr,
+        primaryBtnTextEn: ctaVal.primaryBtnTextEn || defaultImpactConfig.cta.primaryBtnTextEn,
+        primaryBtnUrl: ctaVal.primaryBtnUrl || defaultImpactConfig.cta.primaryBtnUrl,
+        secondaryBtnTextAr: ctaVal.secondaryBtnTextAr || defaultImpactConfig.cta.secondaryBtnTextAr,
+        secondaryBtnTextFr: ctaVal.secondaryBtnTextFr || defaultImpactConfig.cta.secondaryBtnTextFr,
+        secondaryBtnTextEn: ctaVal.secondaryBtnTextEn || defaultImpactConfig.cta.secondaryBtnTextEn,
+        secondaryBtnUrl: ctaVal.secondaryBtnUrl || defaultImpactConfig.cta.secondaryBtnUrl,
+      },
+    }
+  } catch {
+    return defaultImpactConfig
+  }
+}
