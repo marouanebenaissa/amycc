@@ -411,23 +411,23 @@ export default async function HomePage(props: { params: Promise<{ locale: string
             ============================================================ */}
         <section className="relative overflow-hidden min-h-[620px] sm:min-h-[700px] lg:min-h-[760px] flex items-center bg-[#08242a] text-white">
           {/* Full-bleed background photo layer */}
-          <div className="absolute inset-0 -z-10">
+          <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
             <ImageWithFallback
               src={hero.imageUrl || '/images/youth-in-action.jpg'}
-              fallbackSrc="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1920&q=85"
+              fallbackSrc="/images/youth-in-action.jpg"
               alt="AMYCC Hero Banner"
               fill
               priority
               sizes="100vw"
               className="object-cover object-center"
             />
-            {/* Cinematic Gradient Overlays: dark vignette + directional contrast */}
-            <div className="absolute inset-0 bg-[#08242a]/65" />
-            <div className="absolute inset-0 bg-gradient-to-r from-[#08242a]/95 via-[#08242a]/75 to-[#08242a]/30 rtl:bg-gradient-to-l" />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#08242a] via-transparent to-[#08242a]/60" />
+            {/* Cinematic Morocco88 Vignette Overlays: clear faces + dark text backdrop */}
+            <div className="absolute inset-0 bg-black/35" />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#08242a]/90 via-[#08242a]/50 to-transparent rtl:bg-gradient-to-l" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#08242a]/80 via-transparent to-black/20" />
           </div>
 
-          <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-20 sm:py-24 lg:py-28">
+          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-20 sm:py-24 lg:py-28">
             <div className="max-w-3xl space-y-6 text-start">
               {/* Category Eyebrow Tag (Morocco88 style golden uppercase) */}
               {heroTag && (

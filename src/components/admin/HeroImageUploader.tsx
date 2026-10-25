@@ -127,14 +127,15 @@ export function HeroImageUploader({
       <div className="flex gap-2">
         <input
           type="text"
+          dir="ltr"
           value={imageUrl}
           onChange={(e) => {
             setImageUrl(e.target.value)
             setSuccessMessage(null)
             setError(null)
           }}
-          placeholder="/images/youth-in-action.jpg أو رابط صورة خارجي عالي الدقة"
-          className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43] font-mono bg-white"
+          placeholder="/images/youth-in-action.jpg"
+          className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43] font-mono bg-white text-left"
         />
       </div>
 
@@ -177,7 +178,7 @@ export function HeroImageUploader({
                 معاينة حية للصورة المختارة (Cinematic Preview)
               </span>
             </div>
-            <span className="text-3xs font-mono text-[#f4ce83] truncate max-w-sm bg-black/50 px-2.5 py-1 rounded-md border border-white/5">
+            <span dir="ltr" className="text-3xs font-mono text-[#f4ce83] truncate max-w-sm bg-black/50 px-2.5 py-1 rounded-md border border-white/5 text-left">
               {imageUrl}
             </span>
           </div>

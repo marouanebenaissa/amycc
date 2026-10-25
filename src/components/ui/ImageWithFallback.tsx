@@ -14,27 +14,34 @@ export function ImageWithFallback({
   alt,
   ...props
 }: ImageWithFallbackProps) {
-  const [imgSrc, setImgSrc] = useState(src)
   const [failed, setFailed] = useState(false)
+  const [prevSrc, setPrevSrc] = useState(src)
 
-  const isExternal = typeof imgSrc === 'string' && (imgSrc.startsWith('http://') || imgSrc.startsWith('https://'))
-  const isKnownDomain = typeof imgSrc === 'string' && (
-    imgSrc.includes('images.unsplash.com') ||
-    imgSrc.includes('.supabase.co') ||
-    imgSrc.includes('placehold.co')
+  // Adjust state during render when prop changes (recommended React pattern)
+  if (src !== prevSrc) {
+    setPrevSrc(src)
+    setFailed(false)
+  }
+
+  const effectiveSrc = failed && fallbackSrc ? fallbackSrc : src
+  const isUpload = typeof effectiveSrc === 'string' && effectiveSrc.startsWith('/uploads/')
+  const isExternal = typeof effectiveSrc === 'string' && (effectiveSrc.startsWith('http://') || effectiveSrc.startsWith('https://'))
+  const isKnownDomain = typeof effectiveSrc === 'string' && (
+    effectiveSrc.includes('images.unsplash.com') ||
+    effectiveSrc.includes('.supabase.co') ||
+    effectiveSrc.includes('placehold.co')
   )
-  const shouldUnoptimize = props.unoptimized ?? (isExternal && !isKnownDomain)
+  const shouldUnoptimize = props.unoptimized ?? (isUpload || (isExternal && !isKnownDomain))
 
   return (
     <Image
       {...props}
-      src={imgSrc}
+      src={effectiveSrc}
       alt={alt}
       unoptimized={shouldUnoptimize}
       onError={() => {
-        if (!failed && fallbackSrc && imgSrc !== fallbackSrc) {
+        if (!failed && fallbackSrc) {
           setFailed(true)
-          setImgSrc(fallbackSrc)
         }
       }}
     />
