@@ -71,10 +71,10 @@ export function EventRegistrationForm({
         </h3>
         <p className="text-2xs sm:text-xs text-[#5f7174] leading-relaxed">
           {isAr
-            ? 'تم إغلاق حجز المقاعد لهذه الفعالية لاكتمال الطاقة الاستيعابية أو انتهاء المهلة المحددة. للاستفسار راسلونا على: notification@amycc.org.'
+            ? 'تم إغلاق حجز المقاعد لهذه الفعالية لاكتمال الطاقة الاستيعابية أو انتهاء المهلة المحددة. للاستفسار يرجى التواصل مع إدارة الجمعية.'
             : isFr
-            ? 'Les réservations pour cet événement sont closes. Pour toute question, écrivez-nous à : notification@amycc.org.'
-            : 'Seat reservations for this event are currently closed. For inquiries, email: notification@amycc.org.'}
+            ? 'Les réservations pour cet événement sont closes. Pour toute question, veuillez contacter l’association.'
+            : 'Seat reservations for this event are currently closed. For inquiries, please contact the association.'}
         </p>
       </div>
     )
@@ -88,7 +88,7 @@ export function EventRegistrationForm({
       <div className="mb-6">
         <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-3xs font-extrabold bg-[#faece7] text-[#c85a32] mb-2">
           <span className="w-1.5 h-1.5 rounded-full bg-[#c85a32] animate-pulse" />
-          <span>{isAr ? 'حجز مباشر ومجاني' : isFr ? 'Réservation Gratuite' : 'Free Registration'}</span>
+          <span>{isAr ? 'تأكيد الحجز والتسجيل' : isFr ? 'Réservation & Enregistrement' : 'Direct Registration'}</span>
         </span>
         <h3 className="text-base sm:text-lg font-black text-[#08242a] leading-snug">
           {isAr
@@ -133,8 +133,10 @@ export function EventRegistrationForm({
           {response.success && (
             <div className="mt-2 text-3xs text-emerald-700 font-medium">
               ✉️ {isAr
-                ? 'تم إرسال الدعوة إلى بريدك من: notification@amycc.org'
-                : 'Invitation dispatched from: notification@amycc.org'}
+                ? 'تم إرسال تذكرة وتأكيد الحجز إلى بريدك الإلكتروني بنجاح.'
+                : isFr
+                ? 'Votre invitation et billet de confirmation ont été envoyés à votre adresse e-mail.'
+                : 'Your confirmation ticket has been dispatched to your email address.'}
             </div>
           )}
         </div>
@@ -200,20 +202,20 @@ export function EventRegistrationForm({
                   : 'Processing registration...'
                 : isAr
                 ? 'تأكيد حجز مقعدك الآن ✓'
-                : 'Confirm Free Reservation ✓'}
+                : 'Confirm Reservation ✓'}
             </span>
           </button>
         </div>
       </form>
 
-      {/* Free badge & notification note */}
+      {/* Confirmation & ticket note */}
       <div className="mt-5 pt-5 border-t border-[#f4ede2] flex items-center justify-between text-3xs text-[#5f7174]">
         <span className="flex items-center gap-1 font-bold text-[#0d3b43]">
-          <span>✓</span>
-          <span>{isAr ? 'حضور مجاني 100%' : '100% Free Entry'}</span>
+          <span>🎟️</span>
+          <span>{isAr ? 'تأكيد فوري لحجز المقعد' : isFr ? 'Confirmation immédiate' : 'Instant Confirmation'}</span>
         </span>
-        <span className="font-mono text-slate-500">
-          notification@amycc.org
+        <span className="text-[#819598] font-medium">
+          {isAr ? 'تذكرة رقمية رسمية' : isFr ? 'Billet numérique' : 'Official Digital Pass'}
         </span>
       </div>
     </div>

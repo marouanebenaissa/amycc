@@ -3456,13 +3456,13 @@ export const defaultEventsPageConfig: EventsPageConfig = {
   stats: [
     {
       id: 'stat-free',
-      value: '100%',
-      valueAr: '100%',
-      valueFr: '100%',
-      valueEn: '100%',
-      labelAr: 'ولوج ومشاركة مجانية للجميع',
-      labelFr: 'Accès et ateliers 100% gratuits',
-      labelEn: '100% Free Public Participation',
+      value: 'متاح',
+      valueAr: 'متاح',
+      valueFr: 'Disponible',
+      valueEn: 'Available',
+      labelAr: 'حجز المقاعد ومتابعة الفعاليات',
+      labelFr: 'Réservation de places & billetterie',
+      labelEn: 'Seat Booking & Event Access',
       icon: '🎟️',
     },
     {

@@ -220,10 +220,10 @@ export function EventRegistrationModal({
                   <span className="text-base sm:text-lg">🎟️</span>
                   <div>
                     <span className="font-black text-[#08242a] block">
-                      {isAr ? 'الدخول مجاني 100%' : isFr ? 'Entrée Gratuite' : 'Free Entry'}
+                      {isAr ? 'تأكيد الحجز المباشر' : isFr ? 'Réservation confirmée' : 'Direct Booking'}
                     </span>
                     <span className="text-[#819598]">
-                      {isAr ? 'برعاية الجمعية' : '100% Free'}
+                      {isAr ? 'حسب الفعالية' : isFr ? 'Selon l\'événement' : 'Per event terms'}
                     </span>
                   </div>
                 </div>
@@ -234,8 +234,8 @@ export function EventRegistrationModal({
                     <span className="font-black text-[#08242a] block">
                       {isAr ? 'تأكيد ودعوة رسمية' : isFr ? 'Invitation par e-mail' : 'Email Invitation'}
                     </span>
-                    <span className="text-[#819598] font-mono text-3xs">
-                      notification@amycc.org
+                    <span className="text-[#819598] font-medium text-3xs">
+                      {isAr ? 'تذكرة إلكترونية رسمية' : isFr ? 'Billet électronique' : 'Official E-Ticket'}
                     </span>
                   </div>
                 </div>

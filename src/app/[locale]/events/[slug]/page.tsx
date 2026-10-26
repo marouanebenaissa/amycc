@@ -307,7 +307,7 @@ export default async function EventDetailPage(props: {
                   <ul className="text-2xs sm:text-xs text-[#445457] space-y-2 font-medium">
                     <li className="flex items-start gap-2">
                       <span className="text-[#0d3b43] font-bold">✓</span>
-                      <span>{isAr ? 'المشاركة وحجز المقعد مجاني 100% برعاية جمعية روح الفنون والثقافة.' : '100% free participation sponsored by AMYCC.'}</span>
+                      <span>{isAr ? 'يرجى مراجعة تفاصيل وشروط التذاكر الموضحة في برنامج وبطاقة الفعالية.' : isFr ? 'Veuillez consulter les conditions et modalités indiquées dans le programme.' : 'Please check the terms and ticket conditions detailed in the event program.'}</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="text-[#0d3b43] font-bold">✓</span>
@@ -367,15 +367,10 @@ export default async function EventDetailPage(props: {
                   )}
 
                   <div className="flex items-start justify-between gap-4 pt-2 border-t border-[#f4ede2]">
-                    <span className="text-[#819598] font-bold">{isAr ? 'رسوم الدخول:' : 'Admission:'}</span>
-                    <span className="px-2.5 py-1 rounded-md bg-emerald-50 text-emerald-800 font-black text-3xs">
-                      {isAr ? 'مجاني 100%' : '100% Free'}
+                    <span className="text-[#819598] font-bold">{isAr ? 'التذاكر والدخول:' : isFr ? 'Billetterie :' : 'Admission:'}</span>
+                    <span className="px-2.5 py-1 rounded-md bg-[#faf7f2] border border-[#e5e0d6] text-[#08242a] font-black text-3xs">
+                      {isAr ? 'حسب الفعالية والتذكرة' : isFr ? 'Selon l\'événement' : 'According to event'}
                     </span>
-                  </div>
-
-                  <div className="flex items-start justify-between gap-4">
-                    <span className="text-[#819598] font-bold">{isAr ? 'بريد الإشعارات:' : 'Notifications:'}</span>
-                    <span className="text-[#0d3b43] font-mono font-bold text-3xs">notification@amycc.org</span>
                   </div>
                 </div>
               </div>
