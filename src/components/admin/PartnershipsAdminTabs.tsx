@@ -1980,21 +1980,6 @@ export function PartnershipsAdminTabs({
                 />
               </div>
 
-              <div>
-                <label className="block text-2xs font-extrabold text-[#08242a] mb-1">
-                  نبذة عن التعاون والشراكة (العربية)
-                </label>
-                <textarea
-                  rows={2}
-                  value={partnerForm.descriptionAr || ''}
-                  onChange={(e) =>
-                    setPartnerForm((p) => ({ ...p, descriptionAr: e.target.value }))
-                  }
-                  placeholder="مثال: اتفاقية إطار لاحتضان الورشات التكوينية في فنون الأداء..."
-                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#faf7f2]"
-                />
-              </div>
-
               <div className="flex items-center gap-2 pt-2">
                 <input
                   type="checkbox"
