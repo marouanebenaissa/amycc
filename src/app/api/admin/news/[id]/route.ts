@@ -6,11 +6,10 @@ import { createAdminClient } from '@/lib/supabase/admin'
 export const dynamic = 'force-dynamic'
 
 export async function DELETE(
-  _request: Request,
-  props: { params: Promise<{ id: string }> }
+  request: Request,
+  context?: { params?: Promise<{ id: string }> | { id: string } }
 ) {
   try {
-    const { id } = await props.params
     const supabase = await createClient()
     const {
       data: { user },
@@ -23,7 +22,35 @@ export async function DELETE(
       )
     }
 
-    if (!id) {
+    let articleId = ''
+
+    if (context?.params) {
+      const p = await Promise.resolve(context.params)
+      articleId = p?.id || ''
+    }
+
+    if (!articleId) {
+      const match = request.url.match(/\/api\/admin\/news\/([^/?#]+)/)
+      if (match?.[1]) {
+        articleId = decodeURIComponent(match[1])
+      }
+    }
+
+    if (!articleId) {
+      const { searchParams } = new URL(request.url)
+      articleId = searchParams.get('id') || ''
+    }
+
+    if (!articleId) {
+      try {
+        const body = await request.json()
+        articleId = body?.id || ''
+      } catch {
+        // Ignored
+      }
+    }
+
+    if (!articleId) {
       return NextResponse.json(
         { success: false, error: 'معرف المقال مطلوب' },
         { status: 400 }
@@ -32,13 +59,14 @@ export async function DELETE(
 
     const admin = createAdminClient()
 
-    // Delete translations first
-    await admin.from('news_translations').delete().eq('article_id', id)
+    // 1. Delete translations first
+    await admin.from('news_translations').delete().eq('article_id', articleId)
 
-    // Delete the article
-    const { error } = await admin.from('news_articles').delete().eq('id', id)
+    // 2. Delete the article
+    const { error } = await admin.from('news_articles').delete().eq('id', articleId)
 
     if (error) {
+      console.error('Failed to delete news article:', error)
       return NextResponse.json({ success: false, error: error.message }, { status: 500 })
     }
 

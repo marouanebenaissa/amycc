@@ -393,10 +393,32 @@ export async function updateNewsArticle(id: string, formData: FormData): Promise
   redirect('/admin/news')
 }
 
-export async function deleteNewsArticle(id: string): Promise<void> {
-  const { supabase } = await requireAdmin()
-  await supabase.from('news_articles').delete().eq('id', id)
-  revalidatePath('/admin/news')
+export async function deleteNewsArticle(id: string): Promise<{ success: boolean; error?: string }> {
+  try {
+    await requireAdmin()
+    const adminClient = createAdminClient()
+
+    // 1. Delete dependent translations first
+    await adminClient.from('news_translations').delete().eq('article_id', id)
+
+    // 2. Delete the article record
+    const { error } = await adminClient.from('news_articles').delete().eq('id', id)
+    if (error) {
+      console.error('Failed to delete news article:', error)
+      return { success: false, error: error.message }
+    }
+
+    revalidatePath('/admin/news')
+    revalidatePath('/ar/news')
+    revalidatePath('/fr/news')
+    revalidatePath('/en/news')
+    revalidatePath('/news')
+    revalidatePath('/[locale]/news', 'page')
+    return { success: true }
+  } catch (err: unknown) {
+    const msg = err instanceof Error ? err.message : 'Unknown error'
+    return { success: false, error: msg }
+  }
 }
 
 // ============================================================

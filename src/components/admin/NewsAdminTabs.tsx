@@ -3,6 +3,7 @@
 import { useState, useRef } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { useRouter } from 'next/navigation'
 import type { NewsPageConfig, NewsPageStatItem } from '@/lib/settings'
 
 export interface AdminNewsArticleItem {
@@ -23,12 +24,15 @@ export interface AdminNewsArticleItem {
 interface NewsAdminTabsProps {
   initialArticles: AdminNewsArticleItem[]
   initialConfig: NewsPageConfig
+  onDeleteArticle?: (id: string) => Promise<{ success: boolean; error?: string } | void>
 }
 
 export function NewsAdminTabs({
   initialArticles,
   initialConfig,
+  onDeleteArticle,
 }: NewsAdminTabsProps) {
+  const router = useRouter()
   // Tab Navigation: 'articles' or 'page-settings'
   const [activeTab, setActiveTab] = useState<'articles' | 'page-settings'>('articles')
 
@@ -115,23 +119,79 @@ export function NewsAdminTabs({
   }
 
   async function handleDeleteArticle(articleId: string, articleTitle: string) {
-    if (!confirm(`هل أنت متأكد من حذف المقال "${articleTitle}"؟ لا يمكن التراجع عن هذا الإجراء.`)) {
+    if (
+      !confirm(
+        `هل أنت متأكد من رغبتك في حذف المقال "${articleTitle}" نهائياً؟\nسيتم حذف نصوص المقال وترجماته وصورته من الموقع.`
+      )
+    ) {
       return
     }
 
     setDeletingId(articleId)
-    try {
-      const res = await fetch(`/api/admin/news/${articleId}`, {
-        method: 'DELETE',
-      })
+    const backupList = [...articles]
+    setArticles((prev) => prev.filter((a) => a.id !== articleId))
 
-      if (!res.ok) {
-        throw new Error('فشل حذف المقال')
+    try {
+      let success = false
+      let errorMessage = ''
+
+      // 1. Try REST API endpoint with query param
+      try {
+        const apiRes = await fetch(`/api/admin/news?id=${encodeURIComponent(articleId)}`, {
+          method: 'DELETE',
+        })
+        const data = await apiRes.json().catch(() => null)
+        if (apiRes.ok && data?.success) {
+          success = true
+        } else if (data?.error) {
+          errorMessage = data.error
+        }
+      } catch {
+        // Fallback below
       }
 
-      setArticles((prev) => prev.filter((a) => a.id !== articleId))
-    } catch {
-      window.location.reload()
+      // 2. Try REST API endpoint with dynamic path
+      if (!success) {
+        try {
+          const apiRes2 = await fetch(`/api/admin/news/${encodeURIComponent(articleId)}`, {
+            method: 'DELETE',
+          })
+          const data2 = await apiRes2.json().catch(() => null)
+          if (apiRes2.ok && data2?.success) {
+            success = true
+          } else if (data2?.error) {
+            errorMessage = data2.error
+          }
+        } catch {
+          // Fallback below
+        }
+      }
+
+      // 3. Fallback to Server Action
+      if (!success && onDeleteArticle) {
+        const actionRes = await onDeleteArticle(articleId)
+        if (!actionRes || (typeof actionRes === 'object' && actionRes.success !== false)) {
+          success = true
+        } else if (typeof actionRes === 'object' && actionRes.error) {
+          errorMessage = actionRes.error
+        }
+      }
+
+      if (success) {
+        setFeedback({
+          type: 'success',
+          message: `تم حذف مقال "${articleTitle}" بنجاح وإزالته من النظام والموقع.`,
+        })
+        router.refresh()
+      } else {
+        throw new Error(errorMessage || 'فشل حذف المقال من قاعدة البيانات.')
+      }
+    } catch (err: unknown) {
+      setArticles(backupList)
+      setFeedback({
+        type: 'error',
+        message: err instanceof Error ? err.message : 'حدث خطأ أثناء محاولة حذف المقال.',
+      })
     } finally {
       setDeletingId(null)
     }
@@ -315,6 +375,30 @@ export function NewsAdminTabs({
           </button>
         </div>
       </div>
+
+      {/* Global Feedback notification banner */}
+      {feedback && (
+        <div
+          className={`p-4 rounded-2xl text-xs font-bold flex items-center justify-between shadow-2xs transition-all ${
+            feedback.type === 'success'
+              ? 'bg-emerald-50 text-emerald-800 border border-emerald-200'
+              : 'bg-rose-50 text-rose-800 border border-rose-200'
+          }`}
+        >
+          <div className="flex items-center gap-2">
+            <span>{feedback.type === 'success' ? '✓' : '⚠️'}</span>
+            <span>{feedback.message}</span>
+          </div>
+          <button
+            type="button"
+            onClick={() => setFeedback(null)}
+            className="text-xs font-black opacity-60 hover:opacity-100 p-1 cursor-pointer"
+            title="إغلاق التنبيه"
+          >
+            ✕
+          </button>
+        </div>
+      )}
 
       {/* ========================================================= */}
       {/* TAB 1: ARTICLES MANAGEMENT                                */}
@@ -599,26 +683,6 @@ export function NewsAdminTabs({
       {/* ========================================================= */}
       {activeTab === 'page-settings' && (
         <div className="space-y-6">
-          {/* Feedback message */}
-          {feedback && (
-            <div
-              className={`p-4 rounded-xl text-xs font-bold flex items-center justify-between ${
-                feedback.type === 'success'
-                  ? 'bg-emerald-50 text-emerald-800 border border-emerald-200'
-                  : 'bg-rose-50 text-rose-800 border border-rose-200'
-              }`}
-            >
-              <span>{feedback.message}</span>
-              <button
-                type="button"
-                onClick={() => setFeedback(null)}
-                className="text-xs font-black opacity-60 hover:opacity-100"
-              >
-                ✕
-              </button>
-            </div>
-          )}
-
           {/* Language Selector Bar */}
           <div className="bg-white p-4 rounded-2xl border border-[#e5e0d6] shadow-2xs flex items-center justify-between">
             <span className="text-xs font-extrabold text-[#08242a]">
