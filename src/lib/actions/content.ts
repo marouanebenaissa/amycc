@@ -433,6 +433,7 @@ export async function createEvent(formData: FormData): Promise<void> {
     .from('events')
     .insert({
       slug: d.slug,
+      status: 'published',
       start_date: d.start_date,
       end_date: d.end_date || null,
       venue: d.venue || null,
@@ -492,6 +493,7 @@ export async function updateEvent(id: string, formData: FormData): Promise<void>
     .from('events')
     .update({
       slug: d.slug,
+      status: 'published',
       start_date: d.start_date,
       end_date: d.end_date || null,
       venue: d.venue || null,

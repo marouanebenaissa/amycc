@@ -113,7 +113,7 @@ export default async function HomePage(props: { params: Promise<{ locale: string
     const { data: evData } = await supabase
       .from('events')
       .select('id, slug, start_date, venue, city, registration_open, event_translations!inner(title, description)')
-      .eq('status', 'published')
+      .or('status.eq.published,status.is.null')
       .eq('event_translations.locale', locale)
       .order('start_date', { ascending: true })
       .limit(3)

@@ -57,9 +57,9 @@ export default async function EventsPage(props: { params: Promise<{ locale: stri
         const { data } = await supabase
           .from('events')
           .select(
-            'id, slug, start_date, end_date, venue, city, capacity, registration_open, cover_image, event_translations(locale, title, description)'
+            'id, slug, start_date, end_date, venue, city, capacity, registration_open, cover_image, status, event_translations(locale, title, description)'
           )
-          .eq('status', 'published')
+          .or('status.eq.published,status.is.null')
           .order('start_date', { ascending: true })
 
         if (data && data.length > 0) {
@@ -98,83 +98,7 @@ export default async function EventsPage(props: { params: Promise<{ locale: stri
     })(),
   ])
 
-  // Sample default events if none in DB
-  const defaultSampleEvents: EventItemData[] = [
-    {
-      id: 'e-1',
-      slug: 'performing-arts-masterclass',
-      start_date: '2026-11-15T16:00:00Z',
-      venue: isAr ? 'المركز الثقافي' : isFr ? 'Centre Culturel' : 'Cultural Center',
-      city: isAr ? 'الرباط' : isFr ? 'Rabat' : 'Rabat',
-      capacity: 40,
-      registration_open: true,
-      cover_image: 'https://images.unsplash.com/photo-1507676184212-d03ab07a01bf?auto=format&fit=crop&w=800&q=80',
-      event_translations: [
-        {
-          title: isAr
-            ? 'ورشة المسرح والأداء التعبيري للشباب'
-            : isFr
-            ? 'Atelier Théâtre & Expression Scénique'
-            : 'Theatre & Performing Arts Youth Masterclass',
-          description: isAr
-            ? 'تدريب عملي تفاعلي على تقنيات الارتجال المسرحي، الإلقاء، والتحكم في الفضاء الركحي تحت إشراف أطر فنية معتمدة.'
-            : isFr
-            ? 'Formation pratique et interactive aux techniques d\'improvisation théâtrale et d\'expression corporelle.'
-            : 'Interactive hands-on masterclass focusing on dramatic improvisation, vocal delivery, and stage presence.',
-        },
-      ],
-    },
-    {
-      id: 'e-2',
-      slug: 'heritage-music-evening',
-      start_date: '2026-12-05T18:30:00Z',
-      venue: isAr ? 'فضاء الفنون والعروض' : isFr ? 'Espace des Arts et Spectacles' : 'Arts & Performance Hall',
-      city: isAr ? 'الدار البيضاء' : isFr ? 'Casablanca' : 'Casablanca',
-      capacity: 80,
-      registration_open: true,
-      cover_image: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=800&q=80',
-      event_translations: [
-        {
-          title: isAr
-            ? 'أمسية التراث الموسيقي المغربي الأصيل'
-            : isFr
-            ? 'Soirée du Patrimoine Musical Marocain'
-            : 'Moroccan Heritage Music Evening',
-          description: isAr
-            ? 'حفل موسيقي شبابي يحتفي بالروافد الموسيقية المغربية الأصيلة، بمشاركة مواهب صاعدة في العزف والغناء التراثي.'
-            : isFr
-            ? 'Concert acoustique célébrant la richesse des mélodies marocaines traditionnelles avec de jeunes talents.'
-            : 'An acoustic celebration of authentic Moroccan musical roots featuring promising emerging young musicians.',
-        },
-      ],
-    },
-    {
-      id: 'e-3',
-      slug: 'youth-creative-forum',
-      start_date: '2026-12-20T10:00:00Z',
-      venue: isAr ? 'دار الشباب والأنشطة الثقافية' : isFr ? 'Maison des Jeunes et de la Culture' : 'Youth & Cultural Center',
-      city: isAr ? 'مراكش' : isFr ? 'Marrakech' : 'Marrakech',
-      capacity: 60,
-      registration_open: true,
-      cover_image: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=800&q=80',
-      event_translations: [
-        {
-          title: isAr
-            ? 'ملتقى مبادرة شباب في العمل للتطوع الثقافي'
-            : isFr
-            ? 'Forum Jeunesse en Action pour le Bénévolat'
-            : 'Youth in Action Cultural Volunteering Forum',
-          description: isAr
-            ? 'يوم دراسي وورشات تدريبية تجمع متطوعي مبادرة شباب في العمل لتقييم المبادرات وتخطيط الأنشطة الثقافية المقبلة.'
-            : isFr
-            ? 'Journée d\'échange et de formation réunissant les bénévoles de Jeunesse en Action pour planifier les projets.'
-            : 'A full-day strategy and workshop gathering bringing Youth in Action volunteers together to co-design upcoming initiatives.',
-        },
-      ],
-    },
-  ]
-
-  const displayEvents = dbEvents.length > 0 ? dbEvents : defaultSampleEvents
+  const displayEvents = dbEvents
   const hasHeroImage = Boolean(
     pageSettings.hero.hasHeroImage &&
       pageSettings.hero.imageUrl &&

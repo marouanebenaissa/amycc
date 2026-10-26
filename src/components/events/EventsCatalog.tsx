@@ -355,10 +355,29 @@ export function EventsCatalog({ events, locale, buttonLabel }: EventsCatalogProp
             )
           })}
         </div>
-      ) : (
-        /* Empty State */
+      ) : events.length === 0 ? (
+        /* Empty State when no events exist in database */
         <div className="bg-white rounded-3xl border border-[#e5e0d6] p-12 text-center max-w-md mx-auto space-y-4">
           <div className="text-4xl">📅</div>
+          <h3 className="text-base font-extrabold text-[#08242a]">
+            {isAr
+              ? 'لا توجد فعاليات معلنة حالياً'
+              : isFr
+              ? 'Aucun événement programmé actuellement'
+              : 'No events currently scheduled'}
+          </h3>
+          <p className="text-xs text-[#5f7174]">
+            {isAr
+              ? 'ترقبوا الإعلان عن ورشاتنا ومواعيد أنشطتنا الثقافية والفنية القادمة قريباً!'
+              : isFr
+              ? 'Restez à l\'écoute pour nos prochains ateliers et événements culturels !'
+              : 'Stay tuned for upcoming workshops and cultural initiatives!'}
+          </p>
+        </div>
+      ) : (
+        /* Empty State when filter yields 0 matches */
+        <div className="bg-white rounded-3xl border border-[#e5e0d6] p-12 text-center max-w-md mx-auto space-y-4">
+          <div className="text-4xl">🔍</div>
           <h3 className="text-base font-extrabold text-[#08242a]">
             {isAr
               ? 'لم يتم العثور على فعاليات تطابق البحث'
@@ -380,9 +399,9 @@ export function EventsCatalog({ events, locale, buttonLabel }: EventsCatalogProp
               setSelectedFilter('all')
               setSelectedCity('all')
             }}
-            className="px-5 py-2.5 rounded-xl text-xs font-bold text-white bg-[#08242a] hover:bg-[#1a3a40] transition-all"
+            className="px-5 py-2.5 rounded-xl text-xs font-bold text-white bg-[#08242a] hover:bg-[#1a3a40] transition-all cursor-pointer"
           >
-            {isAr ? 'عرض كافة الفعاليات' : isFr ? 'Voir tous les événements' : 'Show All Events'}
+            {isAr ? 'إعادة ضبط الفلاتر' : isFr ? 'Réinitialiser les filtres' : 'Reset filters'}
           </button>
         </div>
       )}
