@@ -1,6 +1,6 @@
 'use client'
 
-import { useMemo, useState } from 'react'
+import { useMemo } from 'react'
 import type { PartnerItemConfig } from '@/lib/settings'
 import { ImageWithFallback } from '@/components/ui/ImageWithFallback'
 
@@ -12,17 +12,20 @@ interface PartnersDirectoryProps {
 export function PartnersDirectory({ partners, locale }: PartnersDirectoryProps) {
   const isAr = locale === 'ar'
   const isFr = locale === 'fr'
-  const [isPaused, setIsPaused] = useState(false)
 
   // Filter only active partners
   const activePartners = useMemo(() => {
     return partners.filter((p) => p.active !== false)
   }, [partners])
 
-  // Build two identical halves for a mathematically seamless 50% infinite loop
+  // Build two identical halves for a mathematically seamless 50% infinite loop.
+  // We guarantee at least 16 items per half (minimum 32 items total) so that even on
+  // ultra-wide / 4K displays, the track is 10,000+ pixels wide and NEVER runs out of items
+  // or leaves any blank gaps.
   const marqueeItems = useMemo(() => {
     if (activePartners.length === 0) return []
-    const repeatCount = Math.max(2, Math.ceil(6 / activePartners.length))
+    const minItemsPerHalf = 16
+    const repeatCount = Math.max(2, Math.ceil(minItemsPerHalf / activePartners.length))
     const half: PartnerItemConfig[] = []
     for (let i = 0; i < repeatCount; i++) {
       half.push(...activePartners)
@@ -33,7 +36,7 @@ export function PartnersDirectory({ partners, locale }: PartnersDirectoryProps) 
   if (activePartners.length === 0) return null
 
   return (
-    <div className="space-y-4 w-full">
+    <div className="w-full">
       {/* Moving Images Container with Gradient Fade Edges */}
       <div className="relative w-full overflow-hidden py-4 select-none">
         {/* Left & Right Smooth Gradient Masks */}
@@ -46,11 +49,10 @@ export function PartnersDirectory({ partners, locale }: PartnersDirectoryProps) 
           aria-hidden="true"
         />
 
-        {/* The Continuous Infinite Marquee Track */}
+        {/* The Continuous Infinite Marquee Track (Smooth, Continuous, Never Disappearing) */}
         <div
           dir="ltr"
           className="flex items-center gap-6 sm:gap-8 w-max animate-marquee-continuous hover:[animation-play-state:paused]"
-          style={isPaused ? { animationPlayState: 'paused' } : undefined}
         >
           {marqueeItems.map((partner, idx) => {
             const name =
@@ -98,31 +100,6 @@ export function PartnersDirectory({ partners, locale }: PartnersDirectoryProps) 
             )
           })}
         </div>
-      </div>
-
-      {/* Subtle Controls & Indicator */}
-      <div className="flex items-center justify-center gap-3 pt-2">
-        <button
-          type="button"
-          onClick={() => setIsPaused((prev) => !prev)}
-          className="inline-flex items-center gap-2 text-3xs sm:text-2xs font-bold text-[#65777a] hover:text-[#08242a] bg-white/80 hover:bg-white px-3.5 py-1.5 rounded-full border border-[#e5e0d6] shadow-2xs transition-all cursor-pointer"
-          title={isPaused ? 'تشغيل الحركة' : 'إيقاف الحركة مؤقتاً'}
-        >
-          <span>{isPaused ? '▶️' : '⏸️'}</span>
-          <span>
-            {isPaused
-              ? isAr
-                ? 'تشغيل الحركة التلقائية'
-                : isFr
-                ? 'Reprendre le défilement'
-                : 'Resume Auto-Scroll'
-              : isAr
-              ? 'إيقاف مؤقت (أو مرر المؤشر)'
-              : isFr
-              ? 'Pause (ou survolez)'
-              : 'Pause (or hover)'}
-          </span>
-        </button>
       </div>
     </div>
   )

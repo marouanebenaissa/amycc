@@ -101,27 +101,31 @@ export function PartnershipsAdminTabs({
 
   // Tabs: 'partners', 'inquiries', 'page-settings'
   const [activeTab, setActiveTab] = useState<'partners' | 'inquiries' | 'page-settings'>('partners')
-  const [isAdminMarqueePaused, setIsAdminMarqueePaused] = useState(false)
 
   // Partners State & CMS State
   const [config, setConfig] = useState<PartnershipsPageConfig>(initialConfig)
   const [activeLangTab, setActiveLangTab] = useState<'ar' | 'fr' | 'en'>('ar')
   const [searchPartner, setSearchPartner] = useState('')
 
-  const activePartnersCount = useMemo(() => {
-    return (config.partners || []).filter((p) => p.active !== false).length
+  // Filter only active partners for the live marquee preview
+  const activePartnersList = useMemo(() => {
+    return (config.partners || []).filter((p) => p.active !== false)
   }, [config.partners])
 
+  const activePartnersCount = activePartnersList.length
+
+  // Guarantee at least 16 items per half (minimum 32 items total) so that even with only 1 or 2 partners,
+  // the track is 10,000+ pixels wide and cards NEVER run out or leave any blank gaps on wide screens.
   const adminMarqueeItems = useMemo(() => {
-    const list = config.partners || []
-    if (list.length === 0) return []
-    const repeatCount = Math.max(2, Math.ceil(6 / list.length))
+    if (activePartnersList.length === 0) return []
+    const minItemsPerHalf = 16
+    const repeatCount = Math.max(2, Math.ceil(minItemsPerHalf / activePartnersList.length))
     const half: PartnerItemConfig[] = []
     for (let i = 0; i < repeatCount; i++) {
-      half.push(...list)
+      half.push(...activePartnersList)
     }
     return [...half, ...half]
-  }, [config.partners])
+  }, [activePartnersList])
 
   // Inquiries State
   const [inquiries, setInquiries] = useState<PartnershipInquiryRow[]>(initialInquiries)
@@ -846,7 +850,7 @@ export function PartnershipsAdminTabs({
               </div>
             </div>
 
-            {/* Live Moving Images Marquee Preview & Controls */}
+            {/* Live Moving Images Marquee Preview */}
             <div className="pt-2">
               <div className="flex items-center justify-between pb-3 text-xs font-bold">
                 <div className="flex items-center gap-2">
@@ -858,14 +862,6 @@ export function PartnershipsAdminTabs({
                     {activePartnersCount} صور نشطة تتحرك
                   </span>
                 </div>
-
-                <button
-                  type="button"
-                  onClick={() => setIsAdminMarqueePaused((prev) => !prev)}
-                  className="inline-flex items-center gap-1.5 text-2xs font-bold text-[#0d3b43] bg-[#faf7f2] hover:bg-[#eae4d9] px-3 py-1 rounded-lg border border-[#e5e0d6] transition-all cursor-pointer"
-                >
-                  <span>{isAdminMarqueePaused ? '▶️ تشغيل الحركة' : '⏸️ إيقاف مؤقت'}</span>
-                </button>
               </div>
 
               {/* The Live Moving Marquee Container */}
@@ -884,7 +880,6 @@ export function PartnershipsAdminTabs({
                   <div
                     dir="ltr"
                     className="flex items-center gap-6 w-max animate-marquee-continuous hover:[animation-play-state:paused]"
-                    style={isAdminMarqueePaused ? { animationPlayState: 'paused' } : undefined}
                   >
                     {adminMarqueeItems.map((partner, idx) => (
                       <div
