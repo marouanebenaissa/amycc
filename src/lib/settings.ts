@@ -3371,6 +3371,9 @@ export async function getImpactSettings(): Promise<ImpactConfig> {
 export interface EventsPageStatItem {
   id: string
   value: string
+  valueAr?: string
+  valueFr?: string
+  valueEn?: string
   labelAr: string
   labelFr: string
   labelEn: string
@@ -3454,6 +3457,9 @@ export const defaultEventsPageConfig: EventsPageConfig = {
     {
       id: 'stat-free',
       value: '100%',
+      valueAr: '100%',
+      valueFr: '100%',
+      valueEn: '100%',
       labelAr: 'ولوج ومشاركة مجانية للجميع',
       labelFr: 'Accès et ateliers 100% gratuits',
       labelEn: '100% Free Public Participation',
@@ -3462,6 +3468,9 @@ export const defaultEventsPageConfig: EventsPageConfig = {
     {
       id: 'stat-workshops',
       value: '+50',
+      valueAr: '+50',
+      valueFr: '+50',
+      valueEn: '+50',
       labelAr: 'ورشة وعرض مسرحي وموسيقي',
       labelFr: 'Ateliers et spectacles programmés',
       labelEn: 'Workshops & Performances',
@@ -3470,6 +3479,9 @@ export const defaultEventsPageConfig: EventsPageConfig = {
     {
       id: 'stat-regions',
       value: '12',
+      valueAr: '12',
+      valueFr: '12',
+      valueEn: '12',
       labelAr: 'جهة مستهدفة بأنشطة القرب',
       labelFr: 'Régions ciblées au Maroc',
       labelEn: 'Targeted Moroccan Regions',
@@ -3478,6 +3490,9 @@ export const defaultEventsPageConfig: EventsPageConfig = {
     {
       id: 'stat-instant',
       value: 'فوري',
+      valueAr: 'فوري',
+      valueFr: 'Immédiat',
+      valueEn: 'Instant',
       labelAr: 'تأكيد التسجيل وتتبع المقاعد',
       labelFr: 'Confirmation d’inscription immédiate',
       labelEn: 'Instant Digital Confirmation',
@@ -3555,6 +3570,9 @@ export async function getEventsPageSettings(): Promise<EventsPageConfig> {
             .map((s) => ({
               id: s.id,
               value: s.value || '',
+              valueAr: s.valueAr || s.value || '',
+              valueFr: s.valueFr || (s.value === 'فوري' ? 'Immédiat' : s.value || ''),
+              valueEn: s.valueEn || (s.value === 'فوري' ? 'Instant' : s.value || ''),
               labelAr: s.labelAr || '',
               labelFr: s.labelFr || '',
               labelEn: s.labelEn || '',

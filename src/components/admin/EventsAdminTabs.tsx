@@ -999,12 +999,28 @@ export function EventsAdminTabs({
 
                   <div>
                     <label className="block text-3xs font-bold text-[#08242a] mb-1">
-                      القيمة الرقمية:
+                      القيمة ({activeLangTab.toUpperCase()}):
                     </label>
                     <input
                       type="text"
-                      value={stat.value}
-                      onChange={(e) => updateStat(idx, 'value', e.target.value)}
+                      value={
+                        activeLangTab === 'ar'
+                          ? (stat.valueAr ?? stat.value)
+                          : activeLangTab === 'fr'
+                          ? (stat.valueFr ?? (stat.value === 'فوري' ? 'Immédiat' : stat.value))
+                          : (stat.valueEn ?? (stat.value === 'فوري' ? 'Instant' : stat.value))
+                      }
+                      onChange={(e) => {
+                        const val = e.target.value
+                        if (activeLangTab === 'ar') {
+                          updateStat(idx, 'valueAr', val)
+                          updateStat(idx, 'value', val)
+                        } else if (activeLangTab === 'fr') {
+                          updateStat(idx, 'valueFr', val)
+                        } else {
+                          updateStat(idx, 'valueEn', val)
+                        }
+                      }}
                       className="w-full px-2.5 py-1.5 rounded-lg border border-[#e5e0d6] text-xs font-bold bg-white outline-none"
                     />
                   </div>

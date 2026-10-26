@@ -278,7 +278,11 @@ export default async function EventsPage(props: { params: Promise<{ locale: stri
                   {stat.icon}
                 </div>
                 <div className="text-3xl sm:text-4xl font-black text-[#08242a] mb-1 tracking-tight">
-                  {stat.value}
+                  {isAr
+                    ? (stat.valueAr || stat.value)
+                    : isFr
+                    ? (stat.valueFr || (stat.value === 'فوري' ? 'Immédiat' : stat.value))
+                    : (stat.valueEn || (stat.value === 'فوري' ? 'Instant' : stat.value))}
                 </div>
                 <div className="text-xs sm:text-sm font-bold text-[#5f7174] leading-snug">
                   {isAr ? stat.labelAr : isFr ? stat.labelFr : stat.labelEn}
