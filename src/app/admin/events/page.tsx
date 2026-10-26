@@ -23,7 +23,7 @@ export default async function AdminEventsPage() {
   const [{ data: initialEvents }, pageSettings] = await Promise.all([
     supabase
       .from('events')
-      .select('*, event_translations(*), event_registrations(count)')
+      .select('*, event_translations(*), event_registrations(id, full_name, email, phone, status, created_at)')
       .order('start_date', { ascending: false }),
     getEventsPageSettings(),
   ])
@@ -34,7 +34,7 @@ export default async function AdminEventsPage() {
     await seedDefaultEventsIfEmpty()
     const { data: refreshedEvents } = await supabase
       .from('events')
-      .select('*, event_translations(*), event_registrations(count)')
+      .select('*, event_translations(*), event_registrations(id, full_name, email, phone, status, created_at)')
       .order('start_date', { ascending: false })
     rawEvents = refreshedEvents
   }
@@ -55,13 +55,14 @@ export default async function AdminEventsPage() {
 
   async function handleDelete(id: string) {
     'use server'
-    await deleteEvent(id)
+    const res = await deleteEvent(id)
     revalidatePath('/admin/events')
     revalidatePath('/ar/events')
     revalidatePath('/fr/events')
     revalidatePath('/en/events')
     revalidatePath('/events')
     revalidatePath('/[locale]/events', 'page')
+    return res
   }
 
   return (

@@ -6,6 +6,7 @@ import { submitEventRegistration } from '@/lib/actions/submissions'
 interface EventRegistrationModalProps {
   eventId: string
   eventTitle: string
+  eventDescription?: string
   eventDate?: string
   eventVenue?: string
   locale: string
@@ -16,6 +17,7 @@ interface EventRegistrationModalProps {
 export function EventRegistrationModal({
   eventId,
   eventTitle,
+  eventDescription,
   eventDate,
   eventVenue,
   locale,
@@ -176,17 +178,75 @@ export function EventRegistrationModal({
                   </button>
                 </div>
               </form>
-            ) : (
+            ) : null}
+
+            {/* Close Button / Bottom Confirmation */}
+            {response?.success && (
               <div className="pt-2">
                 <button
                   type="button"
                   onClick={() => setIsOpen(false)}
-                  className="w-full py-2.5 px-4 rounded-xl font-bold text-[#08242a] bg-[#faf7f2] hover:bg-[#f4ede2] border border-[#e5e0d6] text-xs"
+                  className="w-full py-2.5 px-4 rounded-xl font-bold text-[#08242a] bg-[#faf7f2] hover:bg-[#f4ede2] border border-[#e5e0d6] text-xs transition-colors"
                 >
                   {isAr ? 'إغلاق النافذة' : 'Close'}
                 </button>
               </div>
             )}
+
+            {/* Event Article & Details Overview below registration area */}
+            <div className="mt-8 pt-6 border-t border-[#f4ede2] space-y-4">
+              <div className="flex items-center gap-2">
+                <span className="w-1.5 h-4 bg-[#c85a32] rounded-full" />
+                <h4 className="text-xs sm:text-sm font-black text-[#08242a]">
+                  {isAr ? 'تفاصيل ومقال الفعالية' : isFr ? 'À propos de l\'événement' : 'About the Event'}
+                </h4>
+              </div>
+
+              {eventDescription ? (
+                <div className="bg-[#faf7f2] p-4 rounded-2xl border border-[#e5e0d6] text-xs leading-relaxed text-[#445457] whitespace-pre-line font-medium">
+                  {eventDescription}
+                </div>
+              ) : (
+                <div className="bg-[#faf7f2] p-4 rounded-2xl border border-[#e5e0d6] text-xs leading-relaxed text-[#445457]">
+                  {isAr
+                    ? 'فعالية ثقافية وفنية مميزة تنظمها جمعية روح الفنون والثقافة لتشجيع المواهب الصاعدة وتعزيز الحراك الثقافي المجتمعي.'
+                    : 'A cultural and artistic event organized by AMYCC to foster emerging talents and cultural engagement.'}
+                </div>
+              )}
+
+              {/* Key Highlights Card */}
+              <div className="grid grid-cols-2 gap-3 text-3xs sm:text-2xs">
+                <div className="p-3 rounded-xl bg-white border border-[#e5e0d6] flex items-center gap-2.5">
+                  <span className="text-base sm:text-lg">🎟️</span>
+                  <div>
+                    <span className="font-black text-[#08242a] block">
+                      {isAr ? 'الدخول مجاني 100%' : isFr ? 'Entrée Gratuite' : 'Free Entry'}
+                    </span>
+                    <span className="text-[#819598]">
+                      {isAr ? 'برعاية الجمعية' : '100% Free'}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="p-3 rounded-xl bg-white border border-[#e5e0d6] flex items-center gap-2.5">
+                  <span className="text-base sm:text-lg">✉️</span>
+                  <div>
+                    <span className="font-black text-[#08242a] block">
+                      {isAr ? 'تأكيد ودعوة رسمية' : isFr ? 'Invitation par e-mail' : 'Email Invitation'}
+                    </span>
+                    <span className="text-[#819598] font-mono text-3xs">
+                      notification@amycc.org
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <p className="text-3xs text-[#819598] text-center pt-1 font-medium">
+                {isAr
+                  ? '📍 يرجى الحضور قبل الموعد بـ 15 دقيقة وإبراز رمز التأكيد لدى مكتب الاستقبال.'
+                  : '📍 Please arrive 15 minutes before the start time and present your ticket reference at check-in.'}
+              </p>
+            </div>
           </div>
         </div>
       )}

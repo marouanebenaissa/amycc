@@ -904,6 +904,7 @@ export default async function HomePage(props: { params: Promise<{ locale: string
                         <EventRegistrationModal
                           eventId={ev.id}
                           eventTitle={trans.title}
+                          eventDescription={trans.description || ''}
                           eventDate={formattedDate}
                           eventVenue={ev.venue || ev.city || undefined}
                           locale={locale}

@@ -1,6 +1,7 @@
 'use server'
 
 import { createClient } from '@/lib/supabase/server'
+import { sendEventRegistrationInvitation } from '@/lib/email/notifications'
 import {
   membershipSchema,
   volunteerSchema,
@@ -279,19 +280,61 @@ export async function submitEventRegistration(formData: FormData): Promise<Actio
     }
 
     // 2. Insert attendee registration
-    const { error: regErr } = await supabase.from('event_registrations').insert({
-      event_id: validated.data.eventId,
-      full_name: validated.data.fullName,
-      email: validated.data.email,
-      phone: validated.data.phone || null,
-      status: 'confirmed',
-    })
+    const { data: insertedReg, error: regErr } = await supabase
+      .from('event_registrations')
+      .insert({
+        event_id: validated.data.eventId,
+        full_name: validated.data.fullName,
+        email: validated.data.email,
+        phone: validated.data.phone || null,
+        status: 'confirmed',
+      })
+      .select('id')
+      .single()
 
     if (regErr) {
       return { success: false, message: regErr.message }
     }
 
-    return { success: true, message: 'Registration confirmed successfully.' }
+    // 3. Dispatch official email invitation via notification@amycc.org
+    try {
+      const { data: eventDetails } = await supabase
+        .from('events')
+        .select('start_date, venue, city, event_translations(locale, title)')
+        .eq('id', validated.data.eventId)
+        .single()
+
+      const trans =
+        eventDetails?.event_translations?.find((t: { locale: string }) => t.locale === 'ar') ||
+        eventDetails?.event_translations?.[0]
+
+      const formattedDate = eventDetails?.start_date
+        ? new Date(eventDetails.start_date).toLocaleDateString('ar-MA', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+          })
+        : undefined
+
+      await sendEventRegistrationInvitation({
+        attendeeName: validated.data.fullName,
+        attendeeEmail: validated.data.email,
+        eventTitle: trans?.title || 'فعالية جمعية روح الفنون والثقافة',
+        eventDate: formattedDate,
+        eventVenue: eventDetails?.venue
+          ? `${eventDetails.venue}${eventDetails.city ? ` - ${eventDetails.city}` : ''}`
+          : eventDetails?.city || undefined,
+        registrationId: insertedReg?.id || '',
+        locale: 'ar',
+      })
+    } catch (emailErr) {
+      console.error('Non-blocking invitation email error:', emailErr)
+    }
+
+    return {
+      success: true,
+      message: 'تم تأكيد حجز مقعدك بنجاح! تم توجيه إشعار ودعوة رسمية إلى بريدك الإلكتروني.',
+    }
   } catch (err: unknown) {
     const errorMsg = err instanceof Error ? err.message : 'An unexpected error occurred.'
     return { success: false, message: errorMsg }

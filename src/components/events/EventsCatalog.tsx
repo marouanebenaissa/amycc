@@ -326,6 +326,7 @@ export function EventsCatalog({ events, locale, buttonLabel }: EventsCatalogProp
                       <EventRegistrationModal
                         eventId={ev.id}
                         eventTitle={trans.title}
+                        eventDescription={trans.description || ''}
                         eventDate={formattedDate}
                         eventVenue={ev.venue || ev.city || undefined}
                         locale={locale}

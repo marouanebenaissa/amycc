@@ -3,6 +3,7 @@
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
+import { createAdminClient } from '@/lib/supabase/admin'
 import { z } from 'zod'
 
 // ============================================================
@@ -521,8 +522,19 @@ export async function updateEvent(id: string, formData: FormData): Promise<void>
   redirect('/admin/events')
 }
 
-export async function deleteEvent(id: string): Promise<void> {
-  const { supabase } = await requireAdmin()
-  await supabase.from('events').delete().eq('id', id)
+export async function deleteEvent(id: string): Promise<{ success: boolean; error?: string }> {
+  await requireAdmin()
+  const adminClient = createAdminClient()
+  const { error } = await adminClient.from('events').delete().eq('id', id)
+  if (error) {
+    console.error('Failed to delete event:', error)
+    return { success: false, error: error.message }
+  }
   revalidatePath('/admin/events')
+  revalidatePath('/ar/events')
+  revalidatePath('/fr/events')
+  revalidatePath('/en/events')
+  revalidatePath('/events')
+  revalidatePath('/[locale]/events', 'page')
+  return { success: true }
 }

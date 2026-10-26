@@ -7,6 +7,15 @@ import { useRouter } from 'next/navigation'
 import type { EventsPageConfig, EventsPageStatItem } from '@/lib/settings'
 import { saveEventsPageConfiguration } from '@/lib/actions/admin'
 
+export interface RegistrationItem {
+  id: string
+  full_name: string
+  email: string
+  phone?: string | null
+  status: string
+  created_at: string
+}
+
 export interface AdminEventRow {
   id: string
   slug: string
@@ -23,7 +32,7 @@ export interface AdminEventRow {
     title: string
     description?: string | null
   }[]
-  event_registrations?: { count: number }[]
+  event_registrations?: RegistrationItem[] | { count: number }[]
 }
 
 interface EventsAdminTabsProps {
@@ -31,7 +40,7 @@ interface EventsAdminTabsProps {
   initialPageConfig: EventsPageConfig
   defaultPageConfig?: EventsPageConfig
   onToggleRegistration: (id: string, currentOpen: boolean) => Promise<void>
-  onDeleteEvent: (id: string) => Promise<void>
+  onDeleteEvent: (id: string) => Promise<{ success: boolean; error?: string } | void>
 }
 
 export function EventsAdminTabs({
@@ -43,6 +52,15 @@ export function EventsAdminTabs({
 }: EventsAdminTabsProps) {
   const router = useRouter()
   const [activeMainTab, setActiveMainTab] = useState<'events_list' | 'cms_header'>('events_list')
+  const [eventList, setEventList] = useState<AdminEventRow[]>(events)
+  const [prevEvents, setPrevEvents] = useState<AdminEventRow[]>(events)
+  if (events !== prevEvents) {
+    setPrevEvents(events)
+    setEventList(events)
+  }
+
+  const [deletingId, setDeletingId] = useState<string | null>(null)
+  const [togglingId, setTogglingId] = useState<string | null>(null)
   const [config, setConfig] = useState<EventsPageConfig>(initialPageConfig)
   const [activeLangTab, setActiveLangTab] = useState<'ar' | 'fr' | 'en'>('ar')
   const [saving, setSaving] = useState(false)
@@ -147,7 +165,7 @@ export function EventsAdminTabs({
   }
 
   // Filter events in table
-  const filteredEvents = events.filter((ev) => {
+  const filteredEvents = eventList.filter((ev) => {
     const trans = ev.event_translations?.find((t) => t.locale === 'ar') || ev.event_translations?.[0]
     const title = (trans?.title || ev.slug).toLowerCase()
     const city = (ev.city || '').toLowerCase()
@@ -155,6 +173,165 @@ export function EventsAdminTabs({
     const q = searchFilter.toLowerCase().trim()
     return !q || title.includes(q) || city.includes(q) || venue.includes(q)
   })
+
+  // Calculate total registrations
+  const totalRegistrationsCount = eventList.reduce((acc, ev) => {
+    if (!ev.event_registrations) return acc
+    if (Array.isArray(ev.event_registrations) && ev.event_registrations.length > 0) {
+      if ('count' in (ev.event_registrations[0] as object)) {
+        return acc + ((ev.event_registrations[0] as { count: number }).count || 0)
+      }
+      return acc + ev.event_registrations.length
+    }
+    return acc
+  }, 0)
+
+  async function handleToggleRegistration(id: string, currentOpen: boolean) {
+    setTogglingId(id)
+    setEventList((prev) =>
+      prev.map((e) => (e.id === id ? { ...e, registration_open: !currentOpen } : e))
+    )
+    try {
+      await onToggleRegistration(id, currentOpen)
+      router.refresh()
+    } catch (err: unknown) {
+      setEventList((prev) =>
+        prev.map((e) => (e.id === id ? { ...e, registration_open: currentOpen } : e))
+      )
+      setFeedback({
+        type: 'error',
+        message: err instanceof Error ? err.message : 'فشل تغيير حالة بوابة التسجيل',
+      })
+    } finally {
+      setTogglingId(null)
+    }
+  }
+
+  async function handleDeleteEvent(id: string, title: string) {
+    if (
+      !confirm(
+        `هل أنت متأكد من رغبتك في حذف فعالية "${title}" نهائياً؟\nسيتم حذف كافة الترجمات وبيانات التسجيل المرتبطة بها.`
+      )
+    ) {
+      return
+    }
+
+    setDeletingId(id)
+    const backupList = [...eventList]
+    setEventList((prev) => prev.filter((e) => e.id !== id))
+
+    try {
+      const res = await onDeleteEvent(id)
+      if (res && typeof res === 'object' && 'success' in res && !res.success) {
+        throw new Error(res.error || 'فشل حذف الفعالية من قاعدة البيانات')
+      }
+      setFeedback({
+        type: 'success',
+        message: `تم حذف فعالية "${title}" بنجاح وإزالتها من النظام والموقع.`,
+      })
+      router.refresh()
+    } catch (err: unknown) {
+      setEventList(backupList)
+      setFeedback({
+        type: 'error',
+        message: err instanceof Error ? err.message : 'حدث خطأ أثناء محاولة حذف الفعالية',
+      })
+    } finally {
+      setDeletingId(null)
+    }
+  }
+
+  function exportEventRegistrationsToCSV(event: AdminEventRow) {
+    const trans = event.event_translations?.find((t) => t.locale === 'ar') || event.event_translations?.[0]
+    const eventTitle = trans?.title || event.slug
+    const regs = (Array.isArray(event.event_registrations) ? event.event_registrations : []) as RegistrationItem[]
+
+    const validRegs = regs.filter((r) => r && 'full_name' in r)
+    if (validRegs.length === 0) {
+      alert(`لا توجد تسجيلات حضور مسجلة لفعالية "${eventTitle}" حتى الآن.`)
+      return
+    }
+
+    const csvRows = [
+      ['رقم المرجع (ID)', 'الاسم الكامل', 'البريد الإلكتروني', 'رقم الهاتف', 'الفعالية', 'المدينة', 'تاريخ التسجيل', 'الحالة'].join(','),
+    ]
+
+    validRegs.forEach((r) => {
+      const row = [
+        `"${r.id}"`,
+        `"${(r.full_name || '').replace(/"/g, '""')}"`,
+        `"${(r.email || '').replace(/"/g, '""')}"`,
+        `"${(r.phone || '').replace(/"/g, '""')}"`,
+        `"${eventTitle.replace(/"/g, '""')}"`,
+        `"${(event.city || '').replace(/"/g, '""')}"`,
+        `"${new Date(r.created_at).toLocaleString('ar-MA')}"`,
+        `"${r.status || 'مؤكد'}"`,
+      ]
+      csvRows.push(row.join(','))
+    })
+
+    const csvContent = '\uFEFF' + csvRows.join('\r\n')
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' })
+    const url = URL.createObjectURL(blob)
+    const link = document.createElement('a')
+    link.setAttribute('href', url)
+    const cleanTitle = eventTitle.slice(0, 30).replace(/[/\\?%*:|"<>]/g, '_')
+    link.setAttribute('download', `AMYCC-حضور-${cleanTitle}-${new Date().toISOString().slice(0, 10)}.csv`)
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+    URL.revokeObjectURL(url)
+  }
+
+  function exportAllRegistrationsToCSV() {
+    const allRows: { event: AdminEventRow; reg: RegistrationItem }[] = []
+    eventList.forEach((ev) => {
+      if (Array.isArray(ev.event_registrations)) {
+        ev.event_registrations.forEach((r) => {
+          if (r && 'full_name' in r) {
+            allRows.push({ event: ev, reg: r as RegistrationItem })
+          }
+        })
+      }
+    })
+
+    if (allRows.length === 0) {
+      alert('لا توجد أي تسجيلات حضور مسجلة في كافة الفعاليات حتى الآن.')
+      return
+    }
+
+    const csvRows = [
+      ['رقم المرجع (ID)', 'الاسم الكامل', 'البريد الإلكتروني', 'رقم الهاتف', 'الفعالية', 'المدينة', 'تاريخ الفعالية', 'تاريخ التسجيل', 'الحالة'].join(','),
+    ]
+
+    allRows.forEach(({ event, reg }) => {
+      const trans = event.event_translations?.find((t) => t.locale === 'ar') || event.event_translations?.[0]
+      const eventTitle = trans?.title || event.slug
+      const row = [
+        `"${reg.id}"`,
+        `"${(reg.full_name || '').replace(/"/g, '""')}"`,
+        `"${(reg.email || '').replace(/"/g, '""')}"`,
+        `"${(reg.phone || '').replace(/"/g, '""')}"`,
+        `"${eventTitle.replace(/"/g, '""')}"`,
+        `"${(event.city || '').replace(/"/g, '""')}"`,
+        `"${new Date(event.start_date).toLocaleDateString('ar-MA')}"`,
+        `"${new Date(reg.created_at).toLocaleString('ar-MA')}"`,
+        `"${reg.status || 'مؤكد'}"`,
+      ]
+      csvRows.push(row.join(','))
+    })
+
+    const csvContent = '\uFEFF' + csvRows.join('\r\n')
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' })
+    const url = URL.createObjectURL(blob)
+    const link = document.createElement('a')
+    link.setAttribute('href', url)
+    link.setAttribute('download', `AMYCC-كافة-المسجلين-${new Date().toISOString().slice(0, 10)}.csv`)
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+    URL.revokeObjectURL(url)
+  }
 
   return (
     <div className="space-y-6">
@@ -171,7 +348,7 @@ export function EventsAdminTabs({
             }`}
           >
             <span>📅</span>
-            <span>قائمة الفعاليات والمواعيد ({events.length})</span>
+            <span>قائمة الفعاليات والمواعيد ({eventList.length})</span>
           </button>
 
           <button
@@ -237,13 +414,28 @@ export function EventsAdminTabs({
               />
             </div>
 
-            <Link
-              href="/admin/events/new"
-              className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#08242a] text-white text-xs font-bold rounded-xl hover:bg-[#1a3a40] active:scale-98 transition-all shadow-subtle hover:shadow-card self-start sm:self-auto"
-            >
-              <span>+</span>
-              <span>إضافة فعالية جديدة (New Event)</span>
-            </Link>
+            <div className="flex flex-wrap items-center gap-2.5 self-start sm:self-auto">
+              <button
+                type="button"
+                onClick={exportAllRegistrationsToCSV}
+                className="inline-flex items-center gap-2 px-4 py-2.5 bg-emerald-800 hover:bg-emerald-900 active:scale-98 text-white text-xs font-bold rounded-xl transition-all shadow-subtle cursor-pointer"
+                title="تحميل جدول كافة المسجلين في جميع الفعاليات بصيغة CSV المتوافقة مع Microsoft Excel"
+              >
+                <span>📥</span>
+                <span>تحميل قائمة المسجلين (CSV)</span>
+                <span className="px-1.5 py-0.5 rounded-full bg-emerald-700 text-3xs font-black">
+                  {totalRegistrationsCount}
+                </span>
+              </button>
+
+              <Link
+                href="/admin/events/new"
+                className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#08242a] text-white text-xs font-bold rounded-xl hover:bg-[#1a3a40] active:scale-98 transition-all shadow-subtle hover:shadow-card"
+              >
+                <span>+</span>
+                <span>إضافة فعالية جديدة (New Event)</span>
+              </Link>
+            </div>
           </div>
 
           <div className="bg-white rounded-2xl border border-[#e5e0d6] overflow-hidden shadow-2xs">
@@ -263,7 +455,13 @@ export function EventsAdminTabs({
                     filteredEvents.map((ev) => {
                       const trans = ev.event_translations?.find((t) => t.locale === 'ar') || ev.event_translations?.[0]
                       const title = trans?.title || ev.slug
-                      const regCount = ev.event_registrations?.[0]?.count ?? 0
+                      const regCount = ev.event_registrations
+                        ? Array.isArray(ev.event_registrations) &&
+                          ev.event_registrations.length > 0 &&
+                          'count' in (ev.event_registrations[0] as object)
+                          ? (ev.event_registrations[0] as { count: number }).count
+                          : ev.event_registrations.length
+                        : 0
                       const dateObj = new Date(ev.start_date)
 
                       return (
@@ -320,18 +518,32 @@ export function EventsAdminTabs({
                           <td className="px-6 py-4">
                             <button
                               type="button"
-                              onClick={() => onToggleRegistration(ev.id, ev.registration_open)}
-                              className={`px-3 py-1 rounded-full text-3xs font-extrabold cursor-pointer transition-all ${
+                              disabled={togglingId === ev.id}
+                              onClick={() => handleToggleRegistration(ev.id, ev.registration_open)}
+                              className={`px-3 py-1 rounded-full text-3xs font-extrabold cursor-pointer transition-all disabled:opacity-60 ${
                                 ev.registration_open
                                   ? 'bg-emerald-50 text-emerald-700 border border-emerald-200 hover:bg-emerald-100'
                                   : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
                               }`}
                             >
-                              {ev.registration_open ? 'مفتوح (Open) ✓' : 'مغلق (Closed) ✕'}
+                              {togglingId === ev.id
+                                ? 'جارٍ التحديث...'
+                                : ev.registration_open
+                                ? 'مفتوح (Open) ✓'
+                                : 'مغلق (Closed) ✕'}
                             </button>
                           </td>
                           <td className="px-6 py-4">
                             <div className="flex items-center gap-2">
+                              <button
+                                type="button"
+                                title="تحميل لائحة الحضور لهذه الفعالية بصيغة CSV المتوافقة مع Excel"
+                                onClick={() => exportEventRegistrationsToCSV(ev)}
+                                className="px-2.5 py-1.5 rounded-lg text-2xs font-bold bg-emerald-50 text-emerald-800 border border-emerald-200 hover:bg-emerald-100 transition-colors flex items-center gap-1 cursor-pointer"
+                              >
+                                <span>📥</span>
+                                <span>لائحة الحضور ({regCount})</span>
+                              </button>
                               <Link
                                 href={`/admin/events/${ev.id}/edit`}
                                 className="px-3 py-1.5 rounded-lg text-2xs font-bold bg-[#faf7f2] border border-[#e5e0d6] text-[#08242a] hover:bg-[#eae4d9] transition-colors"
@@ -340,14 +552,11 @@ export function EventsAdminTabs({
                               </Link>
                               <button
                                 type="button"
-                                onClick={() => {
-                                  if (confirm('هل أنت متأكد من حذف هذه الفعالية نهائياً؟')) {
-                                    onDeleteEvent(ev.id)
-                                  }
-                                }}
-                                className="px-3 py-1.5 rounded-lg text-2xs font-bold text-rose-600 hover:bg-rose-50 border border-transparent hover:border-rose-200 transition-colors"
+                                disabled={deletingId === ev.id}
+                                onClick={() => handleDeleteEvent(ev.id, title)}
+                                className="px-3 py-1.5 rounded-lg text-2xs font-bold text-rose-600 hover:bg-rose-50 border border-transparent hover:border-rose-200 transition-colors disabled:opacity-50 cursor-pointer"
                               >
-                                حذف
+                                {deletingId === ev.id ? 'جارٍ الحذف...' : 'حذف'}
                               </button>
                             </div>
                           </td>
