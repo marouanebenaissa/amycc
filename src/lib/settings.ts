@@ -4331,3 +4331,662 @@ export async function getPartnershipsPageSettings(): Promise<PartnershipsPageCon
     return defaultPartnershipsPageConfig
   }
 }
+
+// ============================================================
+// MEMBERSHIP PAGE CONFIGURATION & CMS
+// ============================================================
+
+export interface MembershipStatItem {
+  id: string
+  value: string
+  valueAr?: string
+  valueFr?: string
+  valueEn?: string
+  labelAr: string
+  labelFr: string
+  labelEn: string
+  icon: string
+}
+
+export interface MembershipTierConfig {
+  id: string
+  nameAr: string
+  nameFr: string
+  nameEn: string
+  badgeAr: string
+  badgeFr: string
+  badgeEn: string
+  feeAr: string
+  feeFr: string
+  feeEn: string
+  periodAr: string
+  periodFr: string
+  periodEn: string
+  descriptionAr: string
+  descriptionFr: string
+  descriptionEn: string
+  benefitsAr: string[]
+  benefitsFr: string[]
+  benefitsEn: string[]
+  recommended?: boolean
+  active: boolean
+  order: number
+}
+
+export interface MembershipBenefitItem {
+  id: string
+  icon: string
+  titleAr: string
+  titleFr: string
+  titleEn: string
+  descriptionAr: string
+  descriptionFr: string
+  descriptionEn: string
+}
+
+export interface MembershipStepItem {
+  id: string
+  stepNumber: number
+  titleAr: string
+  titleFr: string
+  titleEn: string
+  descriptionAr: string
+  descriptionFr: string
+  descriptionEn: string
+}
+
+export interface MembershipRequirementItem {
+  id: string
+  titleAr: string
+  titleFr: string
+  titleEn: string
+  itemsAr: string[]
+  itemsFr: string[]
+  itemsEn: string[]
+}
+
+export interface MembershipPageConfig {
+  hero: {
+    tagAr: string
+    tagFr: string
+    tagEn: string
+    badgeAr: string
+    badgeFr: string
+    badgeEn: string
+    titleAr: string
+    titleFr: string
+    titleEn: string
+    subtitleAr: string
+    subtitleFr: string
+    subtitleEn: string
+    descriptionAr: string
+    descriptionFr: string
+    descriptionEn: string
+    imageUrl: string
+    hasHeroImage: boolean
+    primaryBtnTextAr: string
+    primaryBtnTextFr: string
+    primaryBtnTextEn: string
+    primaryBtnUrl: string
+    secondaryBtnTextAr: string
+    secondaryBtnTextFr: string
+    secondaryBtnTextEn: string
+    secondaryBtnUrl: string
+  }
+  stats: MembershipStatItem[]
+  tiers: MembershipTierConfig[]
+  benefits: MembershipBenefitItem[]
+  steps: MembershipStepItem[]
+  requirements: MembershipRequirementItem
+  cta: {
+    badgeAr: string
+    badgeFr: string
+    badgeEn: string
+    titleAr: string
+    titleFr: string
+    titleEn: string
+    descriptionAr: string
+    descriptionFr: string
+    descriptionEn: string
+    primaryBtnTextAr: string
+    primaryBtnTextFr: string
+    primaryBtnTextEn: string
+    primaryBtnUrl: string
+    email: string
+    phone: string
+  }
+}
+
+export const defaultMembershipPageConfig: MembershipPageConfig = {
+  hero: {
+    tagAr: 'بوابة الانخراط والمواطنة الثقافية',
+    tagFr: "Portail d'Adhésion & Citoyenneté Culturelle",
+    tagEn: 'Membership & Cultural Citizenship Portal',
+    badgeAr: 'جمعية روح الفنون والثقافة — AMYCC',
+    badgeFr: 'Association Spirit of Arts & Culture — AMYCC',
+    badgeEn: 'Spirit of Arts & Culture Association — AMYCC',
+    titleAr: 'انضم إلى أسرة روح الفنون والثقافة وكن شريكاً فاعلاً في صناعة المشهد الإبداعي المغربي',
+    titleFr: 'Rejoignez la communauté AMYCC et participez activement à l’effervescence artistique marocaine',
+    titleEn: 'Join the AMYCC Family and Become an Active Catalyst in Moroccan Cultural Expression',
+    subtitleAr: 'عضوية نوعية تعزز حضورك الفني، تفتح لك أبواب التكوين المسرحي والورشات التراثية، وتمنحك حق المشاركة والقرار في مسار الجمعية.',
+    subtitleFr: 'Une adhésion valorisante qui propulse vos talents, ouvre l’accès aux laboratoires de création et garantit votre voix démocratique.',
+    subtitleEn: 'An empowering membership unlocking theatrical masterclasses, regional heritage labs, and democratic voting rights.',
+    descriptionAr: 'نؤمن في جمعية روح الفنون والثقافة (AMYCC) أن العضوية ليست مجرد بطاقة شرفية، بل هي ميثاق التزام مدني وإبداعي مشترك. يستفيد أعضاؤنا من برامج التكوين الركحي المعتمدة، المشاركة في الجمع العام، تمثيل الجمعية في المحافل الوطنية، وفرص الإقامات الفنية الإقليمية والدولية.',
+    descriptionFr: 'Pour l’AMYCC, adhérer est un engagement citoyen et créatif fondé sur la réciprocité. Nos adhérents bénéficient de masterclasses certifiantes, d’ateliers d’art dramatique et du droit de vote lors de l’Assemblée Générale annuelle.',
+    descriptionEn: 'At AMYCC, membership is an authentic partnership fostering creative solidarity. Our members enjoy priority access to certified performing arts workshops, annual general assembly voting rights, and national artistic tours.',
+    imageUrl: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=1200&q=80',
+    hasHeroImage: true,
+    primaryBtnTextAr: 'تقديم طلب الانخراط الرسمي',
+    primaryBtnTextFr: 'Déposer ma candidature d’adhésion',
+    primaryBtnTextEn: 'Submit Membership Application',
+    primaryBtnUrl: '#membership-form',
+    secondaryBtnTextAr: 'استكشاف فئات وامتيازات العضوية',
+    secondaryBtnTextFr: 'Découvrir les catégories & avantages',
+    secondaryBtnTextEn: 'Explore Membership Categories',
+    secondaryBtnUrl: '#membership-tiers',
+  },
+  stats: [
+    {
+      id: 'stat-active-members',
+      value: '+420',
+      valueAr: '+420',
+      valueFr: '+420',
+      valueEn: '+420',
+      labelAr: 'عضواً فاعلاً ومنخرطاً مسجلاً',
+      labelFr: 'Membres adhérents certifiés',
+      labelEn: 'Registered Active Members',
+      icon: '👥',
+    },
+    {
+      id: 'stat-regions',
+      value: '12',
+      valueAr: '12',
+      valueFr: '12',
+      valueEn: '12',
+      labelAr: 'جهة يغطيها نشاط الأعضاء بالمغرب',
+      labelFr: 'Régions du Royaume mobilisées',
+      labelEn: 'Moroccan Regions Reached',
+      icon: '🇲🇦',
+    },
+    {
+      id: 'stat-masterclasses',
+      value: '36+',
+      valueAr: '36+',
+      valueFr: '36+',
+      valueEn: '36+',
+      labelAr: 'محترفاً وورشة تكوينية سنوياً',
+      labelFr: 'Ateliers et résidences par an',
+      labelEn: 'Workshops & Residencies Yearly',
+      icon: '🎭',
+    },
+    {
+      id: 'stat-decision-rights',
+      value: '100%',
+      valueAr: '100%',
+      valueFr: '100%',
+      valueEn: '100%',
+      labelAr: 'حق المشاركة والتصويت بالجمع العام',
+      labelFr: 'Droit de vote en Assemblée Générale',
+      labelEn: 'Democratic Voting Rights',
+      icon: '🗳️',
+    },
+  ],
+  tiers: [
+    {
+      id: 'tier-active-practitioner',
+      nameAr: 'عضو فاعل وممارس',
+      nameFr: 'Membre Actif & Pratiquant',
+      nameEn: 'Active Practicing Member',
+      badgeAr: 'الفئة الأكثر تأثيراً ومشاركة',
+      badgeFr: 'Catégorie phare de l’association',
+      badgeEn: 'Core Association Membership',
+      feeAr: '200 درهم',
+      feeFr: '200 MAD',
+      feeEn: '200 MAD',
+      periodAr: 'سنوياً (تجدد مع الجمع العام)',
+      periodFr: 'Par an (renouvelable à l’AG)',
+      periodEn: 'Annual (renewed at General Assembly)',
+      descriptionAr: 'مخصصة للفنانين والممارسين الثقافيين والفاعلين الجمعويين الراغبين في المشاركة النشطة في صياغة البرامج وتسيير المبادرات.',
+      descriptionFr: 'Destinée aux créateurs, animateurs culturels et artistes engagés participant activement à la mise en œuvre des projets.',
+      descriptionEn: 'Tailored for artists, scenic performers, and active cultural catalysts dedicated to co-leading institutional projects.',
+      benefitsAr: [
+        'بطاقة عضوية رقمية ومطبوعة رسمية برقم تسلسلي وطني',
+        'حق التصويت والترشح لأجهزة التسيير في الجمع العام السنوي',
+        'أولوية التسجيل المجاني في كافة الماستركلاس ومحترفات المسرح',
+        'إمكانية اقتراح مشاريع فنية وتأطير ورشات معتمدة باسم الجمعية',
+        'شهادة سنوية رسمية للعضوية والالتزام الثقافي والمدني',
+      ],
+      benefitsFr: [
+        'Carte d’adhésion officielle avec identifiant national unique',
+        'Droit de vote et d’éligibilité lors de l’Assemblée Générale',
+        'Accès prioritaire gratuit à tous les ateliers scéniques et masterclasses',
+        'Possibilité de proposer et piloter des projets artistiques labellisés',
+        'Attestation officielle annuelle d’engagement associatif et culturel',
+      ],
+      benefitsEn: [
+        'Official printed & digital membership card with verified national ID',
+        'Full voting and candidacy rights at the Annual General Assembly',
+        'Priority complimentary registration to all masterclasses and stage labs',
+        'Opportunity to propose and curate official association-backed projects',
+        'Formal annual certificate of civic and cultural engagement',
+      ],
+      recommended: true,
+      active: true,
+      order: 1,
+    },
+    {
+      id: 'tier-youth-student',
+      nameAr: 'عضوية الشباب والطلبة (الشباب في حركة)',
+      nameFr: 'Adhésion Jeunesse & Étudiants (Youth in Action)',
+      nameEn: 'Youth & Student Membership (Youth in Action)',
+      badgeAr: 'دون 26 سنة وتلاميذ المعاهد الفنية',
+      badgeFr: 'Moins de 26 ans & étudiants en arts',
+      badgeEn: 'Under 26 & Performing Arts Students',
+      feeAr: '100 درهم',
+      feeFr: '100 MAD',
+      feeEn: '100 MAD',
+      periodAr: 'سنوياً (أو معفاة لمتطوعي المبادرات)',
+      periodFr: 'Par an (ou exonérée pour bénévoles actifs)',
+      periodEn: 'Annual (or waived for certified volunteers)',
+      descriptionAr: 'فئة تحفيزية للطلبة والمواهب الشابة الراغبة في صقل قدرات الإلقاء والتعبير الركحي واكتساب تجربة العمل الجمعوي الميداني.',
+      descriptionFr: 'Tarif préférentiel d’encouragement pour les jeunes talents désireux de développer leurs compétences scéniques.',
+      descriptionEn: 'Incentive track dedicated to emerging young artists seeking mentorship in dramatic arts and community leadership.',
+      benefitsAr: [
+        'بطاقة عضوية الشباب وبوابة المبادرات الميدانية والتطوعية',
+        'مواكبة وتدريب مجاني على تقنيات المسرح والتعبير الصوتي والجسدي',
+        'المشاركة في قوافل "الشباب في حركة" الثقافية بالمناطق الشبه الحضرية',
+        'شهادات خبرة وتطوع لتعزيز المسار الأكاديمي والمهني',
+        'تخفيضات 50% على التظاهرات والمخيمات الفنية الصيفية',
+      ],
+      benefitsFr: [
+        'Carte d’adhérent Jeunesse et accès au réseau de bénévolat',
+        'Encadrement personnalisé en diction, expression corporelle et jeu d’acteur',
+        'Participation active aux caravanes de proximité Jeunesse en Action',
+        'Attestations de bénévolat certifiées pour valoriser les dossiers académiques',
+        'Tarif réduit de 50% sur les festivals et résidences artistiques d’été',
+      ],
+      benefitsEn: [
+        'Youth membership credentials and community action portal access',
+        'Free coaching in vocal modulation, stage presence, and theatrical diction',
+        'Direct deployment in regional Youth in Action cultural caravans',
+        'Certified volunteering certificates bolstering academic resumes',
+        '50% discount on summer artistic camps and partner festivals',
+      ],
+      recommended: false,
+      active: true,
+      order: 2,
+    },
+    {
+      id: 'tier-beneficiary-enthusiast',
+      nameAr: 'عضو مستفيد ومتابع ثقافي',
+      nameFr: 'Membre Bénéficiaire & Sympathisant',
+      nameEn: 'Beneficiary & Cultural Enthusiast',
+      badgeAr: 'لعشاق المسرح والتراث المغربي',
+      badgeFr: 'Amateurs d’art et de patrimoine',
+      badgeEn: 'Arts & Cultural Heritage Lovers',
+      feeAr: '150 درهم',
+      feeFr: '150 MAD',
+      feeEn: '150 MAD',
+      periodAr: 'سنوياً',
+      periodFr: 'Par an',
+      periodEn: 'Annual',
+      descriptionAr: 'مخصصة للجمهور والمهتمين بمتابعة الإنتاجات المسرحية وحضور المعارض التشكيلية والاستفادة من فضاءات الجمعية الثقافية.',
+      descriptionFr: 'Pour les passionnés souhaitant assister aux avant-premières et soutenir la programmation théâtrale de proximité.',
+      descriptionEn: 'For community enthusiasts wishing to attend stage previews, gallery openings, and cultural discussions.',
+      benefitsAr: [
+        'دعوات شرفية لحضور العروض الأولى للمسرحيات والمعارض التشكيلية',
+        'حجز مقاعد مفضلة في كافة المهرجانات والندوات الفكرية للجمعية',
+        'استلام النشرة الثقافية الدورية والكتالوجات التوثيقية التراثية',
+        'المشاركة بصفة ملاحظ في اللقاءات المفتوحة والندوات الحوارية',
+      ],
+      benefitsFr: [
+        'Invitations VIP aux avant-premières théâtrales et vernissages',
+        'Réservation prioritaire de places aux colloques et festivals',
+        'Réception de la lettre culturelle trimestrielle et monographies éditées',
+        'Accès en qualité d’observateur aux débats et rencontres ouvertes',
+      ],
+      benefitsEn: [
+        'VIP preview invitations to theatrical premieres and art vernissages',
+        'Guaranteed priority seating at symposiums and seasonal festivals',
+        'Quarterly cultural monographs and heritage documentation newsletters',
+        'Observer status during open cultural debates and roundtable forums',
+      ],
+      recommended: false,
+      active: true,
+      order: 3,
+    },
+    {
+      id: 'tier-honorary-supporter',
+      nameAr: 'عضو شرفي وداعِم مؤسساتي',
+      nameFr: 'Membre d’Honneur & Bienfaiteur',
+      nameEn: 'Honorary & Supporting Member',
+      badgeAr: 'رعاة الفن والشخصيات الثقافية',
+      badgeFr: 'Personnalités & mécènes engagés',
+      badgeEn: 'Distinguished Patrons & Benefactors',
+      feeAr: 'مساهمة تقديرية',
+      feeFr: 'Contribution libre',
+      feeEn: 'Discretionary Patronage',
+      periodAr: 'تزكية شرفية من المكتب التنفيذي',
+      periodFr: 'Homologation par le Bureau',
+      periodEn: 'Executive Board Designation',
+      descriptionAr: 'تمنح للشخصيات الفكرية، الرواد الفنيين، والرعاة الذين يقدمون خدمات جليلة ومساندة متواصلة لأهداف ورسالة الجمعية.',
+      descriptionFr: 'Décernée aux pionniers des arts et bienfaiteurs apportant un soutien moral et matériel déterminant à l’AMYCC.',
+      descriptionEn: 'Conferred upon celebrated artists, scholars, and patrons contributing seminal support to cultural preservation.',
+      benefitsAr: [
+        'درع الجمعية التقديري وبطاقة العضوية الشرفية المذهبة',
+        'العضوية الدائمة في المجلس الاستشاري الثقافي والتوجيهي للجمعية',
+        'مقعد شرفي في المنصة الرسمية لجميع التظاهرات والمؤتمرات الكبرى',
+        'إشادة وتكريم رسمي في التقرير الأدبي السنوي ودليل الشركاء',
+      ],
+      benefitsFr: [
+        'Trophée d’honneur AMYCC et carte de membre bienfaiteur dorée',
+        'Siège permanent au sein du Conseil Consultatif d’Orientation Culturelle',
+        'Place protocolaire d’honneur lors des cérémonies officielles et festivals',
+        'Mention d’hommage permanente dans le rapport moral annuel de l’association',
+      ],
+      benefitsEn: [
+        'Prestigious AMYCC honor trophy and gilded honorary credentials',
+        'Permanent seat on the association’s Strategic Cultural Advisory Council',
+        'Protocolaire VIP seating across all major national festivals and galas',
+        'Formal permanent tribute in the annual moral report and partners registry',
+      ],
+      recommended: false,
+      active: true,
+      order: 4,
+    },
+  ],
+  benefits: [
+    {
+      id: 'benefit-official-card',
+      icon: '🪪',
+      titleAr: 'بطاقة عضوية وطنية موثقة',
+      titleFr: 'Carte de membre officielle certifiée',
+      titleEn: 'Official Verified Membership Credentials',
+      descriptionAr: 'بطاقة انخراط معتمدة ومسجلة برقم عضوي تسلسلي تضمن هويتك داخل النسيج الجمعوي المغربي.',
+      descriptionFr: 'Une carte d’adhésion numérotée attestant de votre appartenance statutaire au réseau associatif marocain.',
+      descriptionEn: 'A numbered official membership credential confirming your statutory belonging to the Moroccan civic landscape.',
+    },
+    {
+      id: 'benefit-masterclasses',
+      icon: '🎭',
+      titleAr: 'أولوية الولوج لمحترفات الإبداع',
+      titleFr: 'Priorité aux laboratoires de création',
+      titleEn: 'Priority Access to Scenic Masterclasses',
+      descriptionAr: 'استفادة مجانية وتفضيلية من ورشات المسرح، التعبير الركحي، وكتابة النصوص الدرامية والفنون التشكيلية.',
+      descriptionFr: 'Accès privilégié et gratuit aux ateliers d’art dramatique, de scénographie et d’expression scénique.',
+      descriptionEn: 'Free and preferred enrollment across dramatic arts labs, scenography masterclasses, and creative writing clinics.',
+    },
+    {
+      id: 'benefit-democratic-voting',
+      icon: '🗳️',
+      titleAr: 'المشاركة الديمقراطية وحق القرار',
+      titleFr: 'Participation démocratique & vote à l’AG',
+      titleEn: 'Democratic Participation & Voting Rights',
+      descriptionAr: 'حق مناقشة التقارير الأدبية والمالية، التصويت، والترشح لأجهزة التسيير بالجمع العام السنوي.',
+      descriptionFr: 'Droit d’intervenir sur les rapports moraux et financiers, de voter et d’élire les instances dirigeantes.',
+      descriptionEn: 'Full entitlement to deliberate on moral/financial reports, vote, and elect executive committee officers.',
+    },
+    {
+      id: 'benefit-field-initiatives',
+      icon: '🚀',
+      titleAr: 'إطلاق وتأطير المبادرات الميدانية',
+      titleFr: 'Pilotage de projets artistiques de terrain',
+      titleEn: 'Incubate & Lead Field Cultural Initiatives',
+      descriptionAr: 'دعم لوجستي وتواصلي من الجمعية لاحتضان مشاريعك الثقافية الفردية والجماعية وتحويلها إلى واقع.',
+      descriptionFr: 'Accompagnement méthodologique et logistique pour concrétiser vos projets artistiques collectifs.',
+      descriptionEn: 'Comprehensive institutional backing to incubate, stage, and tour your independent cultural productions.',
+    },
+    {
+      id: 'benefit-residencies-tours',
+      icon: '🌍',
+      titleAr: 'فرص الإقامات والجولات الثقافية',
+      titleFr: 'Résidences et tournées culturelles',
+      titleEn: 'Artistic Residencies & Touring Opportunities',
+      descriptionAr: 'تمثيل الجمعية في المهرجانات الوطنية والإقامات الفنية الإقليمية والشراكات التبادلية عبر المغرب.',
+      descriptionFr: 'Opportunités de représenter l’AMYCC lors de résidences de création et festivals à travers le Maroc.',
+      descriptionEn: 'Representing AMYCC in national cultural tours, scenic residencies, and collaborative cross-regional circuits.',
+    },
+    {
+      id: 'benefit-certificates-attestations',
+      icon: '📜',
+      titleAr: 'شهادات وتزكيات كفاءة معتمدة',
+      titleFr: 'Attestations certifiées & recommandations',
+      titleEn: 'Certified Experience & Endorsements',
+      descriptionAr: 'تسليم شواهد التكوين والمشاركة الجمعوية لتعزيز سيرتك الذاتية في المعاهد والوظائف الثقافية.',
+      descriptionFr: 'Délivrance d’attestations d’expérience valorisant votre engagement pour vos dossiers professionnels et académiques.',
+      descriptionEn: 'Formal certificates of artistic completion and civic letters of recommendation elevating career portfolios.',
+    },
+  ],
+  steps: [
+    {
+      id: 'step-1-fill-form',
+      stepNumber: 1,
+      titleAr: 'تعبئة استمارة الانخراط الإلكترونية',
+      titleFr: 'Remplir la demande en ligne',
+      titleEn: 'Submit Online Application',
+      descriptionAr: 'أدخل معلوماتك الشخصية، المدينة، ومجالات اهتمامك الفني ورسالتك إلى الجمعية عبر النموذج أسفله.',
+      descriptionFr: 'Renseignez vos coordonnées, centres d’intérêt artistique et motivations sur notre formulaire.',
+      descriptionEn: 'Complete your personal background, artistic disciplines, and motivation statement via the portal.',
+    },
+    {
+      id: 'step-2-board-review',
+      stepNumber: 2,
+      titleAr: 'دراسة الملف والمطابقة التنظيمية',
+      titleFr: 'Examen de conformité par le Bureau',
+      titleEn: 'Executive Board Review',
+      descriptionAr: 'يقوم المكتب التنفيذي للجمعية بدراسة الطلب وفق مقتضيات النظام الأساسي وميثاق الالتزام المشترك.',
+      descriptionFr: 'Le bureau exécutif vérifie l’adéquation de la candidature avec les statuts de l’association.',
+      descriptionEn: 'The executive committee evaluates the application pursuant to the association statutory bylaws.',
+    },
+    {
+      id: 'step-3-onboarding-interview',
+      stepNumber: 3,
+      titleAr: 'مقابلة تعارفية وتأكيد فئة العضوية',
+      titleFr: 'Entretien d’accueil & validation',
+      titleEn: 'Welcome Interview & Tier Confirmation',
+      descriptionAr: 'تواصل مباشر (حضوري أو عن بعد) للتعرف على تطلعاتك وإدماجك في اللجنة والورشات المناسبة لطموحك.',
+      descriptionFr: 'Échange convivial de cadrage pour orienter votre engagement vers les commissions les plus adaptées.',
+      descriptionEn: 'A welcoming orientation session introducing commissions, rehearsals, and confirming category fit.',
+    },
+    {
+      id: 'step-4-membership-card',
+      stepNumber: 4,
+      titleAr: 'تسليم بطاقة العضوية وتفعيل المشاركة',
+      titleFr: 'Délivrance de la carte & intégration',
+      titleEn: 'Membership Card Issuance & Onboarding',
+      descriptionAr: 'استلام بطاقتك الرسمية، تفعيل حسابك، وبدء مشاركتك الفورية في أنشطة ومحترفات الجمعية.',
+      descriptionFr: 'Remise de votre carte d’adhérent officielle et démarrage immédiat de vos activités artistiques.',
+      descriptionEn: 'Receiving your verified credential and starting immediate participation across workshops and events.',
+    },
+  ],
+  requirements: {
+    id: 'req-statutory',
+    titleAr: 'معايير وشروط الانخراط في الجمعية',
+    titleFr: 'Critères & Conditions d’Adhésion Statutaires',
+    titleEn: 'Statutory Criteria & Membership Standards',
+    itemsAr: [
+      'احترام القانون الأساسي والنظام الداخلي لجمعية روح الفنون والثقافة وميثاق الأخلاقيات الفنية.',
+      'التحلي بروح العمل الجماعي والتضامن المدني والالتزام بمواعيد الورشات والتداريب الركحية.',
+      'الرغبة الصادقة في المساهمة في تنشيط المشهد الثقافي وتنمية الحس الإبداعي لدى الناشئة والشباب.',
+      'أداء واجب الانخراط السنوي الرمزي المحدد حسب فئة العضوية لتغطية مصاريف التأمين والبطاقة.',
+    ],
+    itemsFr: [
+      'Respect scrupuleux des statuts, du règlement intérieur et de la charte éthique de l’AMYCC.',
+      'Esprit de solidarité citoyenne, assiduité aux ateliers et engagement dans les projets collectifs.',
+      'Volonté affirmée de promouvoir l’action culturelle de proximité auprès de la jeunesse.',
+      'Règlement de la cotisation annuelle symbolique selon la catégorie d’adhésion choisie.',
+    ],
+    itemsEn: [
+      'Full compliance with the AMYCC bylaws, internal regulations, and artistic code of ethics.',
+      'Exemplary team spirit, punctuality during stage masterclasses, and civic solidarity.',
+      'Genuine dedication to elevating Moroccan scenic heritage and nurturing youth talent.',
+      'Settlement of the symbolic annual membership contribution corresponding to the selected plan.',
+    ],
+  },
+  cta: {
+    badgeAr: 'مكتب شؤون المنخرطين في خدمتكم',
+    badgeFr: 'Pôle Relations Adhérents',
+    badgeEn: 'Member Relations Bureau',
+    titleAr: 'هل لديك استفسار حول إجراءات الانخراط أو فئات العضوية المناسبة لك؟',
+    titleFr: 'Une question concernant votre adhésion ou le choix de votre formule ?',
+    titleEn: 'Have Questions About Joining AMYCC or Selecting Your Membership Tier?',
+    descriptionAr: 'فريق الاستقبال والتوجيه بالجمعية رهن إشارتكم لمواكبتكم والإجابة عن كافة التساؤلات التنظيمية والإجرائية.',
+    descriptionFr: 'Notre équipe d’accueil se tient à votre entière disposition pour vous guider dans vos démarches.',
+    descriptionEn: 'Our welcoming member relations desk is available to assist your orientation and answer any questions.',
+    primaryBtnTextAr: 'تواصل مع مكتب العضوية',
+    primaryBtnTextFr: 'Contacter le pôle adhésion',
+    primaryBtnTextEn: 'Contact Membership Desk',
+    primaryBtnUrl: '/contact',
+    email: 'contact@amycc.org',
+    phone: '+212 5XX-XXXXXX',
+  },
+}
+
+export async function getMembershipPageSettings(): Promise<MembershipPageConfig> {
+  try {
+    const supabase = await createClient()
+    const { data } = await supabase
+      .from('site_settings')
+      .select('value')
+      .eq('key', 'membership_page')
+      .single()
+
+    if (!data || !data.value) {
+      return defaultMembershipPageConfig
+    }
+
+    const val = data.value as Partial<MembershipPageConfig>
+    const heroVal = (val.hero || {}) as Partial<MembershipPageConfig['hero']>
+    const reqVal = (val.requirements || {}) as Partial<MembershipPageConfig['requirements']>
+    const ctaVal = (val.cta || {}) as Partial<MembershipPageConfig['cta']>
+
+    return {
+      hero: {
+        tagAr: typeof heroVal.tagAr === 'string' ? heroVal.tagAr : defaultMembershipPageConfig.hero.tagAr,
+        tagFr: typeof heroVal.tagFr === 'string' ? heroVal.tagFr : defaultMembershipPageConfig.hero.tagFr,
+        tagEn: typeof heroVal.tagEn === 'string' ? heroVal.tagEn : defaultMembershipPageConfig.hero.tagEn,
+        badgeAr: typeof heroVal.badgeAr === 'string' ? heroVal.badgeAr : defaultMembershipPageConfig.hero.badgeAr,
+        badgeFr: typeof heroVal.badgeFr === 'string' ? heroVal.badgeFr : defaultMembershipPageConfig.hero.badgeFr,
+        badgeEn: typeof heroVal.badgeEn === 'string' ? heroVal.badgeEn : defaultMembershipPageConfig.hero.badgeEn,
+        titleAr: typeof heroVal.titleAr === 'string' ? heroVal.titleAr : defaultMembershipPageConfig.hero.titleAr,
+        titleFr: typeof heroVal.titleFr === 'string' ? heroVal.titleFr : defaultMembershipPageConfig.hero.titleFr,
+        titleEn: typeof heroVal.titleEn === 'string' ? heroVal.titleEn : defaultMembershipPageConfig.hero.titleEn,
+        subtitleAr: typeof heroVal.subtitleAr === 'string' ? heroVal.subtitleAr : defaultMembershipPageConfig.hero.subtitleAr,
+        subtitleFr: typeof heroVal.subtitleFr === 'string' ? heroVal.subtitleFr : defaultMembershipPageConfig.hero.subtitleFr,
+        subtitleEn: typeof heroVal.subtitleEn === 'string' ? heroVal.subtitleEn : defaultMembershipPageConfig.hero.subtitleEn,
+        descriptionAr: typeof heroVal.descriptionAr === 'string' ? heroVal.descriptionAr : defaultMembershipPageConfig.hero.descriptionAr,
+        descriptionFr: typeof heroVal.descriptionFr === 'string' ? heroVal.descriptionFr : defaultMembershipPageConfig.hero.descriptionFr,
+        descriptionEn: typeof heroVal.descriptionEn === 'string' ? heroVal.descriptionEn : defaultMembershipPageConfig.hero.descriptionEn,
+        imageUrl: typeof heroVal.imageUrl === 'string' ? heroVal.imageUrl : defaultMembershipPageConfig.hero.imageUrl,
+        hasHeroImage: typeof heroVal.hasHeroImage === 'boolean' ? heroVal.hasHeroImage : defaultMembershipPageConfig.hero.hasHeroImage,
+        primaryBtnTextAr: typeof heroVal.primaryBtnTextAr === 'string' ? heroVal.primaryBtnTextAr : defaultMembershipPageConfig.hero.primaryBtnTextAr,
+        primaryBtnTextFr: typeof heroVal.primaryBtnTextFr === 'string' ? heroVal.primaryBtnTextFr : defaultMembershipPageConfig.hero.primaryBtnTextFr,
+        primaryBtnTextEn: typeof heroVal.primaryBtnTextEn === 'string' ? heroVal.primaryBtnTextEn : defaultMembershipPageConfig.hero.primaryBtnTextEn,
+        primaryBtnUrl: typeof heroVal.primaryBtnUrl === 'string' ? heroVal.primaryBtnUrl : defaultMembershipPageConfig.hero.primaryBtnUrl,
+        secondaryBtnTextAr: typeof heroVal.secondaryBtnTextAr === 'string' ? heroVal.secondaryBtnTextAr : defaultMembershipPageConfig.hero.secondaryBtnTextAr,
+        secondaryBtnTextFr: typeof heroVal.secondaryBtnTextFr === 'string' ? heroVal.secondaryBtnTextFr : defaultMembershipPageConfig.hero.secondaryBtnTextFr,
+        secondaryBtnTextEn: typeof heroVal.secondaryBtnTextEn === 'string' ? heroVal.secondaryBtnTextEn : defaultMembershipPageConfig.hero.secondaryBtnTextEn,
+        secondaryBtnUrl: typeof heroVal.secondaryBtnUrl === 'string' ? heroVal.secondaryBtnUrl : defaultMembershipPageConfig.hero.secondaryBtnUrl,
+      },
+      stats: Array.isArray(val.stats)
+        ? (val.stats as MembershipStatItem[])
+            .filter((s): s is MembershipStatItem => typeof s === 'object' && s !== null && typeof s.id === 'string')
+            .map((s) => ({
+              id: s.id,
+              value: s.value || '',
+              valueAr: s.valueAr || s.value || '',
+              valueFr: s.valueFr || s.value || '',
+              valueEn: s.valueEn || s.value || '',
+              labelAr: s.labelAr || '',
+              labelFr: s.labelFr || '',
+              labelEn: s.labelEn || '',
+              icon: s.icon || '👥',
+            }))
+        : defaultMembershipPageConfig.stats,
+      tiers: Array.isArray(val.tiers)
+        ? (val.tiers as MembershipTierConfig[])
+            .filter((t): t is MembershipTierConfig => typeof t === 'object' && t !== null && typeof t.id === 'string')
+            .map((t) => ({
+              id: t.id,
+              nameAr: t.nameAr || '',
+              nameFr: t.nameFr || '',
+              nameEn: t.nameEn || '',
+              badgeAr: t.badgeAr || '',
+              badgeFr: t.badgeFr || '',
+              badgeEn: t.badgeEn || '',
+              feeAr: t.feeAr || '',
+              feeFr: t.feeFr || '',
+              feeEn: t.feeEn || '',
+              periodAr: t.periodAr || '',
+              periodFr: t.periodFr || '',
+              periodEn: t.periodEn || '',
+              descriptionAr: t.descriptionAr || '',
+              descriptionFr: t.descriptionFr || '',
+              descriptionEn: t.descriptionEn || '',
+              benefitsAr: Array.isArray(t.benefitsAr) ? t.benefitsAr : [],
+              benefitsFr: Array.isArray(t.benefitsFr) ? t.benefitsFr : [],
+              benefitsEn: Array.isArray(t.benefitsEn) ? t.benefitsEn : [],
+              recommended: !!t.recommended,
+              active: t.active !== false,
+              order: typeof t.order === 'number' ? t.order : 1,
+            }))
+        : defaultMembershipPageConfig.tiers,
+      benefits: Array.isArray(val.benefits)
+        ? (val.benefits as MembershipBenefitItem[])
+            .filter((b): b is MembershipBenefitItem => typeof b === 'object' && b !== null && typeof b.id === 'string')
+            .map((b) => ({
+              id: b.id,
+              icon: b.icon || '✨',
+              titleAr: b.titleAr || '',
+              titleFr: b.titleFr || '',
+              titleEn: b.titleEn || '',
+              descriptionAr: b.descriptionAr || '',
+              descriptionFr: b.descriptionFr || '',
+              descriptionEn: b.descriptionEn || '',
+            }))
+        : defaultMembershipPageConfig.benefits,
+      steps: Array.isArray(val.steps)
+        ? (val.steps as MembershipStepItem[])
+            .filter((s): s is MembershipStepItem => typeof s === 'object' && s !== null && typeof s.id === 'string')
+            .map((s) => ({
+              id: s.id,
+              stepNumber: typeof s.stepNumber === 'number' ? s.stepNumber : 1,
+              titleAr: s.titleAr || '',
+              titleFr: s.titleFr || '',
+              titleEn: s.titleEn || '',
+              descriptionAr: s.descriptionAr || '',
+              descriptionFr: s.descriptionFr || '',
+              descriptionEn: s.descriptionEn || '',
+            }))
+        : defaultMembershipPageConfig.steps,
+      requirements: {
+        id: reqVal.id || defaultMembershipPageConfig.requirements.id,
+        titleAr: reqVal.titleAr || defaultMembershipPageConfig.requirements.titleAr,
+        titleFr: reqVal.titleFr || defaultMembershipPageConfig.requirements.titleFr,
+        titleEn: reqVal.titleEn || defaultMembershipPageConfig.requirements.titleEn,
+        itemsAr: Array.isArray(reqVal.itemsAr) ? reqVal.itemsAr : defaultMembershipPageConfig.requirements.itemsAr,
+        itemsFr: Array.isArray(reqVal.itemsFr) ? reqVal.itemsFr : defaultMembershipPageConfig.requirements.itemsFr,
+        itemsEn: Array.isArray(reqVal.itemsEn) ? reqVal.itemsEn : defaultMembershipPageConfig.requirements.itemsEn,
+      },
+      cta: {
+        badgeAr: typeof ctaVal.badgeAr === 'string' ? ctaVal.badgeAr : defaultMembershipPageConfig.cta.badgeAr,
+        badgeFr: typeof ctaVal.badgeFr === 'string' ? ctaVal.badgeFr : defaultMembershipPageConfig.cta.badgeFr,
+        badgeEn: typeof ctaVal.badgeEn === 'string' ? ctaVal.badgeEn : defaultMembershipPageConfig.cta.badgeEn,
+        titleAr: typeof ctaVal.titleAr === 'string' ? ctaVal.titleAr : defaultMembershipPageConfig.cta.titleAr,
+        titleFr: typeof ctaVal.titleFr === 'string' ? ctaVal.titleFr : defaultMembershipPageConfig.cta.titleFr,
+        titleEn: typeof ctaVal.titleEn === 'string' ? ctaVal.titleEn : defaultMembershipPageConfig.cta.titleEn,
+        descriptionAr: typeof ctaVal.descriptionAr === 'string' ? ctaVal.descriptionAr : defaultMembershipPageConfig.cta.descriptionAr,
+        descriptionFr: typeof ctaVal.descriptionFr === 'string' ? ctaVal.descriptionFr : defaultMembershipPageConfig.cta.descriptionFr,
+        descriptionEn: typeof ctaVal.descriptionEn === 'string' ? ctaVal.descriptionEn : defaultMembershipPageConfig.cta.descriptionEn,
+        primaryBtnTextAr: typeof ctaVal.primaryBtnTextAr === 'string' ? ctaVal.primaryBtnTextAr : defaultMembershipPageConfig.cta.primaryBtnTextAr,
+        primaryBtnTextFr: typeof ctaVal.primaryBtnTextFr === 'string' ? ctaVal.primaryBtnTextFr : defaultMembershipPageConfig.cta.primaryBtnTextFr,
+        primaryBtnTextEn: typeof ctaVal.primaryBtnTextEn === 'string' ? ctaVal.primaryBtnTextEn : defaultMembershipPageConfig.cta.primaryBtnTextEn,
+        primaryBtnUrl: typeof ctaVal.primaryBtnUrl === 'string' ? ctaVal.primaryBtnUrl : defaultMembershipPageConfig.cta.primaryBtnUrl,
+        email: typeof ctaVal.email === 'string' ? ctaVal.email : defaultMembershipPageConfig.cta.email,
+        phone: typeof ctaVal.phone === 'string' ? ctaVal.phone : defaultMembershipPageConfig.cta.phone,
+      },
+    }
+  } catch {
+    return defaultMembershipPageConfig
+  }
+}

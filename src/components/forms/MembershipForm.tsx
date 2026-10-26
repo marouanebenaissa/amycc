@@ -2,33 +2,20 @@
 
 import { useState } from 'react'
 import { submitMembership, type ActionResponse } from '@/lib/actions/submissions'
+import type { MembershipTierConfig } from '@/lib/settings'
 
-export function MembershipForm({ locale }: { locale: string }) {
+interface MembershipFormProps {
+  locale: string
+  tiers?: MembershipTierConfig[]
+}
+
+export function MembershipForm({ locale, tiers = [] }: MembershipFormProps) {
   const [loading, setLoading] = useState(false)
   const [result, setResult] = useState<ActionResponse | null>(null)
-
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault()
-    setLoading(true)
-    setResult(null)
-
-    const form = e.currentTarget
-    const formData = new FormData(form)
-    try {
-      const response = await submitMembership(formData)
-      setResult(response)
-      if (response.success) {
-        form.reset()
-      }
-    } catch {
-      setResult({
-        success: false,
-        message: locale === 'ar' ? 'حدث خطأ أثناء معالجة الطلب. يرجى المحاولة لاحقاً.' : 'An error occurred. Please try again.',
-      })
-    } finally {
-      setLoading(false)
-    }
-  }
+  const activeTiers = tiers.filter((t) => t.active !== false)
+  const [selectedTierId, setSelectedTierId] = useState<string>(
+    activeTiers.find((t) => t.recommended)?.id || activeTiers[0]?.id || ''
+  )
 
   const isAr = locale === 'ar'
   const isFr = locale === 'fr'
@@ -42,41 +29,155 @@ export function MembershipForm({ locale }: { locale: string }) {
     { value: 'volunteering', label: isAr ? 'التطوع والعمل المجتمعي' : isFr ? 'Bénévolat communautaire' : 'Community Volunteering' },
   ]
 
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault()
+    setLoading(true)
+    setResult(null)
+
+    const form = e.currentTarget
+    const formData = new FormData(form)
+
+    // Prepend chosen tier if selected
+    const chosenTier = activeTiers.find((t) => t.id === selectedTierId)
+    if (chosenTier) {
+      const tierLabel = isAr ? chosenTier.nameAr : isFr ? chosenTier.nameFr : chosenTier.nameEn
+      const originalMotivation = (formData.get('motivation') as string) || ''
+      const tierPrefix = isAr
+        ? `[الفئة المرغوبة: ${tierLabel}]`
+        : isFr
+        ? `[Catégorie souhaitée: ${tierLabel}]`
+        : `[Intended Membership Tier: ${tierLabel}]`
+      formData.set('motivation', `${tierPrefix}\n\n${originalMotivation}`)
+    }
+
+    try {
+      const response = await submitMembership(formData)
+      setResult(response)
+      if (response.success) {
+        form.reset()
+      }
+    } catch {
+      setResult({
+        success: false,
+        message:
+          isAr
+            ? 'حدث خطأ أثناء معالجة الطلب. يرجى المحاولة لاحقاً.'
+            : isFr
+            ? 'Une erreur est survenue lors de l’envoi. Veuillez réessayer plus tard.'
+            : 'An error occurred. Please try again.',
+      })
+    } finally {
+      setLoading(false)
+    }
+  }
+
   return (
     <form
+      id="membership-form"
       onSubmit={handleSubmit}
-      className="space-y-6 max-w-2xl mx-auto bg-white p-8 sm:p-10 rounded-3xl border border-[#e5e0d6] shadow-subtle"
+      className="space-y-6 max-w-2xl mx-auto bg-white p-7 sm:p-10 rounded-3xl border border-[#e5e0d6] shadow-sm"
     >
+      <div className="border-b border-[#f4ede2] pb-4">
+        <span className="text-2xs font-extrabold uppercase tracking-widest text-[#c85a32]">
+          {isAr ? 'استمارة الترشح الرسمية' : isFr ? 'Candidature Officielle' : 'Official Application'}
+        </span>
+        <h3 className="text-xl sm:text-2xl font-black text-[#08242a] mt-1">
+          {isAr
+            ? 'طلب الانخراط في جمعية روح الفنون والثقافة'
+            : isFr
+            ? 'Demande d’Adhésion à l’AMYCC'
+            : 'AMYCC Membership Application'}
+        </h3>
+        <p className="text-xs text-[#5f7174] mt-1">
+          {isAr
+            ? 'يرجى ملء البيانات بدقة لتيسير دراسة الملف من لدن المكتب التنفيذي للجمعية.'
+            : isFr
+            ? 'Veuillez renseigner vos informations pour examen par le Bureau de l’association.'
+            : 'Please complete your details for evaluation by the executive bureau.'}
+        </p>
+      </div>
+
       {result && (
         <div
-          className={`p-4 rounded-2xl text-xs font-bold border ${
+          className={`p-4 rounded-2xl text-xs font-bold border transition-all ${
             result.success
-              ? 'bg-emerald-50 text-emerald-800 border-emerald-200'
-              : 'bg-red-50 text-red-800 border-red-200'
+              ? 'bg-emerald-50 text-emerald-900 border-emerald-200'
+              : 'bg-red-50 text-red-900 border-red-200'
           }`}
         >
-          {result.message}
+          <div className="flex items-center gap-2">
+            <span>{result.success ? '✓' : '⚠️'}</span>
+            <span>{result.message}</span>
+          </div>
           {result.success && (
             <p className="text-3xs font-medium text-emerald-700 mt-1">
               {isAr
-                ? 'تم تسجيل طلب انخراطكم بنجاح. سيقوم مكتب الجمعية بمراجعة الطلب وموافاتكم بالقرار.'
-                : 'Your application has been received. Our board will review it according to association bylaws.'}
+                ? 'تم تسجيل طلب انخراطكم بنجاح. سيتواصل معكم مكتب الجمعية عبر البريد الإلكتروني أو الهاتف لاستكمال مسطرة الانخراط.'
+                : isFr
+                ? 'Votre candidature a été reçue avec succès. Le bureau vous contactera sous peu pour finaliser la procédure.'
+                : 'Your application has been received successfully. Our board will reach out shortly.'}
             </p>
           )}
         </div>
       )}
 
+      {/* Tier Selector if available */}
+      {activeTiers.length > 0 && (
+        <div>
+          <label className="block text-2xs font-extrabold uppercase tracking-wider text-[#08242a] mb-2">
+            {isAr
+              ? 'فئة الانخراط المرغوبة *'
+              : isFr
+              ? 'Catégorie d’adhésion souhaitée *'
+              : 'Target Membership Tier *'}
+          </label>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+            {activeTiers.map((tier) => {
+              const isSelected = selectedTierId === tier.id
+              const name = isAr ? tier.nameAr : isFr ? tier.nameFr : tier.nameEn
+              const fee = isAr ? tier.feeAr : isFr ? tier.feeFr : tier.feeEn
+              const period = isAr ? tier.periodAr : isFr ? tier.periodFr : tier.periodEn
+
+              return (
+                <button
+                  key={tier.id}
+                  type="button"
+                  onClick={() => setSelectedTierId(tier.id)}
+                  className={`text-start p-3 rounded-2xl border transition-all cursor-pointer ${
+                    isSelected
+                      ? 'bg-[#0d3b43]/5 border-[#0d3b43] shadow-2xs ring-1 ring-[#0d3b43]'
+                      : 'bg-[#faf7f2] border-[#e5e0d6] hover:bg-white'
+                  }`}
+                >
+                  <div className="flex items-center justify-between gap-1 mb-1">
+                    <span className="font-bold text-xs text-[#08242a]">{name}</span>
+                    {tier.recommended && (
+                      <span className="text-3xs font-black px-1.5 py-0.5 rounded-full bg-[#c85a32] text-white">
+                        ⭐
+                      </span>
+                    )}
+                  </div>
+                  <div className="text-3xs font-black text-[#0d3b43]">
+                    {fee} <span className="text-[#5f7174] font-normal">/ {period}</span>
+                  </div>
+                </button>
+              )
+            })}
+          </div>
+        </div>
+      )}
+
       {/* Full Name */}
       <div>
-        <label className="block text-2xs font-bold uppercase tracking-wider text-[#08242a] mb-2">
+        <label className="block text-2xs font-extrabold uppercase tracking-wider text-[#08242a] mb-1.5">
           {isAr ? 'الاسم الكامل *' : isFr ? 'Nom complet *' : 'Full Name *'}
         </label>
         <input
           type="text"
           name="fullName"
           required
-          className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] text-xs text-[#08242a] focus:border-[#0d3b43] focus:ring-1 focus:ring-[#0d3b43] outline-none"
-          placeholder={isAr ? 'أدخل اسمك الكامل' : 'Enter your full name'}
+          className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] text-xs text-[#08242a] focus:border-[#0d3b43] focus:ring-1 focus:ring-[#0d3b43] outline-none bg-[#faf7f2]"
+          placeholder={isAr ? 'أدخل اسمك الكامل' : isFr ? 'Votre nom et prénom' : 'Enter your full name'}
         />
         {result?.errors?.fullName && (
           <p className="text-3xs text-red-600 mt-1">{result.errors.fullName[0]}</p>
@@ -86,14 +187,14 @@ export function MembershipForm({ locale }: { locale: string }) {
       {/* Email & Phone */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <div>
-          <label className="block text-2xs font-bold uppercase tracking-wider text-[#08242a] mb-2">
+          <label className="block text-2xs font-extrabold uppercase tracking-wider text-[#08242a] mb-1.5">
             {isAr ? 'البريد الإلكتروني *' : isFr ? 'Adresse e-mail *' : 'Email Address *'}
           </label>
           <input
             type="email"
             name="email"
             required
-            className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] text-xs text-[#08242a] focus:border-[#0d3b43] focus:ring-1 focus:ring-[#0d3b43] outline-none"
+            className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] text-xs text-[#08242a] focus:border-[#0d3b43] focus:ring-1 focus:ring-[#0d3b43] outline-none bg-[#faf7f2]"
             placeholder="name@example.com"
           />
           {result?.errors?.email && (
@@ -102,14 +203,14 @@ export function MembershipForm({ locale }: { locale: string }) {
         </div>
 
         <div>
-          <label className="block text-2xs font-bold uppercase tracking-wider text-[#08242a] mb-2">
-            {isAr ? 'رقم الهاتف *' : isFr ? 'Téléphone *' : 'Phone *'}
+          <label className="block text-2xs font-extrabold uppercase tracking-wider text-[#08242a] mb-1.5">
+            {isAr ? 'رقم الهاتف *' : isFr ? 'Numéro de téléphone *' : 'Phone Number *'}
           </label>
           <input
             type="tel"
             name="phone"
             required
-            className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] text-xs text-[#08242a] focus:border-[#0d3b43] focus:ring-1 focus:ring-[#0d3b43] outline-none"
+            className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] text-xs text-[#08242a] focus:border-[#0d3b43] focus:ring-1 focus:ring-[#0d3b43] outline-none bg-[#faf7f2]"
             placeholder="+212 6..."
           />
           {result?.errors?.phone && (
@@ -121,15 +222,15 @@ export function MembershipForm({ locale }: { locale: string }) {
       {/* City & Profession */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <div>
-          <label className="block text-2xs font-bold uppercase tracking-wider text-[#08242a] mb-2">
-            {isAr ? 'المدينة / الإقامة *' : isFr ? 'Ville *' : 'City *'}
+          <label className="block text-2xs font-extrabold uppercase tracking-wider text-[#08242a] mb-1.5">
+            {isAr ? 'المدينة / الإقامة *' : isFr ? 'Ville de résidence *' : 'City / Residence *'}
           </label>
           <input
             type="text"
             name="city"
             required
-            className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] text-xs text-[#08242a] focus:border-[#0d3b43] focus:ring-1 focus:ring-[#0d3b43] outline-none"
-            placeholder={isAr ? 'مثال: الرباط، الدار البيضاء...' : 'City in Morocco'}
+            className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] text-xs text-[#08242a] focus:border-[#0d3b43] focus:ring-1 focus:ring-[#0d3b43] outline-none bg-[#faf7f2]"
+            placeholder={isAr ? 'مثال: الرباط، الدار البيضاء...' : 'Ex: Rabat, Casablanca...'}
           />
           {result?.errors?.city && (
             <p className="text-3xs text-red-600 mt-1">{result.errors.city[0]}</p>
@@ -137,22 +238,32 @@ export function MembershipForm({ locale }: { locale: string }) {
         </div>
 
         <div>
-          <label className="block text-2xs font-bold uppercase tracking-wider text-[#08242a] mb-2">
-            {isAr ? 'المهنة أو الصفة' : isFr ? 'Profession / Statut' : 'Profession / Status'}
+          <label className="block text-2xs font-extrabold uppercase tracking-wider text-[#08242a] mb-1.5">
+            {isAr ? 'المهنة أو الصفة' : isFr ? 'Profession / Activité' : 'Profession / Status'}
           </label>
           <input
             type="text"
             name="profession"
-            className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] text-xs text-[#08242a] focus:border-[#0d3b43] focus:ring-1 focus:ring-[#0d3b43] outline-none"
-            placeholder={isAr ? 'طالب، فنان، أستاذ...' : 'Student, Artist, Professional...'}
+            className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] text-xs text-[#08242a] focus:border-[#0d3b43] focus:ring-1 focus:ring-[#0d3b43] outline-none bg-[#faf7f2]"
+            placeholder={
+              isAr
+                ? 'فنان، طالب، أستاذ، فاعل جمعوي...'
+                : isFr
+                ? 'Artiste, étudiant, enseignant...'
+                : 'Artist, Student, Teacher...'
+            }
           />
         </div>
       </div>
 
       {/* Interests Checkboxes */}
       <div>
-        <label className="block text-2xs font-bold uppercase tracking-wider text-[#08242a] mb-2">
-          {isAr ? 'مجالات الاهتمام الثقافي والفني:' : 'Areas of Cultural Interest:'}
+        <label className="block text-2xs font-extrabold uppercase tracking-wider text-[#08242a] mb-2">
+          {isAr
+            ? 'المجالات الفنية والثقافية محل الاهتمام:'
+            : isFr
+            ? 'Centres d’intérêt artistiques :'
+            : 'Areas of Cultural Interest:'}
         </label>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
           {interestOptions.map((opt) => (
@@ -174,15 +285,25 @@ export function MembershipForm({ locale }: { locale: string }) {
 
       {/* Motivation */}
       <div>
-        <label className="block text-2xs font-bold uppercase tracking-wider text-[#08242a] mb-2">
-          {isAr ? 'دوافع الانخراط ورسالتك إلى الجمعية *' : 'Motivation to Join AMYCC *'}
+        <label className="block text-2xs font-extrabold uppercase tracking-wider text-[#08242a] mb-1.5">
+          {isAr
+            ? 'دوافع الانخراط ورسالتك إلى الجمعية *'
+            : isFr
+            ? 'Motivations et projet d’engagement *'
+            : 'Motivation to Join AMYCC *'}
         </label>
         <textarea
           name="motivation"
           required
           rows={4}
-          className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] text-xs text-[#08242a] focus:border-[#0d3b43] focus:ring-1 focus:ring-[#0d3b43] outline-none"
-          placeholder={isAr ? 'اذكر بإيجاز دوافعك للانخراط وما تأمل في تحقيقه أو المساهمة به...' : 'Describe your motivation and what you hope to contribute...'}
+          className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] text-xs text-[#08242a] focus:border-[#0d3b43] focus:ring-1 focus:ring-[#0d3b43] outline-none bg-[#faf7f2]"
+          placeholder={
+            isAr
+              ? 'اذكر بإيجاز دوافعك للانخراط وما تأمل في تحقيقه أو المساهمة به ضمن برامج الجمعية...'
+              : isFr
+              ? 'Expliquez brièvement vos motivations et votre apport potentiel aux activités de l’association...'
+              : 'Briefly explain your motivations and how you wish to contribute...'
+          }
         />
         {result?.errors?.motivation && (
           <p className="text-3xs text-red-600 mt-1">{result.errors.motivation[0]}</p>
@@ -192,11 +313,30 @@ export function MembershipForm({ locale }: { locale: string }) {
       <button
         type="submit"
         disabled={loading}
-        className="w-full py-3.5 px-6 rounded-xl font-bold text-white bg-[#0d3b43] hover:bg-[#14505b] disabled:opacity-60 transition-all text-xs shadow-md active:scale-98"
+        className="w-full py-4 px-6 rounded-2xl font-black text-white bg-[#0d3b43] hover:bg-[#14505b] disabled:opacity-60 transition-all text-xs shadow-md active:scale-98 flex items-center justify-center gap-2 cursor-pointer"
       >
-        {loading
-          ? (isAr ? 'جارٍ إرسال الطلب...' : isFr ? 'Envoi en cours...' : 'Submitting application...')
-          : (isAr ? 'إرسال طلب الانخراط الرسمي ✓' : isFr ? 'Soumettre ma demande d\'adhésion ✓' : 'Submit Membership Application ✓')}
+        {loading ? (
+          <>
+            <span className="w-4 h-4 border-2 border-white/40 border-t-white rounded-full animate-spin" />
+            <span>
+              {isAr
+                ? 'جارٍ تسجيل الطلب...'
+                : isFr
+                ? 'Traitement de la candidature...'
+                : 'Submitting application...'}
+            </span>
+          </>
+        ) : (
+          <>
+            <span>
+              {isAr
+                ? 'إرسال طلب الانخراط الرسمي ✓'
+                : isFr
+                ? 'Soumettre ma demande d’adhésion ✓'
+                : 'Submit Official Application ✓'}
+            </span>
+          </>
+        )}
       </button>
     </form>
   )

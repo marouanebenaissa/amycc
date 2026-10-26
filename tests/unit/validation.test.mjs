@@ -1245,3 +1245,257 @@ describe('Partnerships Page Config & Directory Validation Suite', () => {
     assert.equal(result.success, false)
   })
 })
+
+const membershipTierSchema = z.object({
+  id: z.string(),
+  nameAr: z.string().min(1),
+  nameFr: z.string().min(1),
+  nameEn: z.string().min(1),
+  badgeAr: z.string().optional(),
+  badgeFr: z.string().optional(),
+  badgeEn: z.string().optional(),
+  feeAr: z.string().min(1),
+  feeFr: z.string().min(1),
+  feeEn: z.string().min(1),
+  periodAr: z.string().min(1),
+  periodFr: z.string().min(1),
+  periodEn: z.string().min(1),
+  descriptionAr: z.string().min(1),
+  descriptionFr: z.string().min(1),
+  descriptionEn: z.string().min(1),
+  benefitsAr: z.array(z.string()).default([]),
+  benefitsFr: z.array(z.string()).default([]),
+  benefitsEn: z.array(z.string()).default([]),
+  recommended: z.boolean().optional(),
+  active: z.boolean().default(true),
+  order: z.number().optional(),
+})
+
+const membershipPageConfigSchema = z.object({
+  hero: z.object({
+    tagAr: z.string(),
+    tagFr: z.string(),
+    tagEn: z.string(),
+    badgeAr: z.string(),
+    badgeFr: z.string(),
+    badgeEn: z.string(),
+    titleAr: z.string(),
+    titleFr: z.string(),
+    titleEn: z.string(),
+    subtitleAr: z.string(),
+    subtitleFr: z.string(),
+    subtitleEn: z.string(),
+    descriptionAr: z.string(),
+    descriptionFr: z.string(),
+    descriptionEn: z.string(),
+    imageUrl: z.string(),
+    hasHeroImage: z.boolean().default(true),
+    primaryBtnTextAr: z.string(),
+    primaryBtnTextFr: z.string(),
+    primaryBtnTextEn: z.string(),
+    primaryBtnUrl: z.string(),
+    secondaryBtnTextAr: z.string(),
+    secondaryBtnTextFr: z.string(),
+    secondaryBtnTextEn: z.string(),
+    secondaryBtnUrl: z.string(),
+  }),
+  stats: z.array(
+    z.object({
+      id: z.string(),
+      value: z.string(),
+      labelAr: z.string(),
+      labelFr: z.string(),
+      labelEn: z.string(),
+      icon: z.string(),
+    })
+  ),
+  tiers: z.array(membershipTierSchema),
+  benefits: z.array(
+    z.object({
+      id: z.string(),
+      titleAr: z.string(),
+      titleFr: z.string(),
+      titleEn: z.string(),
+      descriptionAr: z.string(),
+      descriptionFr: z.string(),
+      descriptionEn: z.string(),
+      icon: z.string(),
+    })
+  ),
+  steps: z.array(
+    z.object({
+      id: z.string(),
+      titleAr: z.string(),
+      titleFr: z.string(),
+      titleEn: z.string(),
+      descriptionAr: z.string(),
+      descriptionFr: z.string(),
+      descriptionEn: z.string(),
+    })
+  ),
+  requirements: z.object({
+    id: z.string(),
+    titleAr: z.string(),
+    titleFr: z.string(),
+    titleEn: z.string(),
+    itemsAr: z.array(z.string()),
+    itemsFr: z.array(z.string()),
+    itemsEn: z.array(z.string()),
+  }),
+  cta: z.object({
+    badgeAr: z.string(),
+    badgeFr: z.string(),
+    badgeEn: z.string(),
+    titleAr: z.string(),
+    titleFr: z.string(),
+    titleEn: z.string(),
+    descriptionAr: z.string(),
+    descriptionFr: z.string(),
+    descriptionEn: z.string(),
+    primaryBtnTextAr: z.string(),
+    primaryBtnTextFr: z.string(),
+    primaryBtnTextEn: z.string(),
+    primaryBtnUrl: z.string(),
+    email: z.string(),
+    phone: z.string(),
+  }),
+})
+
+describe('Membership Page CMS Validation Suite', () => {
+  test('accepts valid full membership page configuration', () => {
+    const valid = {
+      hero: {
+        tagAr: 'بوابة الانخراط والمواطنة الثقافية',
+        tagFr: "Portail d'Adhésion & Citoyenneté Culturelle",
+        tagEn: 'Membership & Cultural Citizenship Portal',
+        badgeAr: 'جمعية روح الفنون والثقافة — AMYCC',
+        badgeFr: 'Association Spirit of Arts & Culture — AMYCC',
+        badgeEn: 'Spirit of Arts & Culture Association — AMYCC',
+        titleAr: 'انضم إلى أسرة روح الفنون والثقافة وكن شريكاً فاعلاً في صناعة المشهد الإبداعي المغربي',
+        titleFr: 'Rejoignez la communauté AMYCC et participez activement à l’effervescence artistique marocaine',
+        titleEn: 'Join the AMYCC Family and Become an Active Catalyst in Moroccan Cultural Expression',
+        subtitleAr: 'عضوية نوعية تعزز حضورك الفني، تفتح لك أبواب التكوين المسرحي والورشات التراثية، وتمنحك حق المشاركة والقرار في مسار الجمعية.',
+        subtitleFr: 'Une adhésion valorisante qui propulse vos talents et ouvre l’accès aux laboratoires de création.',
+        subtitleEn: 'An empowering membership unlocking theatrical masterclasses and democratic voting rights.',
+        descriptionAr: 'نؤمن في جمعية روح الفنون والثقافة أن العضوية ميثاق التزام مدني وإبداعي مشترك.',
+        descriptionFr: 'Pour l’AMYCC, adhérer est un engagement citoyen et créatif fondé sur la réciprocité.',
+        descriptionEn: 'At AMYCC, membership is an authentic partnership fostering creative solidarity.',
+        imageUrl: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=1200&q=80',
+        hasHeroImage: true,
+        primaryBtnTextAr: 'تقديم طلب الانخراط الرسمي',
+        primaryBtnTextFr: 'Déposer ma candidature d’adhésion',
+        primaryBtnTextEn: 'Submit Membership Application',
+        primaryBtnUrl: '#membership-form',
+        secondaryBtnTextAr: 'استكشاف فئات وبطاقات العضوية',
+        secondaryBtnTextFr: 'Découvrir les catégories d’adhésion',
+        secondaryBtnTextEn: 'Explore Membership Tiers',
+        secondaryBtnUrl: '#membership-tiers',
+      },
+      stats: [
+        {
+          id: 'stat-active-members',
+          value: '+250',
+          labelAr: 'عضواً فاعلاً ومتطوعاً منخرطاً',
+          labelFr: 'Membres actifs et bénévoles',
+          labelEn: 'Active Members & Volunteers',
+          icon: '👥',
+        },
+      ],
+      tiers: [
+        {
+          id: 'tier-active-practitioner',
+          nameAr: 'عضو فاعل وممارس',
+          nameFr: 'Membre Actif & Pratiquant',
+          nameEn: 'Active Practicing Member',
+          badgeAr: 'الفئة الأكثر تأثيراً ومشاركة',
+          badgeFr: 'Catégorie phare de l’association',
+          badgeEn: 'Core Association Membership',
+          feeAr: '200 درهم',
+          feeFr: '200 MAD',
+          feeEn: '200 MAD',
+          periodAr: 'سنوياً',
+          periodFr: 'Par an',
+          periodEn: 'Annual',
+          descriptionAr: 'مخصصة للفنانين والممارسين الثقافيين والفاعلين الجمعويين.',
+          descriptionFr: 'Destinée aux créateurs et animateurs culturels.',
+          descriptionEn: 'Tailored for artists and active cultural catalysts.',
+          benefitsAr: ['بطاقة عضوية رسمية', 'حق التصويت بالجمع العام'],
+          benefitsFr: ['Carte officielle', 'Droit de vote en AG'],
+          benefitsEn: ['Official card', 'Voting rights at GA'],
+          recommended: true,
+          active: true,
+          order: 1,
+        },
+      ],
+      benefits: [
+        {
+          id: 'benefit-voting-rights',
+          titleAr: 'حق المشاركة والتصويت بالجمع العام',
+          titleFr: 'Droit de Vote en Assemblée Générale',
+          titleEn: 'Democratic Voting Rights',
+          descriptionAr: 'صوت مسموع في انتخاب المكتب التنفيذي.',
+          descriptionFr: 'Participez aux décisions stratégiques.',
+          descriptionEn: 'Exercise democratic voting power.',
+          icon: '🗳️',
+        },
+      ],
+      steps: [
+        {
+          id: 'step-1-form',
+          titleAr: 'إيداع الاستمارة الرقمية',
+          titleFr: 'Candidature Numérique',
+          titleEn: 'Digital Application',
+          descriptionAr: 'تعبئة استمارة الانخراط.',
+          descriptionFr: 'Formulaire trilingue en ligne.',
+          descriptionEn: 'Complete the online application.',
+        },
+      ],
+      requirements: {
+        id: 'requirements-bylaws',
+        titleAr: 'شروط ومعايير الانخراط المعتمدة بالنظام الأساسي',
+        titleFr: 'Conditions & Critères d’Adhésion Statutaires',
+        titleEn: 'Statutory Membership Criteria & Bylaws',
+        itemsAr: ['احترام النظام الأساسي والداخلي للجمعية'],
+        itemsFr: ['Adhésion aux principes et statuts de l’AMYCC'],
+        itemsEn: ['Compliance with AMYCC constitutional bylaws'],
+      },
+      cta: {
+        badgeAr: 'قطب العضوية والانخراط',
+        badgeFr: 'Pôle Adhésions & Vie Associative',
+        badgeEn: 'Membership & Civic Engagement Desk',
+        titleAr: 'هل لديك استفسار حول إجراءات أو فئات الانخراط؟',
+        titleFr: 'Une question concernant votre adhésion ?',
+        titleEn: 'Questions Regarding Membership Tiers?',
+        descriptionAr: 'فريق قطب العضوية رهن إشارتكم لمواكبتكم.',
+        descriptionFr: 'Notre équipe est à votre disposition.',
+        descriptionEn: 'Our membership desk is available to assist you.',
+        primaryBtnTextAr: 'راسلنا مباشرة',
+        primaryBtnTextFr: 'Écrivez-nous',
+        primaryBtnTextEn: 'Email Membership Desk',
+        primaryBtnUrl: 'mailto:adhesion@amycc.org',
+        email: 'adhesion@amycc.org',
+        phone: '+212 5 37 00 00 00',
+      },
+    }
+
+    const result = membershipPageConfigSchema.safeParse(valid)
+    assert.equal(result.success, true)
+    if (result.success) {
+      assert.equal(result.data.tiers.length, 1)
+      assert.equal(result.data.tiers[0].recommended, true)
+      assert.equal(result.data.stats[0].value, '+250')
+    }
+  })
+
+  test('rejects tier with missing required fields', () => {
+    const invalidTier = {
+      id: 'tier-bad',
+      nameAr: '',
+      nameFr: 'Test',
+      nameEn: 'Test',
+      feeAr: '',
+    }
+    const result = membershipTierSchema.safeParse(invalidTier)
+    assert.equal(result.success, false)
+  })
+})
