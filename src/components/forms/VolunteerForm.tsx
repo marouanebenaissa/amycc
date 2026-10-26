@@ -7,6 +7,9 @@ export function VolunteerForm({ locale }: { locale: string }) {
   const [loading, setLoading] = useState(false)
   const [result, setResult] = useState<ActionResponse | null>(null)
 
+  const isAr = locale === 'ar'
+  const isFr = locale === 'fr'
+
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
     setLoading(true)
@@ -23,22 +26,58 @@ export function VolunteerForm({ locale }: { locale: string }) {
     } catch {
       setResult({
         success: false,
-        message: locale === 'ar' ? 'حدث خطأ أثناء معالجة الطلب. يرجى المحاولة لاحقاً.' : 'An error occurred. Please try again.',
+        message: isAr
+          ? 'حدث خطأ أثناء معالجة الطلب. يرجى المحاولة لاحقاً.'
+          : isFr
+          ? 'Une erreur est survenue lors de l’envoi. Veuillez réessayer plus tard.'
+          : 'An error occurred. Please try again.',
       })
     } finally {
       setLoading(false)
     }
   }
 
-  const isAr = locale === 'ar'
-  const isFr = locale === 'fr'
-
   const interestOptions = [
-    { value: 'cultural_events', label: isAr ? 'تنظيم وتنسيق التظاهرات الفنية' : isFr ? 'Organisation d\'événements' : 'Event Coordination' },
-    { value: 'workshop_assistant', label: isAr ? 'المساعدة في تأطير الورش التدريبية' : isFr ? 'Assistance aux ateliers' : 'Workshop Facilitation' },
-    { value: 'media_photography', label: isAr ? 'التصوير الفوتوغرافي وصناعة المحتوى' : isFr ? 'Photographie & Médias' : 'Media & Photography' },
-    { value: 'reception_logistics', label: isAr ? 'الاستقبال واللوجستيك الميداني' : isFr ? 'Accueil & Logistique' : 'Reception & Logistics' },
-    { value: 'translation_comms', label: isAr ? 'الترجمة والتواصل اللغوي' : isFr ? 'Traduction & Communication' : 'Translation & Communications' },
+    {
+      value: 'cultural_events',
+      label: isAr
+        ? 'تنظيم وتنسيق التظاهرات الفنية'
+        : isFr
+        ? 'Organisation d’événements'
+        : 'Event Coordination',
+    },
+    {
+      value: 'workshop_assistant',
+      label: isAr
+        ? 'المساعدة في تأطير الورش التدريبية'
+        : isFr
+        ? 'Assistance aux ateliers'
+        : 'Workshop Facilitation',
+    },
+    {
+      value: 'media_photography',
+      label: isAr
+        ? 'التصوير الفوتوغرافي وصناعة المحتوى'
+        : isFr
+        ? 'Photographie & Médias'
+        : 'Media & Photography',
+    },
+    {
+      value: 'reception_logistics',
+      label: isAr
+        ? 'الاستقبال واللوجستيك الميداني'
+        : isFr
+        ? 'Accueil & Logistique'
+        : 'Reception & Logistics',
+    },
+    {
+      value: 'translation_comms',
+      label: isAr
+        ? 'الترجمة والتواصل اللغوي'
+        : isFr
+        ? 'Traduction & Communication'
+        : 'Translation & Communications',
+    },
   ]
 
   return (
@@ -59,6 +98,8 @@ export function VolunteerForm({ locale }: { locale: string }) {
             <p className="text-3xs font-medium text-emerald-700 mt-1">
               {isAr
                 ? 'مرحباً بك في مبادرة شباب في العمل! سيتواصل معك منسق المبادرة لتحديد موعد اللقاء التوجيهي.'
+                : isFr
+                ? 'Bienvenue dans l’initiative Jeunesse en Action ! Notre coordinateur vous contactera pour convenir d’une séance d’orientation.'
                 : 'Welcome to Youth in Action! Our coordinator will contact you for orientation.'}
             </p>
           )}
@@ -78,7 +119,7 @@ export function VolunteerForm({ locale }: { locale: string }) {
           name="fullName"
           required
           className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] text-xs text-[#08242a] focus:border-[#0d3b43] focus:ring-1 focus:ring-[#0d3b43] outline-none"
-          placeholder={isAr ? 'الاسم والنسب' : 'Your full name'}
+          placeholder={isAr ? 'الاسم والنسب' : isFr ? 'Votre nom et prénom' : 'Your full name'}
         />
         {result?.errors?.fullName && (
           <p className="text-3xs text-red-600 mt-1">{result.errors.fullName[0]}</p>
@@ -131,7 +172,13 @@ export function VolunteerForm({ locale }: { locale: string }) {
             name="city"
             required
             className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] text-xs text-[#08242a] focus:border-[#0d3b43] focus:ring-1 focus:ring-[#0d3b43] outline-none"
-            placeholder={isAr ? 'مدينتك بالمغرب' : 'City in Morocco'}
+            placeholder={
+              isAr
+                ? 'مدينتك بالمغرب'
+                : isFr
+                ? 'Ex : Rabat, Casablanca, Fès...'
+                : 'City in Morocco'
+            }
           />
           {result?.errors?.city && (
             <p className="text-3xs text-red-600 mt-1">{result.errors.city[0]}</p>
@@ -146,10 +193,34 @@ export function VolunteerForm({ locale }: { locale: string }) {
             name="availability"
             className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] text-xs text-[#08242a] bg-[#faf7f2] font-semibold focus:border-[#0d3b43] outline-none"
           >
-            <option value="weekends">{isAr ? 'عطلة نهاية الأسبوع (السبت والأحد)' : 'Weekends only'}</option>
-            <option value="evenings">{isAr ? 'الفترة المسائية خلال الأسبوع' : 'Weekday evenings'}</option>
-            <option value="flexible">{isAr ? 'مرن حسب مواعيد الفعاليات' : 'Flexible based on events'}</option>
-            <option value="full_time">{isAr ? 'تفرغ كامل للمشاريع الكبرى' : 'Full-time for major projects'}</option>
+            <option value="weekends">
+              {isAr
+                ? 'عطلة نهاية الأسبوع (السبت والأحد)'
+                : isFr
+                ? 'Week-ends uniquement (samedi & dimanche)'
+                : 'Weekends only'}
+            </option>
+            <option value="evenings">
+              {isAr
+                ? 'الفترة المسائية خلال الأسبوع'
+                : isFr
+                ? 'Soirées en semaine'
+                : 'Weekday evenings'}
+            </option>
+            <option value="flexible">
+              {isAr
+                ? 'مرن حسب مواعيد الفعاليات'
+                : isFr
+                ? 'Horaires flexibles selon les événements'
+                : 'Flexible based on events'}
+            </option>
+            <option value="full_time">
+              {isAr
+                ? 'تفرغ كامل للمشاريع الكبرى'
+                : isFr
+                ? 'Temps plein pour les grands projets'
+                : 'Full-time for major projects'}
+            </option>
           </select>
         </div>
       </div>
@@ -157,7 +228,11 @@ export function VolunteerForm({ locale }: { locale: string }) {
       {/* Areas of Interest in Volunteering */}
       <div>
         <label className="block text-2xs font-bold uppercase tracking-wider text-[#08242a] mb-2">
-          {isAr ? 'المهام التطوعية المفضلة لديك:' : 'Preferred Volunteer Roles:'}
+          {isAr
+            ? 'المهام التطوعية المفضلة لديك:'
+            : isFr
+            ? 'Missions bénévoles souhaitées :'
+            : 'Preferred Volunteer Roles:'}
         </label>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
           {interestOptions.map((opt) => (
@@ -180,14 +255,24 @@ export function VolunteerForm({ locale }: { locale: string }) {
       {/* Skills & Experience */}
       <div>
         <label className="block text-2xs font-bold uppercase tracking-wider text-[#08242a] mb-2">
-          {isAr ? 'المهارات والخبرات السابقة (إن وُجدت) *' : 'Skills & Background *'}
+          {isAr
+            ? 'المهارات والخبرات السابقة (إن وُجدت) *'
+            : isFr
+            ? 'Compétences et expériences préalables *'
+            : 'Skills & Background *'}
         </label>
         <textarea
           name="skills"
           required
           rows={3}
           className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] text-xs text-[#08242a] focus:border-[#0d3b43] focus:ring-1 focus:ring-[#0d3b43] outline-none"
-          placeholder={isAr ? 'اذكر مهاراتك (تصميم، تنظيم، تصوير، عزف، تواصل...) وتجاربك الجمعوية السابقة...' : 'Mention your skills and relevant experiences...'}
+          placeholder={
+            isAr
+              ? 'اذكر مهاراتك (تصميم، تنظيم، تصوير، عزف، تواصل...) وتجاربك الجمعوية السابقة...'
+              : isFr
+              ? 'Décrivez vos compétences (gestion, photo, design, scène, logistique...) et expériences associatives...'
+              : 'Mention your skills and relevant experiences...'
+          }
         />
         {result?.errors?.skills && (
           <p className="text-3xs text-red-600 mt-1">{result.errors.skills[0]}</p>
@@ -200,8 +285,16 @@ export function VolunteerForm({ locale }: { locale: string }) {
         className="w-full py-3.5 px-6 rounded-xl font-bold text-[#08242a] bg-[#f4ce83] hover:bg-[#fae0a5] disabled:opacity-60 transition-all text-xs shadow-md active:scale-98"
       >
         {loading
-          ? (isAr ? 'جارٍ تسجيل الطلب...' : isFr ? 'Envoi en cours...' : 'Submitting application...')
-          : (isAr ? 'الانضمام لمبادرة شباب في العمل كمتطوع ✓' : isFr ? 'Rejoindre Jeunesse en Action ✓' : 'Join Youth in Action as Volunteer ✓')}
+          ? isAr
+            ? 'جارٍ تسجيل الطلب...'
+            : isFr
+            ? 'Envoi en cours...'
+            : 'Submitting application...'
+          : isAr
+          ? 'الانضمام لمبادرة شباب في العمل كمتطوع ✓'
+          : isFr
+          ? 'Rejoindre Jeunesse en Action ✓'
+          : 'Join Youth in Action as Volunteer ✓'}
       </button>
     </form>
   )

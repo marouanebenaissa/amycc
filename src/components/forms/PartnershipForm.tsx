@@ -7,6 +7,9 @@ export function PartnershipForm({ locale }: { locale: string }) {
   const [loading, setLoading] = useState(false)
   const [result, setResult] = useState<ActionResponse | null>(null)
 
+  const isAr = locale === 'ar'
+  const isFr = locale === 'fr'
+
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
     setLoading(true)
@@ -23,15 +26,16 @@ export function PartnershipForm({ locale }: { locale: string }) {
     } catch {
       setResult({
         success: false,
-        message: locale === 'ar' ? 'حدث خطأ في الإرسال. يرجى المحاولة لاحقاً.' : 'An error occurred. Please try again.',
+        message: isAr
+          ? 'حدث خطأ في الإرسال. يرجى المحاولة لاحقاً.'
+          : isFr
+          ? 'Une erreur est survenue lors de l’envoi. Veuillez réessayer plus tard.'
+          : 'An error occurred. Please try again.',
       })
     } finally {
       setLoading(false)
     }
   }
-
-  const isAr = locale === 'ar'
-  const isFr = locale === 'fr'
 
   return (
     <form
@@ -51,6 +55,8 @@ export function PartnershipForm({ locale }: { locale: string }) {
             <p className="text-3xs font-medium text-emerald-700 mt-1">
               {isAr
                 ? 'تم استلام مقترح الشراكة بنجاح. سيتواصل معكم مسؤول العلاقات المؤسساتية بالجمعية لدراسة آفاق التعاون.'
+                : isFr
+                ? 'Votre proposition de partenariat a été transmise avec succès. Notre responsable des relations institutionnelles prendra contact avec vous.'
                 : 'Your proposal has been received. Our partnership officer will contact you shortly.'}
             </p>
           )}
@@ -61,14 +67,20 @@ export function PartnershipForm({ locale }: { locale: string }) {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <div>
           <label className="block text-2xs font-bold uppercase tracking-wider text-[#08242a] mb-2">
-            {isAr ? 'اسم المؤسسة أو الهيئة *' : isFr ? 'Nom de l\'organisme *' : 'Organization Name *'}
+            {isAr ? 'اسم المؤسسة أو الهيئة *' : isFr ? 'Nom de l’organisme *' : 'Organization Name *'}
           </label>
           <input
             type="text"
             name="organizationName"
             required
             className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] text-xs text-[#08242a] focus:border-[#0d3b43] focus:ring-1 focus:ring-[#0d3b43] outline-none"
-            placeholder={isAr ? 'اسم المركز أو الشركة أو الجمعية' : 'Organization Name'}
+            placeholder={
+              isAr
+                ? 'اسم المركز أو الشركة أو الجمعية'
+                : isFr
+                ? 'Nom de votre organisme ou structure'
+                : 'Organization, Company or NGO Name'
+            }
           />
           {result?.errors?.organizationName && (
             <p className="text-3xs text-red-600 mt-1">{result.errors.organizationName[0]}</p>
@@ -84,11 +96,41 @@ export function PartnershipForm({ locale }: { locale: string }) {
             required
             className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] text-xs text-[#08242a] bg-[#faf7f2] font-semibold focus:border-[#0d3b43] outline-none"
           >
-            <option value="cultural_center">{isAr ? 'مركز ثقافي / فضاء فني' : 'Cultural Center'}</option>
-            <option value="educational">{isAr ? 'مؤسسة تعليمية / مدرسة / جامعة' : 'Educational Institute'}</option>
-            <option value="ngo">{isAr ? 'منظمة غير حكومية / جمعية' : 'NGO / Association'}</option>
-            <option value="public_body">{isAr ? 'هيئة أو مؤسسة عمومية' : 'Public Entity'}</option>
-            <option value="corporate">{isAr ? 'قطاع خاص / شركة راعية' : 'Private Sector / Sponsor'}</option>
+            <option value="cultural_center">
+              {isAr
+                ? 'مركز ثقافي / فضاء فني'
+                : isFr
+                ? 'Centre culturel / Espace artistique'
+                : 'Cultural Center / Artistic Space'}
+            </option>
+            <option value="educational">
+              {isAr
+                ? 'مؤسسة تعليمية / مدرسة / جامعة'
+                : isFr
+                ? 'Établissement éducatif / Université'
+                : 'Educational Institute / University'}
+            </option>
+            <option value="ngo">
+              {isAr
+                ? 'منظمة غير حكومية / جمعية'
+                : isFr
+                ? 'Organisation non gouvernementale / Association'
+                : 'NGO / Civil Society Association'}
+            </option>
+            <option value="public_body">
+              {isAr
+                ? 'هيئة أو مؤسسة عمومية'
+                : isFr
+                ? 'Institution publique / Collectivité'
+                : 'Public Entity / Government Agency'}
+            </option>
+            <option value="corporate">
+              {isAr
+                ? 'قطاع خاص / شركة راعية'
+                : isFr
+                ? 'Secteur privé / Entreprise mécène'
+                : 'Private Sector / Sponsor'}
+            </option>
           </select>
         </div>
       </div>
@@ -104,7 +146,13 @@ export function PartnershipForm({ locale }: { locale: string }) {
             name="contactPerson"
             required
             className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] text-xs text-[#08242a] focus:border-[#0d3b43] focus:ring-1 focus:ring-[#0d3b43] outline-none"
-            placeholder={isAr ? 'الاسم والصفة' : 'Full Name'}
+            placeholder={
+              isAr
+                ? 'الاسم الكامل والصفة أو المنصب'
+                : isFr
+                ? 'Nom complet et fonction'
+                : 'Full Name and Position'
+            }
           />
           {result?.errors?.contactPerson && (
             <p className="text-3xs text-red-600 mt-1">{result.errors.contactPerson[0]}</p>
@@ -139,7 +187,13 @@ export function PartnershipForm({ locale }: { locale: string }) {
             name="city"
             required
             className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] text-xs text-[#08242a] focus:border-[#0d3b43] focus:ring-1 focus:ring-[#0d3b43] outline-none"
-            placeholder={isAr ? 'المدينة' : 'City'}
+            placeholder={
+              isAr
+                ? 'المدينة (مثال: الرباط، الدار البيضاء...)'
+                : isFr
+                ? 'Ex : Rabat, Casablanca, Marrakech...'
+                : 'e.g. Rabat, Casablanca, Marrakech...'
+            }
           />
           {result?.errors?.city && (
             <p className="text-3xs text-red-600 mt-1">{result.errors.city[0]}</p>
@@ -154,7 +208,7 @@ export function PartnershipForm({ locale }: { locale: string }) {
             type="text"
             name="country"
             required
-            defaultValue={isAr ? 'المملكة المغربية' : 'Morocco'}
+            defaultValue={isAr ? 'المملكة المغربية' : isFr ? 'Maroc' : 'Morocco'}
             className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] text-xs text-[#08242a] focus:border-[#0d3b43] focus:ring-1 focus:ring-[#0d3b43] outline-none"
           />
         </div>
@@ -163,14 +217,24 @@ export function PartnershipForm({ locale }: { locale: string }) {
       {/* Proposal Message */}
       <div>
         <label className="block text-2xs font-bold uppercase tracking-wider text-[#08242a] mb-2">
-          {isAr ? 'تفاصيل مقترح الشراكة أو المبادرة المشتركة *' : 'Partnership Proposal Details *'}
+          {isAr
+            ? 'تفاصيل مقترح الشراكة أو المبادرة المشتركة *'
+            : isFr
+            ? 'Détails de la proposition de partenariat *'
+            : 'Partnership Proposal Details *'}
         </label>
         <textarea
           name="proposal"
           required
           rows={5}
           className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] text-xs text-[#08242a] focus:border-[#0d3b43] focus:ring-1 focus:ring-[#0d3b43] outline-none"
-          placeholder={isAr ? 'وضح مجالات التعاون المقترحة، الفئات المستهدفة، والإطار الزمني المتوقع...' : 'Describe the collaboration scope, objectives, and timeline...'}
+          placeholder={
+            isAr
+              ? 'وضح مجالات التعاون المقترحة، الفئات المستهدفة، والإطار الزمني المتوقع...'
+              : isFr
+              ? 'Précisez les axes de collaboration envisagés, les publics cibles et le calendrier prévisionnel...'
+              : 'Describe the collaboration scope, objectives, target audiences, and anticipated timeline...'
+          }
         />
         {result?.errors?.proposal && (
           <p className="text-3xs text-red-600 mt-1">{result.errors.proposal[0]}</p>
@@ -183,8 +247,16 @@ export function PartnershipForm({ locale }: { locale: string }) {
         className="w-full py-3.5 px-6 rounded-xl font-bold text-white bg-[#0d3b43] hover:bg-[#14505b] disabled:opacity-60 transition-all text-xs shadow-md active:scale-98"
       >
         {loading
-          ? (isAr ? 'جارٍ إرسال المقترح...' : isFr ? 'Envoi en cours...' : 'Submitting proposal...')
-          : (isAr ? 'إرسال مقترح الشراكة المؤسساتية ✓' : isFr ? 'Soumettre la proposition de partenariat ✓' : 'Submit Partnership Proposal ✓')}
+          ? isAr
+            ? 'جارٍ إرسال المقترح...'
+            : isFr
+            ? 'Envoi en cours...'
+            : 'Submitting proposal...'
+          : isAr
+          ? 'إرسال مقترح الشراكة المؤسساتية ✓'
+          : isFr
+          ? 'Soumettre la proposition de partenariat ✓'
+          : 'Submit Partnership Proposal ✓'}
       </button>
     </form>
   )

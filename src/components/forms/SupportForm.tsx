@@ -7,6 +7,9 @@ export function SupportForm({ locale }: { locale: string }) {
   const [loading, setLoading] = useState(false)
   const [result, setResult] = useState<ActionResponse | null>(null)
 
+  const isAr = locale === 'ar'
+  const isFr = locale === 'fr'
+
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
     setLoading(true)
@@ -23,15 +26,16 @@ export function SupportForm({ locale }: { locale: string }) {
     } catch {
       setResult({
         success: false,
-        message: locale === 'ar' ? 'حدث خطأ في الإرسال. يرجى المحاولة لاحقاً.' : 'An error occurred. Please try again.',
+        message: isAr
+          ? 'حدث خطأ في الإرسال. يرجى المحاولة لاحقاً.'
+          : isFr
+          ? 'Une erreur est survenue lors de l’envoi. Veuillez réessayer plus tard.'
+          : 'An error occurred. Please try again.',
       })
     } finally {
       setLoading(false)
     }
   }
-
-  const isAr = locale === 'ar'
-  const isFr = locale === 'fr'
 
   return (
     <form
@@ -51,6 +55,8 @@ export function SupportForm({ locale }: { locale: string }) {
             <p className="text-3xs font-medium text-emerald-700 mt-1">
               {isAr
                 ? 'شكراً لدعمكم مسيرتنا الثقافية. سيتواصل معكم أمين مال الجمعية لتنسيق إجراءات المساهمة رسمياً.'
+                : isFr
+                ? 'Merci pour votre engagement à nos côtés. Le trésorier de l’association prendra contact avec vous pour formaliser ce soutien.'
                 : 'Thank you for supporting our cultural journey. Our finance officer will contact you shortly.'}
             </p>
           )}
@@ -60,18 +66,48 @@ export function SupportForm({ locale }: { locale: string }) {
       {/* Support Type */}
       <div>
         <label className="block text-2xs font-bold uppercase tracking-wider text-[#08242a] mb-2">
-          {isAr ? 'نوع الدعم أو المساهمة المقترحة *' : isFr ? 'Type de soutien *' : 'Type of Support *'}
+          {isAr ? 'نوع الدعم أو المساهمة المقترحة *' : isFr ? 'Type de soutien ou contribution *' : 'Type of Support *'}
         </label>
         <select
           name="supportType"
           required
           className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] text-xs text-[#08242a] bg-[#faf7f2] font-semibold focus:border-[#0d3b43] outline-none"
         >
-          <option value="financial">{isAr ? 'دعم مالي أو مساهمة في التسيير' : 'Financial Support / Contribution'}</option>
-          <option value="in_kind">{isAr ? 'مساهمة عينية أو لوجستية' : 'In-Kind Contribution'}</option>
-          <option value="sponsorship">{isAr ? 'رعاية فعالية أو برنامج ثقافي محدد' : 'Event / Program Sponsorship'}</option>
-          <option value="equipment">{isAr ? 'تجهيزات ومعدات فنية أو موسيقية' : 'Artistic & Sound Equipment'}</option>
-          <option value="venue">{isAr ? 'توفير فضاء أو قاعة للعروض والورش' : 'Venue / Exhibition Space Hosting'}</option>
+          <option value="financial">
+            {isAr
+              ? 'دعم مالي أو مساهمة في التسيير'
+              : isFr
+              ? 'Soutien financier / Contribution aux activités'
+              : 'Financial Support / Contribution'}
+          </option>
+          <option value="in_kind">
+            {isAr
+              ? 'مساهمة عينية أو لوجستية'
+              : isFr
+              ? 'Contribution en nature ou logistique'
+              : 'In-Kind Contribution'}
+          </option>
+          <option value="sponsorship">
+            {isAr
+              ? 'رعاية فعالية أو برنامج ثقافي محدد'
+              : isFr
+              ? 'Mécénat / Parrainage d’un programme culturel'
+              : 'Event / Program Sponsorship'}
+          </option>
+          <option value="equipment">
+            {isAr
+              ? 'تجهيزات ومعدات فنية أو موسيقية'
+              : isFr
+              ? 'Équipements scéniques, artistiques ou sonores'
+              : 'Artistic & Sound Equipment'}
+          </option>
+          <option value="venue">
+            {isAr
+              ? 'توفير فضاء أو قاعة للعروض والورش'
+              : isFr
+              ? 'Mise à disposition d’une salle ou d’un espace'
+              : 'Venue / Exhibition Space Hosting'}
+          </option>
         </select>
       </div>
 
@@ -86,7 +122,13 @@ export function SupportForm({ locale }: { locale: string }) {
             name="donorName"
             required
             className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] text-xs text-[#08242a] focus:border-[#0d3b43] focus:ring-1 focus:ring-[#0d3b43] outline-none"
-            placeholder={isAr ? 'الاسم الشخصي أو اسم المؤسسة' : 'Individual or Organization'}
+            placeholder={
+              isAr
+                ? 'الاسم الشخصي أو اسم المؤسسة'
+                : isFr
+                ? 'Nom complet ou raison sociale'
+                : 'Individual or Organization'
+            }
           />
           {result?.errors?.donorName && (
             <p className="text-3xs text-red-600 mt-1">{result.errors.donorName[0]}</p>
@@ -132,7 +174,7 @@ export function SupportForm({ locale }: { locale: string }) {
             type="text"
             name="city"
             className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] text-xs text-[#08242a] focus:border-[#0d3b43] focus:ring-1 focus:ring-[#0d3b43] outline-none"
-            placeholder={isAr ? 'مثال: الرباط، المغرب' : 'City, Country'}
+            placeholder={isAr ? 'مثال: الرباط، المغرب' : isFr ? 'Ex : Rabat, Maroc' : 'e.g. Rabat, Morocco'}
           />
         </div>
       </div>
@@ -140,14 +182,24 @@ export function SupportForm({ locale }: { locale: string }) {
       {/* Message & Scope of Support */}
       <div>
         <label className="block text-2xs font-bold uppercase tracking-wider text-[#08242a] mb-2">
-          {isAr ? 'تفاصيل المبادرة أو المساهمة المقترحة *' : 'Details of Support or Contribution *'}
+          {isAr
+            ? 'تفاصيل المبادرة أو المساهمة المقترحة *'
+            : isFr
+            ? 'Détails de l’initiative ou du soutien proposé *'
+            : 'Details of Support or Contribution *'}
         </label>
         <textarea
           name="message"
           required
           rows={4}
           className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] text-xs text-[#08242a] focus:border-[#0d3b43] focus:ring-1 focus:ring-[#0d3b43] outline-none"
-          placeholder={isAr ? 'وضح طبيعة الدعم، القيمة التقديرية، أو الكيفية التي ترغب بالمساهمة بها...' : 'Describe the proposed support or contribution...'}
+          placeholder={
+            isAr
+              ? 'وضح طبيعة الدعم، القيمة التقديرية، أو الكيفية التي ترغب بالمساهمة بها...'
+              : isFr
+              ? 'Précisez la nature du soutien, sa valeur estimative et les modalités envisagées...'
+              : 'Describe the proposed support or contribution...'
+          }
         />
         {result?.errors?.message && (
           <p className="text-3xs text-red-600 mt-1">{result.errors.message[0]}</p>
@@ -160,8 +212,16 @@ export function SupportForm({ locale }: { locale: string }) {
         className="w-full py-3.5 px-6 rounded-xl font-bold text-white bg-[#0d3b43] hover:bg-[#14505b] disabled:opacity-60 transition-all text-xs shadow-md active:scale-98"
       >
         {loading
-          ? (isAr ? 'جارٍ تسجيل الإشعار...' : isFr ? 'Envoi en cours...' : 'Submitting inquiry...')
-          : (isAr ? 'إرسال إشعار الدعم والمساهمة ✓' : isFr ? 'Envoyer la proposition de soutien ✓' : 'Submit Support Notification ✓')}
+          ? isAr
+            ? 'جارٍ تسجيل الإشعار...'
+            : isFr
+            ? 'Envoi en cours...'
+            : 'Submitting inquiry...'
+          : isAr
+          ? 'إرسال إشعار الدعم والمساهمة ✓'
+          : isFr
+          ? 'Envoyer la proposition de soutien ✓'
+          : 'Submit Support Notification ✓'}
       </button>
     </form>
   )
