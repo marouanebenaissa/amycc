@@ -7,6 +7,7 @@ import { createPublicClient } from '@/lib/supabase/public'
 import { getNewsPageSettings } from '@/lib/settings'
 import { ImageWithFallback } from '@/components/ui/ImageWithFallback'
 import { NewsCatalog, type NewsItemData } from '@/components/news/NewsCatalog'
+import { defaultNewsArticlesData } from '@/lib/supabase/seed-news'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -99,77 +100,28 @@ export default async function NewsPage(props: { params: Promise<{ locale: string
   ])
 
   // Fallback initial high-quality articles if database is empty
-  const defaultArticles: NewsItemData[] = [
-    {
-      id: 'default-1',
-      slug: 'official-launch',
-      category: 'press',
-      cover_image: 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=1200&q=80',
-      published_at: '2026-10-15T10:00:00Z',
-      status: 'published',
+  const defaultArticles: NewsItemData[] = defaultNewsArticlesData.map((art) => {
+    const currentTrans =
+      art.translations.find((t) => t.locale === locale) ||
+      art.translations.find((t) => t.locale === 'ar') ||
+      art.translations[0]
+
+    return {
+      id: `default-${art.slug}`,
+      slug: art.slug,
+      category: art.category,
+      cover_image: art.cover_image,
+      published_at: art.published_at,
+      status: art.status,
       news_translations: [
         {
-          locale,
-          title: isAr
-            ? 'الإطلاق الرسمي للمنصة الرقمية لجمعية روح الفنون والثقافة (AMYCC)'
-            : isFr
-            ? "Lancement officiel de la plateforme numérique de l'Association AMYCC"
-            : 'Official Launch of the AMYCC Digital Platform',
-          excerpt: isAr
-            ? 'تعلن الجمعية عن تدشين موقعها الإلكتروني التفاعلي بـ 3 لغات رسمية لتعزيز التواصل المجتمعي، وتيسير طلبات الانخراط والتطوع، ومتابعة أجندة الفعاليات الثقافية.'
-            : isFr
-            ? 'L\'association inaugure sa plateforme web trilingue facilitant les démarches d\'adhésion, l\'engagement bénévole et le suivi des manifestations culturelles.'
-            : 'AMYCC officially launches its trilingual digital portal to foster community participation, streamline membership applications, and publish its cultural agenda.',
+          locale: currentTrans.locale,
+          title: currentTrans.title,
+          excerpt: currentTrans.excerpt,
         },
       ],
-    },
-    {
-      id: 'default-2',
-      slug: 'youth-in-action-call',
-      category: 'youth',
-      cover_image: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=800&q=80',
-      published_at: '2026-10-20T14:30:00Z',
-      status: 'published',
-      news_translations: [
-        {
-          locale,
-          title: isAr
-            ? 'فتح باب الترشيح للتطوع ضمن مبادرة "شباب في العمل" لموسم 2026'
-            : isFr
-            ? 'Appel à candidatures pour l\'initiative "Jeunesse en Action" 2026'
-            : 'Call for Applications: Youth in Action Volunteering Program 2026',
-          excerpt: isAr
-            ? 'تدعو جمعية روح الفنون والثقافة كافة الطاقات الشابة والطلبة الراغبين في خوض تجربة جمعوية مميزة للتسجيل في الفوج الأول من متطوعي التنشيط الثقافي.'
-            : isFr
-            ? 'L\'AMYCC invite les jeunes et étudiants souhaitant s\'engager dans une aventure associative enrichissante à rejoindre la première promotion de bénévoles.'
-            : 'AMYCC invites passionate young people and students to apply for the inaugural cohort of cultural event volunteers and leaders.',
-        },
-      ],
-    },
-    {
-      id: 'default-3',
-      slug: 'theatre-workshops-launch',
-      category: 'culture',
-      cover_image: 'https://images.unsplash.com/photo-1460723237483-7a6dc9d0b212?auto=format&fit=crop&w=800&q=80',
-      published_at: '2026-10-22T16:00:00Z',
-      status: 'published',
-      news_translations: [
-        {
-          locale,
-          title: isAr
-            ? 'انطلاق سلسلة الورشات المسرحية والتعبير الركحي لفائدة شباب دور الشباب'
-            : isFr
-            ? 'Coup d’envoi du cycle d’ateliers de théâtre et d’expression scénique pour les jeunes'
-            : 'Kickoff of Scenic Theatre & Youth Expressive Performance Workshops',
-          excerpt: isAr
-            ? 'في إطار برنامج التكوين المسرحي والتراثي، تعلن الجمعية عن انطلاق الورشات التكوينية الركحية المؤطرة من طرف أساتذة وممارسين محترفين لتمكين الشباب من تقنيات الأداء المسرحي.'
-            : isFr
-            ? 'Dans le cadre de son programme d’expression théâtrale, l’AMYCC déploie une série de masterclasses animées par des professionnels des arts vivants.'
-            : 'AMYCC launches its flagship theatre coaching workshops guided by seasoned theatrical directors to cultivate emerging talent across cultural venues.',
-        },
-      ],
-    },
-  ]
+    }
+  })
 
   const displayArticles = dbArticles.length > 0 ? dbArticles : defaultArticles
 

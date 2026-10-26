@@ -83,3 +83,47 @@ BEGIN
     (ev3_id, 'en', 'Youth in Action Forum & Cultural Volunteering', 'A full-day strategy and workshop gathering bringing Youth in Action volunteers together to co-design upcoming initiatives.')
   ON CONFLICT (event_id, locale) DO NOTHING;
 END $$;
+
+-- 4. Sample News Articles & Official Announcements
+DO $$
+DECLARE
+  news1_id UUID := gen_random_uuid();
+  news2_id UUID := gen_random_uuid();
+  news3_id UUID := gen_random_uuid();
+BEGIN
+  -- Article 1: Official Launch
+  INSERT INTO public.news_articles (id, slug, status, category, cover_image, published_at)
+  VALUES (news1_id, 'official-launch', 'published', 'press', 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=1200&q=80', '2026-10-15T10:00:00Z')
+  ON CONFLICT (slug) DO NOTHING;
+
+  INSERT INTO public.news_translations (article_id, locale, title, excerpt, content)
+  VALUES
+    (news1_id, 'ar', 'الإطلاق الرسمي للمنصة الرقمية لجمعية روح الفنون والثقافة (AMYCC)', 'تعلن الجمعية عن تدشين موقعها الإلكتروني التفاعلي بـ 3 لغات رسمية لتعزيز التواصل المجتمعي، وتيسير طلبات الانخراط والتطوع، ومتابعة أجندة الفعاليات الثقافية.', '<p>تدشين المنصة الرقمية الرسمية التفاعلية لجمعية روح الفنون والثقافة بـ 3 لغات.</p>'),
+    (news1_id, 'fr', 'Lancement officiel de la plateforme numérique de l''Association AMYCC', 'L''association inaugure sa plateforme web trilingue facilitant les démarches d''adhésion, l''engagement bénévole et le suivi des manifestations culturelles.', '<p>Lancement officiel du portail interactif trilingue de l''AMYCC.</p>'),
+    (news1_id, 'en', 'Official Launch of the AMYCC Digital Platform', 'AMYCC officially launches its trilingual digital portal to foster community participation, streamline membership applications, and publish its cultural agenda.', '<p>Official launch of AMYCC trilingual portal.</p>')
+  ON CONFLICT (article_id, locale) DO NOTHING;
+
+  -- Article 2: Youth in Action Call
+  INSERT INTO public.news_articles (id, slug, status, category, cover_image, published_at)
+  VALUES (news2_id, 'youth-in-action-call', 'published', 'youth', 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=800&q=80', '2026-10-20T14:30:00Z')
+  ON CONFLICT (slug) DO NOTHING;
+
+  INSERT INTO public.news_translations (article_id, locale, title, excerpt, content)
+  VALUES
+    (news2_id, 'ar', 'فتح باب الترشيح للتطوع ضمن مبادرة "شباب في العمل" لموسم 2026', 'تدعو جمعية روح الفنون والثقافة كافة الطاقات الشابة والطلبة الراغبين في خوض تجربة جمعوية مميزة للتسجيل في الفوج الأول من متطوعي التنشيط الثقافي.', '<p>فتح باب الترشيح للالتحاق بالفوج الأول من مبادرة شباب في العمل.</p>'),
+    (news2_id, 'fr', 'Appel à candidatures pour l''initiative "Jeunesse en Action" 2026', 'L''AMYCC invite les jeunes et étudiants souhaitant s''engager dans une aventure associative enrichissante à rejoindre la première promotion de bénévoles.', '<p>Appel à candidatures pour la cohorte Jeunesse en Action 2026.</p>'),
+    (news2_id, 'en', 'Call for Applications: Youth in Action Volunteering Program 2026', 'AMYCC invites passionate young people and students to apply for the inaugural cohort of cultural event volunteers and leaders.', '<p>Applications open for the Youth in Action 2026 cohort.</p>')
+  ON CONFLICT (article_id, locale) DO NOTHING;
+
+  -- Article 3: Theatre Workshops Launch
+  INSERT INTO public.news_articles (id, slug, status, category, cover_image, published_at)
+  VALUES (news3_id, 'theatre-workshops-launch', 'published', 'culture', 'https://images.unsplash.com/photo-1460723237483-7a6dc9d0b212?auto=format&fit=crop&w=800&q=80', '2026-10-22T16:00:00Z')
+  ON CONFLICT (slug) DO NOTHING;
+
+  INSERT INTO public.news_translations (article_id, locale, title, excerpt, content)
+  VALUES
+    (news3_id, 'ar', 'انطلاق سلسلة الورشات المسرحية والتعبير الركحي لفائدة شباب دور الشباب', 'في إطار برنامج التكوين المسرحي والتراثي، تعلن الجمعية عن انطلاق الورشات التكوينية الركحية المؤطرة من طرف أساتذة وممارسين محترفين لتمكين الشباب من تقنيات الأداء المسرحي.', '<p>انطلاق ورشات التكوين المسرحي والتعبير الركحي للشباب.</p>'),
+    (news3_id, 'fr', 'Coup d’envoi du cycle d’ateliers de théâtre et d’expression scénique pour les jeunes', 'Dans le cadre de son programme d’expression théâtrale, l’AMYCC déploie une série de masterclasses animées par des professionnels des arts vivants.', '<p>Lancement des ateliers de théâtre et d’expression scénique.</p>'),
+    (news3_id, 'en', 'Kickoff of Scenic Theatre & Youth Expressive Performance Workshops', 'AMYCC launches its flagship theatre coaching workshops guided by seasoned theatrical directors to cultivate emerging talent across cultural venues.', '<p>Kickoff of scenic theatre workshops.</p>')
+  ON CONFLICT (article_id, locale) DO NOTHING;
+END $$;

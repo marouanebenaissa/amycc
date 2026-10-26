@@ -41,6 +41,7 @@ export function NewsAdminTabs({
   const [articles, setArticles] = useState<AdminNewsArticleItem[]>(initialArticles)
   const [togglingId, setTogglingId] = useState<string | null>(null)
   const [deletingId, setDeletingId] = useState<string | null>(null)
+  const [seedingArticles, setSeedingArticles] = useState(false)
 
   // Page Settings state
   const [config, setConfig] = useState<NewsPageConfig>(initialConfig)
@@ -133,6 +134,39 @@ export function NewsAdminTabs({
       window.location.reload()
     } finally {
       setDeletingId(null)
+    }
+  }
+
+  async function handleSeedDefaultArticles() {
+    if (
+      !confirm(
+        'هل ترغب في استيراد وتحديث المقالات النموذجية الرسمية الثلاث؟ سيتم حفظها في قاعدة البيانات فوراً.'
+      )
+    ) {
+      return
+    }
+
+    setSeedingArticles(true)
+    try {
+      const res = await fetch('/api/admin/news/seed', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+      })
+
+      const data = await res.json()
+      if (!res.ok || !data.success) {
+        throw new Error(data.error || 'فشل استيراد المقالات')
+      }
+
+      if (Array.isArray(data.articles)) {
+        setArticles(data.articles)
+      } else {
+        window.location.reload()
+      }
+    } catch (err: unknown) {
+      alert(err instanceof Error ? err.message : 'حدث خطأ أثناء استيراد المقالات')
+    } finally {
+      setSeedingArticles(false)
     }
   }
 
@@ -352,6 +386,17 @@ export function NewsAdminTabs({
                   <option value="draft">المسودات فقط</option>
                 </select>
 
+                <button
+                  type="button"
+                  disabled={seedingArticles}
+                  onClick={handleSeedDefaultArticles}
+                  className="inline-flex items-center gap-2 px-3.5 py-2 bg-[#faf7f2] border border-[#e5e0d6] text-[#08242a] text-xs font-bold rounded-xl hover:bg-[#eae4d9] active:scale-98 transition-all shadow-2xs disabled:opacity-50 cursor-pointer"
+                  title="استيراد وتحديث المقالات النموذجية الرسمية الثلاث"
+                >
+                  <span>📥</span>
+                  <span>{seedingArticles ? 'جارٍ الاستيراد...' : 'استيراد المقالات النموذجية'}</span>
+                </button>
+
                 <Link
                   href="/admin/news/new"
                   className="inline-flex items-center gap-2 px-4 py-2 bg-[#0d3b43] text-white text-xs font-bold rounded-xl hover:bg-[#14505b] active:scale-98 transition-all shadow-xs"
@@ -472,6 +517,16 @@ export function NewsAdminTabs({
                           </td>
                           <td className="px-6 py-4">
                             <div className="flex items-center gap-2">
+                              <a
+                                href={`/ar/news/${art.slug}`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="px-2.5 py-1.5 rounded-lg text-2xs font-bold bg-[#faf7f2] border border-[#e5e0d6] text-[#0d3b43] hover:bg-[#eae4d9] transition-colors flex items-center gap-1"
+                                title="معاينة المقال في الموقع"
+                              >
+                                <span>معاينة</span>
+                                <span className="text-3xs">↗</span>
+                              </a>
                               <Link
                                 href={`/admin/news/${art.id}/edit`}
                                 className="px-3 py-1.5 rounded-lg text-2xs font-bold bg-[#faf7f2] border border-[#e5e0d6] text-[#08242a] hover:bg-[#eae4d9] transition-colors"
@@ -493,8 +548,42 @@ export function NewsAdminTabs({
                     })
                   ) : (
                     <tr>
-                      <td colSpan={5} className="px-6 py-12 text-center text-[#819598]">
-                        لا توجد مقالات مطابقة لمعايير البحث حالياً.
+                      <td colSpan={5} className="px-6 py-12 text-center">
+                        {articles.length === 0 ? (
+                          <div className="max-w-md mx-auto space-y-3">
+                            <div className="w-12 h-12 mx-auto rounded-2xl bg-[#faf7f2] border border-[#e5e0d6] flex items-center justify-center text-xl">
+                              📰
+                            </div>
+                            <h3 className="text-sm font-extrabold text-[#08242a]">
+                              لا توجد مقالات مسجلة في قاعدة البيانات حالياً
+                            </h3>
+                            <p className="text-xs text-[#819598] leading-relaxed">
+                              يمكنك البدء بكتابة مقال إخباري جديد، أو استيراد المقالات النموذجية الرسمية الثلاث (الإطلاق الرسمي، تطوع شباب في العمل، ورشات المسرح) لتظهر في لوحة التحكم والموقع مباشرة.
+                            </p>
+                            <div className="flex items-center justify-center gap-3 pt-2">
+                              <button
+                                type="button"
+                                disabled={seedingArticles}
+                                onClick={handleSeedDefaultArticles}
+                                className="inline-flex items-center gap-2 px-4 py-2 bg-[#0d3b43] text-white text-xs font-bold rounded-xl hover:bg-[#14505b] transition-all shadow-xs disabled:opacity-50 cursor-pointer"
+                              >
+                                <span>📥</span>
+                                <span>{seedingArticles ? 'جارٍ الاستيراد...' : 'استيراد المقالات النموذجية الآن'}</span>
+                              </button>
+                              <Link
+                                href="/admin/news/new"
+                                className="inline-flex items-center gap-2 px-4 py-2 bg-[#faf7f2] border border-[#e5e0d6] text-[#08242a] text-xs font-bold rounded-xl hover:bg-[#eae4d9] transition-all"
+                              >
+                                <span>✍️</span>
+                                <span>كتابة مقال جديد</span>
+                              </Link>
+                            </div>
+                          </div>
+                        ) : (
+                          <span className="text-[#819598] text-xs">
+                            لا توجد مقالات مطابقة لمعايير البحث حالياً.
+                          </span>
+                        )}
                       </td>
                     </tr>
                   )}

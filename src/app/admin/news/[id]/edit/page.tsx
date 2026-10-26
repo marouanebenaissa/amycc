@@ -1,7 +1,10 @@
 import { createClient } from '@/lib/supabase/server'
+import { createAdminClient } from '@/lib/supabase/admin'
 import { redirect, notFound } from 'next/navigation'
 import Link from 'next/link'
 import { NewsForm } from '@/components/admin/NewsForm'
+
+export const dynamic = 'force-dynamic'
 
 export default async function EditNewsArticlePage(props: {
   params: Promise<{ id: string }>
@@ -16,7 +19,8 @@ export default async function EditNewsArticlePage(props: {
     redirect('/admin/login')
   }
 
-  const { data: article } = await supabase
+  const admin = createAdminClient()
+  const { data: article } = await admin
     .from('news_articles')
     .select('*, news_translations(*)')
     .eq('id', id)
@@ -39,9 +43,9 @@ export default async function EditNewsArticlePage(props: {
           </svg>
         </Link>
         <div>
-          <h1 className="text-2xl font-extrabold text-[#0a0f1d]">Edit Article</h1>
+          <h1 className="text-2xl font-extrabold text-[#0a0f1d]">تعديل المقال الإخباري</h1>
           <p className="text-xs text-slate-500 mt-0.5">
-            Update article content, category, cover image, and trilingual translations.
+            تحديث تفاصيل المقال، الصورة البارزة، والمحتوى التحريري باللغات الثلاث (العربية، الفرنسية، الإنجليزية).
           </p>
         </div>
       </div>

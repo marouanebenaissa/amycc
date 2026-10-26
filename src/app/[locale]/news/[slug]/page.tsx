@@ -6,17 +6,16 @@ import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { createPublicClient } from '@/lib/supabase/public'
 import { ImageWithFallback } from '@/components/ui/ImageWithFallback'
+import { defaultNewsArticlesData } from '@/lib/supabase/seed-news'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
 export const fetchCache = 'force-no-store'
 
 export async function generateStaticParams() {
-  return [
-    { locale: 'ar', slug: 'official-launch' },
-    { locale: 'fr', slug: 'official-launch' },
-    { locale: 'en', slug: 'official-launch' },
-  ]
+  const slugs = ['official-launch', 'youth-in-action-call', 'theatre-workshops-launch']
+  const locales = ['ar', 'fr', 'en']
+  return locales.flatMap((locale) => slugs.map((slug) => ({ locale, slug })))
 }
 
 interface ArticleDetail {
@@ -131,42 +130,18 @@ export default async function NewsDetailPage(props: {
     // Supabase query error fallback
   }
 
-  // Fallback for default initial article
-  if (!article && slug === 'official-launch') {
-    article = {
-      id: 'default-1',
-      slug: 'official-launch',
-      category: 'press',
-      cover_image: 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=1200&q=80',
-      published_at: '2026-10-15T10:00:00Z',
-      news_translations: [
-        {
-          locale,
-          title:
-            isAr
-              ? 'الإطلاق الرسمي للمنصة الرقمية لجمعية روح الفنون والثقافة (AMYCC)'
-              : isFr
-              ? "Lancement officiel de la plateforme numérique de l'Association AMYCC"
-              : 'Official Launch of the AMYCC Digital Platform',
-          excerpt:
-            isAr
-              ? 'تعلن الجمعية عن تدشين موقعها الإلكتروني التفاعلي بـ 3 لغات رسمية لتعزيز التواصل المجتمعي، وتيسير طلبات الانخراط والتطوع، ومتابعة أجندة الفعاليات الثقافية.'
-              : isFr
-              ? 'L\'association inaugure sa plateforme web trilingue facilitant les démarches d\'adhésion, l\'engagement bénévole et le suivi des manifestations culturelles.'
-              : 'AMYCC officially launches its trilingual digital portal to foster community participation, streamline membership applications, and publish its cultural agenda.',
-          content: `<p class="mb-5 text-base sm:text-lg leading-relaxed">${dict.about.description}</p>
-<p class="mb-5 text-base sm:text-lg leading-relaxed">${dict.hero.subtitle}</p>
-<div class="my-8 p-6 rounded-2xl bg-[#faf7f2] border-s-4 border-[#c85a32]">
-  <p class="text-sm sm:text-base font-bold text-[#08242a] leading-relaxed">
-    "يشكل إطلاق هذه المنصة التفاعلية خطوة استراتيجية نحو رقمنة التواصل الثقافي وتمكين الشباب المغربي من الوصول المباشر للفرص الفنية، ورشات العمل، ومبادرات التطوع في الميدان."
-  </p>
-  <span class="block mt-2 text-xs font-mono text-[#819598]">— جمعية روح الفنون والثقافة (AMYCC)</span>
-</div>
-<p class="mb-5 text-base sm:text-lg leading-relaxed">
-  تلتزم جمعية روح الفنون والثقافة بفتح المجال أمام كافة الطاقات الشابة للمساهمة في بناء المشهد الثقافي الوطني والمشاركة في مبادرة "شباب في العمل"، مع توفير تغطية إعلامية متواصلة لكافة الأنشطة والورشات عبر ربوع المملكة المغربية.
-</p>`,
-        },
-      ],
+  // Fallback for default initial articles if database was unreachable
+  if (!article) {
+    const fallbackItem = defaultNewsArticlesData.find((d) => d.slug === slug)
+    if (fallbackItem) {
+      article = {
+        id: `default-${fallbackItem.slug}`,
+        slug: fallbackItem.slug,
+        category: fallbackItem.category,
+        cover_image: fallbackItem.cover_image,
+        published_at: fallbackItem.published_at,
+        news_translations: fallbackItem.translations,
+      }
     }
   }
 
