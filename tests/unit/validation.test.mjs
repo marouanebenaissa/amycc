@@ -846,3 +846,119 @@ describe('Events Page Validation Suite', () => {
     assert.equal(result.success, false)
   })
 })
+
+const newsPageConfigSchema = z.object({
+  hero: z.object({
+    tagAr: z.string().min(1),
+    tagFr: z.string().min(1),
+    tagEn: z.string().min(1),
+    badgeAr: z.string().min(1),
+    titleAr: z.string().min(3),
+    titleFr: z.string().min(3),
+    titleEn: z.string().min(3),
+    subtitleAr: z.string().min(3),
+    subtitleFr: z.string().min(3),
+    subtitleEn: z.string().min(3),
+    descriptionAr: z.string().min(10),
+    descriptionFr: z.string().min(10),
+    descriptionEn: z.string().min(10),
+    imageUrl: z.string(),
+    hasHeroImage: z.boolean(),
+  }),
+  stats: z.array(
+    z.object({
+      id: z.string().min(1),
+      value: z.string().min(1),
+      labelAr: z.string().min(2),
+      labelFr: z.string().min(2),
+      labelEn: z.string().min(2),
+      icon: z.string(),
+    })
+  ).min(1),
+  cta: z.object({
+    badgeAr: z.string().min(1),
+    titleAr: z.string().min(5),
+    descAr: z.string().min(10),
+    primaryBtnTextAr: z.string().min(2),
+    primaryBtnUrl: z.string().min(1),
+    secondaryBtnTextAr: z.string().min(2),
+    secondaryBtnUrl: z.string().min(1),
+  }),
+})
+
+describe('News Page Validation Suite', () => {
+  test('accepts valid news configuration with hero, press media KPIs, and CTA', () => {
+    const valid = {
+      hero: {
+        tagAr: 'المركز الإعلامي والبيانات الرسمية',
+        tagFr: 'Espace Presse & Actualités',
+        tagEn: 'Media Center & Official Press',
+        badgeAr: 'مستجدات الموسم الثقافي 2026 • AMYCC News',
+        titleAr: 'الأخبار والبيانات الصحفية',
+        titleFr: 'Actualités & Communiqués de Presse',
+        titleEn: 'News, Insights & Press Releases',
+        subtitleAr: 'تغطية شاملة للمبادرات الفنية، الورشات الإبداعية، والأنشطة الشبابية لجمعية روح الفنون والثقافة',
+        subtitleFr: 'Couverture complète des initiatives artistiques et événements jeunesse',
+        subtitleEn: 'Comprehensive coverage of artistic initiatives and youth programs',
+        descriptionAr: 'تابعوا أحدث أخبار جمعية روح الفنون والثقافة، والبيانات الرسمية الموجهة لوسائل الإعلام عبر ربوع المملكة.',
+        descriptionFr: 'Suivez toute l’actualité de l’AMYCC : annonces institutionnelles et dossiers de presse.',
+        descriptionEn: 'Discover the latest news from AMYCC: press announcements and cultural project reports.',
+        imageUrl: '',
+        hasHeroImage: false,
+      },
+      stats: [
+        { id: 'stat-articles', value: '+40', labelAr: 'تغطية إعلامية ومقال موثق', labelFr: 'Articles publiés', labelEn: 'Articles', icon: '📰' },
+        { id: 'stat-releases', value: '100%', labelAr: 'بيانات صحفية ومعلومات موثوقة', labelFr: 'Communiqués vérifiés', labelEn: 'Press Releases', icon: '🏛️' },
+      ],
+      cta: {
+        badgeAr: 'العلاقات مع الصحافة والإعلام',
+        titleAr: 'هل أنت صحفي أو مؤسسة إعلامية ترغب في تغطية أنشطتنا؟',
+        descAr: 'تضع جمعية روح الفنون والثقافة رهن إشارة ممثلي وسائل الإعلام ملفاً صحفياً متكاملاً.',
+        primaryBtnTextAr: 'تواصل مع الخلية الإعلامية',
+        primaryBtnUrl: '/contact',
+        secondaryBtnTextAr: 'اقتراح تغطية أو شراكة إعلامية',
+        secondaryBtnUrl: '/partnerships',
+      },
+    }
+    const result = newsPageConfigSchema.safeParse(valid)
+    assert.equal(result.success, true)
+    if (result.success) {
+      assert.equal(result.data.stats.length, 2)
+      assert.equal(result.data.hero.tagAr, 'المركز الإعلامي والبيانات الرسمية')
+    }
+  })
+
+  test('rejects news configuration with missing required fields or empty stats', () => {
+    const invalid = {
+      hero: {
+        tagAr: '',
+        tagFr: '',
+        tagEn: '',
+        badgeAr: '',
+        titleAr: 'أ',
+        titleFr: 'a',
+        titleEn: 'b',
+        subtitleAr: 'c',
+        subtitleFr: 'd',
+        subtitleEn: 'e',
+        descriptionAr: 'قصير',
+        descriptionFr: 'court',
+        descriptionEn: 'short',
+        imageUrl: '',
+        hasHeroImage: false,
+      },
+      stats: [],
+      cta: {
+        badgeAr: '',
+        titleAr: '',
+        descAr: '',
+        primaryBtnTextAr: '',
+        primaryBtnUrl: '',
+        secondaryBtnTextAr: '',
+        secondaryBtnUrl: '',
+      },
+    }
+    const result = newsPageConfigSchema.safeParse(invalid)
+    assert.equal(result.success, false)
+  })
+})

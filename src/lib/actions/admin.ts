@@ -3,7 +3,7 @@
 import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import { revalidatePath } from 'next/cache'
-import type { FaqItemConfig, AreasConfig, TeamConfig, CommissionsConfig, ContactConfig, ProgramsPageConfig, AnnualProgramConfig, ImpactConfig, EventsPageConfig } from '@/lib/settings'
+import type { FaqItemConfig, AreasConfig, TeamConfig, CommissionsConfig, ContactConfig, ProgramsPageConfig, AnnualProgramConfig, ImpactConfig, EventsPageConfig, NewsPageConfig } from '@/lib/settings'
 
 export async function recordAuditLog(
   action: string,
@@ -536,6 +536,52 @@ export async function saveEventsPageConfiguration(
     revalidatePath('/[locale]/events', 'page')
     revalidatePath('/[locale]/events', 'layout')
     revalidatePath('/admin/events')
+    revalidatePath('/admin/pages')
+    revalidatePath('/[locale]', 'layout')
+    revalidatePath('/', 'layout')
+    return { success: true }
+  } catch (err) {
+    return { success: false, error: (err as Error).message }
+  }
+}
+
+export async function saveNewsPageConfiguration(
+  config: NewsPageConfig
+): Promise<{ success: boolean; error?: string }> {
+  try {
+    const supabase = await createClient()
+    const {
+      data: { user },
+    } = await supabase.auth.getUser()
+
+    if (!user) {
+      return { success: false, error: 'غير مصرح لك بتعديل واجهة الأخبار (Unauthorized)' }
+    }
+
+    const { error } = await supabase
+      .from('site_settings')
+      .upsert([
+        {
+          key: 'news_page',
+          value: config,
+          updated_at: new Date().toISOString(),
+        },
+      ])
+
+    if (error) return { success: false, error: error.message }
+
+    await recordAuditLog('news_page_updated', 'site_settings', 'news_page', {
+      titleAr: config.hero.titleAr,
+    })
+
+    // Revalidate all localized paths and layouts so edits appear instantly on the live site
+    revalidatePath('/ar/news')
+    revalidatePath('/fr/news')
+    revalidatePath('/en/news')
+    revalidatePath('/news')
+    revalidatePath('/[locale]/news', 'page')
+    revalidatePath('/[locale]/news', 'layout')
+    revalidatePath('/admin/news')
     revalidatePath('/admin/pages')
     revalidatePath('/[locale]', 'layout')
     revalidatePath('/', 'layout')

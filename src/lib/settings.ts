@@ -3603,3 +3603,243 @@ export async function getEventsPageSettings(): Promise<EventsPageConfig> {
     return defaultEventsPageConfig
   }
 }
+
+// ============================================================
+// NEWS PAGE SETTINGS (صفحة الأخبار والبيانات الصحفية)
+// ============================================================
+
+export interface NewsPageStatItem {
+  id: string
+  value: string
+  valueAr?: string
+  valueFr?: string
+  valueEn?: string
+  labelAr: string
+  labelFr: string
+  labelEn: string
+  icon: string
+}
+
+export interface NewsPageConfig {
+  hero: {
+    tagAr: string
+    tagFr: string
+    tagEn: string
+    badgeAr: string
+    badgeFr: string
+    badgeEn: string
+    titleAr: string
+    titleFr: string
+    titleEn: string
+    subtitleAr: string
+    subtitleFr: string
+    subtitleEn: string
+    descriptionAr: string
+    descriptionFr: string
+    descriptionEn: string
+    imageUrl: string
+    hasHeroImage: boolean
+    primaryBtnTextAr: string
+    primaryBtnTextFr: string
+    primaryBtnTextEn: string
+    primaryBtnUrl: string
+  }
+  stats: NewsPageStatItem[]
+  cta: {
+    badgeAr: string
+    badgeFr: string
+    badgeEn: string
+    titleAr: string
+    titleFr: string
+    titleEn: string
+    descAr: string
+    descFr: string
+    descEn: string
+    primaryBtnTextAr: string
+    primaryBtnTextFr: string
+    primaryBtnTextEn: string
+    primaryBtnUrl: string
+    secondaryBtnTextAr: string
+    secondaryBtnTextFr: string
+    secondaryBtnTextEn: string
+    secondaryBtnUrl: string
+  }
+}
+
+export const defaultNewsPageConfig: NewsPageConfig = {
+  hero: {
+    tagAr: 'المركز الإعلامي والبيانات الرسمية',
+    tagFr: 'Espace Presse & Actualités',
+    tagEn: 'Media Center & Official Press',
+    badgeAr: 'مستجدات الموسم الثقافي 2026 • AMYCC News',
+    badgeFr: 'Actualités Culturelles 2026',
+    badgeEn: 'Cultural News 2026',
+    titleAr: 'الأخبار والبيانات الصحفية',
+    titleFr: 'Actualités & Communiqués de Presse',
+    titleEn: 'News, Insights & Press Releases',
+    subtitleAr: 'تغطية شاملة للمبادرات الفنية، الورشات الإبداعية، والأنشطة الشبابية لجمعية روح الفنون والثقافة',
+    subtitleFr: 'Couverture complète des initiatives artistiques, ateliers créatifs et événements jeunesse',
+    subtitleEn: 'Comprehensive coverage of artistic initiatives, youth masterclasses, and community programs',
+    descriptionAr:
+      'تابعوا أحدث أخبار جمعية روح الفنون والثقافة، والبيانات الرسمية الموجهة لوسائل الإعلام، ومقالات التوثيق الثقافي والفني عبر ربوع المملكة المغربية.',
+    descriptionFr:
+      'Suivez toute l’actualité de l’AMYCC : annonces institutionnelles, dossiers de presse, bilans d’activités et reportages artistiques.',
+    descriptionEn:
+      'Discover the latest news from AMYCC: press announcements, media kits, impact reports, and inspiring stories from our cultural projects across Morocco.',
+    imageUrl: '',
+    hasHeroImage: false,
+    primaryBtnTextAr: 'تصفح أحدث الأخبار والمقالات',
+    primaryBtnTextFr: 'Consulter les actualités',
+    primaryBtnTextEn: 'Browse Latest News',
+    primaryBtnUrl: '#news-catalog',
+  },
+  stats: [
+    {
+      id: 'stat-articles',
+      value: '+40',
+      valueAr: '+40',
+      valueFr: '+40',
+      valueEn: '+40',
+      labelAr: 'تغطية إعلامية ومقال موثق',
+      labelFr: 'Articles et reportages publiés',
+      labelEn: 'Documented Stories & Articles',
+      icon: '📰',
+    },
+    {
+      id: 'stat-releases',
+      value: '100%',
+      valueAr: '100%',
+      valueFr: '100%',
+      valueEn: '100%',
+      labelAr: 'بيانات صحفية ومعلومات موثوقة',
+      labelFr: 'Communiqués officiels vérifiés',
+      labelEn: 'Verified Press Releases',
+      icon: '🏛️',
+    },
+    {
+      id: 'stat-regions',
+      value: '12',
+      valueAr: '12',
+      valueFr: '12',
+      valueEn: '12',
+      labelAr: 'جهة مغربية مغطاة إعلامياً',
+      labelFr: 'Régions marocaines couvertes',
+      labelEn: 'Regions Covered Across Morocco',
+      icon: '🇲🇦',
+    },
+    {
+      id: 'stat-reach',
+      value: 'دائم',
+      valueAr: 'دائم',
+      valueFr: 'Continu',
+      valueEn: '24/7',
+      labelAr: 'تحديث مستمر وتواصل إعلامي',
+      labelFr: 'Veille médiatique & diffusion continue',
+      labelEn: 'Continuous Media & Press Flow',
+      icon: '📡',
+    },
+  ],
+  cta: {
+    badgeAr: 'العلاقات مع الصحافة والإعلام',
+    badgeFr: 'Relations Presse & Médias',
+    badgeEn: 'Press & Media Relations',
+    titleAr: 'هل أنت صحفي أو مؤسسة إعلامية ترغب في تغطية أنشطتنا؟',
+    titleFr: 'Journalistes et professionnels des médias : couvrez nos événements',
+    titleEn: 'Media Inquiries & Press Kit Access',
+    descAr:
+      'تضع جمعية روح الفنون والثقافة رهن إشارة ممثلي وسائل الإعلام والمهتمين ملفاً صحفياً متكاملاً، وصوراً عالية الجودة، ومصادر للمقابلات الحصرية والتغطيات الميدانية.',
+    descFr:
+      'L’AMYCC met à disposition des journalistes un dossier de presse complet, des visuels haute résolution et des opportunités d’interviews exclusives.',
+    descEn:
+      'AMYCC provides accredited journalists and media organizations with comprehensive press kits, high-resolution visual assets, and exclusive interview access.',
+    primaryBtnTextAr: 'تواصل مع الخلية الإعلامية',
+    primaryBtnTextFr: 'Contacter l’équipe presse',
+    primaryBtnTextEn: 'Contact Press Team',
+    primaryBtnUrl: '/contact',
+    secondaryBtnTextAr: 'اقتراح تغطية أو شراكة إعلامية',
+    secondaryBtnTextFr: 'Proposer un partenariat média',
+    secondaryBtnTextEn: 'Propose Media Partnership',
+    secondaryBtnUrl: '/partnerships',
+  },
+}
+
+export async function getNewsPageSettings(): Promise<NewsPageConfig> {
+  try {
+    const supabase = await createClient()
+    const { data, error } = await supabase
+      .from('site_settings')
+      .select('value')
+      .eq('key', 'news_page')
+      .maybeSingle()
+
+    if (error || !data || !data.value) {
+      return defaultNewsPageConfig
+    }
+
+    const val = data.value as Partial<NewsPageConfig>
+    const heroVal = (val.hero || {}) as Partial<NewsPageConfig['hero']>
+    const ctaVal = (val.cta || {}) as Partial<NewsPageConfig['cta']>
+
+    return {
+      hero: {
+        tagAr: typeof heroVal.tagAr === 'string' ? heroVal.tagAr : defaultNewsPageConfig.hero.tagAr,
+        tagFr: typeof heroVal.tagFr === 'string' ? heroVal.tagFr : defaultNewsPageConfig.hero.tagFr,
+        tagEn: typeof heroVal.tagEn === 'string' ? heroVal.tagEn : defaultNewsPageConfig.hero.tagEn,
+        badgeAr: typeof heroVal.badgeAr === 'string' ? heroVal.badgeAr : defaultNewsPageConfig.hero.badgeAr,
+        badgeFr: typeof heroVal.badgeFr === 'string' ? heroVal.badgeFr : defaultNewsPageConfig.hero.badgeFr,
+        badgeEn: typeof heroVal.badgeEn === 'string' ? heroVal.badgeEn : defaultNewsPageConfig.hero.badgeEn,
+        titleAr: typeof heroVal.titleAr === 'string' ? heroVal.titleAr : defaultNewsPageConfig.hero.titleAr,
+        titleFr: typeof heroVal.titleFr === 'string' ? heroVal.titleFr : defaultNewsPageConfig.hero.titleFr,
+        titleEn: typeof heroVal.titleEn === 'string' ? heroVal.titleEn : defaultNewsPageConfig.hero.titleEn,
+        subtitleAr: typeof heroVal.subtitleAr === 'string' ? heroVal.subtitleAr : defaultNewsPageConfig.hero.subtitleAr,
+        subtitleFr: typeof heroVal.subtitleFr === 'string' ? heroVal.subtitleFr : defaultNewsPageConfig.hero.subtitleFr,
+        subtitleEn: typeof heroVal.subtitleEn === 'string' ? heroVal.subtitleEn : defaultNewsPageConfig.hero.subtitleEn,
+        descriptionAr: typeof heroVal.descriptionAr === 'string' ? heroVal.descriptionAr : defaultNewsPageConfig.hero.descriptionAr,
+        descriptionFr: typeof heroVal.descriptionFr === 'string' ? heroVal.descriptionFr : defaultNewsPageConfig.hero.descriptionFr,
+        descriptionEn: typeof heroVal.descriptionEn === 'string' ? heroVal.descriptionEn : defaultNewsPageConfig.hero.descriptionEn,
+        imageUrl: typeof heroVal.imageUrl === 'string' ? heroVal.imageUrl : defaultNewsPageConfig.hero.imageUrl,
+        hasHeroImage: typeof heroVal.hasHeroImage === 'boolean' ? heroVal.hasHeroImage : defaultNewsPageConfig.hero.hasHeroImage,
+        primaryBtnTextAr: typeof heroVal.primaryBtnTextAr === 'string' ? heroVal.primaryBtnTextAr : defaultNewsPageConfig.hero.primaryBtnTextAr,
+        primaryBtnTextFr: typeof heroVal.primaryBtnTextFr === 'string' ? heroVal.primaryBtnTextFr : defaultNewsPageConfig.hero.primaryBtnTextFr,
+        primaryBtnTextEn: typeof heroVal.primaryBtnTextEn === 'string' ? heroVal.primaryBtnTextEn : defaultNewsPageConfig.hero.primaryBtnTextEn,
+        primaryBtnUrl: typeof heroVal.primaryBtnUrl === 'string' ? heroVal.primaryBtnUrl : defaultNewsPageConfig.hero.primaryBtnUrl,
+      },
+      stats: Array.isArray(val.stats) && val.stats.length > 0
+        ? (val.stats as NewsPageStatItem[])
+            .filter((s): s is NewsPageStatItem => typeof s === 'object' && s !== null && typeof s.id === 'string')
+            .map((s) => ({
+              id: s.id,
+              value: s.value || '',
+              valueAr: s.valueAr || s.value || '',
+              valueFr: s.valueFr || s.value || '',
+              valueEn: s.valueEn || s.value || '',
+              labelAr: s.labelAr || '',
+              labelFr: s.labelFr || '',
+              labelEn: s.labelEn || '',
+              icon: s.icon || '📰',
+            }))
+        : defaultNewsPageConfig.stats,
+      cta: {
+        badgeAr: typeof ctaVal.badgeAr === 'string' ? ctaVal.badgeAr : defaultNewsPageConfig.cta.badgeAr,
+        badgeFr: typeof ctaVal.badgeFr === 'string' ? ctaVal.badgeFr : defaultNewsPageConfig.cta.badgeFr,
+        badgeEn: typeof ctaVal.badgeEn === 'string' ? ctaVal.badgeEn : defaultNewsPageConfig.cta.badgeEn,
+        titleAr: typeof ctaVal.titleAr === 'string' ? ctaVal.titleAr : defaultNewsPageConfig.cta.titleAr,
+        titleFr: typeof ctaVal.titleFr === 'string' ? ctaVal.titleFr : defaultNewsPageConfig.cta.titleFr,
+        titleEn: typeof ctaVal.titleEn === 'string' ? ctaVal.titleEn : defaultNewsPageConfig.cta.titleEn,
+        descAr: typeof ctaVal.descAr === 'string' ? ctaVal.descAr : defaultNewsPageConfig.cta.descAr,
+        descFr: typeof ctaVal.descFr === 'string' ? ctaVal.descFr : defaultNewsPageConfig.cta.descFr,
+        descEn: typeof ctaVal.descEn === 'string' ? ctaVal.descEn : defaultNewsPageConfig.cta.descEn,
+        primaryBtnTextAr: typeof ctaVal.primaryBtnTextAr === 'string' ? ctaVal.primaryBtnTextAr : defaultNewsPageConfig.cta.primaryBtnTextAr,
+        primaryBtnTextFr: typeof ctaVal.primaryBtnTextFr === 'string' ? ctaVal.primaryBtnTextFr : defaultNewsPageConfig.cta.primaryBtnTextFr,
+        primaryBtnTextEn: typeof ctaVal.primaryBtnTextEn === 'string' ? ctaVal.primaryBtnTextEn : defaultNewsPageConfig.cta.primaryBtnTextEn,
+        primaryBtnUrl: typeof ctaVal.primaryBtnUrl === 'string' ? ctaVal.primaryBtnUrl : defaultNewsPageConfig.cta.primaryBtnUrl,
+        secondaryBtnTextAr: typeof ctaVal.secondaryBtnTextAr === 'string' ? ctaVal.secondaryBtnTextAr : defaultNewsPageConfig.cta.secondaryBtnTextAr,
+        secondaryBtnTextFr: typeof ctaVal.secondaryBtnTextFr === 'string' ? ctaVal.secondaryBtnTextFr : defaultNewsPageConfig.cta.secondaryBtnTextFr,
+        secondaryBtnTextEn: typeof ctaVal.secondaryBtnTextEn === 'string' ? ctaVal.secondaryBtnTextEn : defaultNewsPageConfig.cta.secondaryBtnTextEn,
+        secondaryBtnUrl: typeof ctaVal.secondaryBtnUrl === 'string' ? ctaVal.secondaryBtnUrl : defaultNewsPageConfig.cta.secondaryBtnUrl,
+      },
+    }
+  } catch {
+    return defaultNewsPageConfig
+  }
+}
