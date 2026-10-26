@@ -4,7 +4,7 @@ import { createClient } from '@/lib/supabase/server'
 import { createAdminClient } from '@/lib/supabase/admin'
 import { redirect } from 'next/navigation'
 import { revalidatePath } from 'next/cache'
-import type { FaqItemConfig, AreasConfig, TeamConfig, CommissionsConfig, ContactConfig, ProgramsPageConfig, AnnualProgramConfig, ImpactConfig, EventsPageConfig, NewsPageConfig, PartnershipsPageConfig, MembershipPageConfig } from '@/lib/settings'
+import type { FaqItemConfig, AreasConfig, TeamConfig, CommissionsConfig, ContactConfig, ProgramsPageConfig, AnnualProgramConfig, ImpactConfig, EventsPageConfig, NewsPageConfig, PartnershipsPageConfig, MembershipPageConfig, SupportPageConfig } from '@/lib/settings'
 
 export async function recordAuditLog(
   action: string,
@@ -678,6 +678,53 @@ export async function saveMembershipPageConfiguration(
     revalidatePath('/[locale]/membership', 'page')
     revalidatePath('/[locale]/membership', 'layout')
     revalidatePath('/admin/memberships')
+    revalidatePath('/admin/pages')
+    revalidatePath('/[locale]', 'layout')
+    revalidatePath('/', 'layout')
+    return { success: true }
+  } catch (err) {
+    return { success: false, error: (err as Error).message }
+  }
+}
+
+export async function saveSupportPageConfiguration(
+  config: SupportPageConfig
+): Promise<{ success: boolean; error?: string }> {
+  try {
+    const supabase = await createClient()
+    const {
+      data: { user },
+    } = await supabase.auth.getUser()
+
+    if (!user) {
+      return { success: false, error: 'غير مصرح لك بتعديل واجهة الدعم والرعاية (Unauthorized)' }
+    }
+
+    const adminClient = createAdminClient()
+    const { error } = await adminClient
+      .from('site_settings')
+      .upsert([
+        {
+          key: 'support_page',
+          value: config,
+          updated_at: new Date().toISOString(),
+        },
+      ])
+
+    if (error) return { success: false, error: error.message }
+
+    await recordAuditLog('support_page_updated', 'site_settings', 'support_page', {
+      titleAr: config.hero.titleAr,
+    })
+
+    // Revalidate localized paths and layouts so edits appear immediately
+    revalidatePath('/ar/support')
+    revalidatePath('/fr/support')
+    revalidatePath('/en/support')
+    revalidatePath('/support')
+    revalidatePath('/[locale]/support', 'page')
+    revalidatePath('/[locale]/support', 'layout')
+    revalidatePath('/admin/donations')
     revalidatePath('/admin/pages')
     revalidatePath('/[locale]', 'layout')
     revalidatePath('/', 'layout')

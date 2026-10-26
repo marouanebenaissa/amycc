@@ -4990,3 +4990,646 @@ export async function getMembershipPageSettings(): Promise<MembershipPageConfig>
     return defaultMembershipPageConfig
   }
 }
+
+// =============================================================================
+// Support, Patronage & Donation Settings (CMS)
+// =============================================================================
+
+export interface SupportStatItem {
+  id: string
+  value: string
+  valueAr: string
+  valueFr: string
+  valueEn: string
+  labelAr: string
+  labelFr: string
+  labelEn: string
+  icon: string
+}
+
+export interface PatronagePackageItem {
+  id: string
+  nameAr: string
+  nameFr: string
+  nameEn: string
+  badgeAr?: string
+  badgeFr?: string
+  badgeEn?: string
+  amount: number
+  currency: string
+  periodAr: string
+  periodFr: string
+  periodEn: string
+  descriptionAr: string
+  descriptionFr: string
+  descriptionEn: string
+  impactAr: string
+  impactFr: string
+  impactEn: string
+  privilegesAr: string[]
+  privilegesFr: string[]
+  privilegesEn: string[]
+  recommended?: boolean
+  active?: boolean
+  order?: number
+}
+
+export interface SupportPillarItem {
+  id: string
+  icon: string
+  titleAr: string
+  titleFr: string
+  titleEn: string
+  descriptionAr: string
+  descriptionFr: string
+  descriptionEn: string
+}
+
+export interface SupportFaqItem {
+  id: string
+  questionAr: string
+  questionFr: string
+  questionEn: string
+  answerAr: string
+  answerFr: string
+  answerEn: string
+}
+
+export interface PaymentGatewayConfig {
+  enabled: boolean
+  provider: 'cmi' | 'stripe' | 'both'
+  mode: 'test' | 'live'
+  cmiConfig: {
+    merchantId: string
+    storeKey: string
+    gatewayUrl: string
+    okUrl: string
+    failUrl: string
+    callbackUrl: string
+  }
+  stripeConfig: {
+    publishableKey: string
+    secretKey: string
+    webhookSecret: string
+  }
+  presetAmounts: number[]
+  currency: string
+  allowCustomAmount: boolean
+}
+
+export interface BankTransferConfig {
+  bankName: string
+  accountHolder: string
+  rib: string
+  iban: string
+  swift: string
+  agency: string
+  instructionsAr: string
+  instructionsFr: string
+  instructionsEn: string
+}
+
+export interface SupportPageConfig {
+  hero: {
+    tagAr: string
+    tagFr: string
+    tagEn: string
+    badgeAr: string
+    badgeFr: string
+    badgeEn: string
+    titleAr: string
+    titleFr: string
+    titleEn: string
+    subtitleAr: string
+    subtitleFr: string
+    subtitleEn: string
+    descriptionAr: string
+    descriptionFr: string
+    descriptionEn: string
+    imageUrl: string
+    hasHeroImage: boolean
+    primaryBtnTextAr: string
+    primaryBtnTextFr: string
+    primaryBtnTextEn: string
+    primaryBtnUrl: string
+    secondaryBtnTextAr: string
+    secondaryBtnTextFr: string
+    secondaryBtnTextEn: string
+    secondaryBtnUrl: string
+  }
+  stats: SupportStatItem[]
+  paymentGateway: PaymentGatewayConfig
+  bankTransfer: BankTransferConfig
+  packages: PatronagePackageItem[]
+  pillars: SupportPillarItem[]
+  transparencyFaqs: SupportFaqItem[]
+  cta: {
+    badgeAr: string
+    badgeFr: string
+    badgeEn: string
+    titleAr: string
+    titleFr: string
+    titleEn: string
+    descriptionAr: string
+    descriptionFr: string
+    descriptionEn: string
+    primaryBtnTextAr: string
+    primaryBtnTextFr: string
+    primaryBtnTextEn: string
+    primaryBtnUrl: string
+    email: string
+    phone: string
+  }
+}
+
+export const defaultSupportPageConfig: SupportPageConfig = {
+  hero: {
+    tagAr: 'بوابة الدعم والرعاية الثقافية والمجتمعية',
+    tagFr: 'Portail de Mécénat & Soutien Culturel',
+    tagEn: 'Patronage & Cultural Giving Portal',
+    badgeAr: 'جمعية روح الفنون والثقافة — AMYCC',
+    badgeFr: 'Association Esprit des Arts et de la Culture — AMYCC',
+    badgeEn: 'Spirit of Arts & Culture Association — AMYCC',
+    titleAr: 'ساهم في رعاية الإبداع وصناعة الأمل الثقافي للأجيال الصاعدة بالمغرب',
+    titleFr: 'Participez au mécénat artistique et soutenez l’émergence culturelle au Maroc',
+    titleEn: 'Catalyze Cultural Expression and Support Emerging Creative Talents Across Morocco',
+    subtitleAr: 'كل درهم تقدمه يُمكّن طفلاً من ولوج ورشة مسرحية، يدعم إقامة فنية لمبدع واعد، ويصون جانباً من تراثنا المغربي الأصيل.',
+    subtitleFr: 'Chaque contribution finance un atelier artistique gratuit, soutient un jeune créateur et préserve notre mémoire vivante.',
+    subtitleEn: 'Every contribution funds free youth workshops, empowers emerging artists, and preserves Moroccan heritage.',
+    descriptionAr: 'تعتمد جمعية روح الفنون والثقافة (AMYCC) نموذجاً تشاركياً مفتوحاً في التمويل يضمن التدبير الرشيد والشفافية المالية التامة وفق مقتضيات الظهير الشريف المؤسس للعمل الجمعوي. نوفر لكم خيارات متعددة للمساهمة: الأداء الإلكتروني الآمن بالبطاقة البنكية، التحويل البنكي المباشر، أو رعاية باقات البرامج السنوية مع تسليم وصولات الإبراء القانونية.',
+    descriptionFr: 'L’AMYCC applique une politique stricte de transparence et d’éthique associative. Vos dons soutiennent directement nos initiatives d’inclusion culturelle. Choisissez votre mode de contribution : paiement sécurisé par carte bancaire, virement direct ou mécénat de projet.',
+    descriptionEn: 'AMYCC operates with full financial integrity and civic commitment. Your contributions directly fund community arts initiatives. Support our mission via secure online card payment, direct bank wire transfer, or corporate patronage packages.',
+    imageUrl: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=1200&q=80',
+    hasHeroImage: true,
+    primaryBtnTextAr: 'المساهمة الفورية عبر البطاقة',
+    primaryBtnTextFr: 'Don Sécurisé en Ligne',
+    primaryBtnTextEn: 'Donate Securely Online',
+    primaryBtnUrl: '#online-donation',
+    secondaryBtnTextAr: 'التحويل البنكي المباشر (RIB)',
+    secondaryBtnTextFr: 'Virement Bancaire (RIB)',
+    secondaryBtnTextEn: 'Bank Transfer (RIB)',
+    secondaryBtnUrl: '#bank-transfer',
+  },
+  stats: [
+    {
+      id: 'stat-impact-ratio',
+      value: '100%',
+      valueAr: '100%',
+      valueFr: '100%',
+      valueEn: '100%',
+      labelAr: 'توجيه مباشر لدعم برامج الميدان والشباب',
+      labelFr: 'Des fonds alloués directement aux projets de terrain',
+      labelEn: 'Allocated directly to field artistic initiatives',
+      icon: '🎯',
+    },
+    {
+      id: 'stat-free-workshops',
+      value: '+150',
+      valueAr: '+150',
+      valueFr: '+150',
+      valueEn: '+150',
+      labelAr: 'مستفيد ومستفيدة من الورشات المجانية سنوياً',
+      labelFr: 'Bénéficiaires d’ateliers et résidences gratuits',
+      labelEn: 'Youth benefiting from free workshops each year',
+      icon: '🎨',
+    },
+    {
+      id: 'stat-transparency',
+      value: '0%',
+      valueAr: '0%',
+      valueFr: '0%',
+      valueEn: '0%',
+      labelAr: 'اقتطاعات خفية وشفافية مالية موثقة قانونياً',
+      labelFr: 'Frais cachés et transparence certifiée',
+      labelEn: 'Hidden fees with certified financial accountability',
+      icon: '📜',
+    },
+  ],
+  paymentGateway: {
+    enabled: true,
+    provider: 'cmi',
+    mode: 'test',
+    cmiConfig: {
+      merchantId: '600000000',
+      storeKey: 'AMYCC_CMI_STORE_KEY_SANDBOX',
+      gatewayUrl: 'https://testpayment.cmi.co.ma/fim/est3Dgate',
+      okUrl: '/support/cmi-success',
+      failUrl: '/support/cmi-failed',
+      callbackUrl: '/api/donations/cmi-callback',
+    },
+    stripeConfig: {
+      publishableKey: '',
+      secretKey: '',
+      webhookSecret: '',
+    },
+    presetAmounts: [100, 250, 500, 1000, 2500],
+    currency: 'MAD',
+    allowCustomAmount: true,
+  },
+  bankTransfer: {
+    bankName: 'التجاري وفا بنك (Attijariwafa Bank)',
+    accountHolder: 'جمعية روح الفنون والثقافة (AMYCC)',
+    rib: '007 810 0001234567890123 45',
+    iban: 'MA64 0078 1000 0123 4567 8901 2345',
+    swift: 'BCMAMAMC',
+    agency: 'وكالة الرباط أكدال — Avenue de France',
+    instructionsAr: 'يرجى الإشارة إلى "مساهمة ثقافية - [اسمكم الكامل]" في خانة موضوع التحويل البنكي، وموافاتنا بنسخة من الإشعار عبر الاستمارة أسفله أو البريد لتسليمكم وصل الإبراء القانوني.',
+    instructionsFr: 'Veuillez mentionner « Don Culturel - [Votre Nom] » comme motif de virement, puis nous adresser le justificatif via le formulaire ci-dessous pour réception de votre reçu officiel.',
+    instructionsEn: 'Please mention "Cultural Donation - [Your Name]" as transfer reference and notify us using the form below to receive your official receipt.',
+  },
+  packages: [
+    {
+      id: 'package-workshop-sponsor',
+      nameAr: 'راعي محترفات التكوين ومسرح الشباب',
+      nameFr: 'Parrain des Ateliers Théâtre & Jeunesse',
+      nameEn: 'Youth Theatre & Stage Workshops Patron',
+      badgeAr: 'رعاية الأثر الميداني المباشر',
+      badgeFr: 'Impact direct sur le terrain',
+      badgeEn: 'Direct Educational Impact',
+      amount: 5000,
+      currency: 'MAD',
+      periodAr: 'دورة تدريبية متكاملة',
+      periodFr: 'Session complète de formation',
+      periodEn: 'Full Workshop Cycle',
+      descriptionAr: 'تغطية تكاليف التأطير الركحي والمستلزمات الفنية لورشة تكوينية يستفيد منها 25 شاباً وشابة.',
+      descriptionFr: 'Prise en charge de l’encadrement professionnel et des équipements pour 25 jeunes créateurs.',
+      descriptionEn: 'Covering professional coaching and stage material for 25 young emerging actors.',
+      impactAr: 'إنتاج عرض مسرحي ختامي متكامل يُعرض مجاناً للجمهور والناشئة.',
+      impactFr: 'Restitution publique ouverte et certification des compétences acquises.',
+      impactEn: 'Staging an open public theatre performance for community audiences.',
+      privilegesAr: [
+        'إدراج شكر شرفي وشعار الراعي في كتيب العرض والملصقات الرسمية',
+        'دعوات VIP لحضور العرض الختامي وجلسة نقاش الماستركلاس',
+        'وصل إبراء مالي وقانوني معتمد من المكتب التنفيذي للجمعية',
+      ],
+      privilegesFr: [
+        'Mention d’honneur et logo dans le livret de saison et affiches officielles',
+        'Invitations VIP à la représentation de clôture et aux masterclasses',
+        'Reçu libératoire certifié délivré par le bureau exécutif',
+      ],
+      privilegesEn: [
+        'Honorary acknowledgment and logo inclusion in official program brochures',
+        'VIP access to premiere performances and masterclass sessions',
+        'Certified association donation receipt for tax purposes',
+      ],
+      recommended: false,
+      active: true,
+      order: 1,
+    },
+    {
+      id: 'package-residency-patron',
+      nameAr: 'راعي الإقامات الفنية والإنتاج الإبداعي',
+      nameFr: 'Mécène des Résidences de Création',
+      nameEn: 'Creative Residency & Arts Production Patron',
+      badgeAr: 'الباقة الأكثر طلباً ودعماً للمبدعين',
+      badgeFr: 'Formule phare de soutien à la création',
+      badgeEn: 'Signature Creative Incubation',
+      amount: 15000,
+      currency: 'MAD',
+      periodAr: 'إقامة إنتاجية متكاملة',
+      periodFr: 'Résidence complète de production',
+      periodEn: 'Complete Creative Residency',
+      descriptionAr: 'دعم إقامة إبداعية مكثفة لفريق فني تتضمن كتابة النصوص، السينوغرافيا، والتأليف الموسيقي الأصيل.',
+      descriptionFr: 'Financement d’un laboratoire de création scénique réunissant dramaturges, comédiens et musiciens.',
+      descriptionEn: 'Funding a dedicated stage lab uniting dramatists, musicians, and performers to produce original works.',
+      impactAr: 'خلق عمل فني جديد يمثل التراث المغربي في المهرجانات الوطنية.',
+      impactFr: 'Création d’une œuvre originale tournée dans les réseaux culturels du Royaume.',
+      impactEn: 'Producing an original Moroccan production touring regional stages.',
+      privilegesAr: [
+        'تسمية العمل أو الإقامة الفنية بشراكة شرفية مع الراعي',
+        'حق حضور التداريب التحضيرية واللقاء المباشر مع طاقم العمل',
+        'كلمة شرفية في افتتاح التظاهرة وتغطية إعلامية خاصة',
+        'درع تكريم شرفي سنوي من جمعية روح الفنون والثقافة',
+      ],
+      privilegesFr: [
+        'Label officiel de parrainage de la production',
+        'Accès exclusif aux répétitions et échanges privilégiés avec les artistes',
+        'Prise de parole lors du vernissage / première et visibilité média',
+        'Trophée officiel de reconnaissance culturelle AMYCC',
+      ],
+      privilegesEn: [
+        'Official co-patronage title for the creative production',
+        'Exclusive behind-the-scenes rehearsal access and artist meet-ups',
+        'Speaking opportunity at the premiere and featured press release',
+        'Formal annual honorary patron recognition award from AMYCC',
+      ],
+      recommended: true,
+      active: true,
+      order: 2,
+    },
+    {
+      id: 'package-heritage-guardian',
+      nameAr: 'شريك الشرف وصون الذاكرة الثقافية',
+      nameFr: 'Grand Mécène & Gardien de la Mémoire',
+      nameEn: 'Heritage Preservation & Grand Patron',
+      badgeAr: 'رعاية استراتيجية مؤسساتية',
+      badgeFr: 'Mécénat stratégique institutionnel',
+      badgeEn: 'Institutional Strategic Partner',
+      amount: 30000,
+      currency: 'MAD',
+      periodAr: 'موسم ثقافي سنوي كامل',
+      periodFr: 'Saison culturelle annuelle complète',
+      periodEn: 'Full Annual Cultural Season',
+      descriptionAr: 'رعاية استراتيجية لمشاريع توثيق التراث الشفهي، القوافل الثقافية في المناطق القروية، وأرشيف الموسيقى الأندلسية والتقليدية.',
+      descriptionFr: 'Partenariat d’envergure pour la documentation du patrimoine immatériel et les tournées en milieu rural.',
+      descriptionEn: 'Comprehensive patron supporting oral heritage documentation and cultural caravans in rural communities.',
+      impactAr: 'رقمنة وأرشفة مواد تراثية نادرة وتوزيع 1,000 مصنف ثقافي على المدارس.',
+      impactFr: 'Numérisation d’archives rares et diffusion de kits pédagogiques dans les écoles.',
+      impactEn: 'Digitizing cultural archives and distributing educational arts kits to rural schools.',
+      privilegesAr: [
+        'وضع شعار الراعي بصفة "الراعي الاستراتيجي الرسمي" في كافة الواجهات والمنشورات',
+        'تقرير مالي وتقييمي سنوي موثق حول الأثر المجتمعي والثقافي للمساهمة',
+        'دعوات دائمة لكافة التظاهرات في مقاعد الشرف الرئاسية',
+        'اتفاقية رعاية رسمية موثقة وفق القوانين المغربية المنظمة للرعاية الثقافية',
+      ],
+      privilegesFr: [
+        'Statut de Grand Partenaire Institutionnel sur l’ensemble des supports',
+        'Rapport d’impact annuel audité et bilan citoyen certifié',
+        'Places d’honneur réservées pour l’ensemble des événements de l’année',
+        'Convention officielle de mécénat conforme aux normes juridiques marocaines',
+      ],
+      privilegesEn: [
+        'Grand Strategic Patron status across all institutional publications and portals',
+        'Comprehensive audited annual social impact report',
+        'Honorary presidential seats at all association events and festivals',
+        'Formal patronage convention signed under Moroccan non-profit statutes',
+      ],
+      recommended: false,
+      active: true,
+      order: 3,
+    },
+  ],
+  pillars: [
+    {
+      id: 'pillar-theatre-youth',
+      icon: '🎭',
+      titleAr: 'المسرح وفنون الأداء للشباب',
+      titleFr: 'Théâtre et Expression Scénique pour les Jeunes',
+      titleEn: 'Youth Theatre & Stage Performance',
+      descriptionAr: 'تمكين الشباب الموهوبين في الأوساط الشبه حضرية من محترفات كتابة النص والتشخيص الركحي بإشراف أساتذة وفنانين محترفين.',
+      descriptionFr: 'Accompagnement des jeunes talents issus des milieux périurbains à travers des ateliers d’écriture et de jeu d’acteur.',
+      descriptionEn: 'Empowering emerging talents through acting masterclasses and dramatic writing labs led by seasoned artists.',
+    },
+    {
+      id: 'pillar-musical-heritage',
+      icon: '🎵',
+      titleAr: 'صون وتوثيق التراث الموسيقي المغربي',
+      titleFr: 'Préservation du Patrimoine Musical Marocain',
+      titleEn: 'Preservation of Moroccan Musical Heritage',
+      descriptionAr: 'تسجيل وتوثيق الأنماط اللحنية التقليدية، الطرب الأندلسي، والعيطة وفنون الملحون لحمايتها من الاندثار وتلقينها للناشئة.',
+      descriptionFr: 'Enregistrement, archivage et transmission des répertoires traditionnels (Andalou, Aïta, Malhoun) aux jeunes générations.',
+      descriptionEn: 'Archiving and transmitting traditional sound repertoires (Andalusian, Malhoun, Aita) to youth ensembles.',
+    },
+    {
+      id: 'pillar-rural-caravans',
+      icon: '🚐',
+      titleAr: 'القوافل الفنية للمناطق القروية',
+      titleFr: 'Caravanes Artistiques en Milieu Rural',
+      titleEn: 'Artistic Caravans in Rural Communities',
+      descriptionAr: 'تنظيم قوافل إبداعية متنقلة تقدم عروضاً مسرحية وورشات رسم وقراءة حكائية للأطفال في المداشر والمراكز الصغرى.',
+      descriptionFr: 'Déploiement de caravanes créatives itinérantes offrant spectacles, ateliers de dessin et contes aux enfants des douars.',
+      descriptionEn: 'Deploying traveling creative caravans offering theatre plays and drawing workshops for children in remote douars.',
+    },
+    {
+      id: 'pillar-creative-incubator',
+      icon: '💡',
+      titleAr: 'حاضنة المشاريع الثقافية الصاعدة',
+      titleFr: 'Incubateur d’Initiatives Culturelles Émergentes',
+      titleEn: 'Emerging Cultural Initiatives Incubator',
+      descriptionAr: 'مواكبة الجمعيات والنوادي الثقافية الناشئة في تقنيات التدبير الثقافي، إعداد الملفات الفنية، والبحث عن التمويل.',
+      descriptionFr: 'Mentorat des associations et collectifs émergents dans la gestion de projets culturels et la levée de fonds.',
+      descriptionEn: 'Mentoring grassroots cultural collectives in cultural management, artistic production, and grant applications.',
+    },
+  ],
+  transparencyFaqs: [
+    {
+      id: 'faq-legal-status',
+      questionAr: 'ما هو الإطار القانوني لجمعية روح الفنون والثقافة وقبولها للتبرعات؟',
+      questionFr: 'Quel est le statut juridique de l’AMYCC pour la collecte des dons ?',
+      questionEn: 'What is AMYCC’s legal status regarding donations and contributions?',
+      answerAr: 'جمعية روح الفنون والثقافة هي جمعية مدنية غير ربحية مؤسسة ومسجلة طبقاً لمقتضيات الظهير الشريف رقم 1.58.376 الصادر في 3 جمادى الأولى 1378 (15 نونبر 1958) المنظم لحق تأسيس الجمعيات بالمملكة المغربية وتعديلاته. يحق للجمعية قانونياً قبول مساهمات وتبرعات الأعضاء، الداعمين، والمؤسسات الشريكة لدعم تحقيق أهدافها الثقافية غير الربحية.',
+      answerFr: 'L’AMYCC est une association marocaine à but non lucratif constituée conformément aux dispositions du Dahir n° 1-58-376 du 15 novembre 1958 réglementant le droit d’association au Maroc. Elle est habilitée à recevoir dons, cotisations et mécénats pour l’accomplissement de ses missions statutaires.',
+      answerEn: 'AMYCC is a registered non-profit cultural association under Moroccan Dahir No. 1-58-376 of November 15, 1958. It is formally authorized to receive contributions, sponsorships, and donations dedicated exclusively to its non-profit cultural goals.',
+    },
+    {
+      id: 'faq-receipt-issuance',
+      questionAr: 'هل أحصل على وصل إبراء مالي رسمي بعد تقديم المساهمة؟',
+      questionFr: 'Est-ce que je reçois un reçu officiel pour mon don ?',
+      questionEn: 'Do donors receive an official receipt and financial acknowledgment?',
+      answerAr: 'نعم، بكل تأكيد. يقوم أمين مال الجمعية فور استلام وتأكيد المساهمة (سواء عبر بوابة الدفع الإلكتروني أو التحويل البنكي المباشر) بتحرير وصل إبراء قانوني رسمي يتضمن اسم المتبرع، المبلغ، والتاريخ، ويُرسل للمتبرع بصيغة رقمية موقعة ومختومة ومرفقة بالإثباتات البنكية.',
+      answerFr: 'Oui, sans exception. Dès confirmation de la transaction (en ligne ou par virement), le trésorier de l’association émet un reçu officiel numéroté, signé et cacheté, transmis par voie électronique au donateur.',
+      answerEn: 'Yes, absolutely. Upon transaction validation (online card or wire transfer), the association treasurer issues an official numbered, signed, and stamped receipt delivered digitally to the donor.',
+    },
+    {
+      id: 'faq-payment-security',
+      questionAr: 'ما مدى أمان المدفوعات الإلكترونية عبر المنصة؟',
+      questionFr: 'Quel est le niveau de sécurité des paiements en ligne ?',
+      questionEn: 'How secure are online payments processed on the platform?',
+      answerAr: 'تتم المعاملات الإلكترونية عبر قنوات مشفرة وفق معايير الحماية الدولية SSL/TLS 256-bit عبر بوابات معتمدة بنكياً (مثل مركز النقديات CMI المغربي أو Stripe) المزودة بخاصية المصادقة الثنائية 3D-Secure (OTP عبر الهاتف). لا تقوم المنصة بتخزين أي بيانات سرية خاصة ببطاقتكم البنكية.',
+      answerFr: 'Toutes les transactions sont traitées via des passerelles bancaires certifiées (CMI ou Stripe) avec protocole 3D-Secure et chiffrement TLS 256 bits. Aucune donnée bancaire n’est stockée sur nos serveurs.',
+      answerEn: 'Transactions are secured through certified payment switches (CMI or Stripe) with 3D-Secure two-factor SMS authorization and 256-bit TLS encryption. No card credentials are stored on our servers.',
+    },
+    {
+      id: 'faq-inkind-donations',
+      questionAr: 'كيف يمكن تقديم دعم عيني (معدات فنية، حواسيب، تجهيزات ركحية)؟',
+      questionFr: 'Comment faire un don en nature ou logistique ?',
+      questionEn: 'How can individuals or companies contribute in-kind equipment or venues?',
+      answerAr: 'نرحب بكافة أشكال المساهمات العينية (أجهزة صوت وإضاءة، آلات موسيقية، أثواب سينوغرافيا، تجهيزات مكتبية). يكفي اختيار خيار "مساهمة عينية أو لوجستية" في الاستمارة أدناه، وسيتواصل معكم فريق التنسيق الميداني لتسلم المواد وتقديم وصل إيداع واستلام رسمي معتمد.',
+      answerFr: 'Les dons en nature (instruments, sonorisation, costumes, livres) sont accueillis avec reconnaissance. Sélectionnez l’option « Don en nature » dans le formulaire pour convenir des modalités logistiques avec notre équipe.',
+      answerEn: 'In-kind contributions (sound gear, musical instruments, stage costumes, venues) are welcome. Simply select "In-Kind / Logistics" in the form below and our team will coordinate reception and documentation.',
+    },
+  ],
+  cta: {
+    badgeAr: 'قطب الرعاية وتنمية الموارد',
+    badgeFr: 'Pôle Mécénat & Philanthropie',
+    badgeEn: 'Patronage & Resource Development Desk',
+    titleAr: 'هل ترغب في مناقشة برنامج رعاية مؤسساتي مخصص لمؤسستك أو شركتك؟',
+    titleFr: 'Vous souhaitez concevoir un programme de mécénat sur-mesure ?',
+    titleEn: 'Seeking a Customized Corporate Patronage Program?',
+    descriptionAr: 'يسعد مكتب الجمعية ولجنة تنمية الموارد الثقافية استقبال ممثلي الهيئات والشركات الراعية لبحث اتفاقيات التعاون والرعاية بما يخدم الصالح العام.',
+    descriptionFr: 'Le bureau de l’AMYCC est à votre disposition pour élaborer une convention de mécénat créative et créatrice de valeur citoyenne.',
+    descriptionEn: 'The AMYCC resource development committee is available to co-design bespoke sponsorship conventions tailored to your institutional CSR vision.',
+    primaryBtnTextAr: 'تواصل مع قطب الرعاية',
+    primaryBtnTextFr: 'Contacter le Pôle Mécénat',
+    primaryBtnTextEn: 'Contact Patronage Desk',
+    primaryBtnUrl: 'mailto:mecenat@amycc.org',
+    email: 'mecenat@amycc.org',
+    phone: '+212 5 37 00 00 00',
+  },
+}
+
+export async function getSupportPageSettings(): Promise<SupportPageConfig> {
+  try {
+    const supabase = await createClient()
+    const { data } = await supabase
+      .from('site_settings')
+      .select('value')
+      .eq('key', 'support_page')
+      .single()
+
+    if (!data || !data.value) {
+      return defaultSupportPageConfig
+    }
+
+    const val = data.value as Partial<SupportPageConfig>
+    const heroVal = (val.hero || {}) as Partial<SupportPageConfig['hero']>
+    const gatewayVal = (val.paymentGateway || {}) as Partial<SupportPageConfig['paymentGateway']>
+    const cmiVal = ((gatewayVal.cmiConfig || {}) as Partial<SupportPageConfig['paymentGateway']['cmiConfig']>)
+    const stripeVal = ((gatewayVal.stripeConfig || {}) as Partial<SupportPageConfig['paymentGateway']['stripeConfig']>)
+    const bankVal = (val.bankTransfer || {}) as Partial<SupportPageConfig['bankTransfer']>
+    const ctaVal = (val.cta || {}) as Partial<SupportPageConfig['cta']>
+
+    return {
+      hero: {
+        tagAr: typeof heroVal.tagAr === 'string' ? heroVal.tagAr : defaultSupportPageConfig.hero.tagAr,
+        tagFr: typeof heroVal.tagFr === 'string' ? heroVal.tagFr : defaultSupportPageConfig.hero.tagFr,
+        tagEn: typeof heroVal.tagEn === 'string' ? heroVal.tagEn : defaultSupportPageConfig.hero.tagEn,
+        badgeAr: typeof heroVal.badgeAr === 'string' ? heroVal.badgeAr : defaultSupportPageConfig.hero.badgeAr,
+        badgeFr: typeof heroVal.badgeFr === 'string' ? heroVal.badgeFr : defaultSupportPageConfig.hero.badgeFr,
+        badgeEn: typeof heroVal.badgeEn === 'string' ? heroVal.badgeEn : defaultSupportPageConfig.hero.badgeEn,
+        titleAr: typeof heroVal.titleAr === 'string' ? heroVal.titleAr : defaultSupportPageConfig.hero.titleAr,
+        titleFr: typeof heroVal.titleFr === 'string' ? heroVal.titleFr : defaultSupportPageConfig.hero.titleFr,
+        titleEn: typeof heroVal.titleEn === 'string' ? heroVal.titleEn : defaultSupportPageConfig.hero.titleEn,
+        subtitleAr: typeof heroVal.subtitleAr === 'string' ? heroVal.subtitleAr : defaultSupportPageConfig.hero.subtitleAr,
+        subtitleFr: typeof heroVal.subtitleFr === 'string' ? heroVal.subtitleFr : defaultSupportPageConfig.hero.subtitleFr,
+        subtitleEn: typeof heroVal.subtitleEn === 'string' ? heroVal.subtitleEn : defaultSupportPageConfig.hero.subtitleEn,
+        descriptionAr: typeof heroVal.descriptionAr === 'string' ? heroVal.descriptionAr : defaultSupportPageConfig.hero.descriptionAr,
+        descriptionFr: typeof heroVal.descriptionFr === 'string' ? heroVal.descriptionFr : defaultSupportPageConfig.hero.descriptionFr,
+        descriptionEn: typeof heroVal.descriptionEn === 'string' ? heroVal.descriptionEn : defaultSupportPageConfig.hero.descriptionEn,
+        imageUrl: typeof heroVal.imageUrl === 'string' ? heroVal.imageUrl : defaultSupportPageConfig.hero.imageUrl,
+        hasHeroImage: typeof heroVal.hasHeroImage === 'boolean' ? heroVal.hasHeroImage : defaultSupportPageConfig.hero.hasHeroImage,
+        primaryBtnTextAr: typeof heroVal.primaryBtnTextAr === 'string' ? heroVal.primaryBtnTextAr : defaultSupportPageConfig.hero.primaryBtnTextAr,
+        primaryBtnTextFr: typeof heroVal.primaryBtnTextFr === 'string' ? heroVal.primaryBtnTextFr : defaultSupportPageConfig.hero.primaryBtnTextFr,
+        primaryBtnTextEn: typeof heroVal.primaryBtnTextEn === 'string' ? heroVal.primaryBtnTextEn : defaultSupportPageConfig.hero.primaryBtnTextEn,
+        primaryBtnUrl: typeof heroVal.primaryBtnUrl === 'string' ? heroVal.primaryBtnUrl : defaultSupportPageConfig.hero.primaryBtnUrl,
+        secondaryBtnTextAr: typeof heroVal.secondaryBtnTextAr === 'string' ? heroVal.secondaryBtnTextAr : defaultSupportPageConfig.hero.secondaryBtnTextAr,
+        secondaryBtnTextFr: typeof heroVal.secondaryBtnTextFr === 'string' ? heroVal.secondaryBtnTextFr : defaultSupportPageConfig.hero.secondaryBtnTextFr,
+        secondaryBtnTextEn: typeof heroVal.secondaryBtnTextEn === 'string' ? heroVal.secondaryBtnTextEn : defaultSupportPageConfig.hero.secondaryBtnTextEn,
+        secondaryBtnUrl: typeof heroVal.secondaryBtnUrl === 'string' ? heroVal.secondaryBtnUrl : defaultSupportPageConfig.hero.secondaryBtnUrl,
+      },
+      stats: Array.isArray(val.stats)
+        ? (val.stats as SupportStatItem[])
+            .filter((s): s is SupportStatItem => typeof s === 'object' && s !== null && typeof s.id === 'string')
+            .map((s) => ({
+              id: s.id,
+              value: s.value || '',
+              valueAr: s.valueAr || s.value || '',
+              valueFr: s.valueFr || s.value || '',
+              valueEn: s.valueEn || s.value || '',
+              labelAr: s.labelAr || '',
+              labelFr: s.labelFr || '',
+              labelEn: s.labelEn || '',
+              icon: s.icon || '🎯',
+            }))
+        : defaultSupportPageConfig.stats,
+      paymentGateway: {
+        enabled: typeof gatewayVal.enabled === 'boolean' ? gatewayVal.enabled : defaultSupportPageConfig.paymentGateway.enabled,
+        provider: gatewayVal.provider === 'stripe' || gatewayVal.provider === 'both' ? gatewayVal.provider : 'cmi',
+        mode: gatewayVal.mode === 'live' ? 'live' : 'test',
+        cmiConfig: {
+          merchantId: typeof cmiVal.merchantId === 'string' ? cmiVal.merchantId : defaultSupportPageConfig.paymentGateway.cmiConfig.merchantId,
+          storeKey: typeof cmiVal.storeKey === 'string' ? cmiVal.storeKey : defaultSupportPageConfig.paymentGateway.cmiConfig.storeKey,
+          gatewayUrl: typeof cmiVal.gatewayUrl === 'string' ? cmiVal.gatewayUrl : defaultSupportPageConfig.paymentGateway.cmiConfig.gatewayUrl,
+          okUrl: typeof cmiVal.okUrl === 'string' ? cmiVal.okUrl : defaultSupportPageConfig.paymentGateway.cmiConfig.okUrl,
+          failUrl: typeof cmiVal.failUrl === 'string' ? cmiVal.failUrl : defaultSupportPageConfig.paymentGateway.cmiConfig.failUrl,
+          callbackUrl: typeof cmiVal.callbackUrl === 'string' ? cmiVal.callbackUrl : defaultSupportPageConfig.paymentGateway.cmiConfig.callbackUrl,
+        },
+        stripeConfig: {
+          publishableKey: typeof stripeVal.publishableKey === 'string' ? stripeVal.publishableKey : defaultSupportPageConfig.paymentGateway.stripeConfig.publishableKey,
+          secretKey: typeof stripeVal.secretKey === 'string' ? stripeVal.secretKey : defaultSupportPageConfig.paymentGateway.stripeConfig.secretKey,
+          webhookSecret: typeof stripeVal.webhookSecret === 'string' ? stripeVal.webhookSecret : defaultSupportPageConfig.paymentGateway.stripeConfig.webhookSecret,
+        },
+        presetAmounts: Array.isArray(gatewayVal.presetAmounts) ? gatewayVal.presetAmounts : defaultSupportPageConfig.paymentGateway.presetAmounts,
+        currency: typeof gatewayVal.currency === 'string' ? gatewayVal.currency : defaultSupportPageConfig.paymentGateway.currency,
+        allowCustomAmount: typeof gatewayVal.allowCustomAmount === 'boolean' ? gatewayVal.allowCustomAmount : defaultSupportPageConfig.paymentGateway.allowCustomAmount,
+      },
+      bankTransfer: {
+        bankName: typeof bankVal.bankName === 'string' ? bankVal.bankName : defaultSupportPageConfig.bankTransfer.bankName,
+        accountHolder: typeof bankVal.accountHolder === 'string' ? bankVal.accountHolder : defaultSupportPageConfig.bankTransfer.accountHolder,
+        rib: typeof bankVal.rib === 'string' ? bankVal.rib : defaultSupportPageConfig.bankTransfer.rib,
+        iban: typeof bankVal.iban === 'string' ? bankVal.iban : defaultSupportPageConfig.bankTransfer.iban,
+        swift: typeof bankVal.swift === 'string' ? bankVal.swift : defaultSupportPageConfig.bankTransfer.swift,
+        agency: typeof bankVal.agency === 'string' ? bankVal.agency : defaultSupportPageConfig.bankTransfer.agency,
+        instructionsAr: typeof bankVal.instructionsAr === 'string' ? bankVal.instructionsAr : defaultSupportPageConfig.bankTransfer.instructionsAr,
+        instructionsFr: typeof bankVal.instructionsFr === 'string' ? bankVal.instructionsFr : defaultSupportPageConfig.bankTransfer.instructionsFr,
+        instructionsEn: typeof bankVal.instructionsEn === 'string' ? bankVal.instructionsEn : defaultSupportPageConfig.bankTransfer.instructionsEn,
+      },
+      packages: Array.isArray(val.packages)
+        ? (val.packages as PatronagePackageItem[])
+            .filter((p): p is PatronagePackageItem => typeof p === 'object' && p !== null && typeof p.id === 'string')
+            .map((p) => ({
+              id: p.id,
+              nameAr: p.nameAr || '',
+              nameFr: p.nameFr || '',
+              nameEn: p.nameEn || '',
+              badgeAr: p.badgeAr || '',
+              badgeFr: p.badgeFr || '',
+              badgeEn: p.badgeEn || '',
+              amount: typeof p.amount === 'number' ? p.amount : 0,
+              currency: p.currency || 'MAD',
+              periodAr: p.periodAr || '',
+              periodFr: p.periodFr || '',
+              periodEn: p.periodEn || '',
+              descriptionAr: p.descriptionAr || '',
+              descriptionFr: p.descriptionFr || '',
+              descriptionEn: p.descriptionEn || '',
+              impactAr: p.impactAr || '',
+              impactFr: p.impactFr || '',
+              impactEn: p.impactEn || '',
+              privilegesAr: Array.isArray(p.privilegesAr) ? p.privilegesAr : [],
+              privilegesFr: Array.isArray(p.privilegesFr) ? p.privilegesFr : [],
+              privilegesEn: Array.isArray(p.privilegesEn) ? p.privilegesEn : [],
+              recommended: Boolean(p.recommended),
+              active: p.active !== false,
+              order: typeof p.order === 'number' ? p.order : 1,
+            }))
+        : defaultSupportPageConfig.packages,
+      pillars: Array.isArray(val.pillars)
+        ? (val.pillars as SupportPillarItem[])
+            .filter((pi): pi is SupportPillarItem => typeof pi === 'object' && pi !== null && typeof pi.id === 'string')
+            .map((pi) => ({
+              id: pi.id,
+              icon: pi.icon || '🎨',
+              titleAr: pi.titleAr || '',
+              titleFr: pi.titleFr || '',
+              titleEn: pi.titleEn || '',
+              descriptionAr: pi.descriptionAr || '',
+              descriptionFr: pi.descriptionFr || '',
+              descriptionEn: pi.descriptionEn || '',
+            }))
+        : defaultSupportPageConfig.pillars,
+      transparencyFaqs: Array.isArray(val.transparencyFaqs)
+        ? (val.transparencyFaqs as SupportFaqItem[])
+            .filter((f): f is SupportFaqItem => typeof f === 'object' && f !== null && typeof f.id === 'string')
+            .map((f) => ({
+              id: f.id,
+              questionAr: f.questionAr || '',
+              questionFr: f.questionFr || '',
+              questionEn: f.questionEn || '',
+              answerAr: f.answerAr || '',
+              answerFr: f.answerFr || '',
+              answerEn: f.answerEn || '',
+            }))
+        : defaultSupportPageConfig.transparencyFaqs,
+      cta: {
+        badgeAr: typeof ctaVal.badgeAr === 'string' ? ctaVal.badgeAr : defaultSupportPageConfig.cta.badgeAr,
+        badgeFr: typeof ctaVal.badgeFr === 'string' ? ctaVal.badgeFr : defaultSupportPageConfig.cta.badgeFr,
+        badgeEn: typeof ctaVal.badgeEn === 'string' ? ctaVal.badgeEn : defaultSupportPageConfig.cta.badgeEn,
+        titleAr: typeof ctaVal.titleAr === 'string' ? ctaVal.titleAr : defaultSupportPageConfig.cta.titleAr,
+        titleFr: typeof ctaVal.titleFr === 'string' ? ctaVal.titleFr : defaultSupportPageConfig.cta.titleFr,
+        titleEn: typeof ctaVal.titleEn === 'string' ? ctaVal.titleEn : defaultSupportPageConfig.cta.titleEn,
+        descriptionAr: typeof ctaVal.descriptionAr === 'string' ? ctaVal.descriptionAr : defaultSupportPageConfig.cta.descriptionAr,
+        descriptionFr: typeof ctaVal.descriptionFr === 'string' ? ctaVal.descriptionFr : defaultSupportPageConfig.cta.descriptionFr,
+        descriptionEn: typeof ctaVal.descriptionEn === 'string' ? ctaVal.descriptionEn : defaultSupportPageConfig.cta.descriptionEn,
+        primaryBtnTextAr: typeof ctaVal.primaryBtnTextAr === 'string' ? ctaVal.primaryBtnTextAr : defaultSupportPageConfig.cta.primaryBtnTextAr,
+        primaryBtnTextFr: typeof ctaVal.primaryBtnTextFr === 'string' ? ctaVal.primaryBtnTextFr : defaultSupportPageConfig.cta.primaryBtnTextFr,
+        primaryBtnTextEn: typeof ctaVal.primaryBtnTextEn === 'string' ? ctaVal.primaryBtnTextEn : defaultSupportPageConfig.cta.primaryBtnTextEn,
+        primaryBtnUrl: typeof ctaVal.primaryBtnUrl === 'string' ? ctaVal.primaryBtnUrl : defaultSupportPageConfig.cta.primaryBtnUrl,
+        email: typeof ctaVal.email === 'string' ? ctaVal.email : defaultSupportPageConfig.cta.email,
+        phone: typeof ctaVal.phone === 'string' ? ctaVal.phone : defaultSupportPageConfig.cta.phone,
+      },
+    }
+  } catch {
+    return defaultSupportPageConfig
+  }
+}
