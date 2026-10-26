@@ -1017,7 +1017,7 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
                 <span className="font-bold text-[#08242a] block mb-1">
                   {isAr ? 'جمعية روح الفنون والثقافة — AMYCC' : 'Spirit of Arts & Culture Association'}
                 </span>
-                <span>contact@amycc.org • {isAr ? 'المملكة المغربية' : 'Morocco'}</span>
+                <span>info@amycc.org • {isAr ? 'المملكة المغربية' : 'Morocco'}</span>
               </div>
             </nav>
           </div>
