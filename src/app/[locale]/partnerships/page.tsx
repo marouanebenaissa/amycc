@@ -48,6 +48,8 @@ export default async function PartnershipsPage(props: { params: Promise<{ locale
   const isAr = locale === 'ar'
   const isFr = locale === 'fr'
   const config = await getPartnershipsPageSettings()
+  const activePartners = (config.partners || []).filter((p) => p.active !== false)
+  const hasActivePartners = activePartners.length > 0
 
   const hasHeroImage = Boolean(
     config.hero.hasHeroImage &&
@@ -310,7 +312,7 @@ export default async function PartnershipsPage(props: { params: Promise<{ locale
         {/* ========================================================= */}
         {/* Approved Partners Directory */}
         {/* ========================================================= */}
-        {config.partners && config.partners.length > 0 && (
+        {hasActivePartners && (
           <section className="bg-gradient-to-b from-[#f7f2e9] via-[#faf7f2] to-[#f7f2e9] border-y border-[#e5e0d6] py-16 sm:py-24">
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16 space-y-3">
@@ -333,7 +335,7 @@ export default async function PartnershipsPage(props: { params: Promise<{ locale
                 </p>
               </div>
 
-              <PartnersDirectory partners={config.partners} locale={locale} />
+              <PartnersDirectory partners={activePartners} locale={locale} />
             </div>
           </section>
         )}
