@@ -1,8 +1,8 @@
 'use client'
 
-import { useState, useMemo } from 'react'
-import Image from 'next/image'
-import type { PartnerItemConfig, PartnerTier } from '@/lib/settings'
+import { useMemo, useState } from 'react'
+import type { PartnerItemConfig } from '@/lib/settings'
+import { ImageWithFallback } from '@/components/ui/ImageWithFallback'
 
 interface PartnersDirectoryProps {
   partners: PartnerItemConfig[]
@@ -12,131 +12,117 @@ interface PartnersDirectoryProps {
 export function PartnersDirectory({ partners, locale }: PartnersDirectoryProps) {
   const isAr = locale === 'ar'
   const isFr = locale === 'fr'
-
-  const [selectedTier, setSelectedTier] = useState<string>('all')
-
-  const tiers = useMemo(() => {
-    return [
-      { id: 'all', labelAr: 'كافة الشركاء', labelFr: 'Tous les partenaires', labelEn: 'All Partners' },
-      { id: 'cultural', labelAr: 'مراكز ثقافية وفنية', labelFr: 'Centres Culturels', labelEn: 'Cultural Centers' },
-      { id: 'educational', labelAr: 'جامعات ومؤسسات تعليمية', labelFr: 'Universités & Écoles', labelEn: 'Universities & Schools' },
-      { id: 'civil_society', labelAr: 'مجتمع مدني وجمعيات', labelFr: 'Société Civile', labelEn: 'Civil Society' },
-      { id: 'institutional', labelAr: 'هيئات عمومية', labelFr: 'Institutions Publiques', labelEn: 'Public Entities' },
-      { id: 'sponsor', labelAr: 'رعاية وقطاع خاص', labelFr: 'Mécénat & Entreprises', labelEn: 'Corporate CSR' },
-    ]
-  }, [])
-
-  const tierBadges: Record<PartnerTier, { ar: string; fr: string; en: string }> = {
-    institutional: { ar: 'مؤسساتي وعمومي', fr: 'Institutionnel', en: 'Institutional' },
-    cultural: { ar: 'مركز ثقافي وفني', fr: 'Culturel & Artistique', en: 'Cultural & Arts' },
-    educational: { ar: 'تعليمي وجامعي', fr: 'Éducatif & Universitaire', en: 'Educational & Academic' },
-    civil_society: { ar: 'مجتمع مدني وجمعيات', fr: 'Société Civile', en: 'Civil Society' },
-    sponsor: { ar: 'رعاية وقطاع خاص', fr: 'Mécénat & Sponsor', en: 'Corporate Sponsor' },
-  }
+  const [isPaused, setIsPaused] = useState(false)
 
   // Filter only active partners
   const activePartners = useMemo(() => {
     return partners.filter((p) => p.active !== false)
   }, [partners])
 
-  const filteredPartners = useMemo(() => {
-    if (selectedTier === 'all') return activePartners
-    return activePartners.filter((p) => p.tier === selectedTier)
-  }, [activePartners, selectedTier])
+  // Build two identical halves for a mathematically seamless 50% infinite loop
+  const marqueeItems = useMemo(() => {
+    if (activePartners.length === 0) return []
+    const repeatCount = Math.max(2, Math.ceil(6 / activePartners.length))
+    const half: PartnerItemConfig[] = []
+    for (let i = 0; i < repeatCount; i++) {
+      half.push(...activePartners)
+    }
+    return [...half, ...half]
+  }, [activePartners])
 
   if (activePartners.length === 0) return null
 
   return (
-    <div className="space-y-8">
-      {/* Filter Tabs */}
-      <div className="flex items-center justify-center gap-2 overflow-x-auto pb-2 scrollbar-none flex-wrap">
-        {tiers.map((t) => (
-          <button
-            key={t.id}
-            type="button"
-            onClick={() => setSelectedTier(t.id)}
-            className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
-              selectedTier === t.id
-                ? 'bg-[#0d3b43] text-white shadow-xs'
-                : 'bg-white text-[#445457] border border-[#e5e0d6] hover:bg-[#faf7f2]'
-            }`}
-          >
-            {isAr ? t.labelAr : isFr ? t.labelFr : t.labelEn}
-          </button>
-        ))}
-      </div>
+    <div className="space-y-4 w-full">
+      {/* Moving Images Container with Gradient Fade Edges */}
+      <div className="relative w-full overflow-hidden py-4 select-none">
+        {/* Left & Right Smooth Gradient Masks */}
+        <div
+          className="absolute inset-y-0 start-0 w-16 sm:w-28 md:w-36 bg-gradient-to-r from-[#f7f2e9] via-[#f7f2e9]/80 to-transparent z-10 pointer-events-none"
+          aria-hidden="true"
+        />
+        <div
+          className="absolute inset-y-0 end-0 w-16 sm:w-28 md:w-36 bg-gradient-to-l from-[#f7f2e9] via-[#f7f2e9]/80 to-transparent z-10 pointer-events-none"
+          aria-hidden="true"
+        />
 
-      {/* Partners Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-        {filteredPartners.map((partner) => {
-          const name =
-            (isAr ? partner.nameAr : isFr ? partner.nameFr : partner.nameEn) || partner.nameAr
-          const desc =
-            (isAr
-              ? partner.descriptionAr
-              : isFr
-              ? partner.descriptionFr
-              : partner.descriptionEn) || partner.descriptionAr
-          const tierInfo = tierBadges[partner.tier] || tierBadges.cultural
-          const tierLabel = isAr ? tierInfo.ar : isFr ? tierInfo.fr : tierInfo.en
+        {/* The Continuous Infinite Marquee Track */}
+        <div
+          dir="ltr"
+          className="flex items-center gap-6 sm:gap-8 w-max animate-marquee-continuous hover:[animation-play-state:paused]"
+          style={isPaused ? { animationPlayState: 'paused' } : undefined}
+        >
+          {marqueeItems.map((partner, idx) => {
+            const name =
+              (isAr ? partner.nameAr : isFr ? partner.nameFr : partner.nameEn) || partner.nameAr
 
-          return (
-            <div
-              key={partner.id}
-              className="group bg-white rounded-2xl border border-[#e5e0d6] p-6 hover:shadow-subtle hover:border-[#0d3b43]/30 transition-all flex flex-col justify-between"
-            >
-              <div className="space-y-4">
-                <div className="flex items-center justify-between">
-                  <div className="relative w-16 h-16 rounded-xl border border-[#e5e0d6] overflow-hidden bg-[#faf7f2] group-hover:scale-105 transition-transform duration-300">
-                    {partner.logoUrl ? (
-                      <Image
-                        src={partner.logoUrl}
-                        alt={name}
-                        fill
-                        className="object-cover"
-                        unoptimized
-                      />
-                    ) : (
-                      <div className="w-full h-full flex items-center justify-center text-2xl">
-                        🏛️
-                      </div>
-                    )}
-                  </div>
-                  <span className="px-2.5 py-1 rounded-md text-4xs font-extrabold bg-[#faf7f2] border border-[#e5e0d6] text-[#c85a32]">
-                    {tierLabel}
+            const card = (
+              <div className="group/card relative w-60 sm:w-72 h-44 sm:h-52 bg-white rounded-3xl border border-[#e5e0d6] p-3 shadow-2xs hover:shadow-xl hover:border-[#c85a32]/50 transition-all duration-300 flex flex-col justify-between shrink-0 overflow-hidden cursor-pointer">
+                {/* Moving Picture Container */}
+                <div className="relative w-full flex-1 rounded-2xl overflow-hidden bg-[#faf7f2] border border-[#f0eae1]">
+                  <ImageWithFallback
+                    src={partner.logoUrl}
+                    fallbackSrc="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=600&q=80"
+                    alt={name}
+                    fill
+                    className="object-cover group-hover/card:scale-108 transition-transform duration-700 ease-out"
+                    sizes="(max-width: 640px) 240px, 288px"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-40 group-hover/card:opacity-20 transition-opacity" />
+                </div>
+
+                {/* Partner Name Label */}
+                <div className="pt-2 px-1 text-center" dir={isAr ? 'rtl' : 'ltr'}>
+                  <span className="text-xs sm:text-sm font-bold text-[#08242a] group-hover/card:text-[#c85a32] transition-colors truncate block">
+                    {name}
                   </span>
                 </div>
-
-                <div>
-                  <h4 className="font-extrabold text-[#08242a] text-sm leading-snug group-hover:text-[#0d3b43] transition-colors">
-                    {name}
-                  </h4>
-                  {desc && (
-                    <p className="text-2xs text-[#5f7174] mt-2 line-clamp-3 leading-relaxed">
-                      {desc}
-                    </p>
-                  )}
-                </div>
               </div>
+            )
 
-              {partner.websiteUrl && (
-                <div className="pt-4 mt-4 border-t border-[#f4ede2]">
-                  <a
-                    href={partner.websiteUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-2xs font-bold text-[#0d3b43] hover:text-[#c85a32] transition-colors"
-                  >
-                    <span>
-                      {isAr ? 'زيارة الموقع الرسمي' : isFr ? 'Site officiel' : 'Visit Website'}
-                    </span>
-                    <span className="text-3xs">↗</span>
-                  </a>
-                </div>
-              )}
-            </div>
-          )
-        })}
+            return partner.websiteUrl ? (
+              <a
+                key={`${partner.id}-${idx}`}
+                href={partner.websiteUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                title={name}
+                className="block shrink-0 focus:outline-hidden"
+              >
+                {card}
+              </a>
+            ) : (
+              <div key={`${partner.id}-${idx}`} className="shrink-0" title={name}>
+                {card}
+              </div>
+            )
+          })}
+        </div>
+      </div>
+
+      {/* Subtle Controls & Indicator */}
+      <div className="flex items-center justify-center gap-3 pt-2">
+        <button
+          type="button"
+          onClick={() => setIsPaused((prev) => !prev)}
+          className="inline-flex items-center gap-2 text-3xs sm:text-2xs font-bold text-[#65777a] hover:text-[#08242a] bg-white/80 hover:bg-white px-3.5 py-1.5 rounded-full border border-[#e5e0d6] shadow-2xs transition-all cursor-pointer"
+          title={isPaused ? 'تشغيل الحركة' : 'إيقاف الحركة مؤقتاً'}
+        >
+          <span>{isPaused ? '▶️' : '⏸️'}</span>
+          <span>
+            {isPaused
+              ? isAr
+                ? 'تشغيل الحركة التلقائية'
+                : isFr
+                ? 'Reprendre le défilement'
+                : 'Resume Auto-Scroll'
+              : isAr
+              ? 'إيقاف مؤقت (أو مرر المؤشر)'
+              : isFr
+              ? 'Pause (ou survolez)'
+              : 'Pause (or hover)'}
+          </span>
+        </button>
       </div>
     </div>
   )

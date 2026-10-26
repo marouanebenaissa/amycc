@@ -295,3 +295,33 @@ body:has([dir="rtl"]) {
   height: 0;
   pointer-events: none;
 }
+
+/* ============================================================
+   Continuous Infinite Marquee for Moving Partner Images
+   ============================================================ */
+
+@keyframes marquee-scroll {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.animate-marquee-continuous {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 35s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee-continuous:hover {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee-continuous {
+    animation-duration: 90s;
+  }
+}

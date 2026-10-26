@@ -83,7 +83,6 @@ export async function updateApplicationStatus(
 
   revalidatePath('/admin')
   revalidatePath(`/admin/${table.replace('_applications', 's').replace('_inquiries', 's').replace('contact_messages', 'contacts').replace('event_registrations', 'registrations').replace('donation_records', 'donations')}`)
-  revalidatePath(`/admin/${table.replace('_applications', 's').replace('_inquiries', 's').replace('contact_messages', 'contacts').replace('event_registrations', 'registrations').replace('donation_records', 'donations')}`)
 }
 
 export async function deleteApplicationRecord(
@@ -96,7 +95,6 @@ export async function deleteApplicationRecord(
   await recordAuditLog('record_deleted', table, id, { deleted_at: new Date().toISOString() })
 
   revalidatePath('/admin')
-  revalidatePath(`/admin/${table.replace('_applications', 's').replace('_inquiries', 's').replace('contact_messages', 'contacts').replace('event_registrations', 'registrations').replace('donation_records', 'donations')}`)
 }
 
 export async function assignUserRole(userId: string, roleId: number): Promise<{ success: boolean; error?: string }> {

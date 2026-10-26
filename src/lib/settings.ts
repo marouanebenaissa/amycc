@@ -4203,13 +4203,13 @@ export const defaultPartnershipsPageConfig: PartnershipsPageConfig = {
 export async function getPartnershipsPageSettings(): Promise<PartnershipsPageConfig> {
   try {
     const supabase = await createClient()
-    const { data, error } = await supabase
+    const { data } = await supabase
       .from('site_settings')
       .select('value')
       .eq('key', 'partnerships_page')
-      .maybeSingle()
+      .single()
 
-    if (error || !data || !data.value) {
+    if (!data || !data.value) {
       return defaultPartnershipsPageConfig
     }
 
@@ -4245,7 +4245,7 @@ export async function getPartnershipsPageSettings(): Promise<PartnershipsPageCon
         brochureBtnTextEn: typeof heroVal.brochureBtnTextEn === 'string' ? heroVal.brochureBtnTextEn : defaultPartnershipsPageConfig.hero.brochureBtnTextEn,
         brochureUrl: typeof heroVal.brochureUrl === 'string' ? heroVal.brochureUrl : defaultPartnershipsPageConfig.hero.brochureUrl,
       },
-      stats: Array.isArray(val.stats)
+      stats: Array.isArray(val.stats) && val.stats.length > 0
         ? (val.stats as PartnershipStatItem[])
             .filter((s): s is PartnershipStatItem => typeof s === 'object' && s !== null && typeof s.id === 'string')
             .map((s) => ({
@@ -4260,7 +4260,7 @@ export async function getPartnershipsPageSettings(): Promise<PartnershipsPageCon
               icon: s.icon || '🤝',
             }))
         : defaultPartnershipsPageConfig.stats,
-      pillars: Array.isArray(val.pillars)
+      pillars: Array.isArray(val.pillars) && val.pillars.length > 0
         ? (val.pillars as PartnershipPillarItem[])
             .filter((p): p is PartnershipPillarItem => typeof p === 'object' && p !== null && typeof p.id === 'string')
             .map((p) => ({
@@ -4277,7 +4277,7 @@ export async function getPartnershipsPageSettings(): Promise<PartnershipsPageCon
               tagEn: p.tagEn || '',
             }))
         : defaultPartnershipsPageConfig.pillars,
-      benefits: Array.isArray(val.benefits)
+      benefits: Array.isArray(val.benefits) && val.benefits.length > 0
         ? (val.benefits as PartnershipBenefitItem[])
             .filter((b): b is PartnershipBenefitItem => typeof b === 'object' && b !== null && typeof b.id === 'string')
             .map((b) => ({
@@ -4291,7 +4291,7 @@ export async function getPartnershipsPageSettings(): Promise<PartnershipsPageCon
               descriptionEn: b.descriptionEn || '',
             }))
         : defaultPartnershipsPageConfig.benefits,
-      partners: Array.isArray(val.partners)
+      partners: Array.isArray(val.partners) && val.partners.length > 0
         ? (val.partners as PartnerItemConfig[])
             .filter((item): item is PartnerItemConfig => typeof item === 'object' && item !== null && typeof item.id === 'string')
             .map((item) => ({

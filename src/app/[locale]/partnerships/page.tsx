@@ -48,8 +48,6 @@ export default async function PartnershipsPage(props: { params: Promise<{ locale
   const isAr = locale === 'ar'
   const isFr = locale === 'fr'
   const config = await getPartnershipsPageSettings()
-  const activePartners = (config.partners || []).filter((p) => p.active !== false)
-  const hasActivePartners = activePartners.length > 0
 
   const hasHeroImage = Boolean(
     config.hero.hasHeroImage &&
@@ -310,32 +308,32 @@ export default async function PartnershipsPage(props: { params: Promise<{ locale
         )}
 
         {/* ========================================================= */}
-        {/* Approved Partners Directory */}
+        {/* Approved Partners Directory: Moving Images Carousel */}
         {/* ========================================================= */}
-        {hasActivePartners && (
-          <section className="bg-gradient-to-b from-[#f7f2e9] via-[#faf7f2] to-[#f7f2e9] border-y border-[#e5e0d6] py-16 sm:py-24">
-            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16 space-y-3">
-                <span className="inline-block text-xs font-bold uppercase tracking-wider text-[#c85a32] bg-[#c85a32]/10 px-3.5 py-1 rounded-full">
-                  {isAr ? 'شبكة الحلفاء' : isFr ? 'Réseau de Partenaires' : 'Alliances Network'}
-                </span>
-                <h2 className="text-2xl sm:text-4xl font-black text-[#08242a]">
-                  {isAr
-                    ? 'دليل الشركاء المعتمدين'
-                    : isFr
-                    ? 'Réseau des Partenaires Officiels'
-                    : 'Official Partners & Alliances Network'}
-                </h2>
-                <p className="text-sm sm:text-base text-[#445457] font-medium leading-relaxed">
-                  {isAr
-                    ? 'نعتز بالتعاون مع نخبة من المؤسسات الثقافية، الأكاديمية، والمدنية لتوسيع الأثر المجتمعي وبناء مبادرات نوعية.'
-                    : isFr
-                    ? 'Fiers de collaborer avec des institutions culturelles, académiques et citoyennes d’excellence pour démultiplier notre impact.'
-                    : 'Proud to collaborate with leading cultural institutions, universities, and civil society to scale creative impact.'}
-                </p>
-              </div>
+        {config.partners && config.partners.length > 0 && (
+          <section className="bg-gradient-to-b from-[#f7f2e9] via-[#faf7f2] to-[#f7f2e9] border-y border-[#e5e0d6] py-16 sm:py-20 overflow-hidden">
+            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-8 sm:mb-12 space-y-3">
+              <span className="inline-block text-xs font-bold uppercase tracking-wider text-[#c85a32] bg-[#c85a32]/10 px-3.5 py-1 rounded-full">
+                {isAr ? 'شبكة الحلفاء' : isFr ? 'Réseau de Partenaires' : 'Alliances Network'}
+              </span>
+              <h2 className="text-2xl sm:text-4xl font-black text-[#08242a]">
+                {isAr
+                  ? 'دليل الشركاء المعتمدين'
+                  : isFr
+                  ? 'Réseau des Partenaires Officiels'
+                  : 'Official Partners & Alliances Network'}
+              </h2>
+              <p className="text-sm sm:text-base text-[#445457] font-medium leading-relaxed max-w-3xl mx-auto">
+                {isAr
+                  ? 'نعتز بالتعاون مع نخبة من المؤسسات الثقافية، الأكاديمية، والمدنية لتوسيع الأثر المجتمعي وبناء مبادرات نوعية.'
+                  : isFr
+                  ? 'Fiers de collaborer avec des institutions culturelles, académiques et citoyennes d’excellence pour démultiplier notre impact.'
+                  : 'Proud to collaborate with leading cultural institutions, universities, and civil society to scale creative impact.'}
+              </p>
+            </div>
 
-              <PartnersDirectory partners={activePartners} locale={locale} />
+            <div className="w-full">
+              <PartnersDirectory partners={config.partners} locale={locale} />
             </div>
           </section>
         )}
