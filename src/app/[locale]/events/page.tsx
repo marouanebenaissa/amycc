@@ -299,7 +299,6 @@ export default async function EventsPage(props: { params: Promise<{ locale: stri
           <EventsCatalog
             events={displayEvents}
             locale={locale}
-            buttonLabel={dict.events.register}
           />
         </section>
 

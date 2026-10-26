@@ -5,7 +5,6 @@ import { getTopBarSettings, getHeroSettings, getFlagshipProgramSettings, getFaqS
 import { createPublicClient } from '@/lib/supabase/public'
 import { FaqAccordion } from '@/components/home/FaqAccordion'
 import { AreasSection } from '@/components/home/AreasSection'
-import { EventRegistrationModal } from '@/components/events/EventRegistrationModal'
 import { IconWithFallback } from '@/components/ui/IconWithFallback'
 import { ImageWithFallback } from '@/components/ui/ImageWithFallback'
 import Link from 'next/link'
@@ -901,31 +900,32 @@ export default async function HomePage(props: { params: Promise<{ locale: string
                       )}
                     </div>
 
-                    <div className="pt-4 border-t border-[#e5e0d6] flex items-center gap-2">
+                    <div className="pt-4 border-t border-[#e5e0d6]">
                       <Link
                         href={`/${locale}/events/${ev.slug}`}
-                        className="py-2.5 px-3 rounded-xl font-bold text-xs text-[#08242a] bg-[#faf7f2] hover:bg-[#eae4d9] border border-[#e5e0d6] transition-colors flex items-center justify-center gap-1"
+                        className={`w-full py-2.5 px-4 rounded-xl font-bold text-xs transition-all flex items-center justify-center gap-1.5 shadow-2xs ${
+                          ev.registration_open
+                            ? 'text-white bg-[#0d3b43] hover:bg-[#14505b] active:scale-98'
+                            : 'text-[#08242a] bg-[#faf7f2] hover:bg-[#eae4d9] border border-[#e5e0d6]'
+                        }`}
                       >
-                        <span>{isAr ? 'المقال والبوستر' : 'Details'}</span>
-                        <span>{isAr ? '←' : '→'}</span>
-                      </Link>
-
-                      {ev.registration_open ? (
-                        <EventRegistrationModal
-                          eventId={ev.id}
-                          eventTitle={trans.title}
-                          eventDescription={trans.description || ''}
-                          eventDate={formattedDate}
-                          eventVenue={ev.venue || ev.city || undefined}
-                          locale={locale}
-                          buttonLabel={dict.events.register}
-                          className="flex-1 py-2.5 px-3 rounded-xl font-bold text-white bg-[#0d3b43] hover:bg-[#14505b] active:scale-95 transition-all text-xs shadow-xs flex items-center justify-center gap-2 cursor-pointer"
-                        />
-                      ) : (
-                        <span className="flex-1 block text-center py-2 text-2xs text-[#819598] font-semibold bg-[#faf7f2] rounded-xl border border-[#e5e0d6]">
-                          {isAr ? 'اكتملت المقاعد' : 'Fully Booked'}
+                        <span>
+                          {ev.registration_open
+                            ? isAr
+                              ? 'تفاصيل الفعالية والتسجيل'
+                              : isFr
+                              ? 'Détails & Inscription'
+                              : 'Event Details & Register'
+                            : isAr
+                            ? 'عرض تفاصيل الفعالية'
+                            : isFr
+                            ? 'Détails'
+                            : 'Details'}
                         </span>
-                      )}
+                        <span className="transition-transform group-hover:translate-x-0.5 rtl:group-hover:-translate-x-0.5">
+                          {isAr ? '←' : '→'}
+                        </span>
+                      </Link>
                     </div>
                   </div>
                 )

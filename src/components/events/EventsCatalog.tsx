@@ -2,7 +2,6 @@
 
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
-import { EventRegistrationModal } from '@/components/events/EventRegistrationModal'
 import { ImageWithFallback } from '@/components/ui/ImageWithFallback'
 
 export interface EventItemData {
@@ -25,10 +24,9 @@ export interface EventItemData {
 interface EventsCatalogProps {
   events: EventItemData[]
   locale: string
-  buttonLabel?: string
 }
 
-export function EventsCatalog({ events, locale, buttonLabel }: EventsCatalogProps) {
+export function EventsCatalog({ events, locale }: EventsCatalogProps) {
   const isAr = locale === 'ar'
   const isFr = locale === 'fr'
 
@@ -213,12 +211,6 @@ export function EventsCatalog({ events, locale, buttonLabel }: EventsCatalogProp
           {filteredEvents.map((ev) => {
             const trans = ev.event_translations?.[0] || { title: ev.slug, description: '' }
             const dateObj = new Date(ev.start_date)
-            const formattedDate = dateObj.toLocaleDateString(locale, {
-              weekday: 'long',
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric',
-            })
 
             return (
               <div
@@ -322,44 +314,34 @@ export function EventsCatalog({ events, locale, buttonLabel }: EventsCatalogProp
                   </div>
                 </div>
 
-                {/* Footer Action Buttons */}
+                {/* Footer Action Button */}
                 <div className="p-6 pt-0">
-                  <div className="pt-4 border-t border-[#f4ede2] flex flex-col sm:flex-row gap-2">
+                  <div className="pt-4 border-t border-[#f4ede2]">
                     <Link
                       href={`/${locale}/events/${ev.slug}`}
-                      className="flex-1 py-2.5 px-3 rounded-xl font-extrabold text-center text-xs text-[#08242a] bg-[#faf7f2] hover:bg-[#eae4d9] border border-[#e5e0d6] transition-all flex items-center justify-center gap-1.5"
+                      className={`w-full py-3 px-4 rounded-xl font-extrabold text-center text-xs transition-all flex items-center justify-center gap-2 shadow-2xs group-hover:shadow-md ${
+                        ev.registration_open
+                          ? 'text-white bg-[#c85a32] hover:bg-[#b04b26] active:scale-98'
+                          : 'text-[#08242a] bg-[#faf7f2] hover:bg-[#eae4d9] border border-[#e5e0d6]'
+                      }`}
                     >
-                      <span>{isAr ? 'صفحة الفعالية والمقال' : isFr ? 'Page de l\'événement' : 'Event Page'}</span>
-                      <span>{isAr ? '←' : '→'}</span>
-                    </Link>
-
-                    {ev.registration_open ? (
-                      <EventRegistrationModal
-                        eventId={ev.id}
-                        eventTitle={trans.title}
-                        eventDescription={trans.description || ''}
-                        eventDate={formattedDate}
-                        eventVenue={ev.venue || ev.city || undefined}
-                        locale={locale}
-                        buttonLabel={
-                          buttonLabel ||
-                          (isAr
-                            ? 'حجز سريع'
+                      <span>
+                        {ev.registration_open
+                          ? isAr
+                            ? 'تفاصيل الفعالية والتسجيل'
                             : isFr
-                            ? 'Inscription rapide'
-                            : 'Quick Register')
-                        }
-                        className="flex-1 py-2.5 px-3 rounded-xl font-bold text-white bg-[#c85a32] hover:bg-[#b04b26] active:scale-95 transition-all text-xs shadow-2xs flex items-center justify-center gap-1.5 cursor-pointer"
-                      />
-                    ) : (
-                      <span className="flex-1 block text-center py-2.5 px-2 text-3xs text-[#819598] font-bold bg-[#faf7f2] rounded-xl border border-[#e5e0d6]">
-                        {isAr
-                          ? 'التسجيل مغلق'
+                            ? 'Détails & Inscription'
+                            : 'Event Details & Register'
+                          : isAr
+                          ? 'عرض تفاصيل الفعالية'
                           : isFr
-                          ? 'Inscriptions closes'
-                          : 'Closed'}
+                          ? 'Voir les détails'
+                          : 'View Details'}
                       </span>
-                    )}
+                      <span className="transition-transform group-hover:translate-x-0.5 rtl:group-hover:-translate-x-0.5">
+                        {isAr ? '←' : '→'}
+                      </span>
+                    </Link>
                   </div>
                 </div>
               </div>
