@@ -1,6 +1,7 @@
 'use server'
 
 import { createClient } from '@/lib/supabase/server'
+import { createAdminClient } from '@/lib/supabase/admin'
 import { redirect } from 'next/navigation'
 import { revalidatePath } from 'next/cache'
 import type { FaqItemConfig, AreasConfig, TeamConfig, CommissionsConfig, ContactConfig, ProgramsPageConfig, AnnualProgramConfig, ImpactConfig, EventsPageConfig, NewsPageConfig, PartnershipsPageConfig } from '@/lib/settings'
@@ -605,7 +606,8 @@ export async function savePartnershipsPageConfiguration(
       return { success: false, error: 'غير مصرح لك بتعديل واجهة الشراكات (Unauthorized)' }
     }
 
-    const { error } = await supabase
+    const adminClient = createAdminClient()
+    const { error } = await adminClient
       .from('site_settings')
       .upsert([
         {

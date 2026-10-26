@@ -4291,7 +4291,7 @@ export async function getPartnershipsPageSettings(): Promise<PartnershipsPageCon
               descriptionEn: b.descriptionEn || '',
             }))
         : defaultPartnershipsPageConfig.benefits,
-      partners: Array.isArray(val.partners) && val.partners.length > 0
+      partners: Array.isArray(val.partners)
         ? (val.partners as PartnerItemConfig[])
             .filter((item): item is PartnerItemConfig => typeof item === 'object' && item !== null && typeof item.id === 'string')
             .map((item) => ({

@@ -104,6 +104,11 @@ export function PartnershipsAdminTabs({
 
   // Partners State & CMS State
   const [config, setConfig] = useState<PartnershipsPageConfig>(initialConfig)
+  const [prevInitialConfig, setPrevInitialConfig] = useState<PartnershipsPageConfig>(initialConfig)
+  if (prevInitialConfig !== initialConfig) {
+    setPrevInitialConfig(initialConfig)
+    setConfig(initialConfig)
+  }
   const [activeLangTab, setActiveLangTab] = useState<'ar' | 'fr' | 'en'>('ar')
   const [searchPartner, setSearchPartner] = useState('')
 
@@ -309,10 +314,28 @@ export function PartnershipsAdminTabs({
       return
     }
 
-    const updatedPartners = config.partners.filter((p) => p.id !== partnerId)
+    const currentPartners = config.partners || []
+    const updatedPartners = currentPartners.filter((p) => p.id !== partnerId)
     const updatedConfig = { ...config, partners: updatedPartners }
     setConfig(updatedConfig)
-    await persistConfig(updatedConfig, 'تمت إزالة الشريك من الدليل بنجاح.')
+    await persistConfig(updatedConfig, `تمت إزالة الشريك "${partnerName}" من الدليل بنجاح.`)
+  }
+
+  async function handleClearAllPartners() {
+    if (
+      !confirm(
+        'هل أنت متأكد من حذف وإزالة كافة الشركاء من الدليل؟ لن يظهر أي شريك في شريط الموقع حتى تقوم بإضافة شركاء جدد.'
+      )
+    ) {
+      return
+    }
+
+    const updatedConfig = {
+      ...config,
+      partners: [],
+    }
+    setConfig(updatedConfig)
+    await persistConfig(updatedConfig, 'تم إفراغ دليل الشركاء وحذف كافة الشركاء بنجاح.')
   }
 
   async function handleTogglePartnerActive(partnerId: string) {
@@ -556,7 +579,10 @@ export function PartnershipsAdminTabs({
       <div className="pt-2 border-t border-[#f4ede2] flex items-center justify-between gap-1 text-2xs" dir="rtl">
         <button
           type="button"
-          onClick={() => openEditPartnerModal(partner)}
+          onClick={(e) => {
+            e.stopPropagation()
+            openEditPartnerModal(partner)
+          }}
           className="px-2.5 py-1 rounded-lg font-bold bg-[#faf7f2] hover:bg-[#eae4d9] text-[#08242a] border border-[#e5e0d6] transition-colors cursor-pointer"
           tabIndex={isClone ? -1 : undefined}
         >
@@ -565,7 +591,10 @@ export function PartnershipsAdminTabs({
 
         <button
           type="button"
-          onClick={() => handleTogglePartnerActive(partner.id)}
+          onClick={(e) => {
+            e.stopPropagation()
+            handleTogglePartnerActive(partner.id)
+          }}
           className={`px-2 py-1 rounded-lg font-bold border transition-colors cursor-pointer text-3xs ${
             partner.active
               ? 'bg-amber-50 hover:bg-amber-100 text-amber-800 border-amber-200'
@@ -578,9 +607,12 @@ export function PartnershipsAdminTabs({
 
         <button
           type="button"
-          onClick={() => handleDeletePartner(partner.id, partner.nameAr)}
+          onClick={(e) => {
+            e.stopPropagation()
+            handleDeletePartner(partner.id, partner.nameAr)
+          }}
           className="px-2 py-1 rounded-lg font-bold text-rose-600 hover:bg-rose-50 border border-transparent hover:border-rose-200 transition-colors cursor-pointer text-3xs"
-          title="حذف"
+          title={`حذف ${partner.nameAr}`}
           tabIndex={isClone ? -1 : undefined}
         >
           🗑️
@@ -915,6 +947,18 @@ export function PartnershipsAdminTabs({
                   <span>📥</span>
                   <span>استيراد الشركاء النموذجيين</span>
                 </button>
+
+                {config.partners && config.partners.length > 0 && (
+                  <button
+                    type="button"
+                    onClick={handleClearAllPartners}
+                    className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-rose-50 border border-rose-200 text-rose-700 text-xs font-bold rounded-xl hover:bg-rose-100 transition-all cursor-pointer shadow-2xs"
+                    title="حذف جميع الشركاء وإفراغ الدليل"
+                  >
+                    <span>🗑️</span>
+                    <span>حذف كافة الشركاء ({config.partners.length})</span>
+                  </button>
+                )}
 
                 <button
                   type="button"
