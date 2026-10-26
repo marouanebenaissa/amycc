@@ -148,7 +148,8 @@ export function EventsAdminTabs({
 
   // Filter events in table
   const filteredEvents = events.filter((ev) => {
-    const title = (ev.event_translations?.[0]?.title || ev.slug).toLowerCase()
+    const trans = ev.event_translations?.find((t) => t.locale === 'ar') || ev.event_translations?.[0]
+    const title = (trans?.title || ev.slug).toLowerCase()
     const city = (ev.city || '').toLowerCase()
     const venue = (ev.venue || '').toLowerCase()
     const q = searchFilter.toLowerCase().trim()
@@ -165,7 +166,7 @@ export function EventsAdminTabs({
             onClick={() => setActiveMainTab('events_list')}
             className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-black transition-all cursor-pointer ${
               activeMainTab === 'events_list'
-                ? 'bg-[#0d3b43] text-white shadow-sm'
+                ? 'bg-[#08242a] text-white shadow-sm'
                 : 'text-[#445457] hover:text-[#08242a] hover:bg-[#faf7f2]'
             }`}
           >
@@ -190,7 +191,7 @@ export function EventsAdminTabs({
         <Link
           href="/ar/events"
           target="_blank"
-          className="px-4 py-2 rounded-xl text-xs font-bold text-[#0d3b43] bg-[#d8f0f4] hover:bg-[#c2e8ef] transition-colors flex items-center gap-1.5"
+          className="px-4 py-2 rounded-xl text-xs font-bold text-[#c85a32] bg-[#faece7] hover:bg-[#f6ddd4] transition-colors flex items-center gap-1.5"
         >
           <span>معاينة صفحة الفعاليات</span>
           <span>↗</span>
@@ -232,13 +233,13 @@ export function EventsAdminTabs({
                 value={searchFilter}
                 onChange={(e) => setSearchFilter(e.target.value)}
                 placeholder="ابحث في الفعاليات بالاسم، المدينة، أو الفضاء..."
-                className="w-full ps-10 pe-4 py-2.5 rounded-xl border border-[#e5e0d6] bg-white text-xs outline-none focus:border-[#0d3b43]"
+                className="w-full ps-10 pe-4 py-2.5 rounded-xl border border-[#e5e0d6] bg-white text-xs outline-none focus:border-[#c85a32]"
               />
             </div>
 
             <Link
               href="/admin/events/new"
-              className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#0d3b43] text-white text-xs font-bold rounded-xl hover:bg-[#14505b] active:scale-98 transition-all shadow-subtle hover:shadow-card self-start sm:self-auto"
+              className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#08242a] text-white text-xs font-bold rounded-xl hover:bg-[#1a3a40] active:scale-98 transition-all shadow-subtle hover:shadow-card self-start sm:self-auto"
             >
               <span>+</span>
               <span>إضافة فعالية جديدة (New Event)</span>
@@ -260,7 +261,8 @@ export function EventsAdminTabs({
                 <tbody className="divide-y divide-[#f4ede2]">
                   {filteredEvents.length > 0 ? (
                     filteredEvents.map((ev) => {
-                      const title = ev.event_translations?.[0]?.title || ev.slug
+                      const trans = ev.event_translations?.find((t) => t.locale === 'ar') || ev.event_translations?.[0]
+                      const title = trans?.title || ev.slug
                       const regCount = ev.event_registrations?.[0]?.count ?? 0
                       const dateObj = new Date(ev.start_date)
 
@@ -307,7 +309,7 @@ export function EventsAdminTabs({
                           </td>
                           <td className="px-6 py-4">
                             <div className="flex items-center gap-1.5">
-                              <span className="font-black text-[#0d3b43] text-sm">
+                              <span className="font-black text-[#08242a] text-sm">
                                 {regCount}
                               </span>
                               <span className="text-[#819598] text-3xs">

@@ -4,6 +4,7 @@ import { revalidatePath } from 'next/cache'
 import { deleteEvent } from '@/lib/actions/content'
 import { getEventsPageSettings, defaultEventsPageConfig } from '@/lib/settings'
 import { EventsAdminTabs, type AdminEventRow } from '@/components/admin/EventsAdminTabs'
+import { seedDefaultEventsIfEmpty } from '@/lib/supabase/seed-events'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -19,13 +20,24 @@ export default async function AdminEventsPage() {
     redirect('/admin/login')
   }
 
-  const [{ data: rawEvents }, pageSettings] = await Promise.all([
+  const [{ data: initialEvents }, pageSettings] = await Promise.all([
     supabase
       .from('events')
       .select('*, event_translations(*), event_registrations(count)')
       .order('start_date', { ascending: false }),
     getEventsPageSettings(),
   ])
+
+  let rawEvents = initialEvents
+
+  if (!rawEvents || rawEvents.length === 0) {
+    await seedDefaultEventsIfEmpty()
+    const { data: refreshedEvents } = await supabase
+      .from('events')
+      .select('*, event_translations(*), event_registrations(count)')
+      .order('start_date', { ascending: false })
+    rawEvents = refreshedEvents
+  }
 
   const events = (rawEvents || []) as AdminEventRow[]
 
