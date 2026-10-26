@@ -1,8 +1,8 @@
 'use client'
 
-import { useState, useRef } from 'react'
-import Image from 'next/image'
+import { useState, useRef, useMemo } from 'react'
 import { useRouter } from 'next/navigation'
+import { ImageWithFallback } from '@/components/ui/ImageWithFallback'
 import type {
   PartnershipsPageConfig,
   PartnerItemConfig,
@@ -99,8 +99,29 @@ export function PartnershipsAdminTabs({
 }: PartnershipsAdminTabsProps) {
   const router = useRouter()
 
-  // Tabs: 'inquiries', 'partners', 'page-settings'
-  const [activeTab, setActiveTab] = useState<'inquiries' | 'partners' | 'page-settings'>('inquiries')
+  // Tabs: 'partners', 'inquiries', 'page-settings'
+  const [activeTab, setActiveTab] = useState<'partners' | 'inquiries' | 'page-settings'>('partners')
+  const [isAdminMarqueePaused, setIsAdminMarqueePaused] = useState(false)
+
+  // Partners State & CMS State
+  const [config, setConfig] = useState<PartnershipsPageConfig>(initialConfig)
+  const [activeLangTab, setActiveLangTab] = useState<'ar' | 'fr' | 'en'>('ar')
+  const [searchPartner, setSearchPartner] = useState('')
+
+  const activePartnersCount = useMemo(() => {
+    return (config.partners || []).filter((p) => p.active !== false).length
+  }, [config.partners])
+
+  const adminMarqueeItems = useMemo(() => {
+    const list = config.partners || []
+    if (list.length === 0) return []
+    const repeatCount = Math.max(2, Math.ceil(6 / list.length))
+    const half: PartnerItemConfig[] = []
+    for (let i = 0; i < repeatCount; i++) {
+      half.push(...list)
+    }
+    return [...half, ...half]
+  }, [config.partners])
 
   // Inquiries State
   const [inquiries, setInquiries] = useState<PartnershipInquiryRow[]>(initialInquiries)
@@ -109,12 +130,6 @@ export function PartnershipsAdminTabs({
   const [typeFilter, setTypeFilter] = useState<string>('all')
   const [viewingInquiry, setViewingInquiry] = useState<PartnershipInquiryRow | null>(null)
   const [processingInquiryId, setProcessingInquiryId] = useState<string | null>(null)
-
-  // Partners State & CMS State
-  const [config, setConfig] = useState<PartnershipsPageConfig>(initialConfig)
-  const [activeLangTab, setActiveLangTab] = useState<'ar' | 'fr' | 'en'>('ar')
-  const [selectedPartnerTier, setSelectedPartnerTier] = useState<string>('all')
-  const [searchPartner, setSearchPartner] = useState('')
 
   // Partner Modal (Add/Edit)
   const [editingPartner, setEditingPartner] = useState<PartnerItemConfig | null>(null)
@@ -219,14 +234,12 @@ export function PartnershipsAdminTabs({
   // -------------------------------------------------------------
   const filteredPartners = (config.partners || []).filter((p) => {
     const q = searchPartner.toLowerCase().trim()
-    const matchesSearch =
-      !q ||
+    if (!q) return true
+    return (
       p.nameAr.toLowerCase().includes(q) ||
       p.nameFr.toLowerCase().includes(q) ||
       p.nameEn.toLowerCase().includes(q)
-
-    const matchesTier = selectedPartnerTier === 'all' || p.tier === selectedPartnerTier
-    return matchesSearch && matchesTier
+    )
   })
 
   function openAddPartnerModal() {
@@ -515,6 +528,19 @@ export function PartnershipsAdminTabs({
         <div className="flex items-center p-1 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6] shadow-2xs self-start sm:self-auto overflow-x-auto max-w-full">
           <button
             type="button"
+            onClick={() => setActiveTab('partners')}
+            className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-2 shrink-0 ${
+              activeTab === 'partners'
+                ? 'bg-[#0d3b43] text-white shadow-xs'
+                : 'text-[#445457] hover:bg-[#eae4d9]'
+            }`}
+          >
+            <span>🎬</span>
+            <span>دليل الشركاء والصور المتحركة ({config.partners?.length || 0})</span>
+          </button>
+
+          <button
+            type="button"
             onClick={() => setActiveTab('inquiries')}
             className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-2 shrink-0 ${
               activeTab === 'inquiries'
@@ -524,19 +550,6 @@ export function PartnershipsAdminTabs({
           >
             <span>📥</span>
             <span>مقترحات الشراكة ({inquiries.length})</span>
-          </button>
-
-          <button
-            type="button"
-            onClick={() => setActiveTab('partners')}
-            className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-2 shrink-0 ${
-              activeTab === 'partners'
-                ? 'bg-[#0d3b43] text-white shadow-xs'
-                : 'text-[#445457] hover:bg-[#eae4d9]'
-            }`}
-          >
-            <span>🏛️</span>
-            <span>دليل الشركاء ({config.partners?.length || 0})</span>
           </button>
 
           <button
@@ -792,23 +805,26 @@ export function PartnershipsAdminTabs({
       )}
 
       {/* ========================================================= */}
-      {/* TAB 2: OFFICIAL PARTNERS DIRECTORY                        */}
+      {/* TAB 2: OFFICIAL PARTNERS & LIVE MOVING IMAGES MARQUEE     */}
       {/* ========================================================= */}
       {activeTab === 'partners' && (
         <div className="space-y-6">
           {/* Action Bar */}
-          <div className="bg-white p-5 rounded-2xl border border-[#e5e0d6] shadow-2xs space-y-4">
+          <div className="bg-white p-5 sm:p-6 rounded-2xl border border-[#e5e0d6] shadow-2xs space-y-4">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div>
-                <h2 className="text-base font-black text-[#08242a]">
-                  شبكة الشركاء المعتمدين والمؤسسات الحليفة
-                </h2>
+                <div className="flex items-center gap-2">
+                  <span className="text-xl">🎬</span>
+                  <h2 className="text-base sm:text-lg font-black text-[#08242a]">
+                    دليل الشركاء وشريط الصور المتحركة
+                  </h2>
+                </div>
                 <p className="text-xs text-[#5f7174] mt-0.5">
-                  إدارة قائمة الشركاء المعروضين في واجهة الموقع، تعديل الشعارات، وتصنيف الشراكات
+                  معاينة وإدارة حركة صور الشركاء المعروضة في شريط الواجهة العامة، مع إمكانية التعديل والإضافة والحذف
                 </p>
               </div>
 
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 flex-wrap">
                 <button
                   type="button"
                   onClick={handleSeedDefaultPartners}
@@ -825,161 +841,240 @@ export function PartnershipsAdminTabs({
                   className="inline-flex items-center gap-2 px-4 py-2 bg-[#0d3b43] text-white text-xs font-bold rounded-xl hover:bg-[#14505b] active:scale-98 transition-all shadow-xs cursor-pointer"
                 >
                   <span>➕</span>
-                  <span>إضافة شريك جديد</span>
+                  <span>إضافة شريك وصورة جديدة</span>
                 </button>
               </div>
             </div>
 
-            {/* Filter Pills & Search */}
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-2 border-t border-[#f4ede2]">
-              <div className="flex items-center gap-1.5 overflow-x-auto pb-1 max-w-full text-2xs">
-                {[
-                  { id: 'all', label: 'الكل' },
-                  { id: 'cultural', label: 'مراكز ثقافية' },
-                  { id: 'educational', label: 'تعليمي وجامعي' },
-                  { id: 'civil_society', label: 'مجتمع مدني' },
-                  { id: 'institutional', label: 'مؤسساتي' },
-                  { id: 'sponsor', label: 'رعاية وخاص' },
-                ].map((t) => (
-                  <button
-                    key={t.id}
-                    type="button"
-                    onClick={() => setSelectedPartnerTier(t.id)}
-                    className={`px-3 py-1.5 rounded-lg font-bold transition-all cursor-pointer shrink-0 ${
-                      selectedPartnerTier === t.id
-                        ? 'bg-[#0d3b43] text-white shadow-2xs'
-                        : 'bg-[#faf7f2] text-[#445457] hover:bg-[#eae4d9]'
-                    }`}
-                  >
-                    {t.label}
-                  </button>
-                ))}
+            {/* Live Moving Images Marquee Preview & Controls */}
+            <div className="pt-2">
+              <div className="flex items-center justify-between pb-3 text-xs font-bold">
+                <div className="flex items-center gap-2">
+                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
+                  <span className="text-[#08242a]">
+                    شريط الصور المتحركة الحي (المعروض في الموقع حالياً)
+                  </span>
+                  <span className="text-2xs font-bold bg-[#faf7f2] px-2 py-0.5 rounded-md border border-[#e5e0d6] text-[#65777a]">
+                    {activePartnersCount} صور نشطة تتحرك
+                  </span>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() => setIsAdminMarqueePaused((prev) => !prev)}
+                  className="inline-flex items-center gap-1.5 text-2xs font-bold text-[#0d3b43] bg-[#faf7f2] hover:bg-[#eae4d9] px-3 py-1 rounded-lg border border-[#e5e0d6] transition-all cursor-pointer"
+                >
+                  <span>{isAdminMarqueePaused ? '▶️ تشغيل الحركة' : '⏸️ إيقاف مؤقت'}</span>
+                </button>
               </div>
 
-              <div className="relative w-full sm:w-64">
-                <input
-                  type="text"
-                  value={searchPartner}
-                  onChange={(e) => setSearchPartner(e.target.value)}
-                  placeholder="بحث في اسم الشريك..."
-                  className="w-full ps-8 pe-3 py-1.5 rounded-xl border border-[#e5e0d6] text-xs bg-[#faf7f2] outline-none"
+              {/* The Live Moving Marquee Container */}
+              <div className="relative w-full overflow-hidden rounded-3xl bg-gradient-to-b from-[#f7f2e9] via-[#faf7f2] to-[#f7f2e9] border border-[#e5e0d6] py-6 shadow-inner">
+                {/* Side Fade Gradient Masks */}
+                <div
+                  className="absolute inset-y-0 start-0 w-16 sm:w-28 bg-gradient-to-r from-[#f7f2e9] to-transparent z-10 pointer-events-none"
+                  aria-hidden="true"
                 />
-                <span className="absolute start-2.5 top-1/2 -translate-y-1/2 text-xs text-[#819598]">
-                  🔍
-                </span>
+                <div
+                  className="absolute inset-y-0 end-0 w-16 sm:w-28 bg-gradient-to-l from-[#f7f2e9] to-transparent z-10 pointer-events-none"
+                  aria-hidden="true"
+                />
+
+                {adminMarqueeItems.length > 0 ? (
+                  <div
+                    dir="ltr"
+                    className="flex items-center gap-6 w-max animate-marquee-continuous hover:[animation-play-state:paused]"
+                    style={isAdminMarqueePaused ? { animationPlayState: 'paused' } : undefined}
+                  >
+                    {adminMarqueeItems.map((partner, idx) => (
+                      <div
+                        key={`${partner.id}-${idx}`}
+                        className={`group/card relative w-64 sm:w-72 h-56 bg-white rounded-3xl border p-3.5 shadow-2xs hover:shadow-xl hover:border-[#c85a32]/50 transition-all flex flex-col justify-between shrink-0 overflow-hidden ${
+                          partner.active ? 'border-[#e5e0d6]' : 'border-rose-200 bg-rose-50/30 opacity-70'
+                        }`}
+                      >
+                        {/* Partner Photo */}
+                        <div className="relative w-full h-32 rounded-2xl overflow-hidden bg-[#faf7f2] border border-[#f0eae1]">
+                          <ImageWithFallback
+                            src={partner.logoUrl}
+                            fallbackSrc="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=600&q=80"
+                            alt={partner.nameAr}
+                            fill
+                            className="object-cover group-hover/card:scale-108 transition-transform duration-700 ease-out"
+                            sizes="(max-width: 640px) 240px, 288px"
+                          />
+                          <div className="absolute top-2 start-2 z-10">
+                            <span
+                              className={`px-2 py-0.5 rounded-md text-4xs font-black shadow-xs ${
+                                partner.active
+                                  ? 'bg-emerald-600 text-white'
+                                  : 'bg-rose-600 text-white'
+                              }`}
+                            >
+                              {partner.active ? 'نشط ✓' : 'مخفي ✕'}
+                            </span>
+                          </div>
+                        </div>
+
+                        {/* Partner Name & Tier */}
+                        <div className="pt-2 text-center" dir="rtl">
+                          <h4 className="text-xs font-bold text-[#08242a] truncate">
+                            {partner.nameAr}
+                          </h4>
+                          <span className="text-4xs text-[#819598] font-medium block">
+                            {tierLabels[partner.tier]?.ar || partner.tier}
+                          </span>
+                        </div>
+
+                        {/* Card Action Buttons */}
+                        <div className="pt-2 border-t border-[#f4ede2] flex items-center justify-between gap-1 text-2xs" dir="rtl">
+                          <button
+                            type="button"
+                            onClick={() => openEditPartnerModal(partner)}
+                            className="px-2.5 py-1 rounded-lg font-bold bg-[#faf7f2] hover:bg-[#eae4d9] text-[#08242a] border border-[#e5e0d6] transition-colors cursor-pointer"
+                          >
+                            ✏️ تعديل
+                          </button>
+
+                          <button
+                            type="button"
+                            onClick={() => handleTogglePartnerActive(partner.id)}
+                            className={`px-2 py-1 rounded-lg font-bold border transition-colors cursor-pointer text-3xs ${
+                              partner.active
+                                ? 'bg-amber-50 hover:bg-amber-100 text-amber-800 border-amber-200'
+                                : 'bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border-emerald-200'
+                            }`}
+                          >
+                            {partner.active ? 'إخفاء' : 'تفعيل'}
+                          </button>
+
+                          <button
+                            type="button"
+                            onClick={() => handleDeletePartner(partner.id, partner.nameAr)}
+                            className="px-2 py-1 rounded-lg font-bold text-rose-600 hover:bg-rose-50 border border-transparent hover:border-rose-200 transition-colors cursor-pointer text-3xs"
+                            title="حذف"
+                          >
+                            🗑️
+                          </button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="p-8 text-center text-[#819598]">
+                    لا توجد صور شركاء معروضة حالياً. يمكنك استيراد الشركاء النموذجيين أو إضافة شريك جديد.
+                  </div>
+                )}
               </div>
             </div>
           </div>
 
-          {/* Partners Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {filteredPartners.length > 0 ? (
-              filteredPartners.map((partner) => (
-                <div
-                  key={partner.id}
-                  className={`bg-white rounded-2xl border p-5 transition-all shadow-2xs flex flex-col justify-between ${
-                    partner.active ? 'border-[#e5e0d6]' : 'border-rose-200 bg-rose-50/20 opacity-70'
-                  }`}
-                >
-                  <div className="space-y-3">
-                    <div className="flex items-start justify-between gap-3">
-                      <div className="relative w-14 h-14 rounded-xl border border-[#e5e0d6] overflow-hidden bg-[#faf7f2] shrink-0">
-                        {partner.logoUrl ? (
-                          <Image
-                            src={partner.logoUrl}
-                            alt={partner.nameAr}
-                            fill
-                            className="object-cover"
-                            unoptimized
-                          />
-                        ) : (
-                          <div className="w-full h-full flex items-center justify-center text-xl">
-                            🏛️
-                          </div>
-                        )}
-                      </div>
-
-                      <div className="flex items-center gap-1.5">
-                        <button
-                          type="button"
-                          onClick={() => handleTogglePartnerActive(partner.id)}
-                          className={`px-2 py-0.5 rounded text-4xs font-extrabold cursor-pointer border ${
-                            partner.active
-                              ? 'bg-emerald-50 text-emerald-800 border-emerald-200'
-                              : 'bg-rose-50 text-rose-800 border-rose-200'
-                          }`}
-                        >
-                          {partner.active ? 'نشط في الموقع ✓' : 'مخفي ✕'}
-                        </button>
-                      </div>
-                    </div>
-
-                    <div>
-                      <span className="inline-block px-2 py-0.5 rounded text-4xs font-extrabold bg-[#faf7f2] border border-[#e5e0d6] text-[#c85a32] mb-1">
-                        {tierLabels[partner.tier]?.ar || partner.tier}
-                      </span>
-                      <h3 className="font-extrabold text-[#08242a] text-sm leading-snug">
-                        {partner.nameAr}
-                      </h3>
-                      {partner.nameFr && (
-                        <p className="text-3xs text-[#819598] font-medium mt-0.5">
-                          {partner.nameFr}
-                        </p>
-                      )}
-                    </div>
-
-                    {partner.descriptionAr && (
-                      <p className="text-2xs text-[#445457] line-clamp-2 leading-relaxed">
-                        {partner.descriptionAr}
-                      </p>
-                    )}
-
-                    {partner.websiteUrl && (
-                      <a
-                        href={partner.websiteUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 text-3xs font-bold text-[#0d3b43] hover:underline"
-                      >
-                        <span>زيارة الموقع الإلكتروني</span>
-                        <span>↗</span>
-                      </a>
-                    )}
-                  </div>
-
-                  <div className="flex items-center justify-end gap-2 pt-4 mt-4 border-t border-[#f4ede2]">
-                    <button
-                      type="button"
-                      onClick={() => openEditPartnerModal(partner)}
-                      className="px-3 py-1.5 rounded-lg text-2xs font-bold bg-[#faf7f2] border border-[#e5e0d6] text-[#08242a] hover:bg-[#eae4d9] transition-colors cursor-pointer"
-                    >
-                      تعديل
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => handleDeletePartner(partner.id, partner.nameAr)}
-                      className="px-3 py-1.5 rounded-lg text-2xs font-bold text-rose-600 hover:bg-rose-50 border border-transparent hover:border-rose-200 transition-colors cursor-pointer"
-                    >
-                      حذف
-                    </button>
-                  </div>
-                </div>
-              ))
-            ) : (
-              <div className="col-span-full bg-white p-12 rounded-2xl border border-[#e5e0d6] text-center text-[#819598] space-y-3">
-                <span className="text-3xl block">🤝</span>
-                <p className="text-xs font-bold text-[#08242a]">
-                  لا يوجد شركاء مطابقون لمعايير البحث حالياً.
-                </p>
-                <button
-                  type="button"
-                  onClick={handleSeedDefaultPartners}
-                  className="inline-flex items-center gap-1.5 px-4 py-2 bg-[#0d3b43] text-white text-xs font-bold rounded-xl hover:bg-[#14505b] transition-all cursor-pointer shadow-xs"
-                >
-                  استيراد الشركاء النموذجيين الآن
-                </button>
+          {/* Quick Management Table for Full Control & Search */}
+          <div className="bg-white rounded-2xl border border-[#e5e0d6] shadow-2xs overflow-hidden">
+            <div className="p-4 sm:p-5 border-b border-[#f4ede2] flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <div className="flex items-center gap-2">
+                <span className="text-base">📋</span>
+                <h3 className="text-xs sm:text-sm font-black text-[#08242a]">
+                  قائمة وتفاصيل الشركاء المعتمدين ({config.partners?.length || 0})
+                </h3>
               </div>
-            )}
+
+              <div className="flex items-center gap-2">
+                <div className="relative w-full sm:w-64">
+                  <input
+                    type="text"
+                    value={searchPartner}
+                    onChange={(e) => setSearchPartner(e.target.value)}
+                    placeholder="بحث في اسم الشريك..."
+                    className="w-full ps-8 pe-3 py-1.5 rounded-xl border border-[#e5e0d6] text-xs bg-[#faf7f2] outline-none"
+                  />
+                  <span className="absolute start-2.5 top-1/2 -translate-y-1/2 text-xs text-[#819598]">
+                    🔍
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div className="overflow-x-auto">
+              <table className="w-full text-start text-xs">
+                <thead className="bg-[#faf7f2] text-[#819598] font-bold border-b border-[#e5e0d6]">
+                  <tr>
+                    <th className="px-5 py-3 text-start">الصورة</th>
+                    <th className="px-5 py-3 text-start">اسم الشريك</th>
+                    <th className="px-5 py-3 text-start">التصنيف</th>
+                    <th className="px-5 py-3 text-center">الظهور في شريط الحركة</th>
+                    <th className="px-5 py-3 text-end">الإجراءات</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-[#f4ede2]">
+                  {filteredPartners.length > 0 ? (
+                    filteredPartners.map((partner) => (
+                      <tr key={partner.id} className="hover:bg-stone-50/50 transition-colors">
+                        <td className="px-5 py-3">
+                          <div className="relative w-12 h-12 rounded-xl border border-[#e5e0d6] overflow-hidden bg-[#faf7f2] shrink-0">
+                            <ImageWithFallback
+                              src={partner.logoUrl}
+                              fallbackSrc="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=300&q=80"
+                              alt={partner.nameAr}
+                              fill
+                              className="object-cover"
+                            />
+                          </div>
+                        </td>
+                        <td className="px-5 py-3">
+                          <span className="font-extrabold text-[#08242a] block">{partner.nameAr}</span>
+                          {partner.nameFr && (
+                            <span className="text-3xs text-[#819598] block">{partner.nameFr}</span>
+                          )}
+                        </td>
+                        <td className="px-5 py-3">
+                          <span className="inline-block px-2 py-0.5 rounded text-4xs font-bold bg-[#faf7f2] border border-[#e5e0d6] text-[#c85a32]">
+                            {tierLabels[partner.tier]?.ar || partner.tier}
+                          </span>
+                        </td>
+                        <td className="px-5 py-3 text-center">
+                          <button
+                            type="button"
+                            onClick={() => handleTogglePartnerActive(partner.id)}
+                            className={`px-3 py-1 rounded-full text-3xs font-extrabold border transition-all cursor-pointer ${
+                              partner.active
+                                ? 'bg-emerald-50 text-emerald-800 border-emerald-200'
+                                : 'bg-rose-50 text-rose-800 border-rose-200'
+                            }`}
+                          >
+                            {partner.active ? 'يتحرك في الموقع ✓' : 'مخفي ✕'}
+                          </button>
+                        </td>
+                        <td className="px-5 py-3 text-end">
+                          <div className="flex items-center justify-end gap-2">
+                            <button
+                              type="button"
+                              onClick={() => openEditPartnerModal(partner)}
+                              className="px-2.5 py-1 rounded-lg text-2xs font-bold bg-[#faf7f2] border border-[#e5e0d6] hover:bg-[#eae4d9] text-[#08242a] transition-colors cursor-pointer"
+                            >
+                              تعديل
+                            </button>
+                            <button
+                              type="button"
+                              onClick={() => handleDeletePartner(partner.id, partner.nameAr)}
+                              className="px-2.5 py-1 rounded-lg text-2xs font-bold text-rose-600 hover:bg-rose-50 border border-transparent hover:border-rose-200 transition-colors cursor-pointer"
+                            >
+                              حذف
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    ))
+                  ) : (
+                    <tr>
+                      <td colSpan={5} className="px-5 py-8 text-center text-[#819598]">
+                        لا توجد نتائج مطابقة لبحثك.
+                      </td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       )}
