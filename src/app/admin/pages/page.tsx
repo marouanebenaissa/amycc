@@ -136,16 +136,6 @@ const sitePages: PageDefinition[] = [
     descriptionAr: 'إشعارات الدعم المالي والمساهمات العينية لدعم المشاريع والأنشطة الثقافية غير الربحية.',
   },
   {
-    key: 'gallery',
-    titleAr: 'معرض الصور والوسائط',
-    titleFr: 'Galerie Médias',
-    titleEn: 'Media Gallery',
-    path: 'gallery',
-    icon: '🖼️',
-    category: 'إعلام',
-    descriptionAr: 'التوثيق البصري للأنشطة والورش والعروض الفنية التي تنظمها الجمعية.',
-  },
-  {
     key: 'contact',
     titleAr: 'اتصل بنا',
     titleFr: 'Contact',

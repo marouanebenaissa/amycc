@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import '../globals.css'
 import { Cairo, Sora } from 'next/font/google'
 import { createClient } from '@/lib/supabase/server'
-import { AdminSidebar } from '@/components/admin/AdminSidebar'
+import { AdminLayoutClient } from '@/components/admin/AdminLayoutClient'
 
 const cairo = Cairo({
   subsets: ['arabic', 'latin'],
@@ -42,21 +42,17 @@ export default async function AdminLayout({
   }
 
   return (
-    <html lang="ar" dir="rtl" className={`h-full ${cairo.variable} ${sora.variable}`}>
-      <body className="min-h-full flex flex-col md:flex-row text-[#08242a] bg-[#faf7f2] font-arabic antialiased">
+    <html lang="ar" dir="rtl" className={`h-full ${cairo.variable} ${sora.variable}`} suppressHydrationWarning>
+      <body className="min-h-full text-[#08242a] bg-[#faf7f2] font-arabic antialiased" suppressHydrationWarning>
         {user ? (
-          <>
-            <AdminSidebar
-              userEmail={user.email || 'admin@amycc.org'}
-              userName={userFullName}
-            />
-
-            <main className="flex-1 overflow-y-auto p-5 sm:p-8 md:p-10 max-w-7xl">
-              {children}
-            </main>
-          </>
+          <AdminLayoutClient
+            userEmail={user.email || 'admin@amycc.org'}
+            userName={userFullName}
+          >
+            {children}
+          </AdminLayoutClient>
         ) : (
-          <main className="flex-1 flex items-center justify-center p-6 bg-[#faf7f2]">
+          <main className="min-h-screen flex items-center justify-center p-6 bg-[#faf7f2]">
             {children}
           </main>
         )}
