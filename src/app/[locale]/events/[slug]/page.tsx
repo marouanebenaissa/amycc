@@ -203,16 +203,20 @@ export default async function EventDetailPage(props: {
                   {event.registration_open
                     ? isAr
                       ? 'التسجيل مفتوح'
+                      : isFr
+                      ? 'Inscriptions ouvertes'
                       : 'Registration Open'
                     : isAr
                     ? 'التسجيل مغلق'
+                    : isFr
+                    ? 'Inscriptions fermées'
                     : 'Closed'}
                 </span>
               </span>
 
               {event.capacity && (
                 <span className="px-3 py-1.5 rounded-xl text-2xs sm:text-xs font-bold bg-[#faf7f2] text-[#5f7174]">
-                  👥 {isAr ? `الطاقة: ${event.capacity} مقعد` : `Capacity: ${event.capacity}`}
+                  👥 {isAr ? `الطاقة: ${event.capacity} مقعد` : isFr ? `Capacité : ${event.capacity} places` : `Capacity: ${event.capacity}`}
                 </span>
               )}
             </div>
@@ -340,28 +344,34 @@ export default async function EventDetailPage(props: {
 
                 <div className="space-y-3 text-2xs sm:text-xs">
                   <div className="flex items-start justify-between gap-4">
-                    <span className="text-[#819598] font-bold">{isAr ? 'المنظم:' : 'Organizer:'}</span>
-                    <span className="text-[#08242a] font-bold text-end">جمعية روح الفنون والثقافة (AMYCC)</span>
+                    <span className="text-[#819598] font-bold">{isAr ? 'المنظم:' : isFr ? 'Organisateur :' : 'Organizer:'}</span>
+                    <span className="text-[#08242a] font-bold text-end">
+                      {isAr
+                        ? 'جمعية روح الفنون والثقافة (AMYCC)'
+                        : isFr
+                        ? 'Association Esprit des Arts et de la Culture (AMYCC)'
+                        : 'Spirit of Arts and Culture Association (AMYCC)'}
+                    </span>
                   </div>
 
                   <div className="flex items-start justify-between gap-4">
-                    <span className="text-[#819598] font-bold">{isAr ? 'التاريخ:' : 'Date:'}</span>
+                    <span className="text-[#819598] font-bold">{isAr ? 'التاريخ:' : isFr ? 'Date :' : 'Date:'}</span>
                     <span className="text-[#08242a] font-bold text-end">{formattedFullDate}</span>
                   </div>
 
                   <div className="flex items-start justify-between gap-4">
-                    <span className="text-[#819598] font-bold">{isAr ? 'التوقيت:' : 'Time:'}</span>
+                    <span className="text-[#819598] font-bold">{isAr ? 'التوقيت:' : isFr ? 'Horaire :' : 'Time:'}</span>
                     <span className="text-[#08242a] font-bold text-end">{formattedTime}</span>
                   </div>
 
                   <div className="flex items-start justify-between gap-4">
-                    <span className="text-[#819598] font-bold">{isAr ? 'الفضاء:' : 'Venue:'}</span>
-                    <span className="text-[#08242a] font-bold text-end">{event.venue || 'المركز الثقافي'}</span>
+                    <span className="text-[#819598] font-bold">{isAr ? 'الفضاء:' : isFr ? 'Lieu :' : 'Venue:'}</span>
+                    <span className="text-[#08242a] font-bold text-end">{event.venue || (isAr ? 'المركز الثقافي' : isFr ? 'Centre culturel' : 'Cultural Center')}</span>
                   </div>
 
                   {event.city && (
                     <div className="flex items-start justify-between gap-4">
-                      <span className="text-[#819598] font-bold">{isAr ? 'المدينة:' : 'City:'}</span>
+                      <span className="text-[#819598] font-bold">{isAr ? 'المدينة:' : isFr ? 'Ville :' : 'City:'}</span>
                       <span className="text-[#08242a] font-bold text-end">{event.city}</span>
                     </div>
                   )}

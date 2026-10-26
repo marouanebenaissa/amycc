@@ -39,9 +39,30 @@ interface RecentArticleItem {
   cover_image?: string | null
   published_at?: string | null
   news_translations?: {
+    locale?: string
     title: string
     excerpt?: string | null
   }[]
+}
+
+function getCategoryLabel(cat: string, loc: string) {
+  const c = (cat || '').toLowerCase()
+  if (c.includes('press') || c.includes('صحف') || c.includes('communiqu')) {
+    return loc === 'ar' ? 'بيان صحفي' : loc === 'fr' ? 'Communiqué de presse' : 'Press Release'
+  }
+  if (c.includes('assoc') || c.includes('جمعو') || c.includes('جمعية') || c.includes('vie')) {
+    return loc === 'ar' ? 'أخبار الجمعية' : loc === 'fr' ? 'Vie associative' : 'Association Life'
+  }
+  if (c.includes('cultur') || c.includes('ثقاف') || c.includes('art') || c.includes('تراث')) {
+    return loc === 'ar' ? 'ثقافة وتراث' : loc === 'fr' ? 'Arts & Patrimoine' : 'Culture & Arts'
+  }
+  if (c.includes('youth') || c.includes('شباب') || c.includes('jeun')) {
+    return loc === 'ar' ? 'مبادرات الشباب' : loc === 'fr' ? 'Jeunesse en action' : 'Youth Initiatives'
+  }
+  if (c.includes('partner') || c.includes('شراك')) {
+    return loc === 'ar' ? 'شراكات وتنسيق' : loc === 'fr' ? 'Partenariats' : 'Partnerships'
+  }
+  return cat
 }
 
 export async function generateMetadata(props: {
@@ -63,9 +84,21 @@ export async function generateMetadata(props: {
         data.news_translations?.find((t) => t.locale === 'ar') ||
         data.news_translations?.[0]
 
-      const title = `${trans?.title || data.slug} | جمعية روح الفنون والثقافة`
+      const orgName =
+        locale === 'ar'
+          ? 'جمعية روح الفنون والثقافة'
+          : locale === 'fr'
+          ? 'Association Esprit des Arts et de la Culture'
+          : 'Spirit of Arts and Culture Association'
+
+      const title = `${trans?.title || data.slug} | ${orgName}`
       const description =
-        trans?.excerpt || 'مقال ومستجدات إعلامية من جمعية روح الفنون والثقافة (AMYCC)'
+        trans?.excerpt ||
+        (locale === 'ar'
+          ? 'مقال ومستجدات إعلامية من جمعية روح الفنون والثقافة (AMYCC)'
+          : locale === 'fr'
+          ? "Actualités et communiqués de presse de l'Association Esprit des Arts et de la Culture (AMYCC)"
+          : 'News and press releases from the Spirit of Arts and Culture Association (AMYCC)')
 
       return {
         title,
@@ -82,8 +115,15 @@ export async function generateMetadata(props: {
     // Fallback
   }
 
+  const fallbackTitle =
+    locale === 'ar'
+      ? 'المستجدات والأخبار | جمعية روح الفنون والثقافة'
+      : locale === 'fr'
+      ? 'Actualités & Publications | Association Esprit des Arts et de la Culture'
+      : 'News & Media | Spirit of Arts and Culture Association'
+
   return {
-    title: 'المستجدات والأخبار | جمعية روح الفنون والثقافة',
+    title: fallbackTitle,
   }
 }
 
@@ -171,6 +211,55 @@ export default async function NewsDetailPage(props: {
       })
     : null
 
+  const orgNameShort =
+    isAr
+      ? 'جمعية روح الفنون والثقافة (AMYCC)'
+      : isFr
+      ? 'Association Esprit des Arts et de la Culture (AMYCC)'
+      : 'Spirit of Arts and Culture Association (AMYCC)'
+
+  const mediaDeskLabel =
+    isAr
+      ? 'خلية الإعلام، النشر والتواصل المؤسساتي'
+      : isFr
+      ? 'Pôle Médias, Édition & Communication'
+      : 'Media, Publishing & Communications Desk'
+
+  const pressBadgeLabel =
+    isAr
+      ? 'خلية الصحافة والإعلام'
+      : isFr
+      ? 'Pôle Presse & Médias'
+      : 'Press & Media Desk'
+
+  const heroCreditLabel =
+    isAr
+      ? 'جمعية روح الفنون والثقافة • AMYCC المغرب'
+      : isFr
+      ? 'AMYCC Maroc • Association Esprit des Arts et de la Culture'
+      : 'AMYCC Morocco • Spirit of Arts and Culture Association'
+
+  const backToNewsLabel =
+    isAr
+      ? 'تصفح بقية الأخبار والمقالات'
+      : isFr
+      ? 'Toutes les actualités & articles'
+      : 'All News & Articles'
+
+  const breadcrumbBackLabel =
+    isAr
+      ? 'الرجوع إلى كافة الأخبار'
+      : isFr
+      ? 'Toutes les actualités'
+      : 'All News & Articles'
+
+  const dossierLabel =
+    isAr
+      ? 'الملف الإعلامي • AMYCC'
+      : isFr
+      ? 'Dossier de Presse • AMYCC'
+      : 'AMYCC Media Dossier'
+
   return (
     <>
       <Header locale={locale} dict={dict} />
@@ -183,12 +272,12 @@ export default async function NewsDetailPage(props: {
               href={`/${locale}/news`}
               className="inline-flex items-center gap-1.5 text-[#0d3b43] hover:text-[#c85a32] transition-colors"
             >
-              <span>{isAr ? '←' : '→'}</span>
-              <span>{dict.news.view_all}</span>
+              <span className="rtl:rotate-180">←</span>
+              <span>{breadcrumbBackLabel}</span>
             </Link>
 
             <span className="text-3xs uppercase tracking-wider font-mono">
-              AMYCC Media Dossier
+              {dossierLabel}
             </span>
           </div>
 
@@ -196,7 +285,7 @@ export default async function NewsDetailPage(props: {
           <header className="space-y-4">
             <div className="flex items-center gap-3 flex-wrap">
               <span className="px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider bg-[#fae4dc] text-[#c85a32] border border-[#f2c2b0]">
-                {article.category}
+                {getCategoryLabel(article.category, locale)}
               </span>
 
               {dateFormatted && (
@@ -207,7 +296,7 @@ export default async function NewsDetailPage(props: {
               )}
 
               <span className="text-xs text-[#819598] font-bold">
-                ⏱️ {isAr ? `${readingTime} دقائق قراءة` : `${readingTime} min de lecture`}
+                ⏱️ {isAr ? `${readingTime} دقائق قراءة` : isFr ? `${readingTime} min de lecture` : `${readingTime} min read`}
               </span>
             </div>
 
@@ -235,8 +324,8 @@ export default async function NewsDetailPage(props: {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
               <div className="absolute bottom-4 start-4 end-4 text-white text-3xs font-mono font-bold flex items-center justify-between">
-                <span>جمعية روح الفنون والثقافة • AMYCC Morocco</span>
-                <span>Press & Media Desk</span>
+                <span>{heroCreditLabel}</span>
+                <span>{pressBadgeLabel}</span>
               </div>
             </div>
           )}
@@ -257,23 +346,20 @@ export default async function NewsDetailPage(props: {
               </div>
               <div>
                 <span className="text-xs font-extrabold text-[#08242a] block">
-                  جمعية روح الفنون والثقافة (AMYCC)
+                  {orgNameShort}
                 </span>
                 <span className="text-3xs text-[#819598] block">
-                  {isAr
-                    ? 'خلية الإعلام، النشر والتواصل المؤسساتي'
-                    : isFr
-                    ? 'Pôle Médias, Édition & Communication'
-                    : 'Media, Publishing & Institutional Communications'}
+                  {mediaDeskLabel}
                 </span>
               </div>
             </div>
 
             <Link
               href={`/${locale}/news`}
-              className="px-4 py-2 rounded-xl text-xs font-bold text-[#0d3b43] bg-[#faf7f2] hover:bg-[#eae4d9] border border-[#e5e0d6] transition-all"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold text-[#0d3b43] bg-[#faf7f2] hover:bg-[#eae4d9] border border-[#e5e0d6] transition-all"
             >
-              {isAr ? '← تصفح بقية الأخبار والمقالات' : '← All News & Articles'}
+              <span className="rtl:rotate-180">←</span>
+              <span>{backToNewsLabel}</span>
             </Link>
           </div>
 
@@ -288,6 +374,7 @@ export default async function NewsDetailPage(props: {
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 {recentArticles.map((rec) => {
                   const recTrans =
+                    rec.news_translations?.find((t) => t.locale === locale) ||
                     rec.news_translations?.find((t) => t.title) ||
                     rec.news_translations?.[0] || { title: rec.slug, excerpt: '' }
 
@@ -299,14 +386,15 @@ export default async function NewsDetailPage(props: {
                     >
                       <div>
                         <span className="text-4xs font-bold uppercase tracking-wider text-[#c85a32] block mb-1">
-                          {rec.category}
+                          {getCategoryLabel(rec.category, locale)}
                         </span>
                         <h4 className="text-xs font-black text-[#08242a] group-hover:text-[#c85a32] transition-colors line-clamp-2 leading-snug">
                           {recTrans.title}
                         </h4>
                       </div>
-                      <span className="text-3xs font-bold text-[#0d3b43] mt-3 block">
-                        {isAr ? 'قراءة ←' : 'Read →'}
+                      <span className="text-3xs font-bold text-[#0d3b43] mt-3 inline-flex items-center gap-1">
+                        <span>{isAr ? 'قراءة المقال' : isFr ? 'Lire l’article' : 'Read Article'}</span>
+                        <span className="rtl:rotate-180">→</span>
                       </span>
                     </Link>
                   )
