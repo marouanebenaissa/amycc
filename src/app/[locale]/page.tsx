@@ -883,8 +883,10 @@ export default async function HomePage(props: { params: Promise<{ locale: string
                         </span>
                       </div>
 
-                      <h3 className="text-lg font-bold text-[#08242a] mb-2 leading-snug">
-                        {trans.title}
+                      <h3 className="text-lg font-bold text-[#08242a] mb-2 leading-snug hover:text-[#c85a32] transition-colors">
+                        <Link href={`/${locale}/events/${ev.slug}`}>
+                          {trans.title}
+                        </Link>
                       </h3>
 
                       <p className="text-2xs text-[#5f7174] flex items-center gap-1 mb-4">
@@ -899,7 +901,15 @@ export default async function HomePage(props: { params: Promise<{ locale: string
                       )}
                     </div>
 
-                    <div className="pt-4 border-t border-[#e5e0d6]">
+                    <div className="pt-4 border-t border-[#e5e0d6] flex items-center gap-2">
+                      <Link
+                        href={`/${locale}/events/${ev.slug}`}
+                        className="py-2.5 px-3 rounded-xl font-bold text-xs text-[#08242a] bg-[#faf7f2] hover:bg-[#eae4d9] border border-[#e5e0d6] transition-colors flex items-center justify-center gap-1"
+                      >
+                        <span>{isAr ? 'المقال والبوستر' : 'Details'}</span>
+                        <span>{isAr ? '←' : '→'}</span>
+                      </Link>
+
                       {ev.registration_open ? (
                         <EventRegistrationModal
                           eventId={ev.id}
@@ -909,10 +919,10 @@ export default async function HomePage(props: { params: Promise<{ locale: string
                           eventVenue={ev.venue || ev.city || undefined}
                           locale={locale}
                           buttonLabel={dict.events.register}
-                          className="w-full py-2.5 px-4 rounded-xl font-bold text-white bg-[#0d3b43] hover:bg-[#14505b] active:scale-95 transition-all text-xs shadow-xs flex items-center justify-center gap-2"
+                          className="flex-1 py-2.5 px-3 rounded-xl font-bold text-white bg-[#0d3b43] hover:bg-[#14505b] active:scale-95 transition-all text-xs shadow-xs flex items-center justify-center gap-2 cursor-pointer"
                         />
                       ) : (
-                        <span className="block text-center py-2 text-2xs text-[#819598] font-semibold">
+                        <span className="flex-1 block text-center py-2 text-2xs text-[#819598] font-semibold bg-[#faf7f2] rounded-xl border border-[#e5e0d6]">
                           {isAr ? 'اكتملت المقاعد' : 'Fully Booked'}
                         </span>
                       )}

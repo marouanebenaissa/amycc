@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useMemo } from 'react'
+import Link from 'next/link'
 import { EventRegistrationModal } from '@/components/events/EventRegistrationModal'
 import { ImageWithFallback } from '@/components/ui/ImageWithFallback'
 
@@ -294,7 +295,9 @@ export function EventsCatalog({ events, locale, buttonLabel }: EventsCatalogProp
                   {/* Card Content */}
                   <div className="p-6 space-y-3">
                     <h3 className="text-lg sm:text-xl font-black text-[#08242a] leading-snug line-clamp-2 group-hover:text-[#c85a32] transition-colors">
-                      {trans.title}
+                      <Link href={`/${locale}/events/${ev.slug}`} className="hover:underline">
+                        {trans.title}
+                      </Link>
                     </h3>
 
                     {/* Capacity Indicator */}
@@ -319,9 +322,17 @@ export function EventsCatalog({ events, locale, buttonLabel }: EventsCatalogProp
                   </div>
                 </div>
 
-                {/* Footer Action Button */}
+                {/* Footer Action Buttons */}
                 <div className="p-6 pt-0">
-                  <div className="pt-4 border-t border-[#f4ede2]">
+                  <div className="pt-4 border-t border-[#f4ede2] flex flex-col sm:flex-row gap-2">
+                    <Link
+                      href={`/${locale}/events/${ev.slug}`}
+                      className="flex-1 py-2.5 px-3 rounded-xl font-extrabold text-center text-xs text-[#08242a] bg-[#faf7f2] hover:bg-[#eae4d9] border border-[#e5e0d6] transition-all flex items-center justify-center gap-1.5"
+                    >
+                      <span>{isAr ? 'صفحة الفعالية والمقال' : isFr ? 'Page de l\'événement' : 'Event Page'}</span>
+                      <span>{isAr ? '←' : '→'}</span>
+                    </Link>
+
                     {ev.registration_open ? (
                       <EventRegistrationModal
                         eventId={ev.id}
@@ -333,20 +344,20 @@ export function EventsCatalog({ events, locale, buttonLabel }: EventsCatalogProp
                         buttonLabel={
                           buttonLabel ||
                           (isAr
-                            ? 'حجز مقعد مجاناً الآن'
+                            ? 'حجز سريع'
                             : isFr
-                            ? 'Réserver ma place gratuite'
-                            : 'Reserve Free Seat Now')
+                            ? 'Inscription rapide'
+                            : 'Quick Register')
                         }
-                        className="w-full py-3 px-4 rounded-xl font-bold text-white bg-[#c85a32] hover:bg-[#b04b26] active:scale-95 transition-all text-xs shadow-xs flex items-center justify-center gap-2"
+                        className="flex-1 py-2.5 px-3 rounded-xl font-bold text-white bg-[#c85a32] hover:bg-[#b04b26] active:scale-95 transition-all text-xs shadow-2xs flex items-center justify-center gap-1.5 cursor-pointer"
                       />
                     ) : (
-                      <span className="block text-center py-3 text-2xs text-[#819598] font-bold bg-[#faf7f2] rounded-xl border border-[#e5e0d6]">
+                      <span className="flex-1 block text-center py-2.5 px-2 text-3xs text-[#819598] font-bold bg-[#faf7f2] rounded-xl border border-[#e5e0d6]">
                         {isAr
-                          ? 'التسجيل مغلق لهذا الموعد'
+                          ? 'التسجيل مغلق'
                           : isFr
-                          ? 'Inscriptions closes pour cette session'
-                          : 'Registration closed for this session'}
+                          ? 'Inscriptions closes'
+                          : 'Closed'}
                       </span>
                     )}
                   </div>
