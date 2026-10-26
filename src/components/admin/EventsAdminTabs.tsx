@@ -221,15 +221,43 @@ export function EventsAdminTabs({
     setEventList((prev) => prev.filter((e) => e.id !== id))
 
     try {
-      const res = await onDeleteEvent(id)
-      if (res && typeof res === 'object' && 'success' in res && !res.success) {
-        throw new Error(res.error || 'فشل حذف الفعالية من قاعدة البيانات')
+      // 1. Try direct REST API endpoint first
+      let success = false
+      let errorMessage = ''
+
+      try {
+        const apiRes = await fetch(`/api/admin/events?id=${encodeURIComponent(id)}`, {
+          method: 'DELETE',
+        })
+        const data = await apiRes.json().catch(() => null)
+        if (apiRes.ok && data?.success) {
+          success = true
+        } else if (data?.error) {
+          errorMessage = data.error
+        }
+      } catch {
+        // Fallback to server action below
       }
-      setFeedback({
-        type: 'success',
-        message: `تم حذف فعالية "${title}" بنجاح وإزالتها من النظام والموقع.`,
-      })
-      router.refresh()
+
+      // 2. If API route did not complete, invoke server action fallback
+      if (!success && onDeleteEvent) {
+        const actionRes = await onDeleteEvent(id)
+        if (!actionRes || (typeof actionRes === 'object' && actionRes.success !== false)) {
+          success = true
+        } else if (typeof actionRes === 'object' && actionRes.error) {
+          errorMessage = actionRes.error
+        }
+      }
+
+      if (success) {
+        setFeedback({
+          type: 'success',
+          message: `تم حذف فعالية "${title}" بنجاح وإزالتها من النظام والموقع.`,
+        })
+        router.refresh()
+      } else {
+        throw new Error(errorMessage || 'فشل حذف الفعالية من قاعدة البيانات')
+      }
     } catch (err: unknown) {
       setEventList(backupList)
       setFeedback({

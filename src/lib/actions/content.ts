@@ -523,18 +523,31 @@ export async function updateEvent(id: string, formData: FormData): Promise<void>
 }
 
 export async function deleteEvent(id: string): Promise<{ success: boolean; error?: string }> {
-  await requireAdmin()
-  const adminClient = createAdminClient()
-  const { error } = await adminClient.from('events').delete().eq('id', id)
-  if (error) {
-    console.error('Failed to delete event:', error)
-    return { success: false, error: error.message }
+  try {
+    await requireAdmin()
+    const adminClient = createAdminClient()
+
+    // 1. Delete dependent registrations and translations first
+    await adminClient.from('event_registrations').delete().eq('event_id', id)
+    await adminClient.from('event_translations').delete().eq('event_id', id)
+
+    // 2. Delete the event record
+    const { error } = await adminClient.from('events').delete().eq('id', id)
+    if (error) {
+      console.error('Failed to delete event:', error)
+      return { success: false, error: error.message }
+    }
+
+    revalidatePath('/admin/events')
+    revalidatePath('/ar/events')
+    revalidatePath('/fr/events')
+    revalidatePath('/en/events')
+    revalidatePath('/events')
+    revalidatePath('/[locale]/events', 'page')
+    return { success: true }
+  } catch (err: unknown) {
+    const errorMsg = err instanceof Error ? err.message : 'فشل حذف الفعالية'
+    console.error('deleteEvent exception:', errorMsg)
+    return { success: false, error: errorMsg }
   }
-  revalidatePath('/admin/events')
-  revalidatePath('/ar/events')
-  revalidatePath('/fr/events')
-  revalidatePath('/en/events')
-  revalidatePath('/events')
-  revalidatePath('/[locale]/events', 'page')
-  return { success: true }
 }
