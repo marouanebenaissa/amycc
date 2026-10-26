@@ -456,10 +456,8 @@ export default async function ImpactPage(props: { params: Promise<{ locale: stri
         {/* ========================================================= */}
         <section className="py-20 bg-[#faf7f2] relative overflow-hidden">
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-[#1c1917] via-[#292524] to-[#1c1917] text-white p-8 sm:p-12 lg:p-14 shadow-card text-center space-y-6">
-              <div className="absolute inset-0 moroccan-pattern-dark opacity-15 pointer-events-none" aria-hidden="true" />
-              <div className="absolute top-0 end-0 w-96 h-96 bg-[#c85a32]/20 rounded-full blur-3xl pointer-events-none" />
-              <div className="absolute bottom-0 start-0 w-96 h-96 bg-[#f4ce83]/15 rounded-full blur-3xl pointer-events-none" />
+            <div className="relative rounded-3xl overflow-hidden bg-gradient-to-r from-[#0d3b43] via-[#0f4650] to-[#08242a] text-white p-8 sm:p-12 lg:p-14 shadow-card text-center space-y-6">
+              <div className="absolute inset-0 moroccan-pattern-dark opacity-20 pointer-events-none" aria-hidden="true" />
               
               <div className="relative z-10 space-y-4 max-w-3xl mx-auto">
                 <span className="inline-block px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-widest bg-white/10 text-[#f4ce83] border border-white/20 backdrop-blur-sm">
