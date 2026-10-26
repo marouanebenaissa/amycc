@@ -114,17 +114,17 @@ export function PartnershipsAdminTabs({
 
   const activePartnersCount = activePartnersList.length
 
-  // Guarantee at least 16 items per half (minimum 32 items total) so that even with only 1 or 2 partners,
-  // the track is 10,000+ pixels wide and cards NEVER run out or leave any blank gaps on wide screens.
-  const adminMarqueeItems = useMemo(() => {
+  // Guarantee at least 16 items in the block so that even with only 1 or 2 partners,
+  // each block is 5,000+ pixels wide and cards NEVER run out or leave any blank gaps on wide screens.
+  const adminMarqueeBlock = useMemo(() => {
     if (activePartnersList.length === 0) return []
-    const minItemsPerHalf = 16
-    const repeatCount = Math.max(2, Math.ceil(minItemsPerHalf / activePartnersList.length))
-    const half: PartnerItemConfig[] = []
+    const minItems = 16
+    const repeatCount = Math.max(2, Math.ceil(minItems / activePartnersList.length))
+    const block: PartnerItemConfig[] = []
     for (let i = 0; i < repeatCount; i++) {
-      half.push(...activePartnersList)
+      block.push(...activePartnersList)
     }
-    return [...half, ...half]
+    return block
   }, [activePartnersList])
 
   // Inquiries State
@@ -512,6 +512,83 @@ export function PartnershipsAdminTabs({
     sponsor: { ar: 'رعاية وقطاع خاص', fr: 'Mécénat & Sponsor', en: 'Corporate Sponsor' },
   }
 
+  const renderAdminCard = (partner: PartnerItemConfig, key: string, isClone = false) => (
+    <div
+      key={key}
+      className={`group/card relative w-64 sm:w-72 h-56 bg-white rounded-3xl border p-3.5 shadow-2xs hover:shadow-xl hover:border-[#c85a32]/50 transition-all flex flex-col justify-between shrink-0 overflow-hidden ${
+        partner.active ? 'border-[#e5e0d6]' : 'border-rose-200 bg-rose-50/30 opacity-70'
+      }`}
+    >
+      {/* Partner Photo */}
+      <div className="relative w-full h-32 rounded-2xl overflow-hidden bg-[#faf7f2] border border-[#f0eae1]">
+        <ImageWithFallback
+          src={partner.logoUrl}
+          fallbackSrc="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=600&q=80"
+          alt={partner.nameAr}
+          fill
+          className="object-cover group-hover/card:scale-108 transition-transform duration-700 ease-out"
+          sizes="(max-width: 640px) 240px, 288px"
+        />
+        <div className="absolute top-2 start-2 z-10">
+          <span
+            className={`px-2 py-0.5 rounded-md text-4xs font-black shadow-xs ${
+              partner.active
+                ? 'bg-emerald-600 text-white'
+                : 'bg-rose-600 text-white'
+            }`}
+          >
+            {partner.active ? 'نشط ✓' : 'مخفي ✕'}
+          </span>
+        </div>
+      </div>
+
+      {/* Partner Name & Tier */}
+      <div className="pt-2 text-center" dir="rtl">
+        <h4 className="text-xs font-bold text-[#08242a] truncate">
+          {partner.nameAr}
+        </h4>
+        <span className="text-4xs text-[#819598] font-medium block">
+          {tierLabels[partner.tier]?.ar || partner.tier}
+        </span>
+      </div>
+
+      {/* Card Action Buttons */}
+      <div className="pt-2 border-t border-[#f4ede2] flex items-center justify-between gap-1 text-2xs" dir="rtl">
+        <button
+          type="button"
+          onClick={() => openEditPartnerModal(partner)}
+          className="px-2.5 py-1 rounded-lg font-bold bg-[#faf7f2] hover:bg-[#eae4d9] text-[#08242a] border border-[#e5e0d6] transition-colors cursor-pointer"
+          tabIndex={isClone ? -1 : undefined}
+        >
+          ✏️ تعديل
+        </button>
+
+        <button
+          type="button"
+          onClick={() => handleTogglePartnerActive(partner.id)}
+          className={`px-2 py-1 rounded-lg font-bold border transition-colors cursor-pointer text-3xs ${
+            partner.active
+              ? 'bg-amber-50 hover:bg-amber-100 text-amber-800 border-amber-200'
+              : 'bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border-emerald-200'
+          }`}
+          tabIndex={isClone ? -1 : undefined}
+        >
+          {partner.active ? 'إخفاء' : 'تفعيل'}
+        </button>
+
+        <button
+          type="button"
+          onClick={() => handleDeletePartner(partner.id, partner.nameAr)}
+          className="px-2 py-1 rounded-lg font-bold text-rose-600 hover:bg-rose-50 border border-transparent hover:border-rose-200 transition-colors cursor-pointer text-3xs"
+          title="حذف"
+          tabIndex={isClone ? -1 : undefined}
+        >
+          🗑️
+        </button>
+      </div>
+    </div>
+  )
+
   return (
     <div className="space-y-6">
       {/* Top Header & Tab Switcher */}
@@ -864,99 +941,39 @@ export function PartnershipsAdminTabs({
                 </div>
               </div>
 
-              {/* The Live Moving Marquee Container */}
-              <div className="relative w-full overflow-hidden rounded-3xl bg-gradient-to-b from-[#f7f2e9] via-[#faf7f2] to-[#f7f2e9] border border-[#e5e0d6] py-6 shadow-inner">
+              {/* The Live Moving Marquee Container - dir="ltr" ensures LTR coordinates and stops RTL track clipping */}
+              <div
+                dir="ltr"
+                className="relative w-full overflow-hidden rounded-3xl bg-gradient-to-b from-[#f7f2e9] via-[#faf7f2] to-[#f7f2e9] border border-[#e5e0d6] py-6 shadow-inner select-none"
+              >
                 {/* Side Fade Gradient Masks */}
                 <div
-                  className="absolute inset-y-0 start-0 w-16 sm:w-28 bg-gradient-to-r from-[#f7f2e9] to-transparent z-10 pointer-events-none"
+                  className="absolute inset-y-0 left-0 w-16 sm:w-28 bg-gradient-to-r from-[#f7f2e9] to-transparent z-10 pointer-events-none"
                   aria-hidden="true"
                 />
                 <div
-                  className="absolute inset-y-0 end-0 w-16 sm:w-28 bg-gradient-to-l from-[#f7f2e9] to-transparent z-10 pointer-events-none"
+                  className="absolute inset-y-0 right-0 w-16 sm:w-28 bg-gradient-to-l from-[#f7f2e9] to-transparent z-10 pointer-events-none"
                   aria-hidden="true"
                 />
 
-                {adminMarqueeItems.length > 0 ? (
-                  <div
-                    dir="ltr"
-                    className="flex items-center gap-6 w-max animate-marquee-continuous hover:[animation-play-state:paused]"
-                  >
-                    {adminMarqueeItems.map((partner, idx) => (
-                      <div
-                        key={`${partner.id}-${idx}`}
-                        className={`group/card relative w-64 sm:w-72 h-56 bg-white rounded-3xl border p-3.5 shadow-2xs hover:shadow-xl hover:border-[#c85a32]/50 transition-all flex flex-col justify-between shrink-0 overflow-hidden ${
-                          partner.active ? 'border-[#e5e0d6]' : 'border-rose-200 bg-rose-50/30 opacity-70'
-                        }`}
-                      >
-                        {/* Partner Photo */}
-                        <div className="relative w-full h-32 rounded-2xl overflow-hidden bg-[#faf7f2] border border-[#f0eae1]">
-                          <ImageWithFallback
-                            src={partner.logoUrl}
-                            fallbackSrc="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=600&q=80"
-                            alt={partner.nameAr}
-                            fill
-                            className="object-cover group-hover/card:scale-108 transition-transform duration-700 ease-out"
-                            sizes="(max-width: 640px) 240px, 288px"
-                          />
-                          <div className="absolute top-2 start-2 z-10">
-                            <span
-                              className={`px-2 py-0.5 rounded-md text-4xs font-black shadow-xs ${
-                                partner.active
-                                  ? 'bg-emerald-600 text-white'
-                                  : 'bg-rose-600 text-white'
-                              }`}
-                            >
-                              {partner.active ? 'نشط ✓' : 'مخفي ✕'}
-                            </span>
-                          </div>
-                        </div>
+                {adminMarqueeBlock.length > 0 ? (
+                  <div className="flex w-max animate-marquee-continuous hover:[animation-play-state:paused]">
+                    {/* Block A */}
+                    <div className="flex items-center gap-6 shrink-0 pr-6">
+                      {adminMarqueeBlock.map((partner, idx) =>
+                        renderAdminCard(partner, `a-${partner.id}-${idx}`)
+                      )}
+                    </div>
 
-                        {/* Partner Name & Tier */}
-                        <div className="pt-2 text-center" dir="rtl">
-                          <h4 className="text-xs font-bold text-[#08242a] truncate">
-                            {partner.nameAr}
-                          </h4>
-                          <span className="text-4xs text-[#819598] font-medium block">
-                            {tierLabels[partner.tier]?.ar || partner.tier}
-                          </span>
-                        </div>
-
-                        {/* Card Action Buttons */}
-                        <div className="pt-2 border-t border-[#f4ede2] flex items-center justify-between gap-1 text-2xs" dir="rtl">
-                          <button
-                            type="button"
-                            onClick={() => openEditPartnerModal(partner)}
-                            className="px-2.5 py-1 rounded-lg font-bold bg-[#faf7f2] hover:bg-[#eae4d9] text-[#08242a] border border-[#e5e0d6] transition-colors cursor-pointer"
-                          >
-                            ✏️ تعديل
-                          </button>
-
-                          <button
-                            type="button"
-                            onClick={() => handleTogglePartnerActive(partner.id)}
-                            className={`px-2 py-1 rounded-lg font-bold border transition-colors cursor-pointer text-3xs ${
-                              partner.active
-                                ? 'bg-amber-50 hover:bg-amber-100 text-amber-800 border-amber-200'
-                                : 'bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border-emerald-200'
-                            }`}
-                          >
-                            {partner.active ? 'إخفاء' : 'تفعيل'}
-                          </button>
-
-                          <button
-                            type="button"
-                            onClick={() => handleDeletePartner(partner.id, partner.nameAr)}
-                            className="px-2 py-1 rounded-lg font-bold text-rose-600 hover:bg-rose-50 border border-transparent hover:border-rose-200 transition-colors cursor-pointer text-3xs"
-                            title="حذف"
-                          >
-                            🗑️
-                          </button>
-                        </div>
-                      </div>
-                    ))}
+                    {/* Block B (Identical clone for seamless 50% infinite translation) */}
+                    <div className="flex items-center gap-6 shrink-0 pr-6" aria-hidden="true">
+                      {adminMarqueeBlock.map((partner, idx) =>
+                        renderAdminCard(partner, `b-${partner.id}-${idx}`, true)
+                      )}
+                    </div>
                   </div>
                 ) : (
-                  <div className="p-8 text-center text-[#819598]">
+                  <div className="p-8 text-center text-[#819598]" dir="rtl">
                     لا توجد صور شركاء معروضة حالياً. يمكنك استيراد الشركاء النموذجيين أو إضافة شريك جديد.
                   </div>
                 )}

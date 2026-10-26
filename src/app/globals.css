@@ -312,7 +312,7 @@ body:has([dir="rtl"]) {
 .animate-marquee-continuous {
   display: flex;
   width: max-content;
-  animation: marquee-scroll 35s linear infinite;
+  animation: marquee-scroll 40s linear infinite;
   will-change: transform;
 }
 
