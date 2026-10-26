@@ -3843,3 +3843,491 @@ export async function getNewsPageSettings(): Promise<NewsPageConfig> {
     return defaultNewsPageConfig
   }
 }
+
+// ============================================================
+// PARTNERSHIPS PAGE CONFIGURATION & CMS
+// ============================================================
+
+export type PartnerTier = 'institutional' | 'cultural' | 'educational' | 'civil_society' | 'sponsor'
+
+export interface PartnerItemConfig {
+  id: string
+  nameAr: string
+  nameFr: string
+  nameEn: string
+  tier: PartnerTier
+  logoUrl: string
+  websiteUrl?: string
+  descriptionAr?: string
+  descriptionFr?: string
+  descriptionEn?: string
+  active: boolean
+  order?: number
+}
+
+export interface PartnershipPillarItem {
+  id: string
+  icon: string
+  titleAr: string
+  titleFr: string
+  titleEn: string
+  descriptionAr: string
+  descriptionFr: string
+  descriptionEn: string
+  tagAr: string
+  tagFr: string
+  tagEn: string
+}
+
+export interface PartnershipStatItem {
+  id: string
+  value: string
+  valueAr: string
+  valueFr: string
+  valueEn: string
+  labelAr: string
+  labelFr: string
+  labelEn: string
+  icon: string
+}
+
+export interface PartnershipBenefitItem {
+  id: string
+  icon: string
+  titleAr: string
+  titleFr: string
+  titleEn: string
+  descriptionAr: string
+  descriptionFr: string
+  descriptionEn: string
+}
+
+export interface PartnershipsPageConfig {
+  hero: {
+    tagAr: string
+    tagFr: string
+    tagEn: string
+    badgeAr: string
+    badgeFr: string
+    badgeEn: string
+    titleAr: string
+    titleFr: string
+    titleEn: string
+    subtitleAr: string
+    subtitleFr: string
+    subtitleEn: string
+    descriptionAr: string
+    descriptionFr: string
+    descriptionEn: string
+    imageUrl: string
+    hasHeroImage: boolean
+    primaryBtnTextAr: string
+    primaryBtnTextFr: string
+    primaryBtnTextEn: string
+    primaryBtnUrl: string
+    brochureBtnTextAr: string
+    brochureBtnTextFr: string
+    brochureBtnTextEn: string
+    brochureUrl: string
+  }
+  stats: PartnershipStatItem[]
+  pillars: PartnershipPillarItem[]
+  benefits: PartnershipBenefitItem[]
+  partners: PartnerItemConfig[]
+  cta: {
+    badgeAr: string
+    badgeFr: string
+    badgeEn: string
+    titleAr: string
+    titleFr: string
+    titleEn: string
+    descriptionAr: string
+    descriptionFr: string
+    descriptionEn: string
+    primaryBtnTextAr: string
+    primaryBtnTextFr: string
+    primaryBtnTextEn: string
+    primaryBtnUrl: string
+    email: string
+    phone: string
+  }
+}
+
+export const defaultPartnershipsPageConfig: PartnershipsPageConfig = {
+  hero: {
+    tagAr: 'التعاون المؤسساتي والشراكات',
+    tagFr: 'Coopération & Partenariats',
+    tagEn: 'Institutional Cooperation & Alliances',
+    badgeAr: 'بناء جسور العمل الثقافي المشترك',
+    badgeFr: 'Bâtir des synergies culturelles durables',
+    badgeEn: 'Building Sustainable Cultural Alliances',
+    titleAr: 'شراكات استراتيجية لتمكين الشباب وصون الفنون والتراث المغربي',
+    titleFr: 'Des Partenariats Stratégiques au Service de la Création et de la Jeunesse',
+    titleEn: 'Strategic Alliances for Youth Empowerment & Moroccan Heritage',
+    subtitleAr: 'نعمل جنباً إلى جنب مع المراكز الثقافية، المؤسسات التعليمية، والفاعلين الجمعويين لتوسيع أثر العمل الفني والإبداعي في كافة جهات المملكة.',
+    subtitleFr: 'En collaboration étroite avec les centres culturels, universités et acteurs associatifs pour démultiplier l’impact artistique et citoyen.',
+    subtitleEn: 'Collaborating hand-in-hand with cultural venues, universities, and civil society to expand creative opportunities across Morocco.',
+    descriptionAr: 'تؤمن جمعية روح الفنون والثقافة (AMYCC) بأن التنمية الثقافية المستدامة تقوم على التحالفات التشاركية والتنسيق الميداني الفعال، من خلال اتفاقيات تعاون واضحة تتيح تبادل الخبرات، تنشيط الفضاءات، وإنتاج المبادرات الهادفة.',
+    descriptionFr: 'L’AMYCC s’engage à développer des partenariats vertueux fondés sur la co-création, le partage de ressources et le rayonnement culturel inclusif.',
+    descriptionEn: 'AMYCC believes that transformative cultural development thrives on collaborative partnerships, field-tested methodologies, and shared vision.',
+    imageUrl: 'https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=1200&q=80',
+    hasHeroImage: true,
+    primaryBtnTextAr: 'تقديم مقترح شراكة الآن',
+    primaryBtnTextFr: 'Proposer un partenariat',
+    primaryBtnTextEn: 'Submit Partnership Proposal',
+    primaryBtnUrl: '#proposal-form',
+    brochureBtnTextAr: 'تحميل الملف التعريفي (PDF)',
+    brochureBtnTextFr: 'Dossier de Présentation (PDF)',
+    brochureBtnTextEn: 'Institutional Brochure (PDF)',
+    brochureUrl: '/docs/AMYCC-Partenariats-2026.pdf',
+  },
+  stats: [
+    {
+      id: 'stat-partners-count',
+      value: '+25',
+      valueAr: '+25',
+      valueFr: '+25',
+      valueEn: '+25',
+      labelAr: 'مؤسسة ومركز شريك بالملتقيات',
+      labelFr: 'Centres & institutions partenaires',
+      labelEn: 'Partner Venues & Institutions',
+      icon: '🏛️',
+    },
+    {
+      id: 'stat-regions-covered',
+      value: '12',
+      valueAr: '12',
+      valueFr: '12',
+      valueEn: '12',
+      labelAr: 'جهة وإقليم مغربي مشمول بالأنشطة',
+      labelFr: 'Régions & territoires couverts',
+      labelEn: 'Moroccan Regions Reached',
+      icon: '📍',
+    },
+    {
+      id: 'stat-direct-beneficiaries',
+      value: '+15,000',
+      valueAr: '+15,000',
+      valueFr: '+15 000',
+      valueEn: '+15,000',
+      labelAr: 'مستفيد مباشر من المشاريع المشتركة',
+      labelFr: 'Bénéficiaires de projets communs',
+      labelEn: 'Direct Project Beneficiaries',
+      icon: '👥',
+    },
+    {
+      id: 'stat-engagement-rate',
+      value: '100%',
+      valueAr: '100%',
+      valueFr: '100%',
+      valueEn: '100%',
+      labelAr: 'التزام مؤسساتي وتنسيق شفاف',
+      labelFr: 'Engagement & synergie de terrain',
+      labelEn: 'Committed Field Engagement',
+      icon: '🤝',
+    },
+  ],
+  pillars: [
+    {
+      id: 'pillar-cultural-centers',
+      icon: '🏛️',
+      titleAr: 'المراكز الثقافية وفضاءات العرض',
+      titleFr: 'Centres Culturels & Salles de Spectacle',
+      titleEn: 'Cultural Centers & Performing Venues',
+      descriptionAr: 'احتضان الورشات التكوينية، التبادل اللوجيستي، والإنتاج المشترك للعروض المسرحية والموسيقية والمعارض التشكيلية.',
+      descriptionFr: 'Accueil d’ateliers d’initiation, co-production de pièces théâtrales et concerts au sein des maisons de jeunes et théâtres.',
+      descriptionEn: 'Hosting masterclasses, artistic co-productions, theatrical showcases, and sharing community stage spaces.',
+      tagAr: 'برمجة فنية وإنتاج مشترك',
+      tagFr: 'Co-programmation culturelle',
+      tagEn: 'Joint Cultural Curation',
+    },
+    {
+      id: 'pillar-educational',
+      icon: '🎓',
+      titleAr: 'المؤسسات التعليمية والجامعات',
+      titleFr: 'Établissements Éducatifs & Universités',
+      titleEn: 'Educational Institutes & Universities',
+      descriptionAr: 'تنشيط الأندية الثقافية الطلابية، تنظيم دورات تدريبية معتمدة في الأداء التعبيري، ودعم أبحاث توثيق التراث المغربي.',
+      descriptionFr: 'Animation de clubs d’expression artistique universitaires, masterclasses certifiantes et valorisation du patrimoine immatériel.',
+      descriptionEn: 'Fostering campus arts clubs, offering certified theatrical workshops, and backing research into living heritage.',
+      tagAr: 'تأطير وتكوين معتمد',
+      tagFr: 'Formations certifiantes',
+      tagEn: 'Youth Talent Incubation',
+    },
+    {
+      id: 'pillar-civil-society',
+      icon: '🤝',
+      titleAr: 'منظمات المجتمع المدني والجمعيات',
+      titleFr: 'Société Civile & Réseaux Associatifs',
+      titleEn: 'Civil Society & Non-Profit Alliances',
+      descriptionAr: 'التنسيق في قوافل التنشيط الثقافي، تعبئة متطوعي مبادرة "شباب في العمل"، وتبادل الممارسات الناجحة في التنمية الجمعوية.',
+      descriptionFr: 'Coordination de caravanes artistiques de proximité, mobilisation bénévole Jeunesse en Action et mutualisation des savoir-faire.',
+      descriptionEn: 'Teaming up for arts caravans, mobilizing Youth in Action volunteers, and scaling grassroots civic initiatives.',
+      tagAr: 'تضامن وعمل تطوعي',
+      tagFr: 'Bénévolat & action de terrain',
+      tagEn: 'Grassroots Social Impact',
+    },
+    {
+      id: 'pillar-private-sector',
+      icon: '🏢',
+      titleAr: 'القطاع الخاص والمؤسسات المانحة',
+      titleFr: 'Secteur Privé & Mécénat Culturel',
+      titleEn: 'Private Sector & Cultural CSR',
+      descriptionAr: 'تفعيل برامج المسؤولية المجتمعية (CSR)، الرعاية الفنية للتظاهرات الثقافية، ودعم المنح التدريبية للمواهب الصاعدة.',
+      descriptionFr: 'Engagement mécène responsable, soutien des festivals thématiques et bourses d’immersion artistique pour jeunes créateurs.',
+      descriptionEn: 'Corporate sponsorship, CSR cultural investments, and grant backing for underprivileged emerging talents.',
+      tagAr: 'رعاية ومسؤولية مجتمعية',
+      tagFr: 'Mécénat d’entreprise & RSE',
+      tagEn: 'Corporate Cultural Patronage',
+    },
+  ],
+  benefits: [
+    {
+      id: 'benefit-reach',
+      icon: '📍',
+      titleAr: 'انتشار ميداني في ربوع المملكة',
+      titleFr: 'Rayonnement territorial élargi',
+      titleEn: 'Nationwide Moroccan Field Reach',
+      descriptionAr: 'إمكانية إيصال البرامج والمبادرات المشتركة إلى دور الشباب والمراكز الثقافية في مختلف المدن والأقاليم المغربية.',
+      descriptionFr: 'Déploiement agile dans les maisons de jeunes et centres d’animation à travers plusieurs préfectures du Royaume.',
+      descriptionEn: 'Direct access to regional community centers, youth hubs, and performing venues across Moroccan territories.',
+    },
+    {
+      id: 'benefit-youth-access',
+      icon: '👥',
+      titleAr: 'قاعدة شبابية ومجتمعية واسعة',
+      titleFr: 'Bassin dynamique de talents & jeunes',
+      titleEn: 'Dynamic Pool of Youth & Creators',
+      descriptionAr: 'ربط مباشر مع الآلاف من الشباب والطلبة والمبدعين المتحمسين للمشاركة الفعالة والتطوع في التظاهرات.',
+      descriptionFr: 'Accès privilégié à des milliers de passionnés d’art, étudiants et bénévoles mobilisés sur le terrain.',
+      descriptionEn: 'Direct connection with energetic student volunteers, performers, and young audiences eager to co-create.',
+    },
+    {
+      id: 'benefit-media',
+      icon: '🌐',
+      titleAr: 'إشعاع إعلامي ثلاثي اللغات',
+      titleFr: 'Visibilité trilingue & communicationnelle',
+      titleEn: 'Trilingual Media Visibility',
+      descriptionAr: 'توثيق احترافي ونشر رقمي باللغات العربية والفرنسية والإنجليزية يبرز مساهمة الشركاء وهويتهم البصرية.',
+      descriptionFr: 'Couverture médiatique soignée, mise en valeur des logos partenaires et valorisation dans nos publications officielles.',
+      descriptionEn: 'High-impact coverage with official logo placement across press releases, portal catalog, and media channels.',
+    },
+    {
+      id: 'benefit-monitoring',
+      icon: '📑',
+      titleAr: 'تتبع ميداني وتقارير دورية موثقة',
+      titleFr: 'Suivi rigoureux & bilans d’impact',
+      titleEn: 'Transparent Tracking & Reporting',
+      descriptionAr: 'اعتماد منهجية عمل واضحة تشمل جدولة دقيقة، اجتماعات تنسيق منتظمة، وتقارير أدبية ورقمية شاملة لكل مشروع مشترك.',
+      descriptionFr: 'Suivi transparent étape par étape, points d’étape réguliers et livrables clairs certifiant l’impact atteint.',
+      descriptionEn: 'Clear execution milestones, regular coordination meetings, and detailed milestone outcome reporting.',
+    },
+  ],
+  partners: [
+    {
+      id: 'partner-cultural-houses',
+      nameAr: 'شبكة المراكز الثقافية ودور الشباب بالمغرب',
+      nameFr: 'Réseau des Maisons de Jeunes & Centres Culturels',
+      nameEn: 'Network of Moroccan Youth Cultural Centers',
+      tier: 'cultural',
+      logoUrl: 'https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=400&q=80',
+      websiteUrl: 'https://amycc.org',
+      descriptionAr: 'شراكة إطار لاحتضان التداريب والورشات التكوينية في فنون الأداء والمسرح التعبيري.',
+      descriptionFr: 'Accord-cadre pour l’accueil des ateliers artistiques et représentations théâtrales de proximité.',
+      descriptionEn: 'Framework agreement for hosting theatrical and expressive coaching masterclasses.',
+      active: true,
+      order: 1,
+    },
+    {
+      id: 'partner-theatre-academy',
+      nameAr: 'المعهد العالي للفن المسرحي والتنشيط الثقافي',
+      nameFr: 'Institut Supérieur d’Art Dramatique et d’Animation Culturelle',
+      nameEn: 'Higher Institute of Theatrical Arts (ISADAC Alumni Network)',
+      tier: 'educational',
+      logoUrl: 'https://images.unsplash.com/photo-1460723237483-7a6dc9d0b212?auto=format&fit=crop&w=400&q=80',
+      websiteUrl: 'https://amycc.org',
+      descriptionAr: 'تنسيق أكاديمي لتأطير المستفيدين من طرف خريجين وأساتذة متخصصين في الإخراج والأداء الركحي.',
+      descriptionFr: 'Coopération académique pour le mentorat d’ateliers de scénographie et d’expression scénique.',
+      descriptionEn: 'Academic coaching partnership offering professional scenic performance mentorship.',
+      active: true,
+      order: 2,
+    },
+    {
+      id: 'partner-youth-initiatives',
+      nameAr: 'اتحاد جمعيات المبادرات الشبابية والتطوع الثقافي',
+      nameFr: 'Fédération des Initiatives Jeunesse & Bénévolat',
+      nameEn: 'Federation of Youth Initiatives & Cultural Volunteering',
+      tier: 'civil_society',
+      logoUrl: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=400&q=80',
+      websiteUrl: 'https://amycc.org',
+      descriptionAr: 'تبادل المتطوعين وتنسيق القوافل التوعوية والفنية في الأحياء والمناطق القروية.',
+      descriptionFr: 'Coordination d’actions de bénévolat de proximité et de caravanes artistiques régionales.',
+      descriptionEn: 'Joint deployment of Youth in Action volunteers and regional arts outreach caravans.',
+      active: true,
+      order: 3,
+    },
+    {
+      id: 'partner-heritage-foundation',
+      nameAr: 'مؤسسة صون التراث الموسيقي والفولكلور المغربي',
+      nameFr: 'Fondation pour la Préservation du Patrimoine Musical Marocain',
+      nameEn: 'Foundation for the Preservation of Moroccan Musical Heritage',
+      tier: 'institutional',
+      logoUrl: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=400&q=80',
+      websiteUrl: 'https://amycc.org',
+      descriptionAr: 'توثيق الإيقاعات التراثية الأصيلة ودعم المواهب الشابة في العزف التراثي والغناء الأندلسي والشعبي.',
+      descriptionFr: 'Archivage des traditions sonores et soutien aux ensembles acoustiques émergents.',
+      descriptionEn: 'Archiving traditional melodies and supporting emerging acoustic heritage ensembles.',
+      active: true,
+      order: 4,
+    },
+  ],
+  cta: {
+    badgeAr: 'دعوة مفتوحة لكافة الهيئات والمؤسسات',
+    badgeFr: 'Appel permanent aux partenaires',
+    badgeEn: 'Open Call for Institutional Collaboration',
+    titleAr: 'هل ترغب في توقيع شراكة استراتيجية مع جمعية روح الفنون والثقافة؟',
+    titleFr: 'Envie de co-construire un projet culturel à fort impact citoyen ?',
+    titleEn: 'Ready to build a strategic cultural partnership with AMYCC?',
+    descriptionAr: 'فريق العلاقات المؤسساتية والشراكات رهن إشارتكم لدراسة أي مقترح تعاون، توفير الدعم الفني، وصياغة اتفاقية إطار تلبي تطلعات الطرفين.',
+    descriptionFr: 'Notre pôle partenariats se tient à votre entière disposition pour échanger sur vos projets et concevoir une convention adaptée.',
+    descriptionEn: 'Our institutional alliances desk welcomes your collaborative proposal to co-create sustainable cultural impact.',
+    primaryBtnTextAr: 'تقديم مقترح شراكة رسمي',
+    primaryBtnTextFr: 'Déposer une proposition',
+    primaryBtnTextEn: 'Submit Collaboration Request',
+    primaryBtnUrl: '#proposal-form',
+    email: 'contact@amycc.org',
+    phone: '+212 5XX-XXXXXX',
+  },
+}
+
+export async function getPartnershipsPageSettings(): Promise<PartnershipsPageConfig> {
+  try {
+    const supabase = await createClient()
+    const { data } = await supabase
+      .from('site_settings')
+      .select('value')
+      .eq('key', 'partnerships_page')
+      .single()
+
+    if (!data || !data.value) {
+      return defaultPartnershipsPageConfig
+    }
+
+    const val = data.value as Partial<PartnershipsPageConfig>
+    const heroVal = (val.hero || {}) as Partial<PartnershipsPageConfig['hero']>
+    const ctaVal = (val.cta || {}) as Partial<PartnershipsPageConfig['cta']>
+
+    return {
+      hero: {
+        tagAr: typeof heroVal.tagAr === 'string' ? heroVal.tagAr : defaultPartnershipsPageConfig.hero.tagAr,
+        tagFr: typeof heroVal.tagFr === 'string' ? heroVal.tagFr : defaultPartnershipsPageConfig.hero.tagFr,
+        tagEn: typeof heroVal.tagEn === 'string' ? heroVal.tagEn : defaultPartnershipsPageConfig.hero.tagEn,
+        badgeAr: typeof heroVal.badgeAr === 'string' ? heroVal.badgeAr : defaultPartnershipsPageConfig.hero.badgeAr,
+        badgeFr: typeof heroVal.badgeFr === 'string' ? heroVal.badgeFr : defaultPartnershipsPageConfig.hero.badgeFr,
+        badgeEn: typeof heroVal.badgeEn === 'string' ? heroVal.badgeEn : defaultPartnershipsPageConfig.hero.badgeEn,
+        titleAr: typeof heroVal.titleAr === 'string' ? heroVal.titleAr : defaultPartnershipsPageConfig.hero.titleAr,
+        titleFr: typeof heroVal.titleFr === 'string' ? heroVal.titleFr : defaultPartnershipsPageConfig.hero.titleFr,
+        titleEn: typeof heroVal.titleEn === 'string' ? heroVal.titleEn : defaultPartnershipsPageConfig.hero.titleEn,
+        subtitleAr: typeof heroVal.subtitleAr === 'string' ? heroVal.subtitleAr : defaultPartnershipsPageConfig.hero.subtitleAr,
+        subtitleFr: typeof heroVal.subtitleFr === 'string' ? heroVal.subtitleFr : defaultPartnershipsPageConfig.hero.subtitleFr,
+        subtitleEn: typeof heroVal.subtitleEn === 'string' ? heroVal.subtitleEn : defaultPartnershipsPageConfig.hero.subtitleEn,
+        descriptionAr: typeof heroVal.descriptionAr === 'string' ? heroVal.descriptionAr : defaultPartnershipsPageConfig.hero.descriptionAr,
+        descriptionFr: typeof heroVal.descriptionFr === 'string' ? heroVal.descriptionFr : defaultPartnershipsPageConfig.hero.descriptionFr,
+        descriptionEn: typeof heroVal.descriptionEn === 'string' ? heroVal.descriptionEn : defaultPartnershipsPageConfig.hero.descriptionEn,
+        imageUrl: typeof heroVal.imageUrl === 'string' ? heroVal.imageUrl : defaultPartnershipsPageConfig.hero.imageUrl,
+        hasHeroImage: typeof heroVal.hasHeroImage === 'boolean' ? heroVal.hasHeroImage : defaultPartnershipsPageConfig.hero.hasHeroImage,
+        primaryBtnTextAr: typeof heroVal.primaryBtnTextAr === 'string' ? heroVal.primaryBtnTextAr : defaultPartnershipsPageConfig.hero.primaryBtnTextAr,
+        primaryBtnTextFr: typeof heroVal.primaryBtnTextFr === 'string' ? heroVal.primaryBtnTextFr : defaultPartnershipsPageConfig.hero.primaryBtnTextFr,
+        primaryBtnTextEn: typeof heroVal.primaryBtnTextEn === 'string' ? heroVal.primaryBtnTextEn : defaultPartnershipsPageConfig.hero.primaryBtnTextEn,
+        primaryBtnUrl: typeof heroVal.primaryBtnUrl === 'string' ? heroVal.primaryBtnUrl : defaultPartnershipsPageConfig.hero.primaryBtnUrl,
+        brochureBtnTextAr: typeof heroVal.brochureBtnTextAr === 'string' ? heroVal.brochureBtnTextAr : defaultPartnershipsPageConfig.hero.brochureBtnTextAr,
+        brochureBtnTextFr: typeof heroVal.brochureBtnTextFr === 'string' ? heroVal.brochureBtnTextFr : defaultPartnershipsPageConfig.hero.brochureBtnTextFr,
+        brochureBtnTextEn: typeof heroVal.brochureBtnTextEn === 'string' ? heroVal.brochureBtnTextEn : defaultPartnershipsPageConfig.hero.brochureBtnTextEn,
+        brochureUrl: typeof heroVal.brochureUrl === 'string' ? heroVal.brochureUrl : defaultPartnershipsPageConfig.hero.brochureUrl,
+      },
+      stats: Array.isArray(val.stats) && val.stats.length > 0
+        ? (val.stats as PartnershipStatItem[])
+            .filter((s): s is PartnershipStatItem => typeof s === 'object' && s !== null && typeof s.id === 'string')
+            .map((s) => ({
+              id: s.id,
+              value: s.value || '',
+              valueAr: s.valueAr || s.value || '',
+              valueFr: s.valueFr || s.value || '',
+              valueEn: s.valueEn || s.value || '',
+              labelAr: s.labelAr || '',
+              labelFr: s.labelFr || '',
+              labelEn: s.labelEn || '',
+              icon: s.icon || '🤝',
+            }))
+        : defaultPartnershipsPageConfig.stats,
+      pillars: Array.isArray(val.pillars) && val.pillars.length > 0
+        ? (val.pillars as PartnershipPillarItem[])
+            .filter((p): p is PartnershipPillarItem => typeof p === 'object' && p !== null && typeof p.id === 'string')
+            .map((p) => ({
+              id: p.id,
+              icon: p.icon || '🏛️',
+              titleAr: p.titleAr || '',
+              titleFr: p.titleFr || '',
+              titleEn: p.titleEn || '',
+              descriptionAr: p.descriptionAr || '',
+              descriptionFr: p.descriptionFr || '',
+              descriptionEn: p.descriptionEn || '',
+              tagAr: p.tagAr || '',
+              tagFr: p.tagFr || '',
+              tagEn: p.tagEn || '',
+            }))
+        : defaultPartnershipsPageConfig.pillars,
+      benefits: Array.isArray(val.benefits) && val.benefits.length > 0
+        ? (val.benefits as PartnershipBenefitItem[])
+            .filter((b): b is PartnershipBenefitItem => typeof b === 'object' && b !== null && typeof b.id === 'string')
+            .map((b) => ({
+              id: b.id,
+              icon: b.icon || '✨',
+              titleAr: b.titleAr || '',
+              titleFr: b.titleFr || '',
+              titleEn: b.titleEn || '',
+              descriptionAr: b.descriptionAr || '',
+              descriptionFr: b.descriptionFr || '',
+              descriptionEn: b.descriptionEn || '',
+            }))
+        : defaultPartnershipsPageConfig.benefits,
+      partners: Array.isArray(val.partners) && val.partners.length > 0
+        ? (val.partners as PartnerItemConfig[])
+            .filter((item): item is PartnerItemConfig => typeof item === 'object' && item !== null && typeof item.id === 'string')
+            .map((item) => ({
+              id: item.id,
+              nameAr: item.nameAr || '',
+              nameFr: item.nameFr || '',
+              nameEn: item.nameEn || '',
+              tier: item.tier || 'cultural',
+              logoUrl: item.logoUrl || '',
+              websiteUrl: item.websiteUrl || '',
+              descriptionAr: item.descriptionAr || '',
+              descriptionFr: item.descriptionFr || '',
+              descriptionEn: item.descriptionEn || '',
+              active: item.active !== false,
+              order: typeof item.order === 'number' ? item.order : 1,
+            }))
+        : defaultPartnershipsPageConfig.partners,
+      cta: {
+        badgeAr: typeof ctaVal.badgeAr === 'string' ? ctaVal.badgeAr : defaultPartnershipsPageConfig.cta.badgeAr,
+        badgeFr: typeof ctaVal.badgeFr === 'string' ? ctaVal.badgeFr : defaultPartnershipsPageConfig.cta.badgeFr,
+        badgeEn: typeof ctaVal.badgeEn === 'string' ? ctaVal.badgeEn : defaultPartnershipsPageConfig.cta.badgeEn,
+        titleAr: typeof ctaVal.titleAr === 'string' ? ctaVal.titleAr : defaultPartnershipsPageConfig.cta.titleAr,
+        titleFr: typeof ctaVal.titleFr === 'string' ? ctaVal.titleFr : defaultPartnershipsPageConfig.cta.titleFr,
+        titleEn: typeof ctaVal.titleEn === 'string' ? ctaVal.titleEn : defaultPartnershipsPageConfig.cta.titleEn,
+        descriptionAr: typeof ctaVal.descriptionAr === 'string' ? ctaVal.descriptionAr : defaultPartnershipsPageConfig.cta.descriptionAr,
+        descriptionFr: typeof ctaVal.descriptionFr === 'string' ? ctaVal.descriptionFr : defaultPartnershipsPageConfig.cta.descriptionFr,
+        descriptionEn: typeof ctaVal.descriptionEn === 'string' ? ctaVal.descriptionEn : defaultPartnershipsPageConfig.cta.descriptionEn,
+        primaryBtnTextAr: typeof ctaVal.primaryBtnTextAr === 'string' ? ctaVal.primaryBtnTextAr : defaultPartnershipsPageConfig.cta.primaryBtnTextAr,
+        primaryBtnTextFr: typeof ctaVal.primaryBtnTextFr === 'string' ? ctaVal.primaryBtnTextFr : defaultPartnershipsPageConfig.cta.primaryBtnTextFr,
+        primaryBtnTextEn: typeof ctaVal.primaryBtnTextEn === 'string' ? ctaVal.primaryBtnTextEn : defaultPartnershipsPageConfig.cta.primaryBtnTextEn,
+        primaryBtnUrl: typeof ctaVal.primaryBtnUrl === 'string' ? ctaVal.primaryBtnUrl : defaultPartnershipsPageConfig.cta.primaryBtnUrl,
+        email: typeof ctaVal.email === 'string' ? ctaVal.email : defaultPartnershipsPageConfig.cta.email,
+        phone: typeof ctaVal.phone === 'string' ? ctaVal.phone : defaultPartnershipsPageConfig.cta.phone,
+      },
+    }
+  } catch {
+    return defaultPartnershipsPageConfig
+  }
+}

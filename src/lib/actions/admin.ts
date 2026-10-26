@@ -3,7 +3,7 @@
 import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import { revalidatePath } from 'next/cache'
-import type { FaqItemConfig, AreasConfig, TeamConfig, CommissionsConfig, ContactConfig, ProgramsPageConfig, AnnualProgramConfig, ImpactConfig, EventsPageConfig, NewsPageConfig } from '@/lib/settings'
+import type { FaqItemConfig, AreasConfig, TeamConfig, CommissionsConfig, ContactConfig, ProgramsPageConfig, AnnualProgramConfig, ImpactConfig, EventsPageConfig, NewsPageConfig, PartnershipsPageConfig } from '@/lib/settings'
 
 export async function recordAuditLog(
   action: string,
@@ -582,6 +582,53 @@ export async function saveNewsPageConfiguration(
     revalidatePath('/[locale]/news', 'page')
     revalidatePath('/[locale]/news', 'layout')
     revalidatePath('/admin/news')
+    revalidatePath('/admin/pages')
+    revalidatePath('/[locale]', 'layout')
+    revalidatePath('/', 'layout')
+    return { success: true }
+  } catch (err) {
+    return { success: false, error: (err as Error).message }
+  }
+}
+
+
+export async function savePartnershipsPageConfiguration(
+  config: PartnershipsPageConfig
+): Promise<{ success: boolean; error?: string }> {
+  try {
+    const supabase = await createClient()
+    const {
+      data: { user },
+    } = await supabase.auth.getUser()
+
+    if (!user) {
+      return { success: false, error: 'غير مصرح لك بتعديل واجهة الشراكات (Unauthorized)' }
+    }
+
+    const { error } = await supabase
+      .from('site_settings')
+      .upsert([
+        {
+          key: 'partnerships_page',
+          value: config,
+          updated_at: new Date().toISOString(),
+        },
+      ])
+
+    if (error) return { success: false, error: error.message }
+
+    await recordAuditLog('partnerships_page_updated', 'site_settings', 'partnerships_page', {
+      titleAr: config.hero.titleAr,
+    })
+
+    // Revalidate localized paths and layouts so edits appear immediately
+    revalidatePath('/ar/partnerships')
+    revalidatePath('/fr/partnerships')
+    revalidatePath('/en/partnerships')
+    revalidatePath('/partnerships')
+    revalidatePath('/[locale]/partnerships', 'page')
+    revalidatePath('/[locale]/partnerships', 'layout')
+    revalidatePath('/admin/partnerships')
     revalidatePath('/admin/pages')
     revalidatePath('/[locale]', 'layout')
     revalidatePath('/', 'layout')

@@ -962,3 +962,286 @@ describe('News Page Validation Suite', () => {
     assert.equal(result.success, false)
   })
 })
+
+
+// ============================================================
+// PARTNERSHIPS VALIDATION SUITE
+// ============================================================
+
+const partnershipSubmissionSchema = z.object({
+  organizationName: z.string().min(2, 'Organization name is required').max(150),
+  organizationType: z.string().min(2, 'Organization type is required'),
+  contactName: z.string().min(3, 'Contact person name is required').max(100),
+  email: z.string().email('Please enter a valid professional email'),
+  phone: z.string().max(20).optional(),
+  city: z.string().min(2, 'City is required').max(50),
+  country: z.string().default('Morocco'),
+  proposal: z.string().min(20, 'Please describe your partnership proposal').max(2000),
+})
+
+const partnerItemSchema = z.object({
+  id: z.string().min(1),
+  nameAr: z.string().min(1),
+  nameFr: z.string().min(1),
+  nameEn: z.string().min(1),
+  tier: z.enum(['institutional', 'cultural', 'educational', 'civil_society', 'sponsor']),
+  logoUrl: z.string(),
+  websiteUrl: z.string().optional(),
+  descriptionAr: z.string().optional(),
+  descriptionFr: z.string().optional(),
+  descriptionEn: z.string().optional(),
+  active: z.boolean().default(true),
+  order: z.number().optional(),
+})
+
+const partnershipsPageConfigSchema = z.object({
+  hero: z.object({
+    tagAr: z.string().min(1),
+    tagFr: z.string().min(1),
+    tagEn: z.string().min(1),
+    badgeAr: z.string().min(1),
+    badgeFr: z.string().min(1),
+    badgeEn: z.string().min(1),
+    titleAr: z.string().min(3),
+    titleFr: z.string().min(3),
+    titleEn: z.string().min(3),
+    subtitleAr: z.string().min(3),
+    subtitleFr: z.string().min(3),
+    subtitleEn: z.string().min(3),
+    descriptionAr: z.string().min(10),
+    descriptionFr: z.string().min(10),
+    descriptionEn: z.string().min(10),
+    imageUrl: z.string().optional().default(''),
+    hasHeroImage: z.boolean().default(false),
+    primaryBtnTextAr: z.string().min(1),
+    primaryBtnTextFr: z.string().min(1),
+    primaryBtnTextEn: z.string().min(1),
+    primaryBtnUrl: z.string().min(1),
+    brochureBtnTextAr: z.string().min(1),
+    brochureBtnTextFr: z.string().min(1),
+    brochureBtnTextEn: z.string().min(1),
+    brochureUrl: z.string().optional().default(''),
+  }),
+  stats: z.array(
+    z.object({
+      id: z.string(),
+      value: z.string().min(1),
+      valueAr: z.string().optional(),
+      valueFr: z.string().optional(),
+      valueEn: z.string().optional(),
+      labelAr: z.string().min(1),
+      labelFr: z.string().min(1),
+      labelEn: z.string().min(1),
+      icon: z.string().min(1),
+    })
+  ).min(1),
+  pillars: z.array(
+    z.object({
+      id: z.string(),
+      icon: z.string(),
+      titleAr: z.string().min(1),
+      titleFr: z.string().min(1),
+      titleEn: z.string().min(1),
+      descriptionAr: z.string().min(1),
+      descriptionFr: z.string().min(1),
+      descriptionEn: z.string().min(1),
+      tagAr: z.string().min(1),
+      tagFr: z.string().min(1),
+      tagEn: z.string().min(1),
+    })
+  ).min(1),
+  benefits: z.array(
+    z.object({
+      id: z.string(),
+      icon: z.string(),
+      titleAr: z.string().min(1),
+      titleFr: z.string().min(1),
+      titleEn: z.string().min(1),
+      descriptionAr: z.string().min(1),
+      descriptionFr: z.string().min(1),
+      descriptionEn: z.string().min(1),
+    })
+  ).min(1),
+  partners: z.array(partnerItemSchema),
+  cta: z.object({
+    badgeAr: z.string().min(1),
+    badgeFr: z.string().min(1),
+    badgeEn: z.string().min(1),
+    titleAr: z.string().min(1),
+    titleFr: z.string().min(1),
+    titleEn: z.string().min(1),
+    descriptionAr: z.string().min(1),
+    descriptionFr: z.string().min(1),
+    descriptionEn: z.string().min(1),
+    primaryBtnTextAr: z.string().min(1),
+    primaryBtnTextFr: z.string().min(1),
+    primaryBtnTextEn: z.string().min(1),
+    primaryBtnUrl: z.string().min(1),
+    email: z.string().email(),
+    phone: z.string().min(6),
+  }),
+})
+
+describe('Partnership Submission Validation Suite', () => {
+  test('accepts valid partnership inquiry proposal', () => {
+    const valid = {
+      organizationName: 'Institut Français de Rabat',
+      organizationType: 'cultural_center',
+      contactName: 'Nadia Benmoussa',
+      email: 'nadia.benmoussa@example.com',
+      phone: '+212661000000',
+      city: 'Rabat',
+      country: 'Morocco',
+      proposal: 'We would like to co-produce a series of youth theater workshops and cross-residences for visual artists.',
+    }
+    const result = partnershipSubmissionSchema.safeParse(valid)
+    assert.equal(result.success, true)
+    if (result.success) {
+      assert.equal(result.data.city, 'Rabat')
+    }
+  })
+
+  test('rejects partnership inquiry with invalid email and short proposal', () => {
+    const invalid = {
+      organizationName: 'Institut',
+      organizationType: 'cultural_center',
+      contactName: 'Nadia',
+      email: 'not-valid-email',
+      city: 'Rabat',
+      proposal: 'Too short',
+    }
+    const result = partnershipSubmissionSchema.safeParse(invalid)
+    assert.equal(result.success, false)
+    if (!result.success) {
+      const errors = result.error.flatten().fieldErrors
+      assert.ok(errors.email)
+      assert.ok(errors.proposal)
+    }
+  })
+})
+
+describe('Partnerships Page Config & Directory Validation Suite', () => {
+  test('accepts valid trilingual partnerships configuration with partner directory', () => {
+    const valid = {
+      hero: {
+        tagAr: 'التعاون المؤسساتي والشراكات',
+        tagFr: 'Coopération & Partenariats',
+        tagEn: 'Institutional Cooperation & Alliances',
+        badgeAr: 'بناء جسور العمل الثقافي المشترك',
+        badgeFr: 'Bâtir des synergies culturelles durables',
+        badgeEn: 'Building Sustainable Cultural Alliances',
+        titleAr: 'شراكات استراتيجية لتمكين الشباب وصون التراث المغربي',
+        titleFr: 'Des Partenariats Stratégiques au Service de la Création',
+        titleEn: 'Strategic Alliances for Youth Empowerment & Heritage',
+        subtitleAr: 'نعمل جنباً إلى جنب مع المراكز الثقافية والجامعات لتوسيع أثر العمل الفني.',
+        subtitleFr: 'En collaboration étroite avec les centres culturels et universités.',
+        subtitleEn: 'Collaborating hand-in-hand with cultural venues and academia.',
+        descriptionAr: 'تؤمن جمعية روح الفنون والثقافة بأن التنمية الثقافية المستدامة تقوم على التحالفات التشاركية والتنسيق الميداني الفعال.',
+        descriptionFr: 'L’AMYCC s’engage à développer des partenariats vertueux fondés sur la co-création.',
+        descriptionEn: 'AMYCC believes that sustainable cultural development is founded on participatory alliances.',
+        imageUrl: '',
+        hasHeroImage: false,
+        primaryBtnTextAr: 'تقديم مقترح شراكة',
+        primaryBtnTextFr: 'Proposer un partenariat',
+        primaryBtnTextEn: 'Submit Proposal',
+        primaryBtnUrl: '#proposal-form',
+        brochureBtnTextAr: 'تحميل ملف الشراكات',
+        brochureBtnTextFr: 'Télécharger la brochure',
+        brochureBtnTextEn: 'Download Brochure',
+        brochureUrl: '',
+      },
+      stats: [
+        { id: 'stat-partners', value: '+40', labelAr: 'شريك استراتيجي ومؤسساتي', labelFr: 'Partenaires actifs', labelEn: 'Active Partners', icon: '🏛️' },
+        { id: 'stat-projects', value: '85+', labelAr: 'مشروع ومبادرة مشتركة', labelFr: 'Projets conjoints', labelEn: 'Joint Projects', icon: '🤝' },
+      ],
+      pillars: [
+        {
+          id: 'pillar-1',
+          icon: '🏛️',
+          titleAr: 'البرمجة الثقافية والإنتاج الفني المشترك',
+          titleFr: 'Co-programmation culturelle',
+          titleEn: 'Joint Cultural Curation',
+          descriptionAr: 'تصميم وتنفيذ مهرجانات ومعارض تشكيلية مشتركة.',
+          descriptionFr: 'Conception et production conjointe d’événements et festivals.',
+          descriptionEn: 'Co-curating art exhibitions, festivals, and concerts.',
+          tagAr: 'برمجة مشتركة',
+          tagFr: 'Co-curation',
+          tagEn: 'Joint Curation',
+        },
+      ],
+      benefits: [
+        {
+          id: 'benefit-1',
+          icon: '🤝',
+          titleAr: 'أثر مجتمعي واسع ومباشر',
+          titleFr: 'Impact citoyen démultiplié',
+          titleEn: 'Direct Community Impact',
+          descriptionAr: 'الوصول المباشر إلى آلاف المستفيدين من الشباب والمبدعين عبر جهات المملكة.',
+          descriptionFr: 'Accès direct à des milliers de jeunes créateurs à travers le Royaume.',
+          descriptionEn: 'Direct access to thousands of young creators across Morocco.',
+        },
+      ],
+      partners: [
+        {
+          id: 'p-1',
+          nameAr: 'المعهد العالي للفن المسرحي والتنشيط الثقافي',
+          nameFr: 'ISADAC - Rabat',
+          nameEn: 'Higher Institute of Theatrical Arts',
+          tier: 'educational',
+          logoUrl: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=300&q=80',
+          websiteUrl: 'https://isadac.ac.ma',
+          active: true,
+          order: 1,
+        },
+        {
+          id: 'p-2',
+          nameAr: 'مؤسسة الثقافات والفنون المعاصرة',
+          nameFr: 'Fondation des Cultures & Arts',
+          nameEn: 'Contemporary Arts Foundation',
+          tier: 'cultural',
+          logoUrl: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=300&q=80',
+          active: true,
+          order: 2,
+        },
+      ],
+      cta: {
+        badgeAr: 'التواصل المؤسساتي المباشر',
+        badgeFr: 'Contact Institutionnel',
+        badgeEn: 'Institutional Contact',
+        titleAr: 'هل تمثل مؤسسة وترغب في بحث آفاق تعاون رسمي؟',
+        titleFr: 'Vous représentez une institution souhaitant collaborer ?',
+        titleEn: 'Representing an institution seeking formal alliance?',
+        descriptionAr: 'يسعد قطب الشراكات والعلاقات المؤسساتية في جمعية روح الفنون والثقافة دراسة مقترحاتكم.',
+        descriptionFr: 'Le pôle partenariats de l’AMYCC est à votre écoute.',
+        descriptionEn: 'Our alliances desk is available to discuss collaboration initiatives.',
+        primaryBtnTextAr: 'تواصل معنا',
+        primaryBtnTextFr: 'Contactez-nous',
+        primaryBtnTextEn: 'Contact Us',
+        primaryBtnUrl: 'mailto:contact@amycc.org',
+        email: 'contact@amycc.org',
+        phone: '+212 5 37 00 00 00',
+      },
+    }
+
+    const result = partnershipsPageConfigSchema.safeParse(valid)
+    assert.equal(result.success, true)
+    if (result.success) {
+      assert.equal(result.data.partners.length, 2)
+      assert.equal(result.data.partners[0].tier, 'educational')
+      assert.equal(result.data.stats[0].value, '+40')
+    }
+  })
+
+  test('rejects partner with invalid tier enum', () => {
+    const invalidPartner = {
+      id: 'p-test',
+      nameAr: 'جمعية تجريبية',
+      nameFr: 'Assoc Test',
+      nameEn: 'Test Assoc',
+      tier: 'unsupported_tier',
+      logoUrl: '',
+    }
+    const result = partnerItemSchema.safeParse(invalidPartner)
+    assert.equal(result.success, false)
+  })
+})
