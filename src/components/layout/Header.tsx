@@ -78,6 +78,12 @@ function renderNavIcon(key: string, className = 'w-4 h-4') {
           <path strokeLinecap="round" strokeLinejoin="round" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
         </svg>
       )
+    case 'support':
+      return (
+        <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+        </svg>
+      )
     default:
       return null
   }
@@ -332,7 +338,7 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
     },
   ]
 
-  // Individual direct nav links (Partnerships)
+  // Individual direct nav links (Partnerships & Support)
   const directNavLinks = [
     {
       key: 'partnerships' as const,
@@ -340,6 +346,13 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
       path: 'partnerships',
       icon: '🏛️',
       iconSrc: '/icons/nav/partnerships.png',
+    },
+    {
+      key: 'support' as const,
+      title: dict.nav.support || (isAr ? 'الدعم والرعاية' : isFr ? 'Soutien' : 'Support'),
+      path: 'support',
+      icon: '🤝',
+      iconSrc: '/icons/nav/support.png',
     },
   ]
 
@@ -971,28 +984,31 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
                 )}
               </div>
 
-              {/* Partnerships */}
-              <Link
-                href={`/${locale}/partnerships`}
-                onClick={() => setMobileMenuOpen(false)}
-                className={`px-4 py-3 rounded-xl text-sm font-bold transition-all flex items-center justify-between ${
-                  isPathActive('partnerships')
-                    ? 'bg-[#FEF6CC] text-[#231f20] font-black shadow-2xs'
-                    : 'text-[#231f20] hover:bg-[#FEF6CC]'
-                }`}
-              >
-                <div className="flex items-center gap-3">
-                  <span className="w-5 h-5 flex items-center justify-center text-[#231f20]">
-                    {renderNavIcon('partnerships', 'w-5 h-5')}
-                  </span>
-                  <span>{dict.nav.partnerships}</span>
-                </div>
-                {isPathActive('partnerships') && (
-                  <span className="text-3xs font-black uppercase tracking-wider px-2 py-0.5 rounded-full bg-[#231f20] text-white">
-                    {isAr ? 'النشط' : 'Active'}
-                  </span>
-                )}
-              </Link>
+              {/* Direct Links (Partnerships & Support) */}
+              {directNavLinks.map(({ key, title, path }) => (
+                <Link
+                  key={key}
+                  href={`/${locale}/${path}`}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={`px-4 py-3 rounded-xl text-sm font-bold transition-all flex items-center justify-between ${
+                    isPathActive(path)
+                      ? 'bg-[#FEF6CC] text-[#231f20] font-black shadow-2xs'
+                      : 'text-[#231f20] hover:bg-[#FEF6CC]'
+                  }`}
+                >
+                  <div className="flex items-center gap-3">
+                    <span className="w-5 h-5 flex items-center justify-center text-[#231f20]">
+                      {renderNavIcon(key, 'w-5 h-5')}
+                    </span>
+                    <span>{title}</span>
+                  </div>
+                  {isPathActive(path) && (
+                    <span className="text-3xs font-black uppercase tracking-wider px-2 py-0.5 rounded-full bg-[#231f20] text-white">
+                      {isAr ? 'النشط' : 'Active'}
+                    </span>
+                  )}
+                </Link>
+              ))}
 
               {/* Action Buttons */}
               <div className="pt-4 mt-2 border-t border-[#e5e0d6] space-y-3">
