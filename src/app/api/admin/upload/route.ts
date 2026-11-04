@@ -79,6 +79,18 @@ export async function POST(request: Request) {
     // (Bypasses Storage RLS & works reliably on Vercel serverless)
     let lastStorageError: string | null = null
 
+    // Early check: if service role key is missing, fail fast with clear message
+    if (!process.env.SUPABASE_SERVICE_ROLE_KEY) {
+      return NextResponse.json(
+        {
+          success: false,
+          error:
+            'الإعداد مفقود: SUPABASE_SERVICE_ROLE_KEY غير موجود. يرجى إضافته في Vercel → Settings → Environment Variables ثم إعادة النشر.',
+        },
+        { status: 500 }
+      )
+    }
+
     try {
       const adminClient = createAdminClient()
 
@@ -140,10 +152,17 @@ export async function POST(request: Request) {
       lastStorageError = err instanceof Error ? err.message : 'Supabase storage error'
     }
 
-    // 3. Fallback for Local Development ONLY (Never run fs write on Vercel / read-only serverless)
-    const isServerlessReadOnly = Boolean(process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME)
+    // 3. Fallback for Local Development ONLY
+    // Try writing to /tmp (always writable, even on Vercel) or public/uploads (local dev)
+    // Never try public/uploads on serverless environments - it's read-only
+    const isServerless = Boolean(
+      process.env.VERCEL ||
+        process.env.AWS_LAMBDA_FUNCTION_NAME ||
+        process.env.NETLIFY ||
+        process.env.RAILWAY_ENVIRONMENT
+    )
 
-    if (!isServerlessReadOnly) {
+    if (!isServerless) {
       try {
         const uploadsDir = path.join(process.cwd(), 'public', 'uploads')
         await fs.promises.mkdir(uploadsDir, { recursive: true })
@@ -164,13 +183,17 @@ export async function POST(request: Request) {
       }
     }
 
-    // If both failed, return a clean descriptive error (never raw EROFS)
+    // Final error — provide a clear diagnostic message
+    const missingKey = !process.env.SUPABASE_SERVICE_ROLE_KEY
+    const errorMsg = missingKey
+      ? 'مفتاح SUPABASE_SERVICE_ROLE_KEY غير مضاف في إعدادات Vercel. يرجى إضافته في لوحة تحكم Vercel → Settings → Environment Variables.'
+      : lastStorageError ||
+        'تعذر حفظ الصورة في سحابة التخزين. يرجى التحقق من إعدادات سلة التخزين (Supabase Storage Bucket).'
+
     return NextResponse.json(
       {
         success: false,
-        error:
-          lastStorageError ||
-          'تعذر حفظ الصورة في سحابة التخزين. يرجى التحقق من إعدادات سلة التخزين (Supabase Storage Bucket).',
+        error: errorMsg,
       },
       { status: 500 }
     )
