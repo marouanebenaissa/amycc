@@ -160,15 +160,15 @@ export default async function ProgramsPage(props: { params: Promise<{ locale: st
     <>
       <Header locale={locale} dict={dict} />
 
-      <main id="main-content" className="flex-1 bg-[#faf7f2]">
+      <main id="main-content" className="flex-1 bg-[#F5F3EE]">
         {/* ============================================================
             1. HERO BANNER (Full-Bleed Moroccan Cinematic Hero or Ambient Pattern)
             ============================================================ */}
         <section
           className={`relative overflow-hidden border-b transition-colors ${
             hasHeroImage
-              ? 'min-h-[500px] sm:min-h-[540px] lg:min-h-[600px] flex items-center bg-[#08242a] text-white pt-16 pb-24 lg:pt-20 lg:pb-32 border-[#0d3b43]'
-              : 'bg-gradient-to-b from-[#faf7f2] via-[#f7f2e9] to-[#faf7f2] border-[#e5e0d6] pt-16 pb-20 lg:pt-20 lg:pb-28 text-[#08242a]'
+              ? 'min-h-[500px] sm:min-h-[540px] lg:min-h-[600px] flex items-center bg-[#231f20] text-white pt-16 pb-24 lg:pt-20 lg:pb-32 border-[#231f20]'
+              : 'bg-gradient-to-b from-[#F5F3EE] via-[#F5F3EE] to-[#F5F3EE] border-[#e5e0d6] pt-16 pb-20 lg:pt-20 lg:pb-28 text-[#231f20]'
           }`}
         >
           {/* Background Layer */}
@@ -185,16 +185,16 @@ export default async function ProgramsPage(props: { params: Promise<{ locale: st
               />
               {/* Cinematic Moroccan Vignette & Dark Backdrops for perfect high-contrast typography and clear visual */}
               <div className="absolute inset-0 bg-black/45" />
-              <div className="absolute inset-0 bg-gradient-to-b from-[#08242a]/90 via-[#08242a]/65 to-[#08242a]/95" />
+              <div className="absolute inset-0 bg-gradient-to-b from-[#231f20]/90 via-[#231f20]/65 to-[#231f20]/95" />
               <div className="absolute inset-0 moroccan-star-pattern opacity-15 pointer-events-none" />
-              <div className="absolute top-1/4 start-1/4 w-96 h-96 bg-[#c85a32]/20 rounded-full blur-3xl pointer-events-none" />
-              <div className="absolute bottom-10 end-10 w-96 h-96 bg-[#f4ce83]/20 rounded-full blur-3xl pointer-events-none" />
+              <div className="absolute top-1/4 start-1/4 w-96 h-96 bg-[#bd3227]/20 rounded-full blur-3xl pointer-events-none" />
+              <div className="absolute bottom-10 end-10 w-96 h-96 bg-[#ffd22f]/20 rounded-full blur-3xl pointer-events-none" />
             </div>
           ) : (
             <>
               <div className="absolute inset-0 moroccan-pattern-light opacity-60 pointer-events-none" aria-hidden="true" />
-              <div className="absolute top-1/3 start-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-[#c85a32]/10 rounded-full blur-3xl pointer-events-none" />
-              <div className="absolute bottom-0 end-12 w-72 h-72 bg-[#0d3b43]/10 rounded-full blur-3xl pointer-events-none" />
+              <div className="absolute top-1/3 start-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-[#bd3227]/10 rounded-full blur-3xl pointer-events-none" />
+              <div className="absolute bottom-0 end-12 w-72 h-72 bg-[#231f20]/10 rounded-full blur-3xl pointer-events-none" />
             </>
           )}
 
@@ -202,17 +202,17 @@ export default async function ProgramsPage(props: { params: Promise<{ locale: st
             {/* Breadcrumb Navigation */}
             <nav
               className={`flex items-center justify-center gap-2 text-xs sm:text-sm font-bold ${
-                hasHeroImage ? 'text-white/80' : 'text-[#5f7174]'
+                hasHeroImage ? 'text-white/80' : 'text-[#5C5A55]'
               }`}
             >
               <Link
                 href={`/${locale}`}
-                className={`transition-colors ${hasHeroImage ? 'hover:text-white' : 'hover:text-[#0d3b43]'}`}
+                className={`transition-colors ${hasHeroImage ? 'hover:text-white' : 'hover:text-[#231f20]'}`}
               >
                 {isAr ? 'الرئيسية' : isFr ? 'Accueil' : 'Home'}
               </Link>
               <span>/</span>
-              <span className={hasHeroImage ? 'text-[#f4ce83]' : 'text-[#c85a32]'}>
+              <span className={hasHeroImage ? 'text-[#ffd22f]' : 'text-[#bd3227]'}>
                 {isAr ? 'البرامج والمشاريع الثقافية' : isFr ? 'Programmes' : 'Programs'}
               </span>
             </nav>
@@ -223,12 +223,12 @@ export default async function ProgramsPage(props: { params: Promise<{ locale: st
                 <span
                   className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs sm:text-sm font-bold shadow-2xs backdrop-blur-md ${
                     hasHeroImage
-                      ? 'bg-white/10 border border-white/20 text-[#f4ce83]'
-                      : 'bg-[#c85a32]/10 border border-[#c85a32]/20 text-[#c85a32]'
+                      ? 'bg-white/10 border border-white/20 text-[#ffd22f]'
+                      : 'bg-[#bd3227]/10 border border-[#bd3227]/20 text-[#bd3227]'
                   }`}
                 >
                   <span
-                    className={`w-2.5 h-2.5 rounded-full ${hasHeroImage ? 'bg-[#f4ce83]' : 'bg-[#c85a32]'} animate-pulse`}
+                    className={`w-2.5 h-2.5 rounded-full ${hasHeroImage ? 'bg-[#ffd22f]' : 'bg-[#bd3227]'} animate-pulse`}
                   />
                   <span>{heroTag}</span>
                 </span>
@@ -239,7 +239,7 @@ export default async function ProgramsPage(props: { params: Promise<{ locale: st
                   className={`inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs sm:text-sm font-bold shadow-2xs backdrop-blur-md ${
                     hasHeroImage
                       ? 'bg-white/10 border border-white/20 text-white'
-                      : 'bg-[#0d3b43]/10 border border-[#0d3b43]/20 text-[#0d3b43]'
+                      : 'bg-[#231f20]/10 border border-[#231f20]/20 text-[#231f20]'
                   }`}
                 >
                   <span>🇲🇦</span>
@@ -251,7 +251,7 @@ export default async function ProgramsPage(props: { params: Promise<{ locale: st
             {/* Headline Title */}
             <h1
               className={`text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-tight whitespace-pre-line ${
-                hasHeroImage ? 'text-white drop-shadow-md' : 'text-[#08242a]'
+                hasHeroImage ? 'text-white drop-shadow-md' : 'text-[#231f20]'
               }`}
             >
               {heroTitle}
@@ -260,7 +260,7 @@ export default async function ProgramsPage(props: { params: Promise<{ locale: st
             {/* Description */}
             <p
               className={`text-base sm:text-lg lg:text-xl max-w-3xl mx-auto leading-relaxed text-balance ${
-                hasHeroImage ? 'text-[#d8f0f4]/95 font-normal drop-shadow-xs' : 'text-[#445457] font-medium'
+                hasHeroImage ? 'text-[#FEF6CC]/95 font-normal drop-shadow-xs' : 'text-[#5C5A55] font-medium'
               }`}
             >
               {heroDesc}
@@ -278,15 +278,15 @@ export default async function ProgramsPage(props: { params: Promise<{ locale: st
               return (
                 <div
                   key={st.id}
-                  className="p-5 sm:p-6 rounded-3xl bg-white border border-[#e5e0d6] hover:border-[#0d3b43]/40 shadow-subtle hover:shadow-lg transition-all text-center flex flex-col justify-center items-center group"
+                  className="p-5 sm:p-6 rounded-3xl bg-white border border-[#e5e0d6] hover:border-[#231f20]/40 shadow-subtle hover:shadow-lg transition-all text-center flex flex-col justify-center items-center group"
                 >
-                  <div className="w-12 h-12 rounded-2xl bg-[#0d3b43]/10 text-[#0d3b43] flex items-center justify-center text-2xl mb-2.5 group-hover:scale-110 transition-transform">
+                  <div className="w-12 h-12 rounded-2xl bg-[#231f20]/10 text-[#231f20] flex items-center justify-center text-2xl mb-2.5 group-hover:scale-110 transition-transform">
                     {st.icon}
                   </div>
-                  <span className="text-2xl sm:text-3xl font-black text-[#08242a] tracking-tight block">
+                  <span className="text-2xl sm:text-3xl font-black text-[#231f20] tracking-tight block">
                     {st.value}
                   </span>
-                  <span className="text-xs sm:text-sm font-bold text-[#5f7174] mt-1 leading-snug">
+                  <span className="text-xs sm:text-sm font-bold text-[#5C5A55] mt-1 leading-snug">
                     {label}
                   </span>
                 </div>
@@ -299,13 +299,13 @@ export default async function ProgramsPage(props: { params: Promise<{ locale: st
             3. FEATURED SPOTLIGHT: FLAGSHIP VOLUNTEER INITIATIVE
             ============================================================ */}
         <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-16">
-          <div className="relative rounded-3xl overflow-hidden border border-[#e5e0d6] bg-gradient-to-br from-[#08242a] via-[#0d3b43] to-[#14505b] text-white p-8 sm:p-12 shadow-card">
+          <div className="relative rounded-3xl overflow-hidden border border-[#e5e0d6] bg-gradient-to-br from-[#231f20] via-[#231f20] to-[#d2a82b] text-white p-8 sm:p-12 shadow-card">
             <div className="absolute inset-0 moroccan-star-pattern opacity-15 pointer-events-none" />
-            <div className="absolute top-0 end-0 w-96 h-96 bg-[#c85a32]/20 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute top-0 end-0 w-96 h-96 bg-[#bd3227]/20 rounded-full blur-3xl pointer-events-none" />
 
             <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
               <div className="lg:col-span-8 space-y-4">
-                <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold bg-[#f4ce83] text-[#08242a] shadow-xs">
+                <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold bg-[#ffd22f] text-[#231f20] shadow-xs">
                   <span>★</span>
                   <span>{isAr ? 'المبادرة الرائدة المستمرة للجمعية' : isFr ? 'Initiative Phare Continue de l\'AMYCC' : 'Flagship Continuous Initiative'}</span>
                 </span>
@@ -314,7 +314,7 @@ export default async function ProgramsPage(props: { params: Promise<{ locale: st
                   {isAr ? 'مبادرة شباب في العمل (Youth in Action)' : isFr ? 'Initiative Jeunesse en Action (Youth in Action)' : 'Youth in Action Initiative'}
                 </h2>
 
-                <p className="text-sm sm:text-base text-[#d8f0f4]/90 leading-relaxed max-w-2xl">
+                <p className="text-sm sm:text-base text-[#FEF6CC]/90 leading-relaxed max-w-2xl">
                   {isAr
                     ? 'المحرك التطوعي والتأطيري الأساسي لجمعية روح الفنون والثقافة، الذي يفتح آفاقاً واسعة أمام الشباب المغربي للمشاركة في تدبير الفعاليات الثقافية، قيادة الورشات الميدانية، وتطوير المهارات الحياتية.'
                     : isFr
@@ -325,7 +325,7 @@ export default async function ProgramsPage(props: { params: Promise<{ locale: st
                 <div className="flex flex-wrap items-center gap-3 pt-2">
                   <Link
                     href={`/${locale}/programs/youth-in-action`}
-                    className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-black text-xs sm:text-sm text-[#08242a] bg-[#f4ce83] hover:bg-[#eabf66] active:scale-98 transition-all shadow-md"
+                    className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-black text-xs sm:text-sm text-[#231f20] bg-[#ffd22f] hover:bg-[#ffd22f] active:scale-98 transition-all shadow-md"
                   >
                     <span>{isAr ? 'استكشف مسار المبادرة بالتفصيل' : isFr ? 'Découvrir l\'initiative en détail' : 'Explore Initiative Details'}</span>
                     <span className="rtl:rotate-180">→</span>
@@ -343,10 +343,10 @@ export default async function ProgramsPage(props: { params: Promise<{ locale: st
               <div className="lg:col-span-4 flex justify-center">
                 <div className="p-6 rounded-2xl bg-white/10 border border-white/15 backdrop-blur-md text-center space-y-3 w-full max-w-xs">
                   <span className="text-4xl sm:text-5xl block">🤝</span>
-                  <h4 className="font-bold text-sm sm:text-base text-[#f4ce83]">
+                  <h4 className="font-bold text-sm sm:text-base text-[#ffd22f]">
                     {isAr ? 'تأطير مجتمعي وتضامني' : isFr ? 'Mentorat Civique & Solidaire' : 'Civic Mentorship'}
                   </h4>
-                  <p className="text-xs text-[#d8f0f4]/80 leading-relaxed">
+                  <p className="text-xs text-[#FEF6CC]/80 leading-relaxed">
                     {isAr
                       ? 'مواكبة دورية ومشاريع ميدانية لخدمة الثقافة والشباب بالمملكة المغربية.'
                       : isFr
@@ -376,22 +376,22 @@ export default async function ProgramsPage(props: { params: Promise<{ locale: st
         <section className="bg-white border-t border-[#e5e0d6] py-16 lg:py-20 text-center relative overflow-hidden">
           <div className="absolute inset-0 moroccan-pattern-light opacity-30 pointer-events-none" aria-hidden="true" />
           <div className="relative max-w-4xl mx-auto px-4 sm:px-6 space-y-5">
-            <span className="inline-block text-xs font-bold uppercase tracking-widest text-[#c85a32]">
+            <span className="inline-block text-xs font-bold uppercase tracking-widest text-[#bd3227]">
               {isAr ? 'شراكات ومبادرات مشتركة • AMYCC' : isFr ? 'Partenariats & Co-Création • AMYCC' : 'AMYCC Partnership & Co-Creation'}
             </span>
 
-            <h2 className="text-2xl sm:text-4xl font-black text-[#08242a] tracking-tight">
+            <h2 className="text-2xl sm:text-4xl font-black text-[#231f20] tracking-tight">
               {ctaTitle}
             </h2>
 
-            <p className="text-sm sm:text-base text-[#5f7174] max-w-2xl mx-auto leading-relaxed">
+            <p className="text-sm sm:text-base text-[#5C5A55] max-w-2xl mx-auto leading-relaxed">
               {ctaDesc}
             </p>
 
             <div className="pt-4 flex flex-wrap items-center justify-center gap-4">
               <Link
                 href={`/${locale}${cta.primaryBtnUrl || '/contact'}`}
-                className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl font-black text-xs sm:text-sm text-white bg-[#0d3b43] hover:bg-[#08242a] active:scale-98 transition-all shadow-md hover:shadow-lg cursor-pointer"
+                className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl font-black text-xs sm:text-sm text-white bg-[#231f20] hover:bg-[#231f20] active:scale-98 transition-all shadow-md hover:shadow-lg cursor-pointer"
               >
                 <span>{ctaPrimaryText}</span>
                 <span className="rtl:rotate-180">→</span>
@@ -399,7 +399,7 @@ export default async function ProgramsPage(props: { params: Promise<{ locale: st
 
               <Link
                 href={`/${locale}${cta.secondaryBtnUrl || '/membership'}`}
-                className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl font-bold text-xs sm:text-sm text-[#08242a] bg-[#faf7f2] hover:bg-[#f0ebe1] border border-[#e5e0d6] transition-all cursor-pointer"
+                className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl font-bold text-xs sm:text-sm text-[#231f20] bg-[#F5F3EE] hover:bg-[#FEF6CC] border border-[#e5e0d6] transition-all cursor-pointer"
               >
                 <span>{ctaSecondaryText}</span>
               </Link>

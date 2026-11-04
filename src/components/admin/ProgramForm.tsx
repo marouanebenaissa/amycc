@@ -109,7 +109,7 @@ export function ProgramForm({ program }: ProgramFormProps) {
   return (
     <form action={handleSubmit} className="space-y-6">
       {error && (
-        <div className="p-4 rounded-2xl bg-[#fae4dc] border border-[#f2c2b0] text-[#c85a32] text-xs sm:text-sm font-bold flex items-center gap-2">
+        <div className="p-4 rounded-2xl bg-[#fde8e7] border border-[#fde8e7] text-[#bd3227] text-xs sm:text-sm font-bold flex items-center gap-2">
           <span>⚠</span>
           <span>{error}</span>
         </div>
@@ -117,9 +117,9 @@ export function ProgramForm({ program }: ProgramFormProps) {
 
       {/* Basic fields */}
       <div className="bg-white rounded-3xl border border-[#e5e0d6] p-6 sm:p-8 space-y-6 shadow-2xs">
-        <div className="border-b border-[#f0ebe1] pb-3">
-          <h2 className="text-base font-black text-[#08242a]">المعلومات العامة للبرنامج (General Details)</h2>
-          <p className="text-xs text-[#5f7174] mt-0.5">
+        <div className="border-b border-[#FEF6CC] pb-3">
+          <h2 className="text-base font-black text-[#231f20]">المعلومات العامة للبرنامج (General Details)</h2>
+          <p className="text-xs text-[#5C5A55] mt-0.5">
             تحديد التصنيف والمجال الثقافي، النطاق الجغرافي، والرابط الفريد للبرنامج.
           </p>
         </div>
@@ -168,11 +168,11 @@ export function ProgramForm({ program }: ProgramFormProps) {
 
         {/* Cover Image Uploader */}
         <div className="space-y-3 pt-2">
-          <label className="block text-xs font-bold uppercase tracking-wider text-[#08242a]">
+          <label className="block text-xs font-bold uppercase tracking-wider text-[#231f20]">
             الصورة البارزة للبرنامج (Program Cover Image)
           </label>
 
-          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5 p-5 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6]">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5 p-5 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6]">
             {coverImageUrl ? (
               <div className="relative w-36 h-24 rounded-xl overflow-hidden border border-[#e5e0d6] shrink-0 bg-white shadow-2xs">
                 <Image
@@ -184,7 +184,7 @@ export function ProgramForm({ program }: ProgramFormProps) {
                 />
               </div>
             ) : (
-              <div className="w-36 h-24 rounded-xl border border-dashed border-[#cfc7b9] flex flex-col items-center justify-center text-[#819598] shrink-0 bg-white">
+              <div className="w-36 h-24 rounded-xl border border-dashed border-[#cfc7b9] flex flex-col items-center justify-center text-[#5C5A55] shrink-0 bg-white">
                 <span className="text-2xl">🖼️</span>
                 <span className="text-3xs mt-1">لا توجد صورة</span>
               </div>
@@ -203,7 +203,7 @@ export function ProgramForm({ program }: ProgramFormProps) {
                   type="button"
                   onClick={() => fileInputRef.current?.click()}
                   disabled={uploadingImage}
-                  className="px-4 py-2 rounded-xl bg-[#0d3b43] text-white text-xs font-bold hover:bg-[#14505b] transition-all shadow-xs disabled:opacity-50 cursor-pointer"
+                  className="px-4 py-2 rounded-xl bg-[#231f20] text-white text-xs font-bold hover:bg-[#d2a82b] transition-all shadow-xs disabled:opacity-50 cursor-pointer"
                 >
                   {uploadingImage ? '⏳ جارٍ رفع الصورة...' : '📁 رفع صورة من الجهاز'}
                 </button>
@@ -226,10 +226,10 @@ export function ProgramForm({ program }: ProgramFormProps) {
                   value={coverImageUrl}
                   onChange={(e) => setCoverImageUrl(e.target.value)}
                   placeholder="رابط أو مسار الصورة: /uploads/... أو https://..."
-                  className="w-full px-3.5 py-2 rounded-xl bg-white border border-[#e5e0d6] text-xs font-mono text-[#08242a] focus:outline-none focus:border-[#0d3b43]"
+                  className="w-full px-3.5 py-2 rounded-xl bg-white border border-[#e5e0d6] text-xs font-mono text-[#231f20] focus:outline-none focus:border-[#231f20]"
                 />
               </div>
-              <p className="text-3xs text-[#819598]">
+              <p className="text-3xs text-[#5C5A55]">
                 الأبعاد الموصى بها: 1200×800 بكسل بحجم أقل من 4 ميغابايت بصيغة JPG أو WebP.
               </p>
             </div>
@@ -239,15 +239,15 @@ export function ProgramForm({ program }: ProgramFormProps) {
 
       {/* Trilingual Translations */}
       <div className="bg-white rounded-3xl border border-[#e5e0d6] p-6 sm:p-8 space-y-6 shadow-2xs">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#f0ebe1] pb-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#FEF6CC] pb-4">
           <div>
-            <h2 className="text-base font-black text-[#08242a]">تفاصيل ومحتوى البرنامج باللغات الثلاث</h2>
-            <p className="text-xs text-[#5f7174] mt-0.5">
+            <h2 className="text-base font-black text-[#231f20]">تفاصيل ومحتوى البرنامج باللغات الثلاث</h2>
+            <p className="text-xs text-[#5C5A55] mt-0.5">
               إدخال العنوان، الوصف الشامل، الأهداف، الفئة المستهدفة، والأنشطة المبرمجة.
             </p>
           </div>
 
-          <div className="flex gap-1.5 p-1 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6] self-start sm:self-auto">
+          <div className="flex gap-1.5 p-1 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6] self-start sm:self-auto">
             {(['ar', 'fr', 'en'] as const).map((loc) => (
               <button
                 key={loc}
@@ -255,8 +255,8 @@ export function ProgramForm({ program }: ProgramFormProps) {
                 onClick={() => setActiveLocale(loc)}
                 className={`px-4 py-1.5 text-xs font-black rounded-xl transition-all cursor-pointer ${
                   activeLocale === loc
-                    ? 'bg-[#0d3b43] text-white shadow-xs'
-                    : 'text-[#445457] hover:bg-[#f4ede2]'
+                    ? 'bg-[#231f20] text-white shadow-xs'
+                    : 'text-[#5C5A55] hover:bg-[#FEF6CC]'
                 }`}
               >
                 {loc === 'ar' ? 'العربية 🇲🇦' : loc === 'fr' ? 'Français 🇫🇷' : 'English 🇬🇧'}
@@ -429,7 +429,7 @@ export function ProgramForm({ program }: ProgramFormProps) {
         <button
           type="button"
           onClick={() => router.back()}
-          className="px-5 py-2.5 text-xs font-bold text-[#445457] border border-[#cfc7b9] rounded-xl hover:bg-[#faf7f2] transition-colors cursor-pointer"
+          className="px-5 py-2.5 text-xs font-bold text-[#5C5A55] border border-[#cfc7b9] rounded-xl hover:bg-[#F5F3EE] transition-colors cursor-pointer"
         >
           إلغاء والعودة
         </button>
@@ -437,7 +437,7 @@ export function ProgramForm({ program }: ProgramFormProps) {
         <button
           type="submit"
           disabled={isPending}
-          className="inline-flex items-center gap-2 px-8 py-3 text-xs sm:text-sm font-black text-white bg-[#0d3b43] hover:bg-[#08242a] active:scale-98 rounded-xl disabled:opacity-60 disabled:cursor-not-allowed transition-all shadow-md hover:shadow-lg cursor-pointer"
+          className="inline-flex items-center gap-2 px-8 py-3 text-xs sm:text-sm font-black text-white bg-[#231f20] hover:bg-[#231f20] active:scale-98 rounded-xl disabled:opacity-60 disabled:cursor-not-allowed transition-all shadow-md hover:shadow-lg cursor-pointer"
         >
           <span>{isPending ? '⏳' : '💾'}</span>
           <span>{isPending ? 'جارٍ الحفظ...' : program ? 'حفظ تعديلات البرنامج' : 'إنشاء البرنامج ونشره'}</span>

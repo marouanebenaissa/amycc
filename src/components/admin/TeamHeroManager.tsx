@@ -165,13 +165,13 @@ export function TeamHeroManager({
 
       {/* Section 1: Hero Image Upload & Live Preview */}
       <div className="p-6 sm:p-8 rounded-3xl bg-white border border-[#e5e0d6] shadow-subtle space-y-6">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#f0ebe1]">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#FEF6CC]">
           <div>
-            <h2 className="text-xl font-black text-[#08242a] tracking-tight flex items-center gap-2">
+            <h2 className="text-xl font-black text-[#231f20] tracking-tight flex items-center gap-2">
               <span>🖼️</span>
               <span>صورة واجهة صفحة الفريق (Hero Banner)</span>
             </h2>
-            <p className="text-xs text-[#5f7174] mt-1">
+            <p className="text-xs text-[#5C5A55] mt-1">
               تحكم بالصورة الرئيسية التي تظهر في رأس صفحة فريق العمل والهيكلة (/[locale]/team).
             </p>
           </div>
@@ -182,7 +182,7 @@ export function TeamHeroManager({
               type="button"
               onClick={() => fileInputRef.current?.click()}
               disabled={uploading}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#0d3b43] hover:bg-[#08242a] text-white text-xs font-bold transition-all shadow-xs disabled:opacity-50 cursor-pointer"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#231f20] hover:bg-[#231f20] text-white text-xs font-bold transition-all shadow-xs disabled:opacity-50 cursor-pointer"
             >
               <span>{uploading ? '⏳' : '📷'}</span>
               <span>{uploading ? 'جارٍ الرفع...' : 'رفع صورة من الجهاز'}</span>
@@ -201,7 +201,7 @@ export function TeamHeroManager({
             <button
               type="button"
               onClick={handleResetToDefaults}
-              className="px-3.5 py-2 rounded-xl bg-[#faf7f2] hover:bg-[#f0ebe1] text-[#445457] text-xs font-bold border border-[#e5e0d6] transition-all cursor-pointer"
+              className="px-3.5 py-2 rounded-xl bg-[#F5F3EE] hover:bg-[#FEF6CC] text-[#5C5A55] text-xs font-bold border border-[#e5e0d6] transition-all cursor-pointer"
             >
               ↺ استعادة الافتراضي
             </button>
@@ -210,21 +210,21 @@ export function TeamHeroManager({
 
         {/* Visibility Toggle & Image URL Input */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
-          <label className="flex items-center gap-3 p-3.5 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6] cursor-pointer hover:bg-[#f5ede1] transition-colors">
+          <label className="flex items-center gap-3 p-3.5 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6] cursor-pointer hover:bg-[#FEF6CC] transition-colors">
             <input
               type="checkbox"
               checked={hero.showImage !== false}
               onChange={(e) => setHero((prev) => ({ ...prev, showImage: e.target.checked }))}
-              className="w-4 h-4 rounded text-[#0d3b43] focus:ring-[#0d3b43]"
+              className="w-4 h-4 rounded text-[#231f20] focus:ring-[#231f20]"
             />
             <div className="text-xs">
-              <span className="font-bold text-[#08242a] block">تفعيل صورة الغلاف على الواجهة</span>
-              <span className="text-[#819598] block">إذا تم التعطيل، ستظهر الواجهة بخلفية مغربية هادئة ونقية.</span>
+              <span className="font-bold text-[#231f20] block">تفعيل صورة الغلاف على الواجهة</span>
+              <span className="text-[#5C5A55] block">إذا تم التعطيل، ستظهر الواجهة بخلفية مغربية هادئة ونقية.</span>
             </div>
           </label>
 
           <div>
-            <label className="block text-2xs font-bold text-[#5f7174] uppercase tracking-wider mb-1">
+            <label className="block text-2xs font-bold text-[#5C5A55] uppercase tracking-wider mb-1">
               أو رابط الصورة المباشر (Image URL)
             </label>
             <input
@@ -232,27 +232,27 @@ export function TeamHeroManager({
               value={hero.imageUrl || ''}
               onChange={(e) => setHero((prev) => ({ ...prev, imageUrl: e.target.value }))}
               placeholder="/images/youth-in-action.jpg أو رابط خارجي..."
-              className="w-full px-3.5 py-2 rounded-xl bg-[#faf7f2] border border-[#e5e0d6] text-xs text-[#08242a] focus:bg-white focus:outline-none focus:border-[#0d3b43]"
+              className="w-full px-3.5 py-2 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
             />
           </div>
         </div>
 
         {/* Live Interactive Preview Box */}
         <div className="space-y-2">
-          <div className="flex items-center justify-between text-2xs font-bold text-[#819598]">
+          <div className="flex items-center justify-between text-2xs font-bold text-[#5C5A55]">
             <span>معاينة حية لواجهة الصفحة (Live Simulation)</span>
             <div className="flex items-center gap-2">
               <Link
                 href="/ar/team"
                 target="_blank"
-                className="text-[#0d3b43] hover:underline"
+                className="text-[#231f20] hover:underline"
               >
                 معاينة الصفحة المنشورة ↗
               </Link>
             </div>
           </div>
 
-          <div className="relative rounded-3xl overflow-hidden min-h-[320px] sm:min-h-[380px] bg-[#08242a] text-white flex items-center justify-center border-2 border-[#cfc7b9] shadow-inner p-6 sm:p-10 text-center">
+          <div className="relative rounded-3xl overflow-hidden min-h-[320px] sm:min-h-[380px] bg-[#231f20] text-white flex items-center justify-center border-2 border-[#cfc7b9] shadow-inner p-6 sm:p-10 text-center">
             {/* Background photo layer */}
             {hero.imageUrl && hero.showImage !== false ? (
               <>
@@ -265,34 +265,34 @@ export function TeamHeroManager({
                     className="object-cover object-center"
                   />
                   <div className="absolute inset-0 bg-black/45" />
-                  <div className="absolute inset-0 bg-gradient-to-b from-[#08242a]/95 via-[#08242a]/70 to-[#08242a]/95" />
+                  <div className="absolute inset-0 bg-gradient-to-b from-[#231f20]/95 via-[#231f20]/70 to-[#231f20]/95" />
                   <div className="absolute inset-0 moroccan-star-pattern opacity-15 pointer-events-none" />
                 </div>
               </>
             ) : (
-              <div className="absolute inset-0 bg-gradient-to-b from-[#faf7f2] via-[#f5ede1] to-[#faf7f2] flex items-center justify-center">
+              <div className="absolute inset-0 bg-gradient-to-b from-[#F5F3EE] via-[#FEF6CC] to-[#F5F3EE] flex items-center justify-center">
                 <div className="absolute inset-0 moroccan-pattern-light opacity-60" />
-                <span className="text-xs text-[#819598] font-bold z-10">
+                <span className="text-xs text-[#5C5A55] font-bold z-10">
                   (لا توجد صورة غلاف — سيتم عرض الخلفية الهادئة)
                 </span>
               </div>
             )}
 
             {/* Overlaid Live Typography */}
-            <div className={`relative z-10 max-w-2xl mx-auto space-y-4 ${hero.imageUrl && hero.showImage !== false ? 'text-white' : 'text-[#08242a]'}`}>
+            <div className={`relative z-10 max-w-2xl mx-auto space-y-4 ${hero.imageUrl && hero.showImage !== false ? 'text-white' : 'text-[#231f20]'}`}>
               {/* Badges preview */}
               <div className="flex flex-wrap items-center justify-center gap-2">
                 <span className={`px-3 py-1 rounded-full text-3xs font-bold backdrop-blur-md border ${
                   hero.imageUrl && hero.showImage !== false
                     ? 'bg-white/15 border-white/25 text-white'
-                    : 'bg-[#0d3b43]/10 border-[#0d3b43]/20 text-[#0d3b43]'
+                    : 'bg-[#231f20]/10 border-[#231f20]/20 text-[#231f20]'
                 }`}>
                   {hero.badge1Ar || defaultHero.badge1Ar}
                 </span>
                 <span className={`px-3 py-1 rounded-full text-3xs font-bold backdrop-blur-md border ${
                   hero.imageUrl && hero.showImage !== false
-                    ? 'bg-white/15 border-white/25 text-[#f4ce83]'
-                    : 'bg-[#d99b26]/10 border-[#d99b26]/20 text-[#99620b]'
+                    ? 'bg-white/15 border-white/25 text-[#ffd22f]'
+                    : 'bg-[#d2a82b]/10 border-[#d2a82b]/20 text-[#d2a82b]'
                 }`}>
                   {hero.badge2Ar || defaultHero.badge2Ar}
                 </span>
@@ -305,7 +305,7 @@ export function TeamHeroManager({
 
               {/* Description preview */}
               <p className={`text-xs sm:text-sm line-clamp-3 leading-relaxed max-w-xl mx-auto ${
-                hero.imageUrl && hero.showImage !== false ? 'text-[#d8f0f4]/90' : 'text-[#445457]'
+                hero.imageUrl && hero.showImage !== false ? 'text-[#FEF6CC]/90' : 'text-[#5C5A55]'
               }`}>
                 {hero.descriptionAr || defaultHero.descriptionAr}
               </p>
@@ -316,26 +316,26 @@ export function TeamHeroManager({
 
       {/* Section 2: Trilingual Text Customization */}
       <div className="p-6 sm:p-8 rounded-3xl bg-white border border-[#e5e0d6] shadow-subtle space-y-6">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#f0ebe1]">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#FEF6CC]">
           <div>
-            <h2 className="text-xl font-black text-[#08242a] tracking-tight flex items-center gap-2">
+            <h2 className="text-xl font-black text-[#231f20] tracking-tight flex items-center gap-2">
               <span>✍️</span>
               <span>نصوص وعناوين الواجهة (Trilingual Content)</span>
             </h2>
-            <p className="text-xs text-[#5f7174] mt-1">
+            <p className="text-xs text-[#5C5A55] mt-1">
               تخصيص الشارات، العنوان العريض، والفقرة التقديمية في اللغات الثلاث.
             </p>
           </div>
 
           {/* Language Switcher Tabs */}
-          <div className="flex items-center gap-1.5 p-1 bg-[#faf7f2] rounded-xl border border-[#e5e0d6]">
+          <div className="flex items-center gap-1.5 p-1 bg-[#F5F3EE] rounded-xl border border-[#e5e0d6]">
             <button
               type="button"
               onClick={() => setActiveLangTab('ar')}
               className={`px-3 py-1.5 rounded-lg text-xs font-black transition-all cursor-pointer ${
                 activeLangTab === 'ar'
-                  ? 'bg-[#0d3b43] text-white shadow-xs'
-                  : 'text-[#5f7174] hover:text-[#08242a]'
+                  ? 'bg-[#231f20] text-white shadow-xs'
+                  : 'text-[#5C5A55] hover:text-[#231f20]'
               }`}
             >
               العربية (AR)
@@ -345,8 +345,8 @@ export function TeamHeroManager({
               onClick={() => setActiveLangTab('fr')}
               className={`px-3 py-1.5 rounded-lg text-xs font-black transition-all cursor-pointer ${
                 activeLangTab === 'fr'
-                  ? 'bg-[#0d3b43] text-white shadow-xs'
-                  : 'text-[#5f7174] hover:text-[#08242a]'
+                  ? 'bg-[#231f20] text-white shadow-xs'
+                  : 'text-[#5C5A55] hover:text-[#231f20]'
               }`}
             >
               Français (FR)
@@ -356,8 +356,8 @@ export function TeamHeroManager({
               onClick={() => setActiveLangTab('en')}
               className={`px-3 py-1.5 rounded-lg text-xs font-black transition-all cursor-pointer ${
                 activeLangTab === 'en'
-                  ? 'bg-[#0d3b43] text-white shadow-xs'
-                  : 'text-[#5f7174] hover:text-[#08242a]'
+                  ? 'bg-[#231f20] text-white shadow-xs'
+                  : 'text-[#5C5A55] hover:text-[#231f20]'
               }`}
             >
               English (EN)
@@ -371,7 +371,7 @@ export function TeamHeroManager({
             <>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-2xs font-bold text-[#5f7174] uppercase tracking-wider mb-1">
+                  <label className="block text-2xs font-bold text-[#5C5A55] uppercase tracking-wider mb-1">
                     الشارة الأولى (Badge 1)
                   </label>
                   <input
@@ -379,11 +379,11 @@ export function TeamHeroManager({
                     value={hero.badge1Ar ?? ''}
                     onChange={(e) => setHero((prev) => ({ ...prev, badge1Ar: e.target.value }))}
                     placeholder={defaultHero.badge1Ar}
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#faf7f2] border border-[#e5e0d6] text-xs text-[#08242a] focus:bg-white focus:outline-none focus:border-[#0d3b43]"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
                   />
                 </div>
                 <div>
-                  <label className="block text-2xs font-bold text-[#5f7174] uppercase tracking-wider mb-1">
+                  <label className="block text-2xs font-bold text-[#5C5A55] uppercase tracking-wider mb-1">
                     الشارة الثانية (Badge 2)
                   </label>
                   <input
@@ -391,13 +391,13 @@ export function TeamHeroManager({
                     value={hero.badge2Ar ?? ''}
                     onChange={(e) => setHero((prev) => ({ ...prev, badge2Ar: e.target.value }))}
                     placeholder={defaultHero.badge2Ar}
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#faf7f2] border border-[#e5e0d6] text-xs text-[#08242a] focus:bg-white focus:outline-none focus:border-[#0d3b43]"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-2xs font-bold text-[#5f7174] uppercase tracking-wider mb-1">
+                <label className="block text-2xs font-bold text-[#5C5A55] uppercase tracking-wider mb-1">
                   العنوان الرئيسي الكبير (Headline)
                 </label>
                 <textarea
@@ -405,12 +405,12 @@ export function TeamHeroManager({
                   value={hero.titleAr ?? ''}
                   onChange={(e) => setHero((prev) => ({ ...prev, titleAr: e.target.value }))}
                   placeholder={defaultHero.titleAr}
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-[#faf7f2] border border-[#e5e0d6] text-xs text-[#08242a] focus:bg-white focus:outline-none focus:border-[#0d3b43]"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
                 />
               </div>
 
               <div>
-                <label className="block text-2xs font-bold text-[#5f7174] uppercase tracking-wider mb-1">
+                <label className="block text-2xs font-bold text-[#5C5A55] uppercase tracking-wider mb-1">
                   الفقرة التقديمية (Description)
                 </label>
                 <textarea
@@ -418,7 +418,7 @@ export function TeamHeroManager({
                   value={hero.descriptionAr ?? ''}
                   onChange={(e) => setHero((prev) => ({ ...prev, descriptionAr: e.target.value }))}
                   placeholder={defaultHero.descriptionAr}
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-[#faf7f2] border border-[#e5e0d6] text-xs text-[#08242a] focus:bg-white focus:outline-none focus:border-[#0d3b43]"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
                 />
               </div>
             </>
@@ -428,7 +428,7 @@ export function TeamHeroManager({
             <>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-2xs font-bold text-[#5f7174] uppercase tracking-wider mb-1">
+                  <label className="block text-2xs font-bold text-[#5C5A55] uppercase tracking-wider mb-1">
                     Badge 1 (Français)
                   </label>
                   <input
@@ -436,11 +436,11 @@ export function TeamHeroManager({
                     value={hero.badge1Fr ?? ''}
                     onChange={(e) => setHero((prev) => ({ ...prev, badge1Fr: e.target.value }))}
                     placeholder={defaultHero.badge1Fr}
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#faf7f2] border border-[#e5e0d6] text-xs text-[#08242a] focus:bg-white focus:outline-none focus:border-[#0d3b43]"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
                   />
                 </div>
                 <div>
-                  <label className="block text-2xs font-bold text-[#5f7174] uppercase tracking-wider mb-1">
+                  <label className="block text-2xs font-bold text-[#5C5A55] uppercase tracking-wider mb-1">
                     Badge 2 (Français)
                   </label>
                   <input
@@ -448,13 +448,13 @@ export function TeamHeroManager({
                     value={hero.badge2Fr ?? ''}
                     onChange={(e) => setHero((prev) => ({ ...prev, badge2Fr: e.target.value }))}
                     placeholder={defaultHero.badge2Fr}
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#faf7f2] border border-[#e5e0d6] text-xs text-[#08242a] focus:bg-white focus:outline-none focus:border-[#0d3b43]"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-2xs font-bold text-[#5f7174] uppercase tracking-wider mb-1">
+                <label className="block text-2xs font-bold text-[#5C5A55] uppercase tracking-wider mb-1">
                   Titre Principal (Français)
                 </label>
                 <textarea
@@ -462,12 +462,12 @@ export function TeamHeroManager({
                   value={hero.titleFr ?? ''}
                   onChange={(e) => setHero((prev) => ({ ...prev, titleFr: e.target.value }))}
                   placeholder={defaultHero.titleFr}
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-[#faf7f2] border border-[#e5e0d6] text-xs text-[#08242a] focus:bg-white focus:outline-none focus:border-[#0d3b43]"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
                 />
               </div>
 
               <div>
-                <label className="block text-2xs font-bold text-[#5f7174] uppercase tracking-wider mb-1">
+                <label className="block text-2xs font-bold text-[#5C5A55] uppercase tracking-wider mb-1">
                   Description (Français)
                 </label>
                 <textarea
@@ -475,7 +475,7 @@ export function TeamHeroManager({
                   value={hero.descriptionFr ?? ''}
                   onChange={(e) => setHero((prev) => ({ ...prev, descriptionFr: e.target.value }))}
                   placeholder={defaultHero.descriptionFr}
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-[#faf7f2] border border-[#e5e0d6] text-xs text-[#08242a] focus:bg-white focus:outline-none focus:border-[#0d3b43]"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
                 />
               </div>
             </>
@@ -485,7 +485,7 @@ export function TeamHeroManager({
             <>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-2xs font-bold text-[#5f7174] uppercase tracking-wider mb-1">
+                  <label className="block text-2xs font-bold text-[#5C5A55] uppercase tracking-wider mb-1">
                     Badge 1 (English)
                   </label>
                   <input
@@ -493,11 +493,11 @@ export function TeamHeroManager({
                     value={hero.badge1En ?? ''}
                     onChange={(e) => setHero((prev) => ({ ...prev, badge1En: e.target.value }))}
                     placeholder={defaultHero.badge1En}
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#faf7f2] border border-[#e5e0d6] text-xs text-[#08242a] focus:bg-white focus:outline-none focus:border-[#0d3b43]"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
                   />
                 </div>
                 <div>
-                  <label className="block text-2xs font-bold text-[#5f7174] uppercase tracking-wider mb-1">
+                  <label className="block text-2xs font-bold text-[#5C5A55] uppercase tracking-wider mb-1">
                     Badge 2 (English)
                   </label>
                   <input
@@ -505,13 +505,13 @@ export function TeamHeroManager({
                     value={hero.badge2En ?? ''}
                     onChange={(e) => setHero((prev) => ({ ...prev, badge2En: e.target.value }))}
                     placeholder={defaultHero.badge2En}
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#faf7f2] border border-[#e5e0d6] text-xs text-[#08242a] focus:bg-white focus:outline-none focus:border-[#0d3b43]"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-2xs font-bold text-[#5f7174] uppercase tracking-wider mb-1">
+                <label className="block text-2xs font-bold text-[#5C5A55] uppercase tracking-wider mb-1">
                   Main Headline (English)
                 </label>
                 <textarea
@@ -519,12 +519,12 @@ export function TeamHeroManager({
                   value={hero.titleEn ?? ''}
                   onChange={(e) => setHero((prev) => ({ ...prev, titleEn: e.target.value }))}
                   placeholder={defaultHero.titleEn}
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-[#faf7f2] border border-[#e5e0d6] text-xs text-[#08242a] focus:bg-white focus:outline-none focus:border-[#0d3b43]"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
                 />
               </div>
 
               <div>
-                <label className="block text-2xs font-bold text-[#5f7174] uppercase tracking-wider mb-1">
+                <label className="block text-2xs font-bold text-[#5C5A55] uppercase tracking-wider mb-1">
                   Narrative Description (English)
                 </label>
                 <textarea
@@ -532,7 +532,7 @@ export function TeamHeroManager({
                   value={hero.descriptionEn ?? ''}
                   onChange={(e) => setHero((prev) => ({ ...prev, descriptionEn: e.target.value }))}
                   placeholder={defaultHero.descriptionEn}
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-[#faf7f2] border border-[#e5e0d6] text-xs text-[#08242a] focus:bg-white focus:outline-none focus:border-[#0d3b43]"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
                 />
               </div>
             </>
@@ -542,7 +542,7 @@ export function TeamHeroManager({
 
       {/* Bottom Sticky Action Strip */}
       <div className="sticky bottom-4 z-20 p-4 rounded-2xl bg-white/95 backdrop-blur-md border border-[#e5e0d6] shadow-xl flex items-center justify-between gap-4">
-        <div className="flex items-center gap-2 text-xs text-[#5f7174]">
+        <div className="flex items-center gap-2 text-xs text-[#5C5A55]">
           <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
           <span>تُطبَّق التغييرات فوراً على صفحة فريق العمل</span>
         </div>
@@ -551,7 +551,7 @@ export function TeamHeroManager({
           type="button"
           onClick={handleSave}
           disabled={saving}
-          className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-[#0d3b43] hover:bg-[#08242a] text-white text-xs sm:text-sm font-black transition-all shadow-md hover:shadow-lg disabled:opacity-50 cursor-pointer"
+          className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-[#231f20] hover:bg-[#231f20] text-white text-xs sm:text-sm font-black transition-all shadow-md hover:shadow-lg disabled:opacity-50 cursor-pointer"
         >
           <span>{saving ? '⏳' : '💾'}</span>
           <span>{saving ? 'جارٍ الحفظ...' : 'حفظ إعدادات الواجهة'}</span>

@@ -109,15 +109,15 @@ export default async function EventsPage(props: { params: Promise<{ locale: stri
     <>
       <Header locale={locale} dict={dict} />
 
-      <main id="main-content" className="flex-1 bg-[#faf7f2]">
+      <main id="main-content" className="flex-1 bg-[#F5F3EE]">
         {/* ========================================================= */}
         {/* Moroccan Cinematic Ambient Hero Section (Clean Non-Green) */}
         {/* ========================================================= */}
         <section
           className={`relative overflow-hidden border-b transition-colors ${
             hasHeroImage
-              ? 'min-h-[500px] sm:min-h-[540px] lg:min-h-[600px] flex items-center bg-[#1c1917] text-white pt-16 pb-24 lg:pt-20 lg:pb-32 border-[#292524]'
-              : 'bg-gradient-to-b from-[#faf7f2] via-[#f7f2e9] to-[#faf7f2] border-[#e5e0d6] pt-16 pb-20 lg:pt-20 lg:pb-28 text-[#08242a]'
+              ? 'min-h-[500px] sm:min-h-[540px] lg:min-h-[600px] flex items-center bg-[#231f20] text-white pt-16 pb-24 lg:pt-20 lg:pb-32 border-[#231f20]'
+              : 'bg-gradient-to-b from-[#F5F3EE] via-[#F5F3EE] to-[#F5F3EE] border-[#e5e0d6] pt-16 pb-20 lg:pt-20 lg:pb-28 text-[#231f20]'
           }`}
         >
           {/* Background Layer */}
@@ -134,14 +134,14 @@ export default async function EventsPage(props: { params: Promise<{ locale: stri
               <div className="absolute inset-0 bg-black/45" />
               <div className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/55 to-black/90" />
               <div className="absolute inset-0 moroccan-star-pattern opacity-15 pointer-events-none" />
-              <div className="absolute top-1/4 start-1/4 w-96 h-96 bg-[#c85a32]/20 rounded-full blur-3xl pointer-events-none" />
-              <div className="absolute bottom-10 end-10 w-96 h-96 bg-[#f4ce83]/20 rounded-full blur-3xl pointer-events-none" />
+              <div className="absolute top-1/4 start-1/4 w-96 h-96 bg-[#bd3227]/20 rounded-full blur-3xl pointer-events-none" />
+              <div className="absolute bottom-10 end-10 w-96 h-96 bg-[#ffd22f]/20 rounded-full blur-3xl pointer-events-none" />
             </div>
           ) : (
             <>
               <div className="absolute inset-0 moroccan-pattern-light opacity-60 pointer-events-none" aria-hidden="true" />
-              <div className="absolute top-1/3 start-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-[#c85a32]/10 rounded-full blur-3xl pointer-events-none" />
-              <div className="absolute bottom-0 end-12 w-72 h-72 bg-[#f4ce83]/15 rounded-full blur-3xl pointer-events-none" />
+              <div className="absolute top-1/3 start-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-[#bd3227]/10 rounded-full blur-3xl pointer-events-none" />
+              <div className="absolute bottom-0 end-12 w-72 h-72 bg-[#ffd22f]/15 rounded-full blur-3xl pointer-events-none" />
             </>
           )}
 
@@ -152,12 +152,12 @@ export default async function EventsPage(props: { params: Promise<{ locale: stri
                 <span
                   className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs sm:text-sm font-bold shadow-2xs backdrop-blur-md ${
                     hasHeroImage
-                      ? 'bg-white/10 border border-white/20 text-[#f4ce83]'
-                      : 'bg-[#c85a32]/10 border border-[#c85a32]/20 text-[#c85a32]'
+                      ? 'bg-white/10 border border-white/20 text-[#ffd22f]'
+                      : 'bg-[#bd3227]/10 border border-[#bd3227]/20 text-[#bd3227]'
                   }`}
                 >
                   <span
-                    className={`w-2 h-2 rounded-full ${hasHeroImage ? 'bg-[#f4ce83]' : 'bg-[#c85a32]'} animate-pulse`}
+                    className={`w-2 h-2 rounded-full ${hasHeroImage ? 'bg-[#ffd22f]' : 'bg-[#bd3227]'} animate-pulse`}
                   />
                   <span>
                     {isAr
@@ -174,7 +174,7 @@ export default async function EventsPage(props: { params: Promise<{ locale: stri
                   className={`inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs sm:text-sm font-bold shadow-2xs backdrop-blur-md ${
                     hasHeroImage
                       ? 'bg-white/10 border border-white/20 text-white'
-                      : 'bg-[#08242a]/5 border border-[#08242a]/15 text-[#08242a]'
+                      : 'bg-[#231f20]/5 border border-[#231f20]/15 text-[#231f20]'
                   }`}
                 >
                   <span>🇲🇦</span>
@@ -192,7 +192,7 @@ export default async function EventsPage(props: { params: Promise<{ locale: stri
             {/* Headline */}
             <h1
               className={`text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-tight sm:leading-tight ${
-                hasHeroImage ? 'text-white drop-shadow-md' : 'text-[#08242a]'
+                hasHeroImage ? 'text-white drop-shadow-md' : 'text-[#231f20]'
               }`}
             >
               {isAr
@@ -206,7 +206,7 @@ export default async function EventsPage(props: { params: Promise<{ locale: stri
             {(isAr ? pageSettings.hero.subtitleAr : isFr ? pageSettings.hero.subtitleFr : pageSettings.hero.subtitleEn) && (
               <p
                 className={`text-base sm:text-xl font-bold max-w-3xl mx-auto leading-relaxed ${
-                  hasHeroImage ? 'text-[#f4ce83]' : 'text-[#c85a32]'
+                  hasHeroImage ? 'text-[#ffd22f]' : 'text-[#bd3227]'
                 }`}
               >
                 {isAr
@@ -220,7 +220,7 @@ export default async function EventsPage(props: { params: Promise<{ locale: stri
             {/* Description */}
             <p
               className={`text-sm sm:text-base max-w-3xl mx-auto leading-relaxed font-medium ${
-                hasHeroImage ? 'text-white/85' : 'text-[#5f7174]'
+                hasHeroImage ? 'text-white/85' : 'text-[#5C5A55]'
               }`}
             >
               {isAr
@@ -236,8 +236,8 @@ export default async function EventsPage(props: { params: Promise<{ locale: stri
                 href="#events-catalog"
                 className={`px-6 py-3.5 rounded-xl font-bold transition-all text-xs sm:text-sm shadow-card hover:scale-105 active:scale-95 flex items-center gap-2 ${
                   hasHeroImage
-                    ? 'text-[#08242a] bg-[#f4ce83] hover:bg-[#eec26e]'
-                    : 'text-white bg-[#c85a32] hover:bg-[#b04b26]'
+                    ? 'text-[#231f20] bg-[#ffd22f] hover:bg-[#ffd22f]'
+                    : 'text-white bg-[#bd3227] hover:bg-[#a3261c]'
                 }`}
               >
                 <span>📅</span>
@@ -255,7 +255,7 @@ export default async function EventsPage(props: { params: Promise<{ locale: stri
                 className={`px-6 py-3.5 rounded-xl font-bold transition-all text-xs sm:text-sm hover:scale-105 active:scale-95 ${
                   hasHeroImage
                     ? 'text-white bg-white/10 hover:bg-white/20 border border-white/20 backdrop-blur-md'
-                    : 'text-[#08242a] bg-white hover:bg-[#faf7f2] border border-[#cfc7b9] shadow-2xs'
+                    : 'text-[#231f20] bg-white hover:bg-[#F5F3EE] border border-[#cfc7b9] shadow-2xs'
                 }`}
               >
                 {isAr ? 'البرنامج السنوي للموسم' : isFr ? 'Programme Annuel' : 'Annual Program'}
@@ -272,19 +272,19 @@ export default async function EventsPage(props: { params: Promise<{ locale: stri
             {pageSettings.stats.map((stat) => (
               <div
                 key={stat.id}
-                className="luxury-card p-5 sm:p-6 text-center flex flex-col justify-between items-center group bg-white shadow-card border border-[#e5e0d6] hover:border-[#c85a32]/40 transition-all rounded-2xl"
+                className="luxury-card p-5 sm:p-6 text-center flex flex-col justify-between items-center group bg-white shadow-card border border-[#e5e0d6] hover:border-[#bd3227]/40 transition-all rounded-2xl"
               >
-                <div className="w-12 h-12 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6] flex items-center justify-center p-2 mb-3 shadow-2xs group-hover:scale-110 transition-transform overflow-hidden text-2xl">
+                <div className="w-12 h-12 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6] flex items-center justify-center p-2 mb-3 shadow-2xs group-hover:scale-110 transition-transform overflow-hidden text-2xl">
                   {stat.icon}
                 </div>
-                <div className="text-3xl sm:text-4xl font-black text-[#08242a] mb-1 tracking-tight">
+                <div className="text-3xl sm:text-4xl font-black text-[#231f20] mb-1 tracking-tight">
                   {isAr
                     ? (stat.valueAr || stat.value)
                     : isFr
                     ? (stat.valueFr || (stat.value === 'فوري' ? 'Immédiat' : stat.value))
                     : (stat.valueEn || (stat.value === 'فوري' ? 'Instant' : stat.value))}
                 </div>
-                <div className="text-xs sm:text-sm font-bold text-[#5f7174] leading-snug">
+                <div className="text-xs sm:text-sm font-bold text-[#5C5A55] leading-snug">
                   {isAr ? stat.labelAr : isFr ? stat.labelFr : stat.labelEn}
                 </div>
               </div>
@@ -307,11 +307,11 @@ export default async function EventsPage(props: { params: Promise<{ locale: stri
         {/* ========================================================= */}
         <section className="py-20 bg-white border-t border-[#e5e0d6] relative overflow-hidden">
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="relative rounded-3xl overflow-hidden bg-gradient-to-r from-[#0d3b43] via-[#0f4650] to-[#08242a] text-white p-8 sm:p-12 lg:p-14 shadow-card text-center space-y-6">
+            <div className="relative rounded-3xl overflow-hidden bg-gradient-to-r from-[#231f20] via-[#231f20] to-[#231f20] text-white p-8 sm:p-12 lg:p-14 shadow-card text-center space-y-6">
               <div className="absolute inset-0 moroccan-pattern-dark opacity-20 pointer-events-none" aria-hidden="true" />
               
               <div className="relative z-10 space-y-4 max-w-3xl mx-auto">
-                <span className="inline-block px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-widest bg-white/10 text-[#f4ce83] border border-white/20 backdrop-blur-sm">
+                <span className="inline-block px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-widest bg-white/10 text-[#ffd22f] border border-white/20 backdrop-blur-sm">
                   {isAr
                     ? pageSettings.cta.badgeAr
                     : isFr
@@ -342,7 +342,7 @@ export default async function EventsPage(props: { params: Promise<{ locale: stri
                         ? `/${locale}${pageSettings.cta.primaryBtnUrl}`
                         : pageSettings.cta.primaryBtnUrl
                     }
-                    className="px-6 py-3.5 rounded-xl font-bold text-[#08242a] bg-[#f4ce83] hover:bg-[#eec26e] transition-all text-xs sm:text-sm shadow-card hover:scale-105 active:scale-95"
+                    className="px-6 py-3.5 rounded-xl font-bold text-[#231f20] bg-[#ffd22f] hover:bg-[#ffd22f] transition-all text-xs sm:text-sm shadow-card hover:scale-105 active:scale-95"
                   >
                     {isAr
                       ? pageSettings.cta.primaryBtnTextAr

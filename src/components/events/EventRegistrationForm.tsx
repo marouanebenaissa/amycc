@@ -58,18 +58,18 @@ export function EventRegistrationForm({
 
   if (!registrationOpen) {
     return (
-      <div className="bg-[#faf7f2] rounded-3xl border border-[#e5e0d6] p-6 sm:p-8 text-center space-y-3 shadow-sm">
+      <div className="bg-[#F5F3EE] rounded-3xl border border-[#e5e0d6] p-6 sm:p-8 text-center space-y-3 shadow-sm">
         <div className="w-12 h-12 rounded-2xl bg-slate-200 text-slate-600 flex items-center justify-center mx-auto text-xl">
           🔒
         </div>
-        <h3 className="text-sm sm:text-base font-extrabold text-[#08242a]">
+        <h3 className="text-sm sm:text-base font-extrabold text-[#231f20]">
           {isAr
             ? 'باب التسجيل مغلق حالياً'
             : isFr
             ? 'Inscriptions actuellement closes'
             : 'Registration is Currently Closed'}
         </h3>
-        <p className="text-2xs sm:text-xs text-[#5f7174] leading-relaxed">
+        <p className="text-2xs sm:text-xs text-[#5C5A55] leading-relaxed">
           {isAr
             ? 'تم إغلاق حجز المقاعد لهذه الفعالية لاكتمال الطاقة الاستيعابية أو انتهاء المهلة المحددة. للاستفسار يرجى التواصل مع إدارة الجمعية.'
             : isFr
@@ -83,21 +83,21 @@ export function EventRegistrationForm({
   return (
     <div className="bg-white rounded-3xl border border-[#e5e0d6] p-6 sm:p-8 shadow-card relative overflow-hidden">
       {/* Decorative accent top strip */}
-      <div className="absolute top-0 start-0 end-0 h-1.5 bg-gradient-to-r from-[#0d3b43] via-[#c85a32] to-[#08242a]" />
+      <div className="absolute top-0 start-0 end-0 h-1.5 bg-gradient-to-r from-[#231f20] via-[#bd3227] to-[#231f20]" />
 
       <div className="mb-6">
-        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-3xs font-extrabold bg-[#faece7] text-[#c85a32] mb-2">
-          <span className="w-1.5 h-1.5 rounded-full bg-[#c85a32] animate-pulse" />
+        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-3xs font-extrabold bg-[#FEF6CC] text-[#bd3227] mb-2">
+          <span className="w-1.5 h-1.5 rounded-full bg-[#bd3227] animate-pulse" />
           <span>{isAr ? 'تأكيد الحجز والتسجيل' : isFr ? 'Réservation & Enregistrement' : 'Direct Registration'}</span>
         </span>
-        <h3 className="text-base sm:text-lg font-black text-[#08242a] leading-snug">
+        <h3 className="text-base sm:text-lg font-black text-[#231f20] leading-snug">
           {isAr
             ? `حجز مقعد لحضور: ${eventTitle}`
             : isFr
             ? `Réservation pour : ${eventTitle}`
             : `Seat reservation for: ${eventTitle}`}
         </h3>
-        <p className="text-3xs sm:text-2xs text-[#5f7174] mt-1">
+        <p className="text-3xs sm:text-2xs text-[#5C5A55] mt-1">
           {isAr
             ? 'املأ البيانات التالية لتأكيد حجز مقعدك واستلام دعوتك الرسمية فوراً عبر البريد الإلكتروني.'
             : isFr
@@ -146,7 +146,7 @@ export function EventRegistrationForm({
         <input type="hidden" name="eventId" value={eventId} />
 
         <div>
-          <label className="block text-2xs font-extrabold text-[#08242a] mb-1.5">
+          <label className="block text-2xs font-extrabold text-[#231f20] mb-1.5">
             {isAr ? 'الاسم الكامل *' : isFr ? 'Nom complet *' : 'Full Name *'}
           </label>
           <input
@@ -154,12 +154,12 @@ export function EventRegistrationForm({
             name="fullName"
             required
             placeholder={isAr ? 'مثال: محمد الإدريسي' : isFr ? 'Ex: Mohamed El Idrissi' : 'e.g. John Doe'}
-            className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] text-xs focus:border-[#0d3b43] focus:ring-2 focus:ring-[#0d3b43]/20 outline-none transition-all placeholder:text-[#a0aab0]"
+            className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] text-xs focus:border-[#231f20] focus:ring-2 focus:ring-[#231f20]/20 outline-none transition-all placeholder:text-[#5C5A55]"
           />
         </div>
 
         <div>
-          <label className="block text-2xs font-extrabold text-[#08242a] mb-1.5">
+          <label className="block text-2xs font-extrabold text-[#231f20] mb-1.5">
             {isAr ? 'البريد الإلكتروني *' : isFr ? 'Adresse e-mail *' : 'Email Address *'}
           </label>
           <input
@@ -167,9 +167,9 @@ export function EventRegistrationForm({
             name="email"
             required
             placeholder="example@domain.com"
-            className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] text-xs focus:border-[#0d3b43] focus:ring-2 focus:ring-[#0d3b43]/20 outline-none transition-all placeholder:text-[#a0aab0]"
+            className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] text-xs focus:border-[#231f20] focus:ring-2 focus:ring-[#231f20]/20 outline-none transition-all placeholder:text-[#5C5A55]"
           />
-          <p className="text-3xs text-[#819598] mt-1">
+          <p className="text-3xs text-[#5C5A55] mt-1">
             {isAr
               ? 'سنرسل تذكرة الدخول والدعوة إلى هذا البريد'
               : 'Your invitation ticket will be delivered to this email'}
@@ -177,14 +177,14 @@ export function EventRegistrationForm({
         </div>
 
         <div>
-          <label className="block text-2xs font-extrabold text-[#08242a] mb-1.5">
+          <label className="block text-2xs font-extrabold text-[#231f20] mb-1.5">
             {isAr ? 'رقم الهاتف (اختياري للتذكير)' : isFr ? 'Téléphone (optionnel)' : 'Phone (optional)'}
           </label>
           <input
             type="tel"
             name="phone"
             placeholder="+212 6..."
-            className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] text-xs focus:border-[#0d3b43] focus:ring-2 focus:ring-[#0d3b43]/20 outline-none transition-all placeholder:text-[#a0aab0]"
+            className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] text-xs focus:border-[#231f20] focus:ring-2 focus:ring-[#231f20]/20 outline-none transition-all placeholder:text-[#5C5A55]"
           />
         </div>
 
@@ -192,7 +192,7 @@ export function EventRegistrationForm({
           <button
             type="submit"
             disabled={isPending}
-            className="w-full py-3.5 px-6 rounded-xl font-black text-white bg-[#0d3b43] hover:bg-[#134d58] active:scale-98 disabled:opacity-50 transition-all text-xs sm:text-sm shadow-md flex items-center justify-center gap-2 cursor-pointer"
+            className="w-full py-3.5 px-6 rounded-xl font-black text-white bg-[#231f20] hover:bg-[#231f20] active:scale-98 disabled:opacity-50 transition-all text-xs sm:text-sm shadow-md flex items-center justify-center gap-2 cursor-pointer"
           >
             <span>{isPending ? '⏳' : '🎟️'}</span>
             <span>
@@ -209,12 +209,12 @@ export function EventRegistrationForm({
       </form>
 
       {/* Confirmation & ticket note */}
-      <div className="mt-5 pt-5 border-t border-[#f4ede2] flex items-center justify-between text-3xs text-[#5f7174]">
-        <span className="flex items-center gap-1 font-bold text-[#0d3b43]">
+      <div className="mt-5 pt-5 border-t border-[#FEF6CC] flex items-center justify-between text-3xs text-[#5C5A55]">
+        <span className="flex items-center gap-1 font-bold text-[#231f20]">
           <span>🎟️</span>
           <span>{isAr ? 'تأكيد فوري لحجز المقعد' : isFr ? 'Confirmation immédiate' : 'Instant Confirmation'}</span>
         </span>
-        <span className="text-[#819598] font-medium">
+        <span className="text-[#5C5A55] font-medium">
           {isAr ? 'تذكرة رقمية رسمية' : isFr ? 'Billet numérique' : 'Official Digital Pass'}
         </span>
       </div>

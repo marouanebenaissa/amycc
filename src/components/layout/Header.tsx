@@ -395,14 +395,14 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
     <header
       className={`sticky top-0 z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-[#faf7f2]/95 backdrop-blur-md border-b border-[#e5e0d6] shadow-sm'
-          : 'bg-[#faf7f2] border-b border-[#ebe1d1]'
+          ? 'bg-[#F5F3EE]/95 backdrop-blur-md border-b border-[#e5e0d6] shadow-sm'
+          : 'bg-[#F5F3EE] border-b border-[#FEF6CC]'
       }`}
     >
       {/* Skip to main content — accessibility */}
       <a
         href="#main-content"
-        className="sr-only focus:not-sr-only focus:absolute focus:top-3 focus:start-3 px-4 py-2 rounded-xl text-xs font-bold bg-[#c85a32] text-white z-50 shadow-md"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-3 focus:start-3 px-4 py-2 rounded-xl text-xs font-bold bg-[#bd3227] text-white z-50 shadow-md"
       >
         {dict.common.skip_to_content}
       </a>
@@ -411,11 +411,11 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
       {topBarVisible && (
         <aside
           aria-label={isAr ? 'شريط الإعلانات المؤسسي' : 'Announcement Bar'}
-          className="bg-[#08242a] text-[#d8f0f4] py-1.5 px-4 text-3xs border-b border-[#14505b]/40 animate-fade-in"
+          className="bg-[#231f20] text-[#FEF6CC] py-1.5 px-4 text-3xs border-b border-[#d2a82b]/40 animate-fade-in"
         >
           <div className="max-w-7xl mx-auto flex items-center justify-between gap-3">
             <div className="flex items-center gap-2.5 min-w-0">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#f4ce83] shrink-0" aria-hidden="true" />
+              <span className="w-1.5 h-1.5 rounded-full bg-[#ffd22f] shrink-0" aria-hidden="true" />
               <p className="truncate font-medium text-xs sm:text-3xs">
                 {topBarMessage}
               </p>
@@ -425,14 +425,14 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
               {topBarLinkText && topBarLinkUrl && (
                 <Link
                   href={resolveTopBarUrl(topBarLinkUrl)}
-                  className="text-[#f4ce83] hover:underline font-bold transition-colors truncate max-w-[180px] sm:max-w-none"
+                  className="text-[#ffd22f] hover:underline font-bold transition-colors truncate max-w-[180px] sm:max-w-none"
                 >
                   {topBarLinkText}
                 </Link>
               )}
               {topBarContact && (
                 <>
-                  <span className="text-[#1c6875] hidden sm:inline" aria-hidden="true">•</span>
+                  <span className="text-[#d2a82b] hidden sm:inline" aria-hidden="true">•</span>
                   <a
                     href={`mailto:${topBarContact}`}
                     className="hover:text-white transition-colors hidden sm:inline"
@@ -444,7 +444,7 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
               <button
                 type="button"
                 onClick={() => setDismissed(true)}
-                className="text-[#819598] hover:text-white p-0.5 rounded transition-colors ms-1 cursor-pointer"
+                className="text-[#5C5A55] hover:text-white p-0.5 rounded transition-colors ms-1 cursor-pointer"
                 aria-label={isAr ? 'إخفاء الشريط' : 'Dismiss'}
                 title={isAr ? 'إخفاء الشريط' : 'Dismiss'}
               >
@@ -468,8 +468,8 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
               href={`/${locale}`}
               className={`px-3 py-2 rounded-lg text-xs font-bold transition-all ${
                 isHomeActive
-                  ? 'bg-[#0d3b43]/8 text-[#0d3b43] font-black'
-                  : 'text-[#1b2628] hover:text-[#0d3b43] hover:bg-[#ebe1d1]/50'
+                  ? 'bg-[#231f20]/8 text-[#231f20] font-black'
+                  : 'text-[#231f20] hover:text-[#231f20] hover:bg-[#FEF6CC]/50'
               }`}
             >
               {dict.nav.home}
@@ -491,8 +491,8 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
                 }}
                 className={`px-3 py-2 rounded-lg text-xs font-bold transition-all inline-flex items-center gap-1.5 ${
                   isAboutActive || aboutDropdownOpen
-                    ? 'bg-[#0d3b43]/8 text-[#0d3b43] font-black'
-                    : 'text-[#1b2628] hover:text-[#0d3b43] hover:bg-[#ebe1d1]/50'
+                    ? 'bg-[#231f20]/8 text-[#231f20] font-black'
+                    : 'text-[#231f20] hover:text-[#231f20] hover:bg-[#FEF6CC]/50'
                 }`}
                 aria-expanded={aboutDropdownOpen}
                 aria-haspopup="true"
@@ -500,7 +500,7 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
                 <span>{dict.nav.about_group || (isAr ? 'عن الجمعية' : isFr ? "L'Association" : 'About Us')}</span>
                 <svg
                   className={`w-3.5 h-3.5 transition-transform duration-200 ${
-                    aboutDropdownOpen ? 'rotate-180 text-[#c85a32]' : 'text-[#819598]'
+                    aboutDropdownOpen ? 'rotate-180 text-[#bd3227]' : 'text-[#5C5A55]'
                   }`}
                   fill="none"
                   viewBox="0 0 24 24"
@@ -514,7 +514,7 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
               {/* Floating Luxury Dropdown for About */}
               {aboutDropdownOpen && (
                 <div className="absolute top-full start-0 mt-1.5 w-72 rounded-2xl bg-white border border-[#e5e0d6] shadow-xl p-2.5 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
-                  <div className="px-3 py-1.5 text-4xs font-bold uppercase tracking-wider text-[#819598] border-b border-[#f4ede2] mb-1">
+                  <div className="px-3 py-1.5 text-4xs font-bold uppercase tracking-wider text-[#5C5A55] border-b border-[#FEF6CC] mb-1">
                     {isAr ? 'الهوية والتنظيم والتواصل' : 'Organization & Team'}
                   </div>
 
@@ -530,25 +530,25 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
                           onClick={() => setAboutDropdownOpen(false)}
                           className={`group/item flex items-start gap-3 p-2.5 rounded-xl transition-all ${
                             isActive
-                              ? 'bg-[#d8f0f4]/80 text-[#0d3b43]'
-                              : 'hover:bg-[#faf7f2] text-[#1b2628]'
+                              ? 'bg-[#FEF6CC]/80 text-[#231f20]'
+                              : 'hover:bg-[#F5F3EE] text-[#231f20]'
                           }`}
                         >
-                          <div className="w-8 h-8 rounded-lg bg-[#faf7f2] border border-[#e5e0d6] flex items-center justify-center shrink-0 p-1.5 shadow-2xs group-hover/item:scale-105 transition-transform text-[#0d3b43] group-hover/item:text-[#c85a32]">
+                          <div className="w-8 h-8 rounded-lg bg-[#F5F3EE] border border-[#e5e0d6] flex items-center justify-center shrink-0 p-1.5 shadow-2xs group-hover/item:scale-105 transition-transform text-[#231f20] group-hover/item:text-[#bd3227]">
                             {renderNavIcon(sub.key, 'w-4 h-4')}
                           </div>
 
                           <div className="flex-1 min-w-0">
-                            <span className="text-xs font-bold block leading-tight text-[#08242a] group-hover/item:text-[#c85a32] transition-colors">
+                            <span className="text-xs font-bold block leading-tight text-[#231f20] group-hover/item:text-[#bd3227] transition-colors">
                               {sub.title}
                             </span>
-                            <span className="text-3xs text-[#5f7174] block mt-0.5 line-clamp-1">
+                            <span className="text-3xs text-[#5C5A55] block mt-0.5 line-clamp-1">
                               {sub.desc}
                             </span>
                           </div>
 
                           {isActive && (
-                            <span className="w-1.5 h-1.5 rounded-full bg-[#c85a32] self-center shrink-0" />
+                            <span className="w-1.5 h-1.5 rounded-full bg-[#bd3227] self-center shrink-0" />
                           )}
                         </Link>
                       )
@@ -574,8 +574,8 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
                 }}
                 className={`px-3 py-2 rounded-lg text-xs font-bold transition-all inline-flex items-center gap-1.5 ${
                   isProgramsActive || programsDropdownOpen
-                    ? 'bg-[#0d3b43]/8 text-[#0d3b43] font-black'
-                    : 'text-[#1b2628] hover:text-[#0d3b43] hover:bg-[#ebe1d1]/50'
+                    ? 'bg-[#231f20]/8 text-[#231f20] font-black'
+                    : 'text-[#231f20] hover:text-[#231f20] hover:bg-[#FEF6CC]/50'
                 }`}
                 aria-expanded={programsDropdownOpen}
                 aria-haspopup="true"
@@ -583,7 +583,7 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
                 <span>{dict.nav.programs_group || dict.nav.programs}</span>
                 <svg
                   className={`w-3.5 h-3.5 transition-transform duration-200 ${
-                    programsDropdownOpen ? 'rotate-180 text-[#c85a32]' : 'text-[#819598]'
+                    programsDropdownOpen ? 'rotate-180 text-[#bd3227]' : 'text-[#5C5A55]'
                   }`}
                   fill="none"
                   viewBox="0 0 24 24"
@@ -597,7 +597,7 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
               {/* Floating Luxury Dropdown for Programs */}
               {programsDropdownOpen && (
                 <div className="absolute top-full start-0 mt-1.5 w-72 rounded-2xl bg-white border border-[#e5e0d6] shadow-xl p-2.5 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
-                  <div className="px-3 py-1.5 text-4xs font-bold uppercase tracking-wider text-[#819598] border-b border-[#f4ede2] mb-1">
+                  <div className="px-3 py-1.5 text-4xs font-bold uppercase tracking-wider text-[#5C5A55] border-b border-[#FEF6CC] mb-1">
                     {dict.nav.programs_group || dict.nav.programs}
                   </div>
 
@@ -613,25 +613,25 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
                           onClick={() => setProgramsDropdownOpen(false)}
                           className={`group/item flex items-start gap-3 p-2.5 rounded-xl transition-all ${
                             isActive
-                              ? 'bg-[#d8f0f4]/80 text-[#0d3b43]'
-                              : 'hover:bg-[#faf7f2] text-[#1b2628]'
+                              ? 'bg-[#FEF6CC]/80 text-[#231f20]'
+                              : 'hover:bg-[#F5F3EE] text-[#231f20]'
                           }`}
                         >
-                          <div className="w-8 h-8 rounded-lg bg-[#faf7f2] border border-[#e5e0d6] flex items-center justify-center shrink-0 p-1.5 shadow-2xs group-hover/item:scale-105 transition-transform text-[#0d3b43] group-hover/item:text-[#c85a32]">
+                          <div className="w-8 h-8 rounded-lg bg-[#F5F3EE] border border-[#e5e0d6] flex items-center justify-center shrink-0 p-1.5 shadow-2xs group-hover/item:scale-105 transition-transform text-[#231f20] group-hover/item:text-[#bd3227]">
                             {renderNavIcon(sub.key, 'w-4 h-4')}
                           </div>
 
                           <div className="flex-1 min-w-0">
-                            <span className="text-xs font-bold block leading-tight text-[#08242a] group-hover/item:text-[#c85a32] transition-colors">
+                            <span className="text-xs font-bold block leading-tight text-[#231f20] group-hover/item:text-[#bd3227] transition-colors">
                               {sub.title}
                             </span>
-                            <span className="text-3xs text-[#5f7174] block mt-0.5 line-clamp-1">
+                            <span className="text-3xs text-[#5C5A55] block mt-0.5 line-clamp-1">
                               {sub.desc}
                             </span>
                           </div>
 
                           {isActive && (
-                            <span className="w-1.5 h-1.5 rounded-full bg-[#c85a32] self-center shrink-0" />
+                            <span className="w-1.5 h-1.5 rounded-full bg-[#bd3227] self-center shrink-0" />
                           )}
                         </Link>
                       )
@@ -657,8 +657,8 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
                 }}
                 className={`px-3 py-2 rounded-lg text-xs font-bold transition-all inline-flex items-center gap-1.5 ${
                   isExploreActive || exploreDropdownOpen
-                    ? 'bg-[#0d3b43]/8 text-[#0d3b43] font-black'
-                    : 'text-[#1b2628] hover:text-[#0d3b43] hover:bg-[#ebe1d1]/50'
+                    ? 'bg-[#231f20]/8 text-[#231f20] font-black'
+                    : 'text-[#231f20] hover:text-[#231f20] hover:bg-[#FEF6CC]/50'
                 }`}
                 aria-expanded={exploreDropdownOpen}
                 aria-haspopup="true"
@@ -666,7 +666,7 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
                 <span>{dict.nav.explore || (isAr ? 'استكشف' : isFr ? 'Explorer' : 'Explore')}</span>
                 <svg
                   className={`w-3.5 h-3.5 transition-transform duration-200 ${
-                    exploreDropdownOpen ? 'rotate-180 text-[#c85a32]' : 'text-[#819598]'
+                    exploreDropdownOpen ? 'rotate-180 text-[#bd3227]' : 'text-[#5C5A55]'
                   }`}
                   fill="none"
                   viewBox="0 0 24 24"
@@ -680,7 +680,7 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
               {/* Floating Luxury Dropdown for Explore */}
               {exploreDropdownOpen && (
                 <div className="absolute top-full start-0 mt-1.5 w-72 rounded-2xl bg-white border border-[#e5e0d6] shadow-xl p-2.5 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
-                  <div className="px-3 py-1.5 text-4xs font-bold uppercase tracking-wider text-[#819598] border-b border-[#f4ede2] mb-1">
+                  <div className="px-3 py-1.5 text-4xs font-bold uppercase tracking-wider text-[#5C5A55] border-b border-[#FEF6CC] mb-1">
                     {dict.nav.explore || (isAr ? 'استكشف أنشطتنا' : 'Explore Activities')}
                   </div>
 
@@ -696,25 +696,25 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
                           onClick={() => setExploreDropdownOpen(false)}
                           className={`group/item flex items-start gap-3 p-2.5 rounded-xl transition-all ${
                             isActive
-                              ? 'bg-[#d8f0f4]/80 text-[#0d3b43]'
-                              : 'hover:bg-[#faf7f2] text-[#1b2628]'
+                              ? 'bg-[#FEF6CC]/80 text-[#231f20]'
+                              : 'hover:bg-[#F5F3EE] text-[#231f20]'
                           }`}
                         >
-                          <div className="w-8 h-8 rounded-lg bg-[#faf7f2] border border-[#e5e0d6] flex items-center justify-center shrink-0 p-1.5 shadow-2xs group-hover/item:scale-105 transition-transform text-[#0d3b43] group-hover/item:text-[#c85a32]">
+                          <div className="w-8 h-8 rounded-lg bg-[#F5F3EE] border border-[#e5e0d6] flex items-center justify-center shrink-0 p-1.5 shadow-2xs group-hover/item:scale-105 transition-transform text-[#231f20] group-hover/item:text-[#bd3227]">
                             {renderNavIcon(sub.key, 'w-4 h-4')}
                           </div>
 
                           <div className="flex-1 min-w-0">
-                            <span className="text-xs font-bold block leading-tight text-[#08242a] group-hover/item:text-[#c85a32] transition-colors">
+                            <span className="text-xs font-bold block leading-tight text-[#231f20] group-hover/item:text-[#bd3227] transition-colors">
                               {sub.title}
                             </span>
-                            <span className="text-3xs text-[#5f7174] block mt-0.5 line-clamp-1">
+                            <span className="text-3xs text-[#5C5A55] block mt-0.5 line-clamp-1">
                               {sub.desc}
                             </span>
                           </div>
 
                           {isActive && (
-                            <span className="w-1.5 h-1.5 rounded-full bg-[#c85a32] self-center shrink-0" />
+                            <span className="w-1.5 h-1.5 rounded-full bg-[#bd3227] self-center shrink-0" />
                           )}
                         </Link>
                       )
@@ -735,8 +735,8 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
                   href={fullPath}
                   className={`px-3 py-2 rounded-lg text-xs font-bold transition-all ${
                     isActive
-                      ? 'bg-[#0d3b43]/8 text-[#0d3b43] font-black'
-                      : 'text-[#1b2628] hover:text-[#0d3b43] hover:bg-[#ebe1d1]/50'
+                      ? 'bg-[#231f20]/8 text-[#231f20] font-black'
+                      : 'text-[#231f20] hover:text-[#231f20] hover:bg-[#FEF6CC]/50'
                   }`}
                 >
                   {title}
@@ -751,7 +751,7 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
 
             <Link
               href={`/${locale}/membership`}
-              className="hidden sm:inline-flex items-center justify-center px-4 py-2.5 rounded-xl text-xs font-bold text-white bg-[#0d3b43] hover:bg-[#14505b] active:scale-95 transition-all shadow-subtle hover:shadow-card gap-1.5 group"
+              className="hidden sm:inline-flex items-center justify-center px-4 py-2.5 rounded-xl text-xs font-bold text-white bg-[#231f20] hover:bg-[#d2a82b] active:scale-95 transition-all shadow-subtle hover:shadow-card gap-1.5 group"
             >
               <span>{dict.membership.apply}</span>
               <span className="group-hover:translate-x-0.5 transition-transform" aria-hidden="true">
@@ -763,7 +763,7 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
             <button
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden p-2.5 rounded-xl text-[#0d3b43] hover:bg-[#ebe1d1] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c85a32]"
+              className="lg:hidden p-2.5 rounded-xl text-[#231f20] hover:bg-[#FEF6CC] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#bd3227]"
               aria-expanded={mobileMenuOpen}
               aria-label={mobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
             >
@@ -783,8 +783,8 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
 
       {/* Mobile Drawer Navigation (Refined & Elevated) */}
       {mobileMenuOpen && (
-        <div className="lg:hidden fixed inset-0 top-[calc(5rem+1px)] z-40 bg-[#08242a]/60 backdrop-blur-xs animate-in fade-in duration-200">
-          <div className="bg-[#faf7f2] border-b border-[#e5e0d6] shadow-2xl p-6 max-h-[calc(100vh-5rem)] overflow-y-auto">
+        <div className="lg:hidden fixed inset-0 top-[calc(5rem+1px)] z-40 bg-[#231f20]/60 backdrop-blur-xs animate-in fade-in duration-200">
+          <div className="bg-[#F5F3EE] border-b border-[#e5e0d6] shadow-2xl p-6 max-h-[calc(100vh-5rem)] overflow-y-auto">
             <nav className="flex flex-col space-y-2" aria-label="Mobile Navigation">
               {/* Home */}
               <Link
@@ -792,18 +792,18 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
                 onClick={() => setMobileMenuOpen(false)}
                 className={`px-4 py-3 rounded-xl text-sm font-bold transition-all flex items-center justify-between ${
                   isHomeActive
-                    ? 'bg-[#d8f0f4] text-[#0d3b43] font-black shadow-2xs'
-                    : 'text-[#1b2628] hover:bg-[#f4ede2]'
+                    ? 'bg-[#FEF6CC] text-[#231f20] font-black shadow-2xs'
+                    : 'text-[#231f20] hover:bg-[#FEF6CC]'
                 }`}
               >
                 <div className="flex items-center gap-3">
-                  <span className="w-5 h-5 flex items-center justify-center text-[#0d3b43]">
+                  <span className="w-5 h-5 flex items-center justify-center text-[#231f20]">
                     {renderNavIcon('home', 'w-5 h-5')}
                   </span>
                   <span>{dict.nav.home}</span>
                 </div>
                 {isHomeActive && (
-                  <span className="text-3xs font-black uppercase tracking-wider px-2 py-0.5 rounded-full bg-[#0d3b43] text-white">
+                  <span className="text-3xs font-black uppercase tracking-wider px-2 py-0.5 rounded-full bg-[#231f20] text-white">
                     {isAr ? 'النشط' : 'Active'}
                   </span>
                 )}
@@ -815,18 +815,18 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
                   type="button"
                   onClick={() => setMobileAboutOpen(!mobileAboutOpen)}
                   className={`w-full px-4 py-3 text-sm font-bold flex items-center justify-between transition-colors ${
-                    isAboutActive ? 'bg-[#0d3b43]/5 text-[#c85a32]' : 'text-[#08242a]'
+                    isAboutActive ? 'bg-[#231f20]/5 text-[#bd3227]' : 'text-[#231f20]'
                   }`}
                 >
                   <div className="flex items-center gap-3">
-                    <span className="w-5 h-5 flex items-center justify-center text-[#0d3b43]">
+                    <span className="w-5 h-5 flex items-center justify-center text-[#231f20]">
                       {renderNavIcon('about', 'w-5 h-5')}
                     </span>
                     <span>{dict.nav.about_group || (isAr ? 'عن الجمعية' : isFr ? "L'Association" : 'About Us')}</span>
                   </div>
 
                   <svg
-                    className={`w-4 h-4 transition-transform ${mobileAboutOpen ? 'rotate-180 text-[#c85a32]' : 'text-[#819598]'}`}
+                    className={`w-4 h-4 transition-transform ${mobileAboutOpen ? 'rotate-180 text-[#bd3227]' : 'text-[#5C5A55]'}`}
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -837,7 +837,7 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
                 </button>
 
                 {mobileAboutOpen && (
-                  <div className="bg-[#faf7f2] p-2 space-y-1 border-t border-[#e5e0d6]">
+                  <div className="bg-[#F5F3EE] p-2 space-y-1 border-t border-[#e5e0d6]">
                     {aboutSubItems.map((sub) => {
                       const fullPath = `/${locale}/${sub.path}`
                       const isActive = pathname.startsWith(fullPath)
@@ -848,11 +848,11 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
                           onClick={() => setMobileMenuOpen(false)}
                           className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-xs font-bold transition-all ${
                             isActive
-                              ? 'bg-[#d8f0f4] text-[#0d3b43] font-black'
-                              : 'text-[#445457] hover:bg-white'
+                              ? 'bg-[#FEF6CC] text-[#231f20] font-black'
+                              : 'text-[#5C5A55] hover:bg-white'
                           }`}
                         >
-                          <span className="w-4 h-4 flex items-center justify-center text-[#0d3b43]">
+                          <span className="w-4 h-4 flex items-center justify-center text-[#231f20]">
                             {renderNavIcon(sub.key, 'w-4 h-4')}
                           </span>
                           <span>{sub.title}</span>
@@ -869,18 +869,18 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
                   type="button"
                   onClick={() => setMobileProgramsOpen(!mobileProgramsOpen)}
                   className={`w-full px-4 py-3 text-sm font-bold flex items-center justify-between transition-colors ${
-                    isProgramsActive ? 'bg-[#0d3b43]/5 text-[#c85a32]' : 'text-[#08242a]'
+                    isProgramsActive ? 'bg-[#231f20]/5 text-[#bd3227]' : 'text-[#231f20]'
                   }`}
                 >
                   <div className="flex items-center gap-3">
-                    <span className="w-5 h-5 flex items-center justify-center text-[#0d3b43]">
+                    <span className="w-5 h-5 flex items-center justify-center text-[#231f20]">
                       {renderNavIcon('programs', 'w-5 h-5')}
                     </span>
                     <span>{dict.nav.programs_group || dict.nav.programs}</span>
                   </div>
 
                   <svg
-                    className={`w-4 h-4 transition-transform ${mobileProgramsOpen ? 'rotate-180 text-[#c85a32]' : 'text-[#819598]'}`}
+                    className={`w-4 h-4 transition-transform ${mobileProgramsOpen ? 'rotate-180 text-[#bd3227]' : 'text-[#5C5A55]'}`}
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -891,7 +891,7 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
                 </button>
 
                 {mobileProgramsOpen && (
-                  <div className="bg-[#faf7f2] p-2 space-y-1 border-t border-[#e5e0d6]">
+                  <div className="bg-[#F5F3EE] p-2 space-y-1 border-t border-[#e5e0d6]">
                     {programSubItems.map((sub) => {
                       const fullPath = `/${locale}/${sub.path}`
                       const isActive = pathname.startsWith(fullPath)
@@ -902,11 +902,11 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
                           onClick={() => setMobileMenuOpen(false)}
                           className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-xs font-bold transition-all ${
                             isActive
-                              ? 'bg-[#d8f0f4] text-[#0d3b43] font-black'
-                              : 'text-[#445457] hover:bg-white'
+                              ? 'bg-[#FEF6CC] text-[#231f20] font-black'
+                              : 'text-[#5C5A55] hover:bg-white'
                           }`}
                         >
-                          <span className="w-4 h-4 flex items-center justify-center text-[#0d3b43]">
+                          <span className="w-4 h-4 flex items-center justify-center text-[#231f20]">
                             {renderNavIcon(sub.key, 'w-4 h-4')}
                           </span>
                           <span>{sub.title}</span>
@@ -923,18 +923,18 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
                   type="button"
                   onClick={() => setMobileExploreOpen(!mobileExploreOpen)}
                   className={`w-full px-4 py-3 text-sm font-bold flex items-center justify-between transition-colors ${
-                    isExploreActive ? 'bg-[#0d3b43]/5 text-[#c85a32]' : 'text-[#08242a]'
+                    isExploreActive ? 'bg-[#231f20]/5 text-[#bd3227]' : 'text-[#231f20]'
                   }`}
                 >
                   <div className="flex items-center gap-3">
-                    <span className="w-5 h-5 flex items-center justify-center text-[#0d3b43]">
+                    <span className="w-5 h-5 flex items-center justify-center text-[#231f20]">
                       {renderNavIcon('explore', 'w-5 h-5')}
                     </span>
                     <span>{dict.nav.explore || (isAr ? 'استكشف' : isFr ? 'Explorer' : 'Explore')}</span>
                   </div>
 
                   <svg
-                    className={`w-4 h-4 transition-transform ${mobileExploreOpen ? 'rotate-180 text-[#c85a32]' : 'text-[#819598]'}`}
+                    className={`w-4 h-4 transition-transform ${mobileExploreOpen ? 'rotate-180 text-[#bd3227]' : 'text-[#5C5A55]'}`}
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -945,7 +945,7 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
                 </button>
 
                 {mobileExploreOpen && (
-                  <div className="bg-[#faf7f2] p-2 space-y-1 border-t border-[#e5e0d6]">
+                  <div className="bg-[#F5F3EE] p-2 space-y-1 border-t border-[#e5e0d6]">
                     {exploreSubItems.map((sub) => {
                       const fullPath = `/${locale}/${sub.path}`
                       const isActive = pathname.startsWith(fullPath)
@@ -956,11 +956,11 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
                           onClick={() => setMobileMenuOpen(false)}
                           className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-xs font-bold transition-all ${
                             isActive
-                              ? 'bg-[#d8f0f4] text-[#0d3b43] font-black'
-                              : 'text-[#445457] hover:bg-white'
+                              ? 'bg-[#FEF6CC] text-[#231f20] font-black'
+                              : 'text-[#5C5A55] hover:bg-white'
                           }`}
                         >
-                          <span className="w-4 h-4 flex items-center justify-center text-[#0d3b43]">
+                          <span className="w-4 h-4 flex items-center justify-center text-[#231f20]">
                             {renderNavIcon(sub.key, 'w-4 h-4')}
                           </span>
                           <span>{sub.title}</span>
@@ -977,18 +977,18 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
                 onClick={() => setMobileMenuOpen(false)}
                 className={`px-4 py-3 rounded-xl text-sm font-bold transition-all flex items-center justify-between ${
                   isPathActive('partnerships')
-                    ? 'bg-[#d8f0f4] text-[#0d3b43] font-black shadow-2xs'
-                    : 'text-[#1b2628] hover:bg-[#f4ede2]'
+                    ? 'bg-[#FEF6CC] text-[#231f20] font-black shadow-2xs'
+                    : 'text-[#231f20] hover:bg-[#FEF6CC]'
                 }`}
               >
                 <div className="flex items-center gap-3">
-                  <span className="w-5 h-5 flex items-center justify-center text-[#0d3b43]">
+                  <span className="w-5 h-5 flex items-center justify-center text-[#231f20]">
                     {renderNavIcon('partnerships', 'w-5 h-5')}
                   </span>
                   <span>{dict.nav.partnerships}</span>
                 </div>
                 {isPathActive('partnerships') && (
-                  <span className="text-3xs font-black uppercase tracking-wider px-2 py-0.5 rounded-full bg-[#0d3b43] text-white">
+                  <span className="text-3xs font-black uppercase tracking-wider px-2 py-0.5 rounded-full bg-[#231f20] text-white">
                     {isAr ? 'النشط' : 'Active'}
                   </span>
                 )}
@@ -999,22 +999,22 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
                 <Link
                   href={`/${locale}/membership`}
                   onClick={() => setMobileMenuOpen(false)}
-                  className="w-full flex items-center justify-center py-3.5 px-4 rounded-xl text-sm font-bold text-white bg-[#c85a32] hover:bg-[#b84e27] transition-all shadow-card"
+                  className="w-full flex items-center justify-center py-3.5 px-4 rounded-xl text-sm font-bold text-white bg-[#bd3227] hover:bg-[#a3261c] transition-all shadow-card"
                 >
                   {dict.membership.apply}
                 </Link>
                 <Link
                   href={`/${locale}/contact`}
                   onClick={() => setMobileMenuOpen(false)}
-                  className="w-full flex items-center justify-center py-3.5 px-4 rounded-xl text-sm font-bold text-[#0d3b43] bg-white border border-[#cfc7b9] hover:bg-[#f4ede2] transition-all shadow-2xs"
+                  className="w-full flex items-center justify-center py-3.5 px-4 rounded-xl text-sm font-bold text-[#231f20] bg-white border border-[#cfc7b9] hover:bg-[#FEF6CC] transition-all shadow-2xs"
                 >
                   {dict.nav.contact}
                 </Link>
               </div>
 
               {/* Direct Association Contact Micro-Card */}
-              <div className="mt-4 p-4 rounded-2xl bg-white border border-[#e5e0d6] text-center text-3xs text-[#5f7174]">
-                <span className="font-bold text-[#08242a] block mb-1">
+              <div className="mt-4 p-4 rounded-2xl bg-white border border-[#e5e0d6] text-center text-3xs text-[#5C5A55]">
+                <span className="font-bold text-[#231f20] block mb-1">
                   {isAr ? 'جمعية روح الفنون والثقافة — AMYCC' : 'Spirit of Arts & Culture Association'}
                 </span>
                 <span>info@amycc.org • {isAr ? 'المملكة المغربية' : 'Morocco'}</span>

@@ -371,8 +371,8 @@ export function EventsAdminTabs({
             onClick={() => setActiveMainTab('events_list')}
             className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-black transition-all cursor-pointer ${
               activeMainTab === 'events_list'
-                ? 'bg-[#08242a] text-white shadow-sm'
-                : 'text-[#445457] hover:text-[#08242a] hover:bg-[#faf7f2]'
+                ? 'bg-[#231f20] text-white shadow-sm'
+                : 'text-[#5C5A55] hover:text-[#231f20] hover:bg-[#F5F3EE]'
             }`}
           >
             <span>📅</span>
@@ -384,8 +384,8 @@ export function EventsAdminTabs({
             onClick={() => setActiveMainTab('cms_header')}
             className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-black transition-all cursor-pointer ${
               activeMainTab === 'cms_header'
-                ? 'bg-[#c85a32] text-white shadow-sm'
-                : 'text-[#445457] hover:text-[#08242a] hover:bg-[#faf7f2]'
+                ? 'bg-[#bd3227] text-white shadow-sm'
+                : 'text-[#5C5A55] hover:text-[#231f20] hover:bg-[#F5F3EE]'
             }`}
           >
             <span>✨</span>
@@ -396,7 +396,7 @@ export function EventsAdminTabs({
         <Link
           href="/ar/events"
           target="_blank"
-          className="px-4 py-2 rounded-xl text-xs font-bold text-[#c85a32] bg-[#faece7] hover:bg-[#f6ddd4] transition-colors flex items-center gap-1.5"
+          className="px-4 py-2 rounded-xl text-xs font-bold text-[#bd3227] bg-[#FEF6CC] hover:bg-[#FEF6CC] transition-colors flex items-center gap-1.5"
         >
           <span>معاينة صفحة الفعاليات</span>
           <span>↗</span>
@@ -438,7 +438,7 @@ export function EventsAdminTabs({
                 value={searchFilter}
                 onChange={(e) => setSearchFilter(e.target.value)}
                 placeholder="ابحث في الفعاليات بالاسم، المدينة، أو الفضاء..."
-                className="w-full ps-10 pe-4 py-2.5 rounded-xl border border-[#e5e0d6] bg-white text-xs outline-none focus:border-[#c85a32]"
+                className="w-full ps-10 pe-4 py-2.5 rounded-xl border border-[#e5e0d6] bg-white text-xs outline-none focus:border-[#bd3227]"
               />
             </div>
 
@@ -458,7 +458,7 @@ export function EventsAdminTabs({
 
               <Link
                 href="/admin/events/new"
-                className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#08242a] text-white text-xs font-bold rounded-xl hover:bg-[#1a3a40] active:scale-98 transition-all shadow-subtle hover:shadow-card"
+                className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#231f20] text-white text-xs font-bold rounded-xl hover:bg-[#231f20] active:scale-98 transition-all shadow-subtle hover:shadow-card"
               >
                 <span>+</span>
                 <span>إضافة فعالية جديدة (New Event)</span>
@@ -468,8 +468,8 @@ export function EventsAdminTabs({
 
           <div className="bg-white rounded-2xl border border-[#e5e0d6] overflow-hidden shadow-2xs">
             <div className="overflow-x-auto">
-              <table className="w-full text-start text-xs text-[#2d3b3e]">
-                <thead className="bg-[#faf7f2] border-b border-[#e5e0d6] text-3xs uppercase tracking-wider text-[#5f7174] font-bold">
+              <table className="w-full text-start text-xs text-[#231f20]">
+                <thead className="bg-[#F5F3EE] border-b border-[#e5e0d6] text-3xs uppercase tracking-wider text-[#5C5A55] font-bold">
                   <tr>
                     <th className="px-6 py-4 text-start">الفعالية</th>
                     <th className="px-6 py-4 text-start">التاريخ والفضاء</th>
@@ -478,7 +478,7 @@ export function EventsAdminTabs({
                     <th className="px-6 py-4 text-start">الإجراءات</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-[#f4ede2]">
+                <tbody className="divide-y divide-[#FEF6CC]">
                   {filteredEvents.length > 0 ? (
                     filteredEvents.map((ev) => {
                       const trans = ev.event_translations?.find((t) => t.locale === 'ar') || ev.event_translations?.[0]
@@ -493,10 +493,10 @@ export function EventsAdminTabs({
                       const dateObj = new Date(ev.start_date)
 
                       return (
-                        <tr key={ev.id} className="hover:bg-[#faf7f2]/60 transition-colors">
+                        <tr key={ev.id} className="hover:bg-[#F5F3EE]/60 transition-colors">
                           <td className="px-6 py-4">
                             <div className="flex items-center gap-3">
-                              <div className="w-12 h-12 rounded-xl bg-[#08242a] overflow-hidden shrink-0 relative border border-[#e5e0d6]">
+                              <div className="w-12 h-12 rounded-xl bg-[#231f20] overflow-hidden shrink-0 relative border border-[#e5e0d6]">
                                 {ev.cover_image ? (
                                   <Image
                                     src={ev.cover_image}
@@ -512,33 +512,33 @@ export function EventsAdminTabs({
                                 )}
                               </div>
                               <div>
-                                <div className="font-extrabold text-[#08242a] text-xs sm:text-sm">
+                                <div className="font-extrabold text-[#231f20] text-xs sm:text-sm">
                                   {title}
                                 </div>
-                                <div className="text-[#819598] text-3xs font-mono">
+                                <div className="text-[#5C5A55] text-3xs font-mono">
                                   /{ev.slug}
                                 </div>
                               </div>
                             </div>
                           </td>
                           <td className="px-6 py-4">
-                            <span className="font-bold block text-[#08242a]">
+                            <span className="font-bold block text-[#231f20]">
                               {dateObj.toLocaleDateString('ar-MA', {
                                 year: 'numeric',
                                 month: 'short',
                                 day: 'numeric',
                               })}
                             </span>
-                            <span className="text-[#819598] text-3xs">
+                            <span className="text-[#5C5A55] text-3xs">
                               {ev.venue || 'المركز الثقافي'} {ev.city ? `• ${ev.city}` : ''}
                             </span>
                           </td>
                           <td className="px-6 py-4">
                             <div className="flex items-center gap-1.5">
-                              <span className="font-black text-[#08242a] text-sm">
+                              <span className="font-black text-[#231f20] text-sm">
                                 {regCount}
                               </span>
-                              <span className="text-[#819598] text-3xs">
+                              <span className="text-[#5C5A55] text-3xs">
                                 / {ev.capacity ? `${ev.capacity} مقعد` : 'غير محدد'}
                               </span>
                             </div>
@@ -574,7 +574,7 @@ export function EventsAdminTabs({
                               </button>
                               <Link
                                 href={`/admin/events/${ev.id}/edit`}
-                                className="px-3 py-1.5 rounded-lg text-2xs font-bold bg-[#faf7f2] border border-[#e5e0d6] text-[#08242a] hover:bg-[#eae4d9] transition-colors"
+                                className="px-3 py-1.5 rounded-lg text-2xs font-bold bg-[#F5F3EE] border border-[#e5e0d6] text-[#231f20] hover:bg-[#FEF6CC] transition-colors"
                               >
                                 تعديل
                               </Link>
@@ -593,7 +593,7 @@ export function EventsAdminTabs({
                     })
                   ) : (
                     <tr>
-                      <td colSpan={5} className="px-6 py-12 text-center text-[#819598]">
+                      <td colSpan={5} className="px-6 py-12 text-center text-[#5C5A55]">
                         لا توجد فعاليات مسجلة حالياً. اضغط على &quot;إضافة فعالية جديدة&quot; لبدء الجدولة.
                       </td>
                     </tr>
@@ -612,7 +612,7 @@ export function EventsAdminTabs({
         <div className="space-y-6">
           {/* Language Switcher Bar */}
           <div className="flex items-center justify-between bg-white p-3.5 rounded-2xl border border-[#e5e0d6] shadow-2xs">
-            <div className="text-2xs font-bold text-[#5f7174] flex items-center gap-2">
+            <div className="text-2xs font-bold text-[#5C5A55] flex items-center gap-2">
               <span>🌐</span>
               <span>اختر لغة إدخال النصوص (Trilingual Input Selector):</span>
             </div>
@@ -622,8 +622,8 @@ export function EventsAdminTabs({
                 onClick={() => setActiveLangTab('ar')}
                 className={`px-3.5 py-1.5 rounded-lg text-2xs font-black transition-colors ${
                   activeLangTab === 'ar'
-                    ? 'bg-[#0d3b43] text-white shadow-xs'
-                    : 'bg-[#faf7f2] text-[#5f7174] hover:bg-[#ede5d8]'
+                    ? 'bg-[#231f20] text-white shadow-xs'
+                    : 'bg-[#F5F3EE] text-[#5C5A55] hover:bg-[#FEF6CC]'
                 }`}
               >
                 العربية (AR)
@@ -633,8 +633,8 @@ export function EventsAdminTabs({
                 onClick={() => setActiveLangTab('fr')}
                 className={`px-3.5 py-1.5 rounded-lg text-2xs font-black transition-colors ${
                   activeLangTab === 'fr'
-                    ? 'bg-[#0d3b43] text-white shadow-xs'
-                    : 'bg-[#faf7f2] text-[#5f7174] hover:bg-[#ede5d8]'
+                    ? 'bg-[#231f20] text-white shadow-xs'
+                    : 'bg-[#F5F3EE] text-[#5C5A55] hover:bg-[#FEF6CC]'
                 }`}
               >
                 Français (FR)
@@ -644,8 +644,8 @@ export function EventsAdminTabs({
                 onClick={() => setActiveLangTab('en')}
                 className={`px-3.5 py-1.5 rounded-lg text-2xs font-black transition-colors ${
                   activeLangTab === 'en'
-                    ? 'bg-[#0d3b43] text-white shadow-xs'
-                    : 'bg-[#faf7f2] text-[#5f7174] hover:bg-[#ede5d8]'
+                    ? 'bg-[#231f20] text-white shadow-xs'
+                    : 'bg-[#F5F3EE] text-[#5C5A55] hover:bg-[#FEF6CC]'
                 }`}
               >
                 English (EN)
@@ -655,7 +655,7 @@ export function EventsAdminTabs({
 
           {/* Hero Simulation Preview */}
           <div className="bg-white p-6 rounded-2xl border border-[#e5e0d6] shadow-2xs space-y-4">
-            <h3 className="text-sm font-extrabold text-[#08242a] flex items-center gap-2">
+            <h3 className="text-sm font-extrabold text-[#231f20] flex items-center gap-2">
               <span>👁️</span>
               <span>معاينة حية ومباشرة لهيدر صفحة الفعاليات (Live Hero Simulation)</span>
             </h3>
@@ -663,8 +663,8 @@ export function EventsAdminTabs({
             <div
               className={`relative rounded-2xl overflow-hidden p-8 sm:p-12 text-center min-h-[280px] flex flex-col justify-center items-center shadow-inner transition-colors ${
                 config.hero.hasHeroImage && config.hero.imageUrl
-                  ? 'bg-[#1c1917] text-white'
-                  : 'bg-gradient-to-b from-[#faf7f2] via-[#f7f2e9] to-[#faf7f2] border border-[#e5e0d6] text-[#08242a]'
+                  ? 'bg-[#231f20] text-white'
+                  : 'bg-gradient-to-b from-[#F5F3EE] via-[#F5F3EE] to-[#F5F3EE] border border-[#e5e0d6] text-[#231f20]'
               }`}
             >
               {config.hero.hasHeroImage && config.hero.imageUrl ? (
@@ -682,7 +682,7 @@ export function EventsAdminTabs({
               ) : (
                 <>
                   <div className="absolute inset-0 moroccan-pattern-light opacity-60 pointer-events-none" />
-                  <div className="absolute top-1/3 start-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-[#c85a32]/10 rounded-full blur-3xl pointer-events-none" />
+                  <div className="absolute top-1/3 start-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-[#bd3227]/10 rounded-full blur-3xl pointer-events-none" />
                 </>
               )}
 
@@ -690,8 +690,8 @@ export function EventsAdminTabs({
                 <span
                   className={`inline-block px-3 py-1 rounded-full text-2xs font-bold ${
                     config.hero.hasHeroImage && config.hero.imageUrl
-                      ? 'bg-white/10 text-[#f4ce83] border border-white/20'
-                      : 'bg-[#faece7] text-[#c85a32] border border-[#f0cbbd]'
+                      ? 'bg-white/10 text-[#ffd22f] border border-white/20'
+                      : 'bg-[#FEF6CC] text-[#bd3227] border border-[#fde8e7]'
                   }`}
                 >
                   {activeLangTab === 'ar'
@@ -703,7 +703,7 @@ export function EventsAdminTabs({
 
                 <h1
                   className={`text-2xl sm:text-4xl font-black leading-tight ${
-                    config.hero.hasHeroImage && config.hero.imageUrl ? 'text-white' : 'text-[#08242a]'
+                    config.hero.hasHeroImage && config.hero.imageUrl ? 'text-white' : 'text-[#231f20]'
                   }`}
                 >
                   {activeLangTab === 'ar'
@@ -720,7 +720,7 @@ export function EventsAdminTabs({
                   : config.hero.subtitleEn) && (
                   <p
                     className={`text-xs sm:text-sm font-bold ${
-                      config.hero.hasHeroImage && config.hero.imageUrl ? 'text-[#f4ce83]' : 'text-[#c85a32]'
+                      config.hero.hasHeroImage && config.hero.imageUrl ? 'text-[#ffd22f]' : 'text-[#bd3227]'
                     }`}
                   >
                     {activeLangTab === 'ar'
@@ -733,7 +733,7 @@ export function EventsAdminTabs({
 
                 <p
                   className={`text-2xs sm:text-xs line-clamp-3 leading-relaxed ${
-                    config.hero.hasHeroImage && config.hero.imageUrl ? 'text-white/80' : 'text-[#5f7174]'
+                    config.hero.hasHeroImage && config.hero.imageUrl ? 'text-white/80' : 'text-[#5C5A55]'
                   }`}
                 >
                   {activeLangTab === 'ar'
@@ -747,8 +747,8 @@ export function EventsAdminTabs({
                   <span
                     className={`px-5 py-2.5 rounded-xl text-2xs font-bold shadow-md inline-flex items-center gap-1.5 ${
                       config.hero.hasHeroImage && config.hero.imageUrl
-                        ? 'bg-[#f4ce83] text-[#08242a]'
-                        : 'bg-[#c85a32] text-white'
+                        ? 'bg-[#ffd22f] text-[#231f20]'
+                        : 'bg-[#bd3227] text-white'
                     }`}
                   >
                     <span>📅</span>
@@ -767,12 +767,12 @@ export function EventsAdminTabs({
 
           {/* Hero Image Controls */}
           <div className="bg-white p-6 rounded-2xl border border-[#e5e0d6] shadow-2xs space-y-4">
-            <div className="flex items-center justify-between pb-3 border-b border-[#f4ede2]">
+            <div className="flex items-center justify-between pb-3 border-b border-[#FEF6CC]">
               <div>
-                <h3 className="text-sm font-extrabold text-[#08242a]">
+                <h3 className="text-sm font-extrabold text-[#231f20]">
                   صورة خلفية الهيدر (Hero Background Image)
                 </h3>
-                <p className="text-3xs text-[#5f7174]">
+                <p className="text-3xs text-[#5C5A55]">
                   ارفع صورة مخصصة عالية الدقة تمثل الأمسيات والورشات الفنية بالمغرب.
                 </p>
               </div>
@@ -782,9 +782,9 @@ export function EventsAdminTabs({
                   type="checkbox"
                   checked={config.hero.hasHeroImage}
                   onChange={(e) => updateHero('hasHeroImage', e.target.checked)}
-                  className="w-4 h-4 text-[#0d3b43] rounded focus:ring-[#0d3b43]"
+                  className="w-4 h-4 text-[#231f20] rounded focus:ring-[#231f20]"
                 />
-                <span className="text-xs font-bold text-[#08242a]">
+                <span className="text-xs font-bold text-[#231f20]">
                   تفعيل صورة الخلفية
                 </span>
               </label>
@@ -792,7 +792,7 @@ export function EventsAdminTabs({
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
               <div>
-                <label className="block text-2xs font-bold text-[#08242a] mb-1">
+                <label className="block text-2xs font-bold text-[#231f20] mb-1">
                   رابط الصورة (Image URL):
                 </label>
                 <input
@@ -800,12 +800,12 @@ export function EventsAdminTabs({
                   value={config.hero.imageUrl}
                   onChange={(e) => updateHero('imageUrl', e.target.value)}
                   placeholder="/uploads/hero-events.jpg أو رابط خارجي https://..."
-                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs focus:border-[#0d3b43] outline-none"
+                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs focus:border-[#231f20] outline-none"
                 />
               </div>
 
               <div>
-                <label className="block text-2xs font-bold text-[#08242a] mb-1">
+                <label className="block text-2xs font-bold text-[#231f20] mb-1">
                   أو رفع صورة من جهازك مباشرة:
                 </label>
                 <div className="flex items-center gap-2">
@@ -820,7 +820,7 @@ export function EventsAdminTabs({
                     type="button"
                     onClick={() => fileInputRef.current?.click()}
                     disabled={uploadingImage}
-                    className="w-full px-4 py-2 rounded-xl text-xs font-bold text-white bg-[#0d3b43] hover:bg-[#14505b] disabled:opacity-50 transition-colors flex items-center justify-center gap-2"
+                    className="w-full px-4 py-2 rounded-xl text-xs font-bold text-white bg-[#231f20] hover:bg-[#d2a82b] disabled:opacity-50 transition-colors flex items-center justify-center gap-2"
                   >
                     {uploadingImage ? 'جاري الرفع...' : '📁 اختيار ملف من الجهاز ورفعه'}
                   </button>
@@ -831,13 +831,13 @@ export function EventsAdminTabs({
 
           {/* Multilingual Text Inputs */}
           <div className="bg-white p-6 rounded-2xl border border-[#e5e0d6] shadow-2xs space-y-4">
-            <h3 className="text-sm font-extrabold text-[#08242a] pb-2 border-b border-[#f4ede2]">
+            <h3 className="text-sm font-extrabold text-[#231f20] pb-2 border-b border-[#FEF6CC]">
               نصوص الهيدر والعناوين باللغة المختارة ({activeLangTab.toUpperCase()})
             </h3>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-2xs font-bold text-[#08242a] mb-1">
+                <label className="block text-2xs font-bold text-[#231f20] mb-1">
                   الشارة (Badge):
                 </label>
                 <input
@@ -859,12 +859,12 @@ export function EventsAdminTabs({
                       e.target.value
                     )
                   }
-                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs outline-none focus:border-[#0d3b43]"
+                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs outline-none focus:border-[#231f20]"
                 />
               </div>
 
               <div>
-                <label className="block text-2xs font-bold text-[#08242a] mb-1">
+                <label className="block text-2xs font-bold text-[#231f20] mb-1">
                   العنوان الرئيسي (Title):
                 </label>
                 <input
@@ -886,12 +886,12 @@ export function EventsAdminTabs({
                       e.target.value
                     )
                   }
-                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs font-bold outline-none focus:border-[#0d3b43]"
+                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs font-bold outline-none focus:border-[#231f20]"
                 />
               </div>
 
               <div className="md:col-span-2">
-                <label className="block text-2xs font-bold text-[#08242a] mb-1">
+                <label className="block text-2xs font-bold text-[#231f20] mb-1">
                   العنوان الفرعي (Subtitle):
                 </label>
                 <input
@@ -913,12 +913,12 @@ export function EventsAdminTabs({
                       e.target.value
                     )
                   }
-                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs outline-none focus:border-[#0d3b43]"
+                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs outline-none focus:border-[#231f20]"
                 />
               </div>
 
               <div className="md:col-span-2">
-                <label className="block text-2xs font-bold text-[#08242a] mb-1">
+                <label className="block text-2xs font-bold text-[#231f20] mb-1">
                   الوصف التفصيلي (Description):
                 </label>
                 <textarea
@@ -940,12 +940,12 @@ export function EventsAdminTabs({
                       e.target.value
                     )
                   }
-                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs leading-relaxed outline-none focus:border-[#0d3b43]"
+                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs leading-relaxed outline-none focus:border-[#231f20]"
                 />
               </div>
 
               <div>
-                <label className="block text-2xs font-bold text-[#08242a] mb-1">
+                <label className="block text-2xs font-bold text-[#231f20] mb-1">
                   نص زر الفعاليات الرئيسي:
                 </label>
                 <input
@@ -967,7 +967,7 @@ export function EventsAdminTabs({
                       e.target.value
                     )
                   }
-                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs outline-none focus:border-[#0d3b43]"
+                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs outline-none focus:border-[#231f20]"
                 />
               </div>
             </div>
@@ -975,7 +975,7 @@ export function EventsAdminTabs({
 
           {/* 4 Impact Stats */}
           <div className="bg-white p-6 rounded-2xl border border-[#e5e0d6] shadow-2xs space-y-4">
-            <h3 className="text-sm font-extrabold text-[#08242a] pb-2 border-b border-[#f4ede2]">
+            <h3 className="text-sm font-extrabold text-[#231f20] pb-2 border-b border-[#FEF6CC]">
               مؤشرات وأرقام الفعاليات الأربعة (4 Impact Stats)
             </h3>
 
@@ -983,10 +983,10 @@ export function EventsAdminTabs({
               {config.stats.map((stat, idx) => (
                 <div
                   key={stat.id}
-                  className="p-4 rounded-xl border border-[#e5e0d6] bg-[#faf7f2] space-y-3"
+                  className="p-4 rounded-xl border border-[#e5e0d6] bg-[#F5F3EE] space-y-3"
                 >
                   <div className="flex items-center justify-between">
-                    <span className="text-3xs font-black text-[#0d3b43]">
+                    <span className="text-3xs font-black text-[#231f20]">
                       مؤشر {idx + 1}
                     </span>
                     <input
@@ -998,7 +998,7 @@ export function EventsAdminTabs({
                   </div>
 
                   <div>
-                    <label className="block text-3xs font-bold text-[#08242a] mb-1">
+                    <label className="block text-3xs font-bold text-[#231f20] mb-1">
                       القيمة ({activeLangTab.toUpperCase()}):
                     </label>
                     <input
@@ -1026,7 +1026,7 @@ export function EventsAdminTabs({
                   </div>
 
                   <div>
-                    <label className="block text-3xs font-bold text-[#08242a] mb-1">
+                    <label className="block text-3xs font-bold text-[#231f20] mb-1">
                       العنوان ({activeLangTab.toUpperCase()}):
                     </label>
                     <input
@@ -1059,13 +1059,13 @@ export function EventsAdminTabs({
 
           {/* Suggest Event / Partnership CTA Banner */}
           <div className="bg-white p-6 rounded-2xl border border-[#e5e0d6] shadow-2xs space-y-4">
-            <h3 className="text-sm font-extrabold text-[#08242a] pb-2 border-b border-[#f4ede2]">
+            <h3 className="text-sm font-extrabold text-[#231f20] pb-2 border-b border-[#FEF6CC]">
               بانر اقتراح فعالية والشراكة الفنية (Partnership CTA Banner)
             </h3>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="md:col-span-2">
-                <label className="block text-2xs font-bold text-[#08242a] mb-1">
+                <label className="block text-2xs font-bold text-[#231f20] mb-1">
                   الشارة ({activeLangTab.toUpperCase()}):
                 </label>
                 <input
@@ -1087,12 +1087,12 @@ export function EventsAdminTabs({
                       e.target.value
                     )
                   }
-                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs outline-none focus:border-[#0d3b43]"
+                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs outline-none focus:border-[#231f20]"
                 />
               </div>
 
               <div className="md:col-span-2">
-                <label className="block text-2xs font-bold text-[#08242a] mb-1">
+                <label className="block text-2xs font-bold text-[#231f20] mb-1">
                   عنوان البانر ({activeLangTab.toUpperCase()}):
                 </label>
                 <input
@@ -1114,12 +1114,12 @@ export function EventsAdminTabs({
                       e.target.value
                     )
                   }
-                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs font-bold outline-none focus:border-[#0d3b43]"
+                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs font-bold outline-none focus:border-[#231f20]"
                 />
               </div>
 
               <div className="md:col-span-2">
-                <label className="block text-2xs font-bold text-[#08242a] mb-1">
+                <label className="block text-2xs font-bold text-[#231f20] mb-1">
                   نص الدعوة ({activeLangTab.toUpperCase()}):
                 </label>
                 <textarea
@@ -1141,12 +1141,12 @@ export function EventsAdminTabs({
                       e.target.value
                     )
                   }
-                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs leading-relaxed outline-none focus:border-[#0d3b43]"
+                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs leading-relaxed outline-none focus:border-[#231f20]"
                 />
               </div>
 
               <div>
-                <label className="block text-2xs font-bold text-[#08242a] mb-1">
+                <label className="block text-2xs font-bold text-[#231f20] mb-1">
                   نص الزر الأول ({activeLangTab.toUpperCase()}):
                 </label>
                 <input
@@ -1173,7 +1173,7 @@ export function EventsAdminTabs({
               </div>
 
               <div>
-                <label className="block text-2xs font-bold text-[#08242a] mb-1">
+                <label className="block text-2xs font-bold text-[#231f20] mb-1">
                   رابط الزر الأول:
                 </label>
                 <input
@@ -1190,7 +1190,7 @@ export function EventsAdminTabs({
 
       {/* Sticky Bottom Save Bar for Immediate Action */}
       <div className="sticky bottom-4 z-40 p-3 bg-white/95 backdrop-blur-md rounded-2xl border border-[#e5e0d6] shadow-card flex items-center justify-between gap-4">
-        <div className="flex items-center gap-2 text-2xs font-bold text-[#08242a]">
+        <div className="flex items-center gap-2 text-2xs font-bold text-[#231f20]">
           <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
           <span>لوحة التحكم نشطة — التعديلات جاهزة للحفظ والنشر الفوري</span>
         </div>
@@ -1204,7 +1204,7 @@ export function EventsAdminTabs({
                   setFeedback({ type: 'success', message: 'تم استرجاع الإعدادات الافتراضية. اضغط حفظ لتطبيقها.' })
                 }
               }}
-              className="px-3.5 py-2 rounded-xl text-xs font-bold text-[#5f7174] bg-[#faf7f2] border border-[#e5e0d6] hover:bg-[#ede5d8] transition-colors"
+              className="px-3.5 py-2 rounded-xl text-xs font-bold text-[#5C5A55] bg-[#F5F3EE] border border-[#e5e0d6] hover:bg-[#FEF6CC] transition-colors"
             >
               استعادة الافتراضي
             </button>
@@ -1214,7 +1214,7 @@ export function EventsAdminTabs({
             type="button"
             onClick={handleSaveConfig}
             disabled={saving}
-            className="px-6 py-2 rounded-xl text-xs font-bold text-white bg-[#0d3b43] hover:bg-[#14505b] disabled:opacity-50 transition-all shadow-xs flex items-center gap-2 cursor-pointer"
+            className="px-6 py-2 rounded-xl text-xs font-bold text-white bg-[#231f20] hover:bg-[#d2a82b] disabled:opacity-50 transition-all shadow-xs flex items-center gap-2 cursor-pointer"
           >
             {saving ? (
               <>

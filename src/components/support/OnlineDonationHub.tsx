@@ -175,15 +175,15 @@ export function OnlineDonationHub({ config, locale }: OnlineDonationHubProps) {
   return (
     <div id="online-donation" className="max-w-4xl mx-auto bg-white rounded-3xl border border-[#e5e0d6] shadow-xl overflow-hidden">
       {/* Header Tabs */}
-      <div className="bg-[#faf7f2] border-b border-[#e5e0d6] p-2 flex gap-2">
+      <div className="bg-[#F5F3EE] border-b border-[#e5e0d6] p-2 flex gap-2">
         {gateway.enabled && (
           <button
             type="button"
             onClick={() => setSelectedMethod('card')}
             className={`flex-1 py-3.5 px-4 rounded-2xl text-xs sm:text-sm font-black transition-all flex items-center justify-center gap-2 cursor-pointer ${
               selectedMethod === 'card'
-                ? 'bg-white text-[#0d3b43] shadow-sm border border-[#e5e0d6]'
-                : 'text-[#5f7174] hover:text-[#08242a]'
+                ? 'bg-white text-[#231f20] shadow-sm border border-[#e5e0d6]'
+                : 'text-[#5C5A55] hover:text-[#231f20]'
             }`}
           >
             <span>💳</span>
@@ -205,8 +205,8 @@ export function OnlineDonationHub({ config, locale }: OnlineDonationHubProps) {
           onClick={() => setSelectedMethod('bank')}
           className={`flex-1 py-3.5 px-4 rounded-2xl text-xs sm:text-sm font-black transition-all flex items-center justify-center gap-2 cursor-pointer ${
             selectedMethod === 'bank'
-              ? 'bg-white text-[#0d3b43] shadow-sm border border-[#e5e0d6]'
-              : 'text-[#5f7174] hover:text-[#08242a]'
+              ? 'bg-white text-[#231f20] shadow-sm border border-[#e5e0d6]'
+              : 'text-[#5C5A55] hover:text-[#231f20]'
           }`}
         >
           <span>🏦</span>
@@ -251,7 +251,7 @@ export function OnlineDonationHub({ config, locale }: OnlineDonationHubProps) {
                   <span className="text-slate-400 font-sans">
                     {isAr ? 'المبلغ: ' : 'Amount: '}
                   </span>
-                  <span className="font-bold text-[#c85a32]">
+                  <span className="font-bold text-[#bd3227]">
                     {successResult.amount.toLocaleString()} {successResult.currency}
                   </span>
                 </div>
@@ -281,7 +281,7 @@ export function OnlineDonationHub({ config, locale }: OnlineDonationHubProps) {
 
               {/* Step 1: Amount Selection */}
               <div>
-                <label className="block text-2xs font-extrabold uppercase tracking-wider text-[#08242a] mb-2.5">
+                <label className="block text-2xs font-extrabold uppercase tracking-wider text-[#231f20] mb-2.5">
                   {isAr
                     ? '1. حدد مبلغ المساهمة (بالدرهم المغربي) *'
                     : isFr
@@ -298,8 +298,8 @@ export function OnlineDonationHub({ config, locale }: OnlineDonationHubProps) {
                         onClick={() => handleSelectPreset(amt)}
                         className={`py-3 px-2 rounded-2xl text-xs sm:text-sm font-black border transition-all cursor-pointer ${
                           isSelected
-                            ? 'bg-[#0d3b43] text-white border-[#0d3b43] shadow-md scale-102 ring-2 ring-[#0d3b43]/30'
-                            : 'bg-[#faf7f2] text-[#08242a] border-[#e5e0d6] hover:bg-white'
+                            ? 'bg-[#231f20] text-white border-[#231f20] shadow-md scale-102 ring-2 ring-[#231f20]/30'
+                            : 'bg-[#F5F3EE] text-[#231f20] border-[#e5e0d6] hover:bg-white'
                         }`}
                       >
                         {amt.toLocaleString()} {gateway.currency || 'MAD'}
@@ -324,11 +324,11 @@ export function OnlineDonationHub({ config, locale }: OnlineDonationHubProps) {
                       }
                       className={`w-full px-4 py-3 rounded-2xl border text-xs sm:text-sm outline-none font-bold transition-all ${
                         isCustomAmount
-                          ? 'border-[#0d3b43] ring-1 ring-[#0d3b43] bg-white'
-                          : 'border-[#e5e0d6] bg-[#faf7f2]'
+                          ? 'border-[#231f20] ring-1 ring-[#231f20] bg-white'
+                          : 'border-[#e5e0d6] bg-[#F5F3EE]'
                       }`}
                     />
-                    <span className="absolute left-4 top-3 text-xs font-bold text-[#819598]">
+                    <span className="absolute left-4 top-3 text-xs font-bold text-[#5C5A55]">
                       {gateway.currency || 'MAD'}
                     </span>
                   </div>
@@ -337,7 +337,7 @@ export function OnlineDonationHub({ config, locale }: OnlineDonationHubProps) {
 
               {/* Step 2: Target Cause */}
               <div>
-                <label className="block text-2xs font-extrabold uppercase tracking-wider text-[#08242a] mb-2">
+                <label className="block text-2xs font-extrabold uppercase tracking-wider text-[#231f20] mb-2">
                   {isAr
                     ? '2. توجيه المساهمة (المجال أو المبادرة) *'
                     : isFr
@@ -347,7 +347,7 @@ export function OnlineDonationHub({ config, locale }: OnlineDonationHubProps) {
                 <select
                   value={selectedCause}
                   onChange={(e) => setSelectedCause(e.target.value)}
-                  className="w-full px-4 py-3 rounded-2xl border border-[#e5e0d6] text-xs font-bold text-[#08242a] bg-[#faf7f2] outline-none"
+                  className="w-full px-4 py-3 rounded-2xl border border-[#e5e0d6] text-xs font-bold text-[#231f20] bg-[#F5F3EE] outline-none"
                 >
                   {causes.map((c) => (
                     <option key={c.id} value={c.id}>
@@ -358,8 +358,8 @@ export function OnlineDonationHub({ config, locale }: OnlineDonationHubProps) {
               </div>
 
               {/* Step 3: Donor Details */}
-              <div className="space-y-4 pt-2 border-t border-[#f4ede2]">
-                <span className="text-2xs font-extrabold uppercase tracking-wider text-[#08242a] block">
+              <div className="space-y-4 pt-2 border-t border-[#FEF6CC]">
+                <span className="text-2xs font-extrabold uppercase tracking-wider text-[#231f20] block">
                   {isAr
                     ? '3. بيانات المتبرع (لتحرير وصل الإبراء القانوني) *'
                     : isFr
@@ -369,7 +369,7 @@ export function OnlineDonationHub({ config, locale }: OnlineDonationHubProps) {
 
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                   <div>
-                    <label className="block text-3xs font-extrabold text-[#08242a] mb-1">
+                    <label className="block text-3xs font-extrabold text-[#231f20] mb-1">
                       {isAr ? 'الاسم الكامل أو اسم المؤسسة *' : isFr ? 'Nom complet ou raison sociale *' : 'Full Name or Entity *'}
                     </label>
                     <input
@@ -378,12 +378,12 @@ export function OnlineDonationHub({ config, locale }: OnlineDonationHubProps) {
                       value={donorName}
                       onChange={(e) => setDonorName(e.target.value)}
                       placeholder={isAr ? 'الاسم الكامل' : 'Full Name'}
-                      className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs bg-[#faf7f2]"
+                      className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE]"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-3xs font-extrabold text-[#08242a] mb-1">
+                    <label className="block text-3xs font-extrabold text-[#231f20] mb-1">
                       {isAr ? 'البريد الإلكتروني للتوصل بالوصل *' : isFr ? 'Adresse courriel *' : 'Email Address *'}
                     </label>
                     <input
@@ -392,12 +392,12 @@ export function OnlineDonationHub({ config, locale }: OnlineDonationHubProps) {
                       value={donorEmail}
                       onChange={(e) => setDonorEmail(e.target.value)}
                       placeholder="name@example.com"
-                      className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs bg-[#faf7f2]"
+                      className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE]"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-3xs font-extrabold text-[#08242a] mb-1">
+                    <label className="block text-3xs font-extrabold text-[#231f20] mb-1">
                       {isAr ? 'الهاتف للتواصل' : isFr ? 'Téléphone' : 'Phone'}
                     </label>
                     <input
@@ -405,13 +405,13 @@ export function OnlineDonationHub({ config, locale }: OnlineDonationHubProps) {
                       value={donorPhone}
                       onChange={(e) => setDonorPhone(e.target.value)}
                       placeholder="+212 6..."
-                      className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs bg-[#faf7f2]"
+                      className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE]"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-3xs font-extrabold text-[#08242a] mb-1">
+                  <label className="block text-3xs font-extrabold text-[#231f20] mb-1">
                     {isAr ? 'رسالة أو إهداء خاص (اختياري)' : isFr ? 'Message ou dédicace (optionnel)' : 'Dedication Note (optional)'}
                   </label>
                   <input
@@ -423,7 +423,7 @@ export function OnlineDonationHub({ config, locale }: OnlineDonationHubProps) {
                         ? 'مثال: دعماً لمواهب مسرح الشباب في إقليم...'
                         : 'e.g. In support of youth theatre...'
                     }
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs bg-[#faf7f2]"
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE]"
                   />
                 </div>
               </div>
@@ -433,7 +433,7 @@ export function OnlineDonationHub({ config, locale }: OnlineDonationHubProps) {
                 <button
                   type="submit"
                   disabled={loading || activeAmount <= 0}
-                  className="w-full py-4 px-6 rounded-2xl font-black text-white bg-[#0d3b43] hover:bg-[#14505b] disabled:opacity-50 transition-all text-xs sm:text-sm shadow-md active:scale-98 flex items-center justify-center gap-2 cursor-pointer"
+                  className="w-full py-4 px-6 rounded-2xl font-black text-white bg-[#231f20] hover:bg-[#d2a82b] disabled:opacity-50 transition-all text-xs sm:text-sm shadow-md active:scale-98 flex items-center justify-center gap-2 cursor-pointer"
                 >
                   {loading ? (
                     <>
@@ -454,7 +454,7 @@ export function OnlineDonationHub({ config, locale }: OnlineDonationHubProps) {
                   )}
                 </button>
 
-                <div className="flex items-center justify-center gap-4 text-3xs text-[#819598] font-bold mt-3 text-center">
+                <div className="flex items-center justify-center gap-4 text-3xs text-[#5C5A55] font-bold mt-3 text-center">
                   <span>🔒 معالجة مشفرة SSL 256-bit</span>
                   <span>🇲🇦 مركز النقديات CMI / 3D-Secure</span>
                   <span>📜 وصل إبراء رسمي معتمد</span>
@@ -470,7 +470,7 @@ export function OnlineDonationHub({ config, locale }: OnlineDonationHubProps) {
       {/* ========================================================= */}
       {selectedMethod === 'bank' && (
         <div className="p-6 sm:p-10 space-y-6">
-          <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-[#0d3b43] via-[#08242a] to-[#0d3b43] text-white shadow-xl relative overflow-hidden space-y-6">
+          <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-[#231f20] via-[#231f20] to-[#231f20] text-white shadow-xl relative overflow-hidden space-y-6">
             <div className="absolute inset-0 moroccan-pattern opacity-10 mix-blend-overlay pointer-events-none" />
 
             <div className="flex items-center justify-between border-b border-white/10 pb-4 relative z-10">
@@ -502,7 +502,7 @@ export function OnlineDonationHub({ config, locale }: OnlineDonationHubProps) {
                 <button
                   type="button"
                   onClick={() => handleCopy(bank.rib, 'rib')}
-                  className="px-3 py-1 rounded-lg text-3xs font-black bg-amber-400 text-[#08242a] hover:bg-amber-300 transition-colors flex items-center gap-1 cursor-pointer"
+                  className="px-3 py-1 rounded-lg text-3xs font-black bg-amber-400 text-[#231f20] hover:bg-amber-300 transition-colors flex items-center gap-1 cursor-pointer"
                 >
                   <span>{copiedKey === 'rib' ? '✓ تم النسخ' : 'نسخ الـ RIB'}</span>
                 </button>
@@ -551,11 +551,11 @@ export function OnlineDonationHub({ config, locale }: OnlineDonationHubProps) {
           </div>
 
           {/* Instructions Box */}
-          <div className="p-5 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6] space-y-2">
-            <span className="text-2xs font-extrabold uppercase text-[#08242a] block">
+          <div className="p-5 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6] space-y-2">
+            <span className="text-2xs font-extrabold uppercase text-[#231f20] block">
               {isAr ? 'إرشادات إتمام التحويل البنكي والتسليم:' : 'Bank Transfer Guidelines:'}
             </span>
-            <p className="text-xs text-[#5f7174] leading-relaxed">
+            <p className="text-xs text-[#5C5A55] leading-relaxed">
               {isAr
                 ? bank.instructionsAr
                 : isFr
@@ -565,7 +565,7 @@ export function OnlineDonationHub({ config, locale }: OnlineDonationHubProps) {
             <div className="pt-2">
               <a
                 href="#support-form"
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#c85a32] text-white text-xs font-bold hover:bg-[#a94824] transition-colors shadow-2xs"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#bd3227] text-white text-xs font-bold hover:bg-[#a3261c] transition-colors shadow-2xs"
               >
                 <span>{isAr ? 'تأكيد وإشعار التحويل البنكي أسفله ↓' : 'Notify us of your transfer ↓'}</span>
               </a>

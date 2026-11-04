@@ -325,12 +325,12 @@ export default async function HomePage(props: { params: Promise<{ locale: string
     <>
       <Header locale={locale} dict={dict} topBar={topBar} />
 
-      <main id="main-content" className="flex flex-col flex-1 bg-[#faf7f2]">
+      <main id="main-content" className="flex flex-col flex-1 bg-[#F5F3EE]">
 
         {/* ============================================================
             1. HERO SECTION — Full-bleed Morocco88 Style Cinematic Banner
             ============================================================ */}
-        <section className="relative overflow-hidden min-h-[620px] sm:min-h-[700px] lg:min-h-[760px] flex items-center bg-[#08242a] text-white">
+        <section className="relative overflow-hidden min-h-[620px] sm:min-h-[700px] lg:min-h-[760px] flex items-center bg-[#231f20] text-white">
           {/* Full-bleed background photo layer */}
           <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
             {hero.imageUrl ? (
@@ -346,14 +346,14 @@ export default async function HomePage(props: { params: Promise<{ locale: string
                 />
                 {/* Cinematic Morocco88 Vignette Overlays: clear faces + dark text backdrop */}
                 <div className="absolute inset-0 bg-black/35" />
-                <div className="absolute inset-0 bg-gradient-to-r from-[#08242a]/90 via-[#08242a]/50 to-transparent rtl:bg-gradient-to-l" />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#08242a]/80 via-transparent to-black/20" />
+                <div className="absolute inset-0 bg-gradient-to-r from-[#231f20]/90 via-[#231f20]/50 to-transparent rtl:bg-gradient-to-l" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#231f20]/80 via-transparent to-black/20" />
               </>
             ) : (
-              <div className="absolute inset-0 bg-gradient-to-br from-[#08242a] via-[#0d3b43] to-[#08242a]">
+              <div className="absolute inset-0 bg-gradient-to-br from-[#231f20] via-[#231f20] to-[#231f20]">
                 <div className="absolute inset-0 moroccan-star-pattern opacity-15 pointer-events-none" />
-                <div className="absolute top-1/4 start-1/4 w-96 h-96 bg-[#c85a32]/10 rounded-full blur-3xl pointer-events-none" />
-                <div className="absolute bottom-10 end-10 w-96 h-96 bg-[#f4ce83]/10 rounded-full blur-3xl pointer-events-none" />
+                <div className="absolute top-1/4 start-1/4 w-96 h-96 bg-[#bd3227]/10 rounded-full blur-3xl pointer-events-none" />
+                <div className="absolute bottom-10 end-10 w-96 h-96 bg-[#ffd22f]/10 rounded-full blur-3xl pointer-events-none" />
               </div>
             )}
           </div>
@@ -363,7 +363,7 @@ export default async function HomePage(props: { params: Promise<{ locale: string
               {/* Category Eyebrow Tag (Morocco88 style golden uppercase) */}
               {heroTag && (
                 <div className="inline-block">
-                  <span className="text-[#f4ce83] text-xs sm:text-sm font-extrabold tracking-widest uppercase font-mono">
+                  <span className="text-[#ffd22f] text-xs sm:text-sm font-extrabold tracking-widest uppercase font-mono">
                     {heroTag}
                   </span>
                 </div>
@@ -375,7 +375,7 @@ export default async function HomePage(props: { params: Promise<{ locale: string
               </h1>
 
               {/* Narrative Story Description */}
-              <p className="text-base sm:text-lg lg:text-xl text-[#d8f0f4]/95 leading-relaxed font-normal max-w-2xl">
+              <p className="text-base sm:text-lg lg:text-xl text-[#FEF6CC]/95 leading-relaxed font-normal max-w-2xl">
                 {heroDesc}
               </p>
 
@@ -383,7 +383,7 @@ export default async function HomePage(props: { params: Promise<{ locale: string
               <div className="flex flex-wrap items-center gap-4 pt-2 sm:pt-4">
                 <Link
                   href={resolveLocaleUrl(hero.ctaPrimaryUrl, locale)}
-                  className="px-8 py-3.5 rounded-full font-bold text-[#08242a] bg-[#f4ce83] hover:bg-[#eabf66] active:scale-98 transition-all shadow-lg text-sm sm:text-base inline-flex items-center gap-2 group"
+                  className="px-8 py-3.5 rounded-full font-bold text-[#231f20] bg-[#ffd22f] hover:bg-[#ffd22f] active:scale-98 transition-all shadow-lg text-sm sm:text-base inline-flex items-center gap-2 group"
                 >
                   <span>{heroCtaPrimary}</span>
                   <span className="group-hover:translate-x-1 rtl:group-hover:-translate-x-1 transition-transform" aria-hidden="true">
@@ -403,8 +403,8 @@ export default async function HomePage(props: { params: Promise<{ locale: string
 
               {/* Bottom Credibility Sub-strip with golden accent vertical line */}
               {heroBottomStrip && (
-                <div className="pt-6 sm:pt-8 flex items-center gap-3 text-xs sm:text-sm text-[#d8f0f4]/85 font-medium border-t border-white/15 mt-8">
-                  <span className="w-1 h-5 sm:h-6 bg-[#f4ce83] rounded-full inline-block shrink-0" aria-hidden="true" />
+                <div className="pt-6 sm:pt-8 flex items-center gap-3 text-xs sm:text-sm text-[#FEF6CC]/85 font-medium border-t border-white/15 mt-8">
+                  <span className="w-1 h-5 sm:h-6 bg-[#ffd22f] rounded-full inline-block shrink-0" aria-hidden="true" />
                   <p className="leading-snug">{heroBottomStrip}</p>
                 </div>
               )}
@@ -418,42 +418,42 @@ export default async function HomePage(props: { params: Promise<{ locale: string
         <section className="bg-white border-b border-[#e5e0d6] py-10">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-              <div className="p-5 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6] shadow-2xs hover:border-[#0d3b43]/30 transition-all">
-                <div className="text-3xl sm:text-4xl font-black text-[#0d3b43]">2026</div>
-                <div className="text-xs font-bold text-[#08242a] mt-1.5">
+              <div className="p-5 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6] shadow-2xs hover:border-[#231f20]/30 transition-all">
+                <div className="text-3xl sm:text-4xl font-black text-[#231f20]">2026</div>
+                <div className="text-xs font-bold text-[#231f20] mt-1.5">
                   {isAr ? 'سنة التأسيس الرسمية بالمغرب' : 'Foundation Year in Morocco'}
                 </div>
-                <div className="text-3xs text-[#819598] mt-1 font-medium">
+                <div className="text-3xs text-[#5C5A55] mt-1 font-medium">
                   {isAr ? 'تأسيس جمعوي مدني' : 'Nonprofit Association'}
                 </div>
               </div>
 
-              <div className="p-5 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6] shadow-2xs hover:border-[#c85a32]/30 transition-all">
-                <div className="text-3xl sm:text-4xl font-black text-[#c85a32]">6</div>
-                <div className="text-xs font-bold text-[#08242a] mt-1.5">
+              <div className="p-5 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6] shadow-2xs hover:border-[#bd3227]/30 transition-all">
+                <div className="text-3xl sm:text-4xl font-black text-[#bd3227]">6</div>
+                <div className="text-xs font-bold text-[#231f20] mt-1.5">
                   {isAr ? 'مجالات عمل فني وثقافي' : 'Core Cultural Domains'}
                 </div>
-                <div className="text-3xs text-[#819598] mt-1 font-medium">
+                <div className="text-3xs text-[#5C5A55] mt-1 font-medium">
                   {isAr ? 'فنون، موسيقى، مسرح، تطوع' : 'Arts, Music, Theatre, Civic'}
                 </div>
               </div>
 
-              <div className="p-5 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6] shadow-2xs hover:border-[#d99b26]/30 transition-all">
-                <div className="text-3xl sm:text-4xl font-black text-[#d99b26]">3</div>
-                <div className="text-xs font-bold text-[#08242a] mt-1.5">
+              <div className="p-5 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6] shadow-2xs hover:border-[#d2a82b]/30 transition-all">
+                <div className="text-3xl sm:text-4xl font-black text-[#d2a82b]">3</div>
+                <div className="text-xs font-bold text-[#231f20] mt-1.5">
                   {isAr ? 'لغات تواصل معتمدة' : 'Official Platform Languages'}
                 </div>
-                <div className="text-3xs text-[#819598] mt-1 font-medium">
+                <div className="text-3xs text-[#5C5A55] mt-1 font-medium">
                   العربية • Français • English
                 </div>
               </div>
 
-              <div className="p-5 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6] shadow-2xs hover:border-[#0d3b43]/30 transition-all">
-                <div className="text-3xl sm:text-4xl font-black text-[#0d3b43]">100%</div>
-                <div className="text-xs font-bold text-[#08242a] mt-1.5">
+              <div className="p-5 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6] shadow-2xs hover:border-[#231f20]/30 transition-all">
+                <div className="text-3xl sm:text-4xl font-black text-[#231f20]">100%</div>
+                <div className="text-xs font-bold text-[#231f20] mt-1.5">
                   {isAr ? 'عمل مدني غير ربحي' : 'Civic Non-Profit Mission'}
                 </div>
-                <div className="text-3xs text-[#819598] mt-1 font-medium">
+                <div className="text-3xs text-[#5C5A55] mt-1 font-medium">
                   {isAr ? 'لخدمة الثقافة والشباب' : 'Serving Youth & Culture'}
                 </div>
               </div>
@@ -464,16 +464,16 @@ export default async function HomePage(props: { params: Promise<{ locale: string
         {/* ============================================================
             3. ABOUT AMYCC — Mission, Vision & Core Values
             ============================================================ */}
-        <section className="py-20 lg:py-28 bg-[#faf7f2] border-b border-[#e5e0d6]">
+        <section className="py-20 lg:py-28 bg-[#F5F3EE] border-b border-[#e5e0d6]">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-3xl mx-auto text-center mb-16">
-              <span className="text-xs font-bold uppercase tracking-widest text-[#c85a32]">
+              <span className="text-xs font-bold uppercase tracking-widest text-[#bd3227]">
                 {dict.about.title}
               </span>
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-[#08242a] mt-2 mb-4">
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-[#231f20] mt-2 mb-4">
                 {dict.home.intro_title}
               </h2>
-              <p className="text-base sm:text-lg text-[#445457] leading-relaxed">
+              <p className="text-base sm:text-lg text-[#5C5A55] leading-relaxed">
                 {dict.home.intro_p1}
               </p>
             </div>
@@ -483,7 +483,7 @@ export default async function HomePage(props: { params: Promise<{ locale: string
               {/* Mission */}
               <div className="luxury-card p-8 flex flex-col justify-between group">
                 <div>
-                  <div className="w-14 h-14 rounded-2xl bg-[#0d3b43] text-white flex items-center justify-center font-bold text-xl mb-6 shadow-xs p-2.5 overflow-hidden group-hover:scale-105 transition-transform">
+                  <div className="w-14 h-14 rounded-2xl bg-[#231f20] text-white flex items-center justify-center font-bold text-xl mb-6 shadow-xs p-2.5 overflow-hidden group-hover:scale-105 transition-transform">
                     <IconWithFallback
                       src="/icons/mission.png"
                       fallbackEmoji="✦"
@@ -492,19 +492,19 @@ export default async function HomePage(props: { params: Promise<{ locale: string
                       className="w-full h-full object-contain"
                     />
                   </div>
-                  <h3 className="text-xl font-black text-[#08242a] mb-3">
+                  <h3 className="text-xl font-black text-[#231f20] mb-3">
                     {dict.about.mission_title}
                   </h3>
-                  <p className="text-sm text-[#445457] leading-relaxed">
+                  <p className="text-sm text-[#5C5A55] leading-relaxed">
                     {isAr
                       ? 'تؤمن الجمعية بأن لكل شاب موهبة وقدرات إبداعية تستحق الاكتشاف والرعاية، وتعمل انطلاقاً من مدينة مراكش على صقل الطاقات الفنية وتمكين الشباب في خدمة المجتمع.'
                       : dict.about.description}
                   </p>
                 </div>
-                <div className="pt-6 mt-6 border-t border-[#f4ede2]">
+                <div className="pt-6 mt-6 border-t border-[#FEF6CC]">
                   <Link
                     href={`/${locale}/about#mission`}
-                    className="text-xs font-bold text-[#0d3b43] hover:text-[#c85a32] transition-colors"
+                    className="text-xs font-bold text-[#231f20] hover:text-[#bd3227] transition-colors"
                   >
                     {isAr ? 'اكتشف رسالتنا الكاملة' : 'Read Our Full Mission'} →
                   </Link>
@@ -512,10 +512,10 @@ export default async function HomePage(props: { params: Promise<{ locale: string
               </div>
 
               {/* Vision */}
-              <div className="luxury-card p-8 border-2 border-[#c85a32]/30 flex flex-col justify-between relative overflow-hidden group">
-                <div className="absolute top-0 end-0 w-24 h-24 bg-[#fae4dc] rounded-bl-full pointer-events-none" />
+              <div className="luxury-card p-8 border-2 border-[#bd3227]/30 flex flex-col justify-between relative overflow-hidden group">
+                <div className="absolute top-0 end-0 w-24 h-24 bg-[#fde8e7] rounded-bl-full pointer-events-none" />
                 <div className="relative z-10">
-                  <div className="w-14 h-14 rounded-2xl bg-[#c85a32] text-white flex items-center justify-center font-bold text-xl mb-6 shadow-xs p-2.5 overflow-hidden group-hover:scale-105 transition-transform">
+                  <div className="w-14 h-14 rounded-2xl bg-[#bd3227] text-white flex items-center justify-center font-bold text-xl mb-6 shadow-xs p-2.5 overflow-hidden group-hover:scale-105 transition-transform">
                     <IconWithFallback
                       src="/icons/vision.png"
                       fallbackEmoji="★"
@@ -524,19 +524,19 @@ export default async function HomePage(props: { params: Promise<{ locale: string
                       className="w-full h-full object-contain"
                     />
                   </div>
-                  <h3 className="text-xl font-black text-[#08242a] mb-3">
+                  <h3 className="text-xl font-black text-[#231f20] mb-3">
                     {dict.about.vision_title}
                   </h3>
-                  <p className="text-sm text-[#445457] leading-relaxed">
+                  <p className="text-sm text-[#5C5A55] leading-relaxed">
                     {isAr
                       ? 'أن تصبح جمعية رائدة في الفنون والتمكين، عبر شبكة متكاملة من الفروع تنطلق إقليمياً وتمتد لمختلف جهات المملكة وصولاً للمستوى الوطني والدولي.'
                       : dict.hero.subtitle}
                   </p>
                 </div>
-                <div className="pt-6 mt-6 border-t border-[#f4ede2] relative z-10">
+                <div className="pt-6 mt-6 border-t border-[#FEF6CC] relative z-10">
                   <Link
                     href={`/${locale}/about#vision`}
-                    className="text-xs font-bold text-[#c85a32] hover:underline"
+                    className="text-xs font-bold text-[#bd3227] hover:underline"
                   >
                     {isAr ? 'استكشف خارطة الرؤية' : 'Explore Vision Roadmap'} →
                   </Link>
@@ -546,7 +546,7 @@ export default async function HomePage(props: { params: Promise<{ locale: string
               {/* Values */}
               <div className="luxury-card p-8 flex flex-col justify-between group">
                 <div>
-                  <div className="w-14 h-14 rounded-2xl bg-[#d99b26] text-white flex items-center justify-center font-bold text-xl mb-6 shadow-xs p-2.5 overflow-hidden group-hover:scale-105 transition-transform">
+                  <div className="w-14 h-14 rounded-2xl bg-[#d2a82b] text-white flex items-center justify-center font-bold text-xl mb-6 shadow-xs p-2.5 overflow-hidden group-hover:scale-105 transition-transform">
                     <IconWithFallback
                       src="/icons/values.png"
                       fallbackEmoji="♥"
@@ -555,19 +555,19 @@ export default async function HomePage(props: { params: Promise<{ locale: string
                       className="w-full h-full object-contain"
                     />
                   </div>
-                  <h3 className="text-xl font-black text-[#08242a] mb-3">
+                  <h3 className="text-xl font-black text-[#231f20] mb-3">
                     {dict.about.values_title}
                   </h3>
-                  <p className="text-sm text-[#445457] leading-relaxed">
+                  <p className="text-sm text-[#5C5A55] leading-relaxed">
                     {isAr
                       ? 'تستند الجمعية إلى 7 قيم أساسية: الإبداع، الشمولية، التضامن، التعليم والتطوير، الاحترام والتنوع، التعاون والشراكة، والشفافية والمسؤولية.'
                       : dict.footer.description}
                   </p>
                 </div>
-                <div className="pt-6 mt-6 border-t border-[#f4ede2]">
+                <div className="pt-6 mt-6 border-t border-[#FEF6CC]">
                   <Link
                     href={`/${locale}/about#values`}
-                    className="text-xs font-bold text-[#d99b26] hover:text-[#08242a] transition-colors"
+                    className="text-xs font-bold text-[#d2a82b] hover:text-[#231f20] transition-colors"
                   >
                     {isAr ? 'تفاصيل قيمنا الـ 7' : 'Our 7 Core Values'} →
                   </Link>
@@ -580,18 +580,18 @@ export default async function HomePage(props: { params: Promise<{ locale: string
         {/* ============================================================
             CULTURAL MANIFESTO BANNER (INTERACTIVE EDITORIAL QUOTE)
             ============================================================ */}
-        <section className="bg-gradient-to-r from-[#0d3b43] via-[#08242a] to-[#0d3b43] py-14 px-4 text-center text-white relative overflow-hidden border-y border-[#14505b]">
+        <section className="bg-gradient-to-r from-[#231f20] via-[#231f20] to-[#231f20] py-14 px-4 text-center text-white relative overflow-hidden border-y border-[#d2a82b]">
           <div className="absolute inset-0 moroccan-pattern opacity-10 pointer-events-none" />
           <div className="max-w-4xl mx-auto relative z-10 space-y-3">
-            <span className="text-3xl block text-[#f4ce83]">❝</span>
-            <blockquote className="text-xl sm:text-2xl lg:text-3xl font-extrabold leading-snug tracking-tight text-[#fdfcf9]">
+            <span className="text-3xl block text-[#ffd22f]">❝</span>
+            <blockquote className="text-xl sm:text-2xl lg:text-3xl font-extrabold leading-snug tracking-tight text-[#F5F3EE]">
               {isAr
                 ? '«الفنون ليست مجرد تعبير جمالي، بل هي رافعة حقيقية للتنمية البشرية، وإطلاق طاقات الشباب، وترسيخ الهوية والتنوع الثقافي المغربي»'
                 : isFr
                 ? '« Les arts ne sont pas seulement une expression esthétique, mais un véritable levier d\'émancipation et de cohésion sociale »'
                 : '“Arts and culture are vital catalysts for human development, youth leadership, and civic empowerment across Morocco.”'}
             </blockquote>
-            <p className="text-xs font-bold text-[#aedfe7] uppercase tracking-widest pt-2">
+            <p className="text-xs font-bold text-[#d2a82b] uppercase tracking-widest pt-2">
               — {isAr ? 'جمعية روح الفنون والثقافة (AMYCC)' : 'Spirit of Arts & Culture Association'}
             </p>
           </div>
@@ -632,7 +632,7 @@ export default async function HomePage(props: { params: Promise<{ locale: string
             5. FLAGSHIP PROGRAM INITIATIVE SPOTLIGHT (البرنامج الرائد)
             ============================================================ */}
         {flagship.enabled && (
-          <section className="py-20 lg:py-24 bg-[#08242a] text-white relative overflow-hidden">
+          <section className="py-20 lg:py-24 bg-[#231f20] text-white relative overflow-hidden">
             {/* Subtle Decorative Pattern */}
             <div className="absolute inset-0 moroccan-pattern opacity-15 pointer-events-none" aria-hidden="true" />
 
@@ -642,7 +642,7 @@ export default async function HomePage(props: { params: Promise<{ locale: string
                 {/* Spotlight Content */}
                 <div className="lg:col-span-7 space-y-6">
                   {flagshipBadge && (
-                    <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-bold bg-[#14505b] text-[#f4ce83] border border-[#268292]/40">
+                    <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-bold bg-[#d2a82b] text-[#ffd22f] border border-[#d2a82b]/40">
                       <span>★</span>
                       <span>{flagshipBadge}</span>
                     </div>
@@ -652,41 +652,41 @@ export default async function HomePage(props: { params: Promise<{ locale: string
                     {flagshipTitle}
                   </h2>
 
-                  <p className="text-sm sm:text-base text-[#d8f0f4] leading-relaxed">
+                  <p className="text-sm sm:text-base text-[#FEF6CC] leading-relaxed">
                     {flagshipDesc}
                   </p>
 
                   {/* 4-Step Volunteering Journey */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 pt-2">
-                    <div className="p-4 rounded-2xl bg-[#0d3b43]/80 border border-[#14505b] flex items-start gap-3 hover:border-[#f4ce83]/50 transition-colors">
-                      <span className="w-7 h-7 rounded-lg bg-[#c85a32] text-white flex items-center justify-center font-black text-xs shrink-0 shadow-xs">1</span>
+                    <div className="p-4 rounded-2xl bg-[#231f20]/80 border border-[#d2a82b] flex items-start gap-3 hover:border-[#ffd22f]/50 transition-colors">
+                      <span className="w-7 h-7 rounded-lg bg-[#bd3227] text-white flex items-center justify-center font-black text-xs shrink-0 shadow-xs">1</span>
                       <div>
                         <span className="font-bold text-xs block text-white">{step1Title}</span>
-                        <span className="text-3xs text-[#74bfcd]">{step1Desc}</span>
+                        <span className="text-3xs text-[#ffd22f]">{step1Desc}</span>
                       </div>
                     </div>
 
-                    <div className="p-4 rounded-2xl bg-[#0d3b43]/80 border border-[#14505b] flex items-start gap-3 hover:border-[#f4ce83]/50 transition-colors">
-                      <span className="w-7 h-7 rounded-lg bg-[#c85a32] text-white flex items-center justify-center font-black text-xs shrink-0 shadow-xs">2</span>
+                    <div className="p-4 rounded-2xl bg-[#231f20]/80 border border-[#d2a82b] flex items-start gap-3 hover:border-[#ffd22f]/50 transition-colors">
+                      <span className="w-7 h-7 rounded-lg bg-[#bd3227] text-white flex items-center justify-center font-black text-xs shrink-0 shadow-xs">2</span>
                       <div>
                         <span className="font-bold text-xs block text-white">{step2Title}</span>
-                        <span className="text-3xs text-[#74bfcd]">{step2Desc}</span>
+                        <span className="text-3xs text-[#ffd22f]">{step2Desc}</span>
                       </div>
                     </div>
 
-                    <div className="p-4 rounded-2xl bg-[#0d3b43]/80 border border-[#14505b] flex items-start gap-3 hover:border-[#f4ce83]/50 transition-colors">
-                      <span className="w-7 h-7 rounded-lg bg-[#c85a32] text-white flex items-center justify-center font-black text-xs shrink-0 shadow-xs">3</span>
+                    <div className="p-4 rounded-2xl bg-[#231f20]/80 border border-[#d2a82b] flex items-start gap-3 hover:border-[#ffd22f]/50 transition-colors">
+                      <span className="w-7 h-7 rounded-lg bg-[#bd3227] text-white flex items-center justify-center font-black text-xs shrink-0 shadow-xs">3</span>
                       <div>
                         <span className="font-bold text-xs block text-white">{step3Title}</span>
-                        <span className="text-3xs text-[#74bfcd]">{step3Desc}</span>
+                        <span className="text-3xs text-[#ffd22f]">{step3Desc}</span>
                       </div>
                     </div>
 
-                    <div className="p-4 rounded-2xl bg-[#0d3b43]/80 border border-[#14505b] flex items-start gap-3 hover:border-[#f4ce83]/50 transition-colors">
-                      <span className="w-7 h-7 rounded-lg bg-[#c85a32] text-white flex items-center justify-center font-black text-xs shrink-0 shadow-xs">4</span>
+                    <div className="p-4 rounded-2xl bg-[#231f20]/80 border border-[#d2a82b] flex items-start gap-3 hover:border-[#ffd22f]/50 transition-colors">
+                      <span className="w-7 h-7 rounded-lg bg-[#bd3227] text-white flex items-center justify-center font-black text-xs shrink-0 shadow-xs">4</span>
                       <div>
                         <span className="font-bold text-xs block text-white">{step4Title}</span>
-                        <span className="text-3xs text-[#74bfcd]">{step4Desc}</span>
+                        <span className="text-3xs text-[#ffd22f]">{step4Desc}</span>
                       </div>
                     </div>
                   </div>
@@ -695,7 +695,7 @@ export default async function HomePage(props: { params: Promise<{ locale: string
                     {flagshipCtaPrimary && (
                       <Link
                         href={resolveLocaleUrl(flagship.ctaPrimaryUrl, locale)}
-                        className="px-8 py-3.5 rounded-xl font-bold text-center text-[#08242a] bg-[#f4ce83] hover:bg-white active:scale-95 transition-all shadow-md text-xs sm:text-sm"
+                        className="px-8 py-3.5 rounded-xl font-bold text-center text-[#231f20] bg-[#ffd22f] hover:bg-white active:scale-95 transition-all shadow-md text-xs sm:text-sm"
                       >
                         {flagshipCtaPrimary}
                       </Link>
@@ -703,7 +703,7 @@ export default async function HomePage(props: { params: Promise<{ locale: string
                     {flagshipCtaSecondary && (
                       <Link
                         href={resolveLocaleUrl(flagship.ctaSecondaryUrl, locale)}
-                        className="px-6 py-3.5 rounded-xl font-bold text-center text-white border border-[#268292] hover:bg-[#14505b] transition-all text-xs sm:text-sm"
+                        className="px-6 py-3.5 rounded-xl font-bold text-center text-white border border-[#d2a82b] hover:bg-[#d2a82b] transition-all text-xs sm:text-sm"
                       >
                         {flagshipCtaSecondary}
                       </Link>
@@ -715,12 +715,12 @@ export default async function HomePage(props: { params: Promise<{ locale: string
                 <div className="lg:col-span-5 relative flex justify-center">
                   {/* Subtle warm ambient glow behind poster */}
                   <div
-                    className="absolute -inset-2 bg-gradient-to-tr from-[#f4ce83]/25 via-[#c85a32]/20 to-[#0d3b43]/30 rounded-[2.5rem] blur-2xl -z-10 opacity-70"
+                    className="absolute -inset-2 bg-gradient-to-tr from-[#ffd22f]/25 via-[#bd3227]/20 to-[#231f20]/30 rounded-[2.5rem] blur-2xl -z-10 opacity-70"
                     aria-hidden="true"
                   />
 
                   <div className="w-full max-w-md relative rounded-3xl p-3.5 bg-white/10 border border-white/20 backdrop-blur-md shadow-2xl">
-                    <div className="relative aspect-[3/4] sm:aspect-[4/5] min-h-[460px] sm:min-h-[520px] lg:min-h-[580px] rounded-2xl overflow-hidden bg-[#0d3b43]">
+                    <div className="relative aspect-[3/4] sm:aspect-[4/5] min-h-[460px] sm:min-h-[520px] lg:min-h-[580px] rounded-2xl overflow-hidden bg-[#231f20]">
                       {flagship.imageUrl ? (
                         <>
                           <ImageWithFallback
@@ -731,10 +731,10 @@ export default async function HomePage(props: { params: Promise<{ locale: string
                             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 45vw, 480px"
                             className="object-cover object-center"
                           />
-                          <div className="absolute inset-0 bg-gradient-to-t from-[#08242a] via-[#08242a]/30 to-black/20 opacity-85" />
+                          <div className="absolute inset-0 bg-gradient-to-t from-[#231f20] via-[#231f20]/30 to-black/20 opacity-85" />
                           <div className="absolute bottom-5 start-5 end-5 text-white">
                             {flagship.imageSubcaption && (
-                              <span className="text-3xs text-[#f4ce83] font-bold uppercase tracking-widest block mb-1">
+                              <span className="text-3xs text-[#ffd22f] font-bold uppercase tracking-widest block mb-1">
                                 {flagship.imageSubcaption}
                               </span>
                             )}
@@ -762,20 +762,20 @@ export default async function HomePage(props: { params: Promise<{ locale: string
         {/* ============================================================
             6. FEATURED PROGRAMS (DYNAMIC FROM DATABASE)
             ============================================================ */}
-        <section className="py-20 lg:py-28 bg-[#faf7f2] border-b border-[#e5e0d6]">
+        <section className="py-20 lg:py-28 bg-[#F5F3EE] border-b border-[#e5e0d6]">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between mb-12 gap-4">
               <div>
-                <span className="text-xs font-bold uppercase tracking-widest text-[#c85a32]">
+                <span className="text-xs font-bold uppercase tracking-widest text-[#bd3227]">
                   {dict.programs.title}
                 </span>
-                <h2 className="text-3xl font-extrabold text-[#08242a] mt-1">
+                <h2 className="text-3xl font-extrabold text-[#231f20] mt-1">
                   {dict.home.featured_programs}
                 </h2>
               </div>
               <Link
                 href={`/${locale}/programs`}
-                className="text-xs font-bold text-[#0d3b43] hover:text-[#c85a32] transition-colors flex items-center gap-1"
+                className="text-xs font-bold text-[#231f20] hover:text-[#bd3227] transition-colors flex items-center gap-1"
               >
                 <span>{dict.programs.view_all}</span>
                 <span aria-hidden="true">→</span>
@@ -792,27 +792,27 @@ export default async function HomePage(props: { params: Promise<{ locale: string
                   >
                     <div>
                       <div className="flex items-center justify-between mb-4">
-                        <span className="px-3 py-1 rounded-full text-3xs font-bold bg-[#d8f0f4] text-[#0d3b43] capitalize">
+                        <span className="px-3 py-1 rounded-full text-3xs font-bold bg-[#FEF6CC] text-[#231f20] capitalize">
                           {prog.category}
                         </span>
-                        <span className="text-3xs font-medium text-[#5f7174] flex items-center gap-1">
+                        <span className="text-3xs font-medium text-[#5C5A55] flex items-center gap-1">
                           <span>📍</span>
                           <span>{prog.city || 'Morocco'}</span>
                         </span>
                       </div>
-                      <h3 className="text-xl font-bold text-[#08242a] mb-3 leading-snug">
+                      <h3 className="text-xl font-bold text-[#231f20] mb-3 leading-snug">
                         {trans.title}
                       </h3>
                       {trans.description && (
-                        <p className="text-xs text-[#445457] leading-relaxed mb-6 line-clamp-3">
+                        <p className="text-xs text-[#5C5A55] leading-relaxed mb-6 line-clamp-3">
                           {trans.description}
                         </p>
                       )}
                     </div>
-                    <div className="pt-4 border-t border-[#f4ede2]">
+                    <div className="pt-4 border-t border-[#FEF6CC]">
                       <Link
                         href={`/${locale}/programs/${prog.slug}`}
-                        className="inline-flex items-center text-xs font-bold text-[#c85a32] hover:text-[#b84e27] transition-colors"
+                        className="inline-flex items-center text-xs font-bold text-[#bd3227] hover:text-[#a3261c] transition-colors"
                       >
                         <span>{dict.programs.learn_more}</span>
                         <span aria-hidden="true" className="ms-1">→</span>
@@ -832,19 +832,19 @@ export default async function HomePage(props: { params: Promise<{ locale: string
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between mb-12 gap-4">
               <div>
-                <span className="text-xs font-bold uppercase tracking-widest text-[#0d3b43]">
+                <span className="text-xs font-bold uppercase tracking-widest text-[#231f20]">
                   {dict.events.title}
                 </span>
-                <h2 className="text-3xl font-extrabold text-[#08242a] mt-1">
+                <h2 className="text-3xl font-extrabold text-[#231f20] mt-1">
                   {dict.home.upcoming_events}
                 </h2>
-                <p className="text-xs sm:text-sm text-[#5f7174] mt-1">
+                <p className="text-xs sm:text-sm text-[#5C5A55] mt-1">
                   {isAr ? 'حجز مباشر ومجاني للمقاعد في الورشات والتظاهرات الثقافية' : 'Live registration for upcoming cultural events & masterclasses'}
                 </p>
               </div>
               <Link
                 href={`/${locale}/events`}
-                className="text-xs font-bold text-[#0d3b43] hover:text-[#c85a32] transition-colors flex items-center gap-1"
+                className="text-xs font-bold text-[#231f20] hover:text-[#bd3227] transition-colors flex items-center gap-1"
               >
                 <span>{dict.events.view_all}</span>
                 <span aria-hidden="true">→</span>
@@ -863,11 +863,11 @@ export default async function HomePage(props: { params: Promise<{ locale: string
                 return (
                   <div
                     key={ev.id}
-                    className="p-7 rounded-3xl bg-[#faf7f2] border border-[#e5e0d6] shadow-subtle hover:shadow-card transition-all flex flex-col justify-between"
+                    className="p-7 rounded-3xl bg-[#F5F3EE] border border-[#e5e0d6] shadow-subtle hover:shadow-card transition-all flex flex-col justify-between"
                   >
                     <div>
                       <div className="flex items-center justify-between mb-3">
-                        <span className="text-xs font-bold text-[#0d3b43] flex items-center gap-1.5">
+                        <span className="text-xs font-bold text-[#231f20] flex items-center gap-1.5">
                           <span>📅</span>
                           <span>{formattedDate}</span>
                         </span>
@@ -882,19 +882,19 @@ export default async function HomePage(props: { params: Promise<{ locale: string
                         </span>
                       </div>
 
-                      <h3 className="text-lg font-bold text-[#08242a] mb-2 leading-snug hover:text-[#c85a32] transition-colors">
+                      <h3 className="text-lg font-bold text-[#231f20] mb-2 leading-snug hover:text-[#bd3227] transition-colors">
                         <Link href={`/${locale}/events/${ev.slug}`}>
                           {trans.title}
                         </Link>
                       </h3>
 
-                      <p className="text-2xs text-[#5f7174] flex items-center gap-1 mb-4">
+                      <p className="text-2xs text-[#5C5A55] flex items-center gap-1 mb-4">
                         <span>📍</span>
                         <span>{ev.venue || ev.city || 'Morocco'}</span>
                       </p>
 
                       {trans.description && (
-                        <p className="text-xs text-[#445457] leading-relaxed mb-6 line-clamp-3">
+                        <p className="text-xs text-[#5C5A55] leading-relaxed mb-6 line-clamp-3">
                           {trans.description}
                         </p>
                       )}
@@ -905,8 +905,8 @@ export default async function HomePage(props: { params: Promise<{ locale: string
                         href={`/${locale}/events/${ev.slug}`}
                         className={`w-full py-2.5 px-4 rounded-xl font-bold text-xs transition-all flex items-center justify-center gap-1.5 shadow-2xs ${
                           ev.registration_open
-                            ? 'text-white bg-[#0d3b43] hover:bg-[#14505b] active:scale-98'
-                            : 'text-[#08242a] bg-[#faf7f2] hover:bg-[#eae4d9] border border-[#e5e0d6]'
+                            ? 'text-white bg-[#231f20] hover:bg-[#d2a82b] active:scale-98'
+                            : 'text-[#231f20] bg-[#F5F3EE] hover:bg-[#FEF6CC] border border-[#e5e0d6]'
                         }`}
                       >
                         <span>
@@ -937,20 +937,20 @@ export default async function HomePage(props: { params: Promise<{ locale: string
         {/* ============================================================
             8. LATEST NEWS & PRESS (الأخبار والبيانات الصحفية)
             ============================================================ */}
-        <section className="py-20 lg:py-28 bg-[#faf7f2] border-b border-[#e5e0d6]">
+        <section className="py-20 lg:py-28 bg-[#F5F3EE] border-b border-[#e5e0d6]">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between mb-12 gap-4">
               <div>
-                <span className="text-xs font-bold uppercase tracking-widest text-[#c85a32]">
+                <span className="text-xs font-bold uppercase tracking-widest text-[#bd3227]">
                   {dict.news.title}
                 </span>
-                <h2 className="text-3xl font-extrabold text-[#08242a] mt-1">
+                <h2 className="text-3xl font-extrabold text-[#231f20] mt-1">
                   {dict.home.latest_news}
                 </h2>
               </div>
               <Link
                 href={`/${locale}/news`}
-                className="text-xs font-bold text-[#0d3b43] hover:text-[#c85a32] transition-colors flex items-center gap-1"
+                className="text-xs font-bold text-[#231f20] hover:text-[#bd3227] transition-colors flex items-center gap-1"
               >
                 <span>{dict.news.view_all}</span>
                 <span aria-hidden="true">→</span>
@@ -967,33 +967,33 @@ export default async function HomePage(props: { params: Promise<{ locale: string
                   >
                     <div>
                       <div className="flex items-center justify-between mb-3">
-                        <span className="text-3xs font-bold px-2.5 py-0.5 rounded-full bg-[#fae4dc] text-[#c85a32] capitalize">
+                        <span className="text-3xs font-bold px-2.5 py-0.5 rounded-full bg-[#fde8e7] text-[#bd3227] capitalize">
                           {art.category}
                         </span>
                         {art.published_at && (
-                          <span className="text-3xs text-[#819598] font-mono">
+                          <span className="text-3xs text-[#5C5A55] font-mono">
                             {new Date(art.published_at).toLocaleDateString(locale)}
                           </span>
                         )}
                       </div>
 
-                      <h3 className="text-lg font-bold text-[#08242a] mb-3 leading-snug">
-                        <Link href={`/${locale}/news/${art.slug}`} className="hover:text-[#c85a32] transition-colors">
+                      <h3 className="text-lg font-bold text-[#231f20] mb-3 leading-snug">
+                        <Link href={`/${locale}/news/${art.slug}`} className="hover:text-[#bd3227] transition-colors">
                           {trans.title}
                         </Link>
                       </h3>
 
                       {trans.excerpt && (
-                        <p className="text-xs text-[#445457] leading-relaxed line-clamp-3 mb-6">
+                        <p className="text-xs text-[#5C5A55] leading-relaxed line-clamp-3 mb-6">
                           {trans.excerpt}
                         </p>
                       )}
                     </div>
 
-                    <div className="pt-4 border-t border-[#f4ede2]">
+                    <div className="pt-4 border-t border-[#FEF6CC]">
                       <Link
                         href={`/${locale}/news/${art.slug}`}
-                        className="text-xs font-bold text-[#0d3b43] hover:text-[#c85a32] transition-colors flex items-center gap-1"
+                        className="text-xs font-bold text-[#231f20] hover:text-[#bd3227] transition-colors flex items-center gap-1"
                       >
                         <span>{dict.news.read_more}</span>
                         <span aria-hidden="true">→</span>
@@ -1012,13 +1012,13 @@ export default async function HomePage(props: { params: Promise<{ locale: string
         <section className="py-20 lg:py-28 bg-white border-b border-[#e5e0d6]">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-14">
-              <span className="text-xs font-bold uppercase tracking-widest text-[#c85a32]">
+              <span className="text-xs font-bold uppercase tracking-widest text-[#bd3227]">
                 AMYCC FAQ
               </span>
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-[#08242a] mt-2 mb-4">
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-[#231f20] mt-2 mb-4">
                 {isAr ? 'الأسئلة الشائعة حول الجمعية والأنشطة' : isFr ? 'Foire Aux Questions' : 'Frequently Asked Questions'}
               </h2>
-              <p className="text-sm text-[#5f7174] max-w-xl mx-auto">
+              <p className="text-sm text-[#5C5A55] max-w-xl mx-auto">
                 {isAr
                   ? 'إجابات واضحة عن كيفية الانخراط، التطوع في شباب في العمل، وحضور الفعاليات الثقافية.'
                   : 'Clear answers on membership, volunteering, and institutional partnership opportunities.'}
@@ -1030,7 +1030,7 @@ export default async function HomePage(props: { params: Promise<{ locale: string
             <div className="text-center mt-10">
               <Link
                 href={`/${locale}/faq`}
-                className="text-xs font-bold text-[#0d3b43] hover:text-[#c85a32] transition-colors inline-flex items-center gap-1"
+                className="text-xs font-bold text-[#231f20] hover:text-[#bd3227] transition-colors inline-flex items-center gap-1"
               >
                 <span>{isAr ? 'عرض جميع الأسئلة والإرشادات' : 'View full FAQ page'}</span>
                 <span aria-hidden="true">→</span>
@@ -1042,15 +1042,15 @@ export default async function HomePage(props: { params: Promise<{ locale: string
         {/* ============================================================
             10. PARTNERSHIPS & INSTITUTIONAL COLLABORATION
             ============================================================ */}
-        <section className="py-20 lg:py-24 bg-[#faf7f2] border-b border-[#e5e0d6]">
+        <section className="py-20 lg:py-24 bg-[#F5F3EE] border-b border-[#e5e0d6]">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <span className="text-xs font-bold uppercase tracking-widest text-[#c85a32]">
+            <span className="text-xs font-bold uppercase tracking-widest text-[#bd3227]">
               {dict.partners.title}
             </span>
-            <h2 className="text-3xl font-extrabold text-[#08242a] mt-2 mb-4">
+            <h2 className="text-3xl font-extrabold text-[#231f20] mt-2 mb-4">
               {dict.home.partners_title}
             </h2>
-            <p className="text-sm sm:text-base text-[#445457] max-w-2xl mx-auto mb-12 leading-relaxed">
+            <p className="text-sm sm:text-base text-[#5C5A55] max-w-2xl mx-auto mb-12 leading-relaxed">
               {dict.home.partners_desc}
             </p>
 
@@ -1066,7 +1066,7 @@ export default async function HomePage(props: { params: Promise<{ locale: string
                   key={idx}
                   className="p-6 rounded-3xl bg-white border border-[#e5e0d6] shadow-subtle hover:shadow-card transition-all flex flex-col justify-center items-center text-center group"
                 >
-                  <div className="w-12 h-12 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6] flex items-center justify-center p-2 mb-3 shadow-2xs group-hover:scale-105 transition-transform overflow-hidden">
+                  <div className="w-12 h-12 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6] flex items-center justify-center p-2 mb-3 shadow-2xs group-hover:scale-105 transition-transform overflow-hidden">
                     <IconWithFallback
                       src={tier.iconImg}
                       fallbackEmoji={tier.icon}
@@ -1075,15 +1075,15 @@ export default async function HomePage(props: { params: Promise<{ locale: string
                       className="w-full h-full object-contain text-2xl"
                     />
                   </div>
-                  <span className="text-xs font-bold text-[#08242a] mb-1 leading-snug">{tier.title}</span>
-                  <span className="text-3xs text-[#819598] font-medium">{tier.desc}</span>
+                  <span className="text-xs font-bold text-[#231f20] mb-1 leading-snug">{tier.title}</span>
+                  <span className="text-3xs text-[#5C5A55] font-medium">{tier.desc}</span>
                 </div>
               ))}
             </div>
 
             <Link
               href={`/${locale}/partnerships`}
-              className="inline-flex items-center px-7 py-3.5 rounded-xl font-bold text-xs text-white bg-[#0d3b43] hover:bg-[#14505b] active:scale-95 transition-all shadow-subtle gap-2"
+              className="inline-flex items-center px-7 py-3.5 rounded-xl font-bold text-xs text-white bg-[#231f20] hover:bg-[#d2a82b] active:scale-95 transition-all shadow-subtle gap-2"
             >
               <span>{dict.partners.apply_partnership}</span>
               <span aria-hidden="true">→</span>
@@ -1094,11 +1094,11 @@ export default async function HomePage(props: { params: Promise<{ locale: string
         {/* ============================================================
             11. FINAL HIGH-IMPACT CALL TO ACTION
             ============================================================ */}
-        <section className="py-20 lg:py-24 bg-gradient-to-br from-[#0d3b43] via-[#08242a] to-[#04161a] text-white relative overflow-hidden">
+        <section className="py-20 lg:py-24 bg-gradient-to-br from-[#231f20] via-[#231f20] to-[#181516] text-white relative overflow-hidden">
           <div className="absolute inset-0 moroccan-pattern opacity-10 pointer-events-none" aria-hidden="true" />
 
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 space-y-6">
-            <span className="inline-block px-3.5 py-1 rounded-full text-xs font-bold bg-[#14505b] text-[#f4ce83] border border-[#268292]/40">
+            <span className="inline-block px-3.5 py-1 rounded-full text-xs font-bold bg-[#d2a82b] text-[#ffd22f] border border-[#d2a82b]/40">
               {isAr ? 'انضم إلى مسيرة روح الفنون والثقافة 2026' : 'Join the Cultural Journey'}
             </span>
 
@@ -1106,20 +1106,20 @@ export default async function HomePage(props: { params: Promise<{ locale: string
               {dict.home.cta_title}
             </h2>
 
-            <p className="text-sm sm:text-base text-[#d8f0f4] max-w-2xl mx-auto leading-relaxed">
+            <p className="text-sm sm:text-base text-[#FEF6CC] max-w-2xl mx-auto leading-relaxed">
               {dict.home.cta_desc}
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
               <Link
                 href={`/${locale}/membership`}
-                className="w-full sm:w-auto px-8 py-4 rounded-xl font-bold text-white bg-[#c85a32] hover:bg-[#b84e27] active:scale-95 transition-all shadow-card text-center text-sm"
+                className="w-full sm:w-auto px-8 py-4 rounded-xl font-bold text-white bg-[#bd3227] hover:bg-[#a3261c] active:scale-95 transition-all shadow-card text-center text-sm"
               >
                 {dict.membership.apply}
               </Link>
               <Link
                 href={`/${locale}/contact`}
-                className="w-full sm:w-auto px-6 py-4 rounded-xl font-bold text-white border border-[#268292] hover:bg-[#14505b] transition-all text-center text-sm"
+                className="w-full sm:w-auto px-6 py-4 rounded-xl font-bold text-white border border-[#d2a82b] hover:bg-[#d2a82b] transition-all text-center text-sm"
               >
                 {dict.nav.contact}
               </Link>

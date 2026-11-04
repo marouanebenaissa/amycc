@@ -19,14 +19,14 @@ export function Logo({
   return (
     <Link
       href={`/${locale}`}
-      className={`group inline-flex items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c85a32] focus-visible:ring-offset-2 rounded-2xl transition-all ${className}`}
+      className={`group inline-flex items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#bd3227] focus-visible:ring-offset-2 rounded-2xl transition-all ${className}`}
       aria-label="AMYCC — الرئيسية"
     >
       {/* Visual Seal / Official Logo Only */}
       <div
         className={`relative flex items-center justify-center shrink-0 overflow-hidden rounded-2xl border p-1 shadow-2xs transition-all duration-200 group-hover:scale-105 ${
           isDark
-            ? 'bg-[#0a2d34] border-[#14505b]/60 shadow-teal-950/40'
+            ? 'bg-[#181516] border-[#d2a82b]/60 shadow-black/40'
             : 'bg-white border-[#e5e0d6] shadow-subtle'
         }`}
         style={{

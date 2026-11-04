@@ -20,7 +20,7 @@ export function AdminLayoutClient({
 
   return (
     <AdminLocaleProvider>
-      <div className="min-h-screen flex text-[#08242a] bg-[#faf7f2] transition-colors">
+      <div className="min-h-screen flex text-[#231f20] bg-[#F5F3EE] transition-colors">
         <AdminSidebar
           userEmail={userEmail}
           userName={userName}

@@ -446,15 +446,15 @@ export function MembershipsAdminTabs({
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-[#e5e0d6] pb-6">
         <div>
           <div className="flex items-center gap-2 mb-1">
-            <span className="w-2.5 h-2.5 rounded-full bg-[#0d3b43] animate-pulse" />
-            <span className="text-2xs font-extrabold tracking-widest uppercase text-[#c85a32]">
+            <span className="w-2.5 h-2.5 rounded-full bg-[#231f20] animate-pulse" />
+            <span className="text-2xs font-extrabold tracking-widest uppercase text-[#bd3227]">
               منظومة تدبير شؤون الأعضاء والانخراط
             </span>
           </div>
-          <h1 className="text-2xl sm:text-3xl font-black text-[#08242a]">
+          <h1 className="text-2xl sm:text-3xl font-black text-[#231f20]">
             إدارة العضوية والانخراط السنوي
           </h1>
-          <p className="text-xs text-[#5f7174] mt-1 font-medium max-w-2xl">
+          <p className="text-xs text-[#5C5A55] mt-1 font-medium max-w-2xl">
             متابعة طلبات الانخراط الواردة، مراجعة فئات وبطاقات العضوية، وتخصيص محتوى واجهة العضوية العامة باللغات الثلاث.
           </p>
         </div>
@@ -465,7 +465,7 @@ export function MembershipsAdminTabs({
             href="/ar/membership"
             target="_blank"
             rel="noopener noreferrer"
-            className="px-4 py-2 rounded-xl text-xs font-bold text-[#0d3b43] bg-white border border-[#0d3b43]/30 hover:bg-[#0d3b43]/5 transition-all flex items-center gap-1.5 shadow-2xs"
+            className="px-4 py-2 rounded-xl text-xs font-bold text-[#231f20] bg-white border border-[#231f20]/30 hover:bg-[#231f20]/5 transition-all flex items-center gap-1.5 shadow-2xs"
           >
             <span>معاينة الصفحة العامة</span>
             <span className="text-3xs">↗</span>
@@ -474,7 +474,7 @@ export function MembershipsAdminTabs({
           <button
             onClick={handleSaveAll}
             disabled={savingConfig}
-            className="px-5 py-2.5 rounded-xl text-xs font-bold bg-[#0d3b43] text-white hover:bg-[#14505b] active:scale-98 transition-all disabled:opacity-50 flex items-center gap-2 shadow-sm cursor-pointer"
+            className="px-5 py-2.5 rounded-xl text-xs font-bold bg-[#231f20] text-white hover:bg-[#d2a82b] active:scale-98 transition-all disabled:opacity-50 flex items-center gap-2 shadow-sm cursor-pointer"
           >
             {savingConfig ? (
               <>
@@ -514,13 +514,13 @@ export function MembershipsAdminTabs({
       )}
 
       {/* Main Tabs Segment Control */}
-      <div className="bg-[#f0ebe1] p-1.5 rounded-2xl flex flex-wrap gap-1 border border-[#e5e0d6]">
+      <div className="bg-[#FEF6CC] p-1.5 rounded-2xl flex flex-wrap gap-1 border border-[#e5e0d6]">
         <button
           onClick={() => setActiveTab('applications')}
           className={`flex-1 min-w-[160px] py-3 px-4 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 cursor-pointer ${
             activeTab === 'applications'
-              ? 'bg-white text-[#08242a] shadow-2xs'
-              : 'text-[#5f7174] hover:text-[#08242a]'
+              ? 'bg-white text-[#231f20] shadow-2xs'
+              : 'text-[#5C5A55] hover:text-[#231f20]'
           }`}
         >
           <span>📋</span>
@@ -528,8 +528,8 @@ export function MembershipsAdminTabs({
           <span
             className={`px-2 py-0.5 rounded-full text-3xs font-black ${
               activeTab === 'applications'
-                ? 'bg-[#0d3b43] text-white'
-                : 'bg-[#e5e0d6] text-[#5f7174]'
+                ? 'bg-[#231f20] text-white'
+                : 'bg-[#e5e0d6] text-[#5C5A55]'
             }`}
           >
             {totalAppsCount}
@@ -540,15 +540,15 @@ export function MembershipsAdminTabs({
           onClick={() => setActiveTab('tiers')}
           className={`flex-1 min-w-[160px] py-3 px-4 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 cursor-pointer ${
             activeTab === 'tiers'
-              ? 'bg-white text-[#08242a] shadow-2xs'
-              : 'text-[#5f7174] hover:text-[#08242a]'
+              ? 'bg-white text-[#231f20] shadow-2xs'
+              : 'text-[#5C5A55] hover:text-[#231f20]'
           }`}
         >
           <span>💳</span>
           <span>فئات وبطاقات الانخراط</span>
           <span
             className={`px-2 py-0.5 rounded-full text-3xs font-black ${
-              activeTab === 'tiers' ? 'bg-[#c85a32] text-white' : 'bg-[#e5e0d6] text-[#5f7174]'
+              activeTab === 'tiers' ? 'bg-[#bd3227] text-white' : 'bg-[#e5e0d6] text-[#5C5A55]'
             }`}
           >
             {(config.tiers || []).length}
@@ -559,8 +559,8 @@ export function MembershipsAdminTabs({
           onClick={() => setActiveTab('page-settings')}
           className={`flex-1 min-w-[160px] py-3 px-4 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 cursor-pointer ${
             activeTab === 'page-settings'
-              ? 'bg-white text-[#08242a] shadow-2xs'
-              : 'text-[#5f7174] hover:text-[#08242a]'
+              ? 'bg-white text-[#231f20] shadow-2xs'
+              : 'text-[#5C5A55] hover:text-[#231f20]'
           }`}
         >
           <span>🎨</span>
@@ -576,12 +576,12 @@ export function MembershipsAdminTabs({
           {/* Metrics Counters */}
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
             <div className="p-4 rounded-2xl bg-white border border-[#e5e0d6] shadow-2xs flex items-center gap-3">
-              <span className="w-10 h-10 rounded-xl bg-[#0d3b43]/10 text-[#0d3b43] flex items-center justify-center text-lg font-bold">
+              <span className="w-10 h-10 rounded-xl bg-[#231f20]/10 text-[#231f20] flex items-center justify-center text-lg font-bold">
                 📥
               </span>
               <div>
-                <div className="text-xl font-black text-[#08242a]">{totalAppsCount}</div>
-                <div className="text-3xs text-[#5f7174] font-bold">إجمالي الطلبات المسجلة</div>
+                <div className="text-xl font-black text-[#231f20]">{totalAppsCount}</div>
+                <div className="text-3xs text-[#5C5A55] font-bold">إجمالي الطلبات المسجلة</div>
               </div>
             </div>
 
@@ -591,7 +591,7 @@ export function MembershipsAdminTabs({
               </span>
               <div>
                 <div className="text-xl font-black text-amber-700">{pendingAppsCount}</div>
-                <div className="text-3xs text-[#5f7174] font-bold">قيد الدراسة والمراجعة</div>
+                <div className="text-3xs text-[#5C5A55] font-bold">قيد الدراسة والمراجعة</div>
               </div>
             </div>
 
@@ -601,7 +601,7 @@ export function MembershipsAdminTabs({
               </span>
               <div>
                 <div className="text-xl font-black text-emerald-700">{approvedAppsCount}</div>
-                <div className="text-3xs text-[#5f7174] font-bold">طلبات مقبولة ومعتمدة</div>
+                <div className="text-3xs text-[#5C5A55] font-bold">طلبات مقبولة ومعتمدة</div>
               </div>
             </div>
 
@@ -611,7 +611,7 @@ export function MembershipsAdminTabs({
               </span>
               <div>
                 <div className="text-xl font-black text-red-700">{rejectedAppsCount}</div>
-                <div className="text-3xs text-[#5f7174] font-bold">طلبات مرفوضة أو ملغاة</div>
+                <div className="text-3xs text-[#5C5A55] font-bold">طلبات مرفوضة أو ملغاة</div>
               </div>
             </div>
           </div>
@@ -625,7 +625,7 @@ export function MembershipsAdminTabs({
                   value={searchApplication}
                   onChange={(e) => setSearchApplication(e.target.value)}
                   placeholder="بحث بالاسم، البريد، الهاتف، المدينة، المهنة أو الدافع..."
-                  className="w-full pl-4 pr-10 py-2.5 rounded-xl border border-[#e5e0d6] text-xs outline-none focus:border-[#0d3b43] bg-[#faf7f2]"
+                  className="w-full pl-4 pr-10 py-2.5 rounded-xl border border-[#e5e0d6] text-xs outline-none focus:border-[#231f20] bg-[#F5F3EE]"
                 />
                 <span className="absolute right-3.5 top-2.5 text-slate-400">🔍</span>
               </div>
@@ -633,7 +633,7 @@ export function MembershipsAdminTabs({
               <select
                 value={statusFilter}
                 onChange={(e) => setStatusFilter(e.target.value)}
-                className="px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs font-bold text-[#08242a] bg-[#faf7f2] outline-none"
+                className="px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs font-bold text-[#231f20] bg-[#F5F3EE] outline-none"
               >
                 <option value="all">كل الحالات ({totalAppsCount})</option>
                 <option value="pending">قيد الانتظار ({pendingAppsCount})</option>
@@ -650,8 +650,8 @@ export function MembershipsAdminTabs({
           {/* Applications Table */}
           <div className="bg-white rounded-2xl border border-[#e5e0d6] overflow-hidden shadow-2xs">
             <div className="overflow-x-auto">
-              <table className="w-full text-start text-xs text-[#2d3b3e]">
-                <thead className="bg-[#faf7f2] border-b border-[#e5e0d6] text-2xs uppercase tracking-wider text-[#5f7174] font-bold">
+              <table className="w-full text-start text-xs text-[#231f20]">
+                <thead className="bg-[#F5F3EE] border-b border-[#e5e0d6] text-2xs uppercase tracking-wider text-[#5C5A55] font-bold">
                   <tr>
                     <th className="px-6 py-4 text-start">المترشح للعضوية</th>
                     <th className="px-6 py-4 text-start">المدينة / المهنة</th>
@@ -661,22 +661,22 @@ export function MembershipsAdminTabs({
                     <th className="px-6 py-4 text-center">الإجراءات</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-[#f4ede2]">
+                <tbody className="divide-y divide-[#FEF6CC]">
                   {filteredApplications.length > 0 ? (
                     filteredApplications.map((app) => (
-                      <tr key={app.id} className="hover:bg-[#faf7f2]/60 transition-colors">
+                      <tr key={app.id} className="hover:bg-[#F5F3EE]/60 transition-colors">
                         {/* Applicant details */}
                         <td className="px-6 py-4">
-                          <div className="font-bold text-[#08242a] text-xs">{app.full_name}</div>
+                          <div className="font-bold text-[#231f20] text-xs">{app.full_name}</div>
                           <a
                             href={`mailto:${app.email}`}
-                            className="text-3xs text-[#5f7174] hover:text-[#0d3b43] transition-colors block font-mono"
+                            className="text-3xs text-[#5C5A55] hover:text-[#231f20] transition-colors block font-mono"
                           >
                             {app.email}
                           </a>
                           <a
                             href={`tel:${app.phone}`}
-                            className="text-3xs text-[#819598] font-mono hover:text-[#0d3b43] transition-colors block"
+                            className="text-3xs text-[#5C5A55] font-mono hover:text-[#231f20] transition-colors block"
                             dir="ltr"
                           >
                             {app.phone}
@@ -685,8 +685,8 @@ export function MembershipsAdminTabs({
 
                         {/* City / Profession */}
                         <td className="px-6 py-4">
-                          <span className="font-semibold block text-[#08242a]">{app.city}</span>
-                          <span className="text-[#819598] text-3xs font-medium">
+                          <span className="font-semibold block text-[#231f20]">{app.city}</span>
+                          <span className="text-[#5C5A55] text-3xs font-medium">
                             {app.profession || '—'}
                           </span>
                         </td>
@@ -698,7 +698,7 @@ export function MembershipsAdminTabs({
                               app.interests.map((interest, idx) => (
                                 <span
                                   key={idx}
-                                  className="px-2 py-0.5 rounded-full text-3xs font-bold bg-[#faf7f2] border border-[#e5e0d6] text-[#0d3b43]"
+                                  className="px-2 py-0.5 rounded-full text-3xs font-bold bg-[#F5F3EE] border border-[#e5e0d6] text-[#231f20]"
                                 >
                                   {interest}
                                 </span>
@@ -712,7 +712,7 @@ export function MembershipsAdminTabs({
                         {/* Motivation */}
                         <td className="px-6 py-4 max-w-xs">
                           <p
-                            className="truncate text-[#445457] text-xs cursor-pointer hover:text-[#08242a]"
+                            className="truncate text-[#5C5A55] text-xs cursor-pointer hover:text-[#231f20]"
                             title={app.motivation}
                             onClick={() => setViewingApp(app)}
                           >
@@ -747,7 +747,7 @@ export function MembershipsAdminTabs({
                           <div className="flex items-center justify-center gap-1.5">
                             <button
                               onClick={() => setViewingApp(app)}
-                              className="px-2.5 py-1 rounded-lg text-2xs font-bold bg-[#faf7f2] text-[#08242a] hover:bg-[#eae2d3] border border-[#e5e0d6] transition-colors cursor-pointer"
+                              className="px-2.5 py-1 rounded-lg text-2xs font-bold bg-[#F5F3EE] text-[#231f20] hover:bg-[#FEF6CC] border border-[#e5e0d6] transition-colors cursor-pointer"
                               title="عرض بطاقة المترشح الكاملة"
                             >
                               عرض الملف
@@ -787,7 +787,7 @@ export function MembershipsAdminTabs({
                     ))
                   ) : (
                     <tr>
-                      <td colSpan={6} className="px-6 py-12 text-center text-[#819598]">
+                      <td colSpan={6} className="px-6 py-12 text-center text-[#5C5A55]">
                         لا توجد طلبات انخراط مطابقة لمعايير البحث الحالية.
                       </td>
                     </tr>
@@ -806,16 +806,16 @@ export function MembershipsAdminTabs({
         <div className="space-y-6">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-5 rounded-2xl border border-[#e5e0d6] shadow-2xs">
             <div>
-              <h2 className="text-base font-extrabold text-[#08242a]">
+              <h2 className="text-base font-extrabold text-[#231f20]">
                 فئات وبطاقات الانخراط السنوي
               </h2>
-              <p className="text-xs text-[#5f7174] mt-0.5">
+              <p className="text-xs text-[#5C5A55] mt-0.5">
                 تحديد واجبات الانخراط، الامتيازات الممنوحة، والشروط الخاصة بكل فئة من فئات العضوية في الجمعية.
               </p>
             </div>
             <button
               onClick={openAddTierModal}
-              className="px-4 py-2.5 rounded-xl text-xs font-bold bg-[#c85a32] text-white hover:bg-[#a94824] transition-all flex items-center justify-center gap-1.5 shadow-2xs cursor-pointer"
+              className="px-4 py-2.5 rounded-xl text-xs font-bold bg-[#bd3227] text-white hover:bg-[#a3261c] transition-all flex items-center justify-center gap-1.5 shadow-2xs cursor-pointer"
             >
               <span>+</span>
               <span>إضافة فئة عضوية جديدة</span>
@@ -829,7 +829,7 @@ export function MembershipsAdminTabs({
                 key={tier.id || idx}
                 className={`relative rounded-3xl p-6 transition-all border flex flex-col justify-between ${
                   tier.recommended
-                    ? 'bg-gradient-to-b from-[#faf7f2] via-white to-[#f7f2e9] border-[#c85a32] shadow-sm'
+                    ? 'bg-gradient-to-b from-[#F5F3EE] via-white to-[#F5F3EE] border-[#bd3227] shadow-sm'
                     : 'bg-white border-[#e5e0d6] shadow-2xs'
                 } ${!tier.active ? 'opacity-60 bg-slate-50' : ''}`}
               >
@@ -837,15 +837,15 @@ export function MembershipsAdminTabs({
                 <div>
                   <div className="flex items-center justify-between gap-2 mb-3">
                     <div className="flex items-center gap-2">
-                      <span className="w-2.5 h-2.5 rounded-full bg-[#0d3b43]" />
-                      <span className="text-3xs font-extrabold tracking-wider uppercase text-[#c85a32]">
+                      <span className="w-2.5 h-2.5 rounded-full bg-[#231f20]" />
+                      <span className="text-3xs font-extrabold tracking-wider uppercase text-[#bd3227]">
                         {tier.badgeAr || 'فئة معتمدة'}
                       </span>
                     </div>
 
                     <div className="flex items-center gap-1.5">
                       {tier.recommended && (
-                        <span className="px-2.5 py-0.5 rounded-full text-3xs font-black bg-[#c85a32] text-white shadow-2xs">
+                        <span className="px-2.5 py-0.5 rounded-full text-3xs font-black bg-[#bd3227] text-white shadow-2xs">
                           ⭐ الأكثر ترشيحاً
                         </span>
                       )}
@@ -861,24 +861,24 @@ export function MembershipsAdminTabs({
                     </div>
                   </div>
 
-                  <h3 className="text-xl font-black text-[#08242a] mb-2">{tier.nameAr}</h3>
+                  <h3 className="text-xl font-black text-[#231f20] mb-2">{tier.nameAr}</h3>
 
                   <div className="flex items-baseline gap-2 mb-4">
-                    <span className="text-2xl font-black text-[#0d3b43]">{tier.feeAr}</span>
-                    <span className="text-xs text-[#5f7174] font-medium">/ {tier.periodAr}</span>
+                    <span className="text-2xl font-black text-[#231f20]">{tier.feeAr}</span>
+                    <span className="text-xs text-[#5C5A55] font-medium">/ {tier.periodAr}</span>
                   </div>
 
-                  <p className="text-xs text-[#445457] leading-relaxed mb-5">
+                  <p className="text-xs text-[#5C5A55] leading-relaxed mb-5">
                     {tier.descriptionAr}
                   </p>
 
                   {/* Benefits checklist */}
-                  <div className="space-y-2 border-t border-[#f4ede2] pt-4 mb-6">
-                    <span className="text-2xs font-extrabold uppercase text-[#08242a] block mb-2">
+                  <div className="space-y-2 border-t border-[#FEF6CC] pt-4 mb-6">
+                    <span className="text-2xs font-extrabold uppercase text-[#231f20] block mb-2">
                       الامتيازات والصلاحيات القانونية:
                     </span>
                     {(tier.benefitsAr || []).map((b, bIdx) => (
-                      <div key={bIdx} className="flex items-start gap-2 text-xs text-[#2d3b3e]">
+                      <div key={bIdx} className="flex items-start gap-2 text-xs text-[#231f20]">
                         <span className="text-emerald-600 font-bold mt-0.5">✓</span>
                         <span className="leading-snug">{b}</span>
                       </div>
@@ -891,7 +891,7 @@ export function MembershipsAdminTabs({
                   <button
                     type="button"
                     onClick={() => handleToggleTierActive(tier.id)}
-                    className="text-2xs font-bold text-[#5f7174] hover:text-[#08242a] transition-colors cursor-pointer"
+                    className="text-2xs font-bold text-[#5C5A55] hover:text-[#231f20] transition-colors cursor-pointer"
                   >
                     {tier.active !== false ? 'إخفاء الفئة مؤقتاً' : 'تفعيل الفئة بالواجهة'}
                   </button>
@@ -900,7 +900,7 @@ export function MembershipsAdminTabs({
                     <button
                       type="button"
                       onClick={() => openEditTierModal(tier)}
-                      className="px-3 py-1.5 rounded-xl text-xs font-bold bg-[#0d3b43] text-white hover:bg-[#14505b] transition-all cursor-pointer shadow-2xs"
+                      className="px-3 py-1.5 rounded-xl text-xs font-bold bg-[#231f20] text-white hover:bg-[#d2a82b] transition-all cursor-pointer shadow-2xs"
                     >
                       تعديل
                     </button>
@@ -927,22 +927,22 @@ export function MembershipsAdminTabs({
           {/* Trilingual Switcher for CMS Fields */}
           <div className="bg-white p-4 rounded-2xl border border-[#e5e0d6] flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-2xs">
             <div>
-              <span className="text-2xs font-bold uppercase tracking-wider text-[#c85a32] block">
+              <span className="text-2xs font-bold uppercase tracking-wider text-[#bd3227] block">
                 تعدد اللغات والمحتوى
               </span>
-              <h2 className="text-sm font-black text-[#08242a]">
+              <h2 className="text-sm font-black text-[#231f20]">
                 اختر لغة التحرير والتعديل للواجهة
               </h2>
             </div>
 
-            <div className="flex items-center bg-[#f0ebe1] p-1 rounded-xl border border-[#e5e0d6]">
+            <div className="flex items-center bg-[#FEF6CC] p-1 rounded-xl border border-[#e5e0d6]">
               <button
                 type="button"
                 onClick={() => setActiveLangTab('ar')}
                 className={`px-4 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
                   activeLangTab === 'ar'
-                    ? 'bg-[#0d3b43] text-white shadow-2xs'
-                    : 'text-[#5f7174] hover:text-[#08242a]'
+                    ? 'bg-[#231f20] text-white shadow-2xs'
+                    : 'text-[#5C5A55] hover:text-[#231f20]'
                 }`}
               >
                 العربية
@@ -952,8 +952,8 @@ export function MembershipsAdminTabs({
                 onClick={() => setActiveLangTab('fr')}
                 className={`px-4 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
                   activeLangTab === 'fr'
-                    ? 'bg-[#0d3b43] text-white shadow-2xs'
-                    : 'text-[#5f7174] hover:text-[#08242a]'
+                    ? 'bg-[#231f20] text-white shadow-2xs'
+                    : 'text-[#5C5A55] hover:text-[#231f20]'
                 }`}
               >
                 Français
@@ -963,8 +963,8 @@ export function MembershipsAdminTabs({
                 onClick={() => setActiveLangTab('en')}
                 className={`px-4 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
                   activeLangTab === 'en'
-                    ? 'bg-[#0d3b43] text-white shadow-2xs'
-                    : 'text-[#5f7174] hover:text-[#08242a]'
+                    ? 'bg-[#231f20] text-white shadow-2xs'
+                    : 'text-[#5C5A55] hover:text-[#231f20]'
                 }`}
               >
                 English
@@ -974,12 +974,12 @@ export function MembershipsAdminTabs({
 
           {/* SECTION 1: HERO */}
           <div className="bg-white p-6 sm:p-8 rounded-3xl border border-[#e5e0d6] shadow-2xs space-y-6">
-            <div className="flex items-center justify-between border-b border-[#f4ede2] pb-4">
+            <div className="flex items-center justify-between border-b border-[#FEF6CC] pb-4">
               <div>
-                <span className="text-2xs font-bold uppercase tracking-wider text-[#c85a32]">
+                <span className="text-2xs font-bold uppercase tracking-wider text-[#bd3227]">
                   واجهة الترحيب
                 </span>
-                <h3 className="text-lg font-black text-[#08242a]">قسم البانر الرئيسي (Hero)</h3>
+                <h3 className="text-lg font-black text-[#231f20]">قسم البانر الرئيسي (Hero)</h3>
               </div>
               <span className="text-xs text-slate-400 font-mono">Hero Section</span>
             </div>
@@ -987,7 +987,7 @@ export function MembershipsAdminTabs({
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               {/* Tag / Category */}
               <div>
-                <label className="block text-2xs font-extrabold text-[#08242a] mb-1.5">
+                <label className="block text-2xs font-extrabold text-[#231f20] mb-1.5">
                   الوسم التعريفي العلوي ({activeLangTab.toUpperCase()})
                 </label>
                 <input
@@ -1005,13 +1005,13 @@ export function MembershipsAdminTabs({
                       e.target.value
                     )
                   }
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs bg-[#faf7f2] outline-none focus:border-[#0d3b43]"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE] outline-none focus:border-[#231f20]"
                 />
               </div>
 
               {/* Badge */}
               <div>
-                <label className="block text-2xs font-extrabold text-[#08242a] mb-1.5">
+                <label className="block text-2xs font-extrabold text-[#231f20] mb-1.5">
                   شارة التميز والمؤسسة ({activeLangTab.toUpperCase()})
                 </label>
                 <input
@@ -1029,13 +1029,13 @@ export function MembershipsAdminTabs({
                       e.target.value
                     )
                   }
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs bg-[#faf7f2] outline-none focus:border-[#0d3b43]"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE] outline-none focus:border-[#231f20]"
                 />
               </div>
 
               {/* Main Title */}
               <div className="sm:col-span-2">
-                <label className="block text-2xs font-extrabold text-[#08242a] mb-1.5">
+                <label className="block text-2xs font-extrabold text-[#231f20] mb-1.5">
                   العنوان الرئيسي الكبير ({activeLangTab.toUpperCase()})
                 </label>
                 <input
@@ -1053,13 +1053,13 @@ export function MembershipsAdminTabs({
                       e.target.value
                     )
                   }
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs bg-[#faf7f2] font-bold outline-none focus:border-[#0d3b43]"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE] font-bold outline-none focus:border-[#231f20]"
                 />
               </div>
 
               {/* Subtitle */}
               <div className="sm:col-span-2">
-                <label className="block text-2xs font-extrabold text-[#08242a] mb-1.5">
+                <label className="block text-2xs font-extrabold text-[#231f20] mb-1.5">
                   العنوان الفرعي الإيضاحي ({activeLangTab.toUpperCase()})
                 </label>
                 <textarea
@@ -1077,13 +1077,13 @@ export function MembershipsAdminTabs({
                       e.target.value
                     )
                   }
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs bg-[#faf7f2] outline-none focus:border-[#0d3b43]"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE] outline-none focus:border-[#231f20]"
                 />
               </div>
 
               {/* Detailed Description */}
               <div className="sm:col-span-2">
-                <label className="block text-2xs font-extrabold text-[#08242a] mb-1.5">
+                <label className="block text-2xs font-extrabold text-[#231f20] mb-1.5">
                   النص التعريفي التفصيلي بميثاق العضوية ({activeLangTab.toUpperCase()})
                 </label>
                 <textarea
@@ -1101,13 +1101,13 @@ export function MembershipsAdminTabs({
                       e.target.value
                     )
                   }
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs bg-[#faf7f2] outline-none focus:border-[#0d3b43]"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE] outline-none focus:border-[#231f20]"
                 />
               </div>
 
               {/* Hero Image */}
-              <div className="sm:col-span-2 pt-2 border-t border-[#f4ede2]">
-                <label className="block text-2xs font-extrabold text-[#08242a] mb-1.5">
+              <div className="sm:col-span-2 pt-2 border-t border-[#FEF6CC]">
+                <label className="block text-2xs font-extrabold text-[#231f20] mb-1.5">
                   صورة الغلاف البانورامي (Hero Image)
                 </label>
                 <input
@@ -1123,13 +1123,13 @@ export function MembershipsAdminTabs({
                     value={config.hero.imageUrl}
                     onChange={(e) => updateHero('imageUrl', e.target.value)}
                     placeholder="https://images.unsplash.com/... أو مسار الصورة"
-                    className="flex-1 px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs font-mono bg-[#faf7f2] outline-none"
+                    className="flex-1 px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs font-mono bg-[#F5F3EE] outline-none"
                   />
                   <button
                     type="button"
                     disabled={uploadingImage}
                     onClick={() => heroFileInputRef.current?.click()}
-                    className="px-4 py-2.5 bg-[#0d3b43] text-white text-xs font-bold rounded-xl hover:bg-[#14505b] active:scale-98 transition-all disabled:opacity-50 flex items-center justify-center gap-1.5 shrink-0 cursor-pointer shadow-2xs"
+                    className="px-4 py-2.5 bg-[#231f20] text-white text-xs font-bold rounded-xl hover:bg-[#d2a82b] active:scale-98 transition-all disabled:opacity-50 flex items-center justify-center gap-1.5 shrink-0 cursor-pointer shadow-2xs"
                   >
                     <span>{uploadingImage ? '⏳' : '📁'}</span>
                     <span>{uploadingImage ? 'جاري التحميل...' : 'رفع صورة من الجهاز'}</span>
@@ -1150,7 +1150,7 @@ export function MembershipsAdminTabs({
 
               {/* Primary & Secondary Buttons */}
               <div>
-                <label className="block text-2xs font-extrabold text-[#08242a] mb-1.5">
+                <label className="block text-2xs font-extrabold text-[#231f20] mb-1.5">
                   نص الزر الرئيسي ({activeLangTab.toUpperCase()})
                 </label>
                 <input
@@ -1172,12 +1172,12 @@ export function MembershipsAdminTabs({
                       e.target.value
                     )
                   }
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs bg-[#faf7f2] outline-none"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE] outline-none"
                 />
               </div>
 
               <div>
-                <label className="block text-2xs font-extrabold text-[#08242a] mb-1.5">
+                <label className="block text-2xs font-extrabold text-[#231f20] mb-1.5">
                   رابط الزر الرئيسي (Anchor Link)
                 </label>
                 <input
@@ -1185,7 +1185,7 @@ export function MembershipsAdminTabs({
                   value={config.hero.primaryBtnUrl}
                   onChange={(e) => updateHero('primaryBtnUrl', e.target.value)}
                   placeholder="#membership-form"
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs font-mono bg-[#faf7f2] outline-none"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs font-mono bg-[#F5F3EE] outline-none"
                 />
               </div>
             </div>
@@ -1193,18 +1193,18 @@ export function MembershipsAdminTabs({
 
           {/* SECTION 2: STATS */}
           <div className="bg-white p-6 sm:p-8 rounded-3xl border border-[#e5e0d6] shadow-2xs space-y-6">
-            <div className="border-b border-[#f4ede2] pb-4">
-              <span className="text-2xs font-bold uppercase tracking-wider text-[#c85a32]">
+            <div className="border-b border-[#FEF6CC] pb-4">
+              <span className="text-2xs font-bold uppercase tracking-wider text-[#bd3227]">
                 أرقام ومؤشرات الانخراط
               </span>
-              <h3 className="text-lg font-black text-[#08242a]">
+              <h3 className="text-lg font-black text-[#231f20]">
                 المؤشرات الثلاثة الكبرى (Key Metrics)
               </h3>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
               {(config.stats || []).map((stat, idx) => (
-                <div key={stat.id || idx} className="p-4 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6] space-y-3">
+                <div key={stat.id || idx} className="p-4 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6] space-y-3">
                   <div className="flex items-center gap-2">
                     <input
                       type="text"
@@ -1218,12 +1218,12 @@ export function MembershipsAdminTabs({
                       value={stat.value}
                       onChange={(e) => updateStat(idx, { value: e.target.value })}
                       placeholder="القيمة مثل +250"
-                      className="flex-1 px-3 py-1.5 text-sm font-black text-[#0d3b43] rounded-lg border border-[#e5e0d6] bg-white"
+                      className="flex-1 px-3 py-1.5 text-sm font-black text-[#231f20] rounded-lg border border-[#e5e0d6] bg-white"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-3xs font-bold text-[#5f7174] mb-1">
+                    <label className="block text-3xs font-bold text-[#5C5A55] mb-1">
                       الوصف ({activeLangTab.toUpperCase()})
                     </label>
                     <input
@@ -1254,18 +1254,18 @@ export function MembershipsAdminTabs({
 
           {/* SECTION 3: BENEFITS */}
           <div className="bg-white p-6 sm:p-8 rounded-3xl border border-[#e5e0d6] shadow-2xs space-y-6">
-            <div className="border-b border-[#f4ede2] pb-4">
-              <span className="text-2xs font-bold uppercase tracking-wider text-[#c85a32]">
+            <div className="border-b border-[#FEF6CC] pb-4">
+              <span className="text-2xs font-bold uppercase tracking-wider text-[#bd3227]">
                 مزايا وحقوق العضو
               </span>
-              <h3 className="text-lg font-black text-[#08242a]">
+              <h3 className="text-lg font-black text-[#231f20]">
                 شبكة الامتيازات الستة (Benefits Grid)
               </h3>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
               {(config.benefits || []).map((b, idx) => (
-                <div key={b.id || idx} className="p-4 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6] space-y-3">
+                <div key={b.id || idx} className="p-4 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6] space-y-3">
                   <div className="flex items-center gap-2">
                     <input
                       type="text"
@@ -1292,7 +1292,7 @@ export function MembershipsAdminTabs({
                         })
                       }
                       placeholder="عنوان الامتياز"
-                      className="flex-1 px-3 py-1.5 text-xs font-bold text-[#08242a] rounded-lg border border-[#e5e0d6] bg-white"
+                      className="flex-1 px-3 py-1.5 text-xs font-bold text-[#231f20] rounded-lg border border-[#e5e0d6] bg-white"
                     />
                   </div>
 
@@ -1324,19 +1324,19 @@ export function MembershipsAdminTabs({
 
           {/* SECTION 4: STEPS */}
           <div className="bg-white p-6 sm:p-8 rounded-3xl border border-[#e5e0d6] shadow-2xs space-y-6">
-            <div className="border-b border-[#f4ede2] pb-4">
-              <span className="text-2xs font-bold uppercase tracking-wider text-[#c85a32]">
+            <div className="border-b border-[#FEF6CC] pb-4">
+              <span className="text-2xs font-bold uppercase tracking-wider text-[#bd3227]">
                 مسار العضوية
               </span>
-              <h3 className="text-lg font-black text-[#08242a]">
+              <h3 className="text-lg font-black text-[#231f20]">
                 المراحل الأربعة لقبول الانخراط (4-Step Admission)
               </h3>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
               {(config.steps || []).map((s, idx) => (
-                <div key={s.id || idx} className="p-4 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6] space-y-3">
-                  <div className="w-7 h-7 rounded-full bg-[#0d3b43] text-white flex items-center justify-center font-bold text-xs">
+                <div key={s.id || idx} className="p-4 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6] space-y-3">
+                  <div className="w-7 h-7 rounded-full bg-[#231f20] text-white flex items-center justify-center font-bold text-xs">
                     {idx + 1}
                   </div>
                   <input
@@ -1386,18 +1386,18 @@ export function MembershipsAdminTabs({
 
           {/* SECTION 5: REQUIREMENTS */}
           <div className="bg-white p-6 sm:p-8 rounded-3xl border border-[#e5e0d6] shadow-2xs space-y-6">
-            <div className="border-b border-[#f4ede2] pb-4">
-              <span className="text-2xs font-bold uppercase tracking-wider text-[#c85a32]">
+            <div className="border-b border-[#FEF6CC] pb-4">
+              <span className="text-2xs font-bold uppercase tracking-wider text-[#bd3227]">
                 الشروط القانونية
               </span>
-              <h3 className="text-lg font-black text-[#08242a]">
+              <h3 className="text-lg font-black text-[#231f20]">
                 معايير وشروط الانخراط المنصوص عليها
               </h3>
             </div>
 
             <div className="space-y-4">
               <div>
-                <label className="block text-2xs font-extrabold text-[#08242a] mb-1.5">
+                <label className="block text-2xs font-extrabold text-[#231f20] mb-1.5">
                   عنوان فقرة الشروط ({activeLangTab.toUpperCase()})
                 </label>
                 <input
@@ -1422,12 +1422,12 @@ export function MembershipsAdminTabs({
                       },
                     }))
                   }
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs bg-[#faf7f2] font-bold"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE] font-bold"
                 />
               </div>
 
               <div>
-                <label className="block text-2xs font-extrabold text-[#08242a] mb-1.5">
+                <label className="block text-2xs font-extrabold text-[#231f20] mb-1.5">
                   بنود الشروط (سطر لكل بند) ({activeLangTab.toUpperCase()})
                 </label>
                 <textarea
@@ -1456,7 +1456,7 @@ export function MembershipsAdminTabs({
                       },
                     }))
                   }}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs bg-[#faf7f2] outline-none"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE] outline-none"
                 />
               </div>
             </div>
@@ -1464,18 +1464,18 @@ export function MembershipsAdminTabs({
 
           {/* SECTION 6: CTA / SUPPORT */}
           <div className="bg-white p-6 sm:p-8 rounded-3xl border border-[#e5e0d6] shadow-2xs space-y-6">
-            <div className="border-b border-[#f4ede2] pb-4">
-              <span className="text-2xs font-bold uppercase tracking-wider text-[#c85a32]">
+            <div className="border-b border-[#FEF6CC] pb-4">
+              <span className="text-2xs font-bold uppercase tracking-wider text-[#bd3227]">
                 المساعدة والتواصل
               </span>
-              <h3 className="text-lg font-black text-[#08242a]">
+              <h3 className="text-lg font-black text-[#231f20]">
                 صندوق الاستفسار والدعم (Inquiry CTA)
               </h3>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               <div>
-                <label className="block text-2xs font-extrabold text-[#08242a] mb-1.5">
+                <label className="block text-2xs font-extrabold text-[#231f20] mb-1.5">
                   شارة الصندوق ({activeLangTab.toUpperCase()})
                 </label>
                 <input
@@ -1493,12 +1493,12 @@ export function MembershipsAdminTabs({
                       e.target.value
                     )
                   }
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs bg-[#faf7f2]"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE]"
                 />
               </div>
 
               <div>
-                <label className="block text-2xs font-extrabold text-[#08242a] mb-1.5">
+                <label className="block text-2xs font-extrabold text-[#231f20] mb-1.5">
                   عنوان الصندوق ({activeLangTab.toUpperCase()})
                 </label>
                 <input
@@ -1516,12 +1516,12 @@ export function MembershipsAdminTabs({
                       e.target.value
                     )
                   }
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs bg-[#faf7f2] font-bold"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE] font-bold"
                 />
               </div>
 
               <div className="sm:col-span-2">
-                <label className="block text-2xs font-extrabold text-[#08242a] mb-1.5">
+                <label className="block text-2xs font-extrabold text-[#231f20] mb-1.5">
                   نص الدعم والمساعدة ({activeLangTab.toUpperCase()})
                 </label>
                 <textarea
@@ -1543,31 +1543,31 @@ export function MembershipsAdminTabs({
                       e.target.value
                     )
                   }
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs bg-[#faf7f2]"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE]"
                 />
               </div>
 
               <div>
-                <label className="block text-2xs font-extrabold text-[#08242a] mb-1.5">
+                <label className="block text-2xs font-extrabold text-[#231f20] mb-1.5">
                   البريد الإلكتروني للرد
                 </label>
                 <input
                   type="email"
                   value={config.cta.email}
                   onChange={(e) => updateCta('email', e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs bg-[#faf7f2]"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE]"
                 />
               </div>
 
               <div>
-                <label className="block text-2xs font-extrabold text-[#08242a] mb-1.5">
+                <label className="block text-2xs font-extrabold text-[#231f20] mb-1.5">
                   الهاتف للتواصل المباشر
                 </label>
                 <input
                   type="text"
                   value={config.cta.phone}
                   onChange={(e) => updateCta('phone', e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs bg-[#faf7f2]"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE]"
                 />
               </div>
             </div>
@@ -1579,7 +1579,7 @@ export function MembershipsAdminTabs({
       <div className="sticky bottom-4 z-40 bg-white/95 backdrop-blur-md p-4 rounded-2xl border border-[#e5e0d6] shadow-xl flex items-center justify-between gap-4">
         <div className="flex items-center gap-2">
           <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
-          <span className="text-xs font-bold text-[#08242a]">
+          <span className="text-xs font-bold text-[#231f20]">
             لوحة تحكم العضوية جاهزة للحفظ المباشر
           </span>
         </div>
@@ -1588,7 +1588,7 @@ export function MembershipsAdminTabs({
           <button
             type="button"
             onClick={() => setConfig(initialConfig)}
-            className="px-4 py-2 rounded-xl text-xs font-bold text-[#5f7174] hover:text-[#08242a] transition-colors cursor-pointer"
+            className="px-4 py-2 rounded-xl text-xs font-bold text-[#5C5A55] hover:text-[#231f20] transition-colors cursor-pointer"
           >
             إلغاء التغييرات
           </button>
@@ -1597,7 +1597,7 @@ export function MembershipsAdminTabs({
             type="button"
             onClick={handleSaveAll}
             disabled={savingConfig}
-            className="px-6 py-2.5 rounded-xl text-xs font-bold bg-[#0d3b43] text-white hover:bg-[#14505b] active:scale-98 transition-all disabled:opacity-50 flex items-center gap-2 shadow-sm cursor-pointer"
+            className="px-6 py-2.5 rounded-xl text-xs font-bold bg-[#231f20] text-white hover:bg-[#d2a82b] active:scale-98 transition-all disabled:opacity-50 flex items-center gap-2 shadow-sm cursor-pointer"
           >
             {savingConfig ? (
               <>
@@ -1620,55 +1620,55 @@ export function MembershipsAdminTabs({
       {viewingApp && (
         <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
           <div className="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto border border-[#e5e0d6] shadow-2xl p-6 sm:p-8 space-y-6">
-            <div className="flex items-center justify-between border-b border-[#f4ede2] pb-4">
+            <div className="flex items-center justify-between border-b border-[#FEF6CC] pb-4">
               <div>
-                <span className="text-2xs font-extrabold uppercase tracking-widest text-[#c85a32]">
+                <span className="text-2xs font-extrabold uppercase tracking-widest text-[#bd3227]">
                   بطاقة فحص طلب الانخراط
                 </span>
-                <h3 className="text-xl font-black text-[#08242a]">{viewingApp.full_name}</h3>
+                <h3 className="text-xl font-black text-[#231f20]">{viewingApp.full_name}</h3>
               </div>
               <button
                 onClick={() => setViewingApp(null)}
-                className="w-8 h-8 rounded-full bg-[#faf7f2] hover:bg-[#eae2d3] flex items-center justify-center text-sm font-bold text-[#08242a] cursor-pointer"
+                className="w-8 h-8 rounded-full bg-[#F5F3EE] hover:bg-[#FEF6CC] flex items-center justify-center text-sm font-bold text-[#231f20] cursor-pointer"
               >
                 ✕
               </button>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
-              <div className="p-3.5 rounded-xl bg-[#faf7f2] border border-[#e5e0d6]">
-                <span className="text-3xs text-[#819598] font-bold block mb-1">
+              <div className="p-3.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6]">
+                <span className="text-3xs text-[#5C5A55] font-bold block mb-1">
                   البريد الإلكتروني
                 </span>
                 <a
                   href={`mailto:${viewingApp.email}`}
-                  className="font-bold text-[#0d3b43] hover:underline"
+                  className="font-bold text-[#231f20] hover:underline"
                 >
                   {viewingApp.email}
                 </a>
               </div>
 
-              <div className="p-3.5 rounded-xl bg-[#faf7f2] border border-[#e5e0d6]">
-                <span className="text-3xs text-[#819598] font-bold block mb-1">الهاتف</span>
+              <div className="p-3.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6]">
+                <span className="text-3xs text-[#5C5A55] font-bold block mb-1">الهاتف</span>
                 <a
                   href={`tel:${viewingApp.phone}`}
-                  className="font-bold text-[#0d3b43] hover:underline font-mono"
+                  className="font-bold text-[#231f20] hover:underline font-mono"
                   dir="ltr"
                 >
                   {viewingApp.phone}
                 </a>
               </div>
 
-              <div className="p-3.5 rounded-xl bg-[#faf7f2] border border-[#e5e0d6]">
-                <span className="text-3xs text-[#819598] font-bold block mb-1">المدينة</span>
-                <span className="font-bold text-[#08242a]">{viewingApp.city}</span>
+              <div className="p-3.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6]">
+                <span className="text-3xs text-[#5C5A55] font-bold block mb-1">المدينة</span>
+                <span className="font-bold text-[#231f20]">{viewingApp.city}</span>
               </div>
 
-              <div className="p-3.5 rounded-xl bg-[#faf7f2] border border-[#e5e0d6]">
-                <span className="text-3xs text-[#819598] font-bold block mb-1">
+              <div className="p-3.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6]">
+                <span className="text-3xs text-[#5C5A55] font-bold block mb-1">
                   المهنة أو التخصص
                 </span>
-                <span className="font-bold text-[#08242a]">
+                <span className="font-bold text-[#231f20]">
                   {viewingApp.profession || 'غير محدد'}
                 </span>
               </div>
@@ -1676,7 +1676,7 @@ export function MembershipsAdminTabs({
 
             {/* Interests tags */}
             <div>
-              <span className="text-2xs font-extrabold uppercase text-[#08242a] block mb-2">
+              <span className="text-2xs font-extrabold uppercase text-[#231f20] block mb-2">
                 المجالات الفنية والاهتمامات المختارة:
               </span>
               <div className="flex flex-wrap gap-1.5">
@@ -1684,7 +1684,7 @@ export function MembershipsAdminTabs({
                   viewingApp.interests.map((it, idx) => (
                     <span
                       key={idx}
-                      className="px-3 py-1 rounded-full text-2xs font-bold bg-[#faf7f2] border border-[#e5e0d6] text-[#0d3b43]"
+                      className="px-3 py-1 rounded-full text-2xs font-bold bg-[#F5F3EE] border border-[#e5e0d6] text-[#231f20]"
                     >
                       {it}
                     </span>
@@ -1696,19 +1696,19 @@ export function MembershipsAdminTabs({
             </div>
 
             {/* Motivation statement */}
-            <div className="p-4 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6] space-y-2">
-              <span className="text-2xs font-extrabold text-[#08242a] block">
+            <div className="p-4 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6] space-y-2">
+              <span className="text-2xs font-extrabold text-[#231f20] block">
                 دوافع الانخراط ورسالة المترشح:
               </span>
-              <p className="text-xs text-[#2d3b3e] leading-relaxed whitespace-pre-line font-medium">
+              <p className="text-xs text-[#231f20] leading-relaxed whitespace-pre-line font-medium">
                 {viewingApp.motivation}
               </p>
             </div>
 
             {/* Current Status and Modal Actions */}
-            <div className="flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-[#f4ede2]">
+            <div className="flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-[#FEF6CC]">
               <div className="flex items-center gap-2">
-                <span className="text-2xs font-bold text-[#5f7174]">الحالة الحالية:</span>
+                <span className="text-2xs font-bold text-[#5C5A55]">الحالة الحالية:</span>
                 <span
                   className={`px-3 py-1 rounded-full text-2xs font-bold ${
                     viewingApp.status === 'approved'
@@ -1766,12 +1766,12 @@ export function MembershipsAdminTabs({
       {(isAddingTier || editingTier) && (
         <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
           <div className="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto border border-[#e5e0d6] shadow-2xl p-6 sm:p-8 space-y-6">
-            <div className="flex items-center justify-between border-b border-[#f4ede2] pb-4">
+            <div className="flex items-center justify-between border-b border-[#FEF6CC] pb-4">
               <div>
-                <span className="text-2xs font-extrabold uppercase tracking-widest text-[#c85a32]">
+                <span className="text-2xs font-extrabold uppercase tracking-widest text-[#bd3227]">
                   {editingTier ? 'تعديل فئة عضوية' : 'إضافة فئة عضوية جديدة'}
                 </span>
-                <h3 className="text-xl font-black text-[#08242a]">
+                <h3 className="text-xl font-black text-[#231f20]">
                   {editingTier ? tierForm.nameAr || 'تعديل الفئة' : 'فئة عضوية جديدة'}
                 </h3>
               </div>
@@ -1780,7 +1780,7 @@ export function MembershipsAdminTabs({
                   setEditingTier(null)
                   setIsAddingTier(false)
                 }}
-                className="w-8 h-8 rounded-full bg-[#faf7f2] hover:bg-[#eae2d3] flex items-center justify-center text-sm font-bold text-[#08242a] cursor-pointer"
+                className="w-8 h-8 rounded-full bg-[#F5F3EE] hover:bg-[#FEF6CC] flex items-center justify-center text-sm font-bold text-[#231f20] cursor-pointer"
               >
                 ✕
               </button>
@@ -1790,7 +1790,7 @@ export function MembershipsAdminTabs({
               {/* Names */}
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <div>
-                  <label className="block text-2xs font-extrabold text-[#08242a] mb-1">
+                  <label className="block text-2xs font-extrabold text-[#231f20] mb-1">
                     مسمى الفئة (العربية) *
                   </label>
                   <input
@@ -1798,11 +1798,11 @@ export function MembershipsAdminTabs({
                     value={tierForm.nameAr}
                     onChange={(e) => setTierForm((p) => ({ ...p, nameAr: e.target.value }))}
                     placeholder="مثال: عضو فاعل وممارس"
-                    className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#faf7f2] font-bold"
+                    className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE] font-bold"
                   />
                 </div>
                 <div>
-                  <label className="block text-2xs font-extrabold text-[#08242a] mb-1">
+                  <label className="block text-2xs font-extrabold text-[#231f20] mb-1">
                     (Français)
                   </label>
                   <input
@@ -1810,11 +1810,11 @@ export function MembershipsAdminTabs({
                     value={tierForm.nameFr}
                     onChange={(e) => setTierForm((p) => ({ ...p, nameFr: e.target.value }))}
                     placeholder="Ex: Membre Actif"
-                    className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#faf7f2]"
+                    className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE]"
                   />
                 </div>
                 <div>
-                  <label className="block text-2xs font-extrabold text-[#08242a] mb-1">
+                  <label className="block text-2xs font-extrabold text-[#231f20] mb-1">
                     (English)
                   </label>
                   <input
@@ -1822,7 +1822,7 @@ export function MembershipsAdminTabs({
                     value={tierForm.nameEn}
                     onChange={(e) => setTierForm((p) => ({ ...p, nameEn: e.target.value }))}
                     placeholder="Ex: Active Member"
-                    className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#faf7f2]"
+                    className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE]"
                   />
                 </div>
               </div>
@@ -1830,7 +1830,7 @@ export function MembershipsAdminTabs({
               {/* Fee & Period */}
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                 <div>
-                  <label className="block text-2xs font-extrabold text-[#08242a] mb-1">
+                  <label className="block text-2xs font-extrabold text-[#231f20] mb-1">
                     الواجب (العربية)
                   </label>
                   <input
@@ -1838,11 +1838,11 @@ export function MembershipsAdminTabs({
                     value={tierForm.feeAr}
                     onChange={(e) => setTierForm((p) => ({ ...p, feeAr: e.target.value }))}
                     placeholder="200 درهم"
-                    className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#faf7f2]"
+                    className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE]"
                   />
                 </div>
                 <div>
-                  <label className="block text-2xs font-extrabold text-[#08242a] mb-1">
+                  <label className="block text-2xs font-extrabold text-[#231f20] mb-1">
                     الواجب (FR/EN)
                   </label>
                   <input
@@ -1852,11 +1852,11 @@ export function MembershipsAdminTabs({
                       setTierForm((p) => ({ ...p, feeFr: e.target.value, feeEn: e.target.value }))
                     }
                     placeholder="200 MAD"
-                    className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#faf7f2]"
+                    className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE]"
                   />
                 </div>
                 <div>
-                  <label className="block text-2xs font-extrabold text-[#08242a] mb-1">
+                  <label className="block text-2xs font-extrabold text-[#231f20] mb-1">
                     الدورية (العربية)
                   </label>
                   <input
@@ -1864,11 +1864,11 @@ export function MembershipsAdminTabs({
                     value={tierForm.periodAr}
                     onChange={(e) => setTierForm((p) => ({ ...p, periodAr: e.target.value }))}
                     placeholder="سنوياً"
-                    className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#faf7f2]"
+                    className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE]"
                   />
                 </div>
                 <div>
-                  <label className="block text-2xs font-extrabold text-[#08242a] mb-1">
+                  <label className="block text-2xs font-extrabold text-[#231f20] mb-1">
                     الدورية (FR/EN)
                   </label>
                   <input
@@ -1882,7 +1882,7 @@ export function MembershipsAdminTabs({
                       }))
                     }
                     placeholder="Par an"
-                    className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#faf7f2]"
+                    className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE]"
                   />
                 </div>
               </div>
@@ -1890,7 +1890,7 @@ export function MembershipsAdminTabs({
               {/* Badges */}
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <div>
-                  <label className="block text-2xs font-extrabold text-[#08242a] mb-1">
+                  <label className="block text-2xs font-extrabold text-[#231f20] mb-1">
                     شارة الفئة (العربية)
                   </label>
                   <input
@@ -1898,74 +1898,74 @@ export function MembershipsAdminTabs({
                     value={tierForm.badgeAr || ''}
                     onChange={(e) => setTierForm((p) => ({ ...p, badgeAr: e.target.value }))}
                     placeholder="الفئة الأكثر تميزاً"
-                    className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#faf7f2]"
+                    className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE]"
                   />
                 </div>
                 <div>
-                  <label className="block text-2xs font-extrabold text-[#08242a] mb-1">
+                  <label className="block text-2xs font-extrabold text-[#231f20] mb-1">
                     (Français)
                   </label>
                   <input
                     type="text"
                     value={tierForm.badgeFr || ''}
                     onChange={(e) => setTierForm((p) => ({ ...p, badgeFr: e.target.value }))}
-                    className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#faf7f2]"
+                    className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE]"
                   />
                 </div>
                 <div>
-                  <label className="block text-2xs font-extrabold text-[#08242a] mb-1">
+                  <label className="block text-2xs font-extrabold text-[#231f20] mb-1">
                     (English)
                   </label>
                   <input
                     type="text"
                     value={tierForm.badgeEn || ''}
                     onChange={(e) => setTierForm((p) => ({ ...p, badgeEn: e.target.value }))}
-                    className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#faf7f2]"
+                    className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE]"
                   />
                 </div>
               </div>
 
               {/* Descriptions */}
               <div>
-                <label className="block text-2xs font-extrabold text-[#08242a] mb-1">
+                <label className="block text-2xs font-extrabold text-[#231f20] mb-1">
                   نبذة تعريفية بالفئة والمستهدفين (العربية)
                 </label>
                 <textarea
                   rows={2}
                   value={tierForm.descriptionAr}
                   onChange={(e) => setTierForm((p) => ({ ...p, descriptionAr: e.target.value }))}
-                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#faf7f2]"
+                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE]"
                 />
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-2xs font-extrabold text-[#08242a] mb-1">
+                  <label className="block text-2xs font-extrabold text-[#231f20] mb-1">
                     (Français)
                   </label>
                   <textarea
                     rows={2}
                     value={tierForm.descriptionFr}
                     onChange={(e) => setTierForm((p) => ({ ...p, descriptionFr: e.target.value }))}
-                    className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#faf7f2]"
+                    className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE]"
                   />
                 </div>
                 <div>
-                  <label className="block text-2xs font-extrabold text-[#08242a] mb-1">
+                  <label className="block text-2xs font-extrabold text-[#231f20] mb-1">
                     (English)
                   </label>
                   <textarea
                     rows={2}
                     value={tierForm.descriptionEn}
                     onChange={(e) => setTierForm((p) => ({ ...p, descriptionEn: e.target.value }))}
-                    className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#faf7f2]"
+                    className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE]"
                   />
                 </div>
               </div>
 
               {/* Benefits Multiline */}
               <div>
-                <label className="block text-2xs font-extrabold text-[#08242a] mb-1">
+                <label className="block text-2xs font-extrabold text-[#231f20] mb-1">
                   قائمة الامتيازات (العربية - سطر لكل امتياز)
                 </label>
                 <textarea
@@ -1973,53 +1973,53 @@ export function MembershipsAdminTabs({
                   value={tierBenefitsArText}
                   onChange={(e) => setTierBenefitsArText(e.target.value)}
                   placeholder="بطاقة عضوية رقمية ومطبوعة&#10;حق التصويت بالجمع العام&#10;أولوية في التسجيل بالمحترفات"
-                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#faf7f2]"
+                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE]"
                 />
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-2xs font-extrabold text-[#08242a] mb-1">
+                  <label className="block text-2xs font-extrabold text-[#231f20] mb-1">
                     الامتيازات (Français)
                   </label>
                   <textarea
                     rows={2}
                     value={tierBenefitsFrText}
                     onChange={(e) => setTierBenefitsFrText(e.target.value)}
-                    className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#faf7f2]"
+                    className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE]"
                   />
                 </div>
                 <div>
-                  <label className="block text-2xs font-extrabold text-[#08242a] mb-1">
+                  <label className="block text-2xs font-extrabold text-[#231f20] mb-1">
                     الامتيازات (English)
                   </label>
                   <textarea
                     rows={2}
                     value={tierBenefitsEnText}
                     onChange={(e) => setTierBenefitsEnText(e.target.value)}
-                    className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#faf7f2]"
+                    className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE]"
                   />
                 </div>
               </div>
 
               {/* Options */}
               <div className="flex flex-wrap items-center gap-6 pt-2">
-                <label className="flex items-center gap-2 text-xs font-bold text-[#08242a] cursor-pointer">
+                <label className="flex items-center gap-2 text-xs font-bold text-[#231f20] cursor-pointer">
                   <input
                     type="checkbox"
                     checked={tierForm.recommended || false}
                     onChange={(e) => setTierForm((p) => ({ ...p, recommended: e.target.checked }))}
-                    className="rounded text-[#c85a32] focus:ring-[#c85a32]"
+                    className="rounded text-[#bd3227] focus:ring-[#bd3227]"
                   />
                   <span>تمييز كـ &quot;الفئة الأكثر ترشيحاً&quot; ⭐</span>
                 </label>
 
-                <label className="flex items-center gap-2 text-xs font-bold text-[#08242a] cursor-pointer">
+                <label className="flex items-center gap-2 text-xs font-bold text-[#231f20] cursor-pointer">
                   <input
                     type="checkbox"
                     checked={tierForm.active !== false}
                     onChange={(e) => setTierForm((p) => ({ ...p, active: e.target.checked }))}
-                    className="rounded text-[#0d3b43] focus:ring-[#0d3b43]"
+                    className="rounded text-[#231f20] focus:ring-[#231f20]"
                   />
                   <span>تفعيل الفئة في الواجهة العامة</span>
                 </label>
@@ -2027,14 +2027,14 @@ export function MembershipsAdminTabs({
             </div>
 
             {/* Modal Actions */}
-            <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#f4ede2]">
+            <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#FEF6CC]">
               <button
                 type="button"
                 onClick={() => {
                   setEditingTier(null)
                   setIsAddingTier(false)
                 }}
-                className="px-4 py-2 rounded-xl text-xs font-bold text-[#5f7174] hover:text-[#08242a] transition-colors cursor-pointer"
+                className="px-4 py-2 rounded-xl text-xs font-bold text-[#5C5A55] hover:text-[#231f20] transition-colors cursor-pointer"
               >
                 إلغاء
               </button>
@@ -2042,7 +2042,7 @@ export function MembershipsAdminTabs({
               <button
                 type="button"
                 onClick={handleSaveTierModal}
-                className="px-5 py-2.5 rounded-xl text-xs font-bold bg-[#0d3b43] text-white hover:bg-[#14505b] active:scale-98 transition-all shadow-2xs cursor-pointer"
+                className="px-5 py-2.5 rounded-xl text-xs font-bold bg-[#231f20] text-white hover:bg-[#d2a82b] active:scale-98 transition-all shadow-2xs cursor-pointer"
               >
                 تأكيد الفئة في القائمة
               </button>

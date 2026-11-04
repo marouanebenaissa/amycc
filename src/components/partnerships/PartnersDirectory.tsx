@@ -39,9 +39,9 @@ export function PartnersDirectory({ partners, locale }: PartnersDirectoryProps) 
       (isAr ? partner.nameAr : isFr ? partner.nameFr : partner.nameEn) || partner.nameAr
 
     const card = (
-      <div className="group/card relative w-60 sm:w-72 h-44 sm:h-52 bg-white rounded-3xl border border-[#e5e0d6] p-3 shadow-2xs hover:shadow-xl hover:border-[#c85a32]/50 transition-all duration-300 flex flex-col justify-between shrink-0 overflow-hidden cursor-pointer">
+      <div className="group/card relative w-60 sm:w-72 h-44 sm:h-52 bg-white rounded-3xl border border-[#e5e0d6] p-3 shadow-2xs hover:shadow-xl hover:border-[#bd3227]/50 transition-all duration-300 flex flex-col justify-between shrink-0 overflow-hidden cursor-pointer">
         {/* Moving Picture Container */}
-        <div className="relative w-full flex-1 rounded-2xl overflow-hidden bg-[#faf7f2] border border-[#f0eae1]">
+        <div className="relative w-full flex-1 rounded-2xl overflow-hidden bg-[#F5F3EE] border border-[#FEF6CC]">
           <ImageWithFallback
             src={partner.logoUrl}
             fallbackSrc="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=600&q=80"
@@ -55,7 +55,7 @@ export function PartnersDirectory({ partners, locale }: PartnersDirectoryProps) 
 
         {/* Partner Name Label */}
         <div className="pt-2 px-1 text-center" dir={isAr ? 'rtl' : 'ltr'}>
-          <span className="text-xs sm:text-sm font-bold text-[#08242a] group-hover/card:text-[#c85a32] transition-colors truncate block">
+          <span className="text-xs sm:text-sm font-bold text-[#231f20] group-hover/card:text-[#bd3227] transition-colors truncate block">
             {name}
           </span>
         </div>
@@ -87,11 +87,11 @@ export function PartnersDirectory({ partners, locale }: PartnersDirectoryProps) 
       <div dir="ltr" className="relative w-full overflow-hidden py-4 select-none">
         {/* Left & Right Smooth Gradient Masks */}
         <div
-          className="absolute inset-y-0 left-0 w-16 sm:w-28 md:w-36 bg-gradient-to-r from-[#f7f2e9] via-[#f7f2e9]/80 to-transparent z-10 pointer-events-none"
+          className="absolute inset-y-0 left-0 w-16 sm:w-28 md:w-36 bg-gradient-to-r from-[#F5F3EE] via-[#F5F3EE]/80 to-transparent z-10 pointer-events-none"
           aria-hidden="true"
         />
         <div
-          className="absolute inset-y-0 right-0 w-16 sm:w-28 md:w-36 bg-gradient-to-l from-[#f7f2e9] via-[#f7f2e9]/80 to-transparent z-10 pointer-events-none"
+          className="absolute inset-y-0 right-0 w-16 sm:w-28 md:w-36 bg-gradient-to-l from-[#F5F3EE] via-[#F5F3EE]/80 to-transparent z-10 pointer-events-none"
           aria-hidden="true"
         />
 

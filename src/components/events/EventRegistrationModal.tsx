@@ -59,7 +59,7 @@ export function EventRegistrationModal({
       <button
         type="button"
         onClick={() => setIsOpen(true)}
-        className={className || "px-4 py-2 rounded-xl text-xs font-bold text-white bg-[#0d3b43] hover:bg-[#14505b] active:scale-95 transition-all shadow-subtle inline-flex items-center gap-1.5"}
+        className={className || "px-4 py-2 rounded-xl text-xs font-bold text-white bg-[#231f20] hover:bg-[#d2a82b] active:scale-95 transition-all shadow-subtle inline-flex items-center gap-1.5"}
       >
         <span>🎟️</span>
         <span>{defaultBtnLabel}</span>
@@ -78,7 +78,7 @@ export function EventRegistrationModal({
                 setIsOpen(false)
                 setResponse(null)
               }}
-              className="absolute top-5 end-5 w-8 h-8 rounded-full bg-[#faf7f2] hover:bg-[#f4ede2] text-[#08242a] flex items-center justify-center font-bold text-sm transition-colors"
+              className="absolute top-5 end-5 w-8 h-8 rounded-full bg-[#F5F3EE] hover:bg-[#FEF6CC] text-[#231f20] flex items-center justify-center font-bold text-sm transition-colors"
               aria-label="Close"
             >
               ✕
@@ -86,14 +86,14 @@ export function EventRegistrationModal({
 
             {/* Header */}
             <div className="mb-6">
-              <span className="text-3xs font-extrabold uppercase tracking-wider text-[#c85a32] block mb-1">
+              <span className="text-3xs font-extrabold uppercase tracking-wider text-[#bd3227] block mb-1">
                 {isAr ? 'تسجيل مباشر للفعالية' : isFr ? 'Inscription à l\'événement' : 'Event Registration'}
               </span>
-              <h3 className="text-xl font-black text-[#08242a] leading-tight">
+              <h3 className="text-xl font-black text-[#231f20] leading-tight">
                 {eventTitle}
               </h3>
               {(eventDate || eventVenue) && (
-                <div className="flex flex-wrap gap-2 text-2xs text-[#5f7174] mt-2">
+                <div className="flex flex-wrap gap-2 text-2xs text-[#5C5A55] mt-2">
                   {eventDate && <span>📅 {eventDate}</span>}
                   {eventVenue && <span>📍 {eventVenue}</span>}
                 </div>
@@ -129,7 +129,7 @@ export function EventRegistrationModal({
                 <input type="hidden" name="eventId" value={eventId} />
 
                 <div>
-                  <label className="block text-2xs font-bold text-[#08242a] mb-1">
+                  <label className="block text-2xs font-bold text-[#231f20] mb-1">
                     {isAr ? 'الاسم الكامل *' : isFr ? 'Nom complet *' : 'Full Name *'}
                   </label>
                   <input
@@ -137,12 +137,12 @@ export function EventRegistrationModal({
                     name="fullName"
                     required
                     placeholder={isAr ? 'مثال: محمد العلوي' : 'e.g. John Doe'}
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs focus:border-[#0d3b43] focus:ring-1 focus:ring-[#0d3b43] outline-none"
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs focus:border-[#231f20] focus:ring-1 focus:ring-[#231f20] outline-none"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-2xs font-bold text-[#08242a] mb-1">
+                  <label className="block text-2xs font-bold text-[#231f20] mb-1">
                     {isAr ? 'البريد الإلكتروني *' : isFr ? 'Adresse e-mail *' : 'Email Address *'}
                   </label>
                   <input
@@ -150,19 +150,19 @@ export function EventRegistrationModal({
                     name="email"
                     required
                     placeholder="name@example.com"
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs focus:border-[#0d3b43] focus:ring-1 focus:ring-[#0d3b43] outline-none"
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs focus:border-[#231f20] focus:ring-1 focus:ring-[#231f20] outline-none"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-2xs font-bold text-[#08242a] mb-1">
+                  <label className="block text-2xs font-bold text-[#231f20] mb-1">
                     {isAr ? 'رقم الهاتف (اختياري للتذكير عبر الرسائل)' : isFr ? 'Téléphone (optionnel)' : 'Phone Number (optional)'}
                   </label>
                   <input
                     type="tel"
                     name="phone"
                     placeholder="+212 6..."
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs focus:border-[#0d3b43] focus:ring-1 focus:ring-[#0d3b43] outline-none"
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs focus:border-[#231f20] focus:ring-1 focus:ring-[#231f20] outline-none"
                   />
                 </div>
 
@@ -170,7 +170,7 @@ export function EventRegistrationModal({
                   <button
                     type="submit"
                     disabled={isPending}
-                    className="w-full py-3 px-4 rounded-xl font-bold text-white bg-[#0d3b43] hover:bg-[#14505b] disabled:opacity-50 transition-all text-xs shadow-md"
+                    className="w-full py-3 px-4 rounded-xl font-bold text-white bg-[#231f20] hover:bg-[#d2a82b] disabled:opacity-50 transition-all text-xs shadow-md"
                   >
                     {isPending
                       ? (isAr ? 'جارٍ تأكيد الحجز...' : 'Processing registration...')
@@ -186,7 +186,7 @@ export function EventRegistrationModal({
                 <button
                   type="button"
                   onClick={() => setIsOpen(false)}
-                  className="w-full py-2.5 px-4 rounded-xl font-bold text-[#08242a] bg-[#faf7f2] hover:bg-[#f4ede2] border border-[#e5e0d6] text-xs transition-colors"
+                  className="w-full py-2.5 px-4 rounded-xl font-bold text-[#231f20] bg-[#F5F3EE] hover:bg-[#FEF6CC] border border-[#e5e0d6] text-xs transition-colors"
                 >
                   {isAr ? 'إغلاق النافذة' : 'Close'}
                 </button>
@@ -194,20 +194,20 @@ export function EventRegistrationModal({
             )}
 
             {/* Event Article & Details Overview below registration area */}
-            <div className="mt-8 pt-6 border-t border-[#f4ede2] space-y-4">
+            <div className="mt-8 pt-6 border-t border-[#FEF6CC] space-y-4">
               <div className="flex items-center gap-2">
-                <span className="w-1.5 h-4 bg-[#c85a32] rounded-full" />
-                <h4 className="text-xs sm:text-sm font-black text-[#08242a]">
+                <span className="w-1.5 h-4 bg-[#bd3227] rounded-full" />
+                <h4 className="text-xs sm:text-sm font-black text-[#231f20]">
                   {isAr ? 'تفاصيل ومقال الفعالية' : isFr ? 'À propos de l\'événement' : 'About the Event'}
                 </h4>
               </div>
 
               {eventDescription ? (
-                <div className="bg-[#faf7f2] p-4 rounded-2xl border border-[#e5e0d6] text-xs leading-relaxed text-[#445457] whitespace-pre-line font-medium">
+                <div className="bg-[#F5F3EE] p-4 rounded-2xl border border-[#e5e0d6] text-xs leading-relaxed text-[#5C5A55] whitespace-pre-line font-medium">
                   {eventDescription}
                 </div>
               ) : (
-                <div className="bg-[#faf7f2] p-4 rounded-2xl border border-[#e5e0d6] text-xs leading-relaxed text-[#445457]">
+                <div className="bg-[#F5F3EE] p-4 rounded-2xl border border-[#e5e0d6] text-xs leading-relaxed text-[#5C5A55]">
                   {isAr
                     ? 'فعالية ثقافية وفنية مميزة تنظمها جمعية روح الفنون والثقافة لتشجيع المواهب الصاعدة وتعزيز الحراك الثقافي المجتمعي.'
                     : 'A cultural and artistic event organized by AMYCC to foster emerging talents and cultural engagement.'}
@@ -219,10 +219,10 @@ export function EventRegistrationModal({
                 <div className="p-3 rounded-xl bg-white border border-[#e5e0d6] flex items-center gap-2.5">
                   <span className="text-base sm:text-lg">🎟️</span>
                   <div>
-                    <span className="font-black text-[#08242a] block">
+                    <span className="font-black text-[#231f20] block">
                       {isAr ? 'تأكيد الحجز المباشر' : isFr ? 'Réservation confirmée' : 'Direct Booking'}
                     </span>
-                    <span className="text-[#819598]">
+                    <span className="text-[#5C5A55]">
                       {isAr ? 'حسب الفعالية' : isFr ? 'Selon l\'événement' : 'Per event terms'}
                     </span>
                   </div>
@@ -231,17 +231,17 @@ export function EventRegistrationModal({
                 <div className="p-3 rounded-xl bg-white border border-[#e5e0d6] flex items-center gap-2.5">
                   <span className="text-base sm:text-lg">✉️</span>
                   <div>
-                    <span className="font-black text-[#08242a] block">
+                    <span className="font-black text-[#231f20] block">
                       {isAr ? 'تأكيد ودعوة رسمية' : isFr ? 'Invitation par e-mail' : 'Email Invitation'}
                     </span>
-                    <span className="text-[#819598] font-medium text-3xs">
+                    <span className="text-[#5C5A55] font-medium text-3xs">
                       {isAr ? 'تذكرة إلكترونية رسمية' : isFr ? 'Billet électronique' : 'Official E-Ticket'}
                     </span>
                   </div>
                 </div>
               </div>
 
-              <p className="text-3xs text-[#819598] text-center pt-1 font-medium">
+              <p className="text-3xs text-[#5C5A55] text-center pt-1 font-medium">
                 {isAr
                   ? '📍 يرجى الحضور قبل الموعد بـ 15 دقيقة وإبراز رمز التأكيد لدى مكتب الاستقبال.'
                   : '📍 Please arrive 15 minutes before the start time and present your ticket reference at check-in.'}

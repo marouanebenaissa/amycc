@@ -483,15 +483,15 @@ export function DonationsAdminTabs({
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-[#e5e0d6] pb-6">
         <div>
           <div className="flex items-center gap-2 mb-1">
-            <span className="w-2.5 h-2.5 rounded-full bg-[#0d3b43] animate-pulse" />
-            <span className="text-2xs font-extrabold tracking-widest uppercase text-[#c85a32]">
+            <span className="w-2.5 h-2.5 rounded-full bg-[#231f20] animate-pulse" />
+            <span className="text-2xs font-extrabold tracking-widest uppercase text-[#bd3227]">
               منظومة الرعاية والدعم والتحصيل المالي
             </span>
           </div>
-          <h1 className="text-2xl sm:text-3xl font-black text-[#08242a]">
+          <h1 className="text-2xl sm:text-3xl font-black text-[#231f20]">
             إدارة الدعم والمساهمات وبوابات الأداء
           </h1>
-          <p className="text-xs text-[#5f7174] mt-1 font-medium max-w-2xl">
+          <p className="text-xs text-[#5C5A55] mt-1 font-medium max-w-2xl">
             متابعة إشعارات الدعم والتبرعات، ضبط بوابة الأداء الإلكتروني المباشر (CMI / Stripe)، الحساب البنكي الرسمي، وباقات الرعاية الثقافية.
           </p>
         </div>
@@ -502,7 +502,7 @@ export function DonationsAdminTabs({
             href="/ar/support"
             target="_blank"
             rel="noopener noreferrer"
-            className="px-4 py-2 rounded-xl text-xs font-bold text-[#0d3b43] bg-white border border-[#0d3b43]/30 hover:bg-[#0d3b43]/5 transition-all flex items-center gap-1.5 shadow-2xs"
+            className="px-4 py-2 rounded-xl text-xs font-bold text-[#231f20] bg-white border border-[#231f20]/30 hover:bg-[#231f20]/5 transition-all flex items-center gap-1.5 shadow-2xs"
           >
             <span>معاينة صفحة الدعم</span>
             <span className="text-3xs">↗</span>
@@ -511,7 +511,7 @@ export function DonationsAdminTabs({
           <button
             onClick={handleSaveAll}
             disabled={savingConfig}
-            className="px-5 py-2.5 rounded-xl text-xs font-bold bg-[#0d3b43] text-white hover:bg-[#14505b] active:scale-98 transition-all disabled:opacity-50 flex items-center gap-2 shadow-sm cursor-pointer"
+            className="px-5 py-2.5 rounded-xl text-xs font-bold bg-[#231f20] text-white hover:bg-[#d2a82b] active:scale-98 transition-all disabled:opacity-50 flex items-center gap-2 shadow-sm cursor-pointer"
           >
             {savingConfig ? (
               <>
@@ -551,13 +551,13 @@ export function DonationsAdminTabs({
       )}
 
       {/* Main Tabs Segment Control */}
-      <div className="bg-[#f0ebe1] p-1.5 rounded-2xl flex flex-wrap gap-1 border border-[#e5e0d6]">
+      <div className="bg-[#FEF6CC] p-1.5 rounded-2xl flex flex-wrap gap-1 border border-[#e5e0d6]">
         <button
           onClick={() => setActiveTab('donations')}
           className={`flex-1 min-w-[140px] py-3 px-3.5 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 cursor-pointer ${
             activeTab === 'donations'
-              ? 'bg-white text-[#08242a] shadow-2xs'
-              : 'text-[#5f7174] hover:text-[#08242a]'
+              ? 'bg-white text-[#231f20] shadow-2xs'
+              : 'text-[#5C5A55] hover:text-[#231f20]'
           }`}
         >
           <span>📥</span>
@@ -565,8 +565,8 @@ export function DonationsAdminTabs({
           <span
             className={`px-2 py-0.5 rounded-full text-3xs font-black ${
               activeTab === 'donations'
-                ? 'bg-[#0d3b43] text-white'
-                : 'bg-[#e5e0d6] text-[#5f7174]'
+                ? 'bg-[#231f20] text-white'
+                : 'bg-[#e5e0d6] text-[#5C5A55]'
             }`}
           >
             {totalDonationsCount}
@@ -577,8 +577,8 @@ export function DonationsAdminTabs({
           onClick={() => setActiveTab('gateway-and-bank')}
           className={`flex-1 min-w-[140px] py-3 px-3.5 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 cursor-pointer ${
             activeTab === 'gateway-and-bank'
-              ? 'bg-white text-[#08242a] shadow-2xs'
-              : 'text-[#5f7174] hover:text-[#08242a]'
+              ? 'bg-white text-[#231f20] shadow-2xs'
+              : 'text-[#5C5A55] hover:text-[#231f20]'
           }`}
         >
           <span>💳</span>
@@ -592,15 +592,15 @@ export function DonationsAdminTabs({
           onClick={() => setActiveTab('packages')}
           className={`flex-1 min-w-[140px] py-3 px-3.5 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 cursor-pointer ${
             activeTab === 'packages'
-              ? 'bg-white text-[#08242a] shadow-2xs'
-              : 'text-[#5f7174] hover:text-[#08242a]'
+              ? 'bg-white text-[#231f20] shadow-2xs'
+              : 'text-[#5C5A55] hover:text-[#231f20]'
           }`}
         >
           <span>🏆</span>
           <span>باقات الرعاية الثقافية</span>
           <span
             className={`px-2 py-0.5 rounded-full text-3xs font-black ${
-              activeTab === 'packages' ? 'bg-[#c85a32] text-white' : 'bg-[#e5e0d6] text-[#5f7174]'
+              activeTab === 'packages' ? 'bg-[#bd3227] text-white' : 'bg-[#e5e0d6] text-[#5C5A55]'
             }`}
           >
             {(config.packages || []).length}
@@ -611,8 +611,8 @@ export function DonationsAdminTabs({
           onClick={() => setActiveTab('page-settings')}
           className={`flex-1 min-w-[140px] py-3 px-3.5 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 cursor-pointer ${
             activeTab === 'page-settings'
-              ? 'bg-white text-[#08242a] shadow-2xs'
-              : 'text-[#5f7174] hover:text-[#08242a]'
+              ? 'bg-white text-[#231f20] shadow-2xs'
+              : 'text-[#5C5A55] hover:text-[#231f20]'
           }`}
         >
           <span>🎨</span>
@@ -623,8 +623,8 @@ export function DonationsAdminTabs({
           onClick={() => setActiveTab('integration-guide')}
           className={`flex-1 min-w-[140px] py-3 px-3.5 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 cursor-pointer ${
             activeTab === 'integration-guide'
-              ? 'bg-white text-[#08242a] shadow-2xs border-b-2 border-[#c85a32]'
-              : 'text-[#5f7174] hover:text-[#08242a]'
+              ? 'bg-white text-[#231f20] shadow-2xs border-b-2 border-[#bd3227]'
+              : 'text-[#5C5A55] hover:text-[#231f20]'
           }`}
         >
           <span>📖</span>
@@ -640,12 +640,12 @@ export function DonationsAdminTabs({
           {/* Counters */}
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
             <div className="p-4 rounded-2xl bg-white border border-[#e5e0d6] shadow-2xs flex items-center gap-3">
-              <span className="w-10 h-10 rounded-xl bg-[#0d3b43]/10 text-[#0d3b43] flex items-center justify-center text-lg font-bold">
+              <span className="w-10 h-10 rounded-xl bg-[#231f20]/10 text-[#231f20] flex items-center justify-center text-lg font-bold">
                 📥
               </span>
               <div>
-                <div className="text-xl font-black text-[#08242a]">{totalDonationsCount}</div>
-                <div className="text-3xs text-[#5f7174] font-bold">إجمالي إشعارات الدعم</div>
+                <div className="text-xl font-black text-[#231f20]">{totalDonationsCount}</div>
+                <div className="text-3xs text-[#5C5A55] font-bold">إجمالي إشعارات الدعم</div>
               </div>
             </div>
 
@@ -657,7 +657,7 @@ export function DonationsAdminTabs({
                 <div className="text-xl font-black text-emerald-700">
                   {totalAmountMad.toLocaleString()} MAD
                 </div>
-                <div className="text-3xs text-[#5f7174] font-bold">مجموع المبالغ المصرح بها</div>
+                <div className="text-3xs text-[#5C5A55] font-bold">مجموع المبالغ المصرح بها</div>
               </div>
             </div>
 
@@ -667,7 +667,7 @@ export function DonationsAdminTabs({
               </span>
               <div>
                 <div className="text-xl font-black text-amber-700">{pendingCount}</div>
-                <div className="text-3xs text-[#5f7174] font-bold">قيد التحقق والتوثيق</div>
+                <div className="text-3xs text-[#5C5A55] font-bold">قيد التحقق والتوثيق</div>
               </div>
             </div>
 
@@ -677,7 +677,7 @@ export function DonationsAdminTabs({
               </span>
               <div>
                 <div className="text-xl font-black text-emerald-700">{confirmedCount}</div>
-                <div className="text-3xs text-[#5f7174] font-bold">مساهمات مؤكدة قانونياً</div>
+                <div className="text-3xs text-[#5C5A55] font-bold">مساهمات مؤكدة قانونياً</div>
               </div>
             </div>
           </div>
@@ -691,7 +691,7 @@ export function DonationsAdminTabs({
                   value={searchDonation}
                   onChange={(e) => setSearchDonation(e.target.value)}
                   placeholder="بحث باسم الداعم، البريد، الهاتف، أو الملاحظات..."
-                  className="w-full pl-4 pr-10 py-2.5 rounded-xl border border-[#e5e0d6] text-xs outline-none focus:border-[#0d3b43] bg-[#faf7f2]"
+                  className="w-full pl-4 pr-10 py-2.5 rounded-xl border border-[#e5e0d6] text-xs outline-none focus:border-[#231f20] bg-[#F5F3EE]"
                 />
                 <span className="absolute right-3.5 top-2.5 text-slate-400">🔍</span>
               </div>
@@ -699,7 +699,7 @@ export function DonationsAdminTabs({
               <select
                 value={statusFilter}
                 onChange={(e) => setStatusFilter(e.target.value)}
-                className="px-3 py-2.5 rounded-xl border border-[#e5e0d6] text-xs font-bold text-[#08242a] bg-[#faf7f2] outline-none"
+                className="px-3 py-2.5 rounded-xl border border-[#e5e0d6] text-xs font-bold text-[#231f20] bg-[#F5F3EE] outline-none"
               >
                 <option value="all">كل الحالات ({totalDonationsCount})</option>
                 <option value="pending">قيد الانتظار ({pendingCount})</option>
@@ -709,7 +709,7 @@ export function DonationsAdminTabs({
               <select
                 value={typeFilter}
                 onChange={(e) => setTypeFilter(e.target.value)}
-                className="px-3 py-2.5 rounded-xl border border-[#e5e0d6] text-xs font-bold text-[#08242a] bg-[#faf7f2] outline-none"
+                className="px-3 py-2.5 rounded-xl border border-[#e5e0d6] text-xs font-bold text-[#231f20] bg-[#F5F3EE] outline-none"
               >
                 <option value="all">كافة أنواع الدعم</option>
                 <option value="financial">دعم مالي (Financial)</option>
@@ -728,8 +728,8 @@ export function DonationsAdminTabs({
           {/* Table */}
           <div className="bg-white rounded-2xl border border-[#e5e0d6] overflow-hidden shadow-2xs">
             <div className="overflow-x-auto">
-              <table className="w-full text-start text-xs text-[#2d3b3e]">
-                <thead className="bg-[#faf7f2] border-b border-[#e5e0d6] text-2xs uppercase tracking-wider text-[#5f7174] font-bold">
+              <table className="w-full text-start text-xs text-[#231f20]">
+                <thead className="bg-[#F5F3EE] border-b border-[#e5e0d6] text-2xs uppercase tracking-wider text-[#5C5A55] font-bold">
                   <tr>
                     <th className="px-6 py-4 text-start">الداعم / الهيئة</th>
                     <th className="px-6 py-4 text-start">نوع المساهمة والقيمة</th>
@@ -738,22 +738,22 @@ export function DonationsAdminTabs({
                     <th className="px-6 py-4 text-center">الإجراءات</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-[#f4ede2]">
+                <tbody className="divide-y divide-[#FEF6CC]">
                   {filteredDonations.length > 0 ? (
                     filteredDonations.map((d) => (
-                      <tr key={d.id} className="hover:bg-[#faf7f2]/60 transition-colors">
+                      <tr key={d.id} className="hover:bg-[#F5F3EE]/60 transition-colors">
                         <td className="px-6 py-4">
-                          <div className="font-bold text-[#08242a] text-xs">{d.donor_name}</div>
+                          <div className="font-bold text-[#231f20] text-xs">{d.donor_name}</div>
                           <a
                             href={`mailto:${d.donor_email}`}
-                            className="text-3xs text-[#5f7174] hover:text-[#0d3b43] transition-colors block font-mono"
+                            className="text-3xs text-[#5C5A55] hover:text-[#231f20] transition-colors block font-mono"
                           >
                             {d.donor_email}
                           </a>
                           {d.donor_phone && (
                             <a
                               href={`tel:${d.donor_phone}`}
-                              className="text-3xs text-[#819598] font-mono hover:text-[#0d3b43] transition-colors block"
+                              className="text-3xs text-[#5C5A55] font-mono hover:text-[#231f20] transition-colors block"
                               dir="ltr"
                             >
                               {d.donor_phone}
@@ -762,21 +762,21 @@ export function DonationsAdminTabs({
                         </td>
 
                         <td className="px-6 py-4">
-                          <span className="font-bold block text-[#08242a] capitalize">
+                          <span className="font-bold block text-[#231f20] capitalize">
                             {d.support_type.replace('_', ' ')}
                           </span>
                           {d.amount ? (
-                            <span className="text-xs font-black text-[#c85a32]">
+                            <span className="text-xs font-black text-[#bd3227]">
                               {d.amount.toLocaleString()} {d.currency}
                             </span>
                           ) : (
-                            <span className="text-3xs text-[#819598]">مساهمة عينية / لوجستية</span>
+                            <span className="text-3xs text-[#5C5A55]">مساهمة عينية / لوجستية</span>
                           )}
                         </td>
 
                         <td className="px-6 py-4 max-w-xs">
                           <p
-                            className="truncate text-[#445457] text-xs cursor-pointer hover:text-[#08242a]"
+                            className="truncate text-[#5C5A55] text-xs cursor-pointer hover:text-[#231f20]"
                             title={d.notes || '—'}
                             onClick={() => setViewingRecord(d)}
                           >
@@ -805,7 +805,7 @@ export function DonationsAdminTabs({
                           <div className="flex items-center justify-center gap-1.5">
                             <button
                               onClick={() => setViewingRecord(d)}
-                              className="px-2.5 py-1 rounded-lg text-2xs font-bold bg-[#faf7f2] text-[#08242a] hover:bg-[#eae2d3] border border-[#e5e0d6] transition-colors cursor-pointer"
+                              className="px-2.5 py-1 rounded-lg text-2xs font-bold bg-[#F5F3EE] text-[#231f20] hover:bg-[#FEF6CC] border border-[#e5e0d6] transition-colors cursor-pointer"
                               title="عرض ملف المساهمة"
                             >
                               عرض
@@ -835,7 +835,7 @@ export function DonationsAdminTabs({
                     ))
                   ) : (
                     <tr>
-                      <td colSpan={5} className="px-6 py-12 text-center text-[#819598]">
+                      <td colSpan={5} className="px-6 py-12 text-center text-[#5C5A55]">
                         لا توجد إشعارات مساهمة مسجلة تطابق معايير البحث الحالية.
                       </td>
                     </tr>
@@ -854,29 +854,29 @@ export function DonationsAdminTabs({
         <div className="space-y-8">
           {/* Section: Master Gateway Switch & Environment */}
           <div className="bg-white p-6 sm:p-8 rounded-3xl border border-[#e5e0d6] shadow-2xs space-y-6">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#f4ede2] pb-5">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#FEF6CC] pb-5">
               <div>
-                <span className="text-2xs font-bold uppercase tracking-wider text-[#c85a32]">
+                <span className="text-2xs font-bold uppercase tracking-wider text-[#bd3227]">
                   بوابة الأداء الإلكتروني المباشر
                 </span>
-                <h2 className="text-lg font-black text-[#08242a]">
+                <h2 className="text-lg font-black text-[#231f20]">
                   الربط مع مركز النقديات CMI / Stripe
                 </h2>
-                <p className="text-xs text-[#5f7174] mt-0.5">
+                <p className="text-xs text-[#5C5A55] mt-0.5">
                   تمكين المتبرعين من الأداء الفوري الآمن بالبطاقات البنكية المغربية والدولية (3D-Secure).
                 </p>
               </div>
 
               {/* Master toggle */}
               <label className="flex items-center gap-3 cursor-pointer select-none">
-                <span className="text-xs font-bold text-[#08242a]">
+                <span className="text-xs font-bold text-[#231f20]">
                   {config.paymentGateway.enabled ? 'بوابة الدفع مفعلة' : 'بوابة الدفع معطلة'}
                 </span>
                 <input
                   type="checkbox"
                   checked={config.paymentGateway.enabled}
                   onChange={(e) => updateGateway('enabled', e.target.checked)}
-                  className="w-5 h-5 text-[#0d3b43] rounded"
+                  className="w-5 h-5 text-[#231f20] rounded"
                 />
               </label>
             </div>
@@ -884,7 +884,7 @@ export function DonationsAdminTabs({
             {/* Provider and Mode */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               <div>
-                <label className="block text-2xs font-extrabold text-[#08242a] mb-1.5">
+                <label className="block text-2xs font-extrabold text-[#231f20] mb-1.5">
                   مزود بوابة الدفع (Gateway Provider)
                 </label>
                 <select
@@ -892,7 +892,7 @@ export function DonationsAdminTabs({
                   onChange={(e) =>
                     updateGateway('provider', e.target.value as 'cmi' | 'stripe' | 'both')
                   }
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs font-bold text-[#08242a] bg-[#faf7f2] outline-none"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs font-bold text-[#231f20] bg-[#F5F3EE] outline-none"
                 >
                   <option value="cmi">🇲🇦 CMI (Centre Monétique Interbancaire - المغربي)</option>
                   <option value="stripe">💳 Stripe (الدولي)</option>
@@ -901,13 +901,13 @@ export function DonationsAdminTabs({
               </div>
 
               <div>
-                <label className="block text-2xs font-extrabold text-[#08242a] mb-1.5">
+                <label className="block text-2xs font-extrabold text-[#231f20] mb-1.5">
                   بيئة التشغيل (Environment Mode)
                 </label>
                 <select
                   value={config.paymentGateway.mode}
                   onChange={(e) => updateGateway('mode', e.target.value as 'test' | 'live')}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs font-bold text-[#08242a] bg-[#faf7f2] outline-none"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs font-bold text-[#231f20] bg-[#F5F3EE] outline-none"
                 >
                   <option value="test">🧪 بيئة الاختبار والمحاكاة (Sandbox / Test Mode)</option>
                   <option value="live">🚀 بيئة الإنتاج الحقيقية (Live / Production Mode)</option>
@@ -916,17 +916,17 @@ export function DonationsAdminTabs({
             </div>
 
             {/* CMI Settings Block */}
-            <div className="p-5 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6] space-y-4">
+            <div className="p-5 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6] space-y-4">
               <div className="flex items-center gap-2">
                 <span className="text-base">🇲🇦</span>
-                <h3 className="text-xs font-extrabold text-[#08242a] uppercase tracking-wider">
+                <h3 className="text-xs font-extrabold text-[#231f20] uppercase tracking-wider">
                   إعدادات الربط مع CMI (Centre Monétique Interbancaire)
                 </h3>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-3xs font-bold text-[#5f7174] mb-1">
+                  <label className="block text-3xs font-bold text-[#5C5A55] mb-1">
                     معرف التاجر (Merchant ID / Client ID)
                   </label>
                   <input
@@ -947,7 +947,7 @@ export function DonationsAdminTabs({
                 </div>
 
                 <div>
-                  <label className="block text-3xs font-bold text-[#5f7174] mb-1">
+                  <label className="block text-3xs font-bold text-[#5C5A55] mb-1">
                     المفتاح السري للتوقيع (Store Key / Hash Salt)
                   </label>
                   <input
@@ -968,7 +968,7 @@ export function DonationsAdminTabs({
                 </div>
 
                 <div className="sm:col-span-2">
-                  <label className="block text-3xs font-bold text-[#5f7174] mb-1">
+                  <label className="block text-3xs font-bold text-[#5C5A55] mb-1">
                     رابط بوابة الأداء CMI (Gateway URL)
                   </label>
                   <input
@@ -992,7 +992,7 @@ export function DonationsAdminTabs({
 
             {/* Preset amounts */}
             <div className="pt-2">
-              <label className="block text-2xs font-extrabold text-[#08242a] mb-1.5">
+              <label className="block text-2xs font-extrabold text-[#231f20] mb-1.5">
                 مبالغ التبرع السريع المقترحة (بالدرهم المغربي - مفصولة بفواصل)
               </label>
               <input
@@ -1005,28 +1005,28 @@ export function DonationsAdminTabs({
                     .filter((n) => !isNaN(n) && n > 0)
                   updateGateway('presetAmounts', amounts)
                 }}
-                className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs font-mono bg-[#faf7f2]"
+                className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs font-mono bg-[#F5F3EE]"
               />
             </div>
           </div>
 
           {/* Section: Official Bank Account (RIB / IBAN / SWIFT) */}
           <div className="bg-white p-6 sm:p-8 rounded-3xl border border-[#e5e0d6] shadow-2xs space-y-6">
-            <div className="border-b border-[#f4ede2] pb-4">
-              <span className="text-2xs font-bold uppercase tracking-wider text-[#c85a32]">
+            <div className="border-b border-[#FEF6CC] pb-4">
+              <span className="text-2xs font-bold uppercase tracking-wider text-[#bd3227]">
                 الحساب البنكي الرسمي للجمعية
               </span>
-              <h2 className="text-lg font-black text-[#08242a]">
+              <h2 className="text-lg font-black text-[#231f20]">
                 بيانات التحويل البنكي المباشر (Virement Bancaire)
               </h2>
-              <p className="text-xs text-[#5f7174] mt-0.5">
+              <p className="text-xs text-[#5C5A55] mt-0.5">
                 البيانات البنكية الرسمية التي تظهر في الواجهة للمتبرعين والمؤسسات الراغبة بالتحويل المباشر.
               </p>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               <div>
-                <label className="block text-2xs font-extrabold text-[#08242a] mb-1.5">
+                <label className="block text-2xs font-extrabold text-[#231f20] mb-1.5">
                   اسم المؤسسة البنكية (Bank Name)
                 </label>
                 <input
@@ -1034,12 +1034,12 @@ export function DonationsAdminTabs({
                   value={config.bankTransfer.bankName}
                   onChange={(e) => updateBank('bankName', e.target.value)}
                   placeholder="مثال: التجاري وفا بنك (Attijariwafa Bank)"
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs bg-[#faf7f2] font-bold"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE] font-bold"
                 />
               </div>
 
               <div>
-                <label className="block text-2xs font-extrabold text-[#08242a] mb-1.5">
+                <label className="block text-2xs font-extrabold text-[#231f20] mb-1.5">
                   اسم الحساب والمستفيد (Account Holder)
                 </label>
                 <input
@@ -1047,12 +1047,12 @@ export function DonationsAdminTabs({
                   value={config.bankTransfer.accountHolder}
                   onChange={(e) => updateBank('accountHolder', e.target.value)}
                   placeholder="جمعية روح الفنون والثقافة (AMYCC)"
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs bg-[#faf7f2] font-bold"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE] font-bold"
                 />
               </div>
 
               <div className="sm:col-span-2">
-                <label className="block text-2xs font-extrabold text-[#08242a] mb-1.5">
+                <label className="block text-2xs font-extrabold text-[#231f20] mb-1.5">
                   رقم الحساب البنكي المغربي RIB (24 رقماً)
                 </label>
                 <input
@@ -1060,58 +1060,58 @@ export function DonationsAdminTabs({
                   value={config.bankTransfer.rib}
                   onChange={(e) => updateBank('rib', e.target.value)}
                   placeholder="007 810 0001234567890123 45"
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs font-mono bg-[#faf7f2] font-black text-[#0d3b43]"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs font-mono bg-[#F5F3EE] font-black text-[#231f20]"
                   dir="ltr"
                 />
               </div>
 
               <div>
-                <label className="block text-2xs font-extrabold text-[#08242a] mb-1.5">
+                <label className="block text-2xs font-extrabold text-[#231f20] mb-1.5">
                   رقم الحساب الدولي IBAN
                 </label>
                 <input
                   type="text"
                   value={config.bankTransfer.iban}
                   onChange={(e) => updateBank('iban', e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs font-mono bg-[#faf7f2]"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs font-mono bg-[#F5F3EE]"
                   dir="ltr"
                 />
               </div>
 
               <div>
-                <label className="block text-2xs font-extrabold text-[#08242a] mb-1.5">
+                <label className="block text-2xs font-extrabold text-[#231f20] mb-1.5">
                   رمز السويفت الدولي SWIFT / BIC
                 </label>
                 <input
                   type="text"
                   value={config.bankTransfer.swift}
                   onChange={(e) => updateBank('swift', e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs font-mono bg-[#faf7f2]"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs font-mono bg-[#F5F3EE]"
                   dir="ltr"
                 />
               </div>
 
               <div className="sm:col-span-2">
-                <label className="block text-2xs font-extrabold text-[#08242a] mb-1.5">
+                <label className="block text-2xs font-extrabold text-[#231f20] mb-1.5">
                   الوكالة والمدينة (Agency)
                 </label>
                 <input
                   type="text"
                   value={config.bankTransfer.agency}
                   onChange={(e) => updateBank('agency', e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs bg-[#faf7f2]"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE]"
                 />
               </div>
 
               <div className="sm:col-span-2">
-                <label className="block text-2xs font-extrabold text-[#08242a] mb-1.5">
+                <label className="block text-2xs font-extrabold text-[#231f20] mb-1.5">
                   إرشادات وتوجيهات التحويل البنكي (العربية)
                 </label>
                 <textarea
                   rows={2}
                   value={config.bankTransfer.instructionsAr}
                   onChange={(e) => updateBank('instructionsAr', e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs bg-[#faf7f2]"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE]"
                 />
               </div>
             </div>
@@ -1126,16 +1126,16 @@ export function DonationsAdminTabs({
         <div className="space-y-6">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-5 rounded-2xl border border-[#e5e0d6] shadow-2xs">
             <div>
-              <h2 className="text-base font-extrabold text-[#08242a]">
+              <h2 className="text-base font-extrabold text-[#231f20]">
                 باقات ومسارات الرعاية الثقافية (Patronage Packages)
               </h2>
-              <p className="text-xs text-[#5f7174] mt-0.5">
+              <p className="text-xs text-[#5C5A55] mt-0.5">
                 تحديد صيغ الرعاية الموجهة للمؤسسات والشركات والشخصيات الراغبة في تمويل مواسم وبرامج محددة.
               </p>
             </div>
             <button
               onClick={openAddPackageModal}
-              className="px-4 py-2.5 rounded-xl text-xs font-bold bg-[#c85a32] text-white hover:bg-[#a94824] transition-all flex items-center justify-center gap-1.5 shadow-2xs cursor-pointer"
+              className="px-4 py-2.5 rounded-xl text-xs font-bold bg-[#bd3227] text-white hover:bg-[#a3261c] transition-all flex items-center justify-center gap-1.5 shadow-2xs cursor-pointer"
             >
               <span>+</span>
               <span>إضافة باقة رعاية جديدة</span>
@@ -1148,18 +1148,18 @@ export function DonationsAdminTabs({
                 key={pkg.id || idx}
                 className={`relative rounded-3xl p-6 transition-all border flex flex-col justify-between ${
                   pkg.recommended
-                    ? 'bg-gradient-to-b from-[#faf7f2] via-white to-[#f7f2e9] border-[#c85a32] shadow-sm'
+                    ? 'bg-gradient-to-b from-[#F5F3EE] via-white to-[#F5F3EE] border-[#bd3227] shadow-sm'
                     : 'bg-white border-[#e5e0d6] shadow-2xs'
                 } ${!pkg.active ? 'opacity-60 bg-slate-50' : ''}`}
               >
                 <div>
                   <div className="flex items-center justify-between gap-2 mb-3">
-                    <span className="text-3xs font-extrabold tracking-wider uppercase text-[#c85a32]">
+                    <span className="text-3xs font-extrabold tracking-wider uppercase text-[#bd3227]">
                       {pkg.badgeAr || 'باقة رعاية'}
                     </span>
                     <div className="flex items-center gap-1.5">
                       {pkg.recommended && (
-                        <span className="px-2 py-0.5 rounded-full text-3xs font-black bg-[#c85a32] text-white">
+                        <span className="px-2 py-0.5 rounded-full text-3xs font-black bg-[#bd3227] text-white">
                           ⭐ الأكثر طلباً
                         </span>
                       )}
@@ -1175,34 +1175,34 @@ export function DonationsAdminTabs({
                     </div>
                   </div>
 
-                  <h3 className="text-xl font-black text-[#08242a] mb-2">{pkg.nameAr}</h3>
+                  <h3 className="text-xl font-black text-[#231f20] mb-2">{pkg.nameAr}</h3>
 
                   <div className="flex items-baseline gap-2 mb-4">
-                    <span className="text-2xl font-black text-[#0d3b43]">
+                    <span className="text-2xl font-black text-[#231f20]">
                       {pkg.amount.toLocaleString()} {pkg.currency}
                     </span>
-                    <span className="text-xs text-[#5f7174] font-medium">/ {pkg.periodAr}</span>
+                    <span className="text-xs text-[#5C5A55] font-medium">/ {pkg.periodAr}</span>
                   </div>
 
-                  <p className="text-xs text-[#445457] leading-relaxed mb-4">
+                  <p className="text-xs text-[#5C5A55] leading-relaxed mb-4">
                     {pkg.descriptionAr}
                   </p>
 
-                  <div className="p-3 rounded-xl bg-[#faf7f2] border border-[#e5e0d6] mb-5">
-                    <span className="text-3xs font-black text-[#c85a32] block mb-1">
+                  <div className="p-3 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] mb-5">
+                    <span className="text-3xs font-black text-[#bd3227] block mb-1">
                       الأثر الميداني المباشر:
                     </span>
-                    <p className="text-xs text-[#08242a] font-medium leading-snug">
+                    <p className="text-xs text-[#231f20] font-medium leading-snug">
                       {pkg.impactAr}
                     </p>
                   </div>
 
-                  <div className="space-y-1.5 border-t border-[#f4ede2] pt-4 mb-6">
-                    <span className="text-3xs font-extrabold uppercase text-[#08242a] block mb-1">
+                  <div className="space-y-1.5 border-t border-[#FEF6CC] pt-4 mb-6">
+                    <span className="text-3xs font-extrabold uppercase text-[#231f20] block mb-1">
                       الامتيازات الممنوحة للراعي:
                     </span>
                     {(pkg.privilegesAr || []).map((pr, prIdx) => (
-                      <div key={prIdx} className="flex items-start gap-2 text-xs text-[#2d3b3e]">
+                      <div key={prIdx} className="flex items-start gap-2 text-xs text-[#231f20]">
                         <span className="text-emerald-600 font-bold shrink-0">✓</span>
                         <span className="leading-snug">{pr}</span>
                       </div>
@@ -1214,7 +1214,7 @@ export function DonationsAdminTabs({
                   <button
                     type="button"
                     onClick={() => handleTogglePackageActive(pkg.id)}
-                    className="text-2xs font-bold text-[#5f7174] hover:text-[#08242a] transition-colors cursor-pointer"
+                    className="text-2xs font-bold text-[#5C5A55] hover:text-[#231f20] transition-colors cursor-pointer"
                   >
                     {pkg.active !== false ? 'إخفاء الباقة' : 'تفعيل الباقة'}
                   </button>
@@ -1223,7 +1223,7 @@ export function DonationsAdminTabs({
                     <button
                       type="button"
                       onClick={() => openEditPackageModal(pkg)}
-                      className="px-3 py-1.5 rounded-xl text-xs font-bold bg-[#0d3b43] text-white hover:bg-[#14505b] transition-all cursor-pointer shadow-2xs"
+                      className="px-3 py-1.5 rounded-xl text-xs font-bold bg-[#231f20] text-white hover:bg-[#d2a82b] transition-all cursor-pointer shadow-2xs"
                     >
                       تعديل
                     </button>
@@ -1250,22 +1250,22 @@ export function DonationsAdminTabs({
           {/* Trilingual Selector */}
           <div className="bg-white p-4 rounded-2xl border border-[#e5e0d6] flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-2xs">
             <div>
-              <span className="text-2xs font-bold uppercase tracking-wider text-[#c85a32] block">
+              <span className="text-2xs font-bold uppercase tracking-wider text-[#bd3227] block">
                 تعدد اللغات والمحتوى
               </span>
-              <h2 className="text-sm font-black text-[#08242a]">
+              <h2 className="text-sm font-black text-[#231f20]">
                 اختر لغة التحرير والتعديل للواجهة
               </h2>
             </div>
 
-            <div className="flex items-center bg-[#f0ebe1] p-1 rounded-xl border border-[#e5e0d6]">
+            <div className="flex items-center bg-[#FEF6CC] p-1 rounded-xl border border-[#e5e0d6]">
               <button
                 type="button"
                 onClick={() => setActiveLangTab('ar')}
                 className={`px-4 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
                   activeLangTab === 'ar'
-                    ? 'bg-[#0d3b43] text-white shadow-2xs'
-                    : 'text-[#5f7174] hover:text-[#08242a]'
+                    ? 'bg-[#231f20] text-white shadow-2xs'
+                    : 'text-[#5C5A55] hover:text-[#231f20]'
                 }`}
               >
                 العربية
@@ -1275,8 +1275,8 @@ export function DonationsAdminTabs({
                 onClick={() => setActiveLangTab('fr')}
                 className={`px-4 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
                   activeLangTab === 'fr'
-                    ? 'bg-[#0d3b43] text-white shadow-2xs'
-                    : 'text-[#5f7174] hover:text-[#08242a]'
+                    ? 'bg-[#231f20] text-white shadow-2xs'
+                    : 'text-[#5C5A55] hover:text-[#231f20]'
                 }`}
               >
                 Français
@@ -1286,8 +1286,8 @@ export function DonationsAdminTabs({
                 onClick={() => setActiveLangTab('en')}
                 className={`px-4 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
                   activeLangTab === 'en'
-                    ? 'bg-[#0d3b43] text-white shadow-2xs'
-                    : 'text-[#5f7174] hover:text-[#08242a]'
+                    ? 'bg-[#231f20] text-white shadow-2xs'
+                    : 'text-[#5C5A55] hover:text-[#231f20]'
                 }`}
               >
                 English
@@ -1297,16 +1297,16 @@ export function DonationsAdminTabs({
 
           {/* Hero Section */}
           <div className="bg-white p-6 sm:p-8 rounded-3xl border border-[#e5e0d6] shadow-2xs space-y-6">
-            <div className="border-b border-[#f4ede2] pb-4">
-              <span className="text-2xs font-bold uppercase tracking-wider text-[#c85a32]">
+            <div className="border-b border-[#FEF6CC] pb-4">
+              <span className="text-2xs font-bold uppercase tracking-wider text-[#bd3227]">
                 البانر والواجهة الرئيسية
               </span>
-              <h3 className="text-lg font-black text-[#08242a]">قسم الترحيب (Hero Section)</h3>
+              <h3 className="text-lg font-black text-[#231f20]">قسم الترحيب (Hero Section)</h3>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               <div>
-                <label className="block text-2xs font-extrabold text-[#08242a] mb-1.5">
+                <label className="block text-2xs font-extrabold text-[#231f20] mb-1.5">
                   الوسم العلوي ({activeLangTab.toUpperCase()})
                 </label>
                 <input
@@ -1324,12 +1324,12 @@ export function DonationsAdminTabs({
                       e.target.value
                     )
                   }
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs bg-[#faf7f2]"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE]"
                 />
               </div>
 
               <div>
-                <label className="block text-2xs font-extrabold text-[#08242a] mb-1.5">
+                <label className="block text-2xs font-extrabold text-[#231f20] mb-1.5">
                   شارة الجمعية ({activeLangTab.toUpperCase()})
                 </label>
                 <input
@@ -1347,12 +1347,12 @@ export function DonationsAdminTabs({
                       e.target.value
                     )
                   }
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs bg-[#faf7f2]"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE]"
                 />
               </div>
 
               <div className="sm:col-span-2">
-                <label className="block text-2xs font-extrabold text-[#08242a] mb-1.5">
+                <label className="block text-2xs font-extrabold text-[#231f20] mb-1.5">
                   العنوان الرئيسي الكبير ({activeLangTab.toUpperCase()})
                 </label>
                 <input
@@ -1370,12 +1370,12 @@ export function DonationsAdminTabs({
                       e.target.value
                     )
                   }
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs bg-[#faf7f2] font-bold"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE] font-bold"
                 />
               </div>
 
               <div className="sm:col-span-2">
-                <label className="block text-2xs font-extrabold text-[#08242a] mb-1.5">
+                <label className="block text-2xs font-extrabold text-[#231f20] mb-1.5">
                   العنوان الفرعي الإيضاحي ({activeLangTab.toUpperCase()})
                 </label>
                 <textarea
@@ -1393,12 +1393,12 @@ export function DonationsAdminTabs({
                       e.target.value
                     )
                   }
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs bg-[#faf7f2]"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE]"
                 />
               </div>
 
               <div className="sm:col-span-2">
-                <label className="block text-2xs font-extrabold text-[#08242a] mb-1.5">
+                <label className="block text-2xs font-extrabold text-[#231f20] mb-1.5">
                   النص التعريفي التفصيلي ({activeLangTab.toUpperCase()})
                 </label>
                 <textarea
@@ -1416,13 +1416,13 @@ export function DonationsAdminTabs({
                       e.target.value
                     )
                   }
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs bg-[#faf7f2]"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE]"
                 />
               </div>
 
               {/* Hero Image */}
-              <div className="sm:col-span-2 pt-2 border-t border-[#f4ede2]">
-                <label className="block text-2xs font-extrabold text-[#08242a] mb-1.5">
+              <div className="sm:col-span-2 pt-2 border-t border-[#FEF6CC]">
+                <label className="block text-2xs font-extrabold text-[#231f20] mb-1.5">
                   صورة غلاف البانر (Hero Image)
                 </label>
                 <input
@@ -1438,13 +1438,13 @@ export function DonationsAdminTabs({
                     value={config.hero.imageUrl}
                     onChange={(e) => updateHero('imageUrl', e.target.value)}
                     placeholder="https://images.unsplash.com/..."
-                    className="flex-1 px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs font-mono bg-[#faf7f2]"
+                    className="flex-1 px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs font-mono bg-[#F5F3EE]"
                   />
                   <button
                     type="button"
                     disabled={uploadingImage}
                     onClick={() => heroFileInputRef.current?.click()}
-                    className="px-4 py-2.5 bg-[#0d3b43] text-white text-xs font-bold rounded-xl hover:bg-[#14505b] active:scale-98 transition-all disabled:opacity-50 flex items-center justify-center gap-1.5 shrink-0 cursor-pointer shadow-2xs"
+                    className="px-4 py-2.5 bg-[#231f20] text-white text-xs font-bold rounded-xl hover:bg-[#d2a82b] active:scale-98 transition-all disabled:opacity-50 flex items-center justify-center gap-1.5 shrink-0 cursor-pointer shadow-2xs"
                   >
                     <span>{uploadingImage ? '⏳' : '📁'}</span>
                     <span>{uploadingImage ? 'جاري التحميل...' : 'رفع صورة من الجهاز'}</span>
@@ -1467,18 +1467,18 @@ export function DonationsAdminTabs({
 
           {/* Stats Section */}
           <div className="bg-white p-6 sm:p-8 rounded-3xl border border-[#e5e0d6] shadow-2xs space-y-6">
-            <div className="border-b border-[#f4ede2] pb-4">
-              <span className="text-2xs font-bold uppercase tracking-wider text-[#c85a32]">
+            <div className="border-b border-[#FEF6CC] pb-4">
+              <span className="text-2xs font-bold uppercase tracking-wider text-[#bd3227]">
                 أرقام الأثر الثقافي
               </span>
-              <h3 className="text-lg font-black text-[#08242a]">
+              <h3 className="text-lg font-black text-[#231f20]">
                 المؤشرات الثلاثة الكبرى (Impact Metrics)
               </h3>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
               {(config.stats || []).map((stat, idx) => (
-                <div key={stat.id || idx} className="p-4 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6] space-y-3">
+                <div key={stat.id || idx} className="p-4 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6] space-y-3">
                   <div className="flex items-center gap-2">
                     <input
                       type="text"
@@ -1490,12 +1490,12 @@ export function DonationsAdminTabs({
                       type="text"
                       value={stat.value}
                       onChange={(e) => updateStat(idx, { value: e.target.value })}
-                      className="flex-1 px-3 py-1.5 text-sm font-black text-[#0d3b43] rounded-lg border border-[#e5e0d6] bg-white"
+                      className="flex-1 px-3 py-1.5 text-sm font-black text-[#231f20] rounded-lg border border-[#e5e0d6] bg-white"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-3xs font-bold text-[#5f7174] mb-1">
+                    <label className="block text-3xs font-bold text-[#5C5A55] mb-1">
                       الوصف ({activeLangTab.toUpperCase()})
                     </label>
                     <input
@@ -1526,18 +1526,18 @@ export function DonationsAdminTabs({
 
           {/* Pillars Section */}
           <div className="bg-white p-6 sm:p-8 rounded-3xl border border-[#e5e0d6] shadow-2xs space-y-6">
-            <div className="border-b border-[#f4ede2] pb-4">
-              <span className="text-2xs font-bold uppercase tracking-wider text-[#c85a32]">
+            <div className="border-b border-[#FEF6CC] pb-4">
+              <span className="text-2xs font-bold uppercase tracking-wider text-[#bd3227]">
                 أوجه صرف وتوجيه التبرعات
               </span>
-              <h3 className="text-lg font-black text-[#08242a]">
+              <h3 className="text-lg font-black text-[#231f20]">
                 محاور التأثير الثقافي (Impact Pillars)
               </h3>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               {(config.pillars || []).map((p, idx) => (
-                <div key={p.id || idx} className="p-4 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6] space-y-3">
+                <div key={p.id || idx} className="p-4 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6] space-y-3">
                   <div className="flex items-center gap-2">
                     <input
                       type="text"
@@ -1563,7 +1563,7 @@ export function DonationsAdminTabs({
                             : 'titleEn']: e.target.value,
                         })
                       }
-                      className="flex-1 px-3 py-1.5 text-xs font-bold text-[#08242a] rounded-lg border border-[#e5e0d6] bg-white"
+                      className="flex-1 px-3 py-1.5 text-xs font-bold text-[#231f20] rounded-lg border border-[#e5e0d6] bg-white"
                     />
                   </div>
 
@@ -1594,18 +1594,18 @@ export function DonationsAdminTabs({
 
           {/* Legal Transparency FAQs */}
           <div className="bg-white p-6 sm:p-8 rounded-3xl border border-[#e5e0d6] shadow-2xs space-y-6">
-            <div className="border-b border-[#f4ede2] pb-4">
-              <span className="text-2xs font-bold uppercase tracking-wider text-[#c85a32]">
+            <div className="border-b border-[#FEF6CC] pb-4">
+              <span className="text-2xs font-bold uppercase tracking-wider text-[#bd3227]">
                 الشفافية والامتثال القانوني
               </span>
-              <h3 className="text-lg font-black text-[#08242a]">
+              <h3 className="text-lg font-black text-[#231f20]">
                 أسئلة الشفافية والوصل الضريبي والقانوني
               </h3>
             </div>
 
             <div className="space-y-4">
               {(config.transparencyFaqs || []).map((faq, idx) => (
-                <div key={faq.id || idx} className="p-4 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6] space-y-2">
+                <div key={faq.id || idx} className="p-4 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6] space-y-2">
                   <input
                     type="text"
                     value={
@@ -1653,18 +1653,18 @@ export function DonationsAdminTabs({
 
           {/* Section 4: Patronage Desk & Contact CTA */}
           <div className="bg-white p-6 sm:p-8 rounded-3xl border border-[#e5e0d6] shadow-2xs space-y-5">
-            <div className="border-b border-[#f4ede2] pb-3">
-              <span className="text-2xs font-extrabold uppercase tracking-widest text-[#c85a32]">
+            <div className="border-b border-[#FEF6CC] pb-3">
+              <span className="text-2xs font-extrabold uppercase tracking-widest text-[#bd3227]">
                 مكتب رعاية المشاريع والتواصل
               </span>
-              <h3 className="text-lg font-black text-[#08242a]">
+              <h3 className="text-lg font-black text-[#231f20]">
                 صندوق الاتصال الخاص بالجهات الراعية والشركاء
               </h3>
             </div>
 
             <div className="space-y-4">
               <div>
-                <label className="block text-2xs font-bold text-[#5f7174] mb-1">
+                <label className="block text-2xs font-bold text-[#5C5A55] mb-1">
                   شارة الترويسة ({activeLangTab.toUpperCase()})
                 </label>
                 <input
@@ -1691,7 +1691,7 @@ export function DonationsAdminTabs({
               </div>
 
               <div>
-                <label className="block text-2xs font-bold text-[#5f7174] mb-1">
+                <label className="block text-2xs font-bold text-[#5C5A55] mb-1">
                   العنوان الرئيسي ({activeLangTab.toUpperCase()})
                 </label>
                 <input
@@ -1718,7 +1718,7 @@ export function DonationsAdminTabs({
               </div>
 
               <div>
-                <label className="block text-2xs font-bold text-[#5f7174] mb-1">
+                <label className="block text-2xs font-bold text-[#5C5A55] mb-1">
                   الوصف التفصيلي ({activeLangTab.toUpperCase()})
                 </label>
                 <textarea
@@ -1746,7 +1746,7 @@ export function DonationsAdminTabs({
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
                 <div>
-                  <label className="block text-2xs font-bold text-[#5f7174] mb-1">
+                  <label className="block text-2xs font-bold text-[#5C5A55] mb-1">
                     البريد الإلكتروني المخصص للرعاية
                   </label>
                   <input
@@ -1758,7 +1758,7 @@ export function DonationsAdminTabs({
                   />
                 </div>
                 <div>
-                  <label className="block text-2xs font-bold text-[#5f7174] mb-1">
+                  <label className="block text-2xs font-bold text-[#5C5A55] mb-1">
                     الهاتف المباشر لأمين المال أو مكتب الرعاية
                   </label>
                   <input
@@ -1781,36 +1781,36 @@ export function DonationsAdminTabs({
       {activeTab === 'integration-guide' && (
         <div className="space-y-8">
           <div className="bg-white p-6 sm:p-8 rounded-3xl border border-[#e5e0d6] shadow-2xs space-y-6">
-            <div className="border-b border-[#f4ede2] pb-4">
-              <span className="text-2xs font-extrabold uppercase tracking-widest text-[#c85a32]">
+            <div className="border-b border-[#FEF6CC] pb-4">
+              <span className="text-2xs font-extrabold uppercase tracking-widest text-[#bd3227]">
                 دليل الربط والتفعيل الرسمي
               </span>
-              <h2 className="text-xl font-black text-[#08242a] mt-1">
+              <h2 className="text-xl font-black text-[#231f20] mt-1">
                 دليل إدماج بوابة الأداء CMI (Centre Monétique Interbancaire) للجمعية
               </h2>
-              <p className="text-xs text-[#5f7174] mt-1">
+              <p className="text-xs text-[#5C5A55] mt-1">
                 خطوات واضحة لتفعيل الدفع الإلكتروني بالبطاقات البنكية المغربية والدولية بما يتوافق مع القوانين المنظمة للعمل الجمعوي.
               </p>
             </div>
 
             {/* Step 1 */}
-            <div className="p-5 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6] space-y-2">
+            <div className="p-5 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6] space-y-2">
               <div className="flex items-center gap-2">
-                <span className="w-6 h-6 rounded-full bg-[#0d3b43] text-white flex items-center justify-center font-bold text-xs">
+                <span className="w-6 h-6 rounded-full bg-[#231f20] text-white flex items-center justify-center font-bold text-xs">
                   1
                 </span>
-                <h3 className="text-sm font-black text-[#08242a]">
+                <h3 className="text-sm font-black text-[#231f20]">
                   فتح ملف تاجر إلكتروني لدى مركز النقديات CMI
                 </h3>
               </div>
-              <p className="text-xs text-[#445457] leading-relaxed">
+              <p className="text-xs text-[#5C5A55] leading-relaxed">
                 تتقدم الجمعية بطلب فتح حساب تاجر (Contrat de Vente à Distance) لدى CMI بالتعاون مع بنكها (Attijariwafa Bank، البنك الشعبي، إلخ).
               </p>
               <div className="pt-2">
-                <span className="text-3xs font-extrabold uppercase text-[#08242a] block mb-1">
+                <span className="text-3xs font-extrabold uppercase text-[#231f20] block mb-1">
                   الوثائق القانونية المطلوبة:
                 </span>
-                <ul className="text-xs text-[#5f7174] space-y-1 list-disc list-inside">
+                <ul className="text-xs text-[#5C5A55] space-y-1 list-disc list-inside">
                   <li>نسخة من القانون الأساسي للجمعية ومحضر آخر جمع عام لانتخاب المكتب التنفيذي.</li>
                   <li>وصل الإيداع القانوني النهائي المسلم من السلطات المحلية المختصة.</li>
                   <li>شهادة بنكية للحساب الجاري (Attestation de RIB) باسم الجمعية.</li>
@@ -1820,72 +1820,72 @@ export function DonationsAdminTabs({
             </div>
 
             {/* Step 2 */}
-            <div className="p-5 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6] space-y-2">
+            <div className="p-5 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6] space-y-2">
               <div className="flex items-center gap-2">
-                <span className="w-6 h-6 rounded-full bg-[#0d3b43] text-white flex items-center justify-center font-bold text-xs">
+                <span className="w-6 h-6 rounded-full bg-[#231f20] text-white flex items-center justify-center font-bold text-xs">
                   2
                 </span>
-                <h3 className="text-sm font-black text-[#08242a]">
+                <h3 className="text-sm font-black text-[#231f20]">
                   الحصول على المفاتيح وضبط الإعدادات في لوحة التحكم
                 </h3>
               </div>
-              <p className="text-xs text-[#445457] leading-relaxed">
+              <p className="text-xs text-[#5C5A55] leading-relaxed">
                 بعد توقيع العقد، يزودكم CMI بمعرف التاجر <strong>(Merchant ID)</strong> والمفتاح السري المشترك <strong>(Store Key)</strong>. أدخلهما في لسان تبويب &quot;بوابة الأداء والحساب البنكي&quot; أعلاه.
               </p>
             </div>
 
             {/* Step 3 */}
-            <div className="p-5 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6] space-y-3">
+            <div className="p-5 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6] space-y-3">
               <div className="flex items-center gap-2">
-                <span className="w-6 h-6 rounded-full bg-[#0d3b43] text-white flex items-center justify-center font-bold text-xs">
+                <span className="w-6 h-6 rounded-full bg-[#231f20] text-white flex items-center justify-center font-bold text-xs">
                   3
                 </span>
-                <h3 className="text-sm font-black text-[#08242a]">
+                <h3 className="text-sm font-black text-[#231f20]">
                   عناوين الروابط المرجعية (Callback & Webhook URLs)
                 </h3>
               </div>
-              <p className="text-xs text-[#445457] leading-relaxed">
+              <p className="text-xs text-[#5C5A55] leading-relaxed">
                 قدم هذه الروابط المجهزة تلقائياً لفريق الدعم التقني في CMI لإتمام التفعيل:
               </p>
               <div className="space-y-2 text-xs font-mono">
                 <div className="p-3 rounded-xl bg-white border border-[#e5e0d6]">
-                  <span className="text-3xs text-[#819598] block">رابط الإشعار الآمن المباشر (Server-to-Server Callback):</span>
-                  <span className="text-[#0d3b43] font-bold">https://amycc.org/api/donations/cmi-callback</span>
+                  <span className="text-3xs text-[#5C5A55] block">رابط الإشعار الآمن المباشر (Server-to-Server Callback):</span>
+                  <span className="text-[#231f20] font-bold">https://amycc.org/api/donations/cmi-callback</span>
                 </div>
                 <div className="p-3 rounded-xl bg-white border border-[#e5e0d6]">
-                  <span className="text-3xs text-[#819598] block">رابط العودة عند نجاح المعاملة (OK Return URL):</span>
-                  <span className="text-[#0d3b43] font-bold">https://amycc.org/ar/support?status=success</span>
+                  <span className="text-3xs text-[#5C5A55] block">رابط العودة عند نجاح المعاملة (OK Return URL):</span>
+                  <span className="text-[#231f20] font-bold">https://amycc.org/ar/support?status=success</span>
                 </div>
                 <div className="p-3 rounded-xl bg-white border border-[#e5e0d6]">
-                  <span className="text-3xs text-[#819598] block">رابط العودة عند إلغاء أو فشل المعاملة (Fail Return URL):</span>
-                  <span className="text-[#0d3b43] font-bold">https://amycc.org/ar/support?status=failed</span>
+                  <span className="text-3xs text-[#5C5A55] block">رابط العودة عند إلغاء أو فشل المعاملة (Fail Return URL):</span>
+                  <span className="text-[#231f20] font-bold">https://amycc.org/ar/support?status=failed</span>
                 </div>
               </div>
             </div>
 
             {/* Step 4 */}
-            <div className="p-5 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6] space-y-2">
+            <div className="p-5 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6] space-y-2">
               <div className="flex items-center gap-2">
-                <span className="w-6 h-6 rounded-full bg-[#0d3b43] text-white flex items-center justify-center font-bold text-xs">
+                <span className="w-6 h-6 rounded-full bg-[#231f20] text-white flex items-center justify-center font-bold text-xs">
                   4
                 </span>
-                <h3 className="text-sm font-black text-[#08242a]">
+                <h3 className="text-sm font-black text-[#231f20]">
                   بطاقات الاختبار في بيئة التجربة (CMI Sandbox Test Cards)
                 </h3>
               </div>
-              <p className="text-xs text-[#445457] leading-relaxed">
+              <p className="text-xs text-[#5C5A55] leading-relaxed">
                 في بيئة الاختبار التجريبية (Test Mode)، يمكنك استخدام بطاقات CMI الوهمية:
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs font-mono">
                 <div className="p-3 rounded-xl bg-white border border-[#e5e0d6]">
-                  <span className="text-3xs text-[#819598] block">بطاقة مغربية ناجحة (Visa/CMI):</span>
-                  <span className="text-[#08242a] font-bold">4000 0000 0000 0001</span>
-                  <span className="text-3xs text-[#5f7174] block mt-0.5">Exp: 12/28 | CVV: 123 | OTP: 123456</span>
+                  <span className="text-3xs text-[#5C5A55] block">بطاقة مغربية ناجحة (Visa/CMI):</span>
+                  <span className="text-[#231f20] font-bold">4000 0000 0000 0001</span>
+                  <span className="text-3xs text-[#5C5A55] block mt-0.5">Exp: 12/28 | CVV: 123 | OTP: 123456</span>
                 </div>
                 <div className="p-3 rounded-xl bg-white border border-[#e5e0d6]">
-                  <span className="text-3xs text-[#819598] block">بطاقة مرفوضة (رصيد غير كاف):</span>
-                  <span className="text-[#08242a] font-bold">4000 0000 0000 0002</span>
-                  <span className="text-3xs text-[#5f7174] block mt-0.5">Exp: 12/28 | CVV: 123</span>
+                  <span className="text-3xs text-[#5C5A55] block">بطاقة مرفوضة (رصيد غير كاف):</span>
+                  <span className="text-[#231f20] font-bold">4000 0000 0000 0002</span>
+                  <span className="text-3xs text-[#5C5A55] block mt-0.5">Exp: 12/28 | CVV: 123</span>
                 </div>
               </div>
             </div>
@@ -1897,7 +1897,7 @@ export function DonationsAdminTabs({
       <div className="sticky bottom-4 z-40 bg-white/95 backdrop-blur-md p-4 rounded-2xl border border-[#e5e0d6] shadow-xl flex items-center justify-between gap-4">
         <div className="flex items-center gap-2">
           <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
-          <span className="text-xs font-bold text-[#08242a]">
+          <span className="text-xs font-bold text-[#231f20]">
             لوحة إعدادات الدعم وبوابات الأداء جاهزة للحفظ
           </span>
         </div>
@@ -1906,7 +1906,7 @@ export function DonationsAdminTabs({
           <button
             type="button"
             onClick={() => setConfig(initialConfig)}
-            className="px-4 py-2 rounded-xl text-xs font-bold text-[#5f7174] hover:text-[#08242a] transition-colors cursor-pointer"
+            className="px-4 py-2 rounded-xl text-xs font-bold text-[#5C5A55] hover:text-[#231f20] transition-colors cursor-pointer"
           >
             إلغاء التغييرات
           </button>
@@ -1915,7 +1915,7 @@ export function DonationsAdminTabs({
             type="button"
             onClick={handleSaveAll}
             disabled={savingConfig}
-            className="px-6 py-2.5 rounded-xl text-xs font-bold bg-[#0d3b43] text-white hover:bg-[#14505b] active:scale-98 transition-all disabled:opacity-50 flex items-center gap-2 shadow-sm cursor-pointer"
+            className="px-6 py-2.5 rounded-xl text-xs font-bold bg-[#231f20] text-white hover:bg-[#d2a82b] active:scale-98 transition-all disabled:opacity-50 flex items-center gap-2 shadow-sm cursor-pointer"
           >
             {savingConfig ? (
               <>
@@ -1938,63 +1938,63 @@ export function DonationsAdminTabs({
       {viewingRecord && (
         <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
           <div className="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto border border-[#e5e0d6] shadow-2xl p-6 sm:p-8 space-y-6">
-            <div className="flex items-center justify-between border-b border-[#f4ede2] pb-4">
+            <div className="flex items-center justify-between border-b border-[#FEF6CC] pb-4">
               <div>
-                <span className="text-2xs font-extrabold uppercase tracking-widest text-[#c85a32]">
+                <span className="text-2xs font-extrabold uppercase tracking-widest text-[#bd3227]">
                   بطاقة إشعار الدعم والمساهمة
                 </span>
-                <h3 className="text-xl font-black text-[#08242a]">{viewingRecord.donor_name}</h3>
+                <h3 className="text-xl font-black text-[#231f20]">{viewingRecord.donor_name}</h3>
               </div>
               <button
                 onClick={() => setViewingRecord(null)}
-                className="w-8 h-8 rounded-full bg-[#faf7f2] hover:bg-[#eae2d3] flex items-center justify-center text-sm font-bold text-[#08242a] cursor-pointer"
+                className="w-8 h-8 rounded-full bg-[#F5F3EE] hover:bg-[#FEF6CC] flex items-center justify-center text-sm font-bold text-[#231f20] cursor-pointer"
               >
                 ✕
               </button>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
-              <div className="p-3.5 rounded-xl bg-[#faf7f2] border border-[#e5e0d6]">
-                <span className="text-3xs text-[#819598] font-bold block mb-1">البريد الإلكتروني</span>
-                <a href={`mailto:${viewingRecord.donor_email}`} className="font-bold text-[#0d3b43] hover:underline font-mono">
+              <div className="p-3.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6]">
+                <span className="text-3xs text-[#5C5A55] font-bold block mb-1">البريد الإلكتروني</span>
+                <a href={`mailto:${viewingRecord.donor_email}`} className="font-bold text-[#231f20] hover:underline font-mono">
                   {viewingRecord.donor_email}
                 </a>
               </div>
 
-              <div className="p-3.5 rounded-xl bg-[#faf7f2] border border-[#e5e0d6]">
-                <span className="text-3xs text-[#819598] font-bold block mb-1">الهاتف للتواصل</span>
-                <span className="font-bold text-[#08242a] font-mono" dir="ltr">
+              <div className="p-3.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6]">
+                <span className="text-3xs text-[#5C5A55] font-bold block mb-1">الهاتف للتواصل</span>
+                <span className="font-bold text-[#231f20] font-mono" dir="ltr">
                   {viewingRecord.donor_phone || 'غير مسجل'}
                 </span>
               </div>
 
-              <div className="p-3.5 rounded-xl bg-[#faf7f2] border border-[#e5e0d6]">
-                <span className="text-3xs text-[#819598] font-bold block mb-1">نوع المساهمة</span>
-                <span className="font-bold text-[#08242a] capitalize">
+              <div className="p-3.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6]">
+                <span className="text-3xs text-[#5C5A55] font-bold block mb-1">نوع المساهمة</span>
+                <span className="font-bold text-[#231f20] capitalize">
                   {viewingRecord.support_type.replace('_', ' ')}
                 </span>
               </div>
 
-              <div className="p-3.5 rounded-xl bg-[#faf7f2] border border-[#e5e0d6]">
-                <span className="text-3xs text-[#819598] font-bold block mb-1">المبلغ المصرح به</span>
-                <span className="font-black text-[#c85a32] text-sm">
+              <div className="p-3.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6]">
+                <span className="text-3xs text-[#5C5A55] font-bold block mb-1">المبلغ المصرح به</span>
+                <span className="font-black text-[#bd3227] text-sm">
                   {viewingRecord.amount ? `${viewingRecord.amount.toLocaleString()} ${viewingRecord.currency}` : 'مساهمة عينية'}
                 </span>
               </div>
             </div>
 
-            <div className="p-4 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6] space-y-2">
-              <span className="text-2xs font-extrabold text-[#08242a] block">
+            <div className="p-4 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6] space-y-2">
+              <span className="text-2xs font-extrabold text-[#231f20] block">
                 ملاحظات وتفاصيل المبادرة:
               </span>
-              <p className="text-xs text-[#2d3b3e] leading-relaxed whitespace-pre-line font-medium">
+              <p className="text-xs text-[#231f20] leading-relaxed whitespace-pre-line font-medium">
                 {viewingRecord.notes || 'لا توجد ملاحظات إضافية.'}
               </p>
             </div>
 
-            <div className="flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-[#f4ede2]">
+            <div className="flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-[#FEF6CC]">
               <div className="flex items-center gap-2">
-                <span className="text-2xs font-bold text-[#5f7174]">الحالة:</span>
+                <span className="text-2xs font-bold text-[#5C5A55]">الحالة:</span>
                 <span
                   className={`px-3 py-1 rounded-full text-2xs font-bold ${
                     viewingRecord.status === 'confirmed' || viewingRecord.status === 'approved'
@@ -2038,12 +2038,12 @@ export function DonationsAdminTabs({
       {(isAddingPackage || editingPackage) && (
         <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
           <div className="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto border border-[#e5e0d6] shadow-2xl p-6 sm:p-8 space-y-6">
-            <div className="flex items-center justify-between border-b border-[#f4ede2] pb-4">
+            <div className="flex items-center justify-between border-b border-[#FEF6CC] pb-4">
               <div>
-                <span className="text-2xs font-extrabold uppercase tracking-widest text-[#c85a32]">
+                <span className="text-2xs font-extrabold uppercase tracking-widest text-[#bd3227]">
                   {editingPackage ? 'تعديل باقة رعاية' : 'إضافة باقة رعاية جديدة'}
                 </span>
-                <h3 className="text-xl font-black text-[#08242a]">
+                <h3 className="text-xl font-black text-[#231f20]">
                   {editingPackage ? packageForm.nameAr || 'تعديل الباقة' : 'باقة رعاية جديدة'}
                 </h3>
               </div>
@@ -2052,7 +2052,7 @@ export function DonationsAdminTabs({
                   setEditingPackage(null)
                   setIsAddingPackage(false)
                 }}
-                className="w-8 h-8 rounded-full bg-[#faf7f2] hover:bg-[#eae2d3] flex items-center justify-center text-sm font-bold text-[#08242a] cursor-pointer"
+                className="w-8 h-8 rounded-full bg-[#F5F3EE] hover:bg-[#FEF6CC] flex items-center justify-center text-sm font-bold text-[#231f20] cursor-pointer"
               >
                 ✕
               </button>
@@ -2061,7 +2061,7 @@ export function DonationsAdminTabs({
             <div className="space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <div>
-                  <label className="block text-2xs font-extrabold text-[#08242a] mb-1">
+                  <label className="block text-2xs font-extrabold text-[#231f20] mb-1">
                     اسم الباقة (العربية) *
                   </label>
                   <input
@@ -2069,11 +2069,11 @@ export function DonationsAdminTabs({
                     value={packageForm.nameAr}
                     onChange={(e) => setPackageForm((p) => ({ ...p, nameAr: e.target.value }))}
                     placeholder="مثال: راعي محترفات الشباب"
-                    className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#faf7f2] font-bold"
+                    className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE] font-bold"
                   />
                 </div>
                 <div>
-                  <label className="block text-2xs font-extrabold text-[#08242a] mb-1">
+                  <label className="block text-2xs font-extrabold text-[#231f20] mb-1">
                     (Français)
                   </label>
                   <input
@@ -2081,11 +2081,11 @@ export function DonationsAdminTabs({
                     value={packageForm.nameFr}
                     onChange={(e) => setPackageForm((p) => ({ ...p, nameFr: e.target.value }))}
                     placeholder="Ex: Parrain des Ateliers"
-                    className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#faf7f2]"
+                    className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE]"
                   />
                 </div>
                 <div>
-                  <label className="block text-2xs font-extrabold text-[#08242a] mb-1">
+                  <label className="block text-2xs font-extrabold text-[#231f20] mb-1">
                     (English)
                   </label>
                   <input
@@ -2093,36 +2093,36 @@ export function DonationsAdminTabs({
                     value={packageForm.nameEn}
                     onChange={(e) => setPackageForm((p) => ({ ...p, nameEn: e.target.value }))}
                     placeholder="Ex: Youth Workshops Patron"
-                    className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#faf7f2]"
+                    className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE]"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                 <div>
-                  <label className="block text-2xs font-extrabold text-[#08242a] mb-1">
+                  <label className="block text-2xs font-extrabold text-[#231f20] mb-1">
                     المبلغ (بالدرهم)
                   </label>
                   <input
                     type="number"
                     value={packageForm.amount}
                     onChange={(e) => setPackageForm((p) => ({ ...p, amount: Number(e.target.value) }))}
-                    className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#faf7f2] font-bold text-[#c85a32]"
+                    className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE] font-bold text-[#bd3227]"
                   />
                 </div>
                 <div>
-                  <label className="block text-2xs font-extrabold text-[#08242a] mb-1">
+                  <label className="block text-2xs font-extrabold text-[#231f20] mb-1">
                     العملة
                   </label>
                   <input
                     type="text"
                     value={packageForm.currency}
                     onChange={(e) => setPackageForm((p) => ({ ...p, currency: e.target.value }))}
-                    className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#faf7f2]"
+                    className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE]"
                   />
                 </div>
                 <div className="sm:col-span-2">
-                  <label className="block text-2xs font-extrabold text-[#08242a] mb-1">
+                  <label className="block text-2xs font-extrabold text-[#231f20] mb-1">
                     النطاق والمدة (العربية)
                   </label>
                   <input
@@ -2130,25 +2130,25 @@ export function DonationsAdminTabs({
                     value={packageForm.periodAr}
                     onChange={(e) => setPackageForm((p) => ({ ...p, periodAr: e.target.value }))}
                     placeholder="موسم ثقافي كامل"
-                    className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#faf7f2]"
+                    className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE]"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-2xs font-extrabold text-[#08242a] mb-1">
+                <label className="block text-2xs font-extrabold text-[#231f20] mb-1">
                   نبذة عن باقة الرعاية (العربية)
                 </label>
                 <textarea
                   rows={2}
                   value={packageForm.descriptionAr}
                   onChange={(e) => setPackageForm((p) => ({ ...p, descriptionAr: e.target.value }))}
-                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#faf7f2]"
+                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE]"
                 />
               </div>
 
               <div>
-                <label className="block text-2xs font-extrabold text-[#08242a] mb-1">
+                <label className="block text-2xs font-extrabold text-[#231f20] mb-1">
                   الأثر الميداني المباشر الذي تحققه (العربية)
                 </label>
                 <input
@@ -2156,12 +2156,12 @@ export function DonationsAdminTabs({
                   value={packageForm.impactAr}
                   onChange={(e) => setPackageForm((p) => ({ ...p, impactAr: e.target.value }))}
                   placeholder="مثال: إنتاج عرض مسرحي ختامي مجاني يستفيد منه 25 شاباً"
-                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#faf7f2]"
+                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE]"
                 />
               </div>
 
               <div>
-                <label className="block text-2xs font-extrabold text-[#08242a] mb-1">
+                <label className="block text-2xs font-extrabold text-[#231f20] mb-1">
                   الامتيازات الممنوحة للراعي (العربية - سطر لكل امتياز)
                 </label>
                 <textarea
@@ -2169,41 +2169,41 @@ export function DonationsAdminTabs({
                   value={packagePrivilegesArText}
                   onChange={(e) => setPackagePrivilegesArText(e.target.value)}
                   placeholder="إدراج الشعار في المطبوعات الرسمية&#10;دعوات VIP لحضور العروض&#10;وصل إبراء مالي وقانوني معتمد"
-                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#faf7f2]"
+                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE]"
                 />
               </div>
 
               <div className="flex flex-wrap items-center gap-6 pt-2">
-                <label className="flex items-center gap-2 text-xs font-bold text-[#08242a] cursor-pointer">
+                <label className="flex items-center gap-2 text-xs font-bold text-[#231f20] cursor-pointer">
                   <input
                     type="checkbox"
                     checked={packageForm.recommended || false}
                     onChange={(e) => setPackageForm((p) => ({ ...p, recommended: e.target.checked }))}
-                    className="rounded text-[#c85a32] focus:ring-[#c85a32]"
+                    className="rounded text-[#bd3227] focus:ring-[#bd3227]"
                   />
                   <span>تمييز كـ &quot;الباقة الأكثر طلباً&quot; ⭐</span>
                 </label>
 
-                <label className="flex items-center gap-2 text-xs font-bold text-[#08242a] cursor-pointer">
+                <label className="flex items-center gap-2 text-xs font-bold text-[#231f20] cursor-pointer">
                   <input
                     type="checkbox"
                     checked={packageForm.active !== false}
                     onChange={(e) => setPackageForm((p) => ({ ...p, active: e.target.checked }))}
-                    className="rounded text-[#0d3b43] focus:ring-[#0d3b43]"
+                    className="rounded text-[#231f20] focus:ring-[#231f20]"
                   />
                   <span>تفعيل الباقة في الواجهة العامة</span>
                 </label>
               </div>
             </div>
 
-            <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#f4ede2]">
+            <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#FEF6CC]">
               <button
                 type="button"
                 onClick={() => {
                   setEditingPackage(null)
                   setIsAddingPackage(false)
                 }}
-                className="px-4 py-2 rounded-xl text-xs font-bold text-[#5f7174] hover:text-[#08242a] transition-colors cursor-pointer"
+                className="px-4 py-2 rounded-xl text-xs font-bold text-[#5C5A55] hover:text-[#231f20] transition-colors cursor-pointer"
               >
                 إلغاء
               </button>
@@ -2211,7 +2211,7 @@ export function DonationsAdminTabs({
               <button
                 type="button"
                 onClick={handleSavePackageModal}
-                className="px-5 py-2.5 rounded-xl text-xs font-bold bg-[#0d3b43] text-white hover:bg-[#14505b] active:scale-98 transition-all shadow-2xs cursor-pointer"
+                className="px-5 py-2.5 rounded-xl text-xs font-bold bg-[#231f20] text-white hover:bg-[#d2a82b] active:scale-98 transition-all shadow-2xs cursor-pointer"
               >
                 تأكيد الباقة في القائمة
               </button>

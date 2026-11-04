@@ -43,7 +43,7 @@ export function RichTextEditor({
       attributes: {
         dir,
         class: [
-          'prose prose-sm max-w-none min-h-[200px] p-4 focus:outline-none text-[#08242a]',
+          'prose prose-sm max-w-none min-h-[200px] p-4 focus:outline-none text-[#231f20]',
           dir === 'rtl' ? 'text-right' : 'text-left',
         ].join(' '),
       },
@@ -61,11 +61,11 @@ export function RichTextEditor({
 
   return (
     <div
-      className="border border-[#e5e0d6] rounded-xl overflow-hidden focus-within:ring-2 focus-within:ring-[#0d3b43] focus-within:border-[#0d3b43] transition-all bg-white"
+      className="border border-[#e5e0d6] rounded-xl overflow-hidden focus-within:ring-2 focus-within:ring-[#231f20] focus-within:border-[#231f20] transition-all bg-white"
       dir={dir}
     >
       {/* Toolbar */}
-      <div className="flex flex-wrap items-center gap-1 px-3 py-2 bg-[#faf7f2] border-b border-[#e5e0d6]">
+      <div className="flex flex-wrap items-center gap-1 px-3 py-2 bg-[#F5F3EE] border-b border-[#e5e0d6]">
         <ToolbarButton
           onClick={() => editor?.chain().focus().toggleBold().run()}
           active={editor?.isActive('bold')}
@@ -155,8 +155,8 @@ export function RichTextEditor({
       <EditorContent editor={editor} />
 
       {/* Character count + hidden input */}
-      <div className="px-3 py-1.5 bg-[#faf7f2] border-t border-[#f4ede2] flex justify-end">
-        <span className="text-3xs text-[#819598] font-mono">{count} characters</span>
+      <div className="px-3 py-1.5 bg-[#F5F3EE] border-t border-[#FEF6CC] flex justify-end">
+        <span className="text-3xs text-[#5C5A55] font-mono">{count} characters</span>
       </div>
 
       <input ref={hiddenRef} type="hidden" name={name} required={required} />
@@ -186,8 +186,8 @@ function ToolbarButton({
       className={[
         'px-2 py-1 rounded text-xs font-bold transition-all',
         active
-          ? 'bg-[#0d3b43] text-white'
-          : 'text-[#445457] hover:bg-[#ebe1d1] disabled:opacity-40 disabled:cursor-not-allowed',
+          ? 'bg-[#231f20] text-white'
+          : 'text-[#5C5A55] hover:bg-[#FEF6CC] disabled:opacity-40 disabled:cursor-not-allowed',
       ].join(' ')}
     >
       {children}

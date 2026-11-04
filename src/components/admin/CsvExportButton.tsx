@@ -51,7 +51,7 @@ export function CsvExportButton({
     <button
       type="button"
       onClick={handleExport}
-      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold text-[#0d3b43] bg-white border border-[#cfc7b9] hover:bg-[#faf7f2] transition-colors shadow-2xs"
+      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold text-[#231f20] bg-white border border-[#cfc7b9] hover:bg-[#F5F3EE] transition-colors shadow-2xs"
       title="Download CSV spreadsheet"
     >
       <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>

@@ -111,14 +111,14 @@ export function VolunteerForm({ locale }: { locale: string }) {
 
       {/* Full Name */}
       <div>
-        <label className="block text-2xs font-bold uppercase tracking-wider text-[#08242a] mb-2">
+        <label className="block text-2xs font-bold uppercase tracking-wider text-[#231f20] mb-2">
           {isAr ? 'الاسم الكامل *' : isFr ? 'Nom complet *' : 'Full Name *'}
         </label>
         <input
           type="text"
           name="fullName"
           required
-          className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] text-xs text-[#08242a] focus:border-[#0d3b43] focus:ring-1 focus:ring-[#0d3b43] outline-none"
+          className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] text-xs text-[#231f20] focus:border-[#231f20] focus:ring-1 focus:ring-[#231f20] outline-none"
           placeholder={isAr ? 'الاسم والنسب' : isFr ? 'Votre nom et prénom' : 'Your full name'}
         />
         {result?.errors?.fullName && (
@@ -129,14 +129,14 @@ export function VolunteerForm({ locale }: { locale: string }) {
       {/* Email & Phone */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <div>
-          <label className="block text-2xs font-bold uppercase tracking-wider text-[#08242a] mb-2">
+          <label className="block text-2xs font-bold uppercase tracking-wider text-[#231f20] mb-2">
             {isAr ? 'البريد الإلكتروني *' : isFr ? 'Adresse e-mail *' : 'Email Address *'}
           </label>
           <input
             type="email"
             name="email"
             required
-            className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] text-xs text-[#08242a] focus:border-[#0d3b43] focus:ring-1 focus:ring-[#0d3b43] outline-none"
+            className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] text-xs text-[#231f20] focus:border-[#231f20] focus:ring-1 focus:ring-[#231f20] outline-none"
             placeholder="name@example.com"
           />
           {result?.errors?.email && (
@@ -145,14 +145,14 @@ export function VolunteerForm({ locale }: { locale: string }) {
         </div>
 
         <div>
-          <label className="block text-2xs font-bold uppercase tracking-wider text-[#08242a] mb-2">
+          <label className="block text-2xs font-bold uppercase tracking-wider text-[#231f20] mb-2">
             {isAr ? 'رقم الهاتف (للتواصل السريع) *' : isFr ? 'Téléphone *' : 'Phone Number *'}
           </label>
           <input
             type="tel"
             name="phone"
             required
-            className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] text-xs text-[#08242a] focus:border-[#0d3b43] focus:ring-1 focus:ring-[#0d3b43] outline-none"
+            className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] text-xs text-[#231f20] focus:border-[#231f20] focus:ring-1 focus:ring-[#231f20] outline-none"
             placeholder="+212 6..."
           />
           {result?.errors?.phone && (
@@ -164,14 +164,14 @@ export function VolunteerForm({ locale }: { locale: string }) {
       {/* City & Availability */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <div>
-          <label className="block text-2xs font-bold uppercase tracking-wider text-[#08242a] mb-2">
+          <label className="block text-2xs font-bold uppercase tracking-wider text-[#231f20] mb-2">
             {isAr ? 'المدينة / الإقامة *' : isFr ? 'Ville de résidence *' : 'City *'}
           </label>
           <input
             type="text"
             name="city"
             required
-            className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] text-xs text-[#08242a] focus:border-[#0d3b43] focus:ring-1 focus:ring-[#0d3b43] outline-none"
+            className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] text-xs text-[#231f20] focus:border-[#231f20] focus:ring-1 focus:ring-[#231f20] outline-none"
             placeholder={
               isAr
                 ? 'مدينتك بالمغرب'
@@ -186,12 +186,12 @@ export function VolunteerForm({ locale }: { locale: string }) {
         </div>
 
         <div>
-          <label className="block text-2xs font-bold uppercase tracking-wider text-[#08242a] mb-2">
+          <label className="block text-2xs font-bold uppercase tracking-wider text-[#231f20] mb-2">
             {isAr ? 'أوقات التفرغ للتطوع' : isFr ? 'Disponibilité' : 'Availability'}
           </label>
           <select
             name="availability"
-            className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] text-xs text-[#08242a] bg-[#faf7f2] font-semibold focus:border-[#0d3b43] outline-none"
+            className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] text-xs text-[#231f20] bg-[#F5F3EE] font-semibold focus:border-[#231f20] outline-none"
           >
             <option value="weekends">
               {isAr
@@ -227,7 +227,7 @@ export function VolunteerForm({ locale }: { locale: string }) {
 
       {/* Areas of Interest in Volunteering */}
       <div>
-        <label className="block text-2xs font-bold uppercase tracking-wider text-[#08242a] mb-2">
+        <label className="block text-2xs font-bold uppercase tracking-wider text-[#231f20] mb-2">
           {isAr
             ? 'المهام التطوعية المفضلة لديك:'
             : isFr
@@ -238,15 +238,15 @@ export function VolunteerForm({ locale }: { locale: string }) {
           {interestOptions.map((opt) => (
             <label
               key={opt.value}
-              className="flex items-center gap-2.5 p-3 rounded-xl border border-[#e5e0d6] bg-[#faf7f2] hover:bg-white cursor-pointer text-xs transition-colors"
+              className="flex items-center gap-2.5 p-3 rounded-xl border border-[#e5e0d6] bg-[#F5F3EE] hover:bg-white cursor-pointer text-xs transition-colors"
             >
               <input
                 type="checkbox"
                 name="interests"
                 value={opt.value}
-                className="w-4 h-4 text-[#0d3b43] rounded border-[#cfc7b9] focus:ring-[#0d3b43]"
+                className="w-4 h-4 text-[#231f20] rounded border-[#cfc7b9] focus:ring-[#231f20]"
               />
-              <span className="font-semibold text-[#08242a]">{opt.label}</span>
+              <span className="font-semibold text-[#231f20]">{opt.label}</span>
             </label>
           ))}
         </div>
@@ -254,7 +254,7 @@ export function VolunteerForm({ locale }: { locale: string }) {
 
       {/* Skills & Experience */}
       <div>
-        <label className="block text-2xs font-bold uppercase tracking-wider text-[#08242a] mb-2">
+        <label className="block text-2xs font-bold uppercase tracking-wider text-[#231f20] mb-2">
           {isAr
             ? 'المهارات والخبرات السابقة (إن وُجدت) *'
             : isFr
@@ -265,7 +265,7 @@ export function VolunteerForm({ locale }: { locale: string }) {
           name="skills"
           required
           rows={3}
-          className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] text-xs text-[#08242a] focus:border-[#0d3b43] focus:ring-1 focus:ring-[#0d3b43] outline-none"
+          className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] text-xs text-[#231f20] focus:border-[#231f20] focus:ring-1 focus:ring-[#231f20] outline-none"
           placeholder={
             isAr
               ? 'اذكر مهاراتك (تصميم، تنظيم، تصوير، عزف، تواصل...) وتجاربك الجمعوية السابقة...'
@@ -282,7 +282,7 @@ export function VolunteerForm({ locale }: { locale: string }) {
       <button
         type="submit"
         disabled={loading}
-        className="w-full py-3.5 px-6 rounded-xl font-bold text-[#08242a] bg-[#f4ce83] hover:bg-[#fae0a5] disabled:opacity-60 transition-all text-xs shadow-md active:scale-98"
+        className="w-full py-3.5 px-6 rounded-xl font-bold text-[#231f20] bg-[#ffd22f] hover:bg-[#ffd22f] disabled:opacity-60 transition-all text-xs shadow-md active:scale-98"
       >
         {loading
           ? isAr

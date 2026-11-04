@@ -220,11 +220,11 @@ export function FaqManager({ initialItems, defaultItems = [] }: FaqManagerProps)
           <div>
             <div className="flex items-center gap-2">
               <span className="text-xl">❓</span>
-              <h2 className="text-lg font-black text-[#08242a]">
+              <h2 className="text-lg font-black text-[#231f20]">
                 إدارة الأسئلة الشائعة (FAQ CMS)
               </h2>
             </div>
-            <p className="text-xs text-[#5f7174] mt-1">
+            <p className="text-xs text-[#5C5A55] mt-1">
               تحكم كامل في الأسئلة الشائعة المعروضة في الصفحة الرئيسية وصفحة الأسئلة الشائعة بثلاث لغات.
             </p>
           </div>
@@ -233,9 +233,9 @@ export function FaqManager({ initialItems, defaultItems = [] }: FaqManagerProps)
             <button
               type="button"
               onClick={handleAddNew}
-              className="px-4 py-2.5 rounded-xl font-bold text-white bg-[#0d3b43] hover:bg-[#14505b] active:scale-98 transition-all text-xs inline-flex items-center gap-2 shadow-2xs cursor-pointer"
+              className="px-4 py-2.5 rounded-xl font-bold text-white bg-[#231f20] hover:bg-[#d2a82b] active:scale-98 transition-all text-xs inline-flex items-center gap-2 shadow-2xs cursor-pointer"
             >
-              <svg className="w-4 h-4 text-[#f4ce83]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+              <svg className="w-4 h-4 text-[#ffd22f]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
               </svg>
               <span>إضافة سؤال جديد</span>
@@ -244,7 +244,7 @@ export function FaqManager({ initialItems, defaultItems = [] }: FaqManagerProps)
             <button
               type="button"
               onClick={handleRestoreDefaults}
-              className="px-3.5 py-2.5 rounded-xl text-3xs font-bold text-[#5f7174] bg-[#faf7f2] border border-[#e5e0d6] hover:bg-[#f0ebe1] active:scale-98 transition-all cursor-pointer"
+              className="px-3.5 py-2.5 rounded-xl text-3xs font-bold text-[#5C5A55] bg-[#F5F3EE] border border-[#e5e0d6] hover:bg-[#FEF6CC] active:scale-98 transition-all cursor-pointer"
               title="استعادة الأسئلة الافتراضية الرسمية"
             >
               استعادة الافتراضي
@@ -256,8 +256,8 @@ export function FaqManager({ initialItems, defaultItems = [] }: FaqManagerProps)
               disabled={saving}
               className={`px-5 py-2.5 rounded-xl font-black text-xs inline-flex items-center gap-2 transition-all shadow-md cursor-pointer disabled:opacity-60 ${
                 hasUnsavedChanges
-                  ? 'bg-[#c85a32] hover:bg-[#a84420] text-white animate-pulse'
-                  : 'bg-[#08242a] hover:bg-[#0d3b43] text-white'
+                  ? 'bg-[#bd3227] hover:bg-[#a3261c] text-white animate-pulse'
+                  : 'bg-[#231f20] hover:bg-[#231f20] text-white'
               }`}
             >
               {saving ? (
@@ -279,22 +279,22 @@ export function FaqManager({ initialItems, defaultItems = [] }: FaqManagerProps)
         </div>
 
         {/* Stats Row */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-3 border-t border-[#f0ebe1]">
-          <div className="p-3 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6]">
-            <span className="text-3xs font-bold text-[#819598] block">إجمالي الأسئلة</span>
-            <span className="text-xl font-black text-[#08242a]">{totalCount}</span>
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-3 border-t border-[#FEF6CC]">
+          <div className="p-3 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6]">
+            <span className="text-3xs font-bold text-[#5C5A55] block">إجمالي الأسئلة</span>
+            <span className="text-xl font-black text-[#231f20]">{totalCount}</span>
           </div>
-          <div className="p-3 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6]">
-            <span className="text-3xs font-bold text-[#819598] block">معروض في الرئيسية</span>
-            <span className="text-xl font-black text-[#0d3b43]">{homeCount}</span>
+          <div className="p-3 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6]">
+            <span className="text-3xs font-bold text-[#5C5A55] block">معروض في الرئيسية</span>
+            <span className="text-xl font-black text-[#231f20]">{homeCount}</span>
           </div>
-          <div className="p-3 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6]">
-            <span className="text-3xs font-bold text-[#819598] block">منشور ومرئي</span>
+          <div className="p-3 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6]">
+            <span className="text-3xs font-bold text-[#5C5A55] block">منشور ومرئي</span>
             <span className="text-xl font-black text-emerald-700">{publishedCount}</span>
           </div>
-          <div className="p-3 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6]">
-            <span className="text-3xs font-bold text-[#819598] block">حالة التعديلات</span>
-            <span className={`text-xs font-bold block mt-1 ${hasUnsavedChanges ? 'text-[#c85a32]' : 'text-emerald-700'}`}>
+          <div className="p-3 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6]">
+            <span className="text-3xs font-bold text-[#5C5A55] block">حالة التعديلات</span>
+            <span className={`text-xs font-bold block mt-1 ${hasUnsavedChanges ? 'text-[#bd3227]' : 'text-emerald-700'}`}>
               {hasUnsavedChanges ? '⚠️ تعديلات غير محفوظة' : '✓ كافة التغييرات محفوظة'}
             </span>
           </div>
@@ -322,7 +322,7 @@ export function FaqManager({ initialItems, defaultItems = [] }: FaqManagerProps)
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="بحث في نصوص الأسئلة والإجابات..."
-            className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] focus:border-[#0d3b43] outline-none"
+            className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] focus:border-[#231f20] outline-none"
           />
           {searchQuery && (
             <button
@@ -341,8 +341,8 @@ export function FaqManager({ initialItems, defaultItems = [] }: FaqManagerProps)
             onClick={() => setSelectedCategory('all')}
             className={`px-3 py-1.5 rounded-xl text-3xs font-bold transition-all cursor-pointer ${
               selectedCategory === 'all'
-                ? 'bg-[#08242a] text-white shadow-2xs'
-                : 'bg-[#faf7f2] text-[#5f7174] hover:bg-[#f0ebe1]'
+                ? 'bg-[#231f20] text-white shadow-2xs'
+                : 'bg-[#F5F3EE] text-[#5C5A55] hover:bg-[#FEF6CC]'
             }`}
           >
             الكل ({items.length})
@@ -356,8 +356,8 @@ export function FaqManager({ initialItems, defaultItems = [] }: FaqManagerProps)
                 onClick={() => setSelectedCategory(catKey)}
                 className={`px-3 py-1.5 rounded-xl text-3xs font-bold transition-all cursor-pointer ${
                   selectedCategory === catKey
-                    ? 'bg-[#08242a] text-white shadow-2xs'
-                    : 'bg-[#faf7f2] text-[#5f7174] hover:bg-[#f0ebe1]'
+                    ? 'bg-[#231f20] text-white shadow-2xs'
+                    : 'bg-[#F5F3EE] text-[#5C5A55] hover:bg-[#FEF6CC]'
                 }`}
               >
                 {labelAr} ({count})
@@ -372,8 +372,8 @@ export function FaqManager({ initialItems, defaultItems = [] }: FaqManagerProps)
         {filteredItems.length === 0 ? (
           <div className="p-12 text-center bg-white rounded-3xl border border-[#e5e0d6]">
             <span className="text-3xl block mb-2">🔍</span>
-            <h3 className="text-sm font-bold text-[#08242a]">لم يتم العثور على أي أسئلة مطابقة</h3>
-            <p className="text-3xs text-[#819598] mt-1">جرب تغيير عبارة البحث أو اختيار تصنيف مختلف.</p>
+            <h3 className="text-sm font-bold text-[#231f20]">لم يتم العثور على أي أسئلة مطابقة</h3>
+            <p className="text-3xs text-[#5C5A55] mt-1">جرب تغيير عبارة البحث أو اختيار تصنيف مختلف.</p>
           </div>
         ) : (
           filteredItems.map((item) => {
@@ -393,7 +393,7 @@ export function FaqManager({ initialItems, defaultItems = [] }: FaqManagerProps)
                         type="button"
                         onClick={() => moveItem(items.findIndex((i) => i.id === item.id), 'up')}
                         disabled={items.findIndex((i) => i.id === item.id) === 0}
-                        className="w-6 h-6 rounded-md bg-[#faf7f2] hover:bg-[#e5e0d6] disabled:opacity-30 disabled:pointer-events-none flex items-center justify-center text-3xs font-bold text-[#08242a] cursor-pointer"
+                        className="w-6 h-6 rounded-md bg-[#F5F3EE] hover:bg-[#e5e0d6] disabled:opacity-30 disabled:pointer-events-none flex items-center justify-center text-3xs font-bold text-[#231f20] cursor-pointer"
                         title="تحريك لأعلى"
                       >
                         ▲
@@ -402,14 +402,14 @@ export function FaqManager({ initialItems, defaultItems = [] }: FaqManagerProps)
                         type="button"
                         onClick={() => moveItem(items.findIndex((i) => i.id === item.id), 'down')}
                         disabled={items.findIndex((i) => i.id === item.id) === items.length - 1}
-                        className="w-6 h-6 rounded-md bg-[#faf7f2] hover:bg-[#e5e0d6] disabled:opacity-30 disabled:pointer-events-none flex items-center justify-center text-3xs font-bold text-[#08242a] cursor-pointer"
+                        className="w-6 h-6 rounded-md bg-[#F5F3EE] hover:bg-[#e5e0d6] disabled:opacity-30 disabled:pointer-events-none flex items-center justify-center text-3xs font-bold text-[#231f20] cursor-pointer"
                         title="تحريك لأسفل"
                       >
                         ▼
                       </button>
                     </div>
 
-                    <span className="w-8 h-8 rounded-xl bg-[#faf7f2] border border-[#e5e0d6] flex items-center justify-center text-xs font-black text-[#0d3b43]">
+                    <span className="w-8 h-8 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] flex items-center justify-center text-xs font-black text-[#231f20]">
                       #{item.order}
                     </span>
                   </div>
@@ -450,16 +450,16 @@ export function FaqManager({ initialItems, defaultItems = [] }: FaqManagerProps)
                       </button>
                     </div>
 
-                    <h4 className="text-sm font-bold text-[#08242a] leading-snug">
+                    <h4 className="text-sm font-bold text-[#231f20] leading-snug">
                       {item.questionAr}
                     </h4>
 
-                    <p className="text-xs text-[#5f7174] leading-relaxed">
+                    <p className="text-xs text-[#5C5A55] leading-relaxed">
                       {item.answerAr}
                     </p>
 
                     {/* Multilingual Indicators */}
-                    <div className="pt-2 flex flex-wrap items-center gap-3 text-4xs text-[#819598]">
+                    <div className="pt-2 flex flex-wrap items-center gap-3 text-4xs text-[#5C5A55]">
                       <span className={item.questionFr ? 'text-emerald-700 font-bold' : 'text-gray-400'}>
                         {item.questionFr ? '✓ الفرنسية متوفرة' : '○ لا توجد ترجمة فرنسية'}
                       </span>
@@ -475,7 +475,7 @@ export function FaqManager({ initialItems, defaultItems = [] }: FaqManagerProps)
                     <button
                       type="button"
                       onClick={() => handleEdit(item)}
-                      className="px-3 py-1.5 rounded-xl text-3xs font-bold bg-[#faf7f2] border border-[#e5e0d6] hover:bg-[#0d3b43] hover:text-white transition-all text-[#08242a] cursor-pointer inline-flex items-center gap-1"
+                      className="px-3 py-1.5 rounded-xl text-3xs font-bold bg-[#F5F3EE] border border-[#e5e0d6] hover:bg-[#231f20] hover:text-white transition-all text-[#231f20] cursor-pointer inline-flex items-center gap-1"
                     >
                       <span>✏️</span>
                       <span>تعديل</span>
@@ -502,17 +502,17 @@ export function FaqManager({ initialItems, defaultItems = [] }: FaqManagerProps)
       {isModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs overflow-y-auto">
           <div className="bg-white rounded-3xl border border-[#e5e0d6] w-full max-w-2xl max-h-[90vh] overflow-y-auto p-6 shadow-2xl space-y-5 my-8">
-            <div className="flex items-center justify-between pb-3 border-b border-[#f0ebe1]">
+            <div className="flex items-center justify-between pb-3 border-b border-[#FEF6CC]">
               <div className="flex items-center gap-2">
                 <span className="text-xl">❓</span>
-                <h3 className="text-base font-black text-[#08242a]">
+                <h3 className="text-base font-black text-[#231f20]">
                   {editingItem ? 'تعديل السؤال والإجابة' : 'إضافة سؤال جديد'}
                 </h3>
               </div>
               <button
                 type="button"
                 onClick={() => setIsModalOpen(false)}
-                className="w-8 h-8 rounded-full bg-[#faf7f2] text-[#819598] hover:text-[#08242a] flex items-center justify-center font-bold text-sm cursor-pointer"
+                className="w-8 h-8 rounded-full bg-[#F5F3EE] text-[#5C5A55] hover:text-[#231f20] flex items-center justify-center font-bold text-sm cursor-pointer"
               >
                 ✕
               </button>
@@ -520,9 +520,9 @@ export function FaqManager({ initialItems, defaultItems = [] }: FaqManagerProps)
 
             <form onSubmit={handleModalSave} className="space-y-4">
               {/* Category & Visibility Settings */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 p-3.5 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6]">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 p-3.5 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6]">
                 <div>
-                  <label className="block text-3xs font-bold text-[#445457] mb-1">
+                  <label className="block text-3xs font-bold text-[#5C5A55] mb-1">
                     التصنيف (Category)
                   </label>
                   <select
@@ -533,7 +533,7 @@ export function FaqManager({ initialItems, defaultItems = [] }: FaqManagerProps)
                         category: e.target.value as FaqItemConfig['category'],
                       })
                     }
-                    className="w-full px-3 py-1.5 text-xs rounded-xl border border-[#e5e0d6] bg-white focus:border-[#0d3b43] outline-none"
+                    className="w-full px-3 py-1.5 text-xs rounded-xl border border-[#e5e0d6] bg-white focus:border-[#231f20] outline-none"
                   >
                     <option value="general">عامة (General)</option>
                     <option value="membership">العضوية والانخراط (Membership)</option>
@@ -551,9 +551,9 @@ export function FaqManager({ initialItems, defaultItems = [] }: FaqManagerProps)
                     onChange={(e) =>
                       setModalForm({ ...modalForm, showOnHome: e.target.checked })
                     }
-                    className="w-4 h-4 rounded text-[#0d3b43] focus:ring-[#0d3b43]"
+                    className="w-4 h-4 rounded text-[#231f20] focus:ring-[#231f20]"
                   />
-                  <label htmlFor="modalShowOnHome" className="text-3xs font-bold text-[#445457] cursor-pointer">
+                  <label htmlFor="modalShowOnHome" className="text-3xs font-bold text-[#5C5A55] cursor-pointer">
                     عرض بالرئيسية (Home)
                   </label>
                 </div>
@@ -568,7 +568,7 @@ export function FaqManager({ initialItems, defaultItems = [] }: FaqManagerProps)
                     }
                     className="w-4 h-4 rounded text-emerald-600 focus:ring-emerald-600"
                   />
-                  <label htmlFor="modalPublished" className="text-3xs font-bold text-[#445457] cursor-pointer">
+                  <label htmlFor="modalPublished" className="text-3xs font-bold text-[#5C5A55] cursor-pointer">
                     نشر السؤال (Published)
                   </label>
                 </div>
@@ -581,7 +581,7 @@ export function FaqManager({ initialItems, defaultItems = [] }: FaqManagerProps)
                   <span>اللغة العربية (إلزامية — الركيزة الأساسية)</span>
                 </div>
                 <div>
-                  <label className="block text-3xs font-bold text-[#445457] mb-1">
+                  <label className="block text-3xs font-bold text-[#5C5A55] mb-1">
                     السؤال بالعربية *
                   </label>
                   <input
@@ -590,11 +590,11 @@ export function FaqManager({ initialItems, defaultItems = [] }: FaqManagerProps)
                     value={modalForm.questionAr || ''}
                     onChange={(e) => setModalForm({ ...modalForm, questionAr: e.target.value })}
                     placeholder="مثال: كيف يمكنني الانخراط في الجمعية؟"
-                    className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] focus:border-[#0d3b43] outline-none bg-white"
+                    className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] focus:border-[#231f20] outline-none bg-white"
                   />
                 </div>
                 <div>
-                  <label className="block text-3xs font-bold text-[#445457] mb-1">
+                  <label className="block text-3xs font-bold text-[#5C5A55] mb-1">
                     الإجابة بالعربية *
                   </label>
                   <textarea
@@ -603,19 +603,19 @@ export function FaqManager({ initialItems, defaultItems = [] }: FaqManagerProps)
                     value={modalForm.answerAr || ''}
                     onChange={(e) => setModalForm({ ...modalForm, answerAr: e.target.value })}
                     placeholder="اكتب الإجابة المفصلة والواضحة هنا..."
-                    className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] focus:border-[#0d3b43] outline-none bg-white leading-relaxed"
+                    className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] focus:border-[#231f20] outline-none bg-white leading-relaxed"
                   />
                 </div>
               </div>
 
               {/* French (Optional) */}
-              <div className="space-y-3 p-4 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6]">
-                <div className="flex items-center gap-1.5 text-xs font-bold text-[#0d3b43]">
+              <div className="space-y-3 p-4 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6]">
+                <div className="flex items-center gap-1.5 text-xs font-bold text-[#231f20]">
                   <span>🇫🇷</span>
                   <span>الترجمة بالفرنسية (Français — اختياري)</span>
                 </div>
                 <div>
-                  <label className="block text-3xs font-bold text-[#445457] mb-1">
+                  <label className="block text-3xs font-bold text-[#5C5A55] mb-1">
                     Question en Français
                   </label>
                   <input
@@ -624,11 +624,11 @@ export function FaqManager({ initialItems, defaultItems = [] }: FaqManagerProps)
                     value={modalForm.questionFr || ''}
                     onChange={(e) => setModalForm({ ...modalForm, questionFr: e.target.value })}
                     placeholder="ex: Comment devenir membre de l'AMYCC ?"
-                    className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] focus:border-[#0d3b43] outline-none bg-white text-left font-sans"
+                    className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] focus:border-[#231f20] outline-none bg-white text-left font-sans"
                   />
                 </div>
                 <div>
-                  <label className="block text-3xs font-bold text-[#445457] mb-1">
+                  <label className="block text-3xs font-bold text-[#5C5A55] mb-1">
                     Réponse en Français
                   </label>
                   <textarea
@@ -637,19 +637,19 @@ export function FaqManager({ initialItems, defaultItems = [] }: FaqManagerProps)
                     value={modalForm.answerFr || ''}
                     onChange={(e) => setModalForm({ ...modalForm, answerFr: e.target.value })}
                     placeholder="Réponse détaillée..."
-                    className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] focus:border-[#0d3b43] outline-none bg-white text-left font-sans leading-relaxed"
+                    className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] focus:border-[#231f20] outline-none bg-white text-left font-sans leading-relaxed"
                   />
                 </div>
               </div>
 
               {/* English (Optional) */}
-              <div className="space-y-3 p-4 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6]">
-                <div className="flex items-center gap-1.5 text-xs font-bold text-[#0d3b43]">
+              <div className="space-y-3 p-4 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6]">
+                <div className="flex items-center gap-1.5 text-xs font-bold text-[#231f20]">
                   <span>🇬🇧</span>
                   <span>الترجمة بالإنجليزية (English — اختياري)</span>
                 </div>
                 <div>
-                  <label className="block text-3xs font-bold text-[#445457] mb-1">
+                  <label className="block text-3xs font-bold text-[#5C5A55] mb-1">
                     Question in English
                   </label>
                   <input
@@ -658,11 +658,11 @@ export function FaqManager({ initialItems, defaultItems = [] }: FaqManagerProps)
                     value={modalForm.questionEn || ''}
                     onChange={(e) => setModalForm({ ...modalForm, questionEn: e.target.value })}
                     placeholder="e.g. How can I become an active member?"
-                    className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] focus:border-[#0d3b43] outline-none bg-white text-left font-sans"
+                    className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] focus:border-[#231f20] outline-none bg-white text-left font-sans"
                   />
                 </div>
                 <div>
-                  <label className="block text-3xs font-bold text-[#445457] mb-1">
+                  <label className="block text-3xs font-bold text-[#5C5A55] mb-1">
                     Answer in English
                   </label>
                   <textarea
@@ -671,23 +671,23 @@ export function FaqManager({ initialItems, defaultItems = [] }: FaqManagerProps)
                     value={modalForm.answerEn || ''}
                     onChange={(e) => setModalForm({ ...modalForm, answerEn: e.target.value })}
                     placeholder="Detailed answer..."
-                    className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] focus:border-[#0d3b43] outline-none bg-white text-left font-sans leading-relaxed"
+                    className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] focus:border-[#231f20] outline-none bg-white text-left font-sans leading-relaxed"
                   />
                 </div>
               </div>
 
               {/* Modal Buttons */}
-              <div className="flex items-center justify-end gap-2.5 pt-3 border-t border-[#f0ebe1]">
+              <div className="flex items-center justify-end gap-2.5 pt-3 border-t border-[#FEF6CC]">
                 <button
                   type="button"
                   onClick={() => setIsModalOpen(false)}
-                  className="px-4 py-2 rounded-xl text-xs font-bold text-[#5f7174] bg-[#faf7f2] hover:bg-[#f0ebe1] transition-colors cursor-pointer"
+                  className="px-4 py-2 rounded-xl text-xs font-bold text-[#5C5A55] bg-[#F5F3EE] hover:bg-[#FEF6CC] transition-colors cursor-pointer"
                 >
                   إلغاء
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2 rounded-xl text-xs font-bold text-white bg-[#0d3b43] hover:bg-[#14505b] transition-all cursor-pointer shadow-xs"
+                  className="px-5 py-2 rounded-xl text-xs font-bold text-white bg-[#231f20] hover:bg-[#d2a82b] transition-all cursor-pointer shadow-xs"
                 >
                   {editingItem ? 'تحديث في القائمة' : 'إضافة إلى القائمة'}
                 </button>

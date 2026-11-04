@@ -29,42 +29,42 @@ export default async function AdminTeamPage() {
       {/* Breadcrumb & Navigation */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2 border-b border-[#e5e0d6]">
         <div>
-          <div className="flex items-center gap-2 text-3xs font-bold text-[#819598] mb-1">
-            <Link href="/admin" className="hover:text-[#0d3b43] transition-colors">لوحة التحكم</Link>
+          <div className="flex items-center gap-2 text-3xs font-bold text-[#5C5A55] mb-1">
+            <Link href="/admin" className="hover:text-[#231f20] transition-colors">لوحة التحكم</Link>
             <span>/</span>
-            <Link href="/admin/pages" className="hover:text-[#0d3b43] transition-colors">الصفحات والأقسام</Link>
+            <Link href="/admin/pages" className="hover:text-[#231f20] transition-colors">الصفحات والأقسام</Link>
             <span>/</span>
-            <span className="text-[#08242a]">فريق العمل واللجان (Team & Commissions)</span>
+            <span className="text-[#231f20]">فريق العمل واللجان (Team & Commissions)</span>
           </div>
-          <h1 className="text-2xl font-black text-[#08242a] tracking-tight">
+          <h1 className="text-2xl font-black text-[#231f20] tracking-tight">
             هيكلة الفريق واللجان الوظيفية المتخصصة — Team & Commissions CMS
           </h1>
-          <p className="text-xs text-[#5f7174] mt-1">
+          <p className="text-xs text-[#5C5A55] mt-1">
             إدارة متكاملة لأعضاء المكتب التنفيذي ورفع صورهم، إلى جانب التحكم الكامل في اللجان الوظيفية الست وتدخلاتها الميدانية.
           </p>
         </div>
 
         {/* Public Preview Links */}
         <div className="flex items-center gap-2">
-          <span className="text-3xs text-[#819598] font-bold">معاينة الواجهة العامة:</span>
+          <span className="text-3xs text-[#5C5A55] font-bold">معاينة الواجهة العامة:</span>
           <Link
             href="/ar/team"
             target="_blank"
-            className="px-2.5 py-1 rounded-lg bg-white border border-[#e5e0d6] hover:bg-[#0d3b43] hover:text-white text-3xs font-bold text-[#08242a] transition-all shadow-2xs"
+            className="px-2.5 py-1 rounded-lg bg-white border border-[#e5e0d6] hover:bg-[#231f20] hover:text-white text-3xs font-bold text-[#231f20] transition-all shadow-2xs"
           >
             عربي ↗
           </Link>
           <Link
             href="/fr/team"
             target="_blank"
-            className="px-2.5 py-1 rounded-lg bg-white border border-[#e5e0d6] hover:bg-[#0d3b43] hover:text-white text-3xs font-bold text-[#08242a] transition-all shadow-2xs"
+            className="px-2.5 py-1 rounded-lg bg-white border border-[#e5e0d6] hover:bg-[#231f20] hover:text-white text-3xs font-bold text-[#231f20] transition-all shadow-2xs"
           >
             FR ↗
           </Link>
           <Link
             href="/en/team"
             target="_blank"
-            className="px-2.5 py-1 rounded-lg bg-white border border-[#e5e0d6] hover:bg-[#0d3b43] hover:text-white text-3xs font-bold text-[#08242a] transition-all shadow-2xs"
+            className="px-2.5 py-1 rounded-lg bg-white border border-[#e5e0d6] hover:bg-[#231f20] hover:text-white text-3xs font-bold text-[#231f20] transition-all shadow-2xs"
           >
             EN ↗
           </Link>

@@ -26,7 +26,7 @@ export default async function NewProgramPage() {
           </svg>
         </Link>
         <div>
-          <h1 className="text-2xl font-extrabold text-[#0a0f1d]">Create New Program</h1>
+          <h1 className="text-2xl font-extrabold text-[#181516]">Create New Program</h1>
           <p className="text-xs text-slate-500 mt-0.5">
             Define program details and trilingual translations (Arabic, French, English).
           </p>

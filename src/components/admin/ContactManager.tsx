@@ -132,8 +132,8 @@ export function ContactManager({ initialConfig, defaultConfig }: ContactManagerP
           onClick={() => setActiveTab('channels')}
           className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer ${
             activeTab === 'channels'
-              ? 'bg-[#0d3b43] text-white shadow-xs'
-              : 'text-[#445457] hover:text-[#08242a] hover:bg-[#faf7f2]'
+              ? 'bg-[#231f20] text-white shadow-xs'
+              : 'text-[#5C5A55] hover:text-[#231f20] hover:bg-[#F5F3EE]'
           }`}
         >
           <span>📞</span>
@@ -145,8 +145,8 @@ export function ContactManager({ initialConfig, defaultConfig }: ContactManagerP
           onClick={() => setActiveTab('hero')}
           className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer ${
             activeTab === 'hero'
-              ? 'bg-[#0d3b43] text-white shadow-xs'
-              : 'text-[#445457] hover:text-[#08242a] hover:bg-[#faf7f2]'
+              ? 'bg-[#231f20] text-white shadow-xs'
+              : 'text-[#5C5A55] hover:text-[#231f20] hover:bg-[#F5F3EE]'
           }`}
         >
           <span>🖼️</span>
@@ -158,8 +158,8 @@ export function ContactManager({ initialConfig, defaultConfig }: ContactManagerP
           onClick={() => setActiveTab('topics')}
           className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer ${
             activeTab === 'topics'
-              ? 'bg-[#99620b] text-white shadow-xs'
-              : 'text-[#445457] hover:text-[#08242a] hover:bg-[#faf7f2]'
+              ? 'bg-[#d2a82b] text-white shadow-xs'
+              : 'text-[#5C5A55] hover:text-[#231f20] hover:bg-[#F5F3EE]'
           }`}
         >
           <span>📋</span>
@@ -171,8 +171,8 @@ export function ContactManager({ initialConfig, defaultConfig }: ContactManagerP
           onClick={() => setActiveTab('social')}
           className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer ${
             activeTab === 'social'
-              ? 'bg-[#0d3b43] text-white shadow-xs'
-              : 'text-[#445457] hover:text-[#08242a] hover:bg-[#faf7f2]'
+              ? 'bg-[#231f20] text-white shadow-xs'
+              : 'text-[#5C5A55] hover:text-[#231f20] hover:bg-[#F5F3EE]'
           }`}
         >
           <span>🌐</span>
@@ -185,12 +185,12 @@ export function ContactManager({ initialConfig, defaultConfig }: ContactManagerP
           ============================================================ */}
       {activeTab === 'channels' && (
         <div className="p-6 sm:p-8 rounded-3xl bg-white border border-[#e5e0d6] shadow-subtle space-y-6">
-          <div className="border-b border-[#f0ebe1] pb-4">
-            <h2 className="text-xl font-black text-[#08242a] tracking-tight flex items-center gap-2">
+          <div className="border-b border-[#FEF6CC] pb-4">
+            <h2 className="text-xl font-black text-[#231f20] tracking-tight flex items-center gap-2">
               <span>📞</span>
               <span>قنوات الاتصال المباشرة ومقر الجمعية</span>
             </h2>
-            <p className="text-xs text-[#5f7174] mt-1">
+            <p className="text-xs text-[#5C5A55] mt-1">
               إدارة عناوين البريد الرسمي، أرقام الهاتف والواتساب، والعنوان الجغرافي للمقر بمراكش وجهات المملكة.
             </p>
           </div>
@@ -198,7 +198,7 @@ export function ContactManager({ initialConfig, defaultConfig }: ContactManagerP
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             {/* Primary Email */}
             <div>
-              <label className="block text-2xs font-bold text-[#5f7174] uppercase tracking-wider mb-1">
+              <label className="block text-2xs font-bold text-[#5C5A55] uppercase tracking-wider mb-1">
                 البريد الإلكتروني الرسمي الأساسي (Primary Email) *
               </label>
               <input
@@ -206,13 +206,13 @@ export function ContactManager({ initialConfig, defaultConfig }: ContactManagerP
                 value={config.channels.primaryEmail}
                 onChange={(e) => updateChannel('primaryEmail', e.target.value)}
                 placeholder="contact@amycc.org"
-                className="w-full px-3.5 py-2.5 rounded-xl bg-[#faf7f2] border border-[#e5e0d6] text-xs text-[#08242a] font-mono focus:bg-white focus:outline-none focus:border-[#0d3b43]"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] font-mono focus:bg-white focus:outline-none focus:border-[#231f20]"
               />
             </div>
 
             {/* Secondary Email */}
             <div>
-              <label className="block text-2xs font-bold text-[#5f7174] uppercase tracking-wider mb-1">
+              <label className="block text-2xs font-bold text-[#5C5A55] uppercase tracking-wider mb-1">
                 بريد الإدارة / المراسلات المؤسساتية (Secondary / Bureau Email)
               </label>
               <input
@@ -220,13 +220,13 @@ export function ContactManager({ initialConfig, defaultConfig }: ContactManagerP
                 value={config.channels.secondaryEmail ?? ''}
                 onChange={(e) => updateChannel('secondaryEmail', e.target.value)}
                 placeholder="direction@amycc.org"
-                className="w-full px-3.5 py-2.5 rounded-xl bg-[#faf7f2] border border-[#e5e0d6] text-xs text-[#08242a] font-mono focus:bg-white focus:outline-none focus:border-[#0d3b43]"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] font-mono focus:bg-white focus:outline-none focus:border-[#231f20]"
               />
             </div>
 
             {/* Official Phone */}
             <div>
-              <label className="block text-2xs font-bold text-[#5f7174] uppercase tracking-wider mb-1">
+              <label className="block text-2xs font-bold text-[#5C5A55] uppercase tracking-wider mb-1">
                 رقم الهاتف الرسمي (Official Phone) *
               </label>
               <input
@@ -234,13 +234,13 @@ export function ContactManager({ initialConfig, defaultConfig }: ContactManagerP
                 value={config.channels.phone}
                 onChange={(e) => updateChannel('phone', e.target.value)}
                 placeholder="+212 5 24 00 00 00"
-                className="w-full px-3.5 py-2.5 rounded-xl bg-[#faf7f2] border border-[#e5e0d6] text-xs text-[#08242a] font-mono focus:bg-white focus:outline-none focus:border-[#0d3b43]"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] font-mono focus:bg-white focus:outline-none focus:border-[#231f20]"
               />
             </div>
 
             {/* WhatsApp Number */}
             <div>
-              <label className="block text-2xs font-bold text-[#5f7174] uppercase tracking-wider mb-1">
+              <label className="block text-2xs font-bold text-[#5C5A55] uppercase tracking-wider mb-1">
                 رقم الواتساب للتواصل السريع (WhatsApp Business)
               </label>
               <input
@@ -248,13 +248,13 @@ export function ContactManager({ initialConfig, defaultConfig }: ContactManagerP
                 value={config.channels.whatsapp ?? ''}
                 onChange={(e) => updateChannel('whatsapp', e.target.value)}
                 placeholder="+212 6 00 00 00 00"
-                className="w-full px-3.5 py-2.5 rounded-xl bg-[#faf7f2] border border-[#e5e0d6] text-xs text-[#08242a] font-mono focus:bg-white focus:outline-none focus:border-[#0d3b43]"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] font-mono focus:bg-white focus:outline-none focus:border-[#231f20]"
               />
             </div>
 
             {/* Address AR */}
             <div className="md:col-span-2">
-              <label className="block text-2xs font-bold text-[#5f7174] uppercase tracking-wider mb-1">
+              <label className="block text-2xs font-bold text-[#5C5A55] uppercase tracking-wider mb-1">
                 العنوان الجغرافي للمقر (بالعربية) *
               </label>
               <input
@@ -262,13 +262,13 @@ export function ContactManager({ initialConfig, defaultConfig }: ContactManagerP
                 value={config.channels.addressAr}
                 onChange={(e) => updateChannel('addressAr', e.target.value)}
                 placeholder="شارع محمد السادس، جليز، مراكش، المملكة المغربية"
-                className="w-full px-3.5 py-2.5 rounded-xl bg-[#faf7f2] border border-[#e5e0d6] text-xs text-[#08242a] focus:bg-white focus:outline-none focus:border-[#0d3b43]"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
               />
             </div>
 
             {/* Address FR & EN */}
             <div>
-              <label className="block text-2xs font-bold text-[#5f7174] uppercase tracking-wider mb-1">
+              <label className="block text-2xs font-bold text-[#5C5A55] uppercase tracking-wider mb-1">
                 العنوان الجغرافي (Français)
               </label>
               <input
@@ -276,12 +276,12 @@ export function ContactManager({ initialConfig, defaultConfig }: ContactManagerP
                 value={config.channels.addressFr ?? ''}
                 onChange={(e) => updateChannel('addressFr', e.target.value)}
                 placeholder="Avenue Mohammed VI, Guéliz, Marrakech, Maroc"
-                className="w-full px-3.5 py-2.5 rounded-xl bg-[#faf7f2] border border-[#e5e0d6] text-xs text-[#08242a] focus:bg-white focus:outline-none focus:border-[#0d3b43]"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
               />
             </div>
 
             <div>
-              <label className="block text-2xs font-bold text-[#5f7174] uppercase tracking-wider mb-1">
+              <label className="block text-2xs font-bold text-[#5C5A55] uppercase tracking-wider mb-1">
                 العنوان الجغرافي (English)
               </label>
               <input
@@ -289,13 +289,13 @@ export function ContactManager({ initialConfig, defaultConfig }: ContactManagerP
                 value={config.channels.addressEn ?? ''}
                 onChange={(e) => updateChannel('addressEn', e.target.value)}
                 placeholder="Mohammed VI Avenue, Gueliz, Marrakech, Morocco"
-                className="w-full px-3.5 py-2.5 rounded-xl bg-[#faf7f2] border border-[#e5e0d6] text-xs text-[#08242a] focus:bg-white focus:outline-none focus:border-[#0d3b43]"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
               />
             </div>
 
             {/* Working Hours AR */}
             <div className="md:col-span-2">
-              <label className="block text-2xs font-bold text-[#5f7174] uppercase tracking-wider mb-1">
+              <label className="block text-2xs font-bold text-[#5C5A55] uppercase tracking-wider mb-1">
                 أوقات وساعات العمل والاستقبال (بالعربية) *
               </label>
               <input
@@ -303,13 +303,13 @@ export function ContactManager({ initialConfig, defaultConfig }: ContactManagerP
                 value={config.channels.workingHoursAr}
                 onChange={(e) => updateChannel('workingHoursAr', e.target.value)}
                 placeholder="من الاثنين إلى الجمعة: 09:00 - 18:00 (السبت للورشات الميدانية)"
-                className="w-full px-3.5 py-2.5 rounded-xl bg-[#faf7f2] border border-[#e5e0d6] text-xs text-[#08242a] focus:bg-white focus:outline-none focus:border-[#0d3b43]"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
               />
             </div>
 
             {/* Working Hours FR & EN */}
             <div>
-              <label className="block text-2xs font-bold text-[#5f7174] uppercase tracking-wider mb-1">
+              <label className="block text-2xs font-bold text-[#5C5A55] uppercase tracking-wider mb-1">
                 أوقات العمل (Français)
               </label>
               <input
@@ -317,12 +317,12 @@ export function ContactManager({ initialConfig, defaultConfig }: ContactManagerP
                 value={config.channels.workingHoursFr ?? ''}
                 onChange={(e) => updateChannel('workingHoursFr', e.target.value)}
                 placeholder="Du Lundi au Vendredi : 09h00 - 18h00"
-                className="w-full px-3.5 py-2.5 rounded-xl bg-[#faf7f2] border border-[#e5e0d6] text-xs text-[#08242a] focus:bg-white focus:outline-none focus:border-[#0d3b43]"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
               />
             </div>
 
             <div>
-              <label className="block text-2xs font-bold text-[#5f7174] uppercase tracking-wider mb-1">
+              <label className="block text-2xs font-bold text-[#5C5A55] uppercase tracking-wider mb-1">
                 أوقات العمل (English)
               </label>
               <input
@@ -330,13 +330,13 @@ export function ContactManager({ initialConfig, defaultConfig }: ContactManagerP
                 value={config.channels.workingHoursEn ?? ''}
                 onChange={(e) => updateChannel('workingHoursEn', e.target.value)}
                 placeholder="Monday to Friday: 09:00 - 18:00"
-                className="w-full px-3.5 py-2.5 rounded-xl bg-[#faf7f2] border border-[#e5e0d6] text-xs text-[#08242a] focus:bg-white focus:outline-none focus:border-[#0d3b43]"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
               />
             </div>
 
             {/* Response Time SLA */}
             <div className="md:col-span-2">
-              <label className="block text-2xs font-bold text-[#5f7174] uppercase tracking-wider mb-1">
+              <label className="block text-2xs font-bold text-[#5C5A55] uppercase tracking-wider mb-1">
                 متوسط وقت الرد المتوقع (Response Time SLA)
               </label>
               <input
@@ -344,13 +344,13 @@ export function ContactManager({ initialConfig, defaultConfig }: ContactManagerP
                 value={config.channels.responseTimeAr}
                 onChange={(e) => updateChannel('responseTimeAr', e.target.value)}
                 placeholder="خلال 24 إلى 48 ساعة كحد أقصى (أيام العمل الرسمية)"
-                className="w-full px-3.5 py-2.5 rounded-xl bg-[#faf7f2] border border-[#e5e0d6] text-xs text-[#08242a] focus:bg-white focus:outline-none focus:border-[#0d3b43]"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
               />
             </div>
 
             {/* Google Maps Link */}
             <div className="md:col-span-2">
-              <label className="block text-2xs font-bold text-[#5f7174] uppercase tracking-wider mb-1">
+              <label className="block text-2xs font-bold text-[#5C5A55] uppercase tracking-wider mb-1">
                 رابط خرائط Google المباشر (Google Maps URL)
               </label>
               <input
@@ -358,7 +358,7 @@ export function ContactManager({ initialConfig, defaultConfig }: ContactManagerP
                 value={config.channels.mapLinkUrl ?? ''}
                 onChange={(e) => updateChannel('mapLinkUrl', e.target.value)}
                 placeholder="https://maps.google.com/?q=Marrakech,Morocco"
-                className="w-full px-3.5 py-2.5 rounded-xl bg-[#faf7f2] border border-[#e5e0d6] text-xs text-[#08242a] font-mono focus:bg-white focus:outline-none focus:border-[#0d3b43]"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] font-mono focus:bg-white focus:outline-none focus:border-[#231f20]"
               />
             </div>
           </div>
@@ -370,26 +370,26 @@ export function ContactManager({ initialConfig, defaultConfig }: ContactManagerP
           ============================================================ */}
       {activeTab === 'hero' && (
         <div className="p-6 sm:p-8 rounded-3xl bg-white border border-[#e5e0d6] shadow-subtle space-y-6">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#f0ebe1] pb-4">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#FEF6CC] pb-4">
             <div>
-              <h2 className="text-xl font-black text-[#08242a] tracking-tight flex items-center gap-2">
+              <h2 className="text-xl font-black text-[#231f20] tracking-tight flex items-center gap-2">
                 <span>🖼️</span>
                 <span>رأس وواجهة صفحة اتصل بنا (Hero Banner)</span>
               </h2>
-              <p className="text-xs text-[#5f7174] mt-1">
+              <p className="text-xs text-[#5C5A55] mt-1">
                 تخصيص الشارة، العنوان الكبير، والفقرة الترحيبية في واجهة الصفحة.
               </p>
             </div>
 
             {/* Language Switcher */}
-            <div className="flex items-center gap-1.5 p-1 bg-[#faf7f2] rounded-xl border border-[#e5e0d6]">
+            <div className="flex items-center gap-1.5 p-1 bg-[#F5F3EE] rounded-xl border border-[#e5e0d6]">
               <button
                 type="button"
                 onClick={() => setActiveLangTab('ar')}
                 className={`px-3 py-1.5 rounded-lg text-xs font-black transition-all cursor-pointer ${
                   activeLangTab === 'ar'
-                    ? 'bg-[#0d3b43] text-white shadow-xs'
-                    : 'text-[#5f7174] hover:text-[#08242a]'
+                    ? 'bg-[#231f20] text-white shadow-xs'
+                    : 'text-[#5C5A55] hover:text-[#231f20]'
                 }`}
               >
                 العربية (AR)
@@ -399,8 +399,8 @@ export function ContactManager({ initialConfig, defaultConfig }: ContactManagerP
                 onClick={() => setActiveLangTab('fr')}
                 className={`px-3 py-1.5 rounded-lg text-xs font-black transition-all cursor-pointer ${
                   activeLangTab === 'fr'
-                    ? 'bg-[#0d3b43] text-white shadow-xs'
-                    : 'text-[#5f7174] hover:text-[#08242a]'
+                    ? 'bg-[#231f20] text-white shadow-xs'
+                    : 'text-[#5C5A55] hover:text-[#231f20]'
                 }`}
               >
                 Français (FR)
@@ -410,8 +410,8 @@ export function ContactManager({ initialConfig, defaultConfig }: ContactManagerP
                 onClick={() => setActiveLangTab('en')}
                 className={`px-3 py-1.5 rounded-lg text-xs font-black transition-all cursor-pointer ${
                   activeLangTab === 'en'
-                    ? 'bg-[#0d3b43] text-white shadow-xs'
-                    : 'text-[#5f7174] hover:text-[#08242a]'
+                    ? 'bg-[#231f20] text-white shadow-xs'
+                    : 'text-[#5C5A55] hover:text-[#231f20]'
                 }`}
               >
                 English (EN)
@@ -425,7 +425,7 @@ export function ContactManager({ initialConfig, defaultConfig }: ContactManagerP
               <>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-2xs font-bold text-[#5f7174] uppercase tracking-wider mb-1">
+                    <label className="block text-2xs font-bold text-[#5C5A55] uppercase tracking-wider mb-1">
                       الوسم العلوي (Eyebrow Tag)
                     </label>
                     <input
@@ -433,11 +433,11 @@ export function ContactManager({ initialConfig, defaultConfig }: ContactManagerP
                       value={config.hero.tagAr ?? ''}
                       onChange={(e) => updateHero('tagAr', e.target.value)}
                       placeholder="بوابة التواصل والإنصات المؤسسي"
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-[#faf7f2] border border-[#e5e0d6] text-xs text-[#08242a] focus:bg-white focus:outline-none focus:border-[#0d3b43]"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
                     />
                   </div>
                   <div>
-                    <label className="block text-2xs font-bold text-[#5f7174] uppercase tracking-wider mb-1">
+                    <label className="block text-2xs font-bold text-[#5C5A55] uppercase tracking-wider mb-1">
                       شارة الاعتماد (Statutory Badge)
                     </label>
                     <input
@@ -445,13 +445,13 @@ export function ContactManager({ initialConfig, defaultConfig }: ContactManagerP
                       value={config.hero.badgeAr ?? ''}
                       onChange={(e) => updateHero('badgeAr', e.target.value)}
                       placeholder="المملكة المغربية • جمعية روح الفنون والثقافة"
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-[#faf7f2] border border-[#e5e0d6] text-xs text-[#08242a] focus:bg-white focus:outline-none focus:border-[#0d3b43]"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-2xs font-bold text-[#5f7174] uppercase tracking-wider mb-1">
+                  <label className="block text-2xs font-bold text-[#5C5A55] uppercase tracking-wider mb-1">
                     العنوان الرئيسي (Headline Title)
                   </label>
                   <textarea
@@ -459,12 +459,12 @@ export function ContactManager({ initialConfig, defaultConfig }: ContactManagerP
                     value={config.hero.titleAr ?? ''}
                     onChange={(e) => updateHero('titleAr', e.target.value)}
                     placeholder="يسعدنا التواصل معكم وبناء جسور التعاون الثقافي والفني"
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#faf7f2] border border-[#e5e0d6] text-xs text-[#08242a] focus:bg-white focus:outline-none focus:border-[#0d3b43]"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-2xs font-bold text-[#5f7174] uppercase tracking-wider mb-1">
+                  <label className="block text-2xs font-bold text-[#5C5A55] uppercase tracking-wider mb-1">
                     الفقرة التقديمية (Description)
                   </label>
                   <textarea
@@ -472,7 +472,7 @@ export function ContactManager({ initialConfig, defaultConfig }: ContactManagerP
                     value={config.hero.descriptionAr ?? ''}
                     onChange={(e) => updateHero('descriptionAr', e.target.value)}
                     placeholder="فريق إدارة الجمعية ومكاتب التنسيق في خدمتكم..."
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#faf7f2] border border-[#e5e0d6] text-xs text-[#08242a] focus:bg-white focus:outline-none focus:border-[#0d3b43]"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
                   />
                 </div>
               </>
@@ -482,7 +482,7 @@ export function ContactManager({ initialConfig, defaultConfig }: ContactManagerP
               <>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-2xs font-bold text-[#5f7174] uppercase tracking-wider mb-1">
+                    <label className="block text-2xs font-bold text-[#5C5A55] uppercase tracking-wider mb-1">
                       Tag Supérieur (Français)
                     </label>
                     <input
@@ -490,11 +490,11 @@ export function ContactManager({ initialConfig, defaultConfig }: ContactManagerP
                       value={config.hero.tagFr ?? ''}
                       onChange={(e) => updateHero('tagFr', e.target.value)}
                       placeholder="CANAL DE COMMUNICATION OFFICIEL"
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-[#faf7f2] border border-[#e5e0d6] text-xs text-[#08242a] focus:bg-white focus:outline-none focus:border-[#0d3b43]"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
                     />
                   </div>
                   <div>
-                    <label className="block text-2xs font-bold text-[#5f7174] uppercase tracking-wider mb-1">
+                    <label className="block text-2xs font-bold text-[#5C5A55] uppercase tracking-wider mb-1">
                       Badge (Français)
                     </label>
                     <input
@@ -502,13 +502,13 @@ export function ContactManager({ initialConfig, defaultConfig }: ContactManagerP
                       value={config.hero.badgeFr ?? ''}
                       onChange={(e) => updateHero('badgeFr', e.target.value)}
                       placeholder="Royaume du Maroc • AMYCC"
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-[#faf7f2] border border-[#e5e0d6] text-xs text-[#08242a] focus:bg-white focus:outline-none focus:border-[#0d3b43]"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-2xs font-bold text-[#5f7174] uppercase tracking-wider mb-1">
+                  <label className="block text-2xs font-bold text-[#5C5A55] uppercase tracking-wider mb-1">
                     Titre Principal (Français)
                   </label>
                   <textarea
@@ -516,12 +516,12 @@ export function ContactManager({ initialConfig, defaultConfig }: ContactManagerP
                     value={config.hero.titleFr ?? ''}
                     onChange={(e) => updateHero('titleFr', e.target.value)}
                     placeholder="Contactez-nous & Développons la Création Culturelle"
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#faf7f2] border border-[#e5e0d6] text-xs text-[#08242a] focus:bg-white focus:outline-none focus:border-[#0d3b43]"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-2xs font-bold text-[#5f7174] uppercase tracking-wider mb-1">
+                  <label className="block text-2xs font-bold text-[#5C5A55] uppercase tracking-wider mb-1">
                     Description (Français)
                   </label>
                   <textarea
@@ -529,7 +529,7 @@ export function ContactManager({ initialConfig, defaultConfig }: ContactManagerP
                     value={config.hero.descriptionFr ?? ''}
                     onChange={(e) => updateHero('descriptionFr', e.target.value)}
                     placeholder="L'équipe de direction de l'AMYCC est à votre disposition..."
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#faf7f2] border border-[#e5e0d6] text-xs text-[#08242a] focus:bg-white focus:outline-none focus:border-[#0d3b43]"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
                   />
                 </div>
               </>
@@ -539,7 +539,7 @@ export function ContactManager({ initialConfig, defaultConfig }: ContactManagerP
               <>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-2xs font-bold text-[#5f7174] uppercase tracking-wider mb-1">
+                    <label className="block text-2xs font-bold text-[#5C5A55] uppercase tracking-wider mb-1">
                       Eyebrow Tag (English)
                     </label>
                     <input
@@ -547,11 +547,11 @@ export function ContactManager({ initialConfig, defaultConfig }: ContactManagerP
                       value={config.hero.tagEn ?? ''}
                       onChange={(e) => updateHero('tagEn', e.target.value)}
                       placeholder="OFFICIAL CONTACT GATEWAY"
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-[#faf7f2] border border-[#e5e0d6] text-xs text-[#08242a] focus:bg-white focus:outline-none focus:border-[#0d3b43]"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
                     />
                   </div>
                   <div>
-                    <label className="block text-2xs font-bold text-[#5f7174] uppercase tracking-wider mb-1">
+                    <label className="block text-2xs font-bold text-[#5C5A55] uppercase tracking-wider mb-1">
                       Badge (English)
                     </label>
                     <input
@@ -559,13 +559,13 @@ export function ContactManager({ initialConfig, defaultConfig }: ContactManagerP
                       value={config.hero.badgeEn ?? ''}
                       onChange={(e) => updateHero('badgeEn', e.target.value)}
                       placeholder="Kingdom of Morocco • AMYCC"
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-[#faf7f2] border border-[#e5e0d6] text-xs text-[#08242a] focus:bg-white focus:outline-none focus:border-[#0d3b43]"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-2xs font-bold text-[#5f7174] uppercase tracking-wider mb-1">
+                  <label className="block text-2xs font-bold text-[#5C5A55] uppercase tracking-wider mb-1">
                     Headline Title (English)
                   </label>
                   <textarea
@@ -573,12 +573,12 @@ export function ContactManager({ initialConfig, defaultConfig }: ContactManagerP
                     value={config.hero.titleEn ?? ''}
                     onChange={(e) => updateHero('titleEn', e.target.value)}
                     placeholder="Connect with Us & Co-Create Cultural Impact in Morocco"
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#faf7f2] border border-[#e5e0d6] text-xs text-[#08242a] focus:bg-white focus:outline-none focus:border-[#0d3b43]"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-2xs font-bold text-[#5f7174] uppercase tracking-wider mb-1">
+                  <label className="block text-2xs font-bold text-[#5C5A55] uppercase tracking-wider mb-1">
                     Description (English)
                   </label>
                   <textarea
@@ -586,7 +586,7 @@ export function ContactManager({ initialConfig, defaultConfig }: ContactManagerP
                     value={config.hero.descriptionEn ?? ''}
                     onChange={(e) => updateHero('descriptionEn', e.target.value)}
                     placeholder="The AMYCC leadership team is at your disposal..."
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#faf7f2] border border-[#e5e0d6] text-xs text-[#08242a] focus:bg-white focus:outline-none focus:border-[#0d3b43]"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
                   />
                 </div>
               </>
@@ -600,13 +600,13 @@ export function ContactManager({ initialConfig, defaultConfig }: ContactManagerP
           ============================================================ */}
       {activeTab === 'topics' && (
         <div className="p-6 sm:p-8 rounded-3xl bg-white border border-[#e5e0d6] shadow-subtle space-y-6">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#f0ebe1] pb-4">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#FEF6CC] pb-4">
             <div>
-              <h2 className="text-xl font-black text-[#08242a] tracking-tight flex items-center gap-2">
+              <h2 className="text-xl font-black text-[#231f20] tracking-tight flex items-center gap-2">
                 <span>📋</span>
                 <span>مواضيع وتصنيفات استمارة المراسلة</span>
               </h2>
-              <p className="text-xs text-[#5f7174] mt-1">
+              <p className="text-xs text-[#5C5A55] mt-1">
                 تحديد الخيارات التي تظهر في القائمة المنسدلة لزوار الموقع عند إرسال رسالة تواصل.
               </p>
             </div>
@@ -614,7 +614,7 @@ export function ContactManager({ initialConfig, defaultConfig }: ContactManagerP
             <button
               type="button"
               onClick={addTopic}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#99620b] hover:bg-[#805008] text-white text-xs font-bold transition-all shadow-xs cursor-pointer"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#d2a82b] hover:bg-[#8c6c16] text-white text-xs font-bold transition-all shadow-xs cursor-pointer"
             >
               <span>+</span>
               <span>إضافة موضوع جديد</span>
@@ -625,10 +625,10 @@ export function ContactManager({ initialConfig, defaultConfig }: ContactManagerP
             {config.formTopics.map((topic, index) => (
               <div
                 key={topic.id}
-                className="p-4 rounded-xl bg-[#faf7f2] border border-[#e5e0d6] flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3"
+                className="p-4 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3"
               >
                 <div className="flex items-center gap-3 flex-1">
-                  <span className="w-6 h-6 rounded-md bg-[#0d3b43]/10 text-[#0d3b43] font-bold text-2xs flex items-center justify-center shrink-0">
+                  <span className="w-6 h-6 rounded-md bg-[#231f20]/10 text-[#231f20] font-bold text-2xs flex items-center justify-center shrink-0">
                     {index + 1}
                   </span>
                   <input
@@ -636,7 +636,7 @@ export function ContactManager({ initialConfig, defaultConfig }: ContactManagerP
                     value={topic.labelAr}
                     onChange={(e) => updateTopic(topic.id, { labelAr: e.target.value })}
                     placeholder="نص الموضوع بالعربية..."
-                    className="flex-1 px-3 py-2 rounded-lg bg-white border border-[#e5e0d6] text-xs text-[#08242a]"
+                    className="flex-1 px-3 py-2 rounded-lg bg-white border border-[#e5e0d6] text-xs text-[#231f20]"
                   />
                 </div>
 
@@ -646,7 +646,7 @@ export function ContactManager({ initialConfig, defaultConfig }: ContactManagerP
                     value={topic.labelFr ?? ''}
                     onChange={(e) => updateTopic(topic.id, { labelFr: e.target.value })}
                     placeholder="Sujet (FR)..."
-                    className="w-48 px-3 py-2 rounded-lg bg-white border border-[#e5e0d6] text-xs text-[#08242a]"
+                    className="w-48 px-3 py-2 rounded-lg bg-white border border-[#e5e0d6] text-xs text-[#231f20]"
                   />
                   <button
                     type="button"
@@ -667,19 +667,19 @@ export function ContactManager({ initialConfig, defaultConfig }: ContactManagerP
           ============================================================ */}
       {activeTab === 'social' && (
         <div className="p-6 sm:p-8 rounded-3xl bg-white border border-[#e5e0d6] shadow-subtle space-y-6">
-          <div className="border-b border-[#f0ebe1] pb-4">
-            <h2 className="text-xl font-black text-[#08242a] tracking-tight flex items-center gap-2">
+          <div className="border-b border-[#FEF6CC] pb-4">
+            <h2 className="text-xl font-black text-[#231f20] tracking-tight flex items-center gap-2">
               <span>🌐</span>
               <span>روابط الحسابات الرسمية على مواقع التواصل</span>
             </h2>
-            <p className="text-xs text-[#5f7174] mt-1">
+            <p className="text-xs text-[#5C5A55] mt-1">
               يتم ربط هذه الروابط مباشرة في صفحة اتصل بنا وفي شريط الفوتر السفلي للموقع.
             </p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-2xs font-bold text-[#5f7174] uppercase tracking-wider mb-1">
+              <label className="block text-2xs font-bold text-[#5C5A55] uppercase tracking-wider mb-1">
                 رابط صفحة فيسبوك (Facebook URL)
               </label>
               <input
@@ -687,12 +687,12 @@ export function ContactManager({ initialConfig, defaultConfig }: ContactManagerP
                 value={config.social.facebook ?? ''}
                 onChange={(e) => updateSocial('facebook', e.target.value)}
                 placeholder="https://facebook.com/amycc.morocco"
-                className="w-full px-3.5 py-2.5 rounded-xl bg-[#faf7f2] border border-[#e5e0d6] text-xs text-[#08242a] font-mono focus:bg-white focus:outline-none focus:border-[#0d3b43]"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] font-mono focus:bg-white focus:outline-none focus:border-[#231f20]"
               />
             </div>
 
             <div>
-              <label className="block text-2xs font-bold text-[#5f7174] uppercase tracking-wider mb-1">
+              <label className="block text-2xs font-bold text-[#5C5A55] uppercase tracking-wider mb-1">
                 رابط حساب إنستغرام (Instagram URL)
               </label>
               <input
@@ -700,12 +700,12 @@ export function ContactManager({ initialConfig, defaultConfig }: ContactManagerP
                 value={config.social.instagram ?? ''}
                 onChange={(e) => updateSocial('instagram', e.target.value)}
                 placeholder="https://instagram.com/amycc.morocco"
-                className="w-full px-3.5 py-2.5 rounded-xl bg-[#faf7f2] border border-[#e5e0d6] text-xs text-[#08242a] font-mono focus:bg-white focus:outline-none focus:border-[#0d3b43]"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] font-mono focus:bg-white focus:outline-none focus:border-[#231f20]"
               />
             </div>
 
             <div>
-              <label className="block text-2xs font-bold text-[#5f7174] uppercase tracking-wider mb-1">
+              <label className="block text-2xs font-bold text-[#5C5A55] uppercase tracking-wider mb-1">
                 رابط حساب لينكد إن (LinkedIn URL)
               </label>
               <input
@@ -713,12 +713,12 @@ export function ContactManager({ initialConfig, defaultConfig }: ContactManagerP
                 value={config.social.linkedin ?? ''}
                 onChange={(e) => updateSocial('linkedin', e.target.value)}
                 placeholder="https://linkedin.com/company/amycc"
-                className="w-full px-3.5 py-2.5 rounded-xl bg-[#faf7f2] border border-[#e5e0d6] text-xs text-[#08242a] font-mono focus:bg-white focus:outline-none focus:border-[#0d3b43]"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] font-mono focus:bg-white focus:outline-none focus:border-[#231f20]"
               />
             </div>
 
             <div>
-              <label className="block text-2xs font-bold text-[#5f7174] uppercase tracking-wider mb-1">
+              <label className="block text-2xs font-bold text-[#5C5A55] uppercase tracking-wider mb-1">
                 رابط قناة يوتيوب (YouTube Channel URL)
               </label>
               <input
@@ -726,7 +726,7 @@ export function ContactManager({ initialConfig, defaultConfig }: ContactManagerP
                 value={config.social.youtube ?? ''}
                 onChange={(e) => updateSocial('youtube', e.target.value)}
                 placeholder="https://youtube.com/@amycc"
-                className="w-full px-3.5 py-2.5 rounded-xl bg-[#faf7f2] border border-[#e5e0d6] text-xs text-[#08242a] font-mono focus:bg-white focus:outline-none focus:border-[#0d3b43]"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] font-mono focus:bg-white focus:outline-none focus:border-[#231f20]"
               />
             </div>
           </div>
@@ -739,14 +739,14 @@ export function ContactManager({ initialConfig, defaultConfig }: ContactManagerP
           <Link
             href="/ar/contact"
             target="_blank"
-            className="px-3 py-1.5 rounded-xl bg-[#faf7f2] hover:bg-[#f0ebe1] text-xs font-bold text-[#0d3b43] border border-[#e5e0d6] transition-colors"
+            className="px-3 py-1.5 rounded-xl bg-[#F5F3EE] hover:bg-[#FEF6CC] text-xs font-bold text-[#231f20] border border-[#e5e0d6] transition-colors"
           >
             معاينة صفحة اتصل بنا ↗
           </Link>
           <button
             type="button"
             onClick={handleReset}
-            className="text-xs text-[#819598] hover:text-[#c85a32] underline cursor-pointer"
+            className="text-xs text-[#5C5A55] hover:text-[#bd3227] underline cursor-pointer"
           >
             استعادة الافتراضي
           </button>
@@ -756,7 +756,7 @@ export function ContactManager({ initialConfig, defaultConfig }: ContactManagerP
           type="button"
           onClick={handleSave}
           disabled={saving}
-          className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-[#0d3b43] hover:bg-[#08242a] text-white text-xs sm:text-sm font-black transition-all shadow-md hover:shadow-lg disabled:opacity-50 cursor-pointer"
+          className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-[#231f20] hover:bg-[#231f20] text-white text-xs sm:text-sm font-black transition-all shadow-md hover:shadow-lg disabled:opacity-50 cursor-pointer"
         >
           <span>{saving ? '⏳' : '💾'}</span>
           <span>{saving ? 'جارٍ الحفظ...' : 'حفظ كافة بيانات التواصل'}</span>

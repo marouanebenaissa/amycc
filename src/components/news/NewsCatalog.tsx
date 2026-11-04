@@ -104,13 +104,13 @@ export function NewsCatalog({ articles, locale, readMoreLabel }: NewsCatalogProp
       case 'press':
         return {
           label: isAr ? 'بيان صحفي' : isFr ? 'Communiqué' : 'Press Release',
-          badgeClass: 'bg-[#fae4dc] text-[#c85a32] border-[#f2c2b0]',
+          badgeClass: 'bg-[#fde8e7] text-[#bd3227] border-[#fde8e7]',
           icon: '📰',
         }
       case 'culture':
         return {
           label: isAr ? 'ثقافة وتراث' : isFr ? 'Culture & Arts' : 'Culture & Heritage',
-          badgeClass: 'bg-[#e6f4f2] text-[#0d3b43] border-[#b8e2db]',
+          badgeClass: 'bg-[#FEF6CC] text-[#231f20] border-[#FEF6CC]',
           icon: '🎭',
         }
       case 'youth':
@@ -128,7 +128,7 @@ export function NewsCatalog({ articles, locale, readMoreLabel }: NewsCatalogProp
       default:
         return {
           label: isAr ? 'خبر الجمعية' : isFr ? 'Vie associative' : 'Association News',
-          badgeClass: 'bg-[#faf7f2] text-[#08242a] border-[#e5e0d6]',
+          badgeClass: 'bg-[#F5F3EE] text-[#231f20] border-[#e5e0d6]',
           icon: '🏛️',
         }
     }
@@ -159,16 +159,16 @@ export function NewsCatalog({ articles, locale, readMoreLabel }: NewsCatalogProp
                 ? 'Rechercher un article, un communiqué ou une annonce...'
                 : 'Search articles, press releases, or keywords...'
             }
-            className="w-full ps-11 pe-4 py-3 sm:py-3.5 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6] text-xs sm:text-sm text-[#08242a] placeholder-[#819598] focus:bg-white focus:border-[#0d3b43] focus:outline-none transition-all"
+            className="w-full ps-11 pe-4 py-3 sm:py-3.5 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs sm:text-sm text-[#231f20] placeholder-[#5C5A55] focus:bg-white focus:border-[#231f20] focus:outline-none transition-all"
           />
-          <span className="absolute start-4 top-1/2 -translate-y-1/2 text-base pointer-events-none text-[#819598]">
+          <span className="absolute start-4 top-1/2 -translate-y-1/2 text-base pointer-events-none text-[#5C5A55]">
             🔍
           </span>
           {searchQuery && (
             <button
               type="button"
               onClick={() => setSearchQuery('')}
-              className="absolute end-4 top-1/2 -translate-y-1/2 text-xs font-bold text-[#819598] hover:text-[#08242a]"
+              className="absolute end-4 top-1/2 -translate-y-1/2 text-xs font-bold text-[#5C5A55] hover:text-[#231f20]"
             >
               ✕
             </button>
@@ -187,8 +187,8 @@ export function NewsCatalog({ articles, locale, readMoreLabel }: NewsCatalogProp
                 onClick={() => setSelectedCategory(cat.id)}
                 className={`px-4 py-2 rounded-xl text-xs font-black shrink-0 transition-all cursor-pointer ${
                   isActive
-                    ? 'bg-[#0d3b43] text-white shadow-2xs scale-102'
-                    : 'bg-[#faf7f2] text-[#445457] hover:bg-[#eae4d9] border border-[#e5e0d6]'
+                    ? 'bg-[#231f20] text-white shadow-2xs scale-102'
+                    : 'bg-[#F5F3EE] text-[#5C5A55] hover:bg-[#FEF6CC] border border-[#e5e0d6]'
                 }`}
               >
                 {label}
@@ -199,7 +199,7 @@ export function NewsCatalog({ articles, locale, readMoreLabel }: NewsCatalogProp
       </div>
 
       {/* Results Count & Reset */}
-      <div className="flex items-center justify-between px-2 text-xs font-bold text-[#5f7174]">
+      <div className="flex items-center justify-between px-2 text-xs font-bold text-[#5C5A55]">
         <span>
           {isAr
             ? `عرض ${filteredArticles.length} من أصل ${articles.length} مادة إخبارية`
@@ -214,7 +214,7 @@ export function NewsCatalog({ articles, locale, readMoreLabel }: NewsCatalogProp
               setSearchQuery('')
               setSelectedCategory('all')
             }}
-            className="text-[#c85a32] hover:underline cursor-pointer"
+            className="text-[#bd3227] hover:underline cursor-pointer"
           >
             {isAr ? 'إعادة ضبط التصفية' : isFr ? 'Réinitialiser les filtres' : 'Reset filters'}
           </button>
@@ -226,7 +226,7 @@ export function NewsCatalog({ articles, locale, readMoreLabel }: NewsCatalogProp
         <div className="relative group rounded-3xl border border-[#e5e0d6] bg-white overflow-hidden shadow-card hover:shadow-xl hover:border-[#cfc7b9] transition-all">
           <div className="grid grid-cols-1 lg:grid-cols-12 items-stretch">
             {/* Visual Cover */}
-            <div className="lg:col-span-7 relative aspect-[16/10] lg:aspect-auto lg:min-h-[380px] bg-[#08242a] overflow-hidden">
+            <div className="lg:col-span-7 relative aspect-[16/10] lg:aspect-auto lg:min-h-[380px] bg-[#231f20] overflow-hidden">
               {featuredArticle.cover_image ? (
                 <ImageWithFallback
                   src={featuredArticle.cover_image}
@@ -237,7 +237,7 @@ export function NewsCatalog({ articles, locale, readMoreLabel }: NewsCatalogProp
                   sizes="(max-width: 1024px) 100vw, 60vw"
                 />
               ) : (
-                <div className="absolute inset-0 bg-gradient-to-br from-[#0d3b43] via-[#08242a] to-[#1a120c] flex items-center justify-center p-8 text-center">
+                <div className="absolute inset-0 bg-gradient-to-br from-[#231f20] via-[#231f20] to-[#181516] flex items-center justify-center p-8 text-center">
                   <div className="absolute inset-0 moroccan-pattern-dark opacity-20" />
                   <span className="relative text-5xl">📰</span>
                 </div>
@@ -246,7 +246,7 @@ export function NewsCatalog({ articles, locale, readMoreLabel }: NewsCatalogProp
 
               {/* Spotlight Badge */}
               <div className="absolute top-4 start-4 z-10 flex items-center gap-2">
-                <span className="px-3.5 py-1.5 rounded-xl text-3xs font-black bg-[#c85a32] text-white shadow-md flex items-center gap-1.5">
+                <span className="px-3.5 py-1.5 rounded-xl text-3xs font-black bg-[#bd3227] text-white shadow-md flex items-center gap-1.5">
                   <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
                   <span>{isAr ? 'مقال مميز' : isFr ? 'À la une' : 'Featured Story'}</span>
                 </span>
@@ -267,7 +267,7 @@ export function NewsCatalog({ articles, locale, readMoreLabel }: NewsCatalogProp
                   })()}
 
                   {featuredArticle.published_at && (
-                    <span className="text-3xs text-[#819598] font-mono flex items-center gap-1">
+                    <span className="text-3xs text-[#5C5A55] font-mono flex items-center gap-1">
                       <span>📅</span>
                       <span>
                         {new Date(featuredArticle.published_at).toLocaleDateString(locale, {
@@ -279,28 +279,28 @@ export function NewsCatalog({ articles, locale, readMoreLabel }: NewsCatalogProp
                     </span>
                   )}
 
-                  <span className="text-3xs text-[#819598] font-bold">
+                  <span className="text-3xs text-[#5C5A55] font-bold">
                     ⏱️ {getReadingTime(featuredArticle.news_translations?.[0]?.excerpt)}
                   </span>
                 </div>
 
-                <h2 className="text-xl sm:text-2xl lg:text-3xl font-black text-[#08242a] leading-tight group-hover:text-[#c85a32] transition-colors">
+                <h2 className="text-xl sm:text-2xl lg:text-3xl font-black text-[#231f20] leading-tight group-hover:text-[#bd3227] transition-colors">
                   <Link href={`/${locale}/news/${featuredArticle.slug}`}>
                     {featuredArticle.news_translations?.[0]?.title || featuredArticle.slug}
                   </Link>
                 </h2>
 
                 {featuredArticle.news_translations?.[0]?.excerpt && (
-                  <p className="text-xs sm:text-sm text-[#445457] leading-relaxed line-clamp-4">
+                  <p className="text-xs sm:text-sm text-[#5C5A55] leading-relaxed line-clamp-4">
                     {featuredArticle.news_translations[0].excerpt}
                   </p>
                 )}
               </div>
 
-              <div className="pt-4 border-t border-[#f4ede2] flex items-center justify-between">
+              <div className="pt-4 border-t border-[#FEF6CC] flex items-center justify-between">
                 <Link
                   href={`/${locale}/news/${featuredArticle.slug}`}
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-extrabold text-xs text-white bg-[#0d3b43] hover:bg-[#14505b] active:scale-98 transition-all shadow-xs"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-extrabold text-xs text-white bg-[#231f20] hover:bg-[#d2a82b] active:scale-98 transition-all shadow-xs"
                 >
                   <span>{readMoreLabel || (isAr ? 'قراءة المقال بالكامل' : isFr ? 'Lire l’article complet' : 'Read Full Story')}</span>
                   <span className="transition-transform group-hover:translate-x-1 rtl:group-hover:-translate-x-1">
@@ -308,7 +308,7 @@ export function NewsCatalog({ articles, locale, readMoreLabel }: NewsCatalogProp
                   </span>
                 </Link>
 
-                <span className="text-3xs font-mono text-[#819598] font-bold">
+                <span className="text-3xs font-mono text-[#5C5A55] font-bold">
                   AMYCC Editorial
                 </span>
               </div>
@@ -338,7 +338,7 @@ export function NewsCatalog({ articles, locale, readMoreLabel }: NewsCatalogProp
               >
                 <div>
                   {/* Article Thumbnail */}
-                  <div className="relative aspect-[16/10] w-full bg-[#08242a] overflow-hidden">
+                  <div className="relative aspect-[16/10] w-full bg-[#231f20] overflow-hidden">
                     {art.cover_image ? (
                       <ImageWithFallback
                         src={art.cover_image}
@@ -349,7 +349,7 @@ export function NewsCatalog({ articles, locale, readMoreLabel }: NewsCatalogProp
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       />
                     ) : (
-                      <div className="absolute inset-0 bg-gradient-to-br from-[#1c1917] via-[#292524] to-[#1c1917] flex items-center justify-center p-6 text-center">
+                      <div className="absolute inset-0 bg-gradient-to-br from-[#231f20] via-[#231f20] to-[#231f20] flex items-center justify-center p-6 text-center">
                         <div className="absolute inset-0 moroccan-pattern-dark opacity-20" />
                         <span className="relative text-3xl">📰</span>
                       </div>
@@ -372,20 +372,20 @@ export function NewsCatalog({ articles, locale, readMoreLabel }: NewsCatalogProp
                   {/* Body Content */}
                   <div className="p-6 space-y-3">
                     {dateFormatted && (
-                      <div className="text-3xs text-[#819598] font-mono flex items-center gap-1">
+                      <div className="text-3xs text-[#5C5A55] font-mono flex items-center gap-1">
                         <span>📅</span>
                         <span>{dateFormatted}</span>
                       </div>
                     )}
 
-                    <h3 className="text-base sm:text-lg font-black text-[#08242a] leading-snug line-clamp-2 group-hover:text-[#c85a32] transition-colors">
+                    <h3 className="text-base sm:text-lg font-black text-[#231f20] leading-snug line-clamp-2 group-hover:text-[#bd3227] transition-colors">
                       <Link href={`/${locale}/news/${art.slug}`} className="hover:underline">
                         {trans.title}
                       </Link>
                     </h3>
 
                     {trans.excerpt && (
-                      <p className="text-xs text-[#445457] leading-relaxed line-clamp-3">
+                      <p className="text-xs text-[#5C5A55] leading-relaxed line-clamp-3">
                         {trans.excerpt}
                       </p>
                     )}
@@ -394,10 +394,10 @@ export function NewsCatalog({ articles, locale, readMoreLabel }: NewsCatalogProp
 
                 {/* Footer Action */}
                 <div className="p-6 pt-0">
-                  <div className="pt-4 border-t border-[#f4ede2] flex items-center justify-between">
+                  <div className="pt-4 border-t border-[#FEF6CC] flex items-center justify-between">
                     <Link
                       href={`/${locale}/news/${art.slug}`}
-                      className="inline-flex items-center gap-1 text-xs font-black text-[#0d3b43] group-hover:text-[#c85a32] transition-colors"
+                      className="inline-flex items-center gap-1 text-xs font-black text-[#231f20] group-hover:text-[#bd3227] transition-colors"
                     >
                       <span>{readMoreLabel || (isAr ? 'قراءة المزيد' : isFr ? 'Lire la suite' : 'Read More')}</span>
                       <span className="transition-transform group-hover:translate-x-1 rtl:group-hover:-translate-x-1">
@@ -405,7 +405,7 @@ export function NewsCatalog({ articles, locale, readMoreLabel }: NewsCatalogProp
                       </span>
                     </Link>
 
-                    <span className="text-4xs font-mono font-bold text-[#819598] uppercase tracking-wider">
+                    <span className="text-4xs font-mono font-bold text-[#5C5A55] uppercase tracking-wider">
                       AMYCC Press
                     </span>
                   </div>
@@ -417,14 +417,14 @@ export function NewsCatalog({ articles, locale, readMoreLabel }: NewsCatalogProp
       ) : filteredArticles.length === 0 ? (
         <div className="bg-white rounded-3xl border border-[#e5e0d6] p-12 text-center max-w-md mx-auto space-y-4 shadow-card">
           <div className="text-4xl">📰</div>
-          <h3 className="text-base font-extrabold text-[#08242a]">
+          <h3 className="text-base font-extrabold text-[#231f20]">
             {isAr
               ? 'لم يتم العثور على أية مقالات'
               : isFr
               ? 'Aucun article trouvé'
               : 'No articles found'}
           </h3>
-          <p className="text-xs text-[#5f7174]">
+          <p className="text-xs text-[#5C5A55]">
             {isAr
               ? 'لم تتطابق أي نتائج مع معايير البحث المحددة. جرب استخدام كلمات مفتاحية أخرى.'
               : isFr
@@ -437,7 +437,7 @@ export function NewsCatalog({ articles, locale, readMoreLabel }: NewsCatalogProp
               setSearchQuery('')
               setSelectedCategory('all')
             }}
-            className="px-4 py-2 rounded-xl text-xs font-bold bg-[#0d3b43] text-white hover:bg-[#14505b] transition-all cursor-pointer"
+            className="px-4 py-2 rounded-xl text-xs font-bold bg-[#231f20] text-white hover:bg-[#d2a82b] transition-all cursor-pointer"
           >
             {isAr ? 'عرض كافة المقالات' : isFr ? 'Voir tous les articles' : 'View all articles'}
           </button>

@@ -44,7 +44,7 @@ export function AdminTopHeader({
         {onToggleMobileMenu && (
           <button
             onClick={onToggleMobileMenu}
-            className="md:hidden p-2 rounded-xl bg-[#faf7f2] hover:bg-[#f4ede2] border border-[#e5e0d6] text-[#08242a] focus:outline-none transition-colors"
+            className="md:hidden p-2 rounded-xl bg-[#F5F3EE] hover:bg-[#FEF6CC] border border-[#e5e0d6] text-[#231f20] focus:outline-none transition-colors"
             aria-label="Toggle menu"
           >
             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -54,8 +54,8 @@ export function AdminTopHeader({
         )}
 
         <div className="min-w-0">
-          <nav aria-label="Breadcrumbs" className="flex items-center gap-1.5 text-3xs font-semibold text-[#819598]">
-            <Link href="/admin" className="hover:text-[#0d3b43] transition-colors">
+          <nav aria-label="Breadcrumbs" className="flex items-center gap-1.5 text-3xs font-semibold text-[#5C5A55]">
+            <Link href="/admin" className="hover:text-[#231f20] transition-colors">
               {t('admin_title')}
             </Link>
             {activeCategoryTitle && (
@@ -65,7 +65,7 @@ export function AdminTopHeader({
               </>
             )}
           </nav>
-          <h1 className="text-sm sm:text-base font-black text-[#08242a] truncate leading-tight">
+          <h1 className="text-sm sm:text-base font-black text-[#231f20] truncate leading-tight">
             {activeItemTitle || t('admin_title')}
           </h1>
         </div>
@@ -74,14 +74,14 @@ export function AdminTopHeader({
       {/* Right / End: Language Switcher, Public Site Link & User Chip */}
       <div className="flex items-center gap-2 sm:gap-3 shrink-0">
         {/* Language Switcher Pills */}
-        <div className="flex items-center p-1 rounded-xl bg-[#faf7f2] border border-[#e5e0d6] shadow-2xs">
+        <div className="flex items-center p-1 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] shadow-2xs">
           <button
             type="button"
             onClick={() => setLocale('ar')}
             className={`px-2.5 py-1 rounded-lg text-2xs font-extrabold transition-all ${
               locale === 'ar'
-                ? 'bg-[#0d3b43] text-white shadow-xs'
-                : 'text-[#5f7174] hover:text-[#08242a]'
+                ? 'bg-[#231f20] text-white shadow-xs'
+                : 'text-[#5C5A55] hover:text-[#231f20]'
             }`}
             title="اللغة العربية"
           >
@@ -92,8 +92,8 @@ export function AdminTopHeader({
             onClick={() => setLocale('fr')}
             className={`px-2.5 py-1 rounded-lg text-2xs font-extrabold transition-all ${
               locale === 'fr'
-                ? 'bg-[#0d3b43] text-white shadow-xs'
-                : 'text-[#5f7174] hover:text-[#08242a]'
+                ? 'bg-[#231f20] text-white shadow-xs'
+                : 'text-[#5C5A55] hover:text-[#231f20]'
             }`}
             title="Français"
           >
@@ -104,8 +104,8 @@ export function AdminTopHeader({
             onClick={() => setLocale('en')}
             className={`px-2.5 py-1 rounded-lg text-2xs font-extrabold transition-all ${
               locale === 'en'
-                ? 'bg-[#0d3b43] text-white shadow-xs'
-                : 'text-[#5f7174] hover:text-[#08242a]'
+                ? 'bg-[#231f20] text-white shadow-xs'
+                : 'text-[#5C5A55] hover:text-[#231f20]'
             }`}
             title="English"
           >
@@ -118,23 +118,23 @@ export function AdminTopHeader({
           href={`/${publicSiteLocale}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white hover:bg-[#faf7f2] border border-[#e5e0d6] text-2xs font-bold text-[#0d3b43] transition-all hover:border-[#0d3b43]/30 shadow-2xs group"
+          className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white hover:bg-[#F5F3EE] border border-[#e5e0d6] text-2xs font-bold text-[#231f20] transition-all hover:border-[#231f20]/30 shadow-2xs group"
         >
           <span>🌐</span>
           <span>{t('view_site')}</span>
-          <span className="text-3xs text-[#819598] group-hover:text-[#c85a32] transition-colors">↗</span>
+          <span className="text-3xs text-[#5C5A55] group-hover:text-[#bd3227] transition-colors">↗</span>
         </Link>
 
         {/* User Identity Chip */}
-        <div className="hidden lg:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-[#faf7f2] border border-[#e5e0d6]">
-          <div className="w-6 h-6 rounded-lg bg-[#c85a32] text-white font-bold text-3xs flex items-center justify-center">
+        <div className="hidden lg:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6]">
+          <div className="w-6 h-6 rounded-lg bg-[#bd3227] text-white font-bold text-3xs flex items-center justify-center">
             AM
           </div>
           <div className="text-start leading-none max-w-[120px]">
-            <span className="text-3xs font-bold text-[#08242a] block truncate">
+            <span className="text-3xs font-bold text-[#231f20] block truncate">
               {userName || 'Admin'}
             </span>
-            <span className="text-4xs text-[#819598] font-mono block truncate">
+            <span className="text-4xs text-[#5C5A55] font-mono block truncate">
               {userEmail.split('@')[0]}
             </span>
           </div>
@@ -144,7 +144,7 @@ export function AdminTopHeader({
         <form action={logoutAdmin} className="inline">
           <button
             type="submit"
-            className="p-2 sm:px-3 sm:py-1.5 rounded-xl bg-[#fae4dc] hover:bg-[#c85a32] text-[#c85a32] hover:text-white border border-[#c85a32]/20 text-2xs font-bold transition-all shadow-2xs active:scale-98 flex items-center gap-1.5"
+            className="p-2 sm:px-3 sm:py-1.5 rounded-xl bg-[#fde8e7] hover:bg-[#bd3227] text-[#bd3227] hover:text-white border border-[#bd3227]/20 text-2xs font-bold transition-all shadow-2xs active:scale-98 flex items-center gap-1.5"
             title={t('sign_out')}
           >
             <span className="text-xs">🚪</span>

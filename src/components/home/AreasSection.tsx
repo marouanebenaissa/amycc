@@ -75,8 +75,8 @@ export function AreasSection({
       icon: '🎨',
       iconImg: '/icons/arts.png',
       tag: isAr ? 'محترفات تشكيلية ومعارض' : isFr ? 'Arts Plastiques' : 'Visual & Fine Arts',
-      accent: 'border-[#c85a32]/30 text-[#c85a32]',
-      bgGlow: 'from-[#fae4dc]/40 to-transparent',
+      accent: 'border-[#bd3227]/30 text-[#bd3227]',
+      bgGlow: 'from-[#fde8e7]/40 to-transparent',
       headline: isAr
         ? 'رعاية المواهب التشكيلية والبصرية وصقل الحس الجمالي لدى الشباب'
         : isFr
@@ -131,8 +131,8 @@ export function AreasSection({
       icon: '🎵',
       iconImg: '/icons/music.png',
       tag: isAr ? 'تراث وأداء موسيقي' : isFr ? 'Patrimoine Musical' : 'Heritage & Musical Arts',
-      accent: 'border-[#0d3b43]/30 text-[#0d3b43]',
-      bgGlow: 'from-[#d8f0f4]/40 to-transparent',
+      accent: 'border-[#231f20]/30 text-[#231f20]',
+      bgGlow: 'from-[#FEF6CC]/40 to-transparent',
       headline: isAr
         ? 'إحياء المقامات والطبوع المغربية الأصيلة وتطوير مهارات العزف والتأليف'
         : isFr
@@ -187,8 +187,8 @@ export function AreasSection({
       icon: '🎭',
       iconImg: '/icons/theatre.png',
       tag: isAr ? 'تعبير مسرحي وارتجال' : isFr ? 'Jeu Scénique' : 'Theatre & Scenic Expression',
-      accent: 'border-[#d99b26]/40 text-[#d99b26]',
-      bgGlow: 'from-[#fdf2db]/40 to-transparent',
+      accent: 'border-[#d2a82b]/40 text-[#d2a82b]',
+      bgGlow: 'from-[#FEF6CC]/40 to-transparent',
       headline: isAr
         ? 'المسرح كمرآة للمجتمع، وسيلة للتعبير الحر، ومدرسة لتنمية الثقة والخطابة'
         : isFr
@@ -243,8 +243,8 @@ export function AreasSection({
       icon: '🏛️',
       iconImg: '/icons/culture.png',
       tag: isAr ? 'صون الذاكرة والتراث' : isFr ? 'Patrimoine & Mémoire' : 'Moroccan Cultural Heritage',
-      accent: 'border-[#0d3b43]/30 text-[#0d3b43]',
-      bgGlow: 'from-[#d8f0f4]/40 to-transparent',
+      accent: 'border-[#231f20]/30 text-[#231f20]',
+      bgGlow: 'from-[#FEF6CC]/40 to-transparent',
       headline: isAr
         ? 'حماية الذاكرة الوطنية، وتثمين التنوع الثقافي المغربي الزاخر عبر الأجيال'
         : isFr
@@ -299,8 +299,8 @@ export function AreasSection({
       icon: '🚀',
       iconImg: '/icons/youth.png',
       tag: isAr ? 'تكوين وقيادة شبابية' : isFr ? 'Leadership Jeunesse' : 'Youth Leadership & Skills',
-      accent: 'border-[#c85a32]/30 text-[#c85a32]',
-      bgGlow: 'from-[#fae4dc]/40 to-transparent',
+      accent: 'border-[#bd3227]/30 text-[#bd3227]',
+      bgGlow: 'from-[#fde8e7]/40 to-transparent',
       headline: isAr
         ? 'بناء القيادات الإبداعية وتأهيل الشباب لولوج المهن الثقافية والفنية باحترافية'
         : isFr
@@ -355,8 +355,8 @@ export function AreasSection({
       icon: '🤝',
       iconImg: '/icons/community.png',
       tag: isAr ? 'مبادرة شباب في العمل' : isFr ? 'Jeunesse en Action' : 'Civic Volunteering Program',
-      accent: 'border-[#d99b26]/40 text-[#d99b26]',
-      bgGlow: 'from-[#fdf2db]/40 to-transparent',
+      accent: 'border-[#d2a82b]/40 text-[#d2a82b]',
+      bgGlow: 'from-[#FEF6CC]/40 to-transparent',
       headline: isAr
         ? 'إشاعة الفن في كل حي وترسيخ ثقافة التطوع الإيجابي لخدمة الصالح العام'
         : isFr
@@ -425,8 +425,8 @@ export function AreasSection({
               : item.descEn || item.descAr,
             icon: item.icon || '🎨',
             iconImg: item.iconImg || '/icons/arts.png',
-            accent: item.accent || 'border-[#0d3b43]/30 text-[#0d3b43]',
-            bgGlow: item.bgGlow || 'from-[#fae4dc]/40 to-transparent',
+            accent: item.accent || 'border-[#231f20]/30 text-[#231f20]',
+            bgGlow: item.bgGlow || 'from-[#fde8e7]/40 to-transparent',
             headline: isAr
               ? item.headlineAr
               : isFr
@@ -465,13 +465,13 @@ export function AreasSection({
       <section className="py-20 lg:py-28 bg-white border-b border-[#e5e0d6]">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto text-center mb-16">
-            <span className="text-xs font-bold uppercase tracking-widest text-[#0d3b43]">
+            <span className="text-xs font-bold uppercase tracking-widest text-[#231f20]">
               {eyebrowText}
             </span>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-[#08242a] mt-2 mb-4">
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-[#231f20] mt-2 mb-4">
               {sectionTitle}
             </h2>
-            <p className="text-base text-[#445457] leading-relaxed">
+            <p className="text-base text-[#5C5A55] leading-relaxed">
               {sectionSubtitle}
             </p>
           </div>
@@ -480,7 +480,7 @@ export function AreasSection({
             {areas.map((area) => (
               <div
                 key={area.key}
-                className="bg-[#faf7f2] p-7 rounded-3xl border border-[#e5e0d6] shadow-subtle hover:shadow-card hover:border-[#cfc7b9] transition-all flex flex-col justify-between group relative overflow-hidden text-start"
+                className="bg-[#F5F3EE] p-7 rounded-3xl border border-[#e5e0d6] shadow-subtle hover:shadow-card hover:border-[#cfc7b9] transition-all flex flex-col justify-between group relative overflow-hidden text-start"
               >
                 <div
                   className={`absolute top-0 end-0 w-32 h-32 bg-gradient-to-bl ${area.bgGlow} rounded-bl-full pointer-events-none`}
@@ -504,10 +504,10 @@ export function AreasSection({
                     </span>
                   </div>
 
-                  <h3 className="text-xl font-black text-[#08242a] mb-2.5">
+                  <h3 className="text-xl font-black text-[#231f20] mb-2.5">
                     {area.title}
                   </h3>
-                  <p className="text-xs sm:text-sm text-[#445457] leading-relaxed mb-6">
+                  <p className="text-xs sm:text-sm text-[#5C5A55] leading-relaxed mb-6">
                     {area.desc}
                   </p>
                 </div>
@@ -516,7 +516,7 @@ export function AreasSection({
                   <button
                     type="button"
                     onClick={() => setSelectedArea(area)}
-                    className="inline-flex items-center text-xs font-bold text-[#0d3b43] hover:text-[#c85a32] transition-colors cursor-pointer group/btn"
+                    className="inline-flex items-center text-xs font-bold text-[#231f20] hover:text-[#bd3227] transition-colors cursor-pointer group/btn"
                   >
                     <span>{learnMoreText}</span>
                     <span
@@ -548,10 +548,10 @@ export function AreasSection({
         >
           <div className="relative w-full max-w-2xl bg-white rounded-3xl border border-[#e5e0d6] shadow-2xl overflow-hidden max-h-[90vh] flex flex-col my-8 animate-in zoom-in-95 duration-200 text-start">
             {/* Top Colored Accent Stripe */}
-            <div className="h-2.5 w-full bg-gradient-to-r from-[#c85a32] via-[#f4ce83] to-[#0d3b43]" />
+            <div className="h-2.5 w-full bg-gradient-to-r from-[#bd3227] via-[#ffd22f] to-[#231f20]" />
 
             {/* Modal Header */}
-            <div className="p-6 sm:p-7 border-b border-[#f0ebe1] flex items-start justify-between gap-4 relative bg-[#faf7f2]/50">
+            <div className="p-6 sm:p-7 border-b border-[#FEF6CC] flex items-start justify-between gap-4 relative bg-[#F5F3EE]/50">
               <div className="flex items-start gap-4">
                 <div className="w-14 h-14 rounded-2xl bg-white border border-[#e5e0d6] flex items-center justify-center p-2.5 text-3xl shadow-sm shrink-0">
                   <IconWithFallback
@@ -571,11 +571,11 @@ export function AreasSection({
                   </span>
                   <h3
                     id="area-modal-title"
-                    className="text-xl sm:text-2xl font-black text-[#08242a] tracking-tight"
+                    className="text-xl sm:text-2xl font-black text-[#231f20] tracking-tight"
                   >
                     {selectedArea.title}
                   </h3>
-                  <p className="text-xs text-[#5f7174] font-medium leading-relaxed max-w-lg">
+                  <p className="text-xs text-[#5C5A55] font-medium leading-relaxed max-w-lg">
                     {selectedArea.headline}
                   </p>
                 </div>
@@ -585,7 +585,7 @@ export function AreasSection({
               <button
                 type="button"
                 onClick={() => setSelectedArea(null)}
-                className="w-9 h-9 rounded-full bg-white hover:bg-[#faf7f2] border border-[#e5e0d6] text-[#08242a] flex items-center justify-center font-bold text-sm transition-all shadow-2xs shrink-0 cursor-pointer hover:rotate-90"
+                className="w-9 h-9 rounded-full bg-white hover:bg-[#F5F3EE] border border-[#e5e0d6] text-[#231f20] flex items-center justify-center font-bold text-sm transition-all shadow-2xs shrink-0 cursor-pointer hover:rotate-90"
                 aria-label={isAr ? 'إغلاق النافذة' : 'Close window'}
               >
                 ✕
@@ -595,17 +595,17 @@ export function AreasSection({
             {/* Modal Scrollable Body */}
             <div className="p-6 sm:p-7 overflow-y-auto space-y-6 flex-1">
               {/* Comprehensive Description Box */}
-              <div className="p-4 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6] text-xs sm:text-sm text-[#445457] leading-relaxed">
+              <div className="p-4 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs sm:text-sm text-[#5C5A55] leading-relaxed">
                 {selectedArea.desc}
               </div>
 
               {/* Strategic Objectives */}
               <div className="space-y-3">
                 <div className="flex items-center gap-2">
-                  <span className="w-6 h-6 rounded-lg bg-[#0d3b43] text-white flex items-center justify-center text-xs font-bold shrink-0">
+                  <span className="w-6 h-6 rounded-lg bg-[#231f20] text-white flex items-center justify-center text-xs font-bold shrink-0">
                     🎯
                   </span>
-                  <h4 className="text-xs sm:text-sm font-black text-[#08242a] uppercase tracking-wide">
+                  <h4 className="text-xs sm:text-sm font-black text-[#231f20] uppercase tracking-wide">
                     {isAr
                       ? 'الأهداف والمحاور الاستراتيجية'
                       : isFr
@@ -618,9 +618,9 @@ export function AreasSection({
                   {selectedArea.objectives.map((obj, i) => (
                     <li
                       key={i}
-                      className="flex items-start gap-2.5 text-xs text-[#445457] leading-relaxed"
+                      className="flex items-start gap-2.5 text-xs text-[#5C5A55] leading-relaxed"
                     >
-                      <span className="text-[#0d3b43] font-bold text-sm shrink-0 mt-0.5">
+                      <span className="text-[#231f20] font-bold text-sm shrink-0 mt-0.5">
                         ✓
                       </span>
                       <span>{obj}</span>
@@ -634,12 +634,12 @@ export function AreasSection({
                 selectedArea.showInitiatives &&
                 selectedArea.initiatives &&
                 selectedArea.initiatives.length > 0 && (
-                  <div className="space-y-3 pt-4 border-t border-[#f0ebe1]">
+                  <div className="space-y-3 pt-4 border-t border-[#FEF6CC]">
                     <div className="flex items-center gap-2">
-                      <span className="w-6 h-6 rounded-lg bg-[#c85a32] text-white flex items-center justify-center text-xs font-bold shrink-0">
+                      <span className="w-6 h-6 rounded-lg bg-[#bd3227] text-white flex items-center justify-center text-xs font-bold shrink-0">
                         ✨
                       </span>
-                      <h4 className="text-xs sm:text-sm font-black text-[#08242a] uppercase tracking-wide">
+                      <h4 className="text-xs sm:text-sm font-black text-[#231f20] uppercase tracking-wide">
                         {isAr
                           ? 'أبرز البرامج والورشات الميدانية'
                           : isFr
@@ -652,12 +652,12 @@ export function AreasSection({
                       {selectedArea.initiatives.map((init, i) => (
                         <div
                           key={i}
-                          className="p-3 rounded-xl bg-white border border-[#e5e0d6] shadow-2xs hover:border-[#0d3b43]/40 transition-colors"
+                          className="p-3 rounded-xl bg-white border border-[#e5e0d6] shadow-2xs hover:border-[#231f20]/40 transition-colors"
                         >
-                          <span className="text-3xs font-extrabold text-[#c85a32] block mb-1">
+                          <span className="text-3xs font-extrabold text-[#bd3227] block mb-1">
                             0{i + 1}
                           </span>
-                          <span className="text-2xs font-bold text-[#08242a] block leading-snug">
+                          <span className="text-2xs font-bold text-[#231f20] block leading-snug">
                             {init}
                           </span>
                         </div>
@@ -668,11 +668,11 @@ export function AreasSection({
             </div>
 
             {/* Modal Footer Bar */}
-            <div className="p-4 sm:p-5 border-t border-[#f0ebe1] bg-[#faf7f2] flex flex-col sm:flex-row items-center justify-between gap-3">
+            <div className="p-4 sm:p-5 border-t border-[#FEF6CC] bg-[#F5F3EE] flex flex-col sm:flex-row items-center justify-between gap-3">
               <button
                 type="button"
                 onClick={() => setSelectedArea(null)}
-                className="w-full sm:w-auto px-4 py-2.5 rounded-xl text-xs font-bold text-[#5f7174] bg-white border border-[#e5e0d6] hover:bg-[#f0ebe1] transition-all cursor-pointer text-center"
+                className="w-full sm:w-auto px-4 py-2.5 rounded-xl text-xs font-bold text-[#5C5A55] bg-white border border-[#e5e0d6] hover:bg-[#FEF6CC] transition-all cursor-pointer text-center"
               >
                 {isAr ? 'إغلاق النافذة' : isFr ? 'Fermer' : 'Close'}
               </button>
@@ -681,7 +681,7 @@ export function AreasSection({
                 <Link
                   href={selectedArea.primaryActionUrl}
                   onClick={() => setSelectedArea(null)}
-                  className="flex-1 sm:flex-none px-5 py-2.5 rounded-xl text-xs font-black text-white bg-[#0d3b43] hover:bg-[#14505b] active:scale-98 transition-all text-center shadow-xs"
+                  className="flex-1 sm:flex-none px-5 py-2.5 rounded-xl text-xs font-black text-white bg-[#231f20] hover:bg-[#d2a82b] active:scale-98 transition-all text-center shadow-xs"
                 >
                   {selectedArea.primaryActionLabel} →
                 </Link>

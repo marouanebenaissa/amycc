@@ -9,11 +9,11 @@ interface FormFieldProps {
 export function FormField({ label, error, required, children, hint }: FormFieldProps) {
   return (
     <div className="space-y-1.5">
-      <label className="block text-xs font-bold text-[#2d3b3e]">
+      <label className="block text-xs font-bold text-[#231f20]">
         {label}
-        {required && <span className="text-[#c85a32] ms-1">*</span>}
+        {required && <span className="text-[#bd3227] ms-1">*</span>}
       </label>
-      {hint && <p className="text-3xs text-[#5f7174]">{hint}</p>}
+      {hint && <p className="text-3xs text-[#5C5A55]">{hint}</p>}
       {children}
       {error && <p className="text-xs text-red-600 font-medium">{error}</p>}
     </div>
@@ -28,8 +28,8 @@ export function Input({ error, className = '', ...props }: InputProps) {
   return (
     <input
       className={[
-        'w-full px-3.5 py-2.5 text-sm rounded-xl border transition-all outline-none text-[#08242a]',
-        'focus:ring-2 focus:ring-[#0d3b43] focus:border-[#0d3b43]',
+        'w-full px-3.5 py-2.5 text-sm rounded-xl border transition-all outline-none text-[#231f20]',
+        'focus:ring-2 focus:ring-[#231f20] focus:border-[#231f20]',
         error
           ? 'border-red-400 bg-red-50/50'
           : 'border-[#e5e0d6] bg-white hover:border-[#cfc7b9]',
@@ -49,8 +49,8 @@ export function Textarea({ error, className = '', ...props }: TextareaProps) {
     <textarea
       rows={4}
       className={[
-        'w-full px-3.5 py-2.5 text-sm rounded-xl border transition-all outline-none resize-vertical text-[#08242a]',
-        'focus:ring-2 focus:ring-[#0d3b43] focus:border-[#0d3b43]',
+        'w-full px-3.5 py-2.5 text-sm rounded-xl border transition-all outline-none resize-vertical text-[#231f20]',
+        'focus:ring-2 focus:ring-[#231f20] focus:border-[#231f20]',
         error
           ? 'border-red-400 bg-red-50/50'
           : 'border-[#e5e0d6] bg-white hover:border-[#cfc7b9]',
@@ -70,8 +70,8 @@ export function Select({ options, error, className = '', ...props }: SelectProps
   return (
     <select
       className={[
-        'w-full px-3.5 py-2.5 text-sm rounded-xl border transition-all outline-none bg-white text-[#08242a]',
-        'focus:ring-2 focus:ring-[#0d3b43] focus:border-[#0d3b43]',
+        'w-full px-3.5 py-2.5 text-sm rounded-xl border transition-all outline-none bg-white text-[#231f20]',
+        'focus:ring-2 focus:ring-[#231f20] focus:border-[#231f20]',
         error ? 'border-red-400' : 'border-[#e5e0d6] hover:border-[#cfc7b9]',
         className,
       ].join(' ')}
@@ -90,7 +90,7 @@ export function SectionDivider({ title }: { title: string }) {
   return (
     <div className="flex items-center gap-3 pt-2">
       <div className="flex-1 h-px bg-[#e5e0d6]" />
-      <span className="text-3xs font-bold uppercase tracking-widest text-[#5f7174]">{title}</span>
+      <span className="text-3xs font-bold uppercase tracking-widest text-[#5C5A55]">{title}</span>
       <div className="flex-1 h-px bg-[#e5e0d6]" />
     </div>
   )
@@ -113,7 +113,7 @@ export function LocaleTab({
       onClick={onClick}
       className={[
         'px-4 py-2 text-xs font-bold rounded-xl transition-all',
-        active ? 'bg-[#0d3b43] text-white shadow-xs' : 'text-[#445457] hover:bg-[#f4ede2]',
+        active ? 'bg-[#231f20] text-white shadow-xs' : 'text-[#5C5A55] hover:bg-[#FEF6CC]',
       ].join(' ')}
     >
       {locale.toUpperCase()} — {label}

@@ -281,14 +281,14 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
       {/* Top Controls Bar */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 bg-white rounded-2xl border border-[#e5e0d6] shadow-2xs">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-[#0d3b43] text-white flex items-center justify-center text-xl shadow-xs">
+          <div className="w-10 h-10 rounded-xl bg-[#231f20] text-white flex items-center justify-center text-xl shadow-xs">
             🌟
           </div>
           <div>
-            <h2 className="text-base font-extrabold text-[#08242a]">
+            <h2 className="text-base font-extrabold text-[#231f20]">
               إدارة محتوى صفحة الأثر المجتمعي (Community Impact CMS)
             </h2>
-            <p className="text-3xs sm:text-2xs text-[#5f7174]">
+            <p className="text-3xs sm:text-2xs text-[#5C5A55]">
               تخصيص الهيدر المغربي، مؤشرات الأثر، المحاور الاستراتيجية، قصة شباب في العمل، ومنهجية العمل والشفافية.
             </p>
           </div>
@@ -299,7 +299,7 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
             <button
               type="button"
               onClick={handleReset}
-              className="px-3.5 py-2 rounded-xl text-xs font-bold text-[#5f7174] bg-[#faf7f2] border border-[#e5e0d6] hover:bg-[#ede5d8] transition-colors"
+              className="px-3.5 py-2 rounded-xl text-xs font-bold text-[#5C5A55] bg-[#F5F3EE] border border-[#e5e0d6] hover:bg-[#FEF6CC] transition-colors"
             >
               استعادة الافتراضي
             </button>
@@ -308,7 +308,7 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
           <Link
             href="/ar/impact"
             target="_blank"
-            className="px-3.5 py-2 rounded-xl text-xs font-bold text-[#0d3b43] bg-[#d8f0f4] hover:bg-[#c2e8ef] transition-colors"
+            className="px-3.5 py-2 rounded-xl text-xs font-bold text-[#231f20] bg-[#FEF6CC] hover:bg-[#FEF6CC] transition-colors"
           >
             معاينة الصفحة ↗
           </Link>
@@ -317,7 +317,7 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
             type="button"
             onClick={handleSave}
             disabled={saving}
-            className="px-5 py-2 rounded-xl text-xs font-bold text-white bg-[#0d3b43] hover:bg-[#14505b] disabled:opacity-50 transition-all shadow-xs flex items-center gap-2"
+            className="px-5 py-2 rounded-xl text-xs font-bold text-white bg-[#231f20] hover:bg-[#d2a82b] disabled:opacity-50 transition-all shadow-xs flex items-center gap-2"
           >
             {saving ? (
               <>
@@ -361,8 +361,8 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
           onClick={() => setActiveTab('hero')}
           className={`px-4 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 ${
             activeTab === 'hero'
-              ? 'bg-[#0d3b43] text-white shadow-xs'
-              : 'bg-white text-[#5f7174] border border-[#e5e0d6] hover:bg-[#faf7f2]'
+              ? 'bg-[#231f20] text-white shadow-xs'
+              : 'bg-white text-[#5C5A55] border border-[#e5e0d6] hover:bg-[#F5F3EE]'
           }`}
         >
           <span>🖼️</span>
@@ -374,8 +374,8 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
           onClick={() => setActiveTab('metrics')}
           className={`px-4 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 ${
             activeTab === 'metrics'
-              ? 'bg-[#0d3b43] text-white shadow-xs'
-              : 'bg-white text-[#5f7174] border border-[#e5e0d6] hover:bg-[#faf7f2]'
+              ? 'bg-[#231f20] text-white shadow-xs'
+              : 'bg-white text-[#5C5A55] border border-[#e5e0d6] hover:bg-[#F5F3EE]'
           }`}
         >
           <span>📊</span>
@@ -387,8 +387,8 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
           onClick={() => setActiveTab('pillars')}
           className={`px-4 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 ${
             activeTab === 'pillars'
-              ? 'bg-[#0d3b43] text-white shadow-xs'
-              : 'bg-white text-[#5f7174] border border-[#e5e0d6] hover:bg-[#faf7f2]'
+              ? 'bg-[#231f20] text-white shadow-xs'
+              : 'bg-white text-[#5C5A55] border border-[#e5e0d6] hover:bg-[#F5F3EE]'
           }`}
         >
           <span>🏛️</span>
@@ -400,8 +400,8 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
           onClick={() => setActiveTab('spotlight')}
           className={`px-4 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 ${
             activeTab === 'spotlight'
-              ? 'bg-[#0d3b43] text-white shadow-xs'
-              : 'bg-white text-[#5f7174] border border-[#e5e0d6] hover:bg-[#faf7f2]'
+              ? 'bg-[#231f20] text-white shadow-xs'
+              : 'bg-white text-[#5C5A55] border border-[#e5e0d6] hover:bg-[#F5F3EE]'
           }`}
         >
           <span>🚀</span>
@@ -413,8 +413,8 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
           onClick={() => setActiveTab('transparency_cta')}
           className={`px-4 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 ${
             activeTab === 'transparency_cta'
-              ? 'bg-[#0d3b43] text-white shadow-xs'
-              : 'bg-white text-[#5f7174] border border-[#e5e0d6] hover:bg-[#faf7f2]'
+              ? 'bg-[#231f20] text-white shadow-xs'
+              : 'bg-white text-[#5C5A55] border border-[#e5e0d6] hover:bg-[#F5F3EE]'
           }`}
         >
           <span>⚖️</span>
@@ -424,7 +424,7 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
 
       {/* Language Switcher Sub-Bar (For Multilingual Fields) */}
       <div className="flex items-center justify-between bg-white p-3 rounded-xl border border-[#e5e0d6]">
-        <div className="text-2xs font-bold text-[#5f7174] flex items-center gap-2">
+        <div className="text-2xs font-bold text-[#5C5A55] flex items-center gap-2">
           <span>🌐</span>
           <span>اختر لغة إدخال النصوص (Trilingual Input Selector):</span>
         </div>
@@ -434,8 +434,8 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
             onClick={() => setActiveLangTab('ar')}
             className={`px-3 py-1 rounded-lg text-2xs font-extrabold transition-colors ${
               activeLangTab === 'ar'
-                ? 'bg-[#0d3b43] text-white'
-                : 'bg-[#faf7f2] text-[#5f7174] hover:bg-[#ede5d8]'
+                ? 'bg-[#231f20] text-white'
+                : 'bg-[#F5F3EE] text-[#5C5A55] hover:bg-[#FEF6CC]'
             }`}
           >
             العربية (AR)
@@ -445,8 +445,8 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
             onClick={() => setActiveLangTab('fr')}
             className={`px-3 py-1 rounded-lg text-2xs font-extrabold transition-colors ${
               activeLangTab === 'fr'
-                ? 'bg-[#0d3b43] text-white'
-                : 'bg-[#faf7f2] text-[#5f7174] hover:bg-[#ede5d8]'
+                ? 'bg-[#231f20] text-white'
+                : 'bg-[#F5F3EE] text-[#5C5A55] hover:bg-[#FEF6CC]'
             }`}
           >
             Français (FR)
@@ -456,8 +456,8 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
             onClick={() => setActiveLangTab('en')}
             className={`px-3 py-1 rounded-lg text-2xs font-extrabold transition-colors ${
               activeLangTab === 'en'
-                ? 'bg-[#0d3b43] text-white'
-                : 'bg-[#faf7f2] text-[#5f7174] hover:bg-[#ede5d8]'
+                ? 'bg-[#231f20] text-white'
+                : 'bg-[#F5F3EE] text-[#5C5A55] hover:bg-[#FEF6CC]'
             }`}
           >
             English (EN)
@@ -472,7 +472,7 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
         <div className="space-y-6">
           {/* Hero Visual Preview */}
           <div className="bg-white p-6 rounded-2xl border border-[#e5e0d6] shadow-2xs space-y-4">
-            <h3 className="text-sm font-extrabold text-[#08242a] flex items-center gap-2">
+            <h3 className="text-sm font-extrabold text-[#231f20] flex items-center gap-2">
               <span>👁️</span>
               <span>معاينة حية وتفاعلية لهيدر صفحة الأثر (Live Simulation Preview)</span>
             </h3>
@@ -480,8 +480,8 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
             <div
               className={`relative rounded-2xl overflow-hidden p-8 sm:p-12 text-center min-h-[300px] flex flex-col justify-center items-center shadow-inner transition-colors ${
                 config.hero.hasHeroImage && config.hero.heroImageUrl
-                  ? 'bg-[#1c1917] text-white'
-                  : 'bg-gradient-to-b from-[#faf7f2] via-[#f7f2e9] to-[#faf7f2] border border-[#e5e0d6] text-[#08242a]'
+                  ? 'bg-[#231f20] text-white'
+                  : 'bg-gradient-to-b from-[#F5F3EE] via-[#F5F3EE] to-[#F5F3EE] border border-[#e5e0d6] text-[#231f20]'
               }`}
             >
               {config.hero.hasHeroImage && config.hero.heroImageUrl ? (
@@ -499,7 +499,7 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
               ) : (
                 <>
                   <div className="absolute inset-0 moroccan-pattern-light opacity-60 pointer-events-none" />
-                  <div className="absolute top-1/3 start-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-[#c85a32]/10 rounded-full blur-3xl pointer-events-none" />
+                  <div className="absolute top-1/3 start-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-[#bd3227]/10 rounded-full blur-3xl pointer-events-none" />
                 </>
               )}
 
@@ -507,8 +507,8 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
                 <span
                   className={`inline-block px-3 py-1 rounded-full text-2xs font-bold ${
                     config.hero.hasHeroImage && config.hero.heroImageUrl
-                      ? 'bg-white/10 text-[#f4ce83] border border-white/20'
-                      : 'bg-[#faece7] text-[#c85a32] border border-[#f0cbbd]'
+                      ? 'bg-white/10 text-[#ffd22f] border border-white/20'
+                      : 'bg-[#FEF6CC] text-[#bd3227] border border-[#fde8e7]'
                   }`}
                 >
                   {activeLangTab === 'ar'
@@ -520,7 +520,7 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
 
                 <h1
                   className={`text-2xl sm:text-4xl font-black leading-tight ${
-                    config.hero.hasHeroImage && config.hero.heroImageUrl ? 'text-white' : 'text-[#08242a]'
+                    config.hero.hasHeroImage && config.hero.heroImageUrl ? 'text-white' : 'text-[#231f20]'
                   }`}
                 >
                   {activeLangTab === 'ar'
@@ -537,7 +537,7 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
                   : config.hero.subtitleEn) && (
                   <p
                     className={`text-xs sm:text-sm font-bold ${
-                      config.hero.hasHeroImage && config.hero.heroImageUrl ? 'text-[#f4ce83]' : 'text-[#c85a32]'
+                      config.hero.hasHeroImage && config.hero.heroImageUrl ? 'text-[#ffd22f]' : 'text-[#bd3227]'
                     }`}
                   >
                     {activeLangTab === 'ar'
@@ -550,7 +550,7 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
 
                 <p
                   className={`text-2xs sm:text-xs line-clamp-3 leading-relaxed ${
-                    config.hero.hasHeroImage && config.hero.heroImageUrl ? 'text-white/80' : 'text-[#5f7174]'
+                    config.hero.hasHeroImage && config.hero.heroImageUrl ? 'text-white/80' : 'text-[#5C5A55]'
                   }`}
                 >
                   {activeLangTab === 'ar'
@@ -564,8 +564,8 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
                   <span
                     className={`px-4 py-2 rounded-lg text-2xs font-bold shadow-xs ${
                       config.hero.hasHeroImage && config.hero.heroImageUrl
-                        ? 'bg-[#f4ce83] text-[#08242a]'
-                        : 'bg-[#c85a32] text-white'
+                        ? 'bg-[#ffd22f] text-[#231f20]'
+                        : 'bg-[#bd3227] text-white'
                     }`}
                   >
                     {activeLangTab === 'ar'
@@ -578,7 +578,7 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
                     className={`px-4 py-2 rounded-lg text-2xs font-bold ${
                       config.hero.hasHeroImage && config.hero.heroImageUrl
                         ? 'bg-white/10 text-white border border-white/20'
-                        : 'bg-white text-[#08242a] border border-[#cfc7b9]'
+                        : 'bg-white text-[#231f20] border border-[#cfc7b9]'
                     }`}
                   >
                     📄 {activeLangTab === 'ar'
@@ -594,12 +594,12 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
 
           {/* Hero Image Controls */}
           <div className="bg-white p-6 rounded-2xl border border-[#e5e0d6] shadow-2xs space-y-5">
-            <div className="flex items-center justify-between pb-3 border-b border-[#f4ede2]">
+            <div className="flex items-center justify-between pb-3 border-b border-[#FEF6CC]">
               <div>
-                <h3 className="text-sm font-extrabold text-[#08242a]">
+                <h3 className="text-sm font-extrabold text-[#231f20]">
                   صورة خلفية الهيدر (Hero Background Image)
                 </h3>
-                <p className="text-3xs text-[#5f7174]">
+                <p className="text-3xs text-[#5C5A55]">
                   ارفع صورة مخصصة عالية الدقة تمثل الأنشطة الميدانية بالمغرب، أو قم بالتبديل إلى الزخرفة التراثية.
                 </p>
               </div>
@@ -609,9 +609,9 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
                   type="checkbox"
                   checked={config.hero.hasHeroImage}
                   onChange={(e) => updateHero('hasHeroImage', e.target.checked)}
-                  className="w-4 h-4 text-[#0d3b43] rounded focus:ring-[#0d3b43]"
+                  className="w-4 h-4 text-[#231f20] rounded focus:ring-[#231f20]"
                 />
-                <span className="text-xs font-bold text-[#08242a]">
+                <span className="text-xs font-bold text-[#231f20]">
                   تفعيل صورة الخلفية (Enable Image)
                 </span>
               </label>
@@ -619,7 +619,7 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
               <div>
-                <label className="block text-2xs font-bold text-[#08242a] mb-1">
+                <label className="block text-2xs font-bold text-[#231f20] mb-1">
                   رابط الصورة (Image URL):
                 </label>
                 <input
@@ -627,12 +627,12 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
                   value={config.hero.heroImageUrl}
                   onChange={(e) => updateHero('heroImageUrl', e.target.value)}
                   placeholder="/uploads/hero-impact.jpg أو رابط خارجي https://..."
-                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs focus:border-[#0d3b43] focus:ring-1 focus:ring-[#0d3b43] outline-none"
+                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs focus:border-[#231f20] focus:ring-1 focus:ring-[#231f20] outline-none"
                 />
               </div>
 
               <div>
-                <label className="block text-2xs font-bold text-[#08242a] mb-1">
+                <label className="block text-2xs font-bold text-[#231f20] mb-1">
                   أو رفع صورة من جهازك مباشرة:
                 </label>
                 <div className="flex items-center gap-2">
@@ -647,7 +647,7 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
                     type="button"
                     onClick={() => fileInputRef.current?.click()}
                     disabled={uploadingImage}
-                    className="w-full px-4 py-2 rounded-xl text-xs font-bold text-white bg-[#0d3b43] hover:bg-[#14505b] disabled:opacity-50 transition-colors flex items-center justify-center gap-2"
+                    className="w-full px-4 py-2 rounded-xl text-xs font-bold text-white bg-[#231f20] hover:bg-[#d2a82b] disabled:opacity-50 transition-colors flex items-center justify-center gap-2"
                   >
                     {uploadingImage ? 'جاري الرفع...' : '📁 اختيار ملف ورفعه تلقائياً'}
                   </button>
@@ -658,62 +658,62 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
 
           {/* Hero Multilingual Text Fields */}
           <div className="bg-white p-6 rounded-2xl border border-[#e5e0d6] shadow-2xs space-y-4">
-            <h3 className="text-sm font-extrabold text-[#08242a] pb-2 border-b border-[#f4ede2]">
+            <h3 className="text-sm font-extrabold text-[#231f20] pb-2 border-b border-[#FEF6CC]">
               نصوص الهيدر باللغة المختارة ({activeLangTab.toUpperCase()})
             </h3>
 
             {activeLangTab === 'ar' && (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="md:col-span-2">
-                  <label className="block text-2xs font-bold text-[#08242a] mb-1">
+                  <label className="block text-2xs font-bold text-[#231f20] mb-1">
                     شارة الهيدر (Badge):
                   </label>
                   <input
                     type="text"
                     value={config.hero.badgeAr}
                     onChange={(e) => updateHero('badgeAr', e.target.value)}
-                    className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs font-semibold focus:border-[#0d3b43] outline-none"
+                    className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs font-semibold focus:border-[#231f20] outline-none"
                   />
                 </div>
 
                 <div className="md:col-span-2">
-                  <label className="block text-2xs font-bold text-[#08242a] mb-1">
+                  <label className="block text-2xs font-bold text-[#231f20] mb-1">
                     العنوان الرئيسي (Title):
                   </label>
                   <input
                     type="text"
                     value={config.hero.titleAr}
                     onChange={(e) => updateHero('titleAr', e.target.value)}
-                    className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs font-bold focus:border-[#0d3b43] outline-none"
+                    className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs font-bold focus:border-[#231f20] outline-none"
                   />
                 </div>
 
                 <div className="md:col-span-2">
-                  <label className="block text-2xs font-bold text-[#08242a] mb-1">
+                  <label className="block text-2xs font-bold text-[#231f20] mb-1">
                     العنوان الفرعي (Subtitle):
                   </label>
                   <input
                     type="text"
                     value={config.hero.subtitleAr}
                     onChange={(e) => updateHero('subtitleAr', e.target.value)}
-                    className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs font-medium focus:border-[#0d3b43] outline-none"
+                    className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs font-medium focus:border-[#231f20] outline-none"
                   />
                 </div>
 
                 <div className="md:col-span-2">
-                  <label className="block text-2xs font-bold text-[#08242a] mb-1">
+                  <label className="block text-2xs font-bold text-[#231f20] mb-1">
                     الوصف الشامل (Description):
                   </label>
                   <textarea
                     rows={3}
                     value={config.hero.descriptionAr}
                     onChange={(e) => updateHero('descriptionAr', e.target.value)}
-                    className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs leading-relaxed focus:border-[#0d3b43] outline-none"
+                    className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs leading-relaxed focus:border-[#231f20] outline-none"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-2xs font-bold text-[#08242a] mb-1">
+                  <label className="block text-2xs font-bold text-[#231f20] mb-1">
                     نص الزر الرئيسي:
                   </label>
                   <input
@@ -725,7 +725,7 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
                 </div>
 
                 <div>
-                  <label className="block text-2xs font-bold text-[#08242a] mb-1">
+                  <label className="block text-2xs font-bold text-[#231f20] mb-1">
                     نص زر التقرير (PDF):
                   </label>
                   <input
@@ -741,55 +741,55 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
             {activeLangTab === 'fr' && (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="md:col-span-2">
-                  <label className="block text-2xs font-bold text-[#08242a] mb-1">
+                  <label className="block text-2xs font-bold text-[#231f20] mb-1">
                     Badge (FR):
                   </label>
                   <input
                     type="text"
                     value={config.hero.badgeFr}
                     onChange={(e) => updateHero('badgeFr', e.target.value)}
-                    className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs font-semibold focus:border-[#0d3b43] outline-none"
+                    className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs font-semibold focus:border-[#231f20] outline-none"
                   />
                 </div>
 
                 <div className="md:col-span-2">
-                  <label className="block text-2xs font-bold text-[#08242a] mb-1">
+                  <label className="block text-2xs font-bold text-[#231f20] mb-1">
                     Titre Principal (FR):
                   </label>
                   <input
                     type="text"
                     value={config.hero.titleFr}
                     onChange={(e) => updateHero('titleFr', e.target.value)}
-                    className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs font-bold focus:border-[#0d3b43] outline-none"
+                    className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs font-bold focus:border-[#231f20] outline-none"
                   />
                 </div>
 
                 <div className="md:col-span-2">
-                  <label className="block text-2xs font-bold text-[#08242a] mb-1">
+                  <label className="block text-2xs font-bold text-[#231f20] mb-1">
                     Sous-titre (FR):
                   </label>
                   <input
                     type="text"
                     value={config.hero.subtitleFr}
                     onChange={(e) => updateHero('subtitleFr', e.target.value)}
-                    className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs font-medium focus:border-[#0d3b43] outline-none"
+                    className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs font-medium focus:border-[#231f20] outline-none"
                   />
                 </div>
 
                 <div className="md:col-span-2">
-                  <label className="block text-2xs font-bold text-[#08242a] mb-1">
+                  <label className="block text-2xs font-bold text-[#231f20] mb-1">
                     Description Complète (FR):
                   </label>
                   <textarea
                     rows={3}
                     value={config.hero.descriptionFr}
                     onChange={(e) => updateHero('descriptionFr', e.target.value)}
-                    className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs leading-relaxed focus:border-[#0d3b43] outline-none"
+                    className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs leading-relaxed focus:border-[#231f20] outline-none"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-2xs font-bold text-[#08242a] mb-1">
+                  <label className="block text-2xs font-bold text-[#231f20] mb-1">
                     Bouton Primaire (FR):
                   </label>
                   <input
@@ -801,7 +801,7 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
                 </div>
 
                 <div>
-                  <label className="block text-2xs font-bold text-[#08242a] mb-1">
+                  <label className="block text-2xs font-bold text-[#231f20] mb-1">
                     Bouton Rapport PDF (FR):
                   </label>
                   <input
@@ -817,55 +817,55 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
             {activeLangTab === 'en' && (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="md:col-span-2">
-                  <label className="block text-2xs font-bold text-[#08242a] mb-1">
+                  <label className="block text-2xs font-bold text-[#231f20] mb-1">
                     Badge (EN):
                   </label>
                   <input
                     type="text"
                     value={config.hero.badgeEn}
                     onChange={(e) => updateHero('badgeEn', e.target.value)}
-                    className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs font-semibold focus:border-[#0d3b43] outline-none"
+                    className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs font-semibold focus:border-[#231f20] outline-none"
                   />
                 </div>
 
                 <div className="md:col-span-2">
-                  <label className="block text-2xs font-bold text-[#08242a] mb-1">
+                  <label className="block text-2xs font-bold text-[#231f20] mb-1">
                     Headline Title (EN):
                   </label>
                   <input
                     type="text"
                     value={config.hero.titleEn}
                     onChange={(e) => updateHero('titleEn', e.target.value)}
-                    className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs font-bold focus:border-[#0d3b43] outline-none"
+                    className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs font-bold focus:border-[#231f20] outline-none"
                   />
                 </div>
 
                 <div className="md:col-span-2">
-                  <label className="block text-2xs font-bold text-[#08242a] mb-1">
+                  <label className="block text-2xs font-bold text-[#231f20] mb-1">
                     Subtitle (EN):
                   </label>
                   <input
                     type="text"
                     value={config.hero.subtitleEn}
                     onChange={(e) => updateHero('subtitleEn', e.target.value)}
-                    className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs font-medium focus:border-[#0d3b43] outline-none"
+                    className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs font-medium focus:border-[#231f20] outline-none"
                   />
                 </div>
 
                 <div className="md:col-span-2">
-                  <label className="block text-2xs font-bold text-[#08242a] mb-1">
+                  <label className="block text-2xs font-bold text-[#231f20] mb-1">
                     Full Description (EN):
                   </label>
                   <textarea
                     rows={3}
                     value={config.hero.descriptionEn}
                     onChange={(e) => updateHero('descriptionEn', e.target.value)}
-                    className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs leading-relaxed focus:border-[#0d3b43] outline-none"
+                    className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs leading-relaxed focus:border-[#231f20] outline-none"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-2xs font-bold text-[#08242a] mb-1">
+                  <label className="block text-2xs font-bold text-[#231f20] mb-1">
                     Primary Button Text (EN):
                   </label>
                   <input
@@ -877,7 +877,7 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
                 </div>
 
                 <div>
-                  <label className="block text-2xs font-bold text-[#08242a] mb-1">
+                  <label className="block text-2xs font-bold text-[#231f20] mb-1">
                     Report Button Text (EN):
                   </label>
                   <input
@@ -891,9 +891,9 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
             )}
 
             {/* Links and PDF */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-3 border-t border-[#f4ede2]">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-3 border-t border-[#FEF6CC]">
               <div>
-                <label className="block text-2xs font-bold text-[#08242a] mb-1">
+                <label className="block text-2xs font-bold text-[#231f20] mb-1">
                   رابط الزر الرئيسي (Primary URL):
                 </label>
                 <input
@@ -906,7 +906,7 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
               </div>
 
               <div>
-                <label className="block text-2xs font-bold text-[#08242a] mb-1">
+                <label className="block text-2xs font-bold text-[#231f20] mb-1">
                   رابط تقرير الأثر المجتمعي (PDF Report URL):
                 </label>
                 <input
@@ -929,17 +929,17 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
         <div className="space-y-6">
           <div className="flex items-center justify-between">
             <div>
-              <h3 className="text-base font-extrabold text-[#08242a]">
+              <h3 className="text-base font-extrabold text-[#231f20]">
                 مؤشرات الأثر والأرقام الرئيسية (Key Impact Indicators)
               </h3>
-              <p className="text-xs text-[#5f7174]">
+              <p className="text-xs text-[#5C5A55]">
                 البطاقات الإحصائية الأربعة العائمة في أعلى الصفحة لقياس المنجزات.
               </p>
             </div>
             <button
               type="button"
               onClick={addMetric}
-              className="px-4 py-2 rounded-xl text-xs font-bold text-white bg-[#0d3b43] hover:bg-[#14505b] transition-all flex items-center gap-1.5 shadow-xs"
+              className="px-4 py-2 rounded-xl text-xs font-bold text-white bg-[#231f20] hover:bg-[#d2a82b] transition-all flex items-center gap-1.5 shadow-xs"
             >
               <span>+</span>
               <span>إضافة مؤشر إحصائي جديد</span>
@@ -952,12 +952,12 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
                 key={metric.id}
                 className="bg-white p-5 rounded-2xl border border-[#e5e0d6] shadow-2xs space-y-4 relative"
               >
-                <div className="flex items-center justify-between pb-3 border-b border-[#f4ede2]">
+                <div className="flex items-center justify-between pb-3 border-b border-[#FEF6CC]">
                   <div className="flex items-center gap-2">
-                    <span className="w-6 h-6 rounded-lg bg-[#faf7f2] border border-[#e5e0d6] text-2xs font-bold flex items-center justify-center text-[#08242a]">
+                    <span className="w-6 h-6 rounded-lg bg-[#F5F3EE] border border-[#e5e0d6] text-2xs font-bold flex items-center justify-center text-[#231f20]">
                       {idx + 1}
                     </span>
-                    <span className="text-xs font-black text-[#08242a]">
+                    <span className="text-xs font-black text-[#231f20]">
                       مؤشر: {metric.value || 'بدون رقم'}
                     </span>
                   </div>
@@ -975,7 +975,7 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
 
                 <div className="grid grid-cols-2 gap-3">
                   <div>
-                    <label className="block text-3xs font-bold text-[#08242a] mb-1">
+                    <label className="block text-3xs font-bold text-[#231f20] mb-1">
                       القيمة الرقمية (Value):
                     </label>
                     <input
@@ -988,7 +988,7 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
                   </div>
 
                   <div>
-                    <label className="block text-3xs font-bold text-[#08242a] mb-1">
+                    <label className="block text-3xs font-bold text-[#231f20] mb-1">
                       الأيقونة (Emoji):
                     </label>
                     <input
@@ -1004,7 +1004,7 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
                 {/* Multilingual Labels */}
                 <div className="space-y-3 pt-2">
                   <div>
-                    <label className="block text-3xs font-bold text-[#08242a] mb-1">
+                    <label className="block text-3xs font-bold text-[#231f20] mb-1">
                       العنوان ({activeLangTab.toUpperCase()}):
                     </label>
                     <input
@@ -1032,7 +1032,7 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
                   </div>
 
                   <div>
-                    <label className="block text-3xs font-bold text-[#08242a] mb-1">
+                    <label className="block text-3xs font-bold text-[#231f20] mb-1">
                       النص التوضيحي ({activeLangTab.toUpperCase()}):
                     </label>
                     <input
@@ -1072,17 +1072,17 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
         <div className="space-y-6">
           <div className="flex items-center justify-between">
             <div>
-              <h3 className="text-base font-extrabold text-[#08242a]">
+              <h3 className="text-base font-extrabold text-[#231f20]">
                 المحاور الاستراتيجية الأربعة للأثر (Strategic Pillars)
               </h3>
-              <p className="text-xs text-[#5f7174]">
+              <p className="text-xs text-[#5C5A55]">
                 المجالات الأساسية التي ترتكز عليها الجمعية لصناعة التغيير الثقافي والمجتمعي.
               </p>
             </div>
             <button
               type="button"
               onClick={addPillar}
-              className="px-4 py-2 rounded-xl text-xs font-bold text-white bg-[#0d3b43] hover:bg-[#14505b] transition-all flex items-center gap-1.5 shadow-xs"
+              className="px-4 py-2 rounded-xl text-xs font-bold text-white bg-[#231f20] hover:bg-[#d2a82b] transition-all flex items-center gap-1.5 shadow-xs"
             >
               <span>+</span>
               <span>إضافة محور استراتيجي جديد</span>
@@ -1095,12 +1095,12 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
                 key={pillar.id}
                 className="bg-white p-6 rounded-2xl border border-[#e5e0d6] shadow-2xs space-y-4 relative"
               >
-                <div className="flex items-center justify-between pb-3 border-b border-[#f4ede2]">
+                <div className="flex items-center justify-between pb-3 border-b border-[#FEF6CC]">
                   <div className="flex items-center gap-2">
-                    <span className="text-xl p-1.5 rounded-xl bg-[#faf7f2] border border-[#e5e0d6]">
+                    <span className="text-xl p-1.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6]">
                       {pillar.icon}
                     </span>
-                    <span className="text-xs font-black text-[#08242a]">
+                    <span className="text-xs font-black text-[#231f20]">
                       المحور {idx + 1}
                     </span>
                   </div>
@@ -1118,7 +1118,7 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
 
                 <div className="grid grid-cols-3 gap-3">
                   <div className="col-span-1">
-                    <label className="block text-3xs font-bold text-[#08242a] mb-1">
+                    <label className="block text-3xs font-bold text-[#231f20] mb-1">
                       الأيقونة:
                     </label>
                     <input
@@ -1130,7 +1130,7 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
                   </div>
 
                   <div className="col-span-2">
-                    <label className="block text-3xs font-bold text-[#08242a] mb-1">
+                    <label className="block text-3xs font-bold text-[#231f20] mb-1">
                       الشارة ({activeLangTab.toUpperCase()}):
                     </label>
                     <input
@@ -1160,7 +1160,7 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
                 </div>
 
                 <div>
-                  <label className="block text-3xs font-bold text-[#08242a] mb-1">
+                  <label className="block text-3xs font-bold text-[#231f20] mb-1">
                     عنوان المحور ({activeLangTab.toUpperCase()}):
                   </label>
                   <input
@@ -1188,7 +1188,7 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
                 </div>
 
                 <div>
-                  <label className="block text-3xs font-bold text-[#08242a] mb-1">
+                  <label className="block text-3xs font-bold text-[#231f20] mb-1">
                     وصف المحور وأثره ({activeLangTab.toUpperCase()}):
                   </label>
                   <textarea
@@ -1227,13 +1227,13 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
         <div className="space-y-6">
           {/* Spotlight Section Form */}
           <div className="bg-white p-6 rounded-2xl border border-[#e5e0d6] shadow-2xs space-y-5">
-            <h3 className="text-base font-extrabold text-[#08242a] pb-2 border-b border-[#f4ede2]">
+            <h3 className="text-base font-extrabold text-[#231f20] pb-2 border-b border-[#FEF6CC]">
               قصة الأثر الميداني — مبادرة شباب في العمل (Featured Spotlight Story)
             </h3>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="md:col-span-2">
-                <label className="block text-2xs font-bold text-[#08242a] mb-1">
+                <label className="block text-2xs font-bold text-[#231f20] mb-1">
                   الشارة ({activeLangTab.toUpperCase()}):
                 </label>
                 <input
@@ -1260,7 +1260,7 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
               </div>
 
               <div className="md:col-span-2">
-                <label className="block text-2xs font-bold text-[#08242a] mb-1">
+                <label className="block text-2xs font-bold text-[#231f20] mb-1">
                   العنوان الرئيسي ({activeLangTab.toUpperCase()}):
                 </label>
                 <input
@@ -1287,7 +1287,7 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
               </div>
 
               <div className="md:col-span-2">
-                <label className="block text-2xs font-bold text-[#08242a] mb-1">
+                <label className="block text-2xs font-bold text-[#231f20] mb-1">
                   الوصف السردي ({activeLangTab.toUpperCase()}):
                 </label>
                 <textarea
@@ -1314,7 +1314,7 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
               </div>
 
               <div>
-                <label className="block text-2xs font-bold text-[#08242a] mb-1">
+                <label className="block text-2xs font-bold text-[#231f20] mb-1">
                   شهادة/اقتباس المستفيد ({activeLangTab.toUpperCase()}):
                 </label>
                 <textarea
@@ -1337,12 +1337,12 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
                     )
                   }
                   placeholder="أدخل نص الشهادة أو الاقتباس..."
-                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs leading-relaxed outline-none focus:border-[#0d3b43] focus:ring-1 focus:ring-[#0d3b43]"
+                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs leading-relaxed outline-none focus:border-[#231f20] focus:ring-1 focus:ring-[#231f20]"
                 />
               </div>
 
               <div>
-                <label className="block text-2xs font-bold text-[#08242a] mb-1">
+                <label className="block text-2xs font-bold text-[#231f20] mb-1">
                   صاحب الشهادة ({activeLangTab.toUpperCase()}):
                 </label>
                 <input
@@ -1364,12 +1364,12 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
                       e.target.value
                     )
                   }
-                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs outline-none focus:border-[#0d3b43]"
+                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs outline-none focus:border-[#231f20]"
                 />
               </div>
 
               <div>
-                <label className="block text-2xs font-bold text-[#08242a] mb-1">
+                <label className="block text-2xs font-bold text-[#231f20] mb-1">
                   رابط صورة القصة (Image URL):
                 </label>
                 <input
@@ -1381,7 +1381,7 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
               </div>
 
               <div>
-                <label className="block text-2xs font-bold text-[#08242a] mb-1">
+                <label className="block text-2xs font-bold text-[#231f20] mb-1">
                   رفع صورة جديدة من الجهاز:
                 </label>
                 <div className="flex items-center gap-2">
@@ -1396,7 +1396,7 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
                     type="button"
                     onClick={() => spotlightFileInputRef.current?.click()}
                     disabled={uploadingSpotlightImg}
-                    className="w-full px-4 py-2 rounded-xl text-xs font-bold text-white bg-[#0d3b43] hover:bg-[#14505b] disabled:opacity-50 transition-colors"
+                    className="w-full px-4 py-2 rounded-xl text-xs font-bold text-white bg-[#231f20] hover:bg-[#d2a82b] disabled:opacity-50 transition-colors"
                   >
                     {uploadingSpotlightImg ? 'جاري الرفع...' : '📁 رفع صورة القصة'}
                   </button>
@@ -1405,12 +1405,12 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
             </div>
 
             {/* Live Visual Preview of the Quote Box */}
-            <div className="pt-4 border-t border-[#f4ede2] space-y-2">
-              <span className="text-3xs font-extrabold text-[#c85a32] uppercase tracking-wider block">
+            <div className="pt-4 border-t border-[#FEF6CC] space-y-2">
+              <span className="text-3xs font-extrabold text-[#bd3227] uppercase tracking-wider block">
                 معاينة حية ومباشرة لشكل الاقتباس على الموقع (Live Quote Simulation):
               </span>
-              <div className="p-4 rounded-xl bg-[#faf7f2] border-r-4 rtl:border-r-4 ltr:border-l-4 border-[#c85a32] shadow-2xs space-y-2">
-                <p className="text-xs sm:text-sm font-semibold italic text-[#08242a] leading-relaxed">
+              <div className="p-4 rounded-xl bg-[#F5F3EE] border-r-4 rtl:border-r-4 ltr:border-l-4 border-[#bd3227] shadow-2xs space-y-2">
+                <p className="text-xs sm:text-sm font-semibold italic text-[#231f20] leading-relaxed">
                   &ldquo;
                   {activeLangTab === 'ar'
                     ? config.spotlight.quoteAr
@@ -1419,7 +1419,7 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
                     : config.spotlight.quoteEn}
                   &rdquo;
                 </p>
-                <div className="text-2xs font-bold text-[#c85a32]">
+                <div className="text-2xs font-bold text-[#bd3227]">
                   — {activeLangTab === 'ar'
                     ? config.spotlight.quoteAuthorAr
                     : activeLangTab === 'fr'
@@ -1430,15 +1430,15 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
             </div>
 
             {/* In-tab Save Button */}
-            <div className="flex items-center justify-between pt-3 border-t border-[#f4ede2]">
-              <span className="text-3xs text-[#819598]">
+            <div className="flex items-center justify-between pt-3 border-t border-[#FEF6CC]">
+              <span className="text-3xs text-[#5C5A55]">
                 * اضغط حفظ ليتم نشر التعديلات فوراً على كافة صفحات الموقع.
               </span>
               <button
                 type="button"
                 onClick={handleSave}
                 disabled={saving}
-                className="px-5 py-2.5 rounded-xl text-xs font-bold text-white bg-[#0d3b43] hover:bg-[#14505b] disabled:opacity-50 transition-all shadow-xs flex items-center gap-2"
+                className="px-5 py-2.5 rounded-xl text-xs font-bold text-white bg-[#231f20] hover:bg-[#d2a82b] disabled:opacity-50 transition-all shadow-xs flex items-center gap-2"
               >
                 {saving ? (
                   <>
@@ -1457,7 +1457,7 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
 
           {/* Methodology 4 Steps */}
           <div className="bg-white p-6 rounded-2xl border border-[#e5e0d6] shadow-2xs space-y-5">
-            <h3 className="text-base font-extrabold text-[#08242a] pb-2 border-b border-[#f4ede2]">
+            <h3 className="text-base font-extrabold text-[#231f20] pb-2 border-b border-[#FEF6CC]">
               خطوات ومنهجية تحقيق الأثر الأربعة (4-Step Impact Methodology)
             </h3>
 
@@ -1465,10 +1465,10 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
               {config.methodology.steps.map((step, idx) => (
                 <div
                   key={step.id}
-                  className="p-4 rounded-xl border border-[#e5e0d6] bg-[#faf7f2] space-y-3"
+                  className="p-4 rounded-xl border border-[#e5e0d6] bg-[#F5F3EE] space-y-3"
                 >
                   <div className="flex items-center justify-between">
-                    <span className="text-xs font-black text-[#c85a32]">
+                    <span className="text-xs font-black text-[#bd3227]">
                       المرحلة {step.stepNumber}
                     </span>
                     <input
@@ -1480,7 +1480,7 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
                   </div>
 
                   <div>
-                    <label className="block text-3xs font-bold text-[#08242a] mb-1">
+                    <label className="block text-3xs font-bold text-[#231f20] mb-1">
                       عنوان المرحلة ({activeLangTab.toUpperCase()}):
                     </label>
                     <input
@@ -1508,7 +1508,7 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
                   </div>
 
                   <div>
-                    <label className="block text-3xs font-bold text-[#08242a] mb-1">
+                    <label className="block text-3xs font-bold text-[#231f20] mb-1">
                       شرح المرحلة ({activeLangTab.toUpperCase()}):
                     </label>
                     <textarea
@@ -1549,10 +1549,10 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
           {/* Transparency Items */}
           <div className="bg-white p-6 rounded-2xl border border-[#e5e0d6] shadow-2xs space-y-5">
             <div>
-              <h3 className="text-base font-extrabold text-[#08242a]">
+              <h3 className="text-base font-extrabold text-[#231f20]">
                 ميثاق النزاهة والشفافية المدنية (Civil Integrity & Transparency)
               </h3>
-              <p className="text-xs text-[#5f7174]">
+              <p className="text-xs text-[#5C5A55]">
                 المعايير القانونية والأخلاقية التي تلتزم بها الجمعية بالمملكة المغربية.
               </p>
             </div>
@@ -1561,10 +1561,10 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
               {config.transparency.items.map((item, idx) => (
                 <div
                   key={item.id}
-                  className="p-4 rounded-xl border border-[#e5e0d6] bg-[#faf7f2] space-y-3"
+                  className="p-4 rounded-xl border border-[#e5e0d6] bg-[#F5F3EE] space-y-3"
                 >
                   <div className="flex items-center justify-between">
-                    <span className="text-xs font-bold text-[#08242a]">
+                    <span className="text-xs font-bold text-[#231f20]">
                       بند النزاهة {idx + 1}
                     </span>
                     <input
@@ -1576,7 +1576,7 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
                   </div>
 
                   <div>
-                    <label className="block text-3xs font-bold text-[#08242a] mb-1">
+                    <label className="block text-3xs font-bold text-[#231f20] mb-1">
                       عنوان البند ({activeLangTab.toUpperCase()}):
                     </label>
                     <input
@@ -1604,7 +1604,7 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
                   </div>
 
                   <div>
-                    <label className="block text-3xs font-bold text-[#08242a] mb-1">
+                    <label className="block text-3xs font-bold text-[#231f20] mb-1">
                       تفاصيل البند ({activeLangTab.toUpperCase()}):
                     </label>
                     <textarea
@@ -1637,13 +1637,13 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
 
           {/* CTA Banner Section */}
           <div className="bg-white p-6 rounded-2xl border border-[#e5e0d6] shadow-2xs space-y-4">
-            <h3 className="text-base font-extrabold text-[#08242a] pb-2 border-b border-[#f4ede2]">
+            <h3 className="text-base font-extrabold text-[#231f20] pb-2 border-b border-[#FEF6CC]">
               بانر الدعوة للشراكة وتوسيع الأثر (Partnership CTA Banner)
             </h3>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="md:col-span-2">
-                <label className="block text-2xs font-bold text-[#08242a] mb-1">
+                <label className="block text-2xs font-bold text-[#231f20] mb-1">
                   الشارة ({activeLangTab.toUpperCase()}):
                 </label>
                 <input
@@ -1670,7 +1670,7 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
               </div>
 
               <div className="md:col-span-2">
-                <label className="block text-2xs font-bold text-[#08242a] mb-1">
+                <label className="block text-2xs font-bold text-[#231f20] mb-1">
                   عنوان البانر ({activeLangTab.toUpperCase()}):
                 </label>
                 <input
@@ -1697,7 +1697,7 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
               </div>
 
               <div className="md:col-span-2">
-                <label className="block text-2xs font-bold text-[#08242a] mb-1">
+                <label className="block text-2xs font-bold text-[#231f20] mb-1">
                   نص الدعوة ({activeLangTab.toUpperCase()}):
                 </label>
                 <textarea
@@ -1724,7 +1724,7 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
               </div>
 
               <div>
-                <label className="block text-2xs font-bold text-[#08242a] mb-1">
+                <label className="block text-2xs font-bold text-[#231f20] mb-1">
                   نص الزر الأول ({activeLangTab.toUpperCase()}):
                 </label>
                 <input
@@ -1751,7 +1751,7 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
               </div>
 
               <div>
-                <label className="block text-2xs font-bold text-[#08242a] mb-1">
+                <label className="block text-2xs font-bold text-[#231f20] mb-1">
                   رابط الزر الأول:
                 </label>
                 <input
@@ -1763,7 +1763,7 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
               </div>
 
               <div>
-                <label className="block text-2xs font-bold text-[#08242a] mb-1">
+                <label className="block text-2xs font-bold text-[#231f20] mb-1">
                   نص الزر الثاني ({activeLangTab.toUpperCase()}):
                 </label>
                 <input
@@ -1790,7 +1790,7 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
               </div>
 
               <div>
-                <label className="block text-2xs font-bold text-[#08242a] mb-1">
+                <label className="block text-2xs font-bold text-[#231f20] mb-1">
                   رابط الزر الثاني:
                 </label>
                 <input
@@ -1807,7 +1807,7 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
 
       {/* Sticky Bottom Save Bar for Immediate Action */}
       <div className="sticky bottom-4 z-40 p-3 bg-white/95 backdrop-blur-md rounded-2xl border border-[#e5e0d6] shadow-card flex items-center justify-between gap-4">
-        <div className="flex items-center gap-2 text-2xs font-bold text-[#08242a]">
+        <div className="flex items-center gap-2 text-2xs font-bold text-[#231f20]">
           <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
           <span>لوحة التحكم نشطة — أي تعديل تجريه جاهز للحفظ والنشر فوراً</span>
         </div>
@@ -1815,7 +1815,7 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
           <Link
             href="/ar/impact"
             target="_blank"
-            className="px-4 py-2 rounded-xl text-xs font-bold text-[#0d3b43] bg-[#d8f0f4] hover:bg-[#c2e8ef] transition-colors"
+            className="px-4 py-2 rounded-xl text-xs font-bold text-[#231f20] bg-[#FEF6CC] hover:bg-[#FEF6CC] transition-colors"
           >
             معاينة صفحة الأثر ↗
           </Link>
@@ -1823,7 +1823,7 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
             type="button"
             onClick={handleSave}
             disabled={saving}
-            className="px-6 py-2 rounded-xl text-xs font-bold text-white bg-[#0d3b43] hover:bg-[#14505b] disabled:opacity-50 transition-all shadow-xs flex items-center gap-2"
+            className="px-6 py-2 rounded-xl text-xs font-bold text-white bg-[#231f20] hover:bg-[#d2a82b] disabled:opacity-50 transition-all shadow-xs flex items-center gap-2"
           >
             {saving ? (
               <>

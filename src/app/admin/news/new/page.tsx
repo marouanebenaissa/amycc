@@ -26,7 +26,7 @@ export default async function NewNewsArticlePage() {
           </svg>
         </Link>
         <div>
-          <h1 className="text-2xl font-extrabold text-[#0a0f1d]">Write New Article</h1>
+          <h1 className="text-2xl font-extrabold text-[#181516]">Write New Article</h1>
           <p className="text-xs text-slate-500 mt-0.5">
             Compose announcements and news articles in Arabic, French, and English with rich formatting.
           </p>

@@ -34,10 +34,10 @@ export function AnnualProgramTimeline({ quarters, locale, dict }: AnnualProgramT
         <div className="flex items-center gap-2">
           <span className="text-xl">🗓️</span>
           <div>
-            <h3 className="text-xs sm:text-sm font-black text-[#08242a]">
+            <h3 className="text-xs sm:text-sm font-black text-[#231f20]">
               {isAr ? 'تصفح البرمجة الفصلية للموسم' : isFr ? 'Parcourir les saisons trimestrielles' : 'Browse Quarterly Roadmap'}
             </h3>
-            <span className="text-3xs text-[#819598]">
+            <span className="text-3xs text-[#5C5A55]">
               {isAr ? 'اختر فصلاً محدداً أو استعرض كافة المحطات' : isFr ? 'Sélectionnez un trimestre ou affichez tout' : 'Filter by quarter or view full annual roadmap'}
             </span>
           </div>
@@ -49,8 +49,8 @@ export function AnnualProgramTimeline({ quarters, locale, dict }: AnnualProgramT
             onClick={() => setSelectedQuarterId('all')}
             className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all whitespace-nowrap cursor-pointer ${
               selectedQuarterId === 'all'
-                ? 'bg-[#0d3b43] text-white shadow-xs'
-                : 'bg-[#faf7f2] text-[#445457] hover:bg-[#f0ebe1] border border-[#e5e0d6]'
+                ? 'bg-[#231f20] text-white shadow-xs'
+                : 'bg-[#F5F3EE] text-[#5C5A55] hover:bg-[#FEF6CC] border border-[#e5e0d6]'
             }`}
           >
             {isAr ? 'كافة الفصول (4 مواسم)' : isFr ? 'Toutes les saisons (4)' : 'All Quarters (4)'}
@@ -66,8 +66,8 @@ export function AnnualProgramTimeline({ quarters, locale, dict }: AnnualProgramT
                 onClick={() => setSelectedQuarterId(q.id)}
                 className={`inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold transition-all whitespace-nowrap cursor-pointer ${
                   isActive
-                    ? 'bg-[#0d3b43] text-white shadow-xs'
-                    : 'bg-[#faf7f2] text-[#445457] hover:bg-[#f0ebe1] border border-[#e5e0d6]'
+                    ? 'bg-[#231f20] text-white shadow-xs'
+                    : 'bg-[#F5F3EE] text-[#5C5A55] hover:bg-[#FEF6CC] border border-[#e5e0d6]'
                 }`}
               >
                 <span>{q.icon || '📌'}</span>
@@ -89,12 +89,12 @@ export function AnnualProgramTimeline({ quarters, locale, dict }: AnnualProgramT
           return (
             <div
               key={quarter.id}
-              className={`p-6 sm:p-10 rounded-3xl bg-white border-2 transition-all space-y-6 shadow-subtle hover:shadow-card ${quarter.color || 'border-[#0d3b43]/30'}`}
+              className={`p-6 sm:p-10 rounded-3xl bg-white border-2 transition-all space-y-6 shadow-subtle hover:shadow-card ${quarter.color || 'border-[#231f20]/30'}`}
             >
               {/* Quarter Header */}
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-6 border-b border-[#f4ede2] gap-4">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-6 border-b border-[#FEF6CC] gap-4">
                 <div className="flex items-center gap-3.5">
-                  <div className="w-12 h-12 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6] flex items-center justify-center text-2xl shadow-2xs overflow-hidden shrink-0">
+                  <div className="w-12 h-12 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6] flex items-center justify-center text-2xl shadow-2xs overflow-hidden shrink-0">
                     <IconWithFallback
                       src={quarter.iconSrc}
                       fallbackEmoji={quarter.icon || '🗓️'}
@@ -105,22 +105,22 @@ export function AnnualProgramTimeline({ quarters, locale, dict }: AnnualProgramT
                   </div>
                   <div>
                     <div className="flex items-center gap-2 flex-wrap">
-                      <h2 className="text-xl sm:text-2xl font-black text-[#08242a]">
+                      <h2 className="text-xl sm:text-2xl font-black text-[#231f20]">
                         {quarterTitle}
                       </h2>
                       {badge && (
-                        <span className={`text-3xs font-black uppercase tracking-wider px-3 py-1 rounded-full ${quarter.accentBg || 'bg-[#d8f0f4] text-[#0d3b43]'}`}>
+                        <span className={`text-3xs font-black uppercase tracking-wider px-3 py-1 rounded-full ${quarter.accentBg || 'bg-[#FEF6CC] text-[#231f20]'}`}>
                           {badge}
                         </span>
                       )}
                     </div>
-                    <span className="text-xs font-bold text-[#5f7174] mt-0.5 block">
+                    <span className="text-xs font-bold text-[#5C5A55] mt-0.5 block">
                       {period}
                     </span>
                   </div>
                 </div>
 
-                <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold bg-[#faf7f2] border border-[#e5e0d6] text-[#819598] self-start sm:self-auto">
+                <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold bg-[#F5F3EE] border border-[#e5e0d6] text-[#5C5A55] self-start sm:self-auto">
                   <span>🇲🇦</span>
                   <span>{isAr ? 'المملكة المغربية • مختلف الجهات' : isFr ? 'Royaume du Maroc • National' : 'Kingdom of Morocco • Nationwide'}</span>
                 </div>
@@ -128,10 +128,10 @@ export function AnnualProgramTimeline({ quarters, locale, dict }: AnnualProgramT
 
               {/* Theme Slogan */}
               {theme && (
-                <div className="p-4 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6]/70 flex items-center gap-3">
-                  <span className="text-base text-[#c85a32]">✨</span>
-                  <p className="text-xs sm:text-sm font-bold text-[#445457]">
-                    <span className="text-[#08242a] font-black ms-1">{isAr ? 'شعار الفصل:' : isFr ? 'Thématique du trimestre :' : 'Quarter Focus:'}</span>
+                <div className="p-4 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6]/70 flex items-center gap-3">
+                  <span className="text-base text-[#bd3227]">✨</span>
+                  <p className="text-xs sm:text-sm font-bold text-[#5C5A55]">
+                    <span className="text-[#231f20] font-black ms-1">{isAr ? 'شعار الفصل:' : isFr ? 'Thématique du trimestre :' : 'Quarter Focus:'}</span>
                     {' '}{theme}
                   </p>
                 </div>
@@ -156,19 +156,19 @@ export function AnnualProgramTimeline({ quarters, locale, dict }: AnnualProgramT
                     },
                     upcoming: {
                       label: isAr ? 'مرتقبة 📅' : isFr ? 'À venir 📅' : 'Upcoming 📅',
-                      style: 'bg-[#d8f0f4] text-[#0d3b43] border-[#74bfcd]/40',
+                      style: 'bg-[#FEF6CC] text-[#231f20] border-[#ffd22f]/40',
                     },
                   }[event.status || 'upcoming']
 
                   return (
                     <div
                       key={event.id}
-                      className="p-5 sm:p-6 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6] flex flex-col justify-between hover:border-[#cfc7b9] hover:bg-white transition-all space-y-4 group shadow-2xs"
+                      className="p-5 sm:p-6 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6] flex flex-col justify-between hover:border-[#cfc7b9] hover:bg-white transition-all space-y-4 group shadow-2xs"
                     >
                       <div className="space-y-3">
                         <div className="flex items-center justify-between gap-2 flex-wrap">
                           {eventCategory && (
-                            <span className="inline-block text-3xs font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-white border border-[#e5e0d6] text-[#0d3b43]">
+                            <span className="inline-block text-3xs font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-white border border-[#e5e0d6] text-[#231f20]">
                               {eventCategory}
                             </span>
                           )}
@@ -179,24 +179,24 @@ export function AnnualProgramTimeline({ quarters, locale, dict }: AnnualProgramT
                         </div>
 
                         {event.highlight && (
-                          <span className="inline-flex items-center gap-1 text-3xs font-black text-[#c85a32]">
+                          <span className="inline-flex items-center gap-1 text-3xs font-black text-[#bd3227]">
                             <span>★</span>
                             <span>{isAr ? 'محطة بارزة' : isFr ? 'Temps fort' : 'Key Highlight'}</span>
                           </span>
                         )}
 
-                        <h3 className="text-sm sm:text-base font-black text-[#08242a] leading-snug group-hover:text-[#0d3b43] transition-colors">
+                        <h3 className="text-sm sm:text-base font-black text-[#231f20] leading-snug group-hover:text-[#231f20] transition-colors">
                           {eventTitle}
                         </h3>
 
                         {eventDesc && (
-                          <p className="text-xs text-[#5f7174] leading-relaxed line-clamp-3">
+                          <p className="text-xs text-[#5C5A55] leading-relaxed line-clamp-3">
                             {eventDesc}
                           </p>
                         )}
 
                         {eventVenue && (
-                          <div className="flex items-center gap-1.5 text-3xs text-[#819598] font-medium pt-1">
+                          <div className="flex items-center gap-1.5 text-3xs text-[#5C5A55] font-medium pt-1">
                             <span>📍</span>
                             <span>{eventVenue}</span>
                           </div>
@@ -204,10 +204,10 @@ export function AnnualProgramTimeline({ quarters, locale, dict }: AnnualProgramT
                       </div>
 
                       <div className="pt-4 border-t border-[#e5e0d6]/70 flex items-center justify-between text-xs">
-                        <span className="text-3xs text-[#819598] font-bold">AMYCC 2026</span>
+                        <span className="text-3xs text-[#5C5A55] font-bold">AMYCC 2026</span>
                         <Link
                           href={`/${locale}/events`}
-                          className="font-bold text-[#c85a32] hover:text-[#9c3f1e] inline-flex items-center gap-1 transition-colors group-hover:translate-x-0.5"
+                          className="font-bold text-[#bd3227] hover:text-[#8f1f16] inline-flex items-center gap-1 transition-colors group-hover:translate-x-0.5"
                         >
                           <span>{registerText}</span>
                           <span className="rtl:rotate-180">→</span>

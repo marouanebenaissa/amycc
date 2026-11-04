@@ -26,7 +26,7 @@ export default async function NewEventPage() {
           </svg>
         </Link>
         <div>
-          <h1 className="text-2xl font-extrabold text-[#0a0f1d]">Schedule New Event</h1>
+          <h1 className="text-2xl font-extrabold text-[#181516]">Schedule New Event</h1>
           <p className="text-xs text-slate-500 mt-0.5">
             Configure dates, venue, capacity, registration parameters, and descriptions.
           </p>

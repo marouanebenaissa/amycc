@@ -21,10 +21,10 @@ export default async function AdminAnnualProgramPage() {
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-black text-[#08242a] tracking-tight">
+          <h1 className="text-2xl sm:text-3xl font-black text-[#231f20] tracking-tight">
             إدارة البرنامج السنوي (Annual Program CMS)
           </h1>
-          <p className="text-xs sm:text-sm text-[#5f7174] mt-1">
+          <p className="text-xs sm:text-sm text-[#5C5A55] mt-1">
             تخصيص واجهة البرنامج الثقافي السنوي، الفصول الأربعة، المبادرات والأحداث، ومؤشرات الأثر بالمملكة المغربية.
           </p>
         </div>

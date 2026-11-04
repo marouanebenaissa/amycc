@@ -37,31 +37,31 @@ export default async function AdminUsersPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-black text-[#08242a]">Users & Role-Based Permissions (RBAC)</h1>
-        <p className="text-xs text-[#5f7174] mt-1">
+        <h1 className="text-2xl font-black text-[#231f20]">Users & Role-Based Permissions (RBAC)</h1>
+        <p className="text-xs text-[#5C5A55] mt-1">
           Enforce the principle of least privilege. Manage authorized staff roles and access levels.
         </p>
       </div>
 
       <div className="bg-white rounded-2xl border border-[#e5e0d6] overflow-hidden shadow-2xs">
         <div className="overflow-x-auto">
-          <table className="w-full text-start text-xs text-[#2d3b3e]">
-            <thead className="bg-[#faf7f2] border-b border-[#e5e0d6] text-2xs uppercase tracking-wider text-[#5f7174] font-bold">
+          <table className="w-full text-start text-xs text-[#231f20]">
+            <thead className="bg-[#F5F3EE] border-b border-[#e5e0d6] text-2xs uppercase tracking-wider text-[#5C5A55] font-bold">
               <tr>
                 <th className="px-6 py-4 text-start">Staff User</th>
                 <th className="px-6 py-4 text-start">Assigned Roles</th>
                 <th className="px-6 py-4 text-start">Member Since</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#f4ede2]">
+            <tbody className="divide-y divide-[#FEF6CC]">
               {profiles.length > 0 ? (
                 profiles.map((p) => {
                   const userRoles = p.user_roles?.map((ur) => ur.roles?.name).filter((name): name is string => Boolean(name)) || []
                   return (
-                    <tr key={p.id} className="hover:bg-[#faf7f2]/60 transition-colors">
+                    <tr key={p.id} className="hover:bg-[#F5F3EE]/60 transition-colors">
                       <td className="px-6 py-4">
-                        <div className="font-bold text-[#08242a]">{p.full_name || 'Staff Member'}</div>
-                        <div className="text-[#5f7174] text-3xs font-mono">{p.email}</div>
+                        <div className="font-bold text-[#231f20]">{p.full_name || 'Staff Member'}</div>
+                        <div className="text-[#5C5A55] text-3xs font-mono">{p.email}</div>
                       </td>
                       <td className="px-6 py-4">
                         {userRoles.length > 0 ? (
@@ -71,8 +71,8 @@ export default async function AdminUsersPage() {
                                 key={r}
                                 className={`px-2.5 py-0.5 rounded-full text-3xs font-bold uppercase tracking-wider ${
                                   r === 'super_admin'
-                                    ? 'bg-[#fae4dc] text-[#c85a32] border border-[#f2c2b0]'
-                                    : 'bg-[#d8f0f4] text-[#0d3b43] border border-[#aedfe7]'
+                                    ? 'bg-[#fde8e7] text-[#bd3227] border border-[#fde8e7]'
+                                    : 'bg-[#FEF6CC] text-[#231f20] border border-[#d2a82b]'
                                 }`}
                               >
                                 {r.replace('_', ' ')}
@@ -80,10 +80,10 @@ export default async function AdminUsersPage() {
                             ))}
                           </div>
                         ) : (
-                          <span className="text-[#819598] text-2xs">No active role assigned</span>
+                          <span className="text-[#5C5A55] text-2xs">No active role assigned</span>
                         )}
                       </td>
-                      <td className="px-6 py-4 text-[#819598] text-3xs">
+                      <td className="px-6 py-4 text-[#5C5A55] text-3xs">
                         {new Date(p.created_at).toLocaleDateString()}
                       </td>
                     </tr>
@@ -91,7 +91,7 @@ export default async function AdminUsersPage() {
                 })
               ) : (
                 <tr>
-                  <td colSpan={3} className="px-6 py-12 text-center text-[#819598]">
+                  <td colSpan={3} className="px-6 py-12 text-center text-[#5C5A55]">
                     No users loaded.
                   </td>
                 </tr>
@@ -103,23 +103,23 @@ export default async function AdminUsersPage() {
 
       {/* Predefined Roles Reference Card */}
       <div className="bg-white p-6 rounded-2xl border border-[#e5e0d6] shadow-2xs">
-        <h2 className="text-xs font-bold text-[#08242a] mb-3 uppercase tracking-wider">
+        <h2 className="text-xs font-bold text-[#231f20] mb-3 uppercase tracking-wider">
           Predefined Role Definitions in AMYCC Security Matrix
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
           {roles && roles.length > 0 ? (
             roles.map((role) => (
-              <div key={role.id} className="p-3 rounded-xl bg-[#faf7f2] border border-[#e5e0d6] text-xs">
-                <span className="font-bold text-[#08242a] capitalize block">
+              <div key={role.id} className="p-3 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs">
+                <span className="font-bold text-[#231f20] capitalize block">
                   {role.name.replace(/_/g, ' ')}
                 </span>
-                <span className="text-3xs text-[#5f7174] leading-relaxed mt-0.5 block">
+                <span className="text-3xs text-[#5C5A55] leading-relaxed mt-0.5 block">
                   {role.description}
                 </span>
               </div>
             ))
           ) : (
-            <p className="text-xs text-[#819598]">9 standard roles initialized.</p>
+            <p className="text-xs text-[#5C5A55]">9 standard roles initialized.</p>
           )}
         </div>
       </div>

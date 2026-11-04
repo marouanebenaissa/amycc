@@ -41,23 +41,23 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
     <>
       <Header locale={locale} dict={dict} />
 
-      <main id="main-content" className="flex-1 bg-[#faf7f2]">
+      <main id="main-content" className="flex-1 bg-[#F5F3EE]">
         {/* ============================================================
             1. HERO BANNER WITH MOROCCAN PATTERN & AMBIENT GLOW
             ============================================================ */}
-        <section className="relative overflow-hidden bg-gradient-to-b from-[#faf7f2] via-[#f7f2e9] to-[#faf7f2] border-b border-[#e5e0d6] pt-16 pb-24 lg:pt-20 lg:pb-32 text-[#08242a]">
+        <section className="relative overflow-hidden bg-gradient-to-b from-[#F5F3EE] via-[#F5F3EE] to-[#F5F3EE] border-b border-[#e5e0d6] pt-16 pb-24 lg:pt-20 lg:pb-32 text-[#231f20]">
           <div className="absolute inset-0 moroccan-pattern-light opacity-60 pointer-events-none" aria-hidden="true" />
-          <div className="absolute top-1/3 start-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-[#c85a32]/10 rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute bottom-0 end-12 w-72 h-72 bg-[#0d3b43]/10 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute top-1/3 start-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-[#bd3227]/10 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute bottom-0 end-12 w-72 h-72 bg-[#231f20]/10 rounded-full blur-3xl pointer-events-none" />
 
           <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 text-center">
             {/* Breadcrumb Navigation */}
-            <nav className="flex items-center justify-center gap-2 text-xs sm:text-sm font-bold text-[#5f7174]">
-              <Link href={`/${locale}`} className="hover:text-[#0d3b43] transition-colors">
+            <nav className="flex items-center justify-center gap-2 text-xs sm:text-sm font-bold text-[#5C5A55]">
+              <Link href={`/${locale}`} className="hover:text-[#231f20] transition-colors">
                 {isAr ? 'الرئيسية' : isFr ? 'Accueil' : 'Home'}
               </Link>
               <span>/</span>
-              <span className="text-[#c85a32]">
+              <span className="text-[#bd3227]">
                 {isAr ? 'اتصل بنا' : isFr ? 'Contact' : 'Contact Us'}
               </span>
             </nav>
@@ -65,14 +65,14 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
             {/* Badges */}
             <div className="flex flex-wrap items-center justify-center gap-2.5">
               {heroTag && (
-                <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs sm:text-sm font-bold shadow-2xs bg-[#c85a32]/10 border border-[#c85a32]/20 text-[#c85a32]">
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#c85a32] animate-pulse" />
+                <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs sm:text-sm font-bold shadow-2xs bg-[#bd3227]/10 border border-[#bd3227]/20 text-[#bd3227]">
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#bd3227] animate-pulse" />
                   <span>{heroTag}</span>
                 </span>
               )}
 
               {heroBadge && (
-                <span className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs sm:text-sm font-bold shadow-2xs bg-[#0d3b43]/10 border border-[#0d3b43]/20 text-[#0d3b43]">
+                <span className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs sm:text-sm font-bold shadow-2xs bg-[#231f20]/10 border border-[#231f20]/20 text-[#231f20]">
                   <span>📍</span>
                   <span>{heroBadge}</span>
                 </span>
@@ -80,12 +80,12 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
             </div>
 
             {/* Headline Title */}
-            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-[#08242a] tracking-tight leading-tight whitespace-pre-line">
+            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-[#231f20] tracking-tight leading-tight whitespace-pre-line">
               {heroTitle}
             </h1>
 
             {/* Description */}
-            <p className="text-base sm:text-lg lg:text-xl text-[#445457] max-w-3xl mx-auto leading-relaxed font-medium text-balance">
+            <p className="text-base sm:text-lg lg:text-xl text-[#5C5A55] max-w-3xl mx-auto leading-relaxed font-medium text-balance">
               {heroDesc}
             </p>
           </div>
@@ -97,33 +97,33 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
         <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 -mt-12 sm:-mt-14 relative z-20">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
             {/* Card 1: Official Email */}
-            <div className="p-6 sm:p-7 rounded-3xl bg-white border border-[#e5e0d6] hover:border-[#0d3b43]/40 shadow-subtle hover:shadow-lg transition-all text-center flex flex-col justify-between group min-h-[260px]">
+            <div className="p-6 sm:p-7 rounded-3xl bg-white border border-[#e5e0d6] hover:border-[#231f20]/40 shadow-subtle hover:shadow-lg transition-all text-center flex flex-col justify-between group min-h-[260px]">
               <div>
-                <div className="w-14 h-14 rounded-2xl bg-[#0d3b43]/10 text-[#0d3b43] flex items-center justify-center text-2xl mx-auto mb-4 group-hover:scale-110 transition-transform">
+                <div className="w-14 h-14 rounded-2xl bg-[#231f20]/10 text-[#231f20] flex items-center justify-center text-2xl mx-auto mb-4 group-hover:scale-110 transition-transform">
                   ✉️
                 </div>
-                <span className="text-xs sm:text-sm font-bold text-[#5f7174] uppercase tracking-wider block mb-2">
+                <span className="text-xs sm:text-sm font-bold text-[#5C5A55] uppercase tracking-wider block mb-2">
                   {isAr ? 'البريد الإلكتروني الرسمي' : isFr ? 'Email Institutionnel' : 'Official Email'}
                 </span>
                 <a
                   href={`mailto:${channels.primaryEmail}`}
-                  className="text-sm sm:text-base font-mono font-bold text-[#08242a] group-hover:text-[#c85a32] transition-colors block break-all"
+                  className="text-sm sm:text-base font-mono font-bold text-[#231f20] group-hover:text-[#bd3227] transition-colors block break-all"
                 >
                   {channels.primaryEmail}
                 </a>
                 {channels.secondaryEmail && channels.secondaryEmail.trim() !== '.' && channels.secondaryEmail.trim().length > 1 && (
                   <a
                     href={`mailto:${channels.secondaryEmail}`}
-                    className="text-xs sm:text-sm font-mono text-[#5f7174] hover:text-[#08242a] block mt-1.5 break-all"
+                    className="text-xs sm:text-sm font-mono text-[#5C5A55] hover:text-[#231f20] block mt-1.5 break-all"
                   >
                     {channels.secondaryEmail}
                   </a>
                 )}
               </div>
-              <div className="mt-5 pt-3.5 border-t border-[#f0ebe1]">
+              <div className="mt-5 pt-3.5 border-t border-[#FEF6CC]">
                 <a
                   href={`mailto:${channels.primaryEmail}`}
-                  className="text-xs sm:text-sm font-bold text-[#0d3b43] group-hover:underline inline-flex items-center gap-1.5"
+                  className="text-xs sm:text-sm font-bold text-[#231f20] group-hover:underline inline-flex items-center gap-1.5"
                 >
                   <span>{isAr ? 'إرسال بريد مباشر' : 'Send Direct Email'}</span>
                   <span className="rtl:rotate-180">→</span>
@@ -132,17 +132,17 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
             </div>
 
             {/* Card 2: Phone & WhatsApp */}
-            <div className="p-6 sm:p-7 rounded-3xl bg-white border border-[#e5e0d6] hover:border-[#c85a32]/40 shadow-subtle hover:shadow-lg transition-all text-center flex flex-col justify-between group min-h-[260px]">
+            <div className="p-6 sm:p-7 rounded-3xl bg-white border border-[#e5e0d6] hover:border-[#bd3227]/40 shadow-subtle hover:shadow-lg transition-all text-center flex flex-col justify-between group min-h-[260px]">
               <div>
-                <div className="w-14 h-14 rounded-2xl bg-[#c85a32]/10 text-[#c85a32] flex items-center justify-center text-2xl mx-auto mb-4 group-hover:scale-110 transition-transform">
+                <div className="w-14 h-14 rounded-2xl bg-[#bd3227]/10 text-[#bd3227] flex items-center justify-center text-2xl mx-auto mb-4 group-hover:scale-110 transition-transform">
                   📞
                 </div>
-                <span className="text-xs sm:text-sm font-bold text-[#5f7174] uppercase tracking-wider block mb-2">
+                <span className="text-xs sm:text-sm font-bold text-[#5C5A55] uppercase tracking-wider block mb-2">
                   {isAr ? 'الهاتف والتواصل المباشر' : isFr ? 'Téléphone & Direct' : 'Direct Call & Line'}
                 </span>
                 <a
                   href={`tel:${channels.phone}`}
-                  className="text-sm sm:text-base font-mono font-bold text-[#08242a] group-hover:text-[#c85a32] transition-colors block"
+                  className="text-sm sm:text-base font-mono font-bold text-[#231f20] group-hover:text-[#bd3227] transition-colors block"
                   dir="ltr"
                 >
                   {channels.phone}
@@ -153,7 +153,7 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
                   </span>
                 )}
               </div>
-              <div className="mt-5 pt-3.5 border-t border-[#f0ebe1]">
+              <div className="mt-5 pt-3.5 border-t border-[#FEF6CC]">
                 {whatsappUrl ? (
                   <a
                     href={whatsappUrl}
@@ -167,7 +167,7 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
                 ) : (
                   <a
                     href={`tel:${channels.phone}`}
-                    className="text-xs sm:text-sm font-bold text-[#c85a32] group-hover:underline inline-flex items-center gap-1.5"
+                    className="text-xs sm:text-sm font-bold text-[#bd3227] group-hover:underline inline-flex items-center gap-1.5"
                   >
                     <span>{isAr ? 'اتصال مباشر' : 'Call Now'}</span>
                     <span className="rtl:rotate-180">→</span>
@@ -177,34 +177,34 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
             </div>
 
             {/* Card 3: Headquarters & City */}
-            <div className="p-6 sm:p-7 rounded-3xl bg-white border border-[#e5e0d6] hover:border-[#99620b]/40 shadow-subtle hover:shadow-lg transition-all text-center flex flex-col justify-between group min-h-[260px]">
+            <div className="p-6 sm:p-7 rounded-3xl bg-white border border-[#e5e0d6] hover:border-[#d2a82b]/40 shadow-subtle hover:shadow-lg transition-all text-center flex flex-col justify-between group min-h-[260px]">
               <div>
-                <div className="w-14 h-14 rounded-2xl bg-[#d99b26]/10 text-[#99620b] flex items-center justify-center text-2xl mx-auto mb-4 group-hover:scale-110 transition-transform">
+                <div className="w-14 h-14 rounded-2xl bg-[#d2a82b]/10 text-[#d2a82b] flex items-center justify-center text-2xl mx-auto mb-4 group-hover:scale-110 transition-transform">
                   🏛️
                 </div>
-                <span className="text-xs sm:text-sm font-bold text-[#5f7174] uppercase tracking-wider block mb-2">
+                <span className="text-xs sm:text-sm font-bold text-[#5C5A55] uppercase tracking-wider block mb-2">
                   {isAr ? 'المقر والنطاق الجغرافي' : isFr ? 'Siège & Rayonnement' : 'Headquarters & Scope'}
                 </span>
-                <span className="text-sm sm:text-base font-black text-[#08242a] block">
+                <span className="text-sm sm:text-base font-black text-[#231f20] block">
                   {city}
                 </span>
-                <p className="text-xs sm:text-sm text-[#5f7174] leading-relaxed mt-1.5 line-clamp-2">
+                <p className="text-xs sm:text-sm text-[#5C5A55] leading-relaxed mt-1.5 line-clamp-2">
                   {address}
                 </p>
               </div>
-              <div className="mt-5 pt-3.5 border-t border-[#f0ebe1]">
+              <div className="mt-5 pt-3.5 border-t border-[#FEF6CC]">
                 {channels.mapLinkUrl ? (
                   <a
                     href={channels.mapLinkUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-xs sm:text-sm font-bold text-[#99620b] hover:underline inline-flex items-center gap-1.5"
+                    className="text-xs sm:text-sm font-bold text-[#d2a82b] hover:underline inline-flex items-center gap-1.5"
                   >
                     <span>{isAr ? 'فتح على خرائط Google' : 'Open in Maps'}</span>
                     <span className="rtl:rotate-180">↗</span>
                   </a>
                 ) : (
-                  <span className="text-xs sm:text-sm font-bold text-[#5f7174]">
+                  <span className="text-xs sm:text-sm font-bold text-[#5C5A55]">
                     {isAr ? 'مراكش الحمراء 🇲🇦' : 'Marrakech, Morocco 🇲🇦'}
                   </span>
                 )}
@@ -217,17 +217,17 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
                 <div className="w-14 h-14 rounded-2xl bg-emerald-50 text-emerald-700 flex items-center justify-center text-2xl mx-auto mb-4 group-hover:scale-110 transition-transform">
                   ⏱️
                 </div>
-                <span className="text-xs sm:text-sm font-bold text-[#5f7174] uppercase tracking-wider block mb-2">
+                <span className="text-xs sm:text-sm font-bold text-[#5C5A55] uppercase tracking-wider block mb-2">
                   {isAr ? 'أوقات العمل وسرعة الرد' : isFr ? 'Horaires & Réactivité' : 'Hours & Response SLA'}
                 </span>
-                <span className="text-xs sm:text-sm font-bold text-[#08242a] block leading-relaxed">
+                <span className="text-xs sm:text-sm font-bold text-[#231f20] block leading-relaxed">
                   {workingHours}
                 </span>
                 <span className="text-xs sm:text-sm text-emerald-700 font-bold block mt-1.5">
                   ● {responseTime}
                 </span>
               </div>
-              <div className="mt-5 pt-3.5 border-t border-[#f0ebe1] flex items-center justify-center gap-2 text-xs sm:text-sm font-bold text-emerald-700">
+              <div className="mt-5 pt-3.5 border-t border-[#FEF6CC] flex items-center justify-center gap-2 text-xs sm:text-sm font-bold text-emerald-700">
                 <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
                 <span>{isAr ? 'فريق الإنصات نشط' : 'Listening Team Active'}</span>
               </div>
@@ -254,20 +254,20 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
               {/* Location & Map Showcase */}
               <div className="p-6 sm:p-7 rounded-3xl bg-white border border-[#e5e0d6] shadow-subtle space-y-5">
                 <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-2xl bg-[#0d3b43]/10 text-[#0d3b43] flex items-center justify-center text-xl">
+                  <div className="w-12 h-12 rounded-2xl bg-[#231f20]/10 text-[#231f20] flex items-center justify-center text-xl">
                     🗺️
                   </div>
                   <div>
-                    <h3 className="text-base sm:text-lg font-black text-[#08242a]">
+                    <h3 className="text-base sm:text-lg font-black text-[#231f20]">
                       {isAr ? 'المقر الإداري للجمعية' : isFr ? 'Siège Administratif' : 'Administrative Headquarters'}
                     </h3>
-                    <span className="text-xs sm:text-sm font-bold text-[#5f7174]">
+                    <span className="text-xs sm:text-sm font-bold text-[#5C5A55]">
                       {city}
                     </span>
                   </div>
                 </div>
 
-                <p className="text-sm text-[#445457] leading-relaxed">
+                <p className="text-sm text-[#5C5A55] leading-relaxed">
                   {address}
                 </p>
 
@@ -282,16 +282,16 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
                     />
                   </div>
                 ) : (
-                  <div className="relative rounded-2xl overflow-hidden border border-[#e5e0d6] p-6 bg-gradient-to-br from-[#08242a] to-[#14505b] text-white space-y-3">
+                  <div className="relative rounded-2xl overflow-hidden border border-[#e5e0d6] p-6 bg-gradient-to-br from-[#231f20] to-[#d2a82b] text-white space-y-3">
                     <div className="absolute inset-0 moroccan-star-pattern opacity-15 pointer-events-none" />
                     <div className="relative z-10">
-                      <span className="text-xs uppercase tracking-widest text-[#f4ce83] font-bold block mb-1">
+                      <span className="text-xs uppercase tracking-widest text-[#ffd22f] font-bold block mb-1">
                         AMYCC Headquarters
                       </span>
                       <h4 className="text-sm sm:text-base font-black">
                         {isAr ? 'مراكش الحمراء • المملكة المغربية' : 'Marrakech, Kingdom of Morocco'}
                       </h4>
-                      <p className="text-xs text-[#d8f0f4]/90 mt-1 leading-relaxed">
+                      <p className="text-xs text-[#FEF6CC]/90 mt-1 leading-relaxed">
                         {isAr
                           ? 'استقبال المرتفقين والشركاء يتم بموعد مسبق أو خلال أوقات الاستقبال الرسمية.'
                           : 'Public reception by appointment during statutory business hours.'}
@@ -301,7 +301,7 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
                           href={channels.mapLinkUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="mt-3.5 inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-[#f4ce83] hover:bg-[#eabf66] text-[#08242a] text-xs sm:text-sm font-bold transition-all shadow-xs"
+                          className="mt-3.5 inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-[#ffd22f] hover:bg-[#ffd22f] text-[#231f20] text-xs sm:text-sm font-bold transition-all shadow-xs"
                         >
                           <span>📍</span>
                           <span>{isAr ? 'الاتجاهات عبر خرائط Google' : 'Get Directions on Google Maps'}</span>
@@ -314,12 +314,12 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
 
               {/* Social Channels Hub */}
               <div className="p-6 sm:p-7 rounded-3xl bg-white border border-[#e5e0d6] shadow-subtle space-y-4">
-                <div className="flex items-center justify-between pb-3 border-b border-[#f0ebe1]">
-                  <h3 className="text-base font-black text-[#08242a] flex items-center gap-2">
+                <div className="flex items-center justify-between pb-3 border-b border-[#FEF6CC]">
+                  <h3 className="text-base font-black text-[#231f20] flex items-center gap-2">
                     <span>🌐</span>
                     <span>{isAr ? 'تابع الجمعية على المنصات الرقمية' : 'Official Social Channels'}</span>
                   </h3>
-                  <span className="text-xs font-mono text-[#5f7174]">@amycc.morocco</span>
+                  <span className="text-xs font-mono text-[#5C5A55]">@amycc.morocco</span>
                 </div>
 
                 <div className="grid grid-cols-2 gap-2.5">
@@ -328,7 +328,7 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
                       href={social.facebook}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="p-3.5 rounded-xl bg-[#faf7f2] hover:bg-[#1877f2] text-[#08242a] hover:text-white transition-all flex items-center gap-2.5 text-xs sm:text-sm font-bold group border border-[#e5e0d6]"
+                      className="p-3.5 rounded-xl bg-[#F5F3EE] hover:bg-[#1877f2] text-[#231f20] hover:text-white transition-all flex items-center gap-2.5 text-xs sm:text-sm font-bold group border border-[#e5e0d6]"
                     >
                       <span className="text-base">📘</span>
                       <span>Facebook</span>
@@ -340,7 +340,7 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
                       href={social.instagram}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="p-3.5 rounded-xl bg-[#faf7f2] hover:bg-[#e4405f] text-[#08242a] hover:text-white transition-all flex items-center gap-2.5 text-xs sm:text-sm font-bold group border border-[#e5e0d6]"
+                      className="p-3.5 rounded-xl bg-[#F5F3EE] hover:bg-[#e4405f] text-[#231f20] hover:text-white transition-all flex items-center gap-2.5 text-xs sm:text-sm font-bold group border border-[#e5e0d6]"
                     >
                       <span className="text-base">📸</span>
                       <span>Instagram</span>
@@ -352,7 +352,7 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
                       href={social.linkedin}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="p-3.5 rounded-xl bg-[#faf7f2] hover:bg-[#0a66c2] text-[#08242a] hover:text-white transition-all flex items-center gap-2.5 text-xs sm:text-sm font-bold group border border-[#e5e0d6]"
+                      className="p-3.5 rounded-xl bg-[#F5F3EE] hover:bg-[#0a66c2] text-[#231f20] hover:text-white transition-all flex items-center gap-2.5 text-xs sm:text-sm font-bold group border border-[#e5e0d6]"
                     >
                       <span className="text-base">💼</span>
                       <span>LinkedIn</span>
@@ -364,7 +364,7 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
                       href={social.youtube}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="p-3.5 rounded-xl bg-[#faf7f2] hover:bg-[#ff0000] text-[#08242a] hover:text-white transition-all flex items-center gap-2.5 text-xs sm:text-sm font-bold group border border-[#e5e0d6]"
+                      className="p-3.5 rounded-xl bg-[#F5F3EE] hover:bg-[#ff0000] text-[#231f20] hover:text-white transition-all flex items-center gap-2.5 text-xs sm:text-sm font-bold group border border-[#e5e0d6]"
                     >
                       <span className="text-base">▶️</span>
                       <span>YouTube</span>

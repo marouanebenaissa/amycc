@@ -18,7 +18,7 @@ export default async function AdminAuditLogsPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-extrabold text-[#0a0f1d]">System Audit Logs</h1>
+        <h1 className="text-2xl font-extrabold text-[#181516]">System Audit Logs</h1>
         <p className="text-xs text-slate-500 mt-1">
           Immutable audit trail recording administrative operations and system modifications.
         </p>

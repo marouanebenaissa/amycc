@@ -66,14 +66,14 @@ export function PartnershipForm({ locale }: { locale: string }) {
       {/* Organization Name & Type */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <div>
-          <label className="block text-2xs font-bold uppercase tracking-wider text-[#08242a] mb-2">
+          <label className="block text-2xs font-bold uppercase tracking-wider text-[#231f20] mb-2">
             {isAr ? 'اسم المؤسسة أو الهيئة *' : isFr ? 'Nom de l’organisme *' : 'Organization Name *'}
           </label>
           <input
             type="text"
             name="organizationName"
             required
-            className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] text-xs text-[#08242a] focus:border-[#0d3b43] focus:ring-1 focus:ring-[#0d3b43] outline-none"
+            className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] text-xs text-[#231f20] focus:border-[#231f20] focus:ring-1 focus:ring-[#231f20] outline-none"
             placeholder={
               isAr
                 ? 'اسم المركز أو الشركة أو الجمعية'
@@ -88,13 +88,13 @@ export function PartnershipForm({ locale }: { locale: string }) {
         </div>
 
         <div>
-          <label className="block text-2xs font-bold uppercase tracking-wider text-[#08242a] mb-2">
+          <label className="block text-2xs font-bold uppercase tracking-wider text-[#231f20] mb-2">
             {isAr ? 'نوع الهيئة *' : isFr ? 'Type de structure *' : 'Organization Type *'}
           </label>
           <select
             name="organizationType"
             required
-            className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] text-xs text-[#08242a] bg-[#faf7f2] font-semibold focus:border-[#0d3b43] outline-none"
+            className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] text-xs text-[#231f20] bg-[#F5F3EE] font-semibold focus:border-[#231f20] outline-none"
           >
             <option value="cultural_center">
               {isAr
@@ -138,14 +138,14 @@ export function PartnershipForm({ locale }: { locale: string }) {
       {/* Contact Person & Position */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <div>
-          <label className="block text-2xs font-bold uppercase tracking-wider text-[#08242a] mb-2">
+          <label className="block text-2xs font-bold uppercase tracking-wider text-[#231f20] mb-2">
             {isAr ? 'اسم الشخص المسؤول *' : isFr ? 'Personne de contact *' : 'Contact Person *'}
           </label>
           <input
             type="text"
             name="contactPerson"
             required
-            className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] text-xs text-[#08242a] focus:border-[#0d3b43] focus:ring-1 focus:ring-[#0d3b43] outline-none"
+            className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] text-xs text-[#231f20] focus:border-[#231f20] focus:ring-1 focus:ring-[#231f20] outline-none"
             placeholder={
               isAr
                 ? 'الاسم الكامل والصفة أو المنصب'
@@ -160,14 +160,14 @@ export function PartnershipForm({ locale }: { locale: string }) {
         </div>
 
         <div>
-          <label className="block text-2xs font-bold uppercase tracking-wider text-[#08242a] mb-2">
+          <label className="block text-2xs font-bold uppercase tracking-wider text-[#231f20] mb-2">
             {isAr ? 'البريد المهني *' : isFr ? 'Email professionnel *' : 'Professional Email *'}
           </label>
           <input
             type="email"
             name="email"
             required
-            className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] text-xs text-[#08242a] focus:border-[#0d3b43] focus:ring-1 focus:ring-[#0d3b43] outline-none"
+            className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] text-xs text-[#231f20] focus:border-[#231f20] focus:ring-1 focus:ring-[#231f20] outline-none"
             placeholder="contact@org.ma"
           />
           {result?.errors?.email && (
@@ -179,14 +179,14 @@ export function PartnershipForm({ locale }: { locale: string }) {
       {/* City & Country */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <div>
-          <label className="block text-2xs font-bold uppercase tracking-wider text-[#08242a] mb-2">
+          <label className="block text-2xs font-bold uppercase tracking-wider text-[#231f20] mb-2">
             {isAr ? 'المدينة *' : isFr ? 'Ville *' : 'City *'}
           </label>
           <input
             type="text"
             name="city"
             required
-            className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] text-xs text-[#08242a] focus:border-[#0d3b43] focus:ring-1 focus:ring-[#0d3b43] outline-none"
+            className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] text-xs text-[#231f20] focus:border-[#231f20] focus:ring-1 focus:ring-[#231f20] outline-none"
             placeholder={
               isAr
                 ? 'المدينة (مثال: الرباط، الدار البيضاء...)'
@@ -201,7 +201,7 @@ export function PartnershipForm({ locale }: { locale: string }) {
         </div>
 
         <div>
-          <label className="block text-2xs font-bold uppercase tracking-wider text-[#08242a] mb-2">
+          <label className="block text-2xs font-bold uppercase tracking-wider text-[#231f20] mb-2">
             {isAr ? 'الدولة *' : isFr ? 'Pays *' : 'Country *'}
           </label>
           <input
@@ -209,14 +209,14 @@ export function PartnershipForm({ locale }: { locale: string }) {
             name="country"
             required
             defaultValue={isAr ? 'المملكة المغربية' : isFr ? 'Maroc' : 'Morocco'}
-            className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] text-xs text-[#08242a] focus:border-[#0d3b43] focus:ring-1 focus:ring-[#0d3b43] outline-none"
+            className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] text-xs text-[#231f20] focus:border-[#231f20] focus:ring-1 focus:ring-[#231f20] outline-none"
           />
         </div>
       </div>
 
       {/* Proposal Message */}
       <div>
-        <label className="block text-2xs font-bold uppercase tracking-wider text-[#08242a] mb-2">
+        <label className="block text-2xs font-bold uppercase tracking-wider text-[#231f20] mb-2">
           {isAr
             ? 'تفاصيل مقترح الشراكة أو المبادرة المشتركة *'
             : isFr
@@ -227,7 +227,7 @@ export function PartnershipForm({ locale }: { locale: string }) {
           name="proposal"
           required
           rows={5}
-          className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] text-xs text-[#08242a] focus:border-[#0d3b43] focus:ring-1 focus:ring-[#0d3b43] outline-none"
+          className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] text-xs text-[#231f20] focus:border-[#231f20] focus:ring-1 focus:ring-[#231f20] outline-none"
           placeholder={
             isAr
               ? 'وضح مجالات التعاون المقترحة، الفئات المستهدفة، والإطار الزمني المتوقع...'
@@ -244,7 +244,7 @@ export function PartnershipForm({ locale }: { locale: string }) {
       <button
         type="submit"
         disabled={loading}
-        className="w-full py-3.5 px-6 rounded-xl font-bold text-white bg-[#0d3b43] hover:bg-[#14505b] disabled:opacity-60 transition-all text-xs shadow-md active:scale-98"
+        className="w-full py-3.5 px-6 rounded-xl font-bold text-white bg-[#231f20] hover:bg-[#d2a82b] disabled:opacity-60 transition-all text-xs shadow-md active:scale-98"
       >
         {loading
           ? isAr

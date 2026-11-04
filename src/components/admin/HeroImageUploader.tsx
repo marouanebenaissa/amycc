@@ -97,10 +97,10 @@ export function HeroImageUploader({
       {/* Header and Quick Action Buttons */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div>
-          <label className="block text-2xs font-bold text-[#445457]">
+          <label className="block text-2xs font-bold text-[#5C5A55]">
             صورة الخلفية الرئيسية (Hero Background Image)
           </label>
-          <span className="text-3xs text-[#819598]">
+          <span className="text-3xs text-[#5C5A55]">
             يمكنك استيراد صورة مباشرة من جهازك أو حذف الصورة بالكامل
           </span>
         </div>
@@ -111,7 +111,7 @@ export function HeroImageUploader({
             type="button"
             onClick={() => fileInputRef.current?.click()}
             disabled={uploading || deleting}
-            className="px-4 py-2 rounded-xl font-bold text-white bg-[#0d3b43] hover:bg-[#14505b] active:scale-98 transition-all text-xs inline-flex items-center gap-2 shadow-2xs cursor-pointer disabled:opacity-60"
+            className="px-4 py-2 rounded-xl font-bold text-white bg-[#231f20] hover:bg-[#d2a82b] active:scale-98 transition-all text-xs inline-flex items-center gap-2 shadow-2xs cursor-pointer disabled:opacity-60"
           >
             {uploading ? (
               <>
@@ -123,7 +123,7 @@ export function HeroImageUploader({
               </>
             ) : (
               <>
-                <svg className="w-4 h-4 text-[#f4ce83]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.2">
+                <svg className="w-4 h-4 text-[#ffd22f]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.2">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
                 </svg>
                 <span>استيراد صورة (Import)</span>
@@ -173,7 +173,7 @@ export function HeroImageUploader({
             setError(null)
           }}
           placeholder="لا توجد صورة محددة — اكتب رابطاً أو اضغط استيراد"
-          className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43] font-mono bg-white text-left"
+          className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#231f20] font-mono bg-white text-left"
         />
       </div>
 
@@ -197,7 +197,7 @@ export function HeroImageUploader({
       )}
 
       {/* Live Visual Preview Card (Cinema Morocco88 Simulation) */}
-      <div className="relative rounded-2xl overflow-hidden border border-[#e5e0d6] bg-[#08242a] aspect-[21/9] max-h-52 shadow-2xs">
+      <div className="relative rounded-2xl overflow-hidden border border-[#e5e0d6] bg-[#231f20] aspect-[21/9] max-h-52 shadow-2xs">
         {imageUrl ? (
           <>
             <ImageWithFallback
@@ -210,29 +210,29 @@ export function HeroImageUploader({
             />
 
             {/* Cinematic Vignette Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#08242a]/95 via-[#08242a]/40 to-transparent flex items-end p-4">
+            <div className="absolute inset-0 bg-gradient-to-t from-[#231f20]/95 via-[#231f20]/40 to-transparent flex items-end p-4">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 w-full">
                 <div className="flex items-center gap-2">
                   <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                  <span className="text-3xs text-[#d8f0f4] font-medium bg-[#08242a]/80 px-2.5 py-1 rounded-md border border-white/10 w-fit">
+                  <span className="text-3xs text-[#FEF6CC] font-medium bg-[#231f20]/80 px-2.5 py-1 rounded-md border border-white/10 w-fit">
                     معاينة حية للصورة المختارة (Cinematic Preview)
                   </span>
                 </div>
-                <span dir="ltr" className="text-3xs font-mono text-[#f4ce83] truncate max-w-sm bg-black/50 px-2.5 py-1 rounded-md border border-white/5 text-left">
+                <span dir="ltr" className="text-3xs font-mono text-[#ffd22f] truncate max-w-sm bg-black/50 px-2.5 py-1 rounded-md border border-white/5 text-left">
                   {imageUrl}
                 </span>
               </div>
             </div>
           </>
         ) : (
-          <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-6 bg-gradient-to-br from-[#08242a] via-[#0d3b43] to-[#08242a]">
+          <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-6 bg-gradient-to-br from-[#231f20] via-[#231f20] to-[#231f20]">
             <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center mb-2">
-              <svg className="w-5 h-5 text-[#f4ce83]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.8">
+              <svg className="w-5 h-5 text-[#ffd22f]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.8">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
               </svg>
             </div>
             <span className="text-xs font-bold text-white">لا توجد صورة خلفية (تم حذف الصورة)</span>
-            <span className="text-3xs text-[#d8f0f4]/80 mt-1 max-w-sm">
+            <span className="text-3xs text-[#FEF6CC]/80 mt-1 max-w-sm">
               سيتم عرض الخلفية الهندسية المغربية الداكنة الفاخرة بدلاً من الصورة، أو يمكنك استيراد صورة جديدة
             </span>
           </div>
@@ -240,19 +240,19 @@ export function HeroImageUploader({
       </div>
 
       {/* Helpful Instructions */}
-      <div className="p-3.5 rounded-xl bg-[#faf7f2] border border-[#e5e0d6] text-3xs space-y-1.5 text-[#5f7174]">
-        <div className="font-bold text-[#08242a] flex items-center gap-1.5">
+      <div className="p-3.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-3xs space-y-1.5 text-[#5C5A55]">
+        <div className="font-bold text-[#231f20] flex items-center gap-1.5">
           <span>💡 خيارات إدارة الصورة:</span>
         </div>
         <ul className="list-disc list-inside space-y-1 ps-1">
           <li>
-            زر <strong className="text-[#0d3b43]">استيراد صورة (Import)</strong>: لاختيار أي ملف صورة مباشرة من جهازك (JPG, PNG, WebP) ورفعه فورياً.
+            زر <strong className="text-[#231f20]">استيراد صورة (Import)</strong>: لاختيار أي ملف صورة مباشرة من جهازك (JPG, PNG, WebP) ورفعه فورياً.
           </li>
           <li>
             زر <strong className="text-red-600">حذف الصورة</strong>: يتيح لك حذف الصورة الحالية والرجوع إلى الخلفية الداكنة الفاخرة بدون صورة.
           </li>
           <li>
-            بعد أي تعديل، اضغط على زر <strong className="text-[#0d3b43]">&ldquo;حفظ كافة الإعدادات&rdquo;</strong> في أسفل الصفحة لاعتماد التغيير نهائياً على الموقع.
+            بعد أي تعديل، اضغط على زر <strong className="text-[#231f20]">&ldquo;حفظ كافة الإعدادات&rdquo;</strong> في أسفل الصفحة لاعتماد التغيير نهائياً على الموقع.
           </li>
         </ul>
       </div>

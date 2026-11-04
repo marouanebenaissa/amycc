@@ -10,11 +10,11 @@ interface CommissionsManagerProps {
 }
 
 const COLOR_OPTIONS = [
-  { label: 'طيني مراكشي (فنون وميدان)', border: 'border-[#c85a32]/30 hover:border-[#c85a32]', text: 'text-[#c85a32]', bg: 'bg-[#c85a32]/10' },
-  { label: 'بترولي داكن (مسرح وتنظيم)', border: 'border-[#0d3b43]/30 hover:border-[#0d3b43]', text: 'text-[#0d3b43]', bg: 'bg-[#0d3b43]/10' },
-  { label: 'ذهبي / خردلي (تراث وموسيقى)', border: 'border-[#d99b26]/30 hover:border-[#d99b26]', text: 'text-[#99620b]', bg: 'bg-[#d99b26]/10' },
-  { label: 'أزرق تركوازي (إعلام وتوثيق)', border: 'border-[#1c6875]/30 hover:border-[#1c6875]', text: 'text-[#1c6875]', bg: 'bg-[#1c6875]/10' },
-  { label: 'كحلي / رمادي (تكوين وريادة)', border: 'border-[#08242a]/30 hover:border-[#08242a]', text: 'text-[#08242a]', bg: 'bg-[#08242a]/10' },
+  { label: 'طيني مراكشي (فنون وميدان)', border: 'border-[#bd3227]/30 hover:border-[#bd3227]', text: 'text-[#bd3227]', bg: 'bg-[#bd3227]/10' },
+  { label: 'بترولي داكن (مسرح وتنظيم)', border: 'border-[#231f20]/30 hover:border-[#231f20]', text: 'text-[#231f20]', bg: 'bg-[#231f20]/10' },
+  { label: 'ذهبي / خردلي (تراث وموسيقى)', border: 'border-[#d2a82b]/30 hover:border-[#d2a82b]', text: 'text-[#d2a82b]', bg: 'bg-[#d2a82b]/10' },
+  { label: 'أزرق تركوازي (إعلام وتوثيق)', border: 'border-[#d2a82b]/30 hover:border-[#d2a82b]', text: 'text-[#d2a82b]', bg: 'bg-[#d2a82b]/10' },
+  { label: 'كحلي / رمادي (تكوين وريادة)', border: 'border-[#231f20]/30 hover:border-[#231f20]', text: 'text-[#231f20]', bg: 'bg-[#231f20]/10' },
   { label: 'زمردي / أخضر (تطوع وبيئة)', border: 'border-emerald-600/30 hover:border-emerald-600', text: 'text-emerald-700', bg: 'bg-emerald-50' },
 ]
 
@@ -45,9 +45,9 @@ export function CommissionsManager({ initialConfig, defaultItems = [] }: Commiss
     descFr: '',
     descEn: '',
     icon: '🎨',
-    borderClass: 'border-[#c85a32]/30 hover:border-[#c85a32]',
-    accentColor: 'text-[#c85a32]',
-    accentBg: 'bg-[#c85a32]/10',
+    borderClass: 'border-[#bd3227]/30 hover:border-[#bd3227]',
+    accentColor: 'text-[#bd3227]',
+    accentBg: 'bg-[#bd3227]/10',
     pointsAr: [],
     pointsFr: [],
     pointsEn: [],
@@ -95,9 +95,9 @@ export function CommissionsManager({ initialConfig, defaultItems = [] }: Commiss
       descFr: '',
       descEn: '',
       icon: '🎨',
-      borderClass: 'border-[#c85a32]/30 hover:border-[#c85a32]',
-      accentColor: 'text-[#c85a32]',
-      accentBg: 'bg-[#c85a32]/10',
+      borderClass: 'border-[#bd3227]/30 hover:border-[#bd3227]',
+      accentColor: 'text-[#bd3227]',
+      accentBg: 'bg-[#bd3227]/10',
       pointsAr: [],
       pointsFr: [],
       pointsEn: [],
@@ -134,9 +134,9 @@ export function CommissionsManager({ initialConfig, defaultItems = [] }: Commiss
       descFr: modalForm.descFr || '',
       descEn: modalForm.descEn || '',
       icon: modalForm.icon || '🎨',
-      borderClass: modalForm.borderClass || 'border-[#c85a32]/30 hover:border-[#c85a32]',
-      accentColor: modalForm.accentColor || 'text-[#c85a32]',
-      accentBg: modalForm.accentBg || 'bg-[#c85a32]/10',
+      borderClass: modalForm.borderClass || 'border-[#bd3227]/30 hover:border-[#bd3227]',
+      accentColor: modalForm.accentColor || 'text-[#bd3227]',
+      accentBg: modalForm.accentBg || 'bg-[#bd3227]/10',
       pointsAr: modalForm.pointsAr || [],
       pointsFr: modalForm.pointsFr || [],
       pointsEn: modalForm.pointsEn || [],
@@ -254,28 +254,28 @@ export function CommissionsManager({ initialConfig, defaultItems = [] }: Commiss
       {/* Top Banner & Quick Metrics */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
         <div className="p-4 rounded-2xl bg-white border border-[#e5e0d6] shadow-2xs">
-          <span className="text-3xs font-bold text-[#819598] block">إجمالي اللجان الميدانية</span>
-          <span className="text-2xl font-black text-[#08242a]">{config.items.length}</span>
-          <span className="text-3xs text-[#5f7174] block mt-0.5">محاور وظيفية متخصصة</span>
+          <span className="text-3xs font-bold text-[#5C5A55] block">إجمالي اللجان الميدانية</span>
+          <span className="text-2xl font-black text-[#231f20]">{config.items.length}</span>
+          <span className="text-3xs text-[#5C5A55] block mt-0.5">محاور وظيفية متخصصة</span>
         </div>
         <div className="p-4 rounded-2xl bg-white border border-emerald-500/30 shadow-2xs">
           <span className="text-3xs font-bold text-emerald-700 block">اللجان النشطة</span>
           <span className="text-2xl font-black text-emerald-600">
             {config.items.filter((item) => item.enabled).length}
           </span>
-          <span className="text-3xs text-[#5f7174] block mt-0.5">ظاهرة في الصفحة العامة</span>
+          <span className="text-3xs text-[#5C5A55] block mt-0.5">ظاهرة في الصفحة العامة</span>
         </div>
-        <div className="p-4 rounded-2xl bg-white border border-[#c85a32]/30 shadow-2xs">
-          <span className="text-3xs font-bold text-[#c85a32] block">إجمالي الأنشطة والتدخلات</span>
-          <span className="text-2xl font-black text-[#c85a32]">
+        <div className="p-4 rounded-2xl bg-white border border-[#bd3227]/30 shadow-2xs">
+          <span className="text-3xs font-bold text-[#bd3227] block">إجمالي الأنشطة والتدخلات</span>
+          <span className="text-2xl font-black text-[#bd3227]">
             {config.items.reduce((acc, item) => acc + (item.pointsAr?.length || 0), 0)}
           </span>
-          <span className="text-3xs text-[#5f7174] block mt-0.5">محور عمل وتأطير ميداني</span>
+          <span className="text-3xs text-[#5C5A55] block mt-0.5">محور عمل وتأطير ميداني</span>
         </div>
-        <div className="p-4 rounded-2xl bg-white border border-[#0d3b43]/30 shadow-2xs">
-          <span className="text-3xs font-bold text-[#0d3b43] block">نطاق التدخل الميداني</span>
-          <span className="text-lg font-black text-[#0d3b43] truncate block mt-1">دور الشباب • مراكز</span>
-          <span className="text-3xs text-[#5f7174] block mt-0.5">فضاءات ثقافية بالمغرب</span>
+        <div className="p-4 rounded-2xl bg-white border border-[#231f20]/30 shadow-2xs">
+          <span className="text-3xs font-bold text-[#231f20] block">نطاق التدخل الميداني</span>
+          <span className="text-lg font-black text-[#231f20] truncate block mt-1">دور الشباب • مراكز</span>
+          <span className="text-3xs text-[#5C5A55] block mt-0.5">فضاءات ثقافية بالمغرب</span>
         </div>
       </div>
 
@@ -287,8 +287,8 @@ export function CommissionsManager({ initialConfig, defaultItems = [] }: Commiss
             onClick={() => setShowSectionSettings(!showSectionSettings)}
             className={`px-3 py-2 rounded-xl text-xs font-bold transition-all border ${
               showSectionSettings
-                ? 'bg-[#0d3b43] text-white border-[#0d3b43]'
-                : 'bg-[#faf7f2] hover:bg-[#eae4d9] text-[#08242a] border-[#e5e0d6]'
+                ? 'bg-[#231f20] text-white border-[#231f20]'
+                : 'bg-[#F5F3EE] hover:bg-[#FEF6CC] text-[#231f20] border-[#e5e0d6]'
             }`}
           >
             ⚙️ عنوان ومقدمة القسم العام
@@ -299,7 +299,7 @@ export function CommissionsManager({ initialConfig, defaultItems = [] }: Commiss
           <button
             type="button"
             onClick={handleAddNew}
-            className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl bg-[#c85a32] hover:bg-[#a64522] text-white text-xs font-bold transition-all shadow-xs cursor-pointer"
+            className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl bg-[#bd3227] hover:bg-[#a3261c] text-white text-xs font-bold transition-all shadow-xs cursor-pointer"
           >
             <span>+</span>
             <span>إضافة لجنة جديدة</span>
@@ -312,7 +312,7 @@ export function CommissionsManager({ initialConfig, defaultItems = [] }: Commiss
             className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all shadow-xs cursor-pointer ${
               hasUnsavedChanges
                 ? 'bg-emerald-600 hover:bg-emerald-700 text-white animate-pulse'
-                : 'bg-[#0d3b43] hover:bg-[#14505b] text-white'
+                : 'bg-[#231f20] hover:bg-[#d2a82b] text-white'
             }`}
           >
             <span>💾</span>
@@ -357,20 +357,20 @@ export function CommissionsManager({ initialConfig, defaultItems = [] }: Commiss
 
       {/* Section Header Settings Drawer */}
       {showSectionSettings && (
-        <div className="p-5 rounded-2xl bg-white border border-[#0d3b43]/30 shadow-subtle space-y-4">
-          <div className="flex items-center justify-between border-b border-[#f0ebe1] pb-3">
+        <div className="p-5 rounded-2xl bg-white border border-[#231f20]/30 shadow-subtle space-y-4">
+          <div className="flex items-center justify-between border-b border-[#FEF6CC] pb-3">
             <div>
-              <h3 className="text-sm font-black text-[#08242a]">
+              <h3 className="text-sm font-black text-[#231f20]">
                 تعديل نصوص ترويسة قسم اللجان الوظيفية في صفحة الموقع
               </h3>
-              <p className="text-3xs text-[#819598]">
+              <p className="text-3xs text-[#5C5A55]">
                 العنوان الرئيسي، الشارة العلوية، والفقرة التمهيدية المعروضة فوق بطاقات اللجان
               </p>
             </div>
             <button
               type="button"
               onClick={() => setShowSectionSettings(false)}
-              className="text-xs text-[#819598] hover:text-[#08242a]"
+              className="text-xs text-[#5C5A55] hover:text-[#231f20]"
             >
               ✕ إغلاق
             </button>
@@ -378,7 +378,7 @@ export function CommissionsManager({ initialConfig, defaultItems = [] }: Commiss
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs font-bold text-[#08242a] mb-1">
+              <label className="block text-xs font-bold text-[#231f20] mb-1">
                 الشارة العلوية (بالعربية)
               </label>
               <input
@@ -388,11 +388,11 @@ export function CommissionsManager({ initialConfig, defaultItems = [] }: Commiss
                   setConfig((prev) => ({ ...prev, sectionTagAr: e.target.value }))
                   setHasUnsavedChanges(true)
                 }}
-                className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] bg-[#faf7f2] text-xs"
+                className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] bg-[#F5F3EE] text-xs"
               />
             </div>
             <div>
-              <label className="block text-xs font-bold text-[#08242a] mb-1">
+              <label className="block text-xs font-bold text-[#231f20] mb-1">
                 العنوان الرئيسي للقسم (بالعربية)
               </label>
               <input
@@ -402,13 +402,13 @@ export function CommissionsManager({ initialConfig, defaultItems = [] }: Commiss
                   setConfig((prev) => ({ ...prev, sectionTitleAr: e.target.value }))
                   setHasUnsavedChanges(true)
                 }}
-                className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] bg-[#faf7f2] text-xs font-bold"
+                className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] bg-[#F5F3EE] text-xs font-bold"
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-[#08242a] mb-1">
+            <label className="block text-xs font-bold text-[#231f20] mb-1">
               الفقرة التعريفية للقسم (بالعربية)
             </label>
             <textarea
@@ -418,7 +418,7 @@ export function CommissionsManager({ initialConfig, defaultItems = [] }: Commiss
                 setConfig((prev) => ({ ...prev, sectionDescAr: e.target.value }))
                 setHasUnsavedChanges(true)
               }}
-              className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] bg-[#faf7f2] text-xs"
+              className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] bg-[#F5F3EE] text-xs"
             />
           </div>
         </div>
@@ -437,14 +437,14 @@ export function CommissionsManager({ initialConfig, defaultItems = [] }: Commiss
               {/* Header: Icon & Category Tag + Reorder */}
               <div className="flex items-start justify-between gap-3">
                 <div className="flex items-center gap-3">
-                  <span className="w-12 h-12 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6] flex items-center justify-center text-2xl shadow-2xs">
+                  <span className="w-12 h-12 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6] flex items-center justify-center text-2xl shadow-2xs">
                     {item.icon}
                   </span>
                   <div>
                     <span className={`inline-block px-2.5 py-0.5 rounded-full text-3xs font-bold ${item.accentBg} ${item.accentColor}`}>
                       {item.tagAr}
                     </span>
-                    <h3 className="text-sm font-black text-[#08242a] mt-1 leading-snug">
+                    <h3 className="text-sm font-black text-[#231f20] mt-1 leading-snug">
                       {item.titleAr}
                     </h3>
                   </div>
@@ -456,7 +456,7 @@ export function CommissionsManager({ initialConfig, defaultItems = [] }: Commiss
                     type="button"
                     disabled={index === 0}
                     onClick={() => moveItem(index, 'up')}
-                    className="w-6 h-6 rounded-md bg-[#faf7f2] hover:bg-[#eae4d9] text-[#08242a] disabled:opacity-30 disabled:cursor-not-allowed flex items-center justify-center text-3xs font-bold transition-colors"
+                    className="w-6 h-6 rounded-md bg-[#F5F3EE] hover:bg-[#FEF6CC] text-[#231f20] disabled:opacity-30 disabled:cursor-not-allowed flex items-center justify-center text-3xs font-bold transition-colors"
                     title="تحريك لأعلى"
                   >
                     ▲
@@ -465,7 +465,7 @@ export function CommissionsManager({ initialConfig, defaultItems = [] }: Commiss
                     type="button"
                     disabled={index === config.items.length - 1}
                     onClick={() => moveItem(index, 'down')}
-                    className="w-6 h-6 rounded-md bg-[#faf7f2] hover:bg-[#eae4d9] text-[#08242a] disabled:opacity-30 disabled:cursor-not-allowed flex items-center justify-center text-3xs font-bold transition-colors"
+                    className="w-6 h-6 rounded-md bg-[#F5F3EE] hover:bg-[#FEF6CC] text-[#231f20] disabled:opacity-30 disabled:cursor-not-allowed flex items-center justify-center text-3xs font-bold transition-colors"
                     title="تحريك لأسفل"
                   >
                     ▼
@@ -474,15 +474,15 @@ export function CommissionsManager({ initialConfig, defaultItems = [] }: Commiss
               </div>
 
               {/* Description */}
-              <p className="text-xs text-[#5f7174] line-clamp-2 leading-relaxed">
+              <p className="text-xs text-[#5C5A55] line-clamp-2 leading-relaxed">
                 {item.descAr}
               </p>
 
               {/* Points Preview */}
               {item.pointsAr && item.pointsAr.length > 0 && (
-                <div className="space-y-1 pt-2 border-t border-[#f0ebe1]">
-                  <span className="text-3xs font-bold text-[#819598] block">أبرز الأنشطة الميدانية:</span>
-                  <ul className="text-3xs text-[#5f7174] space-y-1">
+                <div className="space-y-1 pt-2 border-t border-[#FEF6CC]">
+                  <span className="text-3xs font-bold text-[#5C5A55] block">أبرز الأنشطة الميدانية:</span>
+                  <ul className="text-3xs text-[#5C5A55] space-y-1">
                     {item.pointsAr.slice(0, 2).map((point, pIdx) => (
                       <li key={pIdx} className="truncate flex items-center gap-1.5">
                         <span className={`${item.accentColor} font-bold`}>✦</span>
@@ -490,7 +490,7 @@ export function CommissionsManager({ initialConfig, defaultItems = [] }: Commiss
                       </li>
                     ))}
                     {item.pointsAr.length > 2 && (
-                      <li className="text-3xs text-[#819598] italic">
+                      <li className="text-3xs text-[#5C5A55] italic">
                         +{item.pointsAr.length - 2} أنشطة إضافية...
                       </li>
                     )}
@@ -500,12 +500,12 @@ export function CommissionsManager({ initialConfig, defaultItems = [] }: Commiss
             </div>
 
             {/* Footer Actions */}
-            <div className="pt-3 mt-4 border-t border-[#f0ebe1] flex items-center justify-between text-xs">
+            <div className="pt-3 mt-4 border-t border-[#FEF6CC] flex items-center justify-between text-xs">
               <div className="flex items-center gap-1">
                 <button
                   type="button"
                   onClick={() => handleEdit(item)}
-                  className="px-2.5 py-1 rounded-lg bg-[#faf7f2] hover:bg-[#0d3b43] hover:text-white text-[#08242a] text-3xs font-bold transition-all cursor-pointer"
+                  className="px-2.5 py-1 rounded-lg bg-[#F5F3EE] hover:bg-[#231f20] hover:text-white text-[#231f20] text-3xs font-bold transition-all cursor-pointer"
                 >
                   ✏️ تعديل
                 </button>
@@ -536,14 +536,14 @@ export function CommissionsManager({ initialConfig, defaultItems = [] }: Commiss
       </div>
 
       {/* Footer Tools */}
-      <div className="flex items-center justify-between p-4 bg-[#faf7f2] rounded-2xl border border-[#e5e0d6] text-xs">
-        <span className="text-3xs text-[#819598]">
+      <div className="flex items-center justify-between p-4 bg-[#F5F3EE] rounded-2xl border border-[#e5e0d6] text-xs">
+        <span className="text-3xs text-[#5C5A55]">
           التعديلات المحفوظة هنا تنعكس فوراً في قسم اللجان الميدانية بصفحة فريق العمل.
         </span>
         <button
           type="button"
           onClick={handleResetToDefaults}
-          className="text-3xs font-bold text-[#819598] hover:text-[#c85a32] underline"
+          className="text-3xs font-bold text-[#5C5A55] hover:text-[#bd3227] underline"
         >
           استعادة اللجان الافتراضية الست
         </button>
@@ -560,10 +560,10 @@ export function CommissionsManager({ initialConfig, defaultItems = [] }: Commiss
               <div className="flex items-center gap-3">
                 <span className="text-2xl">{editingItem ? '✏️' : '➕'}</span>
                 <div>
-                  <h2 className="text-base font-black text-[#08242a]">
+                  <h2 className="text-base font-black text-[#231f20]">
                     {editingItem ? `تعديل: ${editingItem.titleAr}` : 'إضافة لجنة وظيفية جديدة'}
                   </h2>
-                  <p className="text-3xs text-[#5f7174]">
+                  <p className="text-3xs text-[#5C5A55]">
                     حدد الاسم، الوسم، والأنشطة والتدخلات الميدانية
                   </p>
                 </div>
@@ -571,21 +571,21 @@ export function CommissionsManager({ initialConfig, defaultItems = [] }: Commiss
               <button
                 type="button"
                 onClick={() => setIsModalOpen(false)}
-                className="w-8 h-8 rounded-full bg-[#faf7f2] hover:bg-[#eae4d9] text-[#08242a] flex items-center justify-center font-bold text-sm"
+                className="w-8 h-8 rounded-full bg-[#F5F3EE] hover:bg-[#FEF6CC] text-[#231f20] flex items-center justify-center font-bold text-sm"
               >
                 ✕
               </button>
             </div>
 
             {/* Navigation Tabs */}
-            <div className="px-6 pt-4 pb-2 border-b border-[#f0ebe1] flex items-center gap-2">
+            <div className="px-6 pt-4 pb-2 border-b border-[#FEF6CC] flex items-center gap-2">
               <button
                 type="button"
                 onClick={() => setModalTab('info')}
                 className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all ${
                   modalTab === 'info'
-                    ? 'bg-[#0d3b43] text-white shadow-xs'
-                    : 'bg-[#faf7f2] text-[#445457] hover:bg-[#eae4d9]'
+                    ? 'bg-[#231f20] text-white shadow-xs'
+                    : 'bg-[#F5F3EE] text-[#5C5A55] hover:bg-[#FEF6CC]'
                 }`}
               >
                 1. بيانات وهوية اللجنة
@@ -595,8 +595,8 @@ export function CommissionsManager({ initialConfig, defaultItems = [] }: Commiss
                 onClick={() => setModalTab('points')}
                 className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all ${
                   modalTab === 'points'
-                    ? 'bg-[#0d3b43] text-white shadow-xs'
-                    : 'bg-[#faf7f2] text-[#445457] hover:bg-[#eae4d9]'
+                    ? 'bg-[#231f20] text-white shadow-xs'
+                    : 'bg-[#F5F3EE] text-[#5C5A55] hover:bg-[#FEF6CC]'
                 }`}
               >
                 2. التدخلات والأنشطة الميدانية ({modalForm.pointsAr?.length || 0})
@@ -609,8 +609,8 @@ export function CommissionsManager({ initialConfig, defaultItems = [] }: Commiss
               {modalTab === 'info' && (
                 <div className="space-y-4">
                   {/* Language Tab */}
-                  <div className="flex items-center justify-between pb-2 border-b border-[#f0ebe1]">
-                    <span className="text-3xs font-bold text-[#819598]">لغة الإدخال الحالية:</span>
+                  <div className="flex items-center justify-between pb-2 border-b border-[#FEF6CC]">
+                    <span className="text-3xs font-bold text-[#5C5A55]">لغة الإدخال الحالية:</span>
                     <div className="flex items-center gap-1">
                       {(['ar', 'fr', 'en'] as const).map((lng) => (
                         <button
@@ -619,8 +619,8 @@ export function CommissionsManager({ initialConfig, defaultItems = [] }: Commiss
                           onClick={() => setLangTab(lng)}
                           className={`px-2.5 py-1 rounded-lg text-3xs font-bold uppercase transition-all ${
                             langTab === lng
-                              ? 'bg-[#c85a32] text-white'
-                              : 'bg-[#faf7f2] text-[#5f7174] hover:bg-[#eae4d9]'
+                              ? 'bg-[#bd3227] text-white'
+                              : 'bg-[#F5F3EE] text-[#5C5A55] hover:bg-[#FEF6CC]'
                           }`}
                         >
                           {lng}
@@ -631,10 +631,10 @@ export function CommissionsManager({ initialConfig, defaultItems = [] }: Commiss
 
                   {/* Trilingual inputs */}
                   {langTab === 'ar' && (
-                    <div className="space-y-3 p-4 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6]">
+                    <div className="space-y-3 p-4 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6]">
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         <div>
-                          <label className="block text-xs font-bold text-[#08242a] mb-1">
+                          <label className="block text-xs font-bold text-[#231f20] mb-1">
                             عنوان اللجنة (بالعربية) *
                           </label>
                           <input
@@ -643,11 +643,11 @@ export function CommissionsManager({ initialConfig, defaultItems = [] }: Commiss
                             value={modalForm.titleAr || ''}
                             onChange={(e) => setModalForm((prev) => ({ ...prev, titleAr: e.target.value }))}
                             placeholder="مثال: لجنة الفنون البصرية والتشكيلية"
-                            className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] bg-white text-xs text-[#08242a] focus:outline-none focus:border-[#0d3b43]"
+                            className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] bg-white text-xs text-[#231f20] focus:outline-none focus:border-[#231f20]"
                           />
                         </div>
                         <div>
-                          <label className="block text-xs font-bold text-[#08242a] mb-1">
+                          <label className="block text-xs font-bold text-[#231f20] mb-1">
                             وسم التصنيف (بالعربية)
                           </label>
                           <input
@@ -655,13 +655,13 @@ export function CommissionsManager({ initialConfig, defaultItems = [] }: Commiss
                             value={modalForm.tagAr || ''}
                             onChange={(e) => setModalForm((prev) => ({ ...prev, tagAr: e.target.value }))}
                             placeholder="مثال: محترفات إبداعية"
-                            className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] bg-white text-xs text-[#08242a] focus:outline-none focus:border-[#0d3b43]"
+                            className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] bg-white text-xs text-[#231f20] focus:outline-none focus:border-[#231f20]"
                           />
                         </div>
                       </div>
 
                       <div>
-                        <label className="block text-xs font-bold text-[#08242a] mb-1">
+                        <label className="block text-xs font-bold text-[#231f20] mb-1">
                           وصف دور وأهداف اللجنة (بالعربية)
                         </label>
                         <textarea
@@ -669,17 +669,17 @@ export function CommissionsManager({ initialConfig, defaultItems = [] }: Commiss
                           value={modalForm.descAr || ''}
                           onChange={(e) => setModalForm((prev) => ({ ...prev, descAr: e.target.value }))}
                           placeholder="تأطير ورشات الرسم التشكيلي، الصباغة المائية والزيتية..."
-                          className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] bg-white text-xs text-[#08242a] focus:outline-none focus:border-[#0d3b43]"
+                          className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] bg-white text-xs text-[#231f20] focus:outline-none focus:border-[#231f20]"
                         />
                       </div>
                     </div>
                   )}
 
                   {langTab === 'fr' && (
-                    <div className="space-y-3 p-4 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6]">
+                    <div className="space-y-3 p-4 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6]">
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         <div>
-                          <label className="block text-xs font-bold text-[#08242a] mb-1">
+                          <label className="block text-xs font-bold text-[#231f20] mb-1">
                             Nom de la Commission (FR)
                           </label>
                           <input
@@ -687,11 +687,11 @@ export function CommissionsManager({ initialConfig, defaultItems = [] }: Commiss
                             value={modalForm.titleFr || ''}
                             onChange={(e) => setModalForm((prev) => ({ ...prev, titleFr: e.target.value }))}
                             placeholder="Ex: Commission Arts Visuels"
-                            className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] bg-white text-xs text-[#08242a] focus:outline-none focus:border-[#0d3b43]"
+                            className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] bg-white text-xs text-[#231f20] focus:outline-none focus:border-[#231f20]"
                           />
                         </div>
                         <div>
-                          <label className="block text-xs font-bold text-[#08242a] mb-1">
+                          <label className="block text-xs font-bold text-[#231f20] mb-1">
                             Tag / Catégorie (FR)
                           </label>
                           <input
@@ -699,13 +699,13 @@ export function CommissionsManager({ initialConfig, defaultItems = [] }: Commiss
                             value={modalForm.tagFr || ''}
                             onChange={(e) => setModalForm((prev) => ({ ...prev, tagFr: e.target.value }))}
                             placeholder="Ex: Ateliers Créatifs"
-                            className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] bg-white text-xs text-[#08242a] focus:outline-none focus:border-[#0d3b43]"
+                            className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] bg-white text-xs text-[#231f20] focus:outline-none focus:border-[#231f20]"
                           />
                         </div>
                       </div>
 
                       <div>
-                        <label className="block text-xs font-bold text-[#08242a] mb-1">
+                        <label className="block text-xs font-bold text-[#231f20] mb-1">
                           Description (FR)
                         </label>
                         <textarea
@@ -713,17 +713,17 @@ export function CommissionsManager({ initialConfig, defaultItems = [] }: Commiss
                           value={modalForm.descFr || ''}
                           onChange={(e) => setModalForm((prev) => ({ ...prev, descFr: e.target.value }))}
                           placeholder="Description des ateliers et objectifs..."
-                          className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] bg-white text-xs text-[#08242a] focus:outline-none focus:border-[#0d3b43]"
+                          className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] bg-white text-xs text-[#231f20] focus:outline-none focus:border-[#231f20]"
                         />
                       </div>
                     </div>
                   )}
 
                   {langTab === 'en' && (
-                    <div className="space-y-3 p-4 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6]">
+                    <div className="space-y-3 p-4 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6]">
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         <div>
-                          <label className="block text-xs font-bold text-[#08242a] mb-1">
+                          <label className="block text-xs font-bold text-[#231f20] mb-1">
                             Commission Title (EN)
                           </label>
                           <input
@@ -731,11 +731,11 @@ export function CommissionsManager({ initialConfig, defaultItems = [] }: Commiss
                             value={modalForm.titleEn || ''}
                             onChange={(e) => setModalForm((prev) => ({ ...prev, titleEn: e.target.value }))}
                             placeholder="Ex: Visual Arts Committee"
-                            className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] bg-white text-xs text-[#08242a] focus:outline-none focus:border-[#0d3b43]"
+                            className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] bg-white text-xs text-[#231f20] focus:outline-none focus:border-[#231f20]"
                           />
                         </div>
                         <div>
-                          <label className="block text-xs font-bold text-[#08242a] mb-1">
+                          <label className="block text-xs font-bold text-[#231f20] mb-1">
                             Tag (EN)
                           </label>
                           <input
@@ -743,13 +743,13 @@ export function CommissionsManager({ initialConfig, defaultItems = [] }: Commiss
                             value={modalForm.tagEn || ''}
                             onChange={(e) => setModalForm((prev) => ({ ...prev, tagEn: e.target.value }))}
                             placeholder="Ex: Creative Labs"
-                            className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] bg-white text-xs text-[#08242a] focus:outline-none focus:border-[#0d3b43]"
+                            className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] bg-white text-xs text-[#231f20] focus:outline-none focus:border-[#231f20]"
                           />
                         </div>
                       </div>
 
                       <div>
-                        <label className="block text-xs font-bold text-[#08242a] mb-1">
+                        <label className="block text-xs font-bold text-[#231f20] mb-1">
                           Description (EN)
                         </label>
                         <textarea
@@ -757,7 +757,7 @@ export function CommissionsManager({ initialConfig, defaultItems = [] }: Commiss
                           value={modalForm.descEn || ''}
                           onChange={(e) => setModalForm((prev) => ({ ...prev, descEn: e.target.value }))}
                           placeholder="Brief overview of the commission's activities..."
-                          className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] bg-white text-xs text-[#08242a] focus:outline-none focus:border-[#0d3b43]"
+                          className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] bg-white text-xs text-[#231f20] focus:outline-none focus:border-[#231f20]"
                         />
                       </div>
                     </div>
@@ -766,7 +766,7 @@ export function CommissionsManager({ initialConfig, defaultItems = [] }: Commiss
                   {/* Icon & Theme Selector */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
                     <div>
-                      <label className="block text-xs font-bold text-[#08242a] mb-1">
+                      <label className="block text-xs font-bold text-[#231f20] mb-1">
                         رمز الأيقونة (إيموجي)
                       </label>
                       <div className="flex items-center gap-2">
@@ -782,7 +782,7 @@ export function CommissionsManager({ initialConfig, defaultItems = [] }: Commiss
                               key={ico}
                               type="button"
                               onClick={() => setModalForm((prev) => ({ ...prev, icon: ico }))}
-                              className="w-7 h-7 rounded-lg bg-[#faf7f2] hover:bg-[#eae4d9] flex items-center justify-center text-sm"
+                              className="w-7 h-7 rounded-lg bg-[#F5F3EE] hover:bg-[#FEF6CC] flex items-center justify-center text-sm"
                             >
                               {ico}
                             </button>
@@ -792,7 +792,7 @@ export function CommissionsManager({ initialConfig, defaultItems = [] }: Commiss
                     </div>
 
                     <div>
-                      <label className="block text-xs font-bold text-[#08242a] mb-1">
+                      <label className="block text-xs font-bold text-[#231f20] mb-1">
                         نمط الألوان والحدود
                       </label>
                       <select
@@ -802,11 +802,11 @@ export function CommissionsManager({ initialConfig, defaultItems = [] }: Commiss
                           setModalForm((prev) => ({
                             ...prev,
                             borderClass: e.target.value,
-                            accentColor: opt?.text || 'text-[#c85a32]',
-                            accentBg: opt?.bg || 'bg-[#c85a32]/10',
+                            accentColor: opt?.text || 'text-[#bd3227]',
+                            accentBg: opt?.bg || 'bg-[#bd3227]/10',
                           }))
                         }}
-                        className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] bg-white text-xs text-[#08242a] focus:outline-none"
+                        className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] bg-white text-xs text-[#231f20] focus:outline-none"
                       >
                         {COLOR_OPTIONS.map((opt) => (
                           <option key={opt.border} value={opt.border}>
@@ -822,14 +822,14 @@ export function CommissionsManager({ initialConfig, defaultItems = [] }: Commiss
               {/* TAB 2: INTERVENTIONS / POINTS */}
               {modalTab === 'points' && (
                 <div className="space-y-4">
-                  <div className="p-4 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6] space-y-4">
-                    <span className="text-xs font-bold text-[#08242a] block">
+                  <div className="p-4 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6] space-y-4">
+                    <span className="text-xs font-bold text-[#231f20] block">
                       أبرز التدخلات والأنشطة الميدانية للجنة
                     </span>
 
                     {/* Arabic Points */}
                     <div className="space-y-2">
-                      <label className="block text-3xs font-bold text-[#0d3b43]">
+                      <label className="block text-3xs font-bold text-[#231f20]">
                         الأنشطة بالعربية ({modalForm.pointsAr?.length || 0})
                       </label>
                       <div className="flex items-center gap-2">
@@ -863,7 +863,7 @@ export function CommissionsManager({ initialConfig, defaultItems = [] }: Commiss
                               setNewPointAr('')
                             }
                           }}
-                          className="px-3 py-1.5 rounded-xl bg-[#0d3b43] text-white text-xs font-bold"
+                          className="px-3 py-1.5 rounded-xl bg-[#231f20] text-white text-xs font-bold"
                         >
                           إضافة
                         </button>
@@ -895,7 +895,7 @@ export function CommissionsManager({ initialConfig, defaultItems = [] }: Commiss
 
                     {/* French Points */}
                     <div className="space-y-2 pt-2 border-t border-[#e5e0d6]">
-                      <label className="block text-3xs font-bold text-[#c85a32]">
+                      <label className="block text-3xs font-bold text-[#bd3227]">
                         Points en Français ({modalForm.pointsFr?.length || 0})
                       </label>
                       <div className="flex items-center gap-2">
@@ -929,7 +929,7 @@ export function CommissionsManager({ initialConfig, defaultItems = [] }: Commiss
                               setNewPointFr('')
                             }
                           }}
-                          className="px-3 py-1.5 rounded-xl bg-[#c85a32] text-white text-xs font-bold"
+                          className="px-3 py-1.5 rounded-xl bg-[#bd3227] text-white text-xs font-bold"
                         >
                           Ajouter
                         </button>
@@ -961,7 +961,7 @@ export function CommissionsManager({ initialConfig, defaultItems = [] }: Commiss
 
                     {/* English Points */}
                     <div className="space-y-2 pt-2 border-t border-[#e5e0d6]">
-                      <label className="block text-3xs font-bold text-[#1c6875]">
+                      <label className="block text-3xs font-bold text-[#d2a82b]">
                         Interventions in English ({modalForm.pointsEn?.length || 0})
                       </label>
                       <div className="flex items-center gap-2">
@@ -995,7 +995,7 @@ export function CommissionsManager({ initialConfig, defaultItems = [] }: Commiss
                               setNewPointEn('')
                             }
                           }}
-                          className="px-3 py-1.5 rounded-xl bg-[#1c6875] text-white text-xs font-bold"
+                          className="px-3 py-1.5 rounded-xl bg-[#d2a82b] text-white text-xs font-bold"
                         >
                           Add
                         </button>
@@ -1029,10 +1029,10 @@ export function CommissionsManager({ initialConfig, defaultItems = [] }: Commiss
               )}
 
               {/* Status Active Toggle */}
-              <div className="flex items-center justify-between p-3 rounded-xl bg-[#faf7f2] border border-[#e5e0d6]">
+              <div className="flex items-center justify-between p-3 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6]">
                 <div>
-                  <span className="block text-xs font-bold text-[#08242a]">تفعيل ظهور اللجنة في الموقع</span>
-                  <span className="block text-3xs text-[#819598]">عند التعطيل، تبقى اللجنة محفوظة في لوحة التحكم وتختفي من الصفحة العامة.</span>
+                  <span className="block text-xs font-bold text-[#231f20]">تفعيل ظهور اللجنة في الموقع</span>
+                  <span className="block text-3xs text-[#5C5A55]">عند التعطيل، تبقى اللجنة محفوظة في لوحة التحكم وتختفي من الصفحة العامة.</span>
                 </div>
                 <label className="relative inline-flex items-center cursor-pointer">
                   <input
@@ -1050,13 +1050,13 @@ export function CommissionsManager({ initialConfig, defaultItems = [] }: Commiss
                 <button
                   type="button"
                   onClick={() => setIsModalOpen(false)}
-                  className="px-4 py-2 rounded-xl bg-[#faf7f2] hover:bg-[#eae4d9] text-[#08242a] text-xs font-bold transition-colors cursor-pointer"
+                  className="px-4 py-2 rounded-xl bg-[#F5F3EE] hover:bg-[#FEF6CC] text-[#231f20] text-xs font-bold transition-colors cursor-pointer"
                 >
                   إلغاء
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2 rounded-xl bg-[#0d3b43] hover:bg-[#14505b] text-white text-xs font-bold transition-all shadow-xs cursor-pointer"
+                  className="px-5 py-2 rounded-xl bg-[#231f20] hover:bg-[#d2a82b] text-white text-xs font-bold transition-all shadow-xs cursor-pointer"
                 >
                   {editingItem ? 'تحديث بيانات اللجنة' : 'إضافة اللجنة للقائمة'}
                 </button>

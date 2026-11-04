@@ -102,14 +102,14 @@ export function EventForm({ event }: EventFormProps) {
   return (
     <form action={handleSubmit} className="space-y-6">
       {error && (
-        <div className="p-4 rounded-xl bg-[#fae4dc] border border-[#f2c2b0] text-[#c85a32] text-xs font-bold">
+        <div className="p-4 rounded-xl bg-[#fde8e7] border border-[#fde8e7] text-[#bd3227] text-xs font-bold">
           {error}
         </div>
       )}
 
       {/* General */}
       <div className="bg-white rounded-2xl border border-[#e5e0d6] p-6 space-y-5 shadow-2xs">
-        <h2 className="text-xs font-bold text-[#08242a] uppercase tracking-wider">Event Scheduling & Capacity</h2>
+        <h2 className="text-xs font-bold text-[#231f20] uppercase tracking-wider">Event Scheduling & Capacity</h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <FormField label="URL Slug" required hint="Auto-generated from English title if blank">
@@ -177,19 +177,19 @@ export function EventForm({ event }: EventFormProps) {
                 name="registration_open"
                 value="true"
                 defaultChecked={event?.registration_open ?? false}
-                className="w-4 h-4 rounded border-[#cfc7b9] text-[#0d3b43] focus:ring-[#0d3b43]"
+                className="w-4 h-4 rounded border-[#cfc7b9] text-[#231f20] focus:ring-[#231f20]"
               />
-              <span className="text-xs font-bold text-[#08242a]">Open for attendee registration</span>
+              <span className="text-xs font-bold text-[#231f20]">Open for attendee registration</span>
             </label>
           </FormField>
         </div>
 
         <div>
           <div className="flex items-center justify-between mb-1.5">
-            <label className="block text-xs font-bold text-[#08242a]">
+            <label className="block text-xs font-bold text-[#231f20]">
               Cover Image URL / صورة وغلاف الفعالية (Poster)
             </label>
-            <span className="text-3xs text-[#819598]">
+            <span className="text-3xs text-[#5C5A55]">
               Direct image URL or /uploads path
             </span>
           </div>
@@ -210,7 +210,7 @@ export function EventForm({ event }: EventFormProps) {
                 value={coverImage}
                 onChange={(e) => setCoverImage(e.target.value)}
                 placeholder="/uploads/... or https://..."
-                className="w-full px-3.5 py-2.5 rounded-xl border border-[#cfc7b9] text-xs font-mono bg-white text-[#08242a] focus:outline-none focus:border-[#0d3b43] transition-colors"
+                className="w-full px-3.5 py-2.5 rounded-xl border border-[#cfc7b9] text-xs font-mono bg-white text-[#231f20] focus:outline-none focus:border-[#231f20] transition-colors"
               />
             </div>
 
@@ -218,7 +218,7 @@ export function EventForm({ event }: EventFormProps) {
               type="button"
               onClick={() => fileInputRef.current?.click()}
               disabled={uploadingImage}
-              className="px-4 py-2.5 rounded-xl text-xs font-extrabold text-white bg-[#0d3b43] hover:bg-[#14505b] active:scale-98 disabled:opacity-50 transition-all flex items-center justify-center gap-2 shrink-0 cursor-pointer shadow-xs"
+              className="px-4 py-2.5 rounded-xl text-xs font-extrabold text-white bg-[#231f20] hover:bg-[#d2a82b] active:scale-98 disabled:opacity-50 transition-all flex items-center justify-center gap-2 shrink-0 cursor-pointer shadow-xs"
             >
               <span>{uploadingImage ? '⏳' : '📥'}</span>
               <span>{uploadingImage ? 'جاري الاستيراد...' : 'Import / استيراد صورة'}</span>
@@ -244,7 +244,7 @@ export function EventForm({ event }: EventFormProps) {
           )}
 
           {coverImage && (
-            <div className="mt-3 p-3 rounded-2xl border border-[#e5e0d6] bg-[#faf7f2] flex items-center gap-3 max-w-md">
+            <div className="mt-3 p-3 rounded-2xl border border-[#e5e0d6] bg-[#F5F3EE] flex items-center gap-3 max-w-md">
               <div className="relative w-16 h-16 rounded-xl overflow-hidden border border-[#e5e0d6] bg-black/5 shrink-0">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
@@ -254,10 +254,10 @@ export function EventForm({ event }: EventFormProps) {
                 />
               </div>
               <div className="min-w-0 flex-1">
-                <span className="text-3xs font-extrabold uppercase text-[#0d3b43] block">
+                <span className="text-3xs font-extrabold uppercase text-[#231f20] block">
                   معاينة البوستر (Live Preview)
                 </span>
-                <span className="text-3xs font-mono text-[#819598] truncate block">
+                <span className="text-3xs font-mono text-[#5C5A55] truncate block">
                   {coverImage}
                 </span>
               </div>
@@ -269,8 +269,8 @@ export function EventForm({ event }: EventFormProps) {
       {/* Translations */}
       <div className="bg-white rounded-2xl border border-[#e5e0d6] p-6 space-y-5 shadow-2xs">
         <div className="flex items-center justify-between">
-          <h2 className="text-xs font-bold text-[#08242a] uppercase tracking-wider">Trilingual Event Descriptions</h2>
-          <div className="flex gap-1.5 p-1 rounded-xl bg-[#faf7f2] border border-[#e5e0d6]">
+          <h2 className="text-xs font-bold text-[#231f20] uppercase tracking-wider">Trilingual Event Descriptions</h2>
+          <div className="flex gap-1.5 p-1 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6]">
             {(['ar', 'fr', 'en'] as const).map((loc) => (
               <button
                 key={loc}
@@ -279,8 +279,8 @@ export function EventForm({ event }: EventFormProps) {
                 className={[
                   'px-3 py-1.5 text-xs font-bold rounded-lg transition-all',
                   activeLocale === loc
-                    ? 'bg-[#0d3b43] text-white shadow-xs'
-                    : 'text-[#445457] hover:bg-[#f4ede2]',
+                    ? 'bg-[#231f20] text-white shadow-xs'
+                    : 'text-[#5C5A55] hover:bg-[#FEF6CC]',
                 ].join(' ')}
               >
                 {loc.toUpperCase()}
@@ -328,14 +328,14 @@ export function EventForm({ event }: EventFormProps) {
         <button
           type="button"
           onClick={() => router.back()}
-          className="px-5 py-2.5 text-xs font-bold text-[#445457] border border-[#cfc7b9] rounded-xl hover:bg-[#faf7f2] transition-colors"
+          className="px-5 py-2.5 text-xs font-bold text-[#5C5A55] border border-[#cfc7b9] rounded-xl hover:bg-[#F5F3EE] transition-colors"
         >
           Cancel
         </button>
         <button
           type="submit"
           disabled={isPending}
-          className="px-6 py-2.5 text-xs font-bold text-white bg-[#0d3b43] hover:bg-[#14505b] active:scale-98 rounded-xl disabled:opacity-60 disabled:cursor-not-allowed transition-all shadow-subtle hover:shadow-card"
+          className="px-6 py-2.5 text-xs font-bold text-white bg-[#231f20] hover:bg-[#d2a82b] active:scale-98 rounded-xl disabled:opacity-60 disabled:cursor-not-allowed transition-all shadow-subtle hover:shadow-card"
         >
           {isPending ? 'Saving…' : event ? 'Update Event' : 'Create Event'}
         </button>

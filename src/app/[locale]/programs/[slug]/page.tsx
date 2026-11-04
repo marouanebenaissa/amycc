@@ -147,25 +147,25 @@ export default async function ProgramDetailPage(props: {
     <>
       <Header locale={locale} dict={dict} />
 
-      <main id="main-content" className="flex-1 bg-[#faf7f2] py-12 lg:py-16">
+      <main id="main-content" className="flex-1 bg-[#F5F3EE] py-12 lg:py-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6">
           {/* Breadcrumb Navigation */}
-          <div className="flex items-center gap-2 text-xs font-bold text-[#5f7174] mb-8">
-            <Link href={`/${locale}`} className="hover:text-[#0d3b43] transition-colors">
+          <div className="flex items-center gap-2 text-xs font-bold text-[#5C5A55] mb-8">
+            <Link href={`/${locale}`} className="hover:text-[#231f20] transition-colors">
               {isAr ? 'الرئيسية' : isFr ? 'Accueil' : 'Home'}
             </Link>
             <span>/</span>
-            <Link href={`/${locale}/programs`} className="hover:text-[#0d3b43] transition-colors">
+            <Link href={`/${locale}/programs`} className="hover:text-[#231f20] transition-colors">
               {isAr ? 'البرامج الثقافية' : isFr ? 'Programmes' : 'Programs'}
             </Link>
             <span>/</span>
-            <span className="text-[#c85a32] truncate max-w-xs">{translation?.title}</span>
+            <span className="text-[#bd3227] truncate max-w-xs">{translation?.title}</span>
           </div>
 
           {/* Program Header Box */}
           <div className="bg-white rounded-3xl border border-[#e5e0d6] overflow-hidden shadow-card mb-8">
             {program.cover_image && (
-              <div className="relative aspect-[21/9] w-full bg-[#08242a]">
+              <div className="relative aspect-[21/9] w-full bg-[#231f20]">
                 <Image
                   src={program.cover_image}
                   alt={translation?.title || ''}
@@ -180,20 +180,20 @@ export default async function ProgramDetailPage(props: {
 
             <div className="p-8 sm:p-10 space-y-6">
               <div className="flex flex-wrap items-center gap-2.5">
-                <span className="px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-[#d8f0f4] text-[#0d3b43]">
+                <span className="px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-[#FEF6CC] text-[#231f20]">
                   {program.category}
                 </span>
-                <span className="px-3.5 py-1.5 rounded-full text-xs font-bold bg-[#faf7f2] border border-[#e5e0d6] text-[#5f7174]">
+                <span className="px-3.5 py-1.5 rounded-full text-xs font-bold bg-[#F5F3EE] border border-[#e5e0d6] text-[#5C5A55]">
                   📍 {program.city || (isAr ? 'المملكة المغربية' : isFr ? 'Royaume du Maroc' : 'Morocco')}
                 </span>
               </div>
 
-              <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black text-[#08242a] tracking-tight leading-snug">
+              <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black text-[#231f20] tracking-tight leading-snug">
                 {translation?.title}
               </h1>
 
               {translation?.description && (
-                <p className="text-base sm:text-lg text-[#445457] leading-relaxed font-medium">
+                <p className="text-base sm:text-lg text-[#5C5A55] leading-relaxed font-medium">
                   {translation.description}
                 </p>
               )}
@@ -201,50 +201,50 @@ export default async function ProgramDetailPage(props: {
           </div>
 
           {/* Program Details Sections */}
-          <div className="bg-white p-8 sm:p-10 rounded-3xl border border-[#e5e0d6] shadow-subtle space-y-8 text-[#445457] text-sm sm:text-base leading-relaxed">
+          <div className="bg-white p-8 sm:p-10 rounded-3xl border border-[#e5e0d6] shadow-subtle space-y-8 text-[#5C5A55] text-sm sm:text-base leading-relaxed">
             {translation?.objectives && (
-              <div className="p-6 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6] space-y-2">
-                <h2 className="text-base sm:text-lg font-black text-[#08242a] flex items-center gap-2">
+              <div className="p-6 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6] space-y-2">
+                <h2 className="text-base sm:text-lg font-black text-[#231f20] flex items-center gap-2">
                   <span>🎯</span>
                   <span>{isAr ? 'أهداف ومخرجات البرنامج' : isFr ? 'Objectifs et résultats attendus' : 'Program Objectives'}</span>
                 </h2>
-                <p className="leading-relaxed text-[#445457]">{translation.objectives}</p>
+                <p className="leading-relaxed text-[#5C5A55]">{translation.objectives}</p>
               </div>
             )}
 
             {translation?.target_audience && (
-              <div className="p-6 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6] space-y-2">
-                <h2 className="text-base sm:text-lg font-black text-[#08242a] flex items-center gap-2">
+              <div className="p-6 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6] space-y-2">
+                <h2 className="text-base sm:text-lg font-black text-[#231f20] flex items-center gap-2">
                   <span>👥</span>
                   <span>{isAr ? 'الفئة المستهدفة وشروط المشاركة' : isFr ? 'Public cible et conditions' : 'Target Audience'}</span>
                 </h2>
-                <p className="leading-relaxed text-[#445457]">{translation.target_audience}</p>
+                <p className="leading-relaxed text-[#5C5A55]">{translation.target_audience}</p>
               </div>
             )}
 
             {translation?.activities && (
               <div className="space-y-3">
-                <h2 className="text-base sm:text-lg font-black text-[#08242a] flex items-center gap-2">
+                <h2 className="text-base sm:text-lg font-black text-[#231f20] flex items-center gap-2">
                   <span>🎨</span>
                   <span>{isAr ? 'الأنشطة والورشات المبرمجة' : isFr ? 'Activités et ateliers au programme' : 'Key Activities & Masterclasses'}</span>
                 </h2>
-                <p className="leading-relaxed text-[#445457]">{translation.activities}</p>
+                <p className="leading-relaxed text-[#5C5A55]">{translation.activities}</p>
               </div>
             )}
 
             {/* Action Bar */}
-            <div className="pt-8 border-t border-[#f0ebe1] flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="pt-8 border-t border-[#FEF6CC] flex flex-col sm:flex-row items-center justify-between gap-4">
               <div className="flex flex-wrap items-center gap-3 w-full sm:w-auto">
                 <Link
                   href={`/${locale}/membership`}
-                  className="inline-flex items-center justify-center px-8 py-3.5 rounded-xl font-black text-white bg-[#0d3b43] hover:bg-[#08242a] active:scale-98 transition-all shadow-md text-xs sm:text-sm w-full sm:w-auto"
+                  className="inline-flex items-center justify-center px-8 py-3.5 rounded-xl font-black text-white bg-[#231f20] hover:bg-[#231f20] active:scale-98 transition-all shadow-md text-xs sm:text-sm w-full sm:w-auto"
                 >
                   {dict.membership.apply}
                 </Link>
 
                 <Link
                   href={`/${locale}/contact`}
-                  className="inline-flex items-center justify-center px-8 py-3.5 rounded-xl font-bold text-[#08242a] bg-[#faf7f2] hover:bg-[#f0ebe1] border border-[#e5e0d6] transition-colors text-xs sm:text-sm w-full sm:w-auto"
+                  className="inline-flex items-center justify-center px-8 py-3.5 rounded-xl font-bold text-[#231f20] bg-[#F5F3EE] hover:bg-[#FEF6CC] border border-[#e5e0d6] transition-colors text-xs sm:text-sm w-full sm:w-auto"
                 >
                   {isAr ? 'استفسر حول هذا البرنامج' : isFr ? 'S\'informer sur ce programme' : dict.nav.contact}
                 </Link>
@@ -252,7 +252,7 @@ export default async function ProgramDetailPage(props: {
 
               <Link
                 href={`/${locale}/programs`}
-                className="text-xs font-bold text-[#c85a32] hover:underline"
+                className="text-xs font-bold text-[#bd3227] hover:underline"
               >
                 ← {isAr ? 'العودة لكافة البرامج' : isFr ? 'Retour à tous les programmes' : 'Back to Programs'}
               </Link>

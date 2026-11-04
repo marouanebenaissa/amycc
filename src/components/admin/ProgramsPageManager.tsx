@@ -141,8 +141,8 @@ export function ProgramsPageManager({ initialConfig, defaultConfig }: ProgramsPa
           onClick={() => setActiveTab('hero')}
           className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer ${
             activeTab === 'hero'
-              ? 'bg-[#0d3b43] text-white shadow-xs'
-              : 'text-[#445457] hover:text-[#08242a] hover:bg-[#faf7f2]'
+              ? 'bg-[#231f20] text-white shadow-xs'
+              : 'text-[#5C5A55] hover:text-[#231f20] hover:bg-[#F5F3EE]'
           }`}
         >
           <span>🖼️</span>
@@ -154,8 +154,8 @@ export function ProgramsPageManager({ initialConfig, defaultConfig }: ProgramsPa
           onClick={() => setActiveTab('stats')}
           className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer ${
             activeTab === 'stats'
-              ? 'bg-[#c85a32] text-white shadow-xs'
-              : 'text-[#445457] hover:text-[#08242a] hover:bg-[#faf7f2]'
+              ? 'bg-[#bd3227] text-white shadow-xs'
+              : 'text-[#5C5A55] hover:text-[#231f20] hover:bg-[#F5F3EE]'
           }`}
         >
           <span>📊</span>
@@ -167,8 +167,8 @@ export function ProgramsPageManager({ initialConfig, defaultConfig }: ProgramsPa
           onClick={() => setActiveTab('cta')}
           className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer ${
             activeTab === 'cta'
-              ? 'bg-[#99620b] text-white shadow-xs'
-              : 'text-[#445457] hover:text-[#08242a] hover:bg-[#faf7f2]'
+              ? 'bg-[#d2a82b] text-white shadow-xs'
+              : 'text-[#5C5A55] hover:text-[#231f20] hover:bg-[#F5F3EE]'
           }`}
         >
           <span>📢</span>
@@ -181,18 +181,18 @@ export function ProgramsPageManager({ initialConfig, defaultConfig }: ProgramsPa
           ============================================================ */}
       {activeTab === 'hero' && (
         <div className="p-6 sm:p-8 rounded-3xl bg-white border border-[#e5e0d6] shadow-subtle space-y-6">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#f0ebe1] pb-4">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#FEF6CC] pb-4">
             <div>
-              <h2 className="text-xl font-black text-[#08242a] tracking-tight flex items-center gap-2">
+              <h2 className="text-xl font-black text-[#231f20] tracking-tight flex items-center gap-2">
                 <span>🖼️</span>
                 <span>رأس وواجهة صفحة البرامج (Hero Section)</span>
               </h2>
-              <p className="text-xs text-[#5f7174] mt-1">
+              <p className="text-xs text-[#5C5A55] mt-1">
                 تخصيص العناوين والوسوم التقديمية والصورة البارزة المعروضة في أعلى صفحة البرامج.
               </p>
             </div>
 
-            <div className="flex gap-1.5 p-1 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6] self-start sm:self-auto">
+            <div className="flex gap-1.5 p-1 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6] self-start sm:self-auto">
               {(['ar', 'fr', 'en'] as const).map((loc) => (
                 <button
                   key={loc}
@@ -200,8 +200,8 @@ export function ProgramsPageManager({ initialConfig, defaultConfig }: ProgramsPa
                   onClick={() => setActiveLangTab(loc)}
                   className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                     activeLangTab === loc
-                      ? 'bg-[#0d3b43] text-white shadow-xs'
-                      : 'text-[#445457] hover:bg-[#f4ede2]'
+                      ? 'bg-[#231f20] text-white shadow-xs'
+                      : 'text-[#5C5A55] hover:bg-[#FEF6CC]'
                   }`}
                 >
                   {loc === 'ar' ? 'العربية' : loc === 'fr' ? 'Français' : 'English'}
@@ -211,15 +211,15 @@ export function ProgramsPageManager({ initialConfig, defaultConfig }: ProgramsPa
           </div>
 
           {/* Hero Visual Image */}
-          <div className="space-y-4 p-5 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6]">
+          <div className="space-y-4 p-5 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6]">
             <div className="flex items-center justify-between">
-              <label className="block text-xs font-bold text-[#08242a]">
+              <label className="block text-xs font-bold text-[#231f20]">
                 صورة خلفية أو بصرية لقسم رأس الصفحة (Hero Visual Image)
               </label>
               <Link
                 href="/ar/programs"
                 target="_blank"
-                className="text-xs font-bold text-[#0d3b43] hover:underline flex items-center gap-1"
+                className="text-xs font-bold text-[#231f20] hover:underline flex items-center gap-1"
               >
                 <span>معاينة صفحة البرامج</span>
                 <span>↗</span>
@@ -238,7 +238,7 @@ export function ProgramsPageManager({ initialConfig, defaultConfig }: ProgramsPa
                   />
                 </div>
               ) : (
-                <div className="w-48 h-28 rounded-xl border border-dashed border-[#cfc7b9] flex flex-col items-center justify-center text-[#819598] shrink-0 bg-white">
+                <div className="w-48 h-28 rounded-xl border border-dashed border-[#cfc7b9] flex flex-col items-center justify-center text-[#5C5A55] shrink-0 bg-white">
                   <span className="text-2xl">🖼️</span>
                   <span className="text-3xs mt-1">لا توجد صورة (نمط مغربي افتراضي)</span>
                 </div>
@@ -257,7 +257,7 @@ export function ProgramsPageManager({ initialConfig, defaultConfig }: ProgramsPa
                     type="button"
                     onClick={() => fileInputRef.current?.click()}
                     disabled={uploadingImage}
-                    className="px-4 py-2 rounded-xl bg-[#0d3b43] text-white text-xs font-bold hover:bg-[#14505b] transition-all shadow-xs disabled:opacity-50 cursor-pointer"
+                    className="px-4 py-2 rounded-xl bg-[#231f20] text-white text-xs font-bold hover:bg-[#d2a82b] transition-all shadow-xs disabled:opacity-50 cursor-pointer"
                   >
                     {uploadingImage ? '⏳ جارٍ الرفع...' : '📁 رفع صورة للواجهة'}
                   </button>
@@ -279,19 +279,19 @@ export function ProgramsPageManager({ initialConfig, defaultConfig }: ProgramsPa
                   value={config.hero.imageUrl ?? ''}
                   onChange={(e) => updateHero('imageUrl', e.target.value)}
                   placeholder="/uploads/... or https://..."
-                  className="w-full px-3.5 py-2 rounded-xl bg-white border border-[#e5e0d6] text-xs font-mono text-[#08242a] focus:outline-none focus:border-[#0d3b43] text-left"
+                  className="w-full px-3.5 py-2 rounded-xl bg-white border border-[#e5e0d6] text-xs font-mono text-[#231f20] focus:outline-none focus:border-[#231f20] text-left"
                 />
 
-                <label className="flex items-center gap-3 p-2.5 rounded-xl bg-white border border-[#e5e0d6] cursor-pointer hover:bg-[#f5ede1] transition-colors">
+                <label className="flex items-center gap-3 p-2.5 rounded-xl bg-white border border-[#e5e0d6] cursor-pointer hover:bg-[#FEF6CC] transition-colors">
                   <input
                     type="checkbox"
                     checked={config.hero.showImage !== false}
                     onChange={(e) => updateHero('showImage', e.target.checked)}
-                    className="w-4 h-4 rounded text-[#0d3b43] focus:ring-[#0d3b43]"
+                    className="w-4 h-4 rounded text-[#231f20] focus:ring-[#231f20]"
                   />
                   <div className="text-xs">
-                    <span className="font-bold text-[#08242a] block">تفعيل صورة الغلاف على واجهة البرامج المنشورة</span>
-                    <span className="text-[#819598] block">إذا تم التعطيل، ستظهر واجهة البرامج بنمط الزخرفة المغربية الأنيق.</span>
+                    <span className="font-bold text-[#231f20] block">تفعيل صورة الغلاف على واجهة البرامج المنشورة</span>
+                    <span className="text-[#5C5A55] block">إذا تم التعطيل، ستظهر واجهة البرامج بنمط الزخرفة المغربية الأنيق.</span>
                   </div>
                 </label>
               </div>
@@ -299,12 +299,12 @@ export function ProgramsPageManager({ initialConfig, defaultConfig }: ProgramsPa
 
             {/* Live Interactive Simulation Preview */}
             <div className="pt-3 border-t border-[#e5e0d6] space-y-2">
-              <span className="text-2xs font-bold text-[#819598] block">معاينة حية لشكل رأس الصفحة (Live Preview):</span>
+              <span className="text-2xs font-bold text-[#5C5A55] block">معاينة حية لشكل رأس الصفحة (Live Preview):</span>
               <div
                 className={`relative rounded-2xl overflow-hidden p-6 text-center border transition-all ${
                   config.hero.showImage !== false && config.hero.imageUrl
-                    ? 'bg-[#08242a] text-white border-[#0d3b43] min-h-[190px] flex flex-col justify-center items-center'
-                    : 'bg-gradient-to-b from-[#faf7f2] via-[#f7f2e9] to-[#faf7f2] text-[#08242a] border-[#e5e0d6] min-h-[160px] flex flex-col justify-center items-center'
+                    ? 'bg-[#231f20] text-white border-[#231f20] min-h-[190px] flex flex-col justify-center items-center'
+                    : 'bg-gradient-to-b from-[#F5F3EE] via-[#F5F3EE] to-[#F5F3EE] text-[#231f20] border-[#e5e0d6] min-h-[160px] flex flex-col justify-center items-center'
                 }`}
               >
                 {config.hero.showImage !== false && config.hero.imageUrl && (
@@ -317,7 +317,7 @@ export function ProgramsPageManager({ initialConfig, defaultConfig }: ProgramsPa
                       className="object-cover object-center"
                     />
                     <div className="absolute inset-0 bg-black/45" />
-                    <div className="absolute inset-0 bg-gradient-to-b from-[#08242a]/90 via-[#08242a]/65 to-[#08242a]/95" />
+                    <div className="absolute inset-0 bg-gradient-to-b from-[#231f20]/90 via-[#231f20]/65 to-[#231f20]/95" />
                   </div>
                 )}
                 <div className="relative z-10 space-y-2 max-w-xl mx-auto">
@@ -325,8 +325,8 @@ export function ProgramsPageManager({ initialConfig, defaultConfig }: ProgramsPa
                     <span
                       className={`px-3 py-1 rounded-full text-3xs font-bold ${
                         config.hero.showImage !== false && config.hero.imageUrl
-                          ? 'bg-white/10 text-[#f4ce83] border border-white/20'
-                          : 'bg-[#c85a32]/10 text-[#c85a32]'
+                          ? 'bg-white/10 text-[#ffd22f] border border-white/20'
+                          : 'bg-[#bd3227]/10 text-[#bd3227]'
                       }`}
                     >
                       {config.hero.tagAr || 'بوابة البرامج والمشاريع الثقافية'}
@@ -334,14 +334,14 @@ export function ProgramsPageManager({ initialConfig, defaultConfig }: ProgramsPa
                   </div>
                   <h3
                     className={`text-base sm:text-lg font-black leading-snug ${
-                      config.hero.showImage !== false && config.hero.imageUrl ? 'text-white' : 'text-[#08242a]'
+                      config.hero.showImage !== false && config.hero.imageUrl ? 'text-white' : 'text-[#231f20]'
                     }`}
                   >
                     {config.hero.titleAr || 'عنوان رأس صفحة البرامج'}
                   </h3>
                   <p
                     className={`text-xs line-clamp-2 ${
-                      config.hero.showImage !== false && config.hero.imageUrl ? 'text-[#d8f0f4]/95' : 'text-[#5f7174]'
+                      config.hero.showImage !== false && config.hero.imageUrl ? 'text-[#FEF6CC]/95' : 'text-[#5C5A55]'
                     }`}
                   >
                     {config.hero.descriptionAr || 'وصف رأس صفحة البرامج...'}
@@ -357,7 +357,7 @@ export function ProgramsPageManager({ initialConfig, defaultConfig }: ProgramsPa
               <>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-2xs font-bold text-[#5f7174] uppercase tracking-wider mb-1">
+                    <label className="block text-2xs font-bold text-[#5C5A55] uppercase tracking-wider mb-1">
                       الوسم العلوي (Eyebrow Tag)
                     </label>
                     <input
@@ -365,11 +365,11 @@ export function ProgramsPageManager({ initialConfig, defaultConfig }: ProgramsPa
                       value={config.hero.tagAr}
                       onChange={(e) => updateHero('tagAr', e.target.value)}
                       placeholder="بوابة البرامج والمشاريع الثقافية • AMYCC Programs"
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-[#faf7f2] border border-[#e5e0d6] text-xs text-[#08242a] focus:bg-white focus:outline-none focus:border-[#0d3b43]"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
                     />
                   </div>
                   <div>
-                    <label className="block text-2xs font-bold text-[#5f7174] uppercase tracking-wider mb-1">
+                    <label className="block text-2xs font-bold text-[#5C5A55] uppercase tracking-wider mb-1">
                       شارة الاعتماد (Statutory Badge)
                     </label>
                     <input
@@ -377,13 +377,13 @@ export function ProgramsPageManager({ initialConfig, defaultConfig }: ProgramsPa
                       value={config.hero.badgeAr}
                       onChange={(e) => updateHero('badgeAr', e.target.value)}
                       placeholder="المملكة المغربية • تمكين الشباب وصون التراث"
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-[#faf7f2] border border-[#e5e0d6] text-xs text-[#08242a] focus:bg-white focus:outline-none focus:border-[#0d3b43]"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-2xs font-bold text-[#5f7174] uppercase tracking-wider mb-1">
+                  <label className="block text-2xs font-bold text-[#5C5A55] uppercase tracking-wider mb-1">
                     العنوان الرئيسي (Headline Title)
                   </label>
                   <textarea
@@ -391,12 +391,12 @@ export function ProgramsPageManager({ initialConfig, defaultConfig }: ProgramsPa
                     value={config.hero.titleAr}
                     onChange={(e) => updateHero('titleAr', e.target.value)}
                     placeholder="برامجنا ومبادراتنا: فضاءات حية لاكتشاف المواهب وبناء الأثر الثقافي"
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#faf7f2] border border-[#e5e0d6] text-xs text-[#08242a] focus:bg-white focus:outline-none focus:border-[#0d3b43]"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-2xs font-bold text-[#5f7174] uppercase tracking-wider mb-1">
+                  <label className="block text-2xs font-bold text-[#5C5A55] uppercase tracking-wider mb-1">
                     الفقرة التقديمية (Description)
                   </label>
                   <textarea
@@ -404,7 +404,7 @@ export function ProgramsPageManager({ initialConfig, defaultConfig }: ProgramsPa
                     value={config.hero.descriptionAr}
                     onChange={(e) => updateHero('descriptionAr', e.target.value)}
                     placeholder="تضع جمعية روح الفنون والثقافة في صلب رسالتها..."
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#faf7f2] border border-[#e5e0d6] text-xs text-[#08242a] focus:bg-white focus:outline-none focus:border-[#0d3b43]"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
                   />
                 </div>
               </>
@@ -414,7 +414,7 @@ export function ProgramsPageManager({ initialConfig, defaultConfig }: ProgramsPa
               <>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-2xs font-bold text-[#5f7174] uppercase tracking-wider mb-1">
+                    <label className="block text-2xs font-bold text-[#5C5A55] uppercase tracking-wider mb-1">
                       Tag Supérieur (Français)
                     </label>
                     <input
@@ -422,11 +422,11 @@ export function ProgramsPageManager({ initialConfig, defaultConfig }: ProgramsPa
                       value={config.hero.tagFr ?? ''}
                       onChange={(e) => updateHero('tagFr', e.target.value)}
                       placeholder="PROGRAMMES & INITIATIVES CULTURELLES"
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-[#faf7f2] border border-[#e5e0d6] text-xs text-[#08242a] focus:bg-white focus:outline-none focus:border-[#0d3b43]"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
                     />
                   </div>
                   <div>
-                    <label className="block text-2xs font-bold text-[#5f7174] uppercase tracking-wider mb-1">
+                    <label className="block text-2xs font-bold text-[#5C5A55] uppercase tracking-wider mb-1">
                       Badge (Français)
                     </label>
                     <input
@@ -434,13 +434,13 @@ export function ProgramsPageManager({ initialConfig, defaultConfig }: ProgramsPa
                       value={config.hero.badgeFr ?? ''}
                       onChange={(e) => updateHero('badgeFr', e.target.value)}
                       placeholder="Royaume du Maroc • Jeunesse & Patrimoine"
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-[#faf7f2] border border-[#e5e0d6] text-xs text-[#08242a] focus:bg-white focus:outline-none focus:border-[#0d3b43]"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-2xs font-bold text-[#5f7174] uppercase tracking-wider mb-1">
+                  <label className="block text-2xs font-bold text-[#5C5A55] uppercase tracking-wider mb-1">
                     Titre Principal (Français)
                   </label>
                   <textarea
@@ -448,12 +448,12 @@ export function ProgramsPageManager({ initialConfig, defaultConfig }: ProgramsPa
                     value={config.hero.titleFr ?? ''}
                     onChange={(e) => updateHero('titleFr', e.target.value)}
                     placeholder="Nos Programmes : Espaces Vivants..."
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#faf7f2] border border-[#e5e0d6] text-xs text-[#08242a] focus:bg-white focus:outline-none focus:border-[#0d3b43]"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-2xs font-bold text-[#5f7174] uppercase tracking-wider mb-1">
+                  <label className="block text-2xs font-bold text-[#5C5A55] uppercase tracking-wider mb-1">
                     Description (Français)
                   </label>
                   <textarea
@@ -461,7 +461,7 @@ export function ProgramsPageManager({ initialConfig, defaultConfig }: ProgramsPa
                     value={config.hero.descriptionFr ?? ''}
                     onChange={(e) => updateHero('descriptionFr', e.target.value)}
                     placeholder="L'AMYCC conçoit et déploie des programmes pérennes..."
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#faf7f2] border border-[#e5e0d6] text-xs text-[#08242a] focus:bg-white focus:outline-none focus:border-[#0d3b43]"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
                   />
                 </div>
               </>
@@ -471,7 +471,7 @@ export function ProgramsPageManager({ initialConfig, defaultConfig }: ProgramsPa
               <>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-2xs font-bold text-[#5f7174] uppercase tracking-wider mb-1">
+                    <label className="block text-2xs font-bold text-[#5C5A55] uppercase tracking-wider mb-1">
                       Eyebrow Tag (English)
                     </label>
                     <input
@@ -479,11 +479,11 @@ export function ProgramsPageManager({ initialConfig, defaultConfig }: ProgramsPa
                       value={config.hero.tagEn ?? ''}
                       onChange={(e) => updateHero('tagEn', e.target.value)}
                       placeholder="CULTURAL PROGRAMS & INITIATIVES"
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-[#faf7f2] border border-[#e5e0d6] text-xs text-[#08242a] focus:bg-white focus:outline-none focus:border-[#0d3b43]"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
                     />
                   </div>
                   <div>
-                    <label className="block text-2xs font-bold text-[#5f7174] uppercase tracking-wider mb-1">
+                    <label className="block text-2xs font-bold text-[#5C5A55] uppercase tracking-wider mb-1">
                       Badge (English)
                     </label>
                     <input
@@ -491,13 +491,13 @@ export function ProgramsPageManager({ initialConfig, defaultConfig }: ProgramsPa
                       value={config.hero.badgeEn ?? ''}
                       onChange={(e) => updateHero('badgeEn', e.target.value)}
                       placeholder="Kingdom of Morocco • Youth & Heritage"
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-[#faf7f2] border border-[#e5e0d6] text-xs text-[#08242a] focus:bg-white focus:outline-none focus:border-[#0d3b43]"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-2xs font-bold text-[#5f7174] uppercase tracking-wider mb-1">
+                  <label className="block text-2xs font-bold text-[#5C5A55] uppercase tracking-wider mb-1">
                     Headline Title (English)
                   </label>
                   <textarea
@@ -505,12 +505,12 @@ export function ProgramsPageManager({ initialConfig, defaultConfig }: ProgramsPa
                     value={config.hero.titleEn ?? ''}
                     onChange={(e) => updateHero('titleEn', e.target.value)}
                     placeholder="Our Programs: Vibrant Spaces..."
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#faf7f2] border border-[#e5e0d6] text-xs text-[#08242a] focus:bg-white focus:outline-none focus:border-[#0d3b43]"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-2xs font-bold text-[#5f7174] uppercase tracking-wider mb-1">
+                  <label className="block text-2xs font-bold text-[#5C5A55] uppercase tracking-wider mb-1">
                     Description (English)
                   </label>
                   <textarea
@@ -518,7 +518,7 @@ export function ProgramsPageManager({ initialConfig, defaultConfig }: ProgramsPa
                     value={config.hero.descriptionEn ?? ''}
                     onChange={(e) => updateHero('descriptionEn', e.target.value)}
                     placeholder="AMYCC designs and leads enduring cultural initiatives..."
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#faf7f2] border border-[#e5e0d6] text-xs text-[#08242a] focus:bg-white focus:outline-none focus:border-[#0d3b43]"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
                   />
                 </div>
               </>
@@ -532,12 +532,12 @@ export function ProgramsPageManager({ initialConfig, defaultConfig }: ProgramsPa
           ============================================================ */}
       {activeTab === 'stats' && (
         <div className="p-6 sm:p-8 rounded-3xl bg-white border border-[#e5e0d6] shadow-subtle space-y-6">
-          <div className="border-b border-[#f0ebe1] pb-4">
-            <h2 className="text-xl font-black text-[#08242a] tracking-tight flex items-center gap-2">
+          <div className="border-b border-[#FEF6CC] pb-4">
+            <h2 className="text-xl font-black text-[#231f20] tracking-tight flex items-center gap-2">
               <span>📊</span>
               <span>أرقام ومؤشرات أثر البرامج (Impact Stats Ribbon)</span>
             </h2>
-            <p className="text-xs text-[#5f7174] mt-1">
+            <p className="text-xs text-[#5C5A55] mt-1">
               تظهر هذه الأرقام في شريط بارز أسفل رأس الصفحة لإبراز حجم المشاركة والانتشار الوطني للبرامج.
             </p>
           </div>
@@ -546,10 +546,10 @@ export function ProgramsPageManager({ initialConfig, defaultConfig }: ProgramsPa
             {config.stats.map((stat, idx) => (
               <div
                 key={stat.id}
-                className="p-5 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6] space-y-3"
+                className="p-5 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6] space-y-3"
               >
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold text-[#c85a32]">
+                  <span className="text-xs font-bold text-[#bd3227]">
                     مؤشر #{idx + 1}
                   </span>
                   <input
@@ -562,50 +562,50 @@ export function ProgramsPageManager({ initialConfig, defaultConfig }: ProgramsPa
                 </div>
 
                 <div>
-                  <label className="block text-3xs font-bold text-[#5f7174] uppercase mb-1">
+                  <label className="block text-3xs font-bold text-[#5C5A55] uppercase mb-1">
                     القيمة الرقمية (الرقم أو النسبة، مثال: +1,500 أو 100%)
                   </label>
                   <input
                     type="text"
                     value={stat.value}
                     onChange={(e) => updateStat(stat.id, { value: e.target.value })}
-                    className="w-full px-3 py-2 rounded-xl bg-white border border-[#e5e0d6] text-xs font-bold text-[#08242a]"
+                    className="w-full px-3 py-2 rounded-xl bg-white border border-[#e5e0d6] text-xs font-bold text-[#231f20]"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-3xs font-bold text-[#5f7174] uppercase mb-1">
+                  <label className="block text-3xs font-bold text-[#5C5A55] uppercase mb-1">
                     الوصف بالعربية *
                   </label>
                   <input
                     type="text"
                     value={stat.labelAr}
                     onChange={(e) => updateStat(stat.id, { labelAr: e.target.value })}
-                    className="w-full px-3 py-2 rounded-xl bg-white border border-[#e5e0d6] text-xs text-[#08242a]"
+                    className="w-full px-3 py-2 rounded-xl bg-white border border-[#e5e0d6] text-xs text-[#231f20]"
                   />
                 </div>
 
                 <div className="grid grid-cols-2 gap-2">
                   <div>
-                    <label className="block text-3xs font-bold text-[#5f7174] uppercase mb-1">
+                    <label className="block text-3xs font-bold text-[#5C5A55] uppercase mb-1">
                       الوصف بالفرنسية
                     </label>
                     <input
                       type="text"
                       value={stat.labelFr ?? ''}
                       onChange={(e) => updateStat(stat.id, { labelFr: e.target.value })}
-                      className="w-full px-3 py-2 rounded-xl bg-white border border-[#e5e0d6] text-xs text-[#08242a]"
+                      className="w-full px-3 py-2 rounded-xl bg-white border border-[#e5e0d6] text-xs text-[#231f20]"
                     />
                   </div>
                   <div>
-                    <label className="block text-3xs font-bold text-[#5f7174] uppercase mb-1">
+                    <label className="block text-3xs font-bold text-[#5C5A55] uppercase mb-1">
                       الوصف بالإنجليزية
                     </label>
                     <input
                       type="text"
                       value={stat.labelEn ?? ''}
                       onChange={(e) => updateStat(stat.id, { labelEn: e.target.value })}
-                      className="w-full px-3 py-2 rounded-xl bg-white border border-[#e5e0d6] text-xs text-[#08242a]"
+                      className="w-full px-3 py-2 rounded-xl bg-white border border-[#e5e0d6] text-xs text-[#231f20]"
                     />
                   </div>
                 </div>
@@ -620,82 +620,82 @@ export function ProgramsPageManager({ initialConfig, defaultConfig }: ProgramsPa
           ============================================================ */}
       {activeTab === 'cta' && (
         <div className="p-6 sm:p-8 rounded-3xl bg-white border border-[#e5e0d6] shadow-subtle space-y-6">
-          <div className="border-b border-[#f0ebe1] pb-4">
-            <h2 className="text-xl font-black text-[#08242a] tracking-tight flex items-center gap-2">
+          <div className="border-b border-[#FEF6CC] pb-4">
+            <h2 className="text-xl font-black text-[#231f20] tracking-tight flex items-center gap-2">
               <span>📢</span>
               <span>شريط الدعوة لاقتراح المشاريع والانخراط (CTA Banner)</span>
             </h2>
-            <p className="text-xs text-[#5f7174] mt-1">
+            <p className="text-xs text-[#5C5A55] mt-1">
               يظهر في نهاية صفحة البرامج لدعوة الزوار، الفنانين، والشباب للتواصل أو تقديم مقترحات برامج جديدة.
             </p>
           </div>
 
           <div className="space-y-4">
             <div>
-              <label className="block text-2xs font-bold text-[#5f7174] uppercase tracking-wider mb-1">
+              <label className="block text-2xs font-bold text-[#5C5A55] uppercase tracking-wider mb-1">
                 عنوان النداء بالعربية *
               </label>
               <input
                 type="text"
                 value={config.cta.titleAr}
                 onChange={(e) => updateCta('titleAr', e.target.value)}
-                className="w-full px-3.5 py-2.5 rounded-xl bg-[#faf7f2] border border-[#e5e0d6] text-xs text-[#08242a] font-bold focus:bg-white focus:outline-none focus:border-[#0d3b43]"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] font-bold focus:bg-white focus:outline-none focus:border-[#231f20]"
               />
             </div>
 
             <div>
-              <label className="block text-2xs font-bold text-[#5f7174] uppercase tracking-wider mb-1">
+              <label className="block text-2xs font-bold text-[#5C5A55] uppercase tracking-wider mb-1">
                 نص التوضيح بالعربية *
               </label>
               <textarea
                 rows={3}
                 value={config.cta.descAr}
                 onChange={(e) => updateCta('descAr', e.target.value)}
-                className="w-full px-3.5 py-2.5 rounded-xl bg-[#faf7f2] border border-[#e5e0d6] text-xs text-[#08242a] focus:bg-white focus:outline-none focus:border-[#0d3b43]"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
               />
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
-              <div className="p-4 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6] space-y-3">
-                <span className="text-xs font-bold text-[#0d3b43] block">الزر الأساسي (Primary CTA)</span>
+              <div className="p-4 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6] space-y-3">
+                <span className="text-xs font-bold text-[#231f20] block">الزر الأساسي (Primary CTA)</span>
                 <div>
-                  <label className="block text-3xs font-bold text-[#5f7174] uppercase mb-1">نص الزر بالعربية</label>
+                  <label className="block text-3xs font-bold text-[#5C5A55] uppercase mb-1">نص الزر بالعربية</label>
                   <input
                     type="text"
                     value={config.cta.primaryBtnTextAr}
                     onChange={(e) => updateCta('primaryBtnTextAr', e.target.value)}
-                    className="w-full px-3 py-2 rounded-xl bg-white border border-[#e5e0d6] text-xs text-[#08242a]"
+                    className="w-full px-3 py-2 rounded-xl bg-white border border-[#e5e0d6] text-xs text-[#231f20]"
                   />
                 </div>
                 <div>
-                  <label className="block text-3xs font-bold text-[#5f7174] uppercase mb-1">رابط الوجهة (URL)</label>
+                  <label className="block text-3xs font-bold text-[#5C5A55] uppercase mb-1">رابط الوجهة (URL)</label>
                   <input
                     type="text"
                     value={config.cta.primaryBtnUrl}
                     onChange={(e) => updateCta('primaryBtnUrl', e.target.value)}
-                    className="w-full px-3 py-2 rounded-xl bg-white border border-[#e5e0d6] text-xs font-mono text-[#08242a]"
+                    className="w-full px-3 py-2 rounded-xl bg-white border border-[#e5e0d6] text-xs font-mono text-[#231f20]"
                   />
                 </div>
               </div>
 
-              <div className="p-4 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6] space-y-3">
-                <span className="text-xs font-bold text-[#c85a32] block">الزر الثانوي (Secondary CTA)</span>
+              <div className="p-4 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6] space-y-3">
+                <span className="text-xs font-bold text-[#bd3227] block">الزر الثانوي (Secondary CTA)</span>
                 <div>
-                  <label className="block text-3xs font-bold text-[#5f7174] uppercase mb-1">نص الزر بالعربية</label>
+                  <label className="block text-3xs font-bold text-[#5C5A55] uppercase mb-1">نص الزر بالعربية</label>
                   <input
                     type="text"
                     value={config.cta.secondaryBtnTextAr}
                     onChange={(e) => updateCta('secondaryBtnTextAr', e.target.value)}
-                    className="w-full px-3 py-2 rounded-xl bg-white border border-[#e5e0d6] text-xs text-[#08242a]"
+                    className="w-full px-3 py-2 rounded-xl bg-white border border-[#e5e0d6] text-xs text-[#231f20]"
                   />
                 </div>
                 <div>
-                  <label className="block text-3xs font-bold text-[#5f7174] uppercase mb-1">رابط الوجهة (URL)</label>
+                  <label className="block text-3xs font-bold text-[#5C5A55] uppercase mb-1">رابط الوجهة (URL)</label>
                   <input
                     type="text"
                     value={config.cta.secondaryBtnUrl}
                     onChange={(e) => updateCta('secondaryBtnUrl', e.target.value)}
-                    className="w-full px-3 py-2 rounded-xl bg-white border border-[#e5e0d6] text-xs font-mono text-[#08242a]"
+                    className="w-full px-3 py-2 rounded-xl bg-white border border-[#e5e0d6] text-xs font-mono text-[#231f20]"
                   />
                 </div>
               </div>
@@ -710,14 +710,14 @@ export function ProgramsPageManager({ initialConfig, defaultConfig }: ProgramsPa
           <Link
             href="/ar/programs"
             target="_blank"
-            className="px-3.5 py-2 rounded-xl bg-[#faf7f2] hover:bg-[#f0ebe1] text-xs font-bold text-[#0d3b43] border border-[#e5e0d6] transition-colors"
+            className="px-3.5 py-2 rounded-xl bg-[#F5F3EE] hover:bg-[#FEF6CC] text-xs font-bold text-[#231f20] border border-[#e5e0d6] transition-colors"
           >
             معاينة صفحة البرامج ↗
           </Link>
           <button
             type="button"
             onClick={handleReset}
-            className="text-xs text-[#819598] hover:text-[#c85a32] underline cursor-pointer"
+            className="text-xs text-[#5C5A55] hover:text-[#bd3227] underline cursor-pointer"
           >
             استعادة الافتراضي
           </button>
@@ -727,7 +727,7 @@ export function ProgramsPageManager({ initialConfig, defaultConfig }: ProgramsPa
           type="button"
           onClick={handleSave}
           disabled={saving}
-          className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-[#0d3b43] hover:bg-[#08242a] text-white text-xs sm:text-sm font-black transition-all shadow-md hover:shadow-lg disabled:opacity-50 cursor-pointer"
+          className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-[#231f20] hover:bg-[#231f20] text-white text-xs sm:text-sm font-black transition-all shadow-md hover:shadow-lg disabled:opacity-50 cursor-pointer"
         >
           <span>{saving ? '⏳' : '💾'}</span>
           <span>{saving ? 'جارٍ الحفظ...' : 'حفظ إعدادات صفحة البرامج'}</span>

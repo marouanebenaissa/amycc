@@ -264,13 +264,13 @@ export default async function NewsDetailPage(props: {
     <>
       <Header locale={locale} dict={dict} />
 
-      <main id="main-content" className="flex-1 bg-[#faf7f2] py-12 lg:py-16">
+      <main id="main-content" className="flex-1 bg-[#F5F3EE] py-12 lg:py-16">
         <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
           {/* Breadcrumb & Navigation */}
-          <div className="flex items-center justify-between text-xs font-bold text-[#819598]">
+          <div className="flex items-center justify-between text-xs font-bold text-[#5C5A55]">
             <Link
               href={`/${locale}/news`}
-              className="inline-flex items-center gap-1.5 text-[#0d3b43] hover:text-[#c85a32] transition-colors"
+              className="inline-flex items-center gap-1.5 text-[#231f20] hover:text-[#bd3227] transition-colors"
             >
               <span className="rtl:rotate-180">←</span>
               <span>{breadcrumbBackLabel}</span>
@@ -284,28 +284,28 @@ export default async function NewsDetailPage(props: {
           {/* Article Header Card */}
           <header className="space-y-4">
             <div className="flex items-center gap-3 flex-wrap">
-              <span className="px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider bg-[#fae4dc] text-[#c85a32] border border-[#f2c2b0]">
+              <span className="px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider bg-[#fde8e7] text-[#bd3227] border border-[#fde8e7]">
                 {getCategoryLabel(article.category, locale)}
               </span>
 
               {dateFormatted && (
-                <time className="text-xs text-[#5f7174] font-medium flex items-center gap-1">
+                <time className="text-xs text-[#5C5A55] font-medium flex items-center gap-1">
                   <span>📅</span>
                   <span>{dateFormatted}</span>
                 </time>
               )}
 
-              <span className="text-xs text-[#819598] font-bold">
+              <span className="text-xs text-[#5C5A55] font-bold">
                 ⏱️ {isAr ? `${readingTime} دقائق قراءة` : isFr ? `${readingTime} min de lecture` : `${readingTime} min read`}
               </span>
             </div>
 
-            <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black text-[#08242a] leading-tight tracking-tight">
+            <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black text-[#231f20] leading-tight tracking-tight">
               {trans.title}
             </h1>
 
             {trans.excerpt && (
-              <p className="text-base sm:text-xl text-[#445457] leading-relaxed font-medium pt-2 pb-6 border-b border-[#e5e0d6]">
+              <p className="text-base sm:text-xl text-[#5C5A55] leading-relaxed font-medium pt-2 pb-6 border-b border-[#e5e0d6]">
                 {trans.excerpt}
               </p>
             )}
@@ -313,7 +313,7 @@ export default async function NewsDetailPage(props: {
 
           {/* Visual Cover Photo (Poster / Article Header) */}
           {article.cover_image && (
-            <div className="relative aspect-[16/9] w-full rounded-3xl overflow-hidden border border-[#e5e0d6] shadow-card bg-[#08242a]">
+            <div className="relative aspect-[16/9] w-full rounded-3xl overflow-hidden border border-[#e5e0d6] shadow-card bg-[#231f20]">
               <ImageWithFallback
                 src={article.cover_image}
                 fallbackSrc="https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=1200&q=80"
@@ -333,7 +333,7 @@ export default async function NewsDetailPage(props: {
           {/* Main Article Content */}
           <div className="bg-white p-6 sm:p-10 lg:p-12 rounded-3xl border border-[#e5e0d6] shadow-card">
             <div
-              className="prose prose-slate max-w-none text-[#2d3a3d] leading-relaxed text-sm sm:text-base space-y-4"
+              className="prose prose-slate max-w-none text-[#231f20] leading-relaxed text-sm sm:text-base space-y-4"
               dangerouslySetInnerHTML={{ __html: trans.content }}
             />
           </div>
@@ -341,14 +341,14 @@ export default async function NewsDetailPage(props: {
           {/* Editorial Attribution & Share Footer */}
           <div className="p-6 sm:p-8 rounded-3xl border border-[#e5e0d6] bg-white shadow-2xs flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-2xl bg-[#0d3b43] text-white flex items-center justify-center font-black text-lg shadow-sm">
+              <div className="w-12 h-12 rounded-2xl bg-[#231f20] text-white flex items-center justify-center font-black text-lg shadow-sm">
                 A
               </div>
               <div>
-                <span className="text-xs font-extrabold text-[#08242a] block">
+                <span className="text-xs font-extrabold text-[#231f20] block">
                   {orgNameShort}
                 </span>
-                <span className="text-3xs text-[#819598] block">
+                <span className="text-3xs text-[#5C5A55] block">
                   {mediaDeskLabel}
                 </span>
               </div>
@@ -356,7 +356,7 @@ export default async function NewsDetailPage(props: {
 
             <Link
               href={`/${locale}/news`}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold text-[#0d3b43] bg-[#faf7f2] hover:bg-[#eae4d9] border border-[#e5e0d6] transition-all"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold text-[#231f20] bg-[#F5F3EE] hover:bg-[#FEF6CC] border border-[#e5e0d6] transition-all"
             >
               <span className="rtl:rotate-180">←</span>
               <span>{backToNewsLabel}</span>
@@ -366,7 +366,7 @@ export default async function NewsDetailPage(props: {
           {/* Other Recent Articles Recommendation */}
           {recentArticles.length > 0 && (
             <div className="pt-8 space-y-6">
-              <h3 className="text-lg font-black text-[#08242a] flex items-center gap-2">
+              <h3 className="text-lg font-black text-[#231f20] flex items-center gap-2">
                 <span>📰</span>
                 <span>{isAr ? 'مستجدات أخرى قد تهمك' : isFr ? 'Autres actualités' : 'More Stories'}</span>
               </h3>
@@ -382,17 +382,17 @@ export default async function NewsDetailPage(props: {
                     <Link
                       key={rec.id}
                       href={`/${locale}/news/${rec.slug}`}
-                      className="group p-4 rounded-2xl bg-white border border-[#e5e0d6] hover:border-[#c85a32] shadow-2xs hover:shadow-card transition-all flex flex-col justify-between"
+                      className="group p-4 rounded-2xl bg-white border border-[#e5e0d6] hover:border-[#bd3227] shadow-2xs hover:shadow-card transition-all flex flex-col justify-between"
                     >
                       <div>
-                        <span className="text-4xs font-bold uppercase tracking-wider text-[#c85a32] block mb-1">
+                        <span className="text-4xs font-bold uppercase tracking-wider text-[#bd3227] block mb-1">
                           {getCategoryLabel(rec.category, locale)}
                         </span>
-                        <h4 className="text-xs font-black text-[#08242a] group-hover:text-[#c85a32] transition-colors line-clamp-2 leading-snug">
+                        <h4 className="text-xs font-black text-[#231f20] group-hover:text-[#bd3227] transition-colors line-clamp-2 leading-snug">
                           {recTrans.title}
                         </h4>
                       </div>
-                      <span className="text-3xs font-bold text-[#0d3b43] mt-3 inline-flex items-center gap-1">
+                      <span className="text-3xs font-bold text-[#231f20] mt-3 inline-flex items-center gap-1">
                         <span>{isAr ? 'قراءة المقال' : isFr ? 'Lire l’article' : 'Read Article'}</span>
                         <span className="rtl:rotate-180">→</span>
                       </span>

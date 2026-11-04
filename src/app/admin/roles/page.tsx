@@ -127,21 +127,21 @@ export default async function AdminRolesPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#e5e0d6]">
         <div>
-          <div className="flex items-center gap-2 text-2xs font-bold text-[#c85a32] uppercase tracking-wider mb-1">
+          <div className="flex items-center gap-2 text-2xs font-bold text-[#bd3227] uppercase tracking-wider mb-1">
             <span>الحماية والأمان المؤسسي</span>
             <span>•</span>
             <span>Role-Based Access Control (RBAC)</span>
           </div>
-          <h1 className="text-2xl font-black text-[#08242a]">
+          <h1 className="text-2xl font-black text-[#231f20]">
             مصفوفة الأدوار والصلاحيات (9 أدوار معتمدة)
           </h1>
-          <p className="text-xs text-[#5f7174] mt-1 max-w-2xl">
+          <p className="text-xs text-[#5C5A55] mt-1 max-w-2xl">
             تطبيق مبدأ الحد الأدنى من الصلاحيات (Least Privilege) وسياسات أمان PostgreSQL RLS على مستوى قاعدة البيانات لمنع تصعيد الامتيازات غير المصرح به.
           </p>
         </div>
 
         <div className="flex items-center gap-2">
-          <span className="px-3 py-1.5 rounded-xl bg-white border border-[#e5e0d6] text-xs font-bold text-[#08242a] shadow-2xs">
+          <span className="px-3 py-1.5 rounded-xl bg-white border border-[#e5e0d6] text-xs font-bold text-[#231f20] shadow-2xs">
             إجمالي الأدوار: 9
           </span>
         </div>
@@ -149,20 +149,20 @@ export default async function AdminRolesPage() {
 
       {/* Assign Role Action Card */}
       <div className="bg-white p-6 rounded-2xl border border-[#e5e0d6] shadow-2xs">
-        <h2 className="text-xs font-bold text-[#08242a] mb-4 uppercase tracking-wider flex items-center gap-2">
+        <h2 className="text-xs font-bold text-[#231f20] mb-4 uppercase tracking-wider flex items-center gap-2">
           <span>🛡️</span>
           <span>تعيين دور إداري لمستخدم معتمد / Assign Role to Staff User</span>
         </h2>
 
         <form action={handleAssignRole} className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div>
-            <label className="block text-3xs font-bold text-[#08242a] mb-1">
+            <label className="block text-3xs font-bold text-[#231f20] mb-1">
               اختر المستخدم / Staff Member:
             </label>
             <select
               name="userId"
               required
-              className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#faf7f2] font-semibold text-[#08242a]"
+              className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE] font-semibold text-[#231f20]"
             >
               <option value="">— اختر مستخدماً —</option>
               {profiles.map((p) => (
@@ -174,13 +174,13 @@ export default async function AdminRolesPage() {
           </div>
 
           <div>
-            <label className="block text-3xs font-bold text-[#08242a] mb-1">
+            <label className="block text-3xs font-bold text-[#231f20] mb-1">
               الدور المراد منحه / Role to Grant:
             </label>
             <select
               name="roleId"
               required
-              className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#faf7f2] font-semibold text-[#08242a]"
+              className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE] font-semibold text-[#231f20]"
             >
               <option value="">— اختر دوراً —</option>
               {rbacMatrix.map((r) => (
@@ -194,7 +194,7 @@ export default async function AdminRolesPage() {
           <div className="flex items-end">
             <button
               type="submit"
-              className="w-full py-2.5 px-4 rounded-xl text-xs font-bold bg-[#0d3b43] hover:bg-[#14505b] text-white transition-all shadow-subtle active:scale-98"
+              className="w-full py-2.5 px-4 rounded-xl text-xs font-bold bg-[#231f20] hover:bg-[#d2a82b] text-white transition-all shadow-subtle active:scale-98"
             >
               تأكيد منح الدور الإداري ✓
             </button>
@@ -204,7 +204,7 @@ export default async function AdminRolesPage() {
 
       {/* Roles Cards Grid */}
       <div className="space-y-4">
-        <h2 className="text-xs font-bold text-[#08242a] uppercase tracking-wider">
+        <h2 className="text-xs font-bold text-[#231f20] uppercase tracking-wider">
           تفاصيل الأدوار وحدود الوصول (Roles Access Boundaries)
         </h2>
 
@@ -219,31 +219,31 @@ export default async function AdminRolesPage() {
               >
                 <div>
                   <div className="flex items-start justify-between gap-2 mb-2">
-                    <span className="w-7 h-7 rounded-lg bg-[#faf7f2] border border-[#e5e0d6] flex items-center justify-center text-xs font-black text-[#c85a32]">
+                    <span className="w-7 h-7 rounded-lg bg-[#F5F3EE] border border-[#e5e0d6] flex items-center justify-center text-xs font-black text-[#bd3227]">
                       {role.id}
                     </span>
-                    <span className="font-mono text-3xs px-2 py-0.5 rounded-full bg-[#08242a]/5 text-[#08242a] font-bold">
+                    <span className="font-mono text-3xs px-2 py-0.5 rounded-full bg-[#231f20]/5 text-[#231f20] font-bold">
                       {role.name}
                     </span>
                   </div>
 
-                  <h3 className="text-sm font-black text-[#08242a] leading-tight mb-2">
+                  <h3 className="text-sm font-black text-[#231f20] leading-tight mb-2">
                     {role.nameAr}
                   </h3>
 
-                  <p className="text-3xs text-[#5f7174] leading-relaxed mb-4">
+                  <p className="text-3xs text-[#5C5A55] leading-relaxed mb-4">
                     {role.descriptionAr}
                   </p>
 
-                  <div className="pt-3 border-t border-[#f4ede2] mb-3">
-                    <span className="text-4xs uppercase tracking-wider font-extrabold text-[#74bfcd] block mb-1.5">
+                  <div className="pt-3 border-t border-[#FEF6CC] mb-3">
+                    <span className="text-4xs uppercase tracking-wider font-extrabold text-[#ffd22f] block mb-1.5">
                       نطاق الصلاحيات الممنوحة:
                     </span>
                     <div className="flex flex-wrap gap-1">
                       {role.scope.map((s) => (
                         <span
                           key={s}
-                          className="px-2 py-0.5 rounded-md text-4xs font-bold bg-[#faf7f2] text-[#08242a] border border-[#e5e0d6]"
+                          className="px-2 py-0.5 rounded-md text-4xs font-bold bg-[#F5F3EE] text-[#231f20] border border-[#e5e0d6]"
                         >
                           ✓ {s}
                         </span>
@@ -253,8 +253,8 @@ export default async function AdminRolesPage() {
                 </div>
 
                 {/* Assigned Users in this role */}
-                <div className="pt-3 border-t border-[#f4ede2]">
-                  <span className="text-4xs uppercase tracking-wider font-extrabold text-[#819598] block mb-1">
+                <div className="pt-3 border-t border-[#FEF6CC]">
+                  <span className="text-4xs uppercase tracking-wider font-extrabold text-[#5C5A55] block mb-1">
                     المستخدمون الحاملون لهذا الدور ({assignedUsers.length}):
                   </span>
                   {assignedUsers.length > 0 ? (
@@ -262,9 +262,9 @@ export default async function AdminRolesPage() {
                       {assignedUsers.map((au) => (
                         <div
                           key={`${au.user_id}-${role.id}`}
-                          className="flex items-center justify-between text-3xs p-1.5 rounded-lg bg-[#faf7f2] border border-[#e5e0d6]"
+                          className="flex items-center justify-between text-3xs p-1.5 rounded-lg bg-[#F5F3EE] border border-[#e5e0d6]"
                         >
-                          <span className="truncate font-semibold text-[#08242a]">
+                          <span className="truncate font-semibold text-[#231f20]">
                             {au.profiles?.full_name || au.profiles?.email}
                           </span>
                           {/* Revoke button */}
@@ -283,7 +283,7 @@ export default async function AdminRolesPage() {
                       ))}
                     </div>
                   ) : (
-                    <span className="text-3xs text-[#819598] italic">
+                    <span className="text-3xs text-[#5C5A55] italic">
                       لا يوجد مستخدمون مسندون حالياً.
                     </span>
                   )}

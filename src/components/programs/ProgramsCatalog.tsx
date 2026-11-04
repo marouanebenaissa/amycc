@@ -59,7 +59,7 @@ function ProgramCoverImage({
         <span className="text-4xl sm:text-5xl mb-2 group-hover:scale-110 transition-transform">
           {CATEGORY_MAP[category]?.icon || '🎨'}
         </span>
-        <span className="text-xs sm:text-sm font-bold text-[#f4ce83] uppercase tracking-wider">
+        <span className="text-xs sm:text-sm font-bold text-[#ffd22f] uppercase tracking-wider">
           AMYCC Cultural Initiative
         </span>
       </div>
@@ -118,10 +118,10 @@ export function ProgramsCatalog({ programs, locale, dict }: ProgramsCatalogProps
       <div className="p-6 rounded-3xl bg-white border border-[#e5e0d6] shadow-subtle space-y-6">
         <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4">
           <div>
-            <h2 className="text-xl sm:text-2xl font-black text-[#08242a]">
+            <h2 className="text-xl sm:text-2xl font-black text-[#231f20]">
               {isAr ? 'دليل البرامج والمبادرات الثقافية' : isFr ? 'Répertoire des Programmes Culturels' : 'Cultural Programs & Initiatives Directory'}
             </h2>
-            <p className="text-xs sm:text-sm text-[#5f7174] mt-0.5">
+            <p className="text-xs sm:text-sm text-[#5C5A55] mt-0.5">
               {isAr
                 ? 'استكشف مسارات التكوين الفني، مبادرات التطوع، وورشات صون التراث بمختلف جهات المملكة.'
                 : isFr
@@ -131,7 +131,7 @@ export function ProgramsCatalog({ programs, locale, dict }: ProgramsCatalogProps
           </div>
 
           <div className="relative min-w-[260px] sm:min-w-[320px]">
-            <span className="absolute inset-y-0 start-3.5 flex items-center pointer-events-none text-base text-[#819598]">
+            <span className="absolute inset-y-0 start-3.5 flex items-center pointer-events-none text-base text-[#5C5A55]">
               🔍
             </span>
             <input
@@ -139,13 +139,13 @@ export function ProgramsCatalog({ programs, locale, dict }: ProgramsCatalogProps
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder={isAr ? 'ابحث في البرامج والورشات...' : isFr ? 'Rechercher un programme...' : 'Search programs...'}
-              className="w-full ps-10 pe-4 py-2.5 rounded-xl bg-[#faf7f2] border border-[#e5e0d6] text-xs sm:text-sm text-[#08242a] focus:bg-white focus:outline-none focus:border-[#0d3b43] transition-all"
+              className="w-full ps-10 pe-4 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs sm:text-sm text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20] transition-all"
             />
             {searchQuery && (
               <button
                 type="button"
                 onClick={() => setSearchQuery('')}
-                className="absolute inset-y-0 end-3 flex items-center text-xs text-[#819598] hover:text-[#08242a]"
+                className="absolute inset-y-0 end-3 flex items-center text-xs text-[#5C5A55] hover:text-[#231f20]"
               >
                 ✕
               </button>
@@ -164,15 +164,15 @@ export function ProgramsCatalog({ programs, locale, dict }: ProgramsCatalogProps
                 onClick={() => setActiveCategory(catKey)}
                 className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all cursor-pointer ${
                   isActive
-                    ? 'bg-[#0d3b43] text-white shadow-xs'
-                    : 'bg-[#faf7f2] text-[#445457] hover:bg-[#f0ebe1] hover:text-[#08242a] border border-[#e5e0d6]'
+                    ? 'bg-[#231f20] text-white shadow-xs'
+                    : 'bg-[#F5F3EE] text-[#5C5A55] hover:bg-[#FEF6CC] hover:text-[#231f20] border border-[#e5e0d6]'
                 }`}
               >
                 <span>{getCategoryIcon(catKey)}</span>
                 <span>{getCategoryLabel(catKey)}</span>
                 {catKey === 'all' && (
                   <span className={`px-2 py-0.5 rounded-full text-3xs font-black ${
-                    isActive ? 'bg-white/20 text-white' : 'bg-[#e5e0d6] text-[#08242a]'
+                    isActive ? 'bg-white/20 text-white' : 'bg-[#e5e0d6] text-[#231f20]'
                   }`}>
                     {programs.length}
                   </span>
@@ -184,7 +184,7 @@ export function ProgramsCatalog({ programs, locale, dict }: ProgramsCatalogProps
       </div>
 
       {/* Program Results Count Status */}
-      <div className="flex items-center justify-between px-2 text-xs font-bold text-[#5f7174]">
+      <div className="flex items-center justify-between px-2 text-xs font-bold text-[#5C5A55]">
         <span>
           {isAr
             ? `عرض ${filteredPrograms.length} من أصل ${programs.length} برنامج ومبادرة`
@@ -196,7 +196,7 @@ export function ProgramsCatalog({ programs, locale, dict }: ProgramsCatalogProps
           <button
             type="button"
             onClick={() => setActiveCategory('all')}
-            className="text-[#c85a32] hover:underline cursor-pointer"
+            className="text-[#bd3227] hover:underline cursor-pointer"
           >
             {isAr ? 'عرض الكل' : isFr ? 'Tout afficher' : 'Show All'}
           </button>
@@ -214,7 +214,7 @@ export function ProgramsCatalog({ programs, locale, dict }: ProgramsCatalogProps
               >
                 <div>
                   {/* Program Cover Banner or Artistic Abstract Visual */}
-                  <div className="relative aspect-[16/9] w-full overflow-hidden bg-gradient-to-br from-[#08242a] via-[#14505b] to-[#0d3b43]">
+                  <div className="relative aspect-[16/9] w-full overflow-hidden bg-gradient-to-br from-[#231f20] via-[#d2a82b] to-[#231f20]">
                     <ProgramCoverImage
                       coverImage={prog.cover_image}
                       title={prog.title}
@@ -226,12 +226,12 @@ export function ProgramsCatalog({ programs, locale, dict }: ProgramsCatalogProps
 
                     {/* Floating Badges */}
                     <div className="absolute top-4 inset-x-4 flex items-center justify-between gap-2">
-                      <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold bg-white/95 text-[#0d3b43] backdrop-blur-md shadow-xs">
+                      <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold bg-white/95 text-[#231f20] backdrop-blur-md shadow-xs">
                         <span>{getCategoryIcon(prog.category)}</span>
                         <span>{getCategoryLabel(prog.category)}</span>
                       </span>
 
-                      <span className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-bold bg-[#08242a]/80 text-white backdrop-blur-md">
+                      <span className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-bold bg-[#231f20]/80 text-white backdrop-blur-md">
                         <span>📍</span>
                         <span>{prog.city || (isAr ? 'المملكة المغربية' : isFr ? 'Royaume du Maroc' : 'Morocco')}</span>
                       </span>
@@ -248,33 +248,33 @@ export function ProgramsCatalog({ programs, locale, dict }: ProgramsCatalogProps
                   {/* Body Content */}
                   <div className="p-6 sm:p-7 space-y-4">
                     {prog.description && (
-                      <p className="text-sm text-[#445457] leading-relaxed line-clamp-3">
+                      <p className="text-sm text-[#5C5A55] leading-relaxed line-clamp-3">
                         {prog.description}
                       </p>
                     )}
 
                     {/* Objectives & Audience Pills */}
                     {(prog.objectives || prog.target_audience) && (
-                      <div className="p-4 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6] space-y-2.5 text-xs">
+                      <div className="p-4 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6] space-y-2.5 text-xs">
                         {prog.objectives && (
                           <div className="space-y-0.5">
-                            <span className="font-bold text-[#08242a] flex items-center gap-1.5">
+                            <span className="font-bold text-[#231f20] flex items-center gap-1.5">
                               <span>🎯</span>
                               <span>{isAr ? 'الأهداف والمخرجات:' : isFr ? 'Objectifs et résultats :' : 'Key Objectives:'}</span>
                             </span>
-                            <p className="text-[#5f7174] leading-relaxed line-clamp-2 ps-5">
+                            <p className="text-[#5C5A55] leading-relaxed line-clamp-2 ps-5">
                               {prog.objectives}
                             </p>
                           </div>
                         )}
 
                         {prog.target_audience && (
-                          <div className="space-y-0.5 pt-2 border-t border-[#f0ebe1]">
-                            <span className="font-bold text-[#08242a] flex items-center gap-1.5">
+                          <div className="space-y-0.5 pt-2 border-t border-[#FEF6CC]">
+                            <span className="font-bold text-[#231f20] flex items-center gap-1.5">
                               <span>👥</span>
                               <span>{isAr ? 'الفئة المستهدفة:' : isFr ? 'Public cible :' : 'Target Audience:'}</span>
                             </span>
-                            <p className="text-[#5f7174] leading-relaxed line-clamp-2 ps-5">
+                            <p className="text-[#5C5A55] leading-relaxed line-clamp-2 ps-5">
                               {prog.target_audience}
                             </p>
                           </div>
@@ -285,10 +285,10 @@ export function ProgramsCatalog({ programs, locale, dict }: ProgramsCatalogProps
                 </div>
 
                 {/* Footer Action Buttons */}
-                <div className="p-6 sm:p-7 pt-0 border-t border-[#f0ebe1] flex items-center justify-between gap-3 mt-4">
+                <div className="p-6 sm:p-7 pt-0 border-t border-[#FEF6CC] flex items-center justify-between gap-3 mt-4">
                   <Link
                     href={`/${locale}/programs/${prog.slug}`}
-                    className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-[#c85a32] hover:text-[#9c3f1e] transition-colors"
+                    className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-[#bd3227] hover:text-[#8f1f16] transition-colors"
                   >
                     <span>{dict.programs.learn_more}</span>
                     <span className="rtl:rotate-180">→</span>
@@ -296,7 +296,7 @@ export function ProgramsCatalog({ programs, locale, dict }: ProgramsCatalogProps
 
                   <Link
                     href={`/${locale}/contact`}
-                    className="px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold text-[#0d3b43] bg-[#faf7f2] hover:bg-[#0d3b43] hover:text-white border border-[#e5e0d6] transition-all shadow-2xs"
+                    className="px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold text-[#231f20] bg-[#F5F3EE] hover:bg-[#231f20] hover:text-white border border-[#e5e0d6] transition-all shadow-2xs"
                   >
                     {isAr ? 'استفسر أو انخرط' : isFr ? 'Participer ou s\'informer' : 'Inquire or Join'}
                   </Link>
@@ -308,10 +308,10 @@ export function ProgramsCatalog({ programs, locale, dict }: ProgramsCatalogProps
       ) : (
         <div className="p-12 sm:p-16 rounded-3xl bg-white border border-[#e5e0d6] text-center space-y-4">
           <span className="text-4xl sm:text-5xl block">🔍</span>
-          <h3 className="text-xl font-black text-[#08242a]">
+          <h3 className="text-xl font-black text-[#231f20]">
             {isAr ? 'لم يتم العثور على مبادرات مطابقة لبحثك' : isFr ? 'Aucun programme correspondant trouvé' : 'No matching programs found'}
           </h3>
-          <p className="text-sm text-[#5f7174] max-w-md mx-auto leading-relaxed">
+          <p className="text-sm text-[#5C5A55] max-w-md mx-auto leading-relaxed">
             {isAr
               ? 'يرجى تجربة كلمات بحث أخرى أو تصفح كافة البرامج والمشاريع الثقافية للجمعية.'
               : isFr
@@ -324,7 +324,7 @@ export function ProgramsCatalog({ programs, locale, dict }: ProgramsCatalogProps
               setActiveCategory('all')
               setSearchQuery('')
             }}
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#0d3b43] text-white text-xs sm:text-sm font-bold hover:bg-[#14505b] transition-all cursor-pointer shadow-xs"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#231f20] text-white text-xs sm:text-sm font-bold hover:bg-[#d2a82b] transition-all cursor-pointer shadow-xs"
           >
             {isAr ? 'إعادة ضبط البحث والتصنيف' : isFr ? 'Réinitialiser les filtres' : 'Reset Filters'}
           </button>

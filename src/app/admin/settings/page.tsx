@@ -289,34 +289,34 @@ export default async function AdminSettingsPage() {
   return (
     <div className="space-y-8 max-w-4xl">
       <div>
-        <h1 className="text-2xl font-black text-[#08242a]">Platform & Site Settings</h1>
-        <p className="text-xs text-[#5f7174] mt-1">
+        <h1 className="text-2xl font-black text-[#231f20]">Platform & Site Settings</h1>
+        <p className="text-xs text-[#5C5A55] mt-1">
           إدارة إعدادات المنصة، الهوية المؤسسية، والتحكم الشامل في واجهة الاستقبال والشريط العلوي.
         </p>
       </div>
 
       {/* Organization Identity Overview */}
       <div className="bg-white p-8 rounded-2xl border border-[#e5e0d6] shadow-2xs space-y-6">
-        <h2 className="text-sm font-bold text-[#08242a] uppercase tracking-wider">
+        <h2 className="text-sm font-bold text-[#231f20] uppercase tracking-wider">
           Official Identity & Charter Data
         </h2>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 text-xs text-[#2d3b3e]">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 text-xs text-[#231f20]">
           <div>
-            <span className="block text-[#819598] font-bold text-3xs uppercase tracking-wider mb-1">Official Name (Arabic)</span>
-            <span className="font-bold text-sm text-[#08242a]">جمعية روح الفنون والثقافة</span>
+            <span className="block text-[#5C5A55] font-bold text-3xs uppercase tracking-wider mb-1">Official Name (Arabic)</span>
+            <span className="font-bold text-sm text-[#231f20]">جمعية روح الفنون والثقافة</span>
           </div>
           <div>
-            <span className="block text-[#819598] font-bold text-3xs uppercase tracking-wider mb-1">Official Name (English)</span>
-            <span className="font-bold text-sm text-[#08242a]">Spirit of Arts & Culture Association</span>
+            <span className="block text-[#5C5A55] font-bold text-3xs uppercase tracking-wider mb-1">Official Name (English)</span>
+            <span className="font-bold text-sm text-[#231f20]">Spirit of Arts & Culture Association</span>
           </div>
           <div>
-            <span className="block text-[#819598] font-bold text-3xs uppercase tracking-wider mb-1">Official Name (French)</span>
-            <span className="font-bold text-sm text-[#08242a]">Association Esprit des Arts et de la Culture</span>
+            <span className="block text-[#5C5A55] font-bold text-3xs uppercase tracking-wider mb-1">Official Name (French)</span>
+            <span className="font-bold text-sm text-[#231f20]">Association Esprit des Arts et de la Culture</span>
           </div>
           <div>
-            <span className="block text-[#819598] font-bold text-3xs uppercase tracking-wider mb-1">Abbreviation & Scope</span>
-            <span className="font-bold text-sm text-[#0d3b43]">AMYCC (Founded 2026, Morocco)</span>
+            <span className="block text-[#5C5A55] font-bold text-3xs uppercase tracking-wider mb-1">Abbreviation & Scope</span>
+            <span className="font-bold text-sm text-[#231f20]">AMYCC (Founded 2026, Morocco)</span>
           </div>
         </div>
       </div>
@@ -326,19 +326,19 @@ export default async function AdminSettingsPage() {
             HERO SECTION CONTROL (Full-Bleed Morocco88 Style)
             ============================================================ */}
         <div className="bg-white p-8 rounded-2xl border border-[#e5e0d6] shadow-2xs space-y-6">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-[#f0ebe1]">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-[#FEF6CC]">
             <div>
               <div className="flex items-center gap-2">
                 <span className="text-lg">🎬</span>
-                <h2 className="text-sm font-bold text-[#08242a] uppercase tracking-wider">
+                <h2 className="text-sm font-bold text-[#231f20] uppercase tracking-wider">
                   واجهة الاستقبال الافتتاحية (Hero Section Showcase)
                 </h2>
               </div>
-              <p className="text-xs text-[#5f7174] mt-1">
+              <p className="text-xs text-[#5C5A55] mt-1">
                 تخصيص صورة الخلفية السينمائية بكامل العرض، النصوص بثلاث لغات، وأزرار التوجيه (نمط Morocco88).
               </p>
             </div>
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 text-3xs font-black rounded-full bg-[#f4ce83]/20 text-[#855308] border border-[#f4ce83]/40">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 text-3xs font-black rounded-full bg-[#ffd22f]/20 text-[#8c6c16] border border-[#ffd22f]/40">
               واجهة سينمائية تفاعلية
             </span>
           </div>
@@ -350,79 +350,79 @@ export default async function AdminSettingsPage() {
           />
 
           {/* Eyebrow Tag (Golden Tag) */}
-          <div className="space-y-4 pt-2 border-t border-[#f0ebe1]">
-            <h3 className="text-2xs font-bold text-[#445457] uppercase tracking-wider">
+          <div className="space-y-4 pt-2 border-t border-[#FEF6CC]">
+            <h3 className="text-2xs font-bold text-[#5C5A55] uppercase tracking-wider">
               الشارة التمهيدية الذهبية (Eyebrow Tag — e.g. MUSIC FOR IMPACT)
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div>
-                <label className="block text-3xs font-bold text-[#5f7174] mb-1">بالعربية (AR)</label>
+                <label className="block text-3xs font-bold text-[#5C5A55] mb-1">بالعربية (AR)</label>
                 <input
                   name="heroTagAr"
                   type="text"
                   defaultValue={heroVal.tagAr || defaultHeroConfig.tagAr}
                   placeholder="الفنون والثقافة للأثر والتمكين"
-                  className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43]"
+                  className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#231f20]"
                 />
               </div>
               <div>
-                <label className="block text-3xs font-bold text-[#5f7174] mb-1">بالفرنسية (FR)</label>
+                <label className="block text-3xs font-bold text-[#5C5A55] mb-1">بالفرنسية (FR)</label>
                 <input
                   name="heroTagFr"
                   type="text"
                   defaultValue={heroVal.tagFr || defaultHeroConfig.tagFr}
                   placeholder="ARTS ET CULTURE POUR L'IMPACT"
-                  className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43]"
+                  className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#231f20]"
                 />
               </div>
               <div>
-                <label className="block text-3xs font-bold text-[#5f7174] mb-1">بالإنجليزية (EN)</label>
+                <label className="block text-3xs font-bold text-[#5C5A55] mb-1">بالإنجليزية (EN)</label>
                 <input
                   name="heroTagEn"
                   type="text"
                   defaultValue={heroVal.tagEn || defaultHeroConfig.tagEn}
                   placeholder="ARTS & CULTURE FOR IMPACT"
-                  className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43]"
+                  className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#231f20]"
                 />
               </div>
             </div>
           </div>
 
           {/* Main Headline */}
-          <div className="space-y-4 pt-2 border-t border-[#f0ebe1]">
-            <h3 className="text-2xs font-bold text-[#445457] uppercase tracking-wider">
+          <div className="space-y-4 pt-2 border-t border-[#FEF6CC]">
+            <h3 className="text-2xs font-bold text-[#5C5A55] uppercase tracking-wider">
               العنوان الرئيسي الكبير (Grand Main Headline)
             </h3>
             <div className="space-y-3">
               <div>
-                <label className="block text-3xs font-bold text-[#5f7174] mb-1">العنوان بالعربية (يمكن استخدام سطر جديد)</label>
+                <label className="block text-3xs font-bold text-[#5C5A55] mb-1">العنوان بالعربية (يمكن استخدام سطر جديد)</label>
                 <textarea
                   name="heroTitleAr"
                   rows={2}
                   defaultValue={heroVal.titleAr || defaultHeroConfig.titleAr}
                   placeholder="حيث يكتشف الشباب مواهبهم،&#10;ويقودون الإبداع الثقافي بالمغرب"
-                  className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43] font-arabic"
+                  className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#231f20] font-arabic"
                 />
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-3xs font-bold text-[#5f7174] mb-1">العنوان بالفرنسية (FR)</label>
+                  <label className="block text-3xs font-bold text-[#5C5A55] mb-1">العنوان بالفرنسية (FR)</label>
                   <textarea
                     name="heroTitleFr"
                     rows={2}
                     defaultValue={heroVal.titleFr || defaultHeroConfig.titleFr}
                     placeholder="Où les jeunes découvrent leurs talents..."
-                    className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43]"
+                    className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#231f20]"
                   />
                 </div>
                 <div>
-                  <label className="block text-3xs font-bold text-[#5f7174] mb-1">العنوان بالإنجليزية (EN)</label>
+                  <label className="block text-3xs font-bold text-[#5C5A55] mb-1">العنوان بالإنجليزية (EN)</label>
                   <textarea
                     name="heroTitleEn"
                     rows={2}
                     defaultValue={heroVal.titleEn || defaultHeroConfig.titleEn}
                     placeholder="Where youth discover their talents..."
-                    className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43]"
+                    className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#231f20]"
                   />
                 </div>
               </div>
@@ -430,37 +430,37 @@ export default async function AdminSettingsPage() {
           </div>
 
           {/* Description Paragraph */}
-          <div className="space-y-4 pt-2 border-t border-[#f0ebe1]">
-            <h3 className="text-2xs font-bold text-[#445457] uppercase tracking-wider">
+          <div className="space-y-4 pt-2 border-t border-[#FEF6CC]">
+            <h3 className="text-2xs font-bold text-[#5C5A55] uppercase tracking-wider">
               النص التعريفي والمهمة (Mission & Story Description)
             </h3>
             <div className="space-y-3">
               <div>
-                <label className="block text-3xs font-bold text-[#5f7174] mb-1">النص بالعربية (AR)</label>
+                <label className="block text-3xs font-bold text-[#5C5A55] mb-1">النص بالعربية (AR)</label>
                 <textarea
                   name="heroDescAr"
                   rows={3}
                   defaultValue={heroVal.descriptionAr || defaultHeroConfig.descriptionAr}
-                  className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43]"
+                  className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#231f20]"
                 />
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-3xs font-bold text-[#5f7174] mb-1">النص بالفرنسية (FR)</label>
+                  <label className="block text-3xs font-bold text-[#5C5A55] mb-1">النص بالفرنسية (FR)</label>
                   <textarea
                     name="heroDescFr"
                     rows={3}
                     defaultValue={heroVal.descriptionFr || defaultHeroConfig.descriptionFr}
-                    className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43]"
+                    className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#231f20]"
                   />
                 </div>
                 <div>
-                  <label className="block text-3xs font-bold text-[#5f7174] mb-1">النص بالإنجليزية (EN)</label>
+                  <label className="block text-3xs font-bold text-[#5C5A55] mb-1">النص بالإنجليزية (EN)</label>
                   <textarea
                     name="heroDescEn"
                     rows={3}
                     defaultValue={heroVal.descriptionEn || defaultHeroConfig.descriptionEn}
-                    className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43]"
+                    className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#231f20]"
                   />
                 </div>
               </div>
@@ -468,18 +468,18 @@ export default async function AdminSettingsPage() {
           </div>
 
           {/* CTA Buttons */}
-          <div className="space-y-4 pt-2 border-t border-[#f0ebe1]">
-            <h3 className="text-2xs font-bold text-[#445457] uppercase tracking-wider">
+          <div className="space-y-4 pt-2 border-t border-[#FEF6CC]">
+            <h3 className="text-2xs font-bold text-[#5C5A55] uppercase tracking-wider">
               أزرار الدعوة للعمل (CTA Buttons)
             </h3>
             {/* Primary Button */}
-            <div className="bg-[#faf7f2] p-4 rounded-xl border border-[#ebe1d1] space-y-3">
-              <span className="text-2xs font-black text-[#08242a] block">
+            <div className="bg-[#F5F3EE] p-4 rounded-xl border border-[#FEF6CC] space-y-3">
+              <span className="text-2xs font-black text-[#231f20] block">
                 الزر الرئيسي (الزر الذهبي المدور — مثل See our impact)
               </span>
               <div className="grid grid-cols-1 sm:grid-cols-4 gap-3">
                 <div>
-                  <label className="block text-3xs font-bold text-[#5f7174] mb-1">نص الزر (عربي)</label>
+                  <label className="block text-3xs font-bold text-[#5C5A55] mb-1">نص الزر (عربي)</label>
                   <input
                     name="heroCtaPrimaryTextAr"
                     type="text"
@@ -488,7 +488,7 @@ export default async function AdminSettingsPage() {
                   />
                 </div>
                 <div>
-                  <label className="block text-3xs font-bold text-[#5f7174] mb-1">نص الزر (فرنسي)</label>
+                  <label className="block text-3xs font-bold text-[#5C5A55] mb-1">نص الزر (فرنسي)</label>
                   <input
                     name="heroCtaPrimaryTextFr"
                     type="text"
@@ -497,7 +497,7 @@ export default async function AdminSettingsPage() {
                   />
                 </div>
                 <div>
-                  <label className="block text-3xs font-bold text-[#5f7174] mb-1">نص الزر (إنجليزي)</label>
+                  <label className="block text-3xs font-bold text-[#5C5A55] mb-1">نص الزر (إنجليزي)</label>
                   <input
                     name="heroCtaPrimaryTextEn"
                     type="text"
@@ -506,7 +506,7 @@ export default async function AdminSettingsPage() {
                   />
                 </div>
                 <div>
-                  <label className="block text-3xs font-bold text-[#5f7174] mb-1">الرابط الموجه</label>
+                  <label className="block text-3xs font-bold text-[#5C5A55] mb-1">الرابط الموجه</label>
                   <input
                     name="heroCtaPrimaryUrl"
                     type="text"
@@ -518,13 +518,13 @@ export default async function AdminSettingsPage() {
             </div>
 
             {/* Secondary Button */}
-            <div className="bg-[#faf7f2] p-4 rounded-xl border border-[#ebe1d1] space-y-3">
-              <span className="text-2xs font-black text-[#08242a] block">
+            <div className="bg-[#F5F3EE] p-4 rounded-xl border border-[#FEF6CC] space-y-3">
+              <span className="text-2xs font-black text-[#231f20] block">
                 الزر الثانوي (الزر الشفاف بحدود بيضاء — مثل Partner with us)
               </span>
               <div className="grid grid-cols-1 sm:grid-cols-4 gap-3">
                 <div>
-                  <label className="block text-3xs font-bold text-[#5f7174] mb-1">نص الزر (عربي)</label>
+                  <label className="block text-3xs font-bold text-[#5C5A55] mb-1">نص الزر (عربي)</label>
                   <input
                     name="heroCtaSecondaryTextAr"
                     type="text"
@@ -533,7 +533,7 @@ export default async function AdminSettingsPage() {
                   />
                 </div>
                 <div>
-                  <label className="block text-3xs font-bold text-[#5f7174] mb-1">نص الزر (فرنسي)</label>
+                  <label className="block text-3xs font-bold text-[#5C5A55] mb-1">نص الزر (فرنسي)</label>
                   <input
                     name="heroCtaSecondaryTextFr"
                     type="text"
@@ -542,7 +542,7 @@ export default async function AdminSettingsPage() {
                   />
                 </div>
                 <div>
-                  <label className="block text-3xs font-bold text-[#5f7174] mb-1">نص الزر (إنجليزي)</label>
+                  <label className="block text-3xs font-bold text-[#5C5A55] mb-1">نص الزر (إنجليزي)</label>
                   <input
                     name="heroCtaSecondaryTextEn"
                     type="text"
@@ -551,7 +551,7 @@ export default async function AdminSettingsPage() {
                   />
                 </div>
                 <div>
-                  <label className="block text-3xs font-bold text-[#5f7174] mb-1">الرابط الموجه</label>
+                  <label className="block text-3xs font-bold text-[#5C5A55] mb-1">الرابط الموجه</label>
                   <input
                     name="heroCtaSecondaryUrl"
                     type="text"
@@ -564,37 +564,37 @@ export default async function AdminSettingsPage() {
           </div>
 
           {/* Bottom Sub-strip */}
-          <div className="space-y-4 pt-2 border-t border-[#f0ebe1]">
-            <h3 className="text-2xs font-bold text-[#445457] uppercase tracking-wider">
+          <div className="space-y-4 pt-2 border-t border-[#FEF6CC]">
+            <h3 className="text-2xs font-bold text-[#5C5A55] uppercase tracking-wider">
               الشريط السفلي للمصداقية (Bottom Institutional Sub-strip)
             </h3>
             <div className="space-y-3">
               <div>
-                <label className="block text-3xs font-bold text-[#5f7174] mb-1">النص بالعربية (AR)</label>
+                <label className="block text-3xs font-bold text-[#5C5A55] mb-1">النص بالعربية (AR)</label>
                 <input
                   name="heroBottomStripAr"
                   type="text"
                   defaultValue={heroVal.bottomStripAr || defaultHeroConfig.bottomStripAr}
-                  className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43]"
+                  className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#231f20]"
                 />
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-3xs font-bold text-[#5f7174] mb-1">النص بالفرنسية (FR)</label>
+                  <label className="block text-3xs font-bold text-[#5C5A55] mb-1">النص بالفرنسية (FR)</label>
                   <input
                     name="heroBottomStripFr"
                     type="text"
                     defaultValue={heroVal.bottomStripFr || defaultHeroConfig.bottomStripFr}
-                    className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43]"
+                    className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#231f20]"
                   />
                 </div>
                 <div>
-                  <label className="block text-3xs font-bold text-[#5f7174] mb-1">النص بالإنجليزية (EN)</label>
+                  <label className="block text-3xs font-bold text-[#5C5A55] mb-1">النص بالإنجليزية (EN)</label>
                   <input
                     name="heroBottomStripEn"
                     type="text"
                     defaultValue={heroVal.bottomStripEn || defaultHeroConfig.bottomStripEn}
-                    className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43]"
+                    className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#231f20]"
                   />
                 </div>
               </div>
@@ -604,15 +604,15 @@ export default async function AdminSettingsPage() {
 
         {/* Flagship Program Spotlight Control (البرنامج الرائد ومبادرة الاستقطاب) */}
         <div className="bg-white p-8 rounded-2xl border border-[#e5e0d6] shadow-2xs space-y-6">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-[#f0ebe1]">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-[#FEF6CC]">
             <div>
               <div className="flex items-center gap-2">
                 <span className="text-base">⭐</span>
-                <h2 className="text-sm font-bold text-[#08242a] uppercase tracking-wider">
+                <h2 className="text-sm font-bold text-[#231f20] uppercase tracking-wider">
                   البرنامج الرائد ومبادرة الاستقطاب (Flagship Program Spotlight)
                 </h2>
               </div>
-              <p className="text-xs text-[#5f7174] mt-1">
+              <p className="text-xs text-[#5C5A55] mt-1">
                 التحكم الكامل في قسم المبادرة الرئيسية (مبادرة شباب في العمل)، اختيار البرنامج من قاعدة البيانات، الصور، النصوص، ومراحل المشاركة.
               </p>
             </div>
@@ -633,12 +633,12 @@ export default async function AdminSettingsPage() {
           </div>
 
           {/* Toggle Enable / Disable */}
-          <div className="p-4 rounded-xl bg-[#faf7f2] border border-[#e5e0d6] flex items-center justify-between">
+          <div className="p-4 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] flex items-center justify-between">
             <div>
-              <label htmlFor="flagshipEnabled" className="text-xs font-bold text-[#08242a] block cursor-pointer">
+              <label htmlFor="flagshipEnabled" className="text-xs font-bold text-[#231f20] block cursor-pointer">
                 عرض قسم البرنامج الرائد في الصفحة الرئيسية
               </label>
-              <p className="text-3xs text-[#5f7174] mt-0.5">
+              <p className="text-3xs text-[#5C5A55] mt-0.5">
                 عند إلغاء التحديد، سيتم إخفاء هذا القسم بالكامل من الواجهة الرئيسية دون فقدان بياناته.
               </p>
             </div>
@@ -647,19 +647,19 @@ export default async function AdminSettingsPage() {
               name="flagshipEnabled"
               type="checkbox"
               defaultChecked={isFlagshipEnabled}
-              className="w-5 h-5 rounded text-[#0d3b43] focus:ring-[#0d3b43] cursor-pointer"
+              className="w-5 h-5 rounded text-[#231f20] focus:ring-[#231f20] cursor-pointer"
             />
           </div>
 
           {/* Select Database Program */}
           <div className="space-y-2">
-            <label className="block text-2xs font-bold text-[#445457]">
+            <label className="block text-2xs font-bold text-[#5C5A55]">
               اختيار البرنامج من قاعدة البيانات (Choose Program)
             </label>
             <select
               name="flagshipProgramSlug"
               defaultValue={flagshipVal.programSlug || defaultFlagshipProgramConfig.programSlug}
-              className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43] bg-white cursor-pointer"
+              className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#231f20] bg-white cursor-pointer"
             >
               <option value="youth-in-action">مبادرة شباب في العمل (Youth in Action) — الافتراضي</option>
               {availablePrograms
@@ -670,13 +670,13 @@ export default async function AdminSettingsPage() {
                   </option>
                 ))}
             </select>
-            <p className="text-3xs text-[#819598]">
+            <p className="text-3xs text-[#5C5A55]">
               يمكنك ربط هذا القسم بأي برنامج مسجل في قاعدة البيانات، مع تخصيص نصوصه وصورته بالكامل في الحقول أدناه.
             </p>
           </div>
 
           {/* Image Uploader */}
-          <div className="pt-2 border-t border-[#f0ebe1]">
+          <div className="pt-2 border-t border-[#FEF6CC]">
             <FlagshipImageUploader
               initialImageUrl={flagshipVal.imageUrl}
               defaultImageUrl={defaultFlagshipProgramConfig.imageUrl}
@@ -685,166 +685,166 @@ export default async function AdminSettingsPage() {
           </div>
 
           {/* Badge & Caption */}
-          <div className="space-y-4 pt-2 border-t border-[#f0ebe1]">
-            <h3 className="text-2xs font-bold text-[#445457] uppercase tracking-wider">
+          <div className="space-y-4 pt-2 border-t border-[#FEF6CC]">
+            <h3 className="text-2xs font-bold text-[#5C5A55] uppercase tracking-wider">
               شارة وتسميات البرنامج الرائد (Badge & Card Labels)
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div>
-                <label className="block text-3xs font-bold text-[#5f7174] mb-1">الشارة بالعربية (AR)</label>
+                <label className="block text-3xs font-bold text-[#5C5A55] mb-1">الشارة بالعربية (AR)</label>
                 <input
                   name="flagshipBadgeAr"
                   type="text"
                   defaultValue={flagshipVal.badgeAr || defaultFlagshipProgramConfig.badgeAr}
                   placeholder="البرنامج الرائد"
-                  className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43]"
+                  className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#231f20]"
                 />
               </div>
               <div>
-                <label className="block text-3xs font-bold text-[#5f7174] mb-1">الشارة بالفرنسية (FR)</label>
+                <label className="block text-3xs font-bold text-[#5C5A55] mb-1">الشارة بالفرنسية (FR)</label>
                 <input
                   name="flagshipBadgeFr"
                   type="text"
                   defaultValue={flagshipVal.badgeFr || defaultFlagshipProgramConfig.badgeFr}
                   placeholder="Programme Phare"
-                  className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43]"
+                  className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#231f20]"
                 />
               </div>
               <div>
-                <label className="block text-3xs font-bold text-[#5f7174] mb-1">الشارة بالإنجليزية (EN)</label>
+                <label className="block text-3xs font-bold text-[#5C5A55] mb-1">الشارة بالإنجليزية (EN)</label>
                 <input
                   name="flagshipBadgeEn"
                   type="text"
                   defaultValue={flagshipVal.badgeEn || defaultFlagshipProgramConfig.badgeEn}
                   placeholder="Flagship Program"
-                  className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43]"
+                  className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#231f20]"
                 />
               </div>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
               <div>
-                <label className="block text-3xs font-bold text-[#5f7174] mb-1">التسمية فوق الصورة (AR)</label>
+                <label className="block text-3xs font-bold text-[#5C5A55] mb-1">التسمية فوق الصورة (AR)</label>
                 <input
                   name="flagshipImageCaptionAr"
                   type="text"
                   defaultValue={flagshipVal.imageCaptionAr || defaultFlagshipProgramConfig.imageCaptionAr}
                   placeholder="طاقات شبابية تقود المشهد الثقافي"
-                  className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43]"
+                  className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#231f20]"
                 />
               </div>
               <div>
-                <label className="block text-3xs font-bold text-[#5f7174] mb-1">التسمية فوق الصورة (FR)</label>
+                <label className="block text-3xs font-bold text-[#5C5A55] mb-1">التسمية فوق الصورة (FR)</label>
                 <input
                   name="flagshipImageCaptionFr"
                   type="text"
                   defaultValue={flagshipVal.imageCaptionFr || defaultFlagshipProgramConfig.imageCaptionFr}
                   placeholder="Jeunes leaders de la scène culturelle"
-                  className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43]"
+                  className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#231f20]"
                 />
               </div>
               <div>
-                <label className="block text-3xs font-bold text-[#5f7174] mb-1">التسمية فوق الصورة (EN)</label>
+                <label className="block text-3xs font-bold text-[#5C5A55] mb-1">التسمية فوق الصورة (EN)</label>
                 <input
                   name="flagshipImageCaptionEn"
                   type="text"
                   defaultValue={flagshipVal.imageCaptionEn || defaultFlagshipProgramConfig.imageCaptionEn}
                   placeholder="Youth Leadership in Arts & Culture"
-                  className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43]"
+                  className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#231f20]"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-3xs font-bold text-[#5f7174] mb-1">الشعار الفرعي للبطاقة (Subcaption e.g. AMYCC Morocco)</label>
+              <label className="block text-3xs font-bold text-[#5C5A55] mb-1">الشعار الفرعي للبطاقة (Subcaption e.g. AMYCC Morocco)</label>
               <input
                 name="flagshipImageSubcaption"
                 type="text"
                 defaultValue={flagshipVal.imageSubcaption || defaultFlagshipProgramConfig.imageSubcaption}
                 placeholder="AMYCC Morocco"
-                className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43]"
+                className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#231f20]"
               />
             </div>
           </div>
 
           {/* Title & Description */}
-          <div className="space-y-4 pt-2 border-t border-[#f0ebe1]">
-            <h3 className="text-2xs font-bold text-[#445457] uppercase tracking-wider">
+          <div className="space-y-4 pt-2 border-t border-[#FEF6CC]">
+            <h3 className="text-2xs font-bold text-[#5C5A55] uppercase tracking-wider">
               العنوان والوصف التعريفي (Title & Description)
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div>
-                <label className="block text-3xs font-bold text-[#5f7174] mb-1">العنوان بالعربية (AR)</label>
+                <label className="block text-3xs font-bold text-[#5C5A55] mb-1">العنوان بالعربية (AR)</label>
                 <input
                   name="flagshipTitleAr"
                   type="text"
                   defaultValue={flagshipVal.titleAr || defaultFlagshipProgramConfig.titleAr}
                   placeholder="مبادرة شباب في العمل"
-                  className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43]"
+                  className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#231f20]"
                 />
               </div>
               <div>
-                <label className="block text-3xs font-bold text-[#5f7174] mb-1">العنوان بالفرنسية (FR)</label>
+                <label className="block text-3xs font-bold text-[#5C5A55] mb-1">العنوان بالفرنسية (FR)</label>
                 <input
                   name="flagshipTitleFr"
                   type="text"
                   defaultValue={flagshipVal.titleFr || defaultFlagshipProgramConfig.titleFr}
                   placeholder="Initiative Jeunesse en Action"
-                  className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43]"
+                  className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#231f20]"
                 />
               </div>
               <div>
-                <label className="block text-3xs font-bold text-[#5f7174] mb-1">العنوان بالإنجليزية (EN)</label>
+                <label className="block text-3xs font-bold text-[#5C5A55] mb-1">العنوان بالإنجليزية (EN)</label>
                 <input
                   name="flagshipTitleEn"
                   type="text"
                   defaultValue={flagshipVal.titleEn || defaultFlagshipProgramConfig.titleEn}
                   placeholder="Youth in Action Initiative"
-                  className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43]"
+                  className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#231f20]"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-3xs font-bold text-[#5f7174] mb-1">الوصف بالعربية (AR)</label>
+              <label className="block text-3xs font-bold text-[#5C5A55] mb-1">الوصف بالعربية (AR)</label>
               <textarea
                 name="flagshipDescAr"
                 rows={2}
                 defaultValue={flagshipVal.descriptionAr || defaultFlagshipProgramConfig.descriptionAr}
-                className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43]"
+                className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#231f20]"
               />
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-3xs font-bold text-[#5f7174] mb-1">الوصف بالفرنسية (FR)</label>
+                <label className="block text-3xs font-bold text-[#5C5A55] mb-1">الوصف بالفرنسية (FR)</label>
                 <textarea
                   name="flagshipDescFr"
                   rows={2}
                   defaultValue={flagshipVal.descriptionFr || defaultFlagshipProgramConfig.descriptionFr}
-                  className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43]"
+                  className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#231f20]"
                 />
               </div>
               <div>
-                <label className="block text-3xs font-bold text-[#5f7174] mb-1">الوصف بالإنجليزية (EN)</label>
+                <label className="block text-3xs font-bold text-[#5C5A55] mb-1">الوصف بالإنجليزية (EN)</label>
                 <textarea
                   name="flagshipDescEn"
                   rows={2}
                   defaultValue={flagshipVal.descriptionEn || defaultFlagshipProgramConfig.descriptionEn}
-                  className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43]"
+                  className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#231f20]"
                 />
               </div>
             </div>
           </div>
 
           {/* 4 Steps Journey */}
-          <div className="space-y-4 pt-2 border-t border-[#f0ebe1]">
-            <h3 className="text-2xs font-bold text-[#445457] uppercase tracking-wider">
+          <div className="space-y-4 pt-2 border-t border-[#FEF6CC]">
+            <h3 className="text-2xs font-bold text-[#5C5A55] uppercase tracking-wider">
               المراحل والخطوات الأربع (The 4 Journey Steps)
             </h3>
 
             {/* Step 1 */}
-            <div className="p-3.5 rounded-xl bg-[#faf7f2] border border-[#e5e0d6] space-y-3">
-              <span className="text-2xs font-bold text-[#0d3b43] block">المرحلة 1:</span>
+            <div className="p-3.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] space-y-3">
+              <span className="text-2xs font-bold text-[#231f20] block">المرحلة 1:</span>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <input name="step1TitleAr" placeholder="العنوان (AR)" defaultValue={flagshipVal.step1TitleAr || defaultFlagshipProgramConfig.step1TitleAr} className="px-3 py-1.5 text-xs rounded-lg border border-[#e5e0d6] bg-white" />
                 <input name="step1TitleFr" placeholder="Titre (FR)" defaultValue={flagshipVal.step1TitleFr || defaultFlagshipProgramConfig.step1TitleFr} className="px-3 py-1.5 text-xs rounded-lg border border-[#e5e0d6] bg-white" />
@@ -858,8 +858,8 @@ export default async function AdminSettingsPage() {
             </div>
 
             {/* Step 2 */}
-            <div className="p-3.5 rounded-xl bg-[#faf7f2] border border-[#e5e0d6] space-y-3">
-              <span className="text-2xs font-bold text-[#0d3b43] block">المرحلة 2:</span>
+            <div className="p-3.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] space-y-3">
+              <span className="text-2xs font-bold text-[#231f20] block">المرحلة 2:</span>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <input name="step2TitleAr" placeholder="العنوان (AR)" defaultValue={flagshipVal.step2TitleAr || defaultFlagshipProgramConfig.step2TitleAr} className="px-3 py-1.5 text-xs rounded-lg border border-[#e5e0d6] bg-white" />
                 <input name="step2TitleFr" placeholder="Titre (FR)" defaultValue={flagshipVal.step2TitleFr || defaultFlagshipProgramConfig.step2TitleFr} className="px-3 py-1.5 text-xs rounded-lg border border-[#e5e0d6] bg-white" />
@@ -873,8 +873,8 @@ export default async function AdminSettingsPage() {
             </div>
 
             {/* Step 3 */}
-            <div className="p-3.5 rounded-xl bg-[#faf7f2] border border-[#e5e0d6] space-y-3">
-              <span className="text-2xs font-bold text-[#0d3b43] block">المرحلة 3:</span>
+            <div className="p-3.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] space-y-3">
+              <span className="text-2xs font-bold text-[#231f20] block">المرحلة 3:</span>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <input name="step3TitleAr" placeholder="العنوان (AR)" defaultValue={flagshipVal.step3TitleAr || defaultFlagshipProgramConfig.step3TitleAr} className="px-3 py-1.5 text-xs rounded-lg border border-[#e5e0d6] bg-white" />
                 <input name="step3TitleFr" placeholder="Titre (FR)" defaultValue={flagshipVal.step3TitleFr || defaultFlagshipProgramConfig.step3TitleFr} className="px-3 py-1.5 text-xs rounded-lg border border-[#e5e0d6] bg-white" />
@@ -888,8 +888,8 @@ export default async function AdminSettingsPage() {
             </div>
 
             {/* Step 4 */}
-            <div className="p-3.5 rounded-xl bg-[#faf7f2] border border-[#e5e0d6] space-y-3">
-              <span className="text-2xs font-bold text-[#0d3b43] block">المرحلة 4:</span>
+            <div className="p-3.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] space-y-3">
+              <span className="text-2xs font-bold text-[#231f20] block">المرحلة 4:</span>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <input name="step4TitleAr" placeholder="العنوان (AR)" defaultValue={flagshipVal.step4TitleAr || defaultFlagshipProgramConfig.step4TitleAr} className="px-3 py-1.5 text-xs rounded-lg border border-[#e5e0d6] bg-white" />
                 <input name="step4TitleFr" placeholder="Titre (FR)" defaultValue={flagshipVal.step4TitleFr || defaultFlagshipProgramConfig.step4TitleFr} className="px-3 py-1.5 text-xs rounded-lg border border-[#e5e0d6] bg-white" />
@@ -904,13 +904,13 @@ export default async function AdminSettingsPage() {
           </div>
 
           {/* Action Buttons */}
-          <div className="space-y-4 pt-2 border-t border-[#f0ebe1]">
-            <h3 className="text-2xs font-bold text-[#445457] uppercase tracking-wider">
+          <div className="space-y-4 pt-2 border-t border-[#FEF6CC]">
+            <h3 className="text-2xs font-bold text-[#5C5A55] uppercase tracking-wider">
               أزرار التوجيه (Action Buttons)
             </h3>
             {/* Primary Button */}
             <div className="space-y-2">
-              <span className="text-3xs font-bold text-[#0d3b43] block">الزر الرئيسي (Primary CTA):</span>
+              <span className="text-3xs font-bold text-[#231f20] block">الزر الرئيسي (Primary CTA):</span>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <input name="flagshipCtaPrimaryTextAr" placeholder="نص الزر (AR)" defaultValue={flagshipVal.ctaPrimaryTextAr || defaultFlagshipProgramConfig.ctaPrimaryTextAr} className="px-3 py-1.5 text-xs rounded-lg border border-[#e5e0d6]" />
                 <input name="flagshipCtaPrimaryTextFr" placeholder="Texte (FR)" defaultValue={flagshipVal.ctaPrimaryTextFr || defaultFlagshipProgramConfig.ctaPrimaryTextFr} className="px-3 py-1.5 text-xs rounded-lg border border-[#e5e0d6]" />
@@ -921,7 +921,7 @@ export default async function AdminSettingsPage() {
 
             {/* Secondary Button */}
             <div className="space-y-2 pt-2">
-              <span className="text-3xs font-bold text-[#0d3b43] block">الزر الثانوي (Secondary CTA):</span>
+              <span className="text-3xs font-bold text-[#231f20] block">الزر الثانوي (Secondary CTA):</span>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <input name="flagshipCtaSecondaryTextAr" placeholder="نص الزر (AR)" defaultValue={flagshipVal.ctaSecondaryTextAr || defaultFlagshipProgramConfig.ctaSecondaryTextAr} className="px-3 py-1.5 text-xs rounded-lg border border-[#e5e0d6]" />
                 <input name="flagshipCtaSecondaryTextFr" placeholder="Texte (FR)" defaultValue={flagshipVal.ctaSecondaryTextFr || defaultFlagshipProgramConfig.ctaSecondaryTextFr} className="px-3 py-1.5 text-xs rounded-lg border border-[#e5e0d6]" />
@@ -934,15 +934,15 @@ export default async function AdminSettingsPage() {
 
         {/* Top Bar Notification & Institutional Banner Control */}
         <div className="bg-white p-8 rounded-2xl border border-[#e5e0d6] shadow-2xs space-y-6">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-[#f0ebe1]">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-[#FEF6CC]">
             <div>
               <div className="flex items-center gap-2">
                 <span className="text-base">📢</span>
-                <h2 className="text-sm font-bold text-[#08242a] uppercase tracking-wider">
+                <h2 className="text-sm font-bold text-[#231f20] uppercase tracking-wider">
                   الشريط العلوي الترويجي للهيدر (Top Bar Control)
                 </h2>
               </div>
-              <p className="text-xs text-[#5f7174] mt-1">
+              <p className="text-xs text-[#5C5A55] mt-1">
                 التحكم في إظهار أو إخفاء الشريط الترويجي المصغر الموجود أعلى الموقع مع تخصيص نصوصه وروابطه.
               </p>
             </div>
@@ -963,12 +963,12 @@ export default async function AdminSettingsPage() {
           </div>
 
           {/* Toggle Switch Card */}
-          <div className="bg-[#faf7f2] p-5 rounded-xl border border-[#ebe1d1] flex items-center justify-between gap-4">
+          <div className="bg-[#F5F3EE] p-5 rounded-xl border border-[#FEF6CC] flex items-center justify-between gap-4">
             <div className="space-y-1">
-              <label htmlFor="topBarEnabled" className="text-xs font-bold text-[#08242a] cursor-pointer block">
+              <label htmlFor="topBarEnabled" className="text-xs font-bold text-[#231f20] cursor-pointer block">
                 تفعيل وإظهار الشريط العلوي (Show Top Announcement Bar)
               </label>
-              <p className="text-3xs text-[#5f7174]">
+              <p className="text-3xs text-[#5C5A55]">
                 إذا قمت بإلغاء التحديد، سيختفي الشريط فوراً من واجهة الموقع بالكامل لجميع الزوار.
               </p>
             </div>
@@ -980,18 +980,18 @@ export default async function AdminSettingsPage() {
                 defaultChecked={isTopBarEnabled}
                 className="sr-only peer"
               />
-              <div className="w-11 h-6 bg-[#d1cdc7] peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#0d3b43]"></div>
+              <div className="w-11 h-6 bg-[#e5e0d6] peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#231f20]"></div>
             </label>
           </div>
 
           {/* Multilingual Announcement Messages */}
           <div className="space-y-4 pt-2">
-            <h3 className="text-2xs font-bold text-[#445457] uppercase tracking-wider">
+            <h3 className="text-2xs font-bold text-[#5C5A55] uppercase tracking-wider">
               نص الإعلان أو الرسالة المؤسسية (Announcement Text)
             </h3>
             <div className="grid grid-cols-1 gap-4">
               <div>
-                <label className="block text-2xs font-bold text-[#445457] mb-1">
+                <label className="block text-2xs font-bold text-[#5C5A55] mb-1">
                   النص بالعربية (Arabic)
                 </label>
                 <input
@@ -999,13 +999,13 @@ export default async function AdminSettingsPage() {
                   type="text"
                   defaultValue={topBarVal.messageAr ?? defaultTopBarConfig.messageAr}
                   placeholder="المملكة المغربية • جمعية روح الفنون والثقافة (AMYCC)..."
-                  className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43]"
+                  className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#231f20]"
                 />
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-2xs font-bold text-[#445457] mb-1">
+                  <label className="block text-2xs font-bold text-[#5C5A55] mb-1">
                     النص بالفرنسية (French)
                   </label>
                   <input
@@ -1013,11 +1013,11 @@ export default async function AdminSettingsPage() {
                     type="text"
                     defaultValue={topBarVal.messageFr ?? defaultTopBarConfig.messageFr}
                     placeholder="Royaume du Maroc • Association Esprit des Arts..."
-                    className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43]"
+                    className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#231f20]"
                   />
                 </div>
                 <div>
-                  <label className="block text-2xs font-bold text-[#445457] mb-1">
+                  <label className="block text-2xs font-bold text-[#5C5A55] mb-1">
                     النص بالإنجليزية (English)
                   </label>
                   <input
@@ -1025,7 +1025,7 @@ export default async function AdminSettingsPage() {
                     type="text"
                     defaultValue={topBarVal.messageEn ?? defaultTopBarConfig.messageEn}
                     placeholder="Kingdom of Morocco • Spirit of Arts & Culture..."
-                    className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43]"
+                    className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#231f20]"
                   />
                 </div>
               </div>
@@ -1034,12 +1034,12 @@ export default async function AdminSettingsPage() {
 
           {/* Action Link & Contact */}
           <div className="space-y-4 pt-2">
-            <h3 className="text-2xs font-bold text-[#445457] uppercase tracking-wider">
+            <h3 className="text-2xs font-bold text-[#5C5A55] uppercase tracking-wider">
               الرابط السريع وزر التوجيه (Action Link & Contact)
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div>
-                <label className="block text-2xs font-bold text-[#445457] mb-1">
+                <label className="block text-2xs font-bold text-[#5C5A55] mb-1">
                   نص الرابط (بالعربية)
                 </label>
                 <input
@@ -1047,11 +1047,11 @@ export default async function AdminSettingsPage() {
                   type="text"
                   defaultValue={topBarVal.linkTextAr ?? defaultTopBarConfig.linkTextAr}
                   placeholder="مبادرة شباب في العمل"
-                  className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43]"
+                  className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#231f20]"
                 />
               </div>
               <div>
-                <label className="block text-2xs font-bold text-[#445457] mb-1">
+                <label className="block text-2xs font-bold text-[#5C5A55] mb-1">
                   نص الرابط (بالفرنسية)
                 </label>
                 <input
@@ -1059,11 +1059,11 @@ export default async function AdminSettingsPage() {
                   type="text"
                   defaultValue={topBarVal.linkTextFr ?? defaultTopBarConfig.linkTextFr}
                   placeholder="Initiative Jeunesse en Action"
-                  className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43]"
+                  className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#231f20]"
                 />
               </div>
               <div>
-                <label className="block text-2xs font-bold text-[#445457] mb-1">
+                <label className="block text-2xs font-bold text-[#5C5A55] mb-1">
                   نص الرابط (بالإنجليزية)
                 </label>
                 <input
@@ -1071,14 +1071,14 @@ export default async function AdminSettingsPage() {
                   type="text"
                   defaultValue={topBarVal.linkTextEn ?? defaultTopBarConfig.linkTextEn}
                   placeholder="Youth in Action Initiative"
-                  className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43]"
+                  className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#231f20]"
                 />
               </div>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-2xs font-bold text-[#445457] mb-1">
+                <label className="block text-2xs font-bold text-[#5C5A55] mb-1">
                   وجهة الرابط (URL / Path)
                 </label>
                 <input
@@ -1086,11 +1086,11 @@ export default async function AdminSettingsPage() {
                   type="text"
                   defaultValue={topBarVal.linkUrl ?? defaultTopBarConfig.linkUrl}
                   placeholder="/programs/youth-in-action"
-                  className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43]"
+                  className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#231f20]"
                 />
               </div>
               <div>
-                <label className="block text-2xs font-bold text-[#445457] mb-1">
+                <label className="block text-2xs font-bold text-[#5C5A55] mb-1">
                   بريد التواصل في الشريط (Contact Email)
                 </label>
                 <input
@@ -1098,7 +1098,7 @@ export default async function AdminSettingsPage() {
                   type="email"
                   defaultValue={topBarVal.contactEmail ?? defaultTopBarConfig.contactEmail}
                   placeholder="contact@amycc.org"
-                  className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43]"
+                  className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#231f20]"
                 />
               </div>
             </div>
@@ -1106,7 +1106,7 @@ export default async function AdminSettingsPage() {
         </div>
 
         {/* Core Areas Management Card */}
-        <div className="bg-gradient-to-r from-[#0d3b43] to-[#14505b] text-white p-6 sm:p-8 rounded-2xl border border-[#268292]/40 shadow-md flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="bg-gradient-to-r from-[#231f20] to-[#d2a82b] text-white p-6 sm:p-8 rounded-2xl border border-[#d2a82b]/40 shadow-md flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div className="space-y-1.5">
             <div className="flex items-center gap-2">
               <span className="text-xl">🎯</span>
@@ -1114,20 +1114,20 @@ export default async function AdminSettingsPage() {
                 إدارة مجالات التدخل الستة والنوافذ المنبثقة (Areas CMS)
               </h3>
             </div>
-            <p className="text-xs text-[#d8f0f4]/85 max-w-xl leading-relaxed">
+            <p className="text-xs text-[#FEF6CC]/85 max-w-xl leading-relaxed">
               تخصيص نصوص بطاقات الواجهة، الأيقونات، والرؤية التفصيلية والأهداف والورشات الميدانية المعروضة داخل النافذة المنبثقة لكل مجال.
             </p>
           </div>
           <Link
             href="/admin/areas"
-            className="px-5 py-2.5 rounded-xl text-xs font-bold text-[#08242a] bg-[#f4ce83] hover:bg-white active:scale-98 transition-all shrink-0 text-center shadow-xs"
+            className="px-5 py-2.5 rounded-xl text-xs font-bold text-[#231f20] bg-[#ffd22f] hover:bg-white active:scale-98 transition-all shrink-0 text-center shadow-xs"
           >
             إدارة مجالات التدخل →
           </Link>
         </div>
 
         {/* FAQ Management Section Card */}
-        <div className="bg-gradient-to-r from-[#08242a] to-[#0d3b43] text-white p-6 sm:p-8 rounded-2xl border border-[#14505b] shadow-md flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="bg-gradient-to-r from-[#231f20] to-[#231f20] text-white p-6 sm:p-8 rounded-2xl border border-[#d2a82b] shadow-md flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div className="space-y-1.5">
             <div className="flex items-center gap-2">
               <span className="text-xl">❓</span>
@@ -1135,13 +1135,13 @@ export default async function AdminSettingsPage() {
                 إدارة بنك الأسئلة الشائعة (FAQ Management)
               </h3>
             </div>
-            <p className="text-xs text-[#d8f0f4]/85 max-w-xl leading-relaxed">
+            <p className="text-xs text-[#FEF6CC]/85 max-w-xl leading-relaxed">
               تحكم كامل في نصوص الأسئلة والإجابات بثلاث لغات (العربية، الفرنسية، الإنجليزية)، ترتيبها، واختيار ما يعرض منها في الواجهة الرئيسية.
             </p>
           </div>
           <Link
             href="/admin/faqs"
-            className="px-5 py-2.5 rounded-xl text-xs font-bold text-[#08242a] bg-[#f4ce83] hover:bg-white active:scale-98 transition-all shrink-0 text-center shadow-xs"
+            className="px-5 py-2.5 rounded-xl text-xs font-bold text-[#231f20] bg-[#ffd22f] hover:bg-white active:scale-98 transition-all shrink-0 text-center shadow-xs"
           >
             الانتقال لإدارة الأسئلة الشائعة →
           </Link>
@@ -1149,69 +1149,69 @@ export default async function AdminSettingsPage() {
 
         {/* Editable Contact & Social Information Form */}
         <div className="bg-white p-8 rounded-2xl border border-[#e5e0d6] shadow-2xs">
-          <h2 className="text-sm font-bold text-[#08242a] mb-6 uppercase tracking-wider">
+          <h2 className="text-sm font-bold text-[#231f20] mb-6 uppercase tracking-wider">
             Official Channels & Social Links
           </h2>
 
           <div className="space-y-5">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-2xs font-bold text-[#445457] mb-1">
+                <label className="block text-2xs font-bold text-[#5C5A55] mb-1">
                   Official Contact Email
                 </label>
                 <input
                   name="contactEmail"
                   type="email"
                   defaultValue={contactVal.email || 'contact@amycc.org'}
-                  className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43]"
+                  className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#231f20]"
                 />
               </div>
               <div>
-                <label className="block text-2xs font-bold text-[#445457] mb-1">
+                <label className="block text-2xs font-bold text-[#5C5A55] mb-1">
                   Official Telephone Number
                 </label>
                 <input
                   name="contactPhone"
                   type="tel"
                   defaultValue={contactVal.phone || '+212 500-000000'}
-                  className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43]"
+                  className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#231f20]"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-2xs font-bold text-[#445457] mb-1">
+              <label className="block text-2xs font-bold text-[#5C5A55] mb-1">
                 Registered Association Office / City
               </label>
               <input
                 name="contactAddress"
                 type="text"
                 defaultValue={contactVal.address || 'Marrakech / مراكش، المملكة المغربية'}
-                className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43]"
+                className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#231f20]"
               />
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
               <div>
-                <label className="block text-2xs font-bold text-[#445457] mb-1">
+                <label className="block text-2xs font-bold text-[#5C5A55] mb-1">
                   Facebook Page URL
                 </label>
                 <input
                   name="facebookUrl"
                   type="url"
                   defaultValue={socialVal.facebook || 'https://facebook.com/amycc'}
-                  className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43]"
+                  className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#231f20]"
                 />
               </div>
               <div>
-                <label className="block text-2xs font-bold text-[#445457] mb-1">
+                <label className="block text-2xs font-bold text-[#5C5A55] mb-1">
                   Instagram Profile URL
                 </label>
                 <input
                   name="instagramUrl"
                   type="url"
                   defaultValue={socialVal.instagram || 'https://instagram.com/amycc'}
-                  className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43]"
+                  className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#231f20]"
                 />
               </div>
             </div>
@@ -1220,12 +1220,12 @@ export default async function AdminSettingsPage() {
 
         {/* Global Save Button */}
         <div className="sticky bottom-6 z-20 bg-white/95 backdrop-blur-md p-4 rounded-2xl border border-[#e5e0d6] shadow-card flex items-center justify-between gap-4">
-          <p className="text-xs text-[#5f7174]">
+          <p className="text-xs text-[#5C5A55]">
             اضغط حفظ لتطبيق التغييرات على واجهة الاستقبال والشريط العلوي والإعدادات فوراً.
           </p>
           <button
             type="submit"
-            className="px-6 py-2.5 text-xs font-bold text-white bg-[#0d3b43] hover:bg-[#14505b] active:scale-98 rounded-xl transition-all shadow-subtle hover:shadow-card cursor-pointer"
+            className="px-6 py-2.5 text-xs font-bold text-white bg-[#231f20] hover:bg-[#d2a82b] active:scale-98 rounded-xl transition-all shadow-subtle hover:shadow-card cursor-pointer"
           >
             حفظ وتحديث الإعدادات (Save Platform Settings)
           </button>

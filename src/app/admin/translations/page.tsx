@@ -107,37 +107,37 @@ export default async function AdminTranslationsPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#e5e0d6]">
         <div>
-          <div className="flex items-center gap-2 text-2xs font-bold text-[#c85a32] uppercase tracking-wider mb-1">
+          <div className="flex items-center gap-2 text-2xs font-bold text-[#bd3227] uppercase tracking-wider mb-1">
             <span>إدارة اللغات والترجمة</span>
             <span>•</span>
             <span>Translation Management & Completeness</span>
           </div>
-          <h1 className="text-2xl font-black text-[#08242a]">
+          <h1 className="text-2xl font-black text-[#231f20]">
             متابعة اكتمال الترجمة وتفادي النقص
           </h1>
-          <p className="text-xs text-[#5f7174] mt-1 max-w-2xl">
+          <p className="text-xs text-[#5C5A55] mt-1 max-w-2xl">
             مراقبة تغطية المحتوى باللغات الثلاث (العربية الرسمية، الفرنسية، الإنجليزية)، وتنبيه الإدارة الفوري عند وجود أي محتوى غير مترجم لتفادي نشره منقوصاً.
           </p>
         </div>
 
         <div className="flex items-center gap-3">
           <div className="px-4 py-2 rounded-2xl bg-white border border-[#e5e0d6] text-center shadow-2xs">
-            <span className="text-3xs text-[#5f7174] block font-bold">نسبة الاكتمال التام</span>
-            <span className="text-xl font-black text-[#0d3b43]">{coveragePercent}%</span>
+            <span className="text-3xs text-[#5C5A55] block font-bold">نسبة الاكتمال التام</span>
+            <span className="text-xl font-black text-[#231f20]">{coveragePercent}%</span>
           </div>
         </div>
       </div>
 
       {/* Warning Banner if any missing translations */}
       {missingItems.length > 0 ? (
-        <div className="p-5 rounded-2xl bg-[#fae4dc] border border-[#f2c2b0] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="p-5 rounded-2xl bg-[#fde8e7] border border-[#fde8e7] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div className="flex items-start gap-3">
             <span className="text-2xl" aria-hidden="true">⚠️</span>
             <div>
-              <h2 className="text-sm font-bold text-[#c85a32]">
+              <h2 className="text-sm font-bold text-[#bd3227]">
                 تنبيه: يوجد {missingItems.length} عنصر يحتاج إلى استكمال الترجمة!
               </h2>
-              <p className="text-2xs text-[#8a3314] mt-0.5 leading-relaxed">
+              <p className="text-2xs text-[#8f1f16] mt-0.5 leading-relaxed">
                 وفقاً لمعايير الجودة المحددة للمنصة، يجب أن تتوفر جميع البرامج والفعاليات والأخبار باللغات الثلاث قبل اعتماد نشرها العام.
               </p>
             </div>
@@ -161,36 +161,36 @@ export default async function AdminTranslationsPage() {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div className="bg-white p-5 rounded-2xl border border-[#e5e0d6] shadow-2xs">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-xs font-bold text-[#08242a]">قاموس العربية (AR)</span>
+            <span className="text-xs font-bold text-[#231f20]">قاموس العربية (AR)</span>
             <span className="px-2 py-0.5 rounded-full text-3xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
               اللغة الافتراضية RTL
             </span>
           </div>
-          <p className="text-3xs text-[#5f7174] leading-relaxed">
+          <p className="text-3xs text-[#5C5A55] leading-relaxed">
             ملف الرسائل الأساسي المعتمد لهوية الجمعية في المغرب، مفاتيح الترجمة: 86 مفتاحاً.
           </p>
         </div>
 
         <div className="bg-white p-5 rounded-2xl border border-[#e5e0d6] shadow-2xs">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-xs font-bold text-[#08242a]">قاموس الفرنسية (FR)</span>
+            <span className="text-xs font-bold text-[#231f20]">قاموس الفرنسية (FR)</span>
             <span className="px-2 py-0.5 rounded-full text-3xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
               LTR متطابق
             </span>
           </div>
-          <p className="text-3xs text-[#5f7174] leading-relaxed">
+          <p className="text-3xs text-[#5C5A55] leading-relaxed">
             النسخة المعتمدة للشراكات الإقليمية والمؤسسية في المغرب والدول الفرنكوفونية.
           </p>
         </div>
 
         <div className="bg-white p-5 rounded-2xl border border-[#e5e0d6] shadow-2xs">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-xs font-bold text-[#08242a]">قاموس الإنجليزية (EN)</span>
+            <span className="text-xs font-bold text-[#231f20]">قاموس الإنجليزية (EN)</span>
             <span className="px-2 py-0.5 rounded-full text-3xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
               LTR متطابق
             </span>
           </div>
-          <p className="text-3xs text-[#5f7174] leading-relaxed">
+          <p className="text-3xs text-[#5C5A55] leading-relaxed">
             النسخة الدولية الموجهة للشركاء العالميين والمؤسسات الدولية والمنظمات غير الحكومية.
           </p>
         </div>
@@ -198,18 +198,18 @@ export default async function AdminTranslationsPage() {
 
       {/* Content Translations Matrix Table */}
       <div className="bg-white rounded-2xl border border-[#e5e0d6] overflow-hidden shadow-2xs">
-        <div className="p-4 bg-[#faf7f2] border-b border-[#e5e0d6] flex items-center justify-between">
-          <h2 className="text-xs font-bold text-[#08242a] uppercase tracking-wider">
+        <div className="p-4 bg-[#F5F3EE] border-b border-[#e5e0d6] flex items-center justify-between">
+          <h2 className="text-xs font-bold text-[#231f20] uppercase tracking-wider">
             مصفوفة حالة الترجمة لعناصر المحتوى (Content Translation Matrix)
           </h2>
-          <span className="text-2xs text-[#5f7174]">
+          <span className="text-2xs text-[#5C5A55]">
             إجمالي العناصر: {contentItems.length}
           </span>
         </div>
 
         <div className="overflow-x-auto">
-          <table className="w-full text-start text-xs text-[#2d3b3e]">
-            <thead className="bg-[#faf7f2]/50 border-b border-[#e5e0d6] text-2xs uppercase tracking-wider text-[#5f7174] font-bold">
+          <table className="w-full text-start text-xs text-[#231f20]">
+            <thead className="bg-[#F5F3EE]/50 border-b border-[#e5e0d6] text-2xs uppercase tracking-wider text-[#5C5A55] font-bold">
               <tr>
                 <th className="px-6 py-4 text-start">نوع المحتوى / Content Type</th>
                 <th className="px-6 py-4 text-start">العنوان / المعرف (Slug)</th>
@@ -219,7 +219,7 @@ export default async function AdminTranslationsPage() {
                 <th className="px-6 py-4 text-start">الإجراء / Action</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#f4ede2]">
+            <tbody className="divide-y divide-[#FEF6CC]">
               {contentItems.length > 0 ? (
                 contentItems.map((item) => {
                   const typeLabel =
@@ -230,15 +230,15 @@ export default async function AdminTranslationsPage() {
                       : 'خبر / News'
 
                   return (
-                    <tr key={`${item.type}-${item.id}`} className="hover:bg-[#faf7f2]/60 transition-colors">
+                    <tr key={`${item.type}-${item.id}`} className="hover:bg-[#F5F3EE]/60 transition-colors">
                       <td className="px-6 py-4">
-                        <span className="px-2 py-0.5 rounded-lg text-3xs font-bold bg-[#faf7f2] border border-[#e5e0d6] text-[#08242a]">
+                        <span className="px-2 py-0.5 rounded-lg text-3xs font-bold bg-[#F5F3EE] border border-[#e5e0d6] text-[#231f20]">
                           {typeLabel}
                         </span>
                       </td>
                       <td className="px-6 py-4">
-                        <div className="font-bold text-[#08242a]">{item.titleAr}</div>
-                        <div className="text-3xs text-[#819598] font-mono">{item.slug}</div>
+                        <div className="font-bold text-[#231f20]">{item.titleAr}</div>
+                        <div className="text-3xs text-[#5C5A55] font-mono">{item.slug}</div>
                       </td>
                       <td className="px-6 py-4 text-center">
                         {item.hasAr ? (
@@ -276,7 +276,7 @@ export default async function AdminTranslationsPage() {
                       <td className="px-6 py-4">
                         <Link
                           href={item.editUrl}
-                          className="px-3 py-1.5 rounded-lg text-2xs font-bold bg-[#0d3b43] hover:bg-[#14505b] text-white transition-colors inline-block"
+                          className="px-3 py-1.5 rounded-lg text-2xs font-bold bg-[#231f20] hover:bg-[#d2a82b] text-white transition-colors inline-block"
                         >
                           تعديل الترجمات ↗
                         </Link>
@@ -286,7 +286,7 @@ export default async function AdminTranslationsPage() {
                 })
               ) : (
                 <tr>
-                  <td colSpan={6} className="px-6 py-12 text-center text-[#819598]">
+                  <td colSpan={6} className="px-6 py-12 text-center text-[#5C5A55]">
                     لا توجد برامج أو فعاليات مسجلة حالياً لفحص ترجمتها.
                   </td>
                 </tr>

@@ -100,7 +100,7 @@ export function ProgramsListManager({
       {/* Search & Filter Toolbar */}
       <div className="p-5 rounded-3xl bg-white border border-[#e5e0d6] shadow-subtle flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4">
         <div className="flex-1 relative">
-          <span className="absolute inset-y-0 start-3.5 flex items-center pointer-events-none text-sm text-[#819598]">
+          <span className="absolute inset-y-0 start-3.5 flex items-center pointer-events-none text-sm text-[#5C5A55]">
             🔍
           </span>
           <input
@@ -108,7 +108,7 @@ export function ProgramsListManager({
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="البحث في البرامج بالاسم، الرابط، أو المدينة..."
-            className="w-full ps-10 pe-4 py-2.5 rounded-xl bg-[#faf7f2] border border-[#e5e0d6] text-xs sm:text-sm text-[#08242a] focus:bg-white focus:outline-none focus:border-[#0d3b43]"
+            className="w-full ps-10 pe-4 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs sm:text-sm text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
           />
         </div>
 
@@ -116,7 +116,7 @@ export function ProgramsListManager({
           <select
             value={selectedCategory}
             onChange={(e) => setSelectedCategory(e.target.value)}
-            className="px-3 py-2.5 rounded-xl bg-[#faf7f2] border border-[#e5e0d6] text-xs font-bold text-[#08242a] focus:bg-white focus:outline-none focus:border-[#0d3b43]"
+            className="px-3 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs font-bold text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
           >
             <option value="all">كل المجالات ({programs.length})</option>
             <option value="arts">فنون تشكيلية</option>
@@ -129,7 +129,7 @@ export function ProgramsListManager({
           <select
             value={selectedStatus}
             onChange={(e) => setSelectedStatus(e.target.value)}
-            className="px-3 py-2.5 rounded-xl bg-[#faf7f2] border border-[#e5e0d6] text-xs font-bold text-[#08242a] focus:bg-white focus:outline-none focus:border-[#0d3b43]"
+            className="px-3 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs font-bold text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
           >
             <option value="all">كل الحالات</option>
             <option value="published">المنشورة فقط</option>
@@ -138,7 +138,7 @@ export function ProgramsListManager({
 
           <Link
             href="/admin/programs/new"
-            className="inline-flex items-center gap-2 px-4 py-2.5 bg-[#0d3b43] text-white text-xs font-bold rounded-xl hover:bg-[#14505b] active:scale-98 transition-all shadow-xs"
+            className="inline-flex items-center gap-2 px-4 py-2.5 bg-[#231f20] text-white text-xs font-bold rounded-xl hover:bg-[#d2a82b] active:scale-98 transition-all shadow-xs"
           >
             <span>+</span>
             <span>برنامج جديد</span>
@@ -149,8 +149,8 @@ export function ProgramsListManager({
       {/* Programs List */}
       <div className="bg-white rounded-3xl border border-[#e5e0d6] overflow-hidden shadow-2xs">
         <div className="overflow-x-auto">
-          <table className="w-full text-start text-xs text-[#2d3b3e]">
-            <thead className="bg-[#faf7f2] border-b border-[#e5e0d6] text-2xs uppercase tracking-wider text-[#5f7174] font-bold">
+          <table className="w-full text-start text-xs text-[#231f20]">
+            <thead className="bg-[#F5F3EE] border-b border-[#e5e0d6] text-2xs uppercase tracking-wider text-[#5C5A55] font-bold">
               <tr>
                 <th className="px-6 py-4 text-start">البرنامج (العنوان والرابط)</th>
                 <th className="px-6 py-4 text-start">المجال / المدينة</th>
@@ -158,7 +158,7 @@ export function ProgramsListManager({
                 <th className="px-6 py-4 text-start">الإجراءات</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#f4ede2]">
+            <tbody className="divide-y divide-[#FEF6CC]">
               {filteredPrograms.length > 0 ? (
                 filteredPrograms.map((prog) => {
                   const arTrans = prog.program_translations?.find((t) => t.locale === 'ar')
@@ -166,7 +166,7 @@ export function ProgramsListManager({
                   const title = arTrans?.title || enTrans?.title || prog.slug
 
                   return (
-                    <tr key={prog.id} className="hover:bg-[#faf7f2]/60 transition-colors">
+                    <tr key={prog.id} className="hover:bg-[#F5F3EE]/60 transition-colors">
                       <td className="px-6 py-4">
                         <div className="flex items-center gap-3.5">
                           {prog.cover_image ? (
@@ -180,26 +180,26 @@ export function ProgramsListManager({
                               />
                             </div>
                           ) : (
-                            <div className="w-12 h-12 rounded-xl bg-[#0d3b43]/10 text-[#0d3b43] flex items-center justify-center text-xl shrink-0">
+                            <div className="w-12 h-12 rounded-xl bg-[#231f20]/10 text-[#231f20] flex items-center justify-center text-xl shrink-0">
                               🎨
                             </div>
                           )}
 
                           <div>
-                            <div className="font-black text-sm text-[#08242a]">{title}</div>
+                            <div className="font-black text-sm text-[#231f20]">{title}</div>
                             {enTrans?.title && enTrans.title !== title && (
-                              <div className="text-[#5f7174] text-2xs">{enTrans.title}</div>
+                              <div className="text-[#5C5A55] text-2xs">{enTrans.title}</div>
                             )}
-                            <div className="text-[#819598] text-3xs font-mono">/{prog.slug}</div>
+                            <div className="text-[#5C5A55] text-3xs font-mono">/{prog.slug}</div>
                           </div>
                         </div>
                       </td>
 
                       <td className="px-6 py-4">
-                        <span className="font-bold text-xs text-[#0d3b43] block">
+                        <span className="font-bold text-xs text-[#231f20] block">
                           {CATEGORY_NAMES[prog.category] || prog.category}
                         </span>
-                        <span className="text-[#819598] text-3xs">
+                        <span className="text-[#5C5A55] text-3xs">
                           📍 {prog.city || 'نطاق وطني'}
                         </span>
                       </td>
@@ -220,7 +220,7 @@ export function ProgramsListManager({
                         <div className="flex items-center gap-2 flex-wrap">
                           <Link
                             href={`/admin/programs/${prog.id}/edit`}
-                            className="px-3 py-1.5 rounded-xl text-xs font-bold bg-[#faf7f2] text-[#08242a] hover:bg-[#f4ede2] border border-[#e5e0d6] transition-colors"
+                            className="px-3 py-1.5 rounded-xl text-xs font-bold bg-[#F5F3EE] text-[#231f20] hover:bg-[#FEF6CC] border border-[#e5e0d6] transition-colors"
                           >
                             تعديل
                           </Link>
@@ -228,7 +228,7 @@ export function ProgramsListManager({
                           <Link
                             href={`/ar/programs/${prog.slug}`}
                             target="_blank"
-                            className="px-3 py-1.5 rounded-xl text-xs font-bold text-[#0d3b43] hover:underline"
+                            className="px-3 py-1.5 rounded-xl text-xs font-bold text-[#231f20] hover:underline"
                             title="معاينة في الموقع"
                           >
                             معاينة ↗
@@ -262,10 +262,10 @@ export function ProgramsListManager({
                 })
               ) : (
                 <tr>
-                  <td colSpan={4} className="px-6 py-12 text-center text-[#819598]">
+                  <td colSpan={4} className="px-6 py-12 text-center text-[#5C5A55]">
                     <span className="text-3xl block mb-2">🎨</span>
-                    <p className="text-sm font-bold text-[#08242a]">لم يتم العثور على برامج مطابقة</p>
-                    <p className="text-xs text-[#5f7174] mt-1">
+                    <p className="text-sm font-bold text-[#231f20]">لم يتم العثور على برامج مطابقة</p>
+                    <p className="text-xs text-[#5C5A55] mt-1">
                       يمكنك إضافة برنامج جديد أو تعديل خيارات البحث والتصفية.
                     </p>
                   </td>

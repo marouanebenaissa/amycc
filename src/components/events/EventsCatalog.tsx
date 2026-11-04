@@ -94,7 +94,7 @@ export function EventsCatalog({ events, locale }: EventsCatalogProps) {
                   ? 'Rechercher par titre, ville ou lieu...'
                   : 'Search by title, city, or venue...'
               }
-              className="w-full ps-11 pe-4 py-3 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6] text-xs sm:text-sm text-[#08242a] focus:bg-white focus:border-[#c85a32] focus:ring-1 focus:ring-[#c85a32] outline-none transition-all placeholder:text-slate-400 font-medium"
+              className="w-full ps-11 pe-4 py-3 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs sm:text-sm text-[#231f20] focus:bg-white focus:border-[#bd3227] focus:ring-1 focus:ring-[#bd3227] outline-none transition-all placeholder:text-slate-400 font-medium"
             />
             {searchQuery && (
               <button
@@ -108,14 +108,14 @@ export function EventsCatalog({ events, locale }: EventsCatalogProps) {
           </div>
 
           {/* Status Filter Pills */}
-          <div className="flex items-center gap-1.5 p-1 bg-[#faf7f2] rounded-2xl border border-[#e5e0d6] overflow-x-auto shrink-0">
+          <div className="flex items-center gap-1.5 p-1 bg-[#F5F3EE] rounded-2xl border border-[#e5e0d6] overflow-x-auto shrink-0">
             <button
               type="button"
               onClick={() => setSelectedFilter('all')}
               className={`px-4 py-2 rounded-xl text-xs font-bold transition-all whitespace-nowrap ${
                 selectedFilter === 'all'
-                  ? 'bg-[#08242a] text-white shadow-xs'
-                  : 'text-[#5f7174] hover:text-[#08242a]'
+                  ? 'bg-[#231f20] text-white shadow-xs'
+                  : 'text-[#5C5A55] hover:text-[#231f20]'
               }`}
             >
               {isAr ? 'كافة الفعاليات' : isFr ? 'Tous les événements' : 'All Events'}
@@ -125,8 +125,8 @@ export function EventsCatalog({ events, locale }: EventsCatalogProps) {
               onClick={() => setSelectedFilter('open')}
               className={`px-4 py-2 rounded-xl text-xs font-bold transition-all whitespace-nowrap flex items-center gap-1.5 ${
                 selectedFilter === 'open'
-                  ? 'bg-[#c85a32] text-white shadow-xs'
-                  : 'text-[#5f7174] hover:text-[#08242a]'
+                  ? 'bg-[#bd3227] text-white shadow-xs'
+                  : 'text-[#5C5A55] hover:text-[#231f20]'
               }`}
             >
               <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
@@ -137,8 +137,8 @@ export function EventsCatalog({ events, locale }: EventsCatalogProps) {
               onClick={() => setSelectedFilter('closed')}
               className={`px-4 py-2 rounded-xl text-xs font-bold transition-all whitespace-nowrap ${
                 selectedFilter === 'closed'
-                  ? 'bg-[#5f7174] text-white shadow-xs'
-                  : 'text-[#5f7174] hover:text-[#08242a]'
+                  ? 'bg-[#5C5A55] text-white shadow-xs'
+                  : 'text-[#5C5A55] hover:text-[#231f20]'
               }`}
             >
               {isAr ? 'مكتملة / مغلقة' : isFr ? 'Inscriptions closes' : 'Completed / Closed'}
@@ -148,8 +148,8 @@ export function EventsCatalog({ events, locale }: EventsCatalogProps) {
 
         {/* Cities Filter (if there are multiple cities) */}
         {uniqueCities.length > 0 && (
-          <div className="flex items-center gap-2 pt-2 border-t border-[#f4ede2] overflow-x-auto pb-1 text-2xs sm:text-xs">
-            <span className="text-[#819598] font-bold shrink-0">
+          <div className="flex items-center gap-2 pt-2 border-t border-[#FEF6CC] overflow-x-auto pb-1 text-2xs sm:text-xs">
+            <span className="text-[#5C5A55] font-bold shrink-0">
               📍 {isAr ? 'تصفية حسب المدينة:' : isFr ? 'Filtrer par ville :' : 'Filter by city:'}
             </span>
             <button
@@ -157,8 +157,8 @@ export function EventsCatalog({ events, locale }: EventsCatalogProps) {
               onClick={() => setSelectedCity('all')}
               className={`px-3 py-1 rounded-lg font-bold transition-all whitespace-nowrap ${
                 selectedCity === 'all'
-                  ? 'bg-[#08242a] text-white'
-                  : 'bg-[#faf7f2] text-[#5f7174] hover:bg-[#ede5d8]'
+                  ? 'bg-[#231f20] text-white'
+                  : 'bg-[#F5F3EE] text-[#5C5A55] hover:bg-[#FEF6CC]'
               }`}
             >
               {isAr ? 'جميع المدن' : isFr ? 'Toutes les villes' : 'All Cities'}
@@ -170,8 +170,8 @@ export function EventsCatalog({ events, locale }: EventsCatalogProps) {
                 onClick={() => setSelectedCity(city)}
                 className={`px-3 py-1 rounded-lg font-bold transition-all whitespace-nowrap ${
                   selectedCity === city
-                    ? 'bg-[#08242a] text-white'
-                    : 'bg-[#faf7f2] text-[#5f7174] hover:bg-[#ede5d8]'
+                    ? 'bg-[#231f20] text-white'
+                    : 'bg-[#F5F3EE] text-[#5C5A55] hover:bg-[#FEF6CC]'
                 }`}
               >
                 {city}
@@ -182,7 +182,7 @@ export function EventsCatalog({ events, locale }: EventsCatalogProps) {
       </div>
 
       {/* Events Results Count */}
-      <div className="flex items-center justify-between px-2 text-xs font-bold text-[#5f7174]">
+      <div className="flex items-center justify-between px-2 text-xs font-bold text-[#5C5A55]">
         <span>
           {isAr
             ? `عرض ${filteredEvents.length} من أصل ${events.length} فعالية مجدولة`
@@ -198,7 +198,7 @@ export function EventsCatalog({ events, locale }: EventsCatalogProps) {
               setSelectedFilter('all')
               setSelectedCity('all')
             }}
-            className="text-[#c85a32] hover:underline"
+            className="text-[#bd3227] hover:underline"
           >
             {isAr ? 'إعادة ضبط الفلاتر' : isFr ? 'Réinitialiser les filtres' : 'Reset filters'}
           </button>
@@ -219,7 +219,7 @@ export function EventsCatalog({ events, locale }: EventsCatalogProps) {
               >
                 <div>
                   {/* Event Cover Photo or Ambient Pattern Header */}
-                  <div className="relative aspect-[16/9] w-full bg-[#08242a] overflow-hidden">
+                  <div className="relative aspect-[16/9] w-full bg-[#231f20] overflow-hidden">
                     {ev.cover_image ? (
                       <ImageWithFallback
                         src={ev.cover_image}
@@ -230,16 +230,16 @@ export function EventsCatalog({ events, locale }: EventsCatalogProps) {
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       />
                     ) : (
-                      <div className="absolute inset-0 bg-gradient-to-br from-[#1c1917] via-[#292524] to-[#1c1917] flex items-center justify-center p-6 text-center">
+                      <div className="absolute inset-0 bg-gradient-to-br from-[#231f20] via-[#231f20] to-[#231f20] flex items-center justify-center p-6 text-center">
                         <div className="absolute inset-0 moroccan-pattern-dark opacity-25" />
                         <span className="relative text-3xl sm:text-4xl">🎭</span>
                       </div>
                     )}
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#08242a]/90 via-transparent to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#231f20]/90 via-transparent to-transparent" />
 
                     {/* Date Tag Floating over Photo */}
                     <div className="absolute top-3.5 start-3.5 z-10">
-                      <span className="px-3 py-1.5 rounded-xl text-3xs font-black bg-white/95 backdrop-blur-md border border-white/20 text-[#08242a] shadow-md flex items-center gap-1.5">
+                      <span className="px-3 py-1.5 rounded-xl text-3xs font-black bg-white/95 backdrop-blur-md border border-white/20 text-[#231f20] shadow-md flex items-center gap-1.5">
                         <span>📅</span>
                         <span>
                           {dateObj.toLocaleDateString(locale, { month: 'short', day: 'numeric' })}
@@ -252,7 +252,7 @@ export function EventsCatalog({ events, locale }: EventsCatalogProps) {
                       <span
                         className={`text-3xs font-extrabold px-3 py-1.5 rounded-xl backdrop-blur-md shadow-md ${
                           ev.registration_open
-                            ? 'bg-[#c85a32] text-white border border-[#e5a085]'
+                            ? 'bg-[#bd3227] text-white border border-[#fce4e3]'
                             : 'bg-black/60 text-white/80 border border-white/20'
                         }`}
                       >
@@ -286,7 +286,7 @@ export function EventsCatalog({ events, locale }: EventsCatalogProps) {
 
                   {/* Card Content */}
                   <div className="p-6 space-y-3">
-                    <h3 className="text-lg sm:text-xl font-black text-[#08242a] leading-snug line-clamp-2 group-hover:text-[#c85a32] transition-colors">
+                    <h3 className="text-lg sm:text-xl font-black text-[#231f20] leading-snug line-clamp-2 group-hover:text-[#bd3227] transition-colors">
                       <Link href={`/${locale}/events/${ev.slug}`} className="hover:underline">
                         {trans.title}
                       </Link>
@@ -294,7 +294,7 @@ export function EventsCatalog({ events, locale }: EventsCatalogProps) {
 
                     {/* Capacity Indicator */}
                     {ev.capacity && (
-                      <div className="flex items-center gap-2 text-2xs text-[#819598] font-medium pt-1">
+                      <div className="flex items-center gap-2 text-2xs text-[#5C5A55] font-medium pt-1">
                         <span>👥</span>
                         <span>
                           {isAr
@@ -307,7 +307,7 @@ export function EventsCatalog({ events, locale }: EventsCatalogProps) {
                     )}
 
                     {trans.description && (
-                      <p className="text-xs text-[#445457] leading-relaxed line-clamp-3">
+                      <p className="text-xs text-[#5C5A55] leading-relaxed line-clamp-3">
                         {trans.description}
                       </p>
                     )}
@@ -316,13 +316,13 @@ export function EventsCatalog({ events, locale }: EventsCatalogProps) {
 
                 {/* Footer Action Button */}
                 <div className="p-6 pt-0">
-                  <div className="pt-4 border-t border-[#f4ede2]">
+                  <div className="pt-4 border-t border-[#FEF6CC]">
                     <Link
                       href={`/${locale}/events/${ev.slug}`}
                       className={`w-full py-3 px-4 rounded-xl font-extrabold text-center text-xs transition-all flex items-center justify-center gap-2 shadow-2xs group-hover:shadow-md ${
                         ev.registration_open
-                          ? 'text-white bg-[#c85a32] hover:bg-[#b04b26] active:scale-98'
-                          : 'text-[#08242a] bg-[#faf7f2] hover:bg-[#eae4d9] border border-[#e5e0d6]'
+                          ? 'text-white bg-[#bd3227] hover:bg-[#a3261c] active:scale-98'
+                          : 'text-[#231f20] bg-[#F5F3EE] hover:bg-[#FEF6CC] border border-[#e5e0d6]'
                       }`}
                     >
                       <span>
@@ -352,14 +352,14 @@ export function EventsCatalog({ events, locale }: EventsCatalogProps) {
         /* Empty State when no events exist in database */
         <div className="bg-white rounded-3xl border border-[#e5e0d6] p-12 text-center max-w-md mx-auto space-y-4">
           <div className="text-4xl">📅</div>
-          <h3 className="text-base font-extrabold text-[#08242a]">
+          <h3 className="text-base font-extrabold text-[#231f20]">
             {isAr
               ? 'لا توجد فعاليات معلنة حالياً'
               : isFr
               ? 'Aucun événement programmé actuellement'
               : 'No events currently scheduled'}
           </h3>
-          <p className="text-xs text-[#5f7174]">
+          <p className="text-xs text-[#5C5A55]">
             {isAr
               ? 'ترقبوا الإعلان عن ورشاتنا ومواعيد أنشطتنا الثقافية والفنية القادمة قريباً!'
               : isFr
@@ -371,14 +371,14 @@ export function EventsCatalog({ events, locale }: EventsCatalogProps) {
         /* Empty State when filter yields 0 matches */
         <div className="bg-white rounded-3xl border border-[#e5e0d6] p-12 text-center max-w-md mx-auto space-y-4">
           <div className="text-4xl">🔍</div>
-          <h3 className="text-base font-extrabold text-[#08242a]">
+          <h3 className="text-base font-extrabold text-[#231f20]">
             {isAr
               ? 'لم يتم العثور على فعاليات تطابق البحث'
               : isFr
               ? 'Aucun événement ne correspond à vos critères'
               : 'No events match your search criteria'}
           </h3>
-          <p className="text-xs text-[#5f7174]">
+          <p className="text-xs text-[#5C5A55]">
             {isAr
               ? 'جرّب تغيير كلمات البحث أو إعادة ضبط فلاتر الحالة والمدينة.'
               : isFr
@@ -392,7 +392,7 @@ export function EventsCatalog({ events, locale }: EventsCatalogProps) {
               setSelectedFilter('all')
               setSelectedCity('all')
             }}
-            className="px-5 py-2.5 rounded-xl text-xs font-bold text-white bg-[#08242a] hover:bg-[#1a3a40] transition-all cursor-pointer"
+            className="px-5 py-2.5 rounded-xl text-xs font-bold text-white bg-[#231f20] hover:bg-[#231f20] transition-all cursor-pointer"
           >
             {isAr ? 'إعادة ضبط الفلاتر' : isFr ? 'Réinitialiser les filtres' : 'Reset filters'}
           </button>

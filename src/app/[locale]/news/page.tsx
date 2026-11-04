@@ -129,18 +129,18 @@ export default async function NewsPage(props: { params: Promise<{ locale: string
     <>
       <Header locale={locale} dict={dict} />
 
-      <main id="main-content" className="flex-1 bg-[#faf7f2]">
+      <main id="main-content" className="flex-1 bg-[#F5F3EE]">
         {/* ========================================================= */}
         {/* News Hero Banner (Configurable via CMS)                   */}
         {/* ========================================================= */}
-        <section className="relative overflow-hidden bg-gradient-to-b from-[#faf7f2] via-[#f7f2e9] to-[#faf7f2] border-b border-[#e5e0d6] pt-16 pb-20 lg:pt-24 lg:pb-28">
+        <section className="relative overflow-hidden bg-gradient-to-b from-[#F5F3EE] via-[#F5F3EE] to-[#F5F3EE] border-b border-[#e5e0d6] pt-16 pb-20 lg:pt-24 lg:pb-28">
           <div className="absolute inset-0 moroccan-pattern-light opacity-60 pointer-events-none" aria-hidden="true" />
           
           <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
             {/* Tag / Category Badge */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#fae4dc] border border-[#f2c2b0] shadow-2xs">
-              <span className="w-2 h-2 rounded-full bg-[#c85a32] animate-pulse" />
-              <span className="text-3xs sm:text-2xs font-extrabold uppercase tracking-widest text-[#c85a32]">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#fde8e7] border border-[#fde8e7] shadow-2xs">
+              <span className="w-2 h-2 rounded-full bg-[#bd3227] animate-pulse" />
+              <span className="text-3xs sm:text-2xs font-extrabold uppercase tracking-widest text-[#bd3227]">
                 {isAr
                   ? pageSettings.hero.tagAr
                   : isFr
@@ -150,7 +150,7 @@ export default async function NewsPage(props: { params: Promise<{ locale: string
             </div>
 
             {/* Main Title */}
-            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-[#08242a] tracking-tight leading-tight">
+            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-[#231f20] tracking-tight leading-tight">
               {isAr
                 ? pageSettings.hero.titleAr
                 : isFr
@@ -159,7 +159,7 @@ export default async function NewsPage(props: { params: Promise<{ locale: string
             </h1>
 
             {/* Subtitle */}
-            <p className="text-base sm:text-xl font-bold text-[#0d3b43] max-w-3xl mx-auto leading-relaxed">
+            <p className="text-base sm:text-xl font-bold text-[#231f20] max-w-3xl mx-auto leading-relaxed">
               {isAr
                 ? pageSettings.hero.subtitleAr
                 : isFr
@@ -168,7 +168,7 @@ export default async function NewsPage(props: { params: Promise<{ locale: string
             </p>
 
             {/* Description */}
-            <p className="text-xs sm:text-sm text-[#445457] max-w-2xl mx-auto leading-relaxed font-normal">
+            <p className="text-xs sm:text-sm text-[#5C5A55] max-w-2xl mx-auto leading-relaxed font-normal">
               {isAr
                 ? pageSettings.hero.descriptionAr
                 : isFr
@@ -180,7 +180,7 @@ export default async function NewsPage(props: { params: Promise<{ locale: string
             <div className="pt-2">
               <Link
                 href={pageSettings.hero.primaryBtnUrl || '#news-catalog'}
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl font-black text-xs sm:text-sm text-white bg-[#0d3b43] hover:bg-[#14505b] active:scale-98 transition-all shadow-md hover:shadow-lg"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl font-black text-xs sm:text-sm text-white bg-[#231f20] hover:bg-[#d2a82b] active:scale-98 transition-all shadow-md hover:shadow-lg"
               >
                 <span>📰</span>
                 <span>
@@ -221,19 +221,19 @@ export default async function NewsPage(props: { params: Promise<{ locale: string
             {pageSettings.stats.map((stat) => (
               <div
                 key={stat.id}
-                className="luxury-card p-5 sm:p-6 text-center flex flex-col justify-between items-center group bg-white shadow-card border border-[#e5e0d6] hover:border-[#c85a32]/40 transition-all rounded-2xl"
+                className="luxury-card p-5 sm:p-6 text-center flex flex-col justify-between items-center group bg-white shadow-card border border-[#e5e0d6] hover:border-[#bd3227]/40 transition-all rounded-2xl"
               >
-                <div className="w-12 h-12 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6] flex items-center justify-center p-2 mb-3 shadow-2xs group-hover:scale-110 transition-transform overflow-hidden text-2xl">
+                <div className="w-12 h-12 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6] flex items-center justify-center p-2 mb-3 shadow-2xs group-hover:scale-110 transition-transform overflow-hidden text-2xl">
                   {stat.icon}
                 </div>
-                <div className="text-3xl sm:text-4xl font-black text-[#08242a] mb-1 tracking-tight">
+                <div className="text-3xl sm:text-4xl font-black text-[#231f20] mb-1 tracking-tight">
                   {isAr
                     ? (stat.valueAr || stat.value)
                     : isFr
                     ? (stat.valueFr || stat.value)
                     : (stat.valueEn || stat.value)}
                 </div>
-                <div className="text-xs sm:text-sm font-bold text-[#5f7174] leading-snug">
+                <div className="text-xs sm:text-sm font-bold text-[#5C5A55] leading-snug">
                   {isAr ? stat.labelAr : isFr ? stat.labelFr : stat.labelEn}
                 </div>
               </div>
@@ -257,11 +257,11 @@ export default async function NewsPage(props: { params: Promise<{ locale: string
         {/* ========================================================= */}
         <section className="py-20 bg-white border-t border-[#e5e0d6] relative overflow-hidden">
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="relative rounded-3xl overflow-hidden bg-gradient-to-r from-[#0d3b43] via-[#0f4650] to-[#08242a] text-white p-8 sm:p-12 lg:p-14 shadow-card text-center space-y-6">
+            <div className="relative rounded-3xl overflow-hidden bg-gradient-to-r from-[#231f20] via-[#231f20] to-[#231f20] text-white p-8 sm:p-12 lg:p-14 shadow-card text-center space-y-6">
               <div className="absolute inset-0 moroccan-pattern-dark opacity-20 pointer-events-none" aria-hidden="true" />
               
               <div className="relative z-10 space-y-4 max-w-3xl mx-auto">
-                <span className="inline-block text-3xs sm:text-2xs font-extrabold uppercase tracking-widest text-[#e5a085] px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15">
+                <span className="inline-block text-3xs sm:text-2xs font-extrabold uppercase tracking-widest text-[#fce4e3] px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15">
                   {isAr ? pageSettings.cta.badgeAr : isFr ? pageSettings.cta.badgeFr : pageSettings.cta.badgeEn}
                 </span>
 
@@ -276,7 +276,7 @@ export default async function NewsPage(props: { params: Promise<{ locale: string
                 <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-3">
                   <Link
                     href={pageSettings.cta.primaryBtnUrl || '/contact'}
-                    className="w-full sm:w-auto px-6 py-3 rounded-xl font-black text-xs text-[#08242a] bg-white hover:bg-[#faf7f2] active:scale-98 transition-all shadow-md flex items-center justify-center gap-2"
+                    className="w-full sm:w-auto px-6 py-3 rounded-xl font-black text-xs text-[#231f20] bg-white hover:bg-[#F5F3EE] active:scale-98 transition-all shadow-md flex items-center justify-center gap-2"
                   >
                     <span>🎙️</span>
                     <span>

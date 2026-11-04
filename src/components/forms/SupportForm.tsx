@@ -65,13 +65,13 @@ export function SupportForm({ locale }: { locale: string }) {
 
       {/* Support Type */}
       <div>
-        <label className="block text-2xs font-bold uppercase tracking-wider text-[#08242a] mb-2">
+        <label className="block text-2xs font-bold uppercase tracking-wider text-[#231f20] mb-2">
           {isAr ? 'نوع الدعم أو المساهمة المقترحة *' : isFr ? 'Type de soutien ou contribution *' : 'Type of Support *'}
         </label>
         <select
           name="supportType"
           required
-          className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] text-xs text-[#08242a] bg-[#faf7f2] font-semibold focus:border-[#0d3b43] outline-none"
+          className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] text-xs text-[#231f20] bg-[#F5F3EE] font-semibold focus:border-[#231f20] outline-none"
         >
           <option value="financial">
             {isAr
@@ -114,14 +114,14 @@ export function SupportForm({ locale }: { locale: string }) {
       {/* Donor / Organization Name & Email */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <div>
-          <label className="block text-2xs font-bold uppercase tracking-wider text-[#08242a] mb-2">
+          <label className="block text-2xs font-bold uppercase tracking-wider text-[#231f20] mb-2">
             {isAr ? 'اسم الداعم أو المؤسسة *' : isFr ? 'Nom du donateur / Organisme *' : 'Name of Supporter / Org *'}
           </label>
           <input
             type="text"
             name="donorName"
             required
-            className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] text-xs text-[#08242a] focus:border-[#0d3b43] focus:ring-1 focus:ring-[#0d3b43] outline-none"
+            className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] text-xs text-[#231f20] focus:border-[#231f20] focus:ring-1 focus:ring-[#231f20] outline-none"
             placeholder={
               isAr
                 ? 'الاسم الشخصي أو اسم المؤسسة'
@@ -136,14 +136,14 @@ export function SupportForm({ locale }: { locale: string }) {
         </div>
 
         <div>
-          <label className="block text-2xs font-bold uppercase tracking-wider text-[#08242a] mb-2">
+          <label className="block text-2xs font-bold uppercase tracking-wider text-[#231f20] mb-2">
             {isAr ? 'البريد الإلكتروني *' : isFr ? 'Adresse e-mail *' : 'Email Address *'}
           </label>
           <input
             type="email"
             name="email"
             required
-            className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] text-xs text-[#08242a] focus:border-[#0d3b43] focus:ring-1 focus:ring-[#0d3b43] outline-none"
+            className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] text-xs text-[#231f20] focus:border-[#231f20] focus:ring-1 focus:ring-[#231f20] outline-none"
             placeholder="name@example.com"
           />
           {result?.errors?.email && (
@@ -155,25 +155,25 @@ export function SupportForm({ locale }: { locale: string }) {
       {/* Phone & City */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <div>
-          <label className="block text-2xs font-bold uppercase tracking-wider text-[#08242a] mb-2">
+          <label className="block text-2xs font-bold uppercase tracking-wider text-[#231f20] mb-2">
             {isAr ? 'رقم الهاتف' : isFr ? 'Téléphone' : 'Phone'}
           </label>
           <input
             type="tel"
             name="phone"
-            className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] text-xs text-[#08242a] focus:border-[#0d3b43] focus:ring-1 focus:ring-[#0d3b43] outline-none"
+            className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] text-xs text-[#231f20] focus:border-[#231f20] focus:ring-1 focus:ring-[#231f20] outline-none"
             placeholder="+212 6..."
           />
         </div>
 
         <div>
-          <label className="block text-2xs font-bold uppercase tracking-wider text-[#08242a] mb-2">
+          <label className="block text-2xs font-bold uppercase tracking-wider text-[#231f20] mb-2">
             {isAr ? 'المدينة / الدولة' : isFr ? 'Ville / Pays' : 'City / Country'}
           </label>
           <input
             type="text"
             name="city"
-            className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] text-xs text-[#08242a] focus:border-[#0d3b43] focus:ring-1 focus:ring-[#0d3b43] outline-none"
+            className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] text-xs text-[#231f20] focus:border-[#231f20] focus:ring-1 focus:ring-[#231f20] outline-none"
             placeholder={isAr ? 'مثال: الرباط، المغرب' : isFr ? 'Ex : Rabat, Maroc' : 'e.g. Rabat, Morocco'}
           />
         </div>
@@ -181,7 +181,7 @@ export function SupportForm({ locale }: { locale: string }) {
 
       {/* Message & Scope of Support */}
       <div>
-        <label className="block text-2xs font-bold uppercase tracking-wider text-[#08242a] mb-2">
+        <label className="block text-2xs font-bold uppercase tracking-wider text-[#231f20] mb-2">
           {isAr
             ? 'تفاصيل المبادرة أو المساهمة المقترحة *'
             : isFr
@@ -192,7 +192,7 @@ export function SupportForm({ locale }: { locale: string }) {
           name="message"
           required
           rows={4}
-          className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] text-xs text-[#08242a] focus:border-[#0d3b43] focus:ring-1 focus:ring-[#0d3b43] outline-none"
+          className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] text-xs text-[#231f20] focus:border-[#231f20] focus:ring-1 focus:ring-[#231f20] outline-none"
           placeholder={
             isAr
               ? 'وضح طبيعة الدعم، القيمة التقديرية، أو الكيفية التي ترغب بالمساهمة بها...'
@@ -209,7 +209,7 @@ export function SupportForm({ locale }: { locale: string }) {
       <button
         type="submit"
         disabled={loading}
-        className="w-full py-3.5 px-6 rounded-xl font-bold text-white bg-[#0d3b43] hover:bg-[#14505b] disabled:opacity-60 transition-all text-xs shadow-md active:scale-98"
+        className="w-full py-3.5 px-6 rounded-xl font-bold text-white bg-[#231f20] hover:bg-[#d2a82b] disabled:opacity-60 transition-all text-xs shadow-md active:scale-98"
       >
         {loading
           ? isAr

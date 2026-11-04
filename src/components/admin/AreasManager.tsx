@@ -88,8 +88,8 @@ export function AreasManager({ initialConfig, defaultItems = [] }: AreasManagerP
       initiativesAr: [],
       actionLabelAr: 'اعرف أكثر',
       actionUrl: '/programs',
-      accent: 'border-[#0d3b43]/30 text-[#0d3b43]',
-      bgGlow: 'from-[#d8f0f4]/40 to-transparent',
+      accent: 'border-[#231f20]/30 text-[#231f20]',
+      bgGlow: 'from-[#FEF6CC]/40 to-transparent',
       order: config.items.length + 1,
       enabled: true,
       showInitiatives: true,
@@ -132,8 +132,8 @@ export function AreasManager({ initialConfig, defaultItems = [] }: AreasManagerP
       actionLabelFr: modalForm.actionLabelFr || 'En savoir plus',
       actionLabelEn: modalForm.actionLabelEn || 'Learn More',
       actionUrl: modalForm.actionUrl || '/programs',
-      accent: modalForm.accent || 'border-[#0d3b43]/30 text-[#0d3b43]',
-      bgGlow: modalForm.bgGlow || 'from-[#d8f0f4]/40 to-transparent',
+      accent: modalForm.accent || 'border-[#231f20]/30 text-[#231f20]',
+      bgGlow: modalForm.bgGlow || 'from-[#FEF6CC]/40 to-transparent',
       order: modalForm.order || config.items.length + 1,
       enabled: modalForm.enabled ?? true,
       showInitiatives: modalForm.showInitiatives !== false,
@@ -292,11 +292,11 @@ export function AreasManager({ initialConfig, defaultItems = [] }: AreasManagerP
           <div>
             <div className="flex items-center gap-2">
               <span className="text-xl">🎯</span>
-              <h2 className="text-lg font-black text-[#08242a]">
+              <h2 className="text-lg font-black text-[#231f20]">
                 إدارة مجالات التدخل الستة ومحتوى النوافذ المنبثقة (Areas CMS)
               </h2>
             </div>
-            <p className="text-xs text-[#5f7174] mt-1">
+            <p className="text-xs text-[#5C5A55] mt-1">
               تحكم كامل في نصوص البطاقات الستة ومحتوى النافذة التفاعلية (الأهداف، الورشات، والشارات) في الواجهة الرئيسية.
             </p>
           </div>
@@ -305,7 +305,7 @@ export function AreasManager({ initialConfig, defaultItems = [] }: AreasManagerP
             <button
               type="button"
               onClick={() => setShowSectionSettings(!showSectionSettings)}
-              className="px-3.5 py-2.5 rounded-xl text-3xs font-bold text-[#0d3b43] bg-[#faf7f2] border border-[#e5e0d6] hover:bg-[#f0ebe1] active:scale-98 transition-all cursor-pointer inline-flex items-center gap-1.5"
+              className="px-3.5 py-2.5 rounded-xl text-3xs font-bold text-[#231f20] bg-[#F5F3EE] border border-[#e5e0d6] hover:bg-[#FEF6CC] active:scale-98 transition-all cursor-pointer inline-flex items-center gap-1.5"
             >
               <span>⚙️</span>
               <span>{showSectionSettings ? 'إخفاء نصوص القسم' : 'تعديل نصوص القسم'}</span>
@@ -314,9 +314,9 @@ export function AreasManager({ initialConfig, defaultItems = [] }: AreasManagerP
             <button
               type="button"
               onClick={handleAddNew}
-              className="px-4 py-2.5 rounded-xl font-bold text-white bg-[#0d3b43] hover:bg-[#14505b] active:scale-98 transition-all text-xs inline-flex items-center gap-2 shadow-2xs cursor-pointer"
+              className="px-4 py-2.5 rounded-xl font-bold text-white bg-[#231f20] hover:bg-[#d2a82b] active:scale-98 transition-all text-xs inline-flex items-center gap-2 shadow-2xs cursor-pointer"
             >
-              <svg className="w-4 h-4 text-[#f4ce83]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+              <svg className="w-4 h-4 text-[#ffd22f]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
               </svg>
               <span>إضافة مجال جديد</span>
@@ -325,7 +325,7 @@ export function AreasManager({ initialConfig, defaultItems = [] }: AreasManagerP
             <button
               type="button"
               onClick={handleRestoreDefaults}
-              className="px-3.5 py-2.5 rounded-xl text-3xs font-bold text-[#5f7174] bg-[#faf7f2] border border-[#e5e0d6] hover:bg-[#f0ebe1] active:scale-98 transition-all cursor-pointer"
+              className="px-3.5 py-2.5 rounded-xl text-3xs font-bold text-[#5C5A55] bg-[#F5F3EE] border border-[#e5e0d6] hover:bg-[#FEF6CC] active:scale-98 transition-all cursor-pointer"
               title="استعادة مجالات الجمعية الرسمية"
             >
               استعادة الافتراضي
@@ -337,8 +337,8 @@ export function AreasManager({ initialConfig, defaultItems = [] }: AreasManagerP
               disabled={saving}
               className={`px-5 py-2.5 rounded-xl font-black text-xs inline-flex items-center gap-2 transition-all shadow-md cursor-pointer disabled:opacity-60 ${
                 hasUnsavedChanges
-                  ? 'bg-[#c85a32] hover:bg-[#a84420] text-white animate-pulse'
-                  : 'bg-[#08242a] hover:bg-[#0d3b43] text-white'
+                  ? 'bg-[#bd3227] hover:bg-[#a3261c] text-white animate-pulse'
+                  : 'bg-[#231f20] hover:bg-[#231f20] text-white'
               }`}
             >
               {saving ? (
@@ -360,24 +360,24 @@ export function AreasManager({ initialConfig, defaultItems = [] }: AreasManagerP
         </div>
 
         {/* Status Indicators */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-3 border-t border-[#f0ebe1]">
-          <div className="p-3 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6]">
-            <span className="text-3xs font-bold text-[#819598] block">إجمالي المجالات</span>
-            <span className="text-xl font-black text-[#08242a]">{config.items.length}</span>
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-3 border-t border-[#FEF6CC]">
+          <div className="p-3 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6]">
+            <span className="text-3xs font-bold text-[#5C5A55] block">إجمالي المجالات</span>
+            <span className="text-xl font-black text-[#231f20]">{config.items.length}</span>
           </div>
-          <div className="p-3 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6]">
-            <span className="text-3xs font-bold text-[#819598] block">مفعلة بالرئيسية</span>
+          <div className="p-3 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6]">
+            <span className="text-3xs font-bold text-[#5C5A55] block">مفعلة بالرئيسية</span>
             <span className="text-xl font-black text-emerald-700">
               {config.items.filter((i) => i.enabled).length}
             </span>
           </div>
-          <div className="p-3 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6]">
-            <span className="text-3xs font-bold text-[#819598] block">محتوى النوافذ</span>
-            <span className="text-xs font-bold text-[#0d3b43] block mt-1">✓ نوافذ تفاعلية منبثقة</span>
+          <div className="p-3 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6]">
+            <span className="text-3xs font-bold text-[#5C5A55] block">محتوى النوافذ</span>
+            <span className="text-xs font-bold text-[#231f20] block mt-1">✓ نوافذ تفاعلية منبثقة</span>
           </div>
-          <div className="p-3 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6]">
-            <span className="text-3xs font-bold text-[#819598] block">حالة التعديلات</span>
-            <span className={`text-xs font-bold block mt-1 ${hasUnsavedChanges ? 'text-[#c85a32]' : 'text-emerald-700'}`}>
+          <div className="p-3 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6]">
+            <span className="text-3xs font-bold text-[#5C5A55] block">حالة التعديلات</span>
+            <span className={`text-xs font-bold block mt-1 ${hasUnsavedChanges ? 'text-[#bd3227]' : 'text-emerald-700'}`}>
               {hasUnsavedChanges ? '⚠️ تعديلات غير محفوظة' : '✓ كافة التغييرات محفوظة'}
             </span>
           </div>
@@ -399,16 +399,16 @@ export function AreasManager({ initialConfig, defaultItems = [] }: AreasManagerP
       {/* Section Header Settings Collapsible Box */}
       {showSectionSettings && (
         <div className="bg-white rounded-3xl border border-[#e5e0d6] p-6 shadow-xs space-y-4 animate-in fade-in duration-150">
-          <div className="flex items-center justify-between pb-2 border-b border-[#f0ebe1]">
-            <h3 className="text-xs font-bold uppercase tracking-wider text-[#08242a]">
+          <div className="flex items-center justify-between pb-2 border-b border-[#FEF6CC]">
+            <h3 className="text-xs font-bold uppercase tracking-wider text-[#231f20]">
               نصوص الترويسة لقسم مجالات النشاط بالصفحة الرئيسية
             </h3>
-            <span className="text-3xs text-[#819598]">تظهر في أعلى القسم لجميع الزوار</span>
+            <span className="text-3xs text-[#5C5A55]">تظهر في أعلى القسم لجميع الزوار</span>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div>
-              <label className="block text-3xs font-bold text-[#5f7174] mb-1">
+              <label className="block text-3xs font-bold text-[#5C5A55] mb-1">
                 الشارة العلوية بالعربية (Eyebrow AR)
               </label>
               <input
@@ -418,11 +418,11 @@ export function AreasManager({ initialConfig, defaultItems = [] }: AreasManagerP
                   setConfig({ ...config, eyebrowAr: e.target.value })
                   setHasUnsavedChanges(true)
                 }}
-                className="w-full px-3 py-2 text-xs rounded-xl border border-[#e5e0d6] focus:border-[#0d3b43] outline-none"
+                className="w-full px-3 py-2 text-xs rounded-xl border border-[#e5e0d6] focus:border-[#231f20] outline-none"
               />
             </div>
             <div>
-              <label className="block text-3xs font-bold text-[#5f7174] mb-1">
+              <label className="block text-3xs font-bold text-[#5C5A55] mb-1">
                 العنوان الرئيسي بالعربية (Title AR)
               </label>
               <input
@@ -432,11 +432,11 @@ export function AreasManager({ initialConfig, defaultItems = [] }: AreasManagerP
                   setConfig({ ...config, sectionTitleAr: e.target.value })
                   setHasUnsavedChanges(true)
                 }}
-                className="w-full px-3 py-2 text-xs rounded-xl border border-[#e5e0d6] focus:border-[#0d3b43] outline-none"
+                className="w-full px-3 py-2 text-xs rounded-xl border border-[#e5e0d6] focus:border-[#231f20] outline-none"
               />
             </div>
             <div>
-              <label className="block text-3xs font-bold text-[#5f7174] mb-1">
+              <label className="block text-3xs font-bold text-[#5C5A55] mb-1">
                 الوصف التوضيحي بالعربية (Subtitle AR)
               </label>
               <input
@@ -446,19 +446,19 @@ export function AreasManager({ initialConfig, defaultItems = [] }: AreasManagerP
                   setConfig({ ...config, sectionSubtitleAr: e.target.value })
                   setHasUnsavedChanges(true)
                 }}
-                className="w-full px-3 py-2 text-xs rounded-xl border border-[#e5e0d6] focus:border-[#0d3b43] outline-none"
+                className="w-full px-3 py-2 text-xs rounded-xl border border-[#e5e0d6] focus:border-[#231f20] outline-none"
               />
             </div>
           </div>
 
           {/* Global Workshops Visibility Switch */}
-          <div className="p-3.5 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6] flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div className="p-3.5 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6] flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div className="space-y-0.5">
-              <span className="text-xs font-bold text-[#08242a] flex items-center gap-1.5">
+              <span className="text-xs font-bold text-[#231f20] flex items-center gap-1.5">
                 <span>✨</span>
                 <span>إظهار قسم البرامج والورشات في كافة المجالات (تحكم عام)</span>
               </span>
-              <span className="text-3xs text-[#819598] block">
+              <span className="text-3xs text-[#5C5A55] block">
                 تفعيل أو تعطيل ظهور قسم &quot;أبرز البرامج والورشات الميدانية&quot; بالنوافذ المنبثقة لجميع مجالات التدخل دفعة واحدة
               </span>
             </div>
@@ -500,7 +500,7 @@ export function AreasManager({ initialConfig, defaultItems = [] }: AreasManagerP
                     type="button"
                     onClick={() => moveItem(index, 'up')}
                     disabled={index === 0}
-                    className="w-6 h-6 rounded-md bg-[#faf7f2] hover:bg-[#e5e0d6] disabled:opacity-30 disabled:pointer-events-none flex items-center justify-center text-3xs font-bold text-[#08242a] cursor-pointer"
+                    className="w-6 h-6 rounded-md bg-[#F5F3EE] hover:bg-[#e5e0d6] disabled:opacity-30 disabled:pointer-events-none flex items-center justify-center text-3xs font-bold text-[#231f20] cursor-pointer"
                     title="تحريك لأعلى"
                   >
                     ▲
@@ -509,14 +509,14 @@ export function AreasManager({ initialConfig, defaultItems = [] }: AreasManagerP
                     type="button"
                     onClick={() => moveItem(index, 'down')}
                     disabled={index === config.items.length - 1}
-                    className="w-6 h-6 rounded-md bg-[#faf7f2] hover:bg-[#e5e0d6] disabled:opacity-30 disabled:pointer-events-none flex items-center justify-center text-3xs font-bold text-[#08242a] cursor-pointer"
+                    className="w-6 h-6 rounded-md bg-[#F5F3EE] hover:bg-[#e5e0d6] disabled:opacity-30 disabled:pointer-events-none flex items-center justify-center text-3xs font-bold text-[#231f20] cursor-pointer"
                     title="تحريك لأسفل"
                   >
                     ▼
                   </button>
                 </div>
 
-                <span className="w-9 h-9 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6] flex items-center justify-center text-xs font-black text-[#0d3b43]">
+                <span className="w-9 h-9 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6] flex items-center justify-center text-xs font-black text-[#231f20]">
                   #{area.order}
                 </span>
 
@@ -528,7 +528,7 @@ export function AreasManager({ initialConfig, defaultItems = [] }: AreasManagerP
               {/* Area Content Preview */}
               <div className="flex-1 space-y-2">
                 <div className="flex flex-wrap items-center gap-2">
-                  <span className={`px-2.5 py-0.5 rounded-full text-4xs font-black border bg-white ${area.accent || 'text-[#0d3b43]'}`}>
+                  <span className={`px-2.5 py-0.5 rounded-full text-4xs font-black border bg-white ${area.accent || 'text-[#231f20]'}`}>
                     {area.tagAr}
                   </span>
 
@@ -557,33 +557,33 @@ export function AreasManager({ initialConfig, defaultItems = [] }: AreasManagerP
                     {area.showInitiatives !== false ? '✨ الورشات: معروضة بالنافذة' : '✨ الورشات: مخفية من النافذة'}
                   </button>
 
-                  <span className="text-4xs text-[#819598] font-mono">
+                  <span className="text-4xs text-[#5C5A55] font-mono">
                     key: {area.key}
                   </span>
                 </div>
 
-                <h3 className="text-base font-black text-[#08242a]">
+                <h3 className="text-base font-black text-[#231f20]">
                   {area.titleAr}
                 </h3>
 
-                <p className="text-xs text-[#5f7174] leading-relaxed">
+                <p className="text-xs text-[#5C5A55] leading-relaxed">
                   {area.descAr}
                 </p>
 
                 {/* Modal details summary badges */}
-                <div className="pt-2 flex flex-wrap items-center gap-3 text-3xs text-[#819598]">
-                  <span className="px-2 py-0.5 rounded-md bg-[#faf7f2] border border-[#e5e0d6] text-[#0d3b43] font-bold">
+                <div className="pt-2 flex flex-wrap items-center gap-3 text-3xs text-[#5C5A55]">
+                  <span className="px-2 py-0.5 rounded-md bg-[#F5F3EE] border border-[#e5e0d6] text-[#231f20] font-bold">
                     🎯 {area.objectivesAr?.length || 0} أهداف استراتيجية
                   </span>
                   <span className={`px-2 py-0.5 rounded-md border font-bold ${
                     area.showInitiatives !== false
-                      ? 'bg-amber-50/70 border-amber-200 text-[#c85a32]'
+                      ? 'bg-amber-50/70 border-amber-200 text-[#bd3227]'
                       : 'bg-gray-100 border-gray-200 text-gray-400 line-through'
                   }`}>
                     ✨ {area.initiativesAr?.length || 0} ورشات وبرامج {area.showInitiatives === false ? '(مخفية)' : ''}
                   </span>
                   <span>•</span>
-                  <span>رابط الزر: <code className="font-mono text-[#08242a]">{area.actionUrl}</code></span>
+                  <span>رابط الزر: <code className="font-mono text-[#231f20]">{area.actionUrl}</code></span>
                 </div>
               </div>
 
@@ -592,7 +592,7 @@ export function AreasManager({ initialConfig, defaultItems = [] }: AreasManagerP
                 <button
                   type="button"
                   onClick={() => handleEdit(area)}
-                  className="px-4 py-2 rounded-xl text-xs font-bold bg-[#faf7f2] border border-[#e5e0d6] hover:bg-[#0d3b43] hover:text-white transition-all text-[#08242a] cursor-pointer inline-flex items-center gap-1.5 shadow-2xs"
+                  className="px-4 py-2 rounded-xl text-xs font-bold bg-[#F5F3EE] border border-[#e5e0d6] hover:bg-[#231f20] hover:text-white transition-all text-[#231f20] cursor-pointer inline-flex items-center gap-1.5 shadow-2xs"
                 >
                   <span>✏️</span>
                   <span>تعديل المجال والنافذة</span>
@@ -618,34 +618,34 @@ export function AreasManager({ initialConfig, defaultItems = [] }: AreasManagerP
       {isModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs overflow-y-auto">
           <div className="bg-white rounded-3xl border border-[#e5e0d6] w-full max-w-3xl max-h-[90vh] overflow-y-auto p-6 sm:p-8 shadow-2xl space-y-6 my-8">
-            <div className="flex items-center justify-between pb-3 border-b border-[#f0ebe1]">
+            <div className="flex items-center justify-between pb-3 border-b border-[#FEF6CC]">
               <div className="flex items-center gap-2.5">
                 <span className="text-2xl">{modalForm.icon || '🎯'}</span>
                 <div>
-                  <h3 className="text-base font-black text-[#08242a]">
+                  <h3 className="text-base font-black text-[#231f20]">
                     {editingArea ? `تعديل مجال: ${modalForm.titleAr || editingArea.titleAr}` : 'إضافة مجال تدخل جديد'}
                   </h3>
-                  <span className="text-3xs text-[#819598]">تخصيص بيانات البطاقة ومحتوى النافذة المنبثقة التفصيلية</span>
+                  <span className="text-3xs text-[#5C5A55]">تخصيص بيانات البطاقة ومحتوى النافذة المنبثقة التفصيلية</span>
                 </div>
               </div>
               <button
                 type="button"
                 onClick={() => setIsModalOpen(false)}
-                className="w-8 h-8 rounded-full bg-[#faf7f2] text-[#819598] hover:text-[#08242a] flex items-center justify-center font-bold text-sm cursor-pointer"
+                className="w-8 h-8 rounded-full bg-[#F5F3EE] text-[#5C5A55] hover:text-[#231f20] flex items-center justify-center font-bold text-sm cursor-pointer"
               >
                 ✕
               </button>
             </div>
 
             {/* Navigation Tabs inside modal */}
-            <div className="flex items-center gap-2 border-b border-[#f0ebe1] pb-2">
+            <div className="flex items-center gap-2 border-b border-[#FEF6CC] pb-2">
               <button
                 type="button"
                 onClick={() => setModalTab('card')}
                 className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                   modalTab === 'card'
-                    ? 'bg-[#0d3b43] text-white shadow-2xs'
-                    : 'bg-[#faf7f2] text-[#5f7174] hover:bg-[#f0ebe1]'
+                    ? 'bg-[#231f20] text-white shadow-2xs'
+                    : 'bg-[#F5F3EE] text-[#5C5A55] hover:bg-[#FEF6CC]'
                 }`}
               >
                 1. بطاقة العرض بالرئيسية (Card Basics)
@@ -655,8 +655,8 @@ export function AreasManager({ initialConfig, defaultItems = [] }: AreasManagerP
                 onClick={() => setModalTab('modal')}
                 className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                   modalTab === 'modal'
-                    ? 'bg-[#0d3b43] text-white shadow-2xs'
-                    : 'bg-[#faf7f2] text-[#5f7174] hover:bg-[#f0ebe1]'
+                    ? 'bg-[#231f20] text-white shadow-2xs'
+                    : 'bg-[#F5F3EE] text-[#5C5A55] hover:bg-[#FEF6CC]'
                 }`}
               >
                 2. محتوى النافذة المنبثقة (Popup Modal Content)
@@ -667,9 +667,9 @@ export function AreasManager({ initialConfig, defaultItems = [] }: AreasManagerP
               {/* TAB 1: CARD BASICS */}
               {modalTab === 'card' && (
                 <div className="space-y-4 animate-in fade-in duration-150">
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 p-3.5 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6]">
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 p-3.5 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6]">
                     <div>
-                      <label className="block text-3xs font-bold text-[#445457] mb-1">
+                      <label className="block text-3xs font-bold text-[#5C5A55] mb-1">
                         أيقونة Emoji
                       </label>
                       <input
@@ -681,7 +681,7 @@ export function AreasManager({ initialConfig, defaultItems = [] }: AreasManagerP
                       />
                     </div>
                     <div>
-                      <label className="block text-3xs font-bold text-[#445457] mb-1">
+                      <label className="block text-3xs font-bold text-[#5C5A55] mb-1">
                         مسار أيقونة PNG
                       </label>
                       <input
@@ -701,7 +701,7 @@ export function AreasManager({ initialConfig, defaultItems = [] }: AreasManagerP
                         onChange={(e) => setModalForm({ ...modalForm, enabled: e.target.checked })}
                         className="w-4 h-4 rounded text-emerald-600 focus:ring-emerald-600"
                       />
-                      <label htmlFor="areaModalEnabled" className="text-3xs font-bold text-[#445457] cursor-pointer">
+                      <label htmlFor="areaModalEnabled" className="text-3xs font-bold text-[#5C5A55] cursor-pointer">
                         تفعيل وعرض في الصفحة الرئيسية
                       </label>
                     </div>
@@ -714,7 +714,7 @@ export function AreasManager({ initialConfig, defaultItems = [] }: AreasManagerP
                     </span>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       <div>
-                        <label className="block text-3xs font-bold text-[#445457] mb-1">
+                        <label className="block text-3xs font-bold text-[#5C5A55] mb-1">
                           عنوان المجال *
                         </label>
                         <input
@@ -723,11 +723,11 @@ export function AreasManager({ initialConfig, defaultItems = [] }: AreasManagerP
                           value={modalForm.titleAr || ''}
                           onChange={(e) => setModalForm({ ...modalForm, titleAr: e.target.value })}
                           placeholder="مثال: الفنون والإبداع"
-                          className="w-full px-3 py-2 text-xs rounded-xl border border-[#e5e0d6] bg-white outline-none focus:border-[#0d3b43]"
+                          className="w-full px-3 py-2 text-xs rounded-xl border border-[#e5e0d6] bg-white outline-none focus:border-[#231f20]"
                         />
                       </div>
                       <div>
-                        <label className="block text-3xs font-bold text-[#445457] mb-1">
+                        <label className="block text-3xs font-bold text-[#5C5A55] mb-1">
                           شارة التصنيف (Tag) *
                         </label>
                         <input
@@ -736,12 +736,12 @@ export function AreasManager({ initialConfig, defaultItems = [] }: AreasManagerP
                           value={modalForm.tagAr || ''}
                           onChange={(e) => setModalForm({ ...modalForm, tagAr: e.target.value })}
                           placeholder="مثال: محترفات تشكيلية ومعارض"
-                          className="w-full px-3 py-2 text-xs rounded-xl border border-[#e5e0d6] bg-white outline-none focus:border-[#0d3b43]"
+                          className="w-full px-3 py-2 text-xs rounded-xl border border-[#e5e0d6] bg-white outline-none focus:border-[#231f20]"
                         />
                       </div>
                     </div>
                     <div>
-                      <label className="block text-3xs font-bold text-[#445457] mb-1">
+                      <label className="block text-3xs font-bold text-[#5C5A55] mb-1">
                         الوصف المختصر بالبطاقة *
                       </label>
                       <textarea
@@ -750,19 +750,19 @@ export function AreasManager({ initialConfig, defaultItems = [] }: AreasManagerP
                         value={modalForm.descAr || ''}
                         onChange={(e) => setModalForm({ ...modalForm, descAr: e.target.value })}
                         placeholder="اكتب نبذة موجزة تظهر في البطاقة الرئيسية..."
-                        className="w-full px-3 py-2 text-xs rounded-xl border border-[#e5e0d6] bg-white outline-none focus:border-[#0d3b43] leading-relaxed"
+                        className="w-full px-3 py-2 text-xs rounded-xl border border-[#e5e0d6] bg-white outline-none focus:border-[#231f20] leading-relaxed"
                       />
                     </div>
                   </div>
 
                   {/* French Translation */}
-                  <div className="p-4 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6] space-y-3">
-                    <span className="text-xs font-bold text-[#0d3b43] block">
+                  <div className="p-4 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6] space-y-3">
+                    <span className="text-xs font-bold text-[#231f20] block">
                       🇫🇷 الترجمة بالفرنسية (Français)
                     </span>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       <div>
-                        <label className="block text-3xs font-bold text-[#445457] mb-1">
+                        <label className="block text-3xs font-bold text-[#5C5A55] mb-1">
                           Titre en Français
                         </label>
                         <input
@@ -775,7 +775,7 @@ export function AreasManager({ initialConfig, defaultItems = [] }: AreasManagerP
                         />
                       </div>
                       <div>
-                        <label className="block text-3xs font-bold text-[#445457] mb-1">
+                        <label className="block text-3xs font-bold text-[#5C5A55] mb-1">
                           Tag / Catégorie
                         </label>
                         <input
@@ -789,7 +789,7 @@ export function AreasManager({ initialConfig, defaultItems = [] }: AreasManagerP
                       </div>
                     </div>
                     <div>
-                      <label className="block text-3xs font-bold text-[#445457] mb-1">
+                      <label className="block text-3xs font-bold text-[#5C5A55] mb-1">
                         Description courte
                       </label>
                       <textarea
@@ -804,13 +804,13 @@ export function AreasManager({ initialConfig, defaultItems = [] }: AreasManagerP
                   </div>
 
                   {/* English Translation */}
-                  <div className="p-4 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6] space-y-3">
-                    <span className="text-xs font-bold text-[#0d3b43] block">
+                  <div className="p-4 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6] space-y-3">
+                    <span className="text-xs font-bold text-[#231f20] block">
                       🇬🇧 الترجمة بالإنجليزية (English)
                     </span>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       <div>
-                        <label className="block text-3xs font-bold text-[#445457] mb-1">
+                        <label className="block text-3xs font-bold text-[#5C5A55] mb-1">
                           Title in English
                         </label>
                         <input
@@ -823,7 +823,7 @@ export function AreasManager({ initialConfig, defaultItems = [] }: AreasManagerP
                         />
                       </div>
                       <div>
-                        <label className="block text-3xs font-bold text-[#445457] mb-1">
+                        <label className="block text-3xs font-bold text-[#5C5A55] mb-1">
                           Tag / Category
                         </label>
                         <input
@@ -837,7 +837,7 @@ export function AreasManager({ initialConfig, defaultItems = [] }: AreasManagerP
                       </div>
                     </div>
                     <div>
-                      <label className="block text-3xs font-bold text-[#445457] mb-1">
+                      <label className="block text-3xs font-bold text-[#5C5A55] mb-1">
                         Short Description
                       </label>
                       <textarea
@@ -852,9 +852,9 @@ export function AreasManager({ initialConfig, defaultItems = [] }: AreasManagerP
                   </div>
 
                   {/* Action Link */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 p-3.5 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6]">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 p-3.5 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6]">
                     <div>
-                      <label className="block text-3xs font-bold text-[#445457] mb-1">
+                      <label className="block text-3xs font-bold text-[#5C5A55] mb-1">
                         نص الزر التوجيهي (Action Button Label)
                       </label>
                       <input
@@ -866,7 +866,7 @@ export function AreasManager({ initialConfig, defaultItems = [] }: AreasManagerP
                       />
                     </div>
                     <div>
-                      <label className="block text-3xs font-bold text-[#445457] mb-1">
+                      <label className="block text-3xs font-bold text-[#5C5A55] mb-1">
                         رابط التوجيه (Action URL)
                       </label>
                       <input
@@ -886,8 +886,8 @@ export function AreasManager({ initialConfig, defaultItems = [] }: AreasManagerP
               {modalTab === 'modal' && (
                 <div className="space-y-5 animate-in fade-in duration-150">
                   {/* Headline / Vision */}
-                  <div className="p-4 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6] space-y-3">
-                    <label className="block text-xs font-bold text-[#08242a]">
+                  <div className="p-4 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6] space-y-3">
+                    <label className="block text-xs font-bold text-[#231f20]">
                       الرؤية والهدف العريض (Modal Headline)
                     </label>
                     <input
@@ -895,7 +895,7 @@ export function AreasManager({ initialConfig, defaultItems = [] }: AreasManagerP
                       value={modalForm.headlineAr || ''}
                       onChange={(e) => setModalForm({ ...modalForm, headlineAr: e.target.value })}
                       placeholder="مثال: رعاية المواهب التشكيلية والبصرية وصقل الحس الجمالي لدى الشباب"
-                      className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] bg-white outline-none focus:border-[#0d3b43]"
+                      className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] bg-white outline-none focus:border-[#231f20]"
                     />
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
                       <input
@@ -922,11 +922,11 @@ export function AreasManager({ initialConfig, defaultItems = [] }: AreasManagerP
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-1.5">
                         <span className="text-base">🎯</span>
-                        <h4 className="text-xs font-bold text-[#08242a]">
+                        <h4 className="text-xs font-bold text-[#231f20]">
                           الأهداف والمحاور الاستراتيجية (Strategic Objectives)
                         </h4>
                       </div>
-                      <span className="text-3xs text-[#819598]">
+                      <span className="text-3xs text-[#5C5A55]">
                         ({modalForm.objectivesAr?.length || 0} أهداف محددة)
                       </span>
                     </div>
@@ -936,10 +936,10 @@ export function AreasManager({ initialConfig, defaultItems = [] }: AreasManagerP
                       {(modalForm.objectivesAr || []).map((obj, i) => (
                         <div
                           key={i}
-                          className="flex items-center justify-between gap-2 p-2.5 rounded-xl bg-[#faf7f2] border border-[#e5e0d6] text-xs text-[#445457]"
+                          className="flex items-center justify-between gap-2 p-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#5C5A55]"
                         >
                           <span className="flex-1 leading-relaxed">
-                            <span className="text-[#0d3b43] font-bold me-1.5">✓</span>
+                            <span className="text-[#231f20] font-bold me-1.5">✓</span>
                             {obj}
                           </span>
                           <button
@@ -967,12 +967,12 @@ export function AreasManager({ initialConfig, defaultItems = [] }: AreasManagerP
                           }
                         }}
                         placeholder="اكتب هدفاً استراتيجياً جديداً واضغط إضافة..."
-                        className="flex-1 px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43]"
+                        className="flex-1 px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#231f20]"
                       />
                       <button
                         type="button"
                         onClick={handleAddObjective}
-                        className="px-4 py-2 rounded-xl text-xs font-bold text-white bg-[#0d3b43] hover:bg-[#14505b] shrink-0 cursor-pointer"
+                        className="px-4 py-2 rounded-xl text-xs font-bold text-white bg-[#231f20] hover:bg-[#d2a82b] shrink-0 cursor-pointer"
                       >
                         + إضافة هدف
                       </button>
@@ -984,22 +984,22 @@ export function AreasManager({ initialConfig, defaultItems = [] }: AreasManagerP
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-1.5">
                         <span className="text-base">✨</span>
-                        <h4 className="text-xs font-bold text-[#08242a]">
+                        <h4 className="text-xs font-bold text-[#231f20]">
                           البرامج والورشات الميدانية (Initiatives & Workshops)
                         </h4>
                       </div>
-                      <span className="text-3xs text-[#819598]">
+                      <span className="text-3xs text-[#5C5A55]">
                         ({modalForm.initiativesAr?.length || 0} ورشات محددة)
                       </span>
                     </div>
 
                     {/* Toggle show/hide for this area */}
-                    <div className="p-3 rounded-xl bg-[#faf7f2] border border-[#e5e0d6] flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
+                    <div className="p-3 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
                       <div className="space-y-0.5">
-                        <span className="text-xs font-bold text-[#08242a] block">
+                        <span className="text-xs font-bold text-[#231f20] block">
                           إظهار قسم &quot;أبرز البرامج والورشات الميدانية&quot; بالنافذة
                         </span>
-                        <span className="text-3xs text-[#819598] block">
+                        <span className="text-3xs text-[#5C5A55] block">
                           يمكنك إخفاء هذا القسم بالكامل في حال لم تتوفر ورشات حالية لهذا المجال
                         </span>
                       </div>
@@ -1026,10 +1026,10 @@ export function AreasManager({ initialConfig, defaultItems = [] }: AreasManagerP
                       {(modalForm.initiativesAr || []).map((init, i) => (
                         <div
                           key={i}
-                          className="flex items-center justify-between gap-2 p-2.5 rounded-xl bg-[#faf7f2] border border-[#e5e0d6] text-xs text-[#08242a] font-bold"
+                          className="flex items-center justify-between gap-2 p-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] font-bold"
                         >
                           <span className="truncate">
-                            <span className="text-[#c85a32] me-1.5 font-mono">0{i + 1}.</span>
+                            <span className="text-[#bd3227] me-1.5 font-mono">0{i + 1}.</span>
                             {init}
                           </span>
                           <button
@@ -1057,12 +1057,12 @@ export function AreasManager({ initialConfig, defaultItems = [] }: AreasManagerP
                           }
                         }}
                         placeholder="اكتب اسم ورشة أو برنامج جديد واضغط إضافة..."
-                        className="flex-1 px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43]"
+                        className="flex-1 px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#231f20]"
                       />
                       <button
                         type="button"
                         onClick={handleAddInitiative}
-                        className="px-4 py-2 rounded-xl text-xs font-bold text-white bg-[#c85a32] hover:bg-[#a84420] shrink-0 cursor-pointer"
+                        className="px-4 py-2 rounded-xl text-xs font-bold text-white bg-[#bd3227] hover:bg-[#a3261c] shrink-0 cursor-pointer"
                       >
                         + إضافة ورشة
                       </button>
@@ -1072,17 +1072,17 @@ export function AreasManager({ initialConfig, defaultItems = [] }: AreasManagerP
               )}
 
               {/* Form Bottom Buttons */}
-              <div className="flex items-center justify-end gap-2.5 pt-4 border-t border-[#f0ebe1]">
+              <div className="flex items-center justify-end gap-2.5 pt-4 border-t border-[#FEF6CC]">
                 <button
                   type="button"
                   onClick={() => setIsModalOpen(false)}
-                  className="px-4 py-2 rounded-xl text-xs font-bold text-[#5f7174] bg-[#faf7f2] hover:bg-[#f0ebe1] cursor-pointer"
+                  className="px-4 py-2 rounded-xl text-xs font-bold text-[#5C5A55] bg-[#F5F3EE] hover:bg-[#FEF6CC] cursor-pointer"
                 >
                   إلغاء
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2 rounded-xl text-xs font-bold text-white bg-[#0d3b43] hover:bg-[#14505b] shadow-xs cursor-pointer"
+                  className="px-5 py-2 rounded-xl text-xs font-bold text-white bg-[#231f20] hover:bg-[#d2a82b] shadow-xs cursor-pointer"
                 >
                   {editingArea ? 'تحديث بيانات المجال' : 'إضافة إلى القائمة'}
                 </button>

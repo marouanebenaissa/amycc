@@ -43,7 +43,7 @@ export default async function EditNewsArticlePage(props: {
           </svg>
         </Link>
         <div>
-          <h1 className="text-2xl font-extrabold text-[#0a0f1d]">تعديل المقال الإخباري</h1>
+          <h1 className="text-2xl font-extrabold text-[#181516]">تعديل المقال الإخباري</h1>
           <p className="text-xs text-slate-500 mt-0.5">
             تحديث تفاصيل المقال، الصورة البارزة، والمحتوى التحريري باللغات الثلاث (العربية، الفرنسية، الإنجليزية).
           </p>

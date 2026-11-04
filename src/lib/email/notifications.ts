@@ -43,23 +43,23 @@ export function generateEventInvitationHtml(payload: EventInvitationPayload): st
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>${isFr ? 'Confirmation d’inscription' : isEn ? 'Registration Confirmation' : 'تأكيد التسجيل والدعوة الرسمية'}</title>
   <style>
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #faf7f2; margin: 0; padding: 24px; color: #08242a; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #F5F3EE; margin: 0; padding: 24px; color: #231f20; }
     .container { max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 24px; overflow: hidden; border: 1px solid #e5e0d6; box-shadow: 0 10px 25px rgba(8, 36, 42, 0.06); }
-    .header { background: linear-gradient(135deg, #0d3b43 0%, #0f4650 50%, #08242a 100%); color: #ffffff; padding: 36px 32px; text-align: center; }
-    .badge { display: inline-block; padding: 6px 16px; border-radius: 9999px; background: rgba(255,255,255,0.15); color: #f4ce83; font-size: 12px; font-weight: bold; margin-bottom: 12px; letter-spacing: 0.5px; }
+    .header { background: linear-gradient(135deg, #231f20 0%, #231f20 50%, #231f20 100%); color: #ffffff; padding: 36px 32px; text-align: center; }
+    .badge { display: inline-block; padding: 6px 16px; border-radius: 9999px; background: rgba(255,255,255,0.15); color: #ffd22f; font-size: 12px; font-weight: bold; margin-bottom: 12px; letter-spacing: 0.5px; }
     .org-title { font-size: 14px; color: rgba(255,255,255,0.85); font-weight: 600; margin: 0 0 6px 0; }
     .main-title { font-size: 24px; font-weight: 900; color: #ffffff; margin: 0; line-height: 1.3; }
     .body-content { padding: 36px 32px; }
-    .greeting { font-size: 16px; font-weight: 700; color: #08242a; margin-bottom: 12px; }
-    .intro { font-size: 14px; color: #445457; line-height: 1.7; margin-bottom: 24px; }
-    .ticket-card { background: #faf7f2; border: 1px solid #e5e0d6; border-radius: 18px; padding: 24px; margin-bottom: 24px; border-top: 4px solid #c85a32; }
+    .greeting { font-size: 16px; font-weight: 700; color: #231f20; margin-bottom: 12px; }
+    .intro { font-size: 14px; color: #5C5A55; line-height: 1.7; margin-bottom: 24px; }
+    .ticket-card { background: #F5F3EE; border: 1px solid #e5e0d6; border-radius: 18px; padding: 24px; margin-bottom: 24px; border-top: 4px solid #bd3227; }
     .ticket-item { margin-bottom: 14px; }
-    .ticket-label { font-size: 11px; text-transform: uppercase; font-weight: 800; color: #819598; display: block; margin-bottom: 3px; }
-    .ticket-val { font-size: 15px; font-weight: 800; color: #08242a; }
-    .ref-badge { display: inline-block; font-family: monospace; font-size: 14px; font-weight: 900; background: #08242a; color: #f4ce83; padding: 4px 12px; border-radius: 8px; }
-    .instructions { background: #fff8f5; border: 1px solid #f0cbbd; border-radius: 14px; padding: 18px 20px; font-size: 12px; color: #873319; line-height: 1.6; margin-bottom: 24px; }
-    .footer { background: #f7f2e9; padding: 24px 32px; text-align: center; font-size: 12px; color: #5f7174; border-top: 1px solid #e5e0d6; }
-    .footer a { color: #0d3b43; text-decoration: none; font-weight: bold; }
+    .ticket-label { font-size: 11px; text-transform: uppercase; font-weight: 800; color: #5C5A55; display: block; margin-bottom: 3px; }
+    .ticket-val { font-size: 15px; font-weight: 800; color: #231f20; }
+    .ref-badge { display: inline-block; font-family: monospace; font-size: 14px; font-weight: 900; background: #231f20; color: #ffd22f; padding: 4px 12px; border-radius: 8px; }
+    .instructions { background: #FFFFFF; border: 1px solid #fde8e7; border-radius: 14px; padding: 18px 20px; font-size: 12px; color: #8f1f16; line-height: 1.6; margin-bottom: 24px; }
+    .footer { background: #F5F3EE; padding: 24px 32px; text-align: center; font-size: 12px; color: #5C5A55; border-top: 1px solid #e5e0d6; }
+    .footer a { color: #231f20; text-decoration: none; font-weight: bold; }
   </style>
 </head>
 <body>
@@ -114,7 +114,7 @@ export function generateEventInvitationHtml(payload: EventInvitationPayload): st
         </ul>
       </div>
 
-      <p style="font-size: 13px; color: #5f7174; margin: 0; line-height: 1.6;">
+      <p style="font-size: 13px; color: #5C5A55; margin: 0; line-height: 1.6;">
         ${isFr
           ? 'Pour toute question, écrivez-nous à : notification@amycc.org.'
           : isEn

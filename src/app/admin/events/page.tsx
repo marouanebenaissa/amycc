@@ -57,10 +57,10 @@ export default async function AdminEventsPage() {
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-black text-[#08242a] tracking-tight">
+          <h1 className="text-2xl sm:text-3xl font-black text-[#231f20] tracking-tight">
             إدارة الفعاليات والورشات الثقافية (Events CMS)
           </h1>
-          <p className="text-xs sm:text-sm text-[#5f7174] mt-1">
+          <p className="text-xs sm:text-sm text-[#5C5A55] mt-1">
             إدارة أجندة الورشات والعروض الفنية، بوابات التسجيل وتتبع المقاعد، وتخصيص واجهة ورأس صفحة الفعاليات.
           </p>
         </div>

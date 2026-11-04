@@ -48,40 +48,40 @@ export default async function AdminContactsPage() {
       {/* Page Header and Breadcrumb */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2 border-b border-[#e5e0d6]">
         <div>
-          <div className="flex items-center gap-2 text-3xs font-bold text-[#819598] mb-1">
-            <Link href="/admin" className="hover:text-[#0d3b43] transition-colors">لوحة التحكم</Link>
+          <div className="flex items-center gap-2 text-3xs font-bold text-[#5C5A55] mb-1">
+            <Link href="/admin" className="hover:text-[#231f20] transition-colors">لوحة التحكم</Link>
             <span>/</span>
-            <span className="text-[#08242a]">بوابة التواصل وصفحة اتصل بنا (Contact CMS & Inbox)</span>
+            <span className="text-[#231f20]">بوابة التواصل وصفحة اتصل بنا (Contact CMS & Inbox)</span>
           </div>
-          <h1 className="text-2xl font-black text-[#08242a] tracking-tight">
+          <h1 className="text-2xl font-black text-[#231f20] tracking-tight">
             إدارة بيانات التواصل والرسائل الواردة — Contact Center
           </h1>
-          <p className="text-xs text-[#5f7174] mt-1">
+          <p className="text-xs text-[#5C5A55] mt-1">
             تحكم كامل في أرقام الهاتف، العناوين، قنوات الاتصال، واستقبال رسائل واستفسارات المواطنين والشركاء.
           </p>
         </div>
 
         {/* Public Preview Links */}
         <div className="flex items-center gap-2">
-          <span className="text-3xs text-[#819598] font-bold">معاينة صفحة اتصل بنا:</span>
+          <span className="text-3xs text-[#5C5A55] font-bold">معاينة صفحة اتصل بنا:</span>
           <Link
             href="/ar/contact"
             target="_blank"
-            className="px-2.5 py-1 rounded-lg bg-white border border-[#e5e0d6] hover:bg-[#0d3b43] hover:text-white text-3xs font-bold text-[#08242a] transition-all shadow-2xs"
+            className="px-2.5 py-1 rounded-lg bg-white border border-[#e5e0d6] hover:bg-[#231f20] hover:text-white text-3xs font-bold text-[#231f20] transition-all shadow-2xs"
           >
             عربي ↗
           </Link>
           <Link
             href="/fr/contact"
             target="_blank"
-            className="px-2.5 py-1 rounded-lg bg-white border border-[#e5e0d6] hover:bg-[#0d3b43] hover:text-white text-3xs font-bold text-[#08242a] transition-all shadow-2xs"
+            className="px-2.5 py-1 rounded-lg bg-white border border-[#e5e0d6] hover:bg-[#231f20] hover:text-white text-3xs font-bold text-[#231f20] transition-all shadow-2xs"
           >
             FR ↗
           </Link>
           <Link
             href="/en/contact"
             target="_blank"
-            className="px-2.5 py-1 rounded-lg bg-white border border-[#e5e0d6] hover:bg-[#0d3b43] hover:text-white text-3xs font-bold text-[#08242a] transition-all shadow-2xs"
+            className="px-2.5 py-1 rounded-lg bg-white border border-[#e5e0d6] hover:bg-[#231f20] hover:text-white text-3xs font-bold text-[#231f20] transition-all shadow-2xs"
           >
             EN ↗
           </Link>

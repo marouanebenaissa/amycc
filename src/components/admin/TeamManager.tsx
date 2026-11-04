@@ -18,12 +18,12 @@ const CATEGORIES = [
 ] as const
 
 const COLOR_OPTIONS = [
-  { label: 'بترولي (رئيسي)', border: 'border-[#0d3b43]/30 hover:border-[#0d3b43]', badge: 'bg-[#0d3b43]/10 text-[#0d3b43]' },
-  { label: 'طيني مراكشي', border: 'border-[#c85a32]/30 hover:border-[#c85a32]', badge: 'bg-[#c85a32]/10 text-[#c85a32]' },
-  { label: 'ذهبي / خردلي', border: 'border-[#d99b26]/30 hover:border-[#d99b26]', badge: 'bg-[#d99b26]/10 text-[#99620b]' },
-  { label: 'أزرق داكن', border: 'border-[#1c6875]/30 hover:border-[#1c6875]', badge: 'bg-[#1c6875]/10 text-[#1c6875]' },
+  { label: 'بترولي (رئيسي)', border: 'border-[#231f20]/30 hover:border-[#231f20]', badge: 'bg-[#231f20]/10 text-[#231f20]' },
+  { label: 'طيني مراكشي', border: 'border-[#bd3227]/30 hover:border-[#bd3227]', badge: 'bg-[#bd3227]/10 text-[#bd3227]' },
+  { label: 'ذهبي / خردلي', border: 'border-[#d2a82b]/30 hover:border-[#d2a82b]', badge: 'bg-[#d2a82b]/10 text-[#d2a82b]' },
+  { label: 'أزرق داكن', border: 'border-[#d2a82b]/30 hover:border-[#d2a82b]', badge: 'bg-[#d2a82b]/10 text-[#d2a82b]' },
   { label: 'زمردي / زيتوني', border: 'border-emerald-600/30 hover:border-emerald-600', badge: 'bg-emerald-50 text-emerald-800' },
-  { label: 'نيلي / كحلي', border: 'border-[#08242a]/30 hover:border-[#08242a]', badge: 'bg-[#08242a]/10 text-[#08242a]' },
+  { label: 'نيلي / كحلي', border: 'border-[#231f20]/30 hover:border-[#231f20]', badge: 'bg-[#231f20]/10 text-[#231f20]' },
 ]
 
 export function TeamManager({ initialConfig, defaultMembers = [] }: TeamManagerProps) {
@@ -64,8 +64,8 @@ export function TeamManager({ initialConfig, defaultMembers = [] }: TeamManagerP
     dutiesEn: [],
     photoUrl: '',
     icon: '👤',
-    colorClass: 'border-[#0d3b43]/30 hover:border-[#0d3b43]',
-    accentBg: 'bg-[#0d3b43]/10 text-[#0d3b43]',
+    colorClass: 'border-[#231f20]/30 hover:border-[#231f20]',
+    accentBg: 'bg-[#231f20]/10 text-[#231f20]',
     order: 1,
     enabled: true,
   })
@@ -125,8 +125,8 @@ export function TeamManager({ initialConfig, defaultMembers = [] }: TeamManagerP
       dutiesEn: [],
       photoUrl: '',
       icon: '👤',
-      colorClass: 'border-[#0d3b43]/30 hover:border-[#0d3b43]',
-      accentBg: 'bg-[#0d3b43]/10 text-[#0d3b43]',
+      colorClass: 'border-[#231f20]/30 hover:border-[#231f20]',
+      accentBg: 'bg-[#231f20]/10 text-[#231f20]',
       order: config.members.length + 1,
       enabled: true,
     })
@@ -243,8 +243,8 @@ export function TeamManager({ initialConfig, defaultMembers = [] }: TeamManagerP
       dutiesEn: modalForm.dutiesEn || [],
       photoUrl: modalForm.photoUrl || '',
       icon: modalForm.icon || '👤',
-      colorClass: modalForm.colorClass || 'border-[#0d3b43]/30 hover:border-[#0d3b43]',
-      accentBg: modalForm.accentBg || 'bg-[#0d3b43]/10 text-[#0d3b43]',
+      colorClass: modalForm.colorClass || 'border-[#231f20]/30 hover:border-[#231f20]',
+      accentBg: modalForm.accentBg || 'bg-[#231f20]/10 text-[#231f20]',
       order: modalForm.order || config.members.length + 1,
       enabled: modalForm.enabled !== false,
     }
@@ -380,29 +380,29 @@ export function TeamManager({ initialConfig, defaultMembers = [] }: TeamManagerP
       {/* Top Banner & Quick Metrics */}
       <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
         <div className="p-4 rounded-2xl bg-white border border-[#e5e0d6] shadow-2xs">
-          <span className="text-3xs font-bold text-[#819598] block">إجمالي الأعضاء</span>
-          <span className="text-2xl font-black text-[#08242a]">{totalCount}</span>
-          <span className="text-3xs text-[#5f7174] block mt-0.5">مسجل في الهيكلة</span>
+          <span className="text-3xs font-bold text-[#5C5A55] block">إجمالي الأعضاء</span>
+          <span className="text-2xl font-black text-[#231f20]">{totalCount}</span>
+          <span className="text-3xs text-[#5C5A55] block mt-0.5">مسجل في الهيكلة</span>
         </div>
-        <div className="p-4 rounded-2xl bg-white border border-[#0d3b43]/30 shadow-2xs">
-          <span className="text-3xs font-bold text-[#0d3b43] block">المكتب التنفيذي</span>
-          <span className="text-2xl font-black text-[#0d3b43]">{executiveCount}</span>
-          <span className="text-3xs text-[#5f7174] block mt-0.5">مناصب أساسية</span>
+        <div className="p-4 rounded-2xl bg-white border border-[#231f20]/30 shadow-2xs">
+          <span className="text-3xs font-bold text-[#231f20] block">المكتب التنفيذي</span>
+          <span className="text-2xl font-black text-[#231f20]">{executiveCount}</span>
+          <span className="text-3xs text-[#5C5A55] block mt-0.5">مناصب أساسية</span>
         </div>
-        <div className="p-4 rounded-2xl bg-white border border-[#c85a32]/30 shadow-2xs">
-          <span className="text-3xs font-bold text-[#c85a32] block">اللجان والتأطير</span>
-          <span className="text-2xl font-black text-[#c85a32]">{committeeCount}</span>
-          <span className="text-3xs text-[#5f7174] block mt-0.5">منسقون ومؤطرون</span>
+        <div className="p-4 rounded-2xl bg-white border border-[#bd3227]/30 shadow-2xs">
+          <span className="text-3xs font-bold text-[#bd3227] block">اللجان والتأطير</span>
+          <span className="text-2xl font-black text-[#bd3227]">{committeeCount}</span>
+          <span className="text-3xs text-[#5C5A55] block mt-0.5">منسقون ومؤطرون</span>
         </div>
-        <div className="p-4 rounded-2xl bg-white border border-[#d99b26]/30 shadow-2xs">
-          <span className="text-3xs font-bold text-[#99620b] block">الهيئة الاستشارية</span>
-          <span className="text-2xl font-black text-[#d99b26]">{advisorCount}</span>
-          <span className="text-3xs text-[#5f7174] block mt-0.5">خبراء ومرشدون</span>
+        <div className="p-4 rounded-2xl bg-white border border-[#d2a82b]/30 shadow-2xs">
+          <span className="text-3xs font-bold text-[#d2a82b] block">الهيئة الاستشارية</span>
+          <span className="text-2xl font-black text-[#d2a82b]">{advisorCount}</span>
+          <span className="text-3xs text-[#5C5A55] block mt-0.5">خبراء ومرشدون</span>
         </div>
         <div className="p-4 rounded-2xl bg-white border border-emerald-500/30 shadow-2xs col-span-2 sm:col-span-1">
           <span className="text-3xs font-bold text-emerald-700 block">الصور المرفوعة</span>
           <span className="text-2xl font-black text-emerald-600">{withPhotosCount} / {totalCount}</span>
-          <span className="text-3xs text-[#5f7174] block mt-0.5">صورة شخصية معتمدة</span>
+          <span className="text-3xs text-[#5C5A55] block mt-0.5">صورة شخصية معتمدة</span>
         </div>
       </div>
 
@@ -417,8 +417,8 @@ export function TeamManager({ initialConfig, defaultMembers = [] }: TeamManagerP
               onClick={() => setSelectedCategory(cat.key)}
               className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all ${
                 selectedCategory === cat.key
-                  ? 'bg-[#0d3b43] text-white shadow-xs'
-                  : 'bg-[#faf7f2] text-[#445457] hover:bg-[#eae4d9]'
+                  ? 'bg-[#231f20] text-white shadow-xs'
+                  : 'bg-[#F5F3EE] text-[#5C5A55] hover:bg-[#FEF6CC]'
               }`}
             >
               {cat.labelAr}
@@ -431,7 +431,7 @@ export function TeamManager({ initialConfig, defaultMembers = [] }: TeamManagerP
           <button
             type="button"
             onClick={() => handleAddNew(selectedCategory === 'committee' ? 'committee' : selectedCategory === 'advisor' ? 'advisor' : 'executive')}
-            className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl bg-[#c85a32] hover:bg-[#a64522] text-white text-xs font-bold transition-all shadow-xs cursor-pointer"
+            className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl bg-[#bd3227] hover:bg-[#a3261c] text-white text-xs font-bold transition-all shadow-xs cursor-pointer"
           >
             <span>+</span>
             <span>إضافة عضو جديد</span>
@@ -444,7 +444,7 @@ export function TeamManager({ initialConfig, defaultMembers = [] }: TeamManagerP
             className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all shadow-xs cursor-pointer ${
               hasUnsavedChanges
                 ? 'bg-emerald-600 hover:bg-emerald-700 text-white animate-pulse'
-                : 'bg-[#0d3b43] hover:bg-[#14505b] text-white'
+                : 'bg-[#231f20] hover:bg-[#d2a82b] text-white'
             }`}
           >
             <span>💾</span>
@@ -507,7 +507,7 @@ export function TeamManager({ initialConfig, defaultMembers = [] }: TeamManagerP
                     {/* Member Photo or Icon */}
                     <div className="relative group/avatar shrink-0">
                       {member.photoUrl ? (
-                        <div className="w-16 h-16 rounded-2xl overflow-hidden border-2 border-white shadow-xs ring-2 ring-[#0d3b43]/20 relative bg-neutral-100">
+                        <div className="w-16 h-16 rounded-2xl overflow-hidden border-2 border-white shadow-xs ring-2 ring-[#231f20]/20 relative bg-neutral-100">
                           <ImageWithFallback
                             src={member.photoUrl}
                             alt={member.nameAr || member.roleAr}
@@ -517,7 +517,7 @@ export function TeamManager({ initialConfig, defaultMembers = [] }: TeamManagerP
                           />
                         </div>
                       ) : (
-                        <div className="w-16 h-16 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6] flex items-center justify-center text-3xl shadow-2xs">
+                        <div className="w-16 h-16 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6] flex items-center justify-center text-3xl shadow-2xs">
                           {member.icon || '👤'}
                         </div>
                       )}
@@ -531,7 +531,7 @@ export function TeamManager({ initialConfig, defaultMembers = [] }: TeamManagerP
                         }}
                         disabled={isUploadingThisCard}
                         title="رفع أو تغيير صورة العضو"
-                        className="absolute -bottom-1 -end-1 w-6 h-6 rounded-full bg-[#0d3b43] hover:bg-[#c85a32] text-white flex items-center justify-center text-3xs shadow-xs transition-colors cursor-pointer"
+                        className="absolute -bottom-1 -end-1 w-6 h-6 rounded-full bg-[#231f20] hover:bg-[#bd3227] text-white flex items-center justify-center text-3xs shadow-xs transition-colors cursor-pointer"
                       >
                         {isUploadingThisCard ? '⏳' : '📷'}
                       </button>
@@ -548,10 +548,10 @@ export function TeamManager({ initialConfig, defaultMembers = [] }: TeamManagerP
                           </span>
                         )}
                       </div>
-                      <h3 className="text-sm font-black text-[#08242a] mt-1 truncate">
-                        {member.nameAr ? member.nameAr : <span className="text-[#819598] font-normal italic">لم يحدد الاسم بعد</span>}
+                      <h3 className="text-sm font-black text-[#231f20] mt-1 truncate">
+                        {member.nameAr ? member.nameAr : <span className="text-[#5C5A55] font-normal italic">لم يحدد الاسم بعد</span>}
                       </h3>
-                      <p className="text-xs font-bold text-[#c85a32] truncate">
+                      <p className="text-xs font-bold text-[#bd3227] truncate">
                         {member.roleAr}
                       </p>
                     </div>
@@ -563,7 +563,7 @@ export function TeamManager({ initialConfig, defaultMembers = [] }: TeamManagerP
                       type="button"
                       disabled={globalIndex === 0}
                       onClick={() => moveMember(globalIndex, 'up')}
-                      className="w-6 h-6 rounded-md bg-[#faf7f2] hover:bg-[#eae4d9] text-[#08242a] disabled:opacity-30 disabled:cursor-not-allowed flex items-center justify-center text-3xs font-bold transition-colors"
+                      className="w-6 h-6 rounded-md bg-[#F5F3EE] hover:bg-[#FEF6CC] text-[#231f20] disabled:opacity-30 disabled:cursor-not-allowed flex items-center justify-center text-3xs font-bold transition-colors"
                       title="تحريك لأعلى"
                     >
                       ▲
@@ -572,7 +572,7 @@ export function TeamManager({ initialConfig, defaultMembers = [] }: TeamManagerP
                       type="button"
                       disabled={globalIndex === config.members.length - 1}
                       onClick={() => moveMember(globalIndex, 'down')}
-                      className="w-6 h-6 rounded-md bg-[#faf7f2] hover:bg-[#eae4d9] text-[#08242a] disabled:opacity-30 disabled:cursor-not-allowed flex items-center justify-center text-3xs font-bold transition-colors"
+                      className="w-6 h-6 rounded-md bg-[#F5F3EE] hover:bg-[#FEF6CC] text-[#231f20] disabled:opacity-30 disabled:cursor-not-allowed flex items-center justify-center text-3xs font-bold transition-colors"
                       title="تحريك لأسفل"
                     >
                       ▼
@@ -582,23 +582,23 @@ export function TeamManager({ initialConfig, defaultMembers = [] }: TeamManagerP
 
                 {/* Scope & Mandate */}
                 {member.titleStatusAr && (
-                  <div className="text-3xs font-bold text-[#819598] uppercase tracking-wider">
+                  <div className="text-3xs font-bold text-[#5C5A55] uppercase tracking-wider">
                     {member.titleStatusAr}
                   </div>
                 )}
 
                 {/* Bio / Description */}
                 {member.descAr && (
-                  <p className="text-xs text-[#5f7174] line-clamp-2 leading-relaxed">
+                  <p className="text-xs text-[#5C5A55] line-clamp-2 leading-relaxed">
                     {member.descAr}
                   </p>
                 )}
 
                 {/* Duties Preview */}
                 {member.dutiesAr && member.dutiesAr.length > 0 && (
-                  <div className="space-y-1 pt-2 border-t border-[#f0ebe1]">
-                    <span className="text-3xs font-bold text-[#819598] block">المهام الأساسية:</span>
-                    <ul className="text-3xs text-[#5f7174] space-y-0.5">
+                  <div className="space-y-1 pt-2 border-t border-[#FEF6CC]">
+                    <span className="text-3xs font-bold text-[#5C5A55] block">المهام الأساسية:</span>
+                    <ul className="text-3xs text-[#5C5A55] space-y-0.5">
                       {member.dutiesAr.slice(0, 2).map((duty, dIdx) => (
                         <li key={dIdx} className="truncate flex items-center gap-1.5">
                           <span className="text-emerald-600 font-bold">✓</span>
@@ -606,7 +606,7 @@ export function TeamManager({ initialConfig, defaultMembers = [] }: TeamManagerP
                         </li>
                       ))}
                       {member.dutiesAr.length > 2 && (
-                        <li className="text-3xs text-[#819598] italic">
+                        <li className="text-3xs text-[#5C5A55] italic">
                           +{member.dutiesAr.length - 2} مهام إضافية...
                         </li>
                       )}
@@ -616,7 +616,7 @@ export function TeamManager({ initialConfig, defaultMembers = [] }: TeamManagerP
               </div>
 
               {/* Card Footer Actions */}
-              <div className="pt-3 mt-4 border-t border-[#f0ebe1] flex items-center justify-between text-xs gap-2">
+              <div className="pt-3 mt-4 border-t border-[#FEF6CC] flex items-center justify-between text-xs gap-2">
                 <div className="flex items-center gap-1.5 flex-wrap">
                   <button
                     type="button"
@@ -625,7 +625,7 @@ export function TeamManager({ initialConfig, defaultMembers = [] }: TeamManagerP
                       cardFileInputRef.current?.click()
                     }}
                     disabled={isUploadingThisCard}
-                    className="px-2.5 py-1 rounded-lg bg-[#0d3b43]/10 hover:bg-[#0d3b43] text-[#0d3b43] hover:text-white text-3xs font-bold transition-all flex items-center gap-1 cursor-pointer"
+                    className="px-2.5 py-1 rounded-lg bg-[#231f20]/10 hover:bg-[#231f20] text-[#231f20] hover:text-white text-3xs font-bold transition-all flex items-center gap-1 cursor-pointer"
                     title="رفع أو تغيير صورة العضو"
                   >
                     <span>📷</span>
@@ -634,7 +634,7 @@ export function TeamManager({ initialConfig, defaultMembers = [] }: TeamManagerP
                   <button
                     type="button"
                     onClick={() => handleEdit(member)}
-                    className="px-2.5 py-1 rounded-lg bg-[#faf7f2] hover:bg-[#0d3b43] hover:text-white text-[#08242a] text-3xs font-bold transition-all cursor-pointer"
+                    className="px-2.5 py-1 rounded-lg bg-[#F5F3EE] hover:bg-[#231f20] hover:text-white text-[#231f20] text-3xs font-bold transition-all cursor-pointer"
                   >
                     ✏️ تعديل
                   </button>
@@ -669,14 +669,14 @@ export function TeamManager({ initialConfig, defaultMembers = [] }: TeamManagerP
       {filteredMembers.length === 0 && (
         <div className="p-12 text-center bg-white rounded-3xl border border-dashed border-[#e5e0d6] space-y-3">
           <span className="text-4xl block">👥</span>
-          <h3 className="text-base font-bold text-[#08242a]">لا يوجد أعضاء في هذا القسم بعد</h3>
-          <p className="text-xs text-[#5f7174] max-w-md mx-auto">
+          <h3 className="text-base font-bold text-[#231f20]">لا يوجد أعضاء في هذا القسم بعد</h3>
+          <p className="text-xs text-[#5C5A55] max-w-md mx-auto">
             يمكنك إضافة أعضاء جدد، تحديد أدوارهم، ورفع صورهم الرسمية لعرضهم في الصفحة العامة لفريق العمل.
           </p>
           <button
             type="button"
             onClick={() => handleAddNew(selectedCategory === 'committee' ? 'committee' : selectedCategory === 'advisor' ? 'advisor' : 'executive')}
-            className="px-4 py-2 rounded-xl bg-[#c85a32] text-white text-xs font-bold hover:bg-[#a64522] transition-colors"
+            className="px-4 py-2 rounded-xl bg-[#bd3227] text-white text-xs font-bold hover:bg-[#a3261c] transition-colors"
           >
             + إضافة أول عضو في هذا التصنيف
           </button>
@@ -684,14 +684,14 @@ export function TeamManager({ initialConfig, defaultMembers = [] }: TeamManagerP
       )}
 
       {/* Footer Tools */}
-      <div className="flex items-center justify-between p-4 bg-[#faf7f2] rounded-2xl border border-[#e5e0d6] text-xs">
-        <span className="text-3xs text-[#819598]">
+      <div className="flex items-center justify-between p-4 bg-[#F5F3EE] rounded-2xl border border-[#e5e0d6] text-xs">
+        <span className="text-3xs text-[#5C5A55]">
           الهيكلة الرسمية متوافقة مع مقتضيات الظهير الشريف رقم 1.58.376 المنظم للجمعيات بالمملكة المغربية.
         </span>
         <button
           type="button"
           onClick={handleResetToDefaults}
-          className="text-3xs font-bold text-[#819598] hover:text-[#c85a32] underline"
+          className="text-3xs font-bold text-[#5C5A55] hover:text-[#bd3227] underline"
         >
           استعادة الهيكلة الافتراضية
         </button>
@@ -710,10 +710,10 @@ export function TeamManager({ initialConfig, defaultMembers = [] }: TeamManagerP
                   {editingMember ? '✏️' : '➕'}
                 </span>
                 <div>
-                  <h2 className="text-base font-black text-[#08242a]">
+                  <h2 className="text-base font-black text-[#231f20]">
                     {editingMember ? `تعديل بيانات: ${editingMember.nameAr || editingMember.roleAr}` : 'إضافة عضو جديد للهيكلة'}
                   </h2>
-                  <p className="text-3xs text-[#5f7174]">
+                  <p className="text-3xs text-[#5C5A55]">
                     حدد الاسم، المنصب، الصورة الشخصية، والمهام المنوطة به
                   </p>
                 </div>
@@ -721,21 +721,21 @@ export function TeamManager({ initialConfig, defaultMembers = [] }: TeamManagerP
               <button
                 type="button"
                 onClick={() => setIsModalOpen(false)}
-                className="w-8 h-8 rounded-full bg-[#faf7f2] hover:bg-[#eae4d9] text-[#08242a] flex items-center justify-center font-bold text-sm"
+                className="w-8 h-8 rounded-full bg-[#F5F3EE] hover:bg-[#FEF6CC] text-[#231f20] flex items-center justify-center font-bold text-sm"
               >
                 ✕
               </button>
             </div>
 
             {/* Modal Navigation Tabs */}
-            <div className="px-6 pt-4 pb-2 border-b border-[#f0ebe1] flex items-center gap-2">
+            <div className="px-6 pt-4 pb-2 border-b border-[#FEF6CC] flex items-center gap-2">
               <button
                 type="button"
                 onClick={() => setModalTab('info')}
                 className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all ${
                   modalTab === 'info'
-                    ? 'bg-[#0d3b43] text-white shadow-xs'
-                    : 'bg-[#faf7f2] text-[#445457] hover:bg-[#eae4d9]'
+                    ? 'bg-[#231f20] text-white shadow-xs'
+                    : 'bg-[#F5F3EE] text-[#5C5A55] hover:bg-[#FEF6CC]'
                 }`}
               >
                 1. البيانات الأساسية والرتبة
@@ -745,8 +745,8 @@ export function TeamManager({ initialConfig, defaultMembers = [] }: TeamManagerP
                 onClick={() => setModalTab('photo')}
                 className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 ${
                   modalTab === 'photo'
-                    ? 'bg-[#0d3b43] text-white shadow-xs'
-                    : 'bg-[#faf7f2] text-[#445457] hover:bg-[#eae4d9]'
+                    ? 'bg-[#231f20] text-white shadow-xs'
+                    : 'bg-[#F5F3EE] text-[#5C5A55] hover:bg-[#FEF6CC]'
                 }`}
               >
                 <span>2. الصورة الشخصية</span>
@@ -757,8 +757,8 @@ export function TeamManager({ initialConfig, defaultMembers = [] }: TeamManagerP
                 onClick={() => setModalTab('duties')}
                 className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all ${
                   modalTab === 'duties'
-                    ? 'bg-[#0d3b43] text-white shadow-xs'
-                    : 'bg-[#faf7f2] text-[#445457] hover:bg-[#eae4d9]'
+                    ? 'bg-[#231f20] text-white shadow-xs'
+                    : 'bg-[#F5F3EE] text-[#5C5A55] hover:bg-[#FEF6CC]'
                 }`}
               >
                 3. المهام والمسؤوليات ({modalForm.dutiesAr?.length || 0})
@@ -772,7 +772,7 @@ export function TeamManager({ initialConfig, defaultMembers = [] }: TeamManagerP
                 <div className="space-y-4">
                   {/* Category Selection */}
                   <div>
-                    <label className="block text-xs font-bold text-[#08242a] mb-1.5">
+                    <label className="block text-xs font-bold text-[#231f20] mb-1.5">
                       التصنيف والهيئة التنظيمية *
                     </label>
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
@@ -787,20 +787,20 @@ export function TeamManager({ initialConfig, defaultMembers = [] }: TeamManagerP
                           onClick={() => setModalForm((prev) => ({ ...prev, category: cat.key as 'executive' | 'committee' | 'advisor' }))}
                           className={`p-3 rounded-xl border text-start transition-all ${
                             modalForm.category === cat.key
-                              ? 'border-[#0d3b43] bg-[#0d3b43]/5 ring-1 ring-[#0d3b43]'
-                              : 'border-[#e5e0d6] hover:bg-[#faf7f2]'
+                              ? 'border-[#231f20] bg-[#231f20]/5 ring-1 ring-[#231f20]'
+                              : 'border-[#e5e0d6] hover:bg-[#F5F3EE]'
                           }`}
                         >
-                          <span className="block text-xs font-bold text-[#08242a]">{cat.label}</span>
-                          <span className="block text-3xs text-[#819598]">{cat.desc}</span>
+                          <span className="block text-xs font-bold text-[#231f20]">{cat.label}</span>
+                          <span className="block text-3xs text-[#5C5A55]">{cat.desc}</span>
                         </button>
                       ))}
                     </div>
                   </div>
 
                   {/* Language Selector for Text Fields */}
-                  <div className="flex items-center justify-between pt-2 border-t border-[#f0ebe1]">
-                    <span className="text-3xs font-bold text-[#819598]">لغة الإدخال الحالية:</span>
+                  <div className="flex items-center justify-between pt-2 border-t border-[#FEF6CC]">
+                    <span className="text-3xs font-bold text-[#5C5A55]">لغة الإدخال الحالية:</span>
                     <div className="flex items-center gap-1">
                       {(['ar', 'fr', 'en'] as const).map((lng) => (
                         <button
@@ -809,8 +809,8 @@ export function TeamManager({ initialConfig, defaultMembers = [] }: TeamManagerP
                           onClick={() => setLangTab(lng)}
                           className={`px-2.5 py-1 rounded-lg text-3xs font-bold uppercase transition-all ${
                             langTab === lng
-                              ? 'bg-[#c85a32] text-white'
-                              : 'bg-[#faf7f2] text-[#5f7174] hover:bg-[#eae4d9]'
+                              ? 'bg-[#bd3227] text-white'
+                              : 'bg-[#F5F3EE] text-[#5C5A55] hover:bg-[#FEF6CC]'
                           }`}
                         >
                           {lng}
@@ -821,10 +821,10 @@ export function TeamManager({ initialConfig, defaultMembers = [] }: TeamManagerP
 
                   {/* Trilingual Name & Role */}
                   {langTab === 'ar' && (
-                    <div className="space-y-3 p-4 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6]">
+                    <div className="space-y-3 p-4 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6]">
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         <div>
-                          <label className="block text-xs font-bold text-[#08242a] mb-1">
+                          <label className="block text-xs font-bold text-[#231f20] mb-1">
                             اسم العضو (بالعربية)
                           </label>
                           <input
@@ -832,11 +832,11 @@ export function TeamManager({ initialConfig, defaultMembers = [] }: TeamManagerP
                             value={modalForm.nameAr || ''}
                             onChange={(e) => setModalForm((prev) => ({ ...prev, nameAr: e.target.value }))}
                             placeholder="مثال: ذ. أحمد المرابط"
-                            className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] bg-white text-xs text-[#08242a] focus:outline-none focus:border-[#0d3b43]"
+                            className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] bg-white text-xs text-[#231f20] focus:outline-none focus:border-[#231f20]"
                           />
                         </div>
                         <div>
-                          <label className="block text-xs font-bold text-[#08242a] mb-1">
+                          <label className="block text-xs font-bold text-[#231f20] mb-1">
                             المهمة أو المنصب (بالعربية) *
                           </label>
                           <input
@@ -845,14 +845,14 @@ export function TeamManager({ initialConfig, defaultMembers = [] }: TeamManagerP
                             value={modalForm.roleAr || ''}
                             onChange={(e) => setModalForm((prev) => ({ ...prev, roleAr: e.target.value }))}
                             placeholder="مثال: رئيس الجمعية / منسق الورشات المسرحية"
-                            className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] bg-white text-xs text-[#08242a] focus:outline-none focus:border-[#0d3b43]"
+                            className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] bg-white text-xs text-[#231f20] focus:outline-none focus:border-[#231f20]"
                           />
                         </div>
                       </div>
 
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         <div>
-                          <label className="block text-xs font-bold text-[#08242a] mb-1">
+                          <label className="block text-xs font-bold text-[#231f20] mb-1">
                             نطاق الصلاحيات (عنوان فرعي)
                           </label>
                           <input
@@ -860,11 +860,11 @@ export function TeamManager({ initialConfig, defaultMembers = [] }: TeamManagerP
                             value={modalForm.titleStatusAr || ''}
                             onChange={(e) => setModalForm((prev) => ({ ...prev, titleStatusAr: e.target.value }))}
                             placeholder="مثال: التمثيل القانوني والتوجيه الاستراتيجي"
-                            className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] bg-white text-xs text-[#08242a] focus:outline-none focus:border-[#0d3b43]"
+                            className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] bg-white text-xs text-[#231f20] focus:outline-none focus:border-[#231f20]"
                           />
                         </div>
                         <div>
-                          <label className="block text-xs font-bold text-[#08242a] mb-1">
+                          <label className="block text-xs font-bold text-[#231f20] mb-1">
                             شارة العضوية
                           </label>
                           <input
@@ -872,13 +872,13 @@ export function TeamManager({ initialConfig, defaultMembers = [] }: TeamManagerP
                             value={modalForm.badgeStatusAr || ''}
                             onChange={(e) => setModalForm((prev) => ({ ...prev, badgeStatusAr: e.target.value }))}
                             placeholder="مثال: عضوية معتمدة بالنظام الأساسي"
-                            className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] bg-white text-xs text-[#08242a] focus:outline-none focus:border-[#0d3b43]"
+                            className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] bg-white text-xs text-[#231f20] focus:outline-none focus:border-[#231f20]"
                           />
                         </div>
                       </div>
 
                       <div>
-                        <label className="block text-xs font-bold text-[#08242a] mb-1">
+                        <label className="block text-xs font-bold text-[#231f20] mb-1">
                           نبذة تعريفية ودور العضو (بالعربية)
                         </label>
                         <textarea
@@ -886,17 +886,17 @@ export function TeamManager({ initialConfig, defaultMembers = [] }: TeamManagerP
                           value={modalForm.descAr || ''}
                           onChange={(e) => setModalForm((prev) => ({ ...prev, descAr: e.target.value }))}
                           placeholder="ملخص عن الدور الإداري أو الميداني للعضو داخل الجمعية..."
-                          className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] bg-white text-xs text-[#08242a] focus:outline-none focus:border-[#0d3b43]"
+                          className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] bg-white text-xs text-[#231f20] focus:outline-none focus:border-[#231f20]"
                         />
                       </div>
                     </div>
                   )}
 
                   {langTab === 'fr' && (
-                    <div className="space-y-3 p-4 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6]">
+                    <div className="space-y-3 p-4 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6]">
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         <div>
-                          <label className="block text-xs font-bold text-[#08242a] mb-1">
+                          <label className="block text-xs font-bold text-[#231f20] mb-1">
                             Nom & Prénom (FR)
                           </label>
                           <input
@@ -904,11 +904,11 @@ export function TeamManager({ initialConfig, defaultMembers = [] }: TeamManagerP
                             value={modalForm.nameFr || ''}
                             onChange={(e) => setModalForm((prev) => ({ ...prev, nameFr: e.target.value }))}
                             placeholder="Ex: Ahmed El Mourabit"
-                            className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] bg-white text-xs text-[#08242a] focus:outline-none focus:border-[#0d3b43]"
+                            className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] bg-white text-xs text-[#231f20] focus:outline-none focus:border-[#231f20]"
                           />
                         </div>
                         <div>
-                          <label className="block text-xs font-bold text-[#08242a] mb-1">
+                          <label className="block text-xs font-bold text-[#231f20] mb-1">
                             Poste / Rôle (FR)
                           </label>
                           <input
@@ -916,14 +916,14 @@ export function TeamManager({ initialConfig, defaultMembers = [] }: TeamManagerP
                             value={modalForm.roleFr || ''}
                             onChange={(e) => setModalForm((prev) => ({ ...prev, roleFr: e.target.value }))}
                             placeholder="Ex: Président(e) de l’Association"
-                            className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] bg-white text-xs text-[#08242a] focus:outline-none focus:border-[#0d3b43]"
+                            className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] bg-white text-xs text-[#231f20] focus:outline-none focus:border-[#231f20]"
                           />
                         </div>
                       </div>
 
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         <div>
-                          <label className="block text-xs font-bold text-[#08242a] mb-1">
+                          <label className="block text-xs font-bold text-[#231f20] mb-1">
                             Champ de responsabilité (FR)
                           </label>
                           <input
@@ -931,11 +931,11 @@ export function TeamManager({ initialConfig, defaultMembers = [] }: TeamManagerP
                             value={modalForm.titleStatusFr || ''}
                             onChange={(e) => setModalForm((prev) => ({ ...prev, titleStatusFr: e.target.value }))}
                             placeholder="Ex: Représentation Légale & Stratégie"
-                            className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] bg-white text-xs text-[#08242a] focus:outline-none focus:border-[#0d3b43]"
+                            className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] bg-white text-xs text-[#231f20] focus:outline-none focus:border-[#231f20]"
                           />
                         </div>
                         <div>
-                          <label className="block text-xs font-bold text-[#08242a] mb-1">
+                          <label className="block text-xs font-bold text-[#231f20] mb-1">
                             Badge statutaire (FR)
                           </label>
                           <input
@@ -943,13 +943,13 @@ export function TeamManager({ initialConfig, defaultMembers = [] }: TeamManagerP
                             value={modalForm.badgeStatusFr || ''}
                             onChange={(e) => setModalForm((prev) => ({ ...prev, badgeStatusFr: e.target.value }))}
                             placeholder="Ex: Mandat Statutaire"
-                            className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] bg-white text-xs text-[#08242a] focus:outline-none focus:border-[#0d3b43]"
+                            className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] bg-white text-xs text-[#231f20] focus:outline-none focus:border-[#231f20]"
                           />
                         </div>
                       </div>
 
                       <div>
-                        <label className="block text-xs font-bold text-[#08242a] mb-1">
+                        <label className="block text-xs font-bold text-[#231f20] mb-1">
                           Présentation & Bio (FR)
                         </label>
                         <textarea
@@ -957,17 +957,17 @@ export function TeamManager({ initialConfig, defaultMembers = [] }: TeamManagerP
                           value={modalForm.descFr || ''}
                           onChange={(e) => setModalForm((prev) => ({ ...prev, descFr: e.target.value }))}
                           placeholder="Description des responsabilités..."
-                          className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] bg-white text-xs text-[#08242a] focus:outline-none focus:border-[#0d3b43]"
+                          className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] bg-white text-xs text-[#231f20] focus:outline-none focus:border-[#231f20]"
                         />
                       </div>
                     </div>
                   )}
 
                   {langTab === 'en' && (
-                    <div className="space-y-3 p-4 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6]">
+                    <div className="space-y-3 p-4 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6]">
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         <div>
-                          <label className="block text-xs font-bold text-[#08242a] mb-1">
+                          <label className="block text-xs font-bold text-[#231f20] mb-1">
                             Full Name (EN)
                           </label>
                           <input
@@ -975,11 +975,11 @@ export function TeamManager({ initialConfig, defaultMembers = [] }: TeamManagerP
                             value={modalForm.nameEn || ''}
                             onChange={(e) => setModalForm((prev) => ({ ...prev, nameEn: e.target.value }))}
                             placeholder="Ex: Ahmed El Mourabit"
-                            className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] bg-white text-xs text-[#08242a] focus:outline-none focus:border-[#0d3b43]"
+                            className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] bg-white text-xs text-[#231f20] focus:outline-none focus:border-[#231f20]"
                           />
                         </div>
                         <div>
-                          <label className="block text-xs font-bold text-[#08242a] mb-1">
+                          <label className="block text-xs font-bold text-[#231f20] mb-1">
                             Title / Role (EN)
                           </label>
                           <input
@@ -987,14 +987,14 @@ export function TeamManager({ initialConfig, defaultMembers = [] }: TeamManagerP
                             value={modalForm.roleEn || ''}
                             onChange={(e) => setModalForm((prev) => ({ ...prev, roleEn: e.target.value }))}
                             placeholder="Ex: President of the Association"
-                            className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] bg-white text-xs text-[#08242a] focus:outline-none focus:border-[#0d3b43]"
+                            className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] bg-white text-xs text-[#231f20] focus:outline-none focus:border-[#231f20]"
                           />
                         </div>
                       </div>
 
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         <div>
-                          <label className="block text-xs font-bold text-[#08242a] mb-1">
+                          <label className="block text-xs font-bold text-[#231f20] mb-1">
                             Mandate / Scope (EN)
                           </label>
                           <input
@@ -1002,11 +1002,11 @@ export function TeamManager({ initialConfig, defaultMembers = [] }: TeamManagerP
                             value={modalForm.titleStatusEn || ''}
                             onChange={(e) => setModalForm((prev) => ({ ...prev, titleStatusEn: e.target.value }))}
                             placeholder="Ex: Legal Representation & Strategic Direction"
-                            className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] bg-white text-xs text-[#08242a] focus:outline-none focus:border-[#0d3b43]"
+                            className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] bg-white text-xs text-[#231f20] focus:outline-none focus:border-[#231f20]"
                           />
                         </div>
                         <div>
-                          <label className="block text-xs font-bold text-[#08242a] mb-1">
+                          <label className="block text-xs font-bold text-[#231f20] mb-1">
                             Badge (EN)
                           </label>
                           <input
@@ -1014,13 +1014,13 @@ export function TeamManager({ initialConfig, defaultMembers = [] }: TeamManagerP
                             value={modalForm.badgeStatusEn || ''}
                             onChange={(e) => setModalForm((prev) => ({ ...prev, badgeStatusEn: e.target.value }))}
                             placeholder="Ex: Statutory Mandate"
-                            className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] bg-white text-xs text-[#08242a] focus:outline-none focus:border-[#0d3b43]"
+                            className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] bg-white text-xs text-[#231f20] focus:outline-none focus:border-[#231f20]"
                           />
                         </div>
                       </div>
 
                       <div>
-                        <label className="block text-xs font-bold text-[#08242a] mb-1">
+                        <label className="block text-xs font-bold text-[#231f20] mb-1">
                           Bio & Summary (EN)
                         </label>
                         <textarea
@@ -1028,7 +1028,7 @@ export function TeamManager({ initialConfig, defaultMembers = [] }: TeamManagerP
                           value={modalForm.descEn || ''}
                           onChange={(e) => setModalForm((prev) => ({ ...prev, descEn: e.target.value }))}
                           placeholder="Brief description of the officer's mandate..."
-                          className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] bg-white text-xs text-[#08242a] focus:outline-none focus:border-[#0d3b43]"
+                          className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] bg-white text-xs text-[#231f20] focus:outline-none focus:border-[#231f20]"
                         />
                       </div>
                     </div>
@@ -1037,7 +1037,7 @@ export function TeamManager({ initialConfig, defaultMembers = [] }: TeamManagerP
                   {/* Icon & Color Styling */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
                     <div>
-                      <label className="block text-xs font-bold text-[#08242a] mb-1">
+                      <label className="block text-xs font-bold text-[#231f20] mb-1">
                         رمز الأيقونة (إيموجي كبديل للصورة)
                       </label>
                       <div className="flex items-center gap-2">
@@ -1053,7 +1053,7 @@ export function TeamManager({ initialConfig, defaultMembers = [] }: TeamManagerP
                               key={ico}
                               type="button"
                               onClick={() => setModalForm((prev) => ({ ...prev, icon: ico }))}
-                              className="w-7 h-7 rounded-lg bg-[#faf7f2] hover:bg-[#eae4d9] flex items-center justify-center text-sm"
+                              className="w-7 h-7 rounded-lg bg-[#F5F3EE] hover:bg-[#FEF6CC] flex items-center justify-center text-sm"
                             >
                               {ico}
                             </button>
@@ -1063,7 +1063,7 @@ export function TeamManager({ initialConfig, defaultMembers = [] }: TeamManagerP
                     </div>
 
                     <div>
-                      <label className="block text-xs font-bold text-[#08242a] mb-1">
+                      <label className="block text-xs font-bold text-[#231f20] mb-1">
                         نمط الألوان والشارة
                       </label>
                       <select
@@ -1073,10 +1073,10 @@ export function TeamManager({ initialConfig, defaultMembers = [] }: TeamManagerP
                           setModalForm((prev) => ({
                             ...prev,
                             colorClass: e.target.value,
-                            accentBg: opt?.badge || 'bg-[#0d3b43]/10 text-[#0d3b43]',
+                            accentBg: opt?.badge || 'bg-[#231f20]/10 text-[#231f20]',
                           }))
                         }}
-                        className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] bg-white text-xs text-[#08242a] focus:outline-none"
+                        className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] bg-white text-xs text-[#231f20] focus:outline-none"
                       >
                         {COLOR_OPTIONS.map((opt) => (
                           <option key={opt.border} value={opt.border}>
@@ -1092,18 +1092,18 @@ export function TeamManager({ initialConfig, defaultMembers = [] }: TeamManagerP
               {/* TAB 2: PHOTO UPLOAD */}
               {modalTab === 'photo' && (
                 <div className="space-y-4">
-                  <div className="p-4 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6] space-y-4">
-                    <span className="text-xs font-bold text-[#08242a] block">
+                  <div className="p-4 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6] space-y-4">
+                    <span className="text-xs font-bold text-[#231f20] block">
                       صورة العضو الشخصية أو الرسمية
                     </span>
-                    <p className="text-3xs text-[#5f7174]">
+                    <p className="text-3xs text-[#5C5A55]">
                       يتم حفظ الصور المرفوعة في سحابة التخزين وتنسيقها تلقائياً بشكل دائري أو بطاقي مع تأثير تكبير احترافي.
                     </p>
 
                     {/* Preview Box */}
                     <div className="flex flex-col sm:flex-row items-center gap-4 p-4 bg-white rounded-2xl border border-[#e5e0d6]">
                       {modalForm.photoUrl ? (
-                        <div className="w-24 h-24 rounded-2xl overflow-hidden border-2 border-[#0d3b43] shadow-md relative group shrink-0">
+                        <div className="w-24 h-24 rounded-2xl overflow-hidden border-2 border-[#231f20] shadow-md relative group shrink-0">
                           <ImageWithFallback
                             src={modalForm.photoUrl}
                             alt="معاينة الصورة"
@@ -1113,7 +1113,7 @@ export function TeamManager({ initialConfig, defaultMembers = [] }: TeamManagerP
                           />
                         </div>
                       ) : (
-                        <div className="w-24 h-24 rounded-2xl bg-[#faf7f2] border border-dashed border-[#819598] flex flex-col items-center justify-center text-[#819598] shrink-0">
+                        <div className="w-24 h-24 rounded-2xl bg-[#F5F3EE] border border-dashed border-[#5C5A55] flex flex-col items-center justify-center text-[#5C5A55] shrink-0">
                           <span className="text-2xl mb-1">👤</span>
                           <span className="text-3xs font-bold">بدون صورة</span>
                         </div>
@@ -1125,7 +1125,7 @@ export function TeamManager({ initialConfig, defaultMembers = [] }: TeamManagerP
                             <div className="text-xs font-bold text-emerald-700 flex items-center gap-1.5">
                               <span>✓ تم ربط الصورة بنجاح:</span>
                             </div>
-                            <p className="text-3xs text-[#819598] break-all font-mono">
+                            <p className="text-3xs text-[#5C5A55] break-all font-mono">
                               {modalForm.photoUrl}
                             </p>
                             <div className="flex items-center gap-2">
@@ -1133,7 +1133,7 @@ export function TeamManager({ initialConfig, defaultMembers = [] }: TeamManagerP
                                 type="button"
                                 onClick={() => fileInputRef.current?.click()}
                                 disabled={uploadingPhoto}
-                                className="px-3 py-1.5 rounded-xl bg-[#0d3b43] text-white text-3xs font-bold hover:bg-[#14505b] transition-colors"
+                                className="px-3 py-1.5 rounded-xl bg-[#231f20] text-white text-3xs font-bold hover:bg-[#d2a82b] transition-colors"
                               >
                                 {uploadingPhoto ? 'جارٍ الاستبدال...' : 'استبدال الصورة'}
                               </button>
@@ -1148,14 +1148,14 @@ export function TeamManager({ initialConfig, defaultMembers = [] }: TeamManagerP
                           </>
                         ) : (
                           <>
-                            <p className="text-xs text-[#5f7174]">
+                            <p className="text-xs text-[#5C5A55]">
                               انقر أدناه لاختيار صورة من جهازك (JPG, PNG, WEBP) بحد أقصى 5 ميغابايت.
                             </p>
                             <button
                               type="button"
                               onClick={() => fileInputRef.current?.click()}
                               disabled={uploadingPhoto}
-                              className="px-4 py-2 rounded-xl bg-[#c85a32] text-white text-xs font-bold hover:bg-[#a64522] transition-colors flex items-center gap-2"
+                              className="px-4 py-2 rounded-xl bg-[#bd3227] text-white text-xs font-bold hover:bg-[#a3261c] transition-colors flex items-center gap-2"
                             >
                               <span>📷</span>
                               <span>{uploadingPhoto ? 'جارٍ رفع الصورة...' : 'اختر صورة لرفعها الآن'}</span>
@@ -1182,7 +1182,7 @@ export function TeamManager({ initialConfig, defaultMembers = [] }: TeamManagerP
 
                     {/* Direct URL Input Option */}
                     <div className="pt-3 border-t border-[#e5e0d6]">
-                      <label className="block text-3xs font-bold text-[#819598] mb-1">
+                      <label className="block text-3xs font-bold text-[#5C5A55] mb-1">
                         أو أدخل رابط الصورة المباشر (URL):
                       </label>
                       <input
@@ -1190,7 +1190,7 @@ export function TeamManager({ initialConfig, defaultMembers = [] }: TeamManagerP
                         value={modalForm.photoUrl || ''}
                         onChange={(e) => setModalForm((prev) => ({ ...prev, photoUrl: e.target.value }))}
                         placeholder="https://... أو /uploads/photo.jpg"
-                        className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] bg-white text-xs text-[#08242a] focus:outline-none focus:border-[#0d3b43] font-mono"
+                        className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] bg-white text-xs text-[#231f20] focus:outline-none focus:border-[#231f20] font-mono"
                       />
                     </div>
                   </div>
@@ -1200,19 +1200,19 @@ export function TeamManager({ initialConfig, defaultMembers = [] }: TeamManagerP
               {/* TAB 3: DUTIES & RESPONSIBILITIES */}
               {modalTab === 'duties' && (
                 <div className="space-y-4">
-                  <div className="p-4 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6] space-y-4">
+                  <div className="p-4 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6] space-y-4">
                     <div className="flex items-center justify-between">
-                      <span className="text-xs font-bold text-[#08242a] block">
+                      <span className="text-xs font-bold text-[#231f20] block">
                         قائمة المهام والمسؤوليات النظامية
                       </span>
-                      <span className="text-3xs text-[#819598]">
+                      <span className="text-3xs text-[#5C5A55]">
                         تظهر في بطاقة العضو في الموقع العام
                       </span>
                     </div>
 
                     {/* Arabic Duties */}
                     <div className="space-y-2">
-                      <label className="block text-3xs font-bold text-[#0d3b43]">
+                      <label className="block text-3xs font-bold text-[#231f20]">
                         المهام بالعربية ({modalForm.dutiesAr?.length || 0})
                       </label>
                       <div className="flex items-center gap-2">
@@ -1246,7 +1246,7 @@ export function TeamManager({ initialConfig, defaultMembers = [] }: TeamManagerP
                               setNewDutyAr('')
                             }
                           }}
-                          className="px-3 py-1.5 rounded-xl bg-[#0d3b43] text-white text-xs font-bold"
+                          className="px-3 py-1.5 rounded-xl bg-[#231f20] text-white text-xs font-bold"
                         >
                           إضافة
                         </button>
@@ -1278,7 +1278,7 @@ export function TeamManager({ initialConfig, defaultMembers = [] }: TeamManagerP
 
                     {/* French Duties */}
                     <div className="space-y-2 pt-2 border-t border-[#e5e0d6]">
-                      <label className="block text-3xs font-bold text-[#c85a32]">
+                      <label className="block text-3xs font-bold text-[#bd3227]">
                         Missions en Français ({modalForm.dutiesFr?.length || 0})
                       </label>
                       <div className="flex items-center gap-2">
@@ -1312,7 +1312,7 @@ export function TeamManager({ initialConfig, defaultMembers = [] }: TeamManagerP
                               setNewDutyFr('')
                             }
                           }}
-                          className="px-3 py-1.5 rounded-xl bg-[#c85a32] text-white text-xs font-bold"
+                          className="px-3 py-1.5 rounded-xl bg-[#bd3227] text-white text-xs font-bold"
                         >
                           Ajouter
                         </button>
@@ -1344,7 +1344,7 @@ export function TeamManager({ initialConfig, defaultMembers = [] }: TeamManagerP
 
                     {/* English Duties */}
                     <div className="space-y-2 pt-2 border-t border-[#e5e0d6]">
-                      <label className="block text-3xs font-bold text-[#1c6875]">
+                      <label className="block text-3xs font-bold text-[#d2a82b]">
                         Responsibilities in English ({modalForm.dutiesEn?.length || 0})
                       </label>
                       <div className="flex items-center gap-2">
@@ -1378,7 +1378,7 @@ export function TeamManager({ initialConfig, defaultMembers = [] }: TeamManagerP
                               setNewDutyEn('')
                             }
                           }}
-                          className="px-3 py-1.5 rounded-xl bg-[#1c6875] text-white text-xs font-bold"
+                          className="px-3 py-1.5 rounded-xl bg-[#d2a82b] text-white text-xs font-bold"
                         >
                           Add
                         </button>
@@ -1412,10 +1412,10 @@ export function TeamManager({ initialConfig, defaultMembers = [] }: TeamManagerP
               )}
 
               {/* Status Active Toggle */}
-              <div className="flex items-center justify-between p-3 rounded-xl bg-[#faf7f2] border border-[#e5e0d6]">
+              <div className="flex items-center justify-between p-3 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6]">
                 <div>
-                  <span className="block text-xs font-bold text-[#08242a]">تفعيل ظهور العضو في الموقع</span>
-                  <span className="block text-3xs text-[#819598]">عند التعطيل، يبقى العضو محفوظاً في لوحة التحكم ويختفي من الصفحة العامة.</span>
+                  <span className="block text-xs font-bold text-[#231f20]">تفعيل ظهور العضو في الموقع</span>
+                  <span className="block text-3xs text-[#5C5A55]">عند التعطيل، يبقى العضو محفوظاً في لوحة التحكم ويختفي من الصفحة العامة.</span>
                 </div>
                 <label className="relative inline-flex items-center cursor-pointer">
                   <input
@@ -1433,13 +1433,13 @@ export function TeamManager({ initialConfig, defaultMembers = [] }: TeamManagerP
                 <button
                   type="button"
                   onClick={() => setIsModalOpen(false)}
-                  className="px-4 py-2 rounded-xl bg-[#faf7f2] hover:bg-[#eae4d9] text-[#08242a] text-xs font-bold transition-colors cursor-pointer"
+                  className="px-4 py-2 rounded-xl bg-[#F5F3EE] hover:bg-[#FEF6CC] text-[#231f20] text-xs font-bold transition-colors cursor-pointer"
                 >
                   إلغاء
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2 rounded-xl bg-[#0d3b43] hover:bg-[#14505b] text-white text-xs font-bold transition-all shadow-xs cursor-pointer"
+                  className="px-5 py-2 rounded-xl bg-[#231f20] hover:bg-[#d2a82b] text-white text-xs font-bold transition-all shadow-xs cursor-pointer"
                 >
                   {editingMember ? 'تحديث بيانات العضو' : 'إضافة العضو للقائمة'}
                 </button>

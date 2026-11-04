@@ -43,7 +43,7 @@ export default async function AdminLayout({
 
   return (
     <html lang="ar" dir="rtl" className={`h-full ${cairo.variable} ${sora.variable}`} suppressHydrationWarning>
-      <body className="min-h-full text-[#08242a] bg-[#faf7f2] font-arabic antialiased" suppressHydrationWarning>
+      <body className="min-h-full text-[#231f20] bg-[#F5F3EE] font-arabic antialiased" suppressHydrationWarning>
         {user ? (
           <AdminLayoutClient
             userEmail={user.email || 'admin@amycc.org'}
@@ -52,7 +52,7 @@ export default async function AdminLayout({
             {children}
           </AdminLayoutClient>
         ) : (
-          <main className="min-h-screen flex items-center justify-center p-6 bg-[#faf7f2]">
+          <main className="min-h-screen flex items-center justify-center p-6 bg-[#F5F3EE]">
             {children}
           </main>
         )}

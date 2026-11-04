@@ -338,24 +338,24 @@ export function NewsAdminTabs({
         <div>
           <div className="flex items-center gap-2 mb-1">
             <span className="text-xl">📰</span>
-            <h1 className="text-2xl font-black text-[#08242a]">
+            <h1 className="text-2xl font-black text-[#231f20]">
               إدارة الأخبار والمركز الإعلامي
             </h1>
           </div>
-          <p className="text-xs text-[#5f7174]">
+          <p className="text-xs text-[#5C5A55]">
             نشر البيانات الصحفية، متابعة المقالات الثقافية، وتخصيص واجهة صفحة الأخبار بالكامل
           </p>
         </div>
 
         {/* Tab Buttons */}
-        <div className="flex items-center p-1 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6] shadow-2xs self-start sm:self-auto">
+        <div className="flex items-center p-1 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6] shadow-2xs self-start sm:self-auto">
           <button
             type="button"
             onClick={() => setActiveTab('articles')}
             className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-2 ${
               activeTab === 'articles'
-                ? 'bg-[#0d3b43] text-white shadow-xs'
-                : 'text-[#445457] hover:bg-[#eae4d9]'
+                ? 'bg-[#231f20] text-white shadow-xs'
+                : 'text-[#5C5A55] hover:bg-[#FEF6CC]'
             }`}
           >
             <span>📑</span>
@@ -366,8 +366,8 @@ export function NewsAdminTabs({
             onClick={() => setActiveTab('page-settings')}
             className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-2 ${
               activeTab === 'page-settings'
-                ? 'bg-[#0d3b43] text-white shadow-xs'
-                : 'text-[#445457] hover:bg-[#eae4d9]'
+                ? 'bg-[#231f20] text-white shadow-xs'
+                : 'text-[#5C5A55] hover:bg-[#FEF6CC]'
             }`}
           >
             <span>⚙️</span>
@@ -408,11 +408,11 @@ export function NewsAdminTabs({
           {/* Quick Metrics Cards */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div className="bg-white p-5 rounded-2xl border border-[#e5e0d6] shadow-2xs">
-              <span className="text-3xs font-extrabold uppercase text-[#819598] block mb-1">
+              <span className="text-3xs font-extrabold uppercase text-[#5C5A55] block mb-1">
                 إجمالي المواد الإخبارية
               </span>
-              <span className="text-2xl font-black text-[#08242a]">{totalArticles}</span>
-              <span className="text-3xs text-[#5f7174] block mt-1">مقالات وبيانات مسجلة</span>
+              <span className="text-2xl font-black text-[#231f20]">{totalArticles}</span>
+              <span className="text-3xs text-[#5C5A55] block mt-1">مقالات وبيانات مسجلة</span>
             </div>
 
             <div className="bg-white p-5 rounded-2xl border border-[#e5e0d6] shadow-2xs">
@@ -420,7 +420,7 @@ export function NewsAdminTabs({
                 منشور حالياً (Live)
               </span>
               <span className="text-2xl font-black text-emerald-800">{publishedCount}</span>
-              <span className="text-3xs text-[#5f7174] block mt-1">يظهر للعموم في الموقع</span>
+              <span className="text-3xs text-[#5C5A55] block mt-1">يظهر للعموم في الموقع</span>
             </div>
 
             <div className="bg-white p-5 rounded-2xl border border-[#e5e0d6] shadow-2xs">
@@ -428,7 +428,7 @@ export function NewsAdminTabs({
                 مسودات قيد الإعداد (Drafts)
               </span>
               <span className="text-2xl font-black text-amber-800">{draftCount}</span>
-              <span className="text-3xs text-[#5f7174] block mt-1">غير منشورة بعد</span>
+              <span className="text-3xs text-[#5C5A55] block mt-1">غير منشورة بعد</span>
             </div>
           </div>
 
@@ -442,16 +442,16 @@ export function NewsAdminTabs({
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="بحث في المقالات بالعنوان أو الرابط..."
-                  className="w-full ps-9 pe-4 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#faf7f2] focus:bg-white focus:border-[#0d3b43] outline-none transition-all"
+                  className="w-full ps-9 pe-4 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE] focus:bg-white focus:border-[#231f20] outline-none transition-all"
                 />
-                <span className="absolute start-3 top-1/2 -translate-y-1/2 text-xs text-[#819598]">
+                <span className="absolute start-3 top-1/2 -translate-y-1/2 text-xs text-[#5C5A55]">
                   🔍
                 </span>
                 {searchQuery && (
                   <button
                     type="button"
                     onClick={() => setSearchQuery('')}
-                    className="absolute end-3 top-1/2 -translate-y-1/2 text-xs text-[#819598] hover:text-[#08242a]"
+                    className="absolute end-3 top-1/2 -translate-y-1/2 text-xs text-[#5C5A55] hover:text-[#231f20]"
                   >
                     ✕
                   </button>
@@ -463,7 +463,7 @@ export function NewsAdminTabs({
                 <select
                   value={statusFilter}
                   onChange={(e) => setStatusFilter(e.target.value as 'all' | 'published' | 'draft')}
-                  className="px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs font-bold bg-[#faf7f2] text-[#08242a] outline-none"
+                  className="px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs font-bold bg-[#F5F3EE] text-[#231f20] outline-none"
                 >
                   <option value="all">كافة الحالات</option>
                   <option value="published">المنشورة فقط</option>
@@ -474,7 +474,7 @@ export function NewsAdminTabs({
                   type="button"
                   disabled={seedingArticles}
                   onClick={handleSeedDefaultArticles}
-                  className="inline-flex items-center gap-2 px-3.5 py-2 bg-[#faf7f2] border border-[#e5e0d6] text-[#08242a] text-xs font-bold rounded-xl hover:bg-[#eae4d9] active:scale-98 transition-all shadow-2xs disabled:opacity-50 cursor-pointer"
+                  className="inline-flex items-center gap-2 px-3.5 py-2 bg-[#F5F3EE] border border-[#e5e0d6] text-[#231f20] text-xs font-bold rounded-xl hover:bg-[#FEF6CC] active:scale-98 transition-all shadow-2xs disabled:opacity-50 cursor-pointer"
                   title="استيراد وتحديث المقالات النموذجية الرسمية الثلاث"
                 >
                   <span>📥</span>
@@ -483,7 +483,7 @@ export function NewsAdminTabs({
 
                 <Link
                   href="/admin/news/new"
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-[#0d3b43] text-white text-xs font-bold rounded-xl hover:bg-[#14505b] active:scale-98 transition-all shadow-xs"
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-[#231f20] text-white text-xs font-bold rounded-xl hover:bg-[#d2a82b] active:scale-98 transition-all shadow-xs"
                 >
                   <span>✍️</span>
                   <span>كتابة مقال جديد</span>
@@ -507,8 +507,8 @@ export function NewsAdminTabs({
                   onClick={() => setSelectedCategory(c.id)}
                   className={`px-3 py-1.5 rounded-lg font-bold transition-all cursor-pointer shrink-0 ${
                     selectedCategory === c.id
-                      ? 'bg-[#0d3b43] text-white shadow-2xs'
-                      : 'bg-[#faf7f2] text-[#5f7174] hover:bg-[#eae4d9]'
+                      ? 'bg-[#231f20] text-white shadow-2xs'
+                      : 'bg-[#F5F3EE] text-[#5C5A55] hover:bg-[#FEF6CC]'
                   }`}
                 >
                   {c.label}
@@ -520,8 +520,8 @@ export function NewsAdminTabs({
           {/* Articles Table */}
           <div className="bg-white rounded-2xl border border-[#e5e0d6] overflow-hidden shadow-2xs">
             <div className="overflow-x-auto">
-              <table className="w-full text-start text-xs text-[#2d3b3e]">
-                <thead className="bg-[#faf7f2] border-b border-[#e5e0d6] text-3xs uppercase tracking-wider text-[#5f7174] font-black">
+              <table className="w-full text-start text-xs text-[#231f20]">
+                <thead className="bg-[#F5F3EE] border-b border-[#e5e0d6] text-3xs uppercase tracking-wider text-[#5C5A55] font-black">
                   <tr>
                     <th className="px-6 py-4 text-start">المقال والغلاف</th>
                     <th className="px-6 py-4 text-start">التصنيف</th>
@@ -530,17 +530,17 @@ export function NewsAdminTabs({
                     <th className="px-6 py-4 text-start">الإجراءات</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-[#f4ede2]">
+                <tbody className="divide-y divide-[#FEF6CC]">
                   {filteredArticles.length > 0 ? (
                     filteredArticles.map((art) => {
                       const title = art.news_translations?.[0]?.title || art.slug
                       const dateObj = art.published_at ? new Date(art.published_at) : null
 
                       return (
-                        <tr key={art.id} className="hover:bg-[#faf7f2]/60 transition-colors">
+                        <tr key={art.id} className="hover:bg-[#F5F3EE]/60 transition-colors">
                           <td className="px-6 py-4">
                             <div className="flex items-center gap-3">
-                              <div className="relative w-12 h-12 rounded-xl bg-[#08242a] overflow-hidden shrink-0 border border-[#e5e0d6]">
+                              <div className="relative w-12 h-12 rounded-xl bg-[#231f20] overflow-hidden shrink-0 border border-[#e5e0d6]">
                                 {art.cover_image ? (
                                   <Image
                                     src={art.cover_image}
@@ -556,22 +556,22 @@ export function NewsAdminTabs({
                                 )}
                               </div>
                               <div>
-                                <div className="font-extrabold text-[#08242a] text-xs sm:text-sm">
+                                <div className="font-extrabold text-[#231f20] text-xs sm:text-sm">
                                   {title}
                                 </div>
-                                <div className="text-[#819598] text-3xs font-mono">
+                                <div className="text-[#5C5A55] text-3xs font-mono">
                                   /{art.slug}
                                 </div>
                               </div>
                             </div>
                           </td>
                           <td className="px-6 py-4">
-                            <span className="px-2.5 py-1 rounded-md text-3xs font-extrabold bg-[#faf7f2] border border-[#e5e0d6] text-[#0d3b43]">
+                            <span className="px-2.5 py-1 rounded-md text-3xs font-extrabold bg-[#F5F3EE] border border-[#e5e0d6] text-[#231f20]">
                               {art.category}
                             </span>
                           </td>
                           <td className="px-6 py-4">
-                            <span className="font-bold block text-[#08242a]">
+                            <span className="font-bold block text-[#231f20]">
                               {dateObj
                                 ? dateObj.toLocaleDateString('ar-MA', {
                                     year: 'numeric',
@@ -605,7 +605,7 @@ export function NewsAdminTabs({
                                 href={`/ar/news/${art.slug}`}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="px-2.5 py-1.5 rounded-lg text-2xs font-bold bg-[#faf7f2] border border-[#e5e0d6] text-[#0d3b43] hover:bg-[#eae4d9] transition-colors flex items-center gap-1"
+                                className="px-2.5 py-1.5 rounded-lg text-2xs font-bold bg-[#F5F3EE] border border-[#e5e0d6] text-[#231f20] hover:bg-[#FEF6CC] transition-colors flex items-center gap-1"
                                 title="معاينة المقال في الموقع"
                               >
                                 <span>معاينة</span>
@@ -613,7 +613,7 @@ export function NewsAdminTabs({
                               </a>
                               <Link
                                 href={`/admin/news/${art.id}/edit`}
-                                className="px-3 py-1.5 rounded-lg text-2xs font-bold bg-[#faf7f2] border border-[#e5e0d6] text-[#08242a] hover:bg-[#eae4d9] transition-colors"
+                                className="px-3 py-1.5 rounded-lg text-2xs font-bold bg-[#F5F3EE] border border-[#e5e0d6] text-[#231f20] hover:bg-[#FEF6CC] transition-colors"
                               >
                                 تعديل
                               </Link>
@@ -635,13 +635,13 @@ export function NewsAdminTabs({
                       <td colSpan={5} className="px-6 py-12 text-center">
                         {articles.length === 0 ? (
                           <div className="max-w-md mx-auto space-y-3">
-                            <div className="w-12 h-12 mx-auto rounded-2xl bg-[#faf7f2] border border-[#e5e0d6] flex items-center justify-center text-xl">
+                            <div className="w-12 h-12 mx-auto rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6] flex items-center justify-center text-xl">
                               📰
                             </div>
-                            <h3 className="text-sm font-extrabold text-[#08242a]">
+                            <h3 className="text-sm font-extrabold text-[#231f20]">
                               لا توجد مقالات مسجلة في قاعدة البيانات حالياً
                             </h3>
-                            <p className="text-xs text-[#819598] leading-relaxed">
+                            <p className="text-xs text-[#5C5A55] leading-relaxed">
                               يمكنك البدء بكتابة مقال إخباري جديد، أو استيراد المقالات النموذجية الرسمية الثلاث (الإطلاق الرسمي، تطوع شباب في العمل، ورشات المسرح) لتظهر في لوحة التحكم والموقع مباشرة.
                             </p>
                             <div className="flex items-center justify-center gap-3 pt-2">
@@ -649,14 +649,14 @@ export function NewsAdminTabs({
                                 type="button"
                                 disabled={seedingArticles}
                                 onClick={handleSeedDefaultArticles}
-                                className="inline-flex items-center gap-2 px-4 py-2 bg-[#0d3b43] text-white text-xs font-bold rounded-xl hover:bg-[#14505b] transition-all shadow-xs disabled:opacity-50 cursor-pointer"
+                                className="inline-flex items-center gap-2 px-4 py-2 bg-[#231f20] text-white text-xs font-bold rounded-xl hover:bg-[#d2a82b] transition-all shadow-xs disabled:opacity-50 cursor-pointer"
                               >
                                 <span>📥</span>
                                 <span>{seedingArticles ? 'جارٍ الاستيراد...' : 'استيراد المقالات النموذجية الآن'}</span>
                               </button>
                               <Link
                                 href="/admin/news/new"
-                                className="inline-flex items-center gap-2 px-4 py-2 bg-[#faf7f2] border border-[#e5e0d6] text-[#08242a] text-xs font-bold rounded-xl hover:bg-[#eae4d9] transition-all"
+                                className="inline-flex items-center gap-2 px-4 py-2 bg-[#F5F3EE] border border-[#e5e0d6] text-[#231f20] text-xs font-bold rounded-xl hover:bg-[#FEF6CC] transition-all"
                               >
                                 <span>✍️</span>
                                 <span>كتابة مقال جديد</span>
@@ -664,7 +664,7 @@ export function NewsAdminTabs({
                             </div>
                           </div>
                         ) : (
-                          <span className="text-[#819598] text-xs">
+                          <span className="text-[#5C5A55] text-xs">
                             لا توجد مقالات مطابقة لمعايير البحث حالياً.
                           </span>
                         )}
@@ -685,10 +685,10 @@ export function NewsAdminTabs({
         <div className="space-y-6">
           {/* Language Selector Bar */}
           <div className="bg-white p-4 rounded-2xl border border-[#e5e0d6] shadow-2xs flex items-center justify-between">
-            <span className="text-xs font-extrabold text-[#08242a]">
+            <span className="text-xs font-extrabold text-[#231f20]">
               لغة التحرير والمعاينة:
             </span>
-            <div className="flex gap-1.5 p-1 rounded-xl bg-[#faf7f2] border border-[#e5e0d6]">
+            <div className="flex gap-1.5 p-1 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6]">
               {(['ar', 'fr', 'en'] as const).map((lang) => (
                 <button
                   key={lang}
@@ -696,8 +696,8 @@ export function NewsAdminTabs({
                   onClick={() => setActiveLangTab(lang)}
                   className={`px-3 py-1.5 text-xs font-black rounded-lg transition-all cursor-pointer ${
                     activeLangTab === lang
-                      ? 'bg-[#0d3b43] text-white shadow-xs'
-                      : 'text-[#445457] hover:bg-[#eae4d9]'
+                      ? 'bg-[#231f20] text-white shadow-xs'
+                      : 'text-[#5C5A55] hover:bg-[#FEF6CC]'
                   }`}
                 >
                   {lang === 'ar' ? 'العربية (AR)' : lang === 'fr' ? 'Français (FR)' : 'English (EN)'}
@@ -708,19 +708,19 @@ export function NewsAdminTabs({
 
           {/* Hero Section Config */}
           <div className="bg-white p-6 rounded-2xl border border-[#e5e0d6] shadow-2xs space-y-4">
-            <h3 className="text-sm font-extrabold text-[#08242a] pb-2 border-b border-[#f4ede2] flex items-center gap-2">
+            <h3 className="text-sm font-extrabold text-[#231f20] pb-2 border-b border-[#FEF6CC] flex items-center gap-2">
               <span>🖼️</span>
               <span>واجهة الهيدر الرئيسي لصفحة الأخبار (Hero Section)</span>
             </h3>
 
             {/* Hero Image Settings */}
-            <div className="p-4 rounded-xl bg-[#faf7f2] border border-[#e5e0d6] space-y-3">
+            <div className="p-4 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] space-y-3">
               <div className="flex items-center justify-between">
                 <div>
-                  <span className="text-xs font-bold text-[#08242a] block">
+                  <span className="text-xs font-bold text-[#231f20] block">
                     تفعيل صورة خلفية هيدر الأخبار
                   </span>
-                  <span className="text-3xs text-[#819598]">
+                  <span className="text-3xs text-[#5C5A55]">
                     عند التفعيل، تظهر صورة بانورامية عالية الدقة في رأس صفحة الأخبار مع نمط مغربي أنيق
                   </span>
                 </div>
@@ -731,14 +731,14 @@ export function NewsAdminTabs({
                     onChange={(e) => updateHero('hasHeroImage', e.target.checked)}
                     className="sr-only peer"
                   />
-                  <div className="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#0d3b43]" />
+                  <div className="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#231f20]" />
                 </label>
               </div>
 
               {config.hero.hasHeroImage && (
                 <div className="pt-3 border-t border-[#e5e0d6] space-y-3">
                   <div>
-                    <label className="block text-2xs font-bold text-[#08242a] mb-1">
+                    <label className="block text-2xs font-bold text-[#231f20] mb-1">
                       رابط صورة الهيدر (URL):
                     </label>
                     <input
@@ -746,12 +746,12 @@ export function NewsAdminTabs({
                       value={config.hero.imageUrl}
                       onChange={(e) => updateHero('imageUrl', e.target.value)}
                       placeholder="/uploads/news-hero.jpg أو رابط خارجي https://..."
-                      className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs focus:border-[#0d3b43] outline-none"
+                      className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs focus:border-[#231f20] outline-none"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-2xs font-bold text-[#08242a] mb-1">
+                    <label className="block text-2xs font-bold text-[#231f20] mb-1">
                       أو رفع صورة من جهازك مباشرة:
                     </label>
                     <div className="flex items-center gap-2">
@@ -766,7 +766,7 @@ export function NewsAdminTabs({
                         type="button"
                         onClick={() => fileInputRef.current?.click()}
                         disabled={uploadingImage}
-                        className="w-full px-4 py-2 rounded-xl text-xs font-bold text-white bg-[#0d3b43] hover:bg-[#14505b] disabled:opacity-50 transition-colors flex items-center justify-center gap-2 cursor-pointer"
+                        className="w-full px-4 py-2 rounded-xl text-xs font-bold text-white bg-[#231f20] hover:bg-[#d2a82b] disabled:opacity-50 transition-colors flex items-center justify-center gap-2 cursor-pointer"
                       >
                         {uploadingImage ? 'جاري الرفع...' : '📁 اختيار ملف من الجهاز ورفعه'}
                       </button>
@@ -779,7 +779,7 @@ export function NewsAdminTabs({
             {/* Multilingual Text Inputs */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-2xs font-bold text-[#08242a] mb-1">
+                <label className="block text-2xs font-bold text-[#231f20] mb-1">
                   الوسم العلوي (Tag):
                 </label>
                 <input
@@ -797,12 +797,12 @@ export function NewsAdminTabs({
                       e.target.value
                     )
                   }
-                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs outline-none focus:border-[#0d3b43]"
+                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs outline-none focus:border-[#231f20]"
                 />
               </div>
 
               <div>
-                <label className="block text-2xs font-bold text-[#08242a] mb-1">
+                <label className="block text-2xs font-bold text-[#231f20] mb-1">
                   الشارة البارزة (Badge):
                 </label>
                 <input
@@ -824,12 +824,12 @@ export function NewsAdminTabs({
                       e.target.value
                     )
                   }
-                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs outline-none focus:border-[#0d3b43]"
+                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs outline-none focus:border-[#231f20]"
                 />
               </div>
 
               <div className="md:col-span-2">
-                <label className="block text-2xs font-bold text-[#08242a] mb-1">
+                <label className="block text-2xs font-bold text-[#231f20] mb-1">
                   العنوان الرئيسي (Title):
                 </label>
                 <input
@@ -851,12 +851,12 @@ export function NewsAdminTabs({
                       e.target.value
                     )
                   }
-                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs font-bold outline-none focus:border-[#0d3b43]"
+                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs font-bold outline-none focus:border-[#231f20]"
                 />
               </div>
 
               <div className="md:col-span-2">
-                <label className="block text-2xs font-bold text-[#08242a] mb-1">
+                <label className="block text-2xs font-bold text-[#231f20] mb-1">
                   العنوان الفرعي (Subtitle):
                 </label>
                 <input
@@ -878,12 +878,12 @@ export function NewsAdminTabs({
                       e.target.value
                     )
                   }
-                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs outline-none focus:border-[#0d3b43]"
+                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs outline-none focus:border-[#231f20]"
                 />
               </div>
 
               <div className="md:col-span-2">
-                <label className="block text-2xs font-bold text-[#08242a] mb-1">
+                <label className="block text-2xs font-bold text-[#231f20] mb-1">
                   الوصف التقديمي (Description):
                 </label>
                 <textarea
@@ -905,12 +905,12 @@ export function NewsAdminTabs({
                       e.target.value
                     )
                   }
-                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs outline-none focus:border-[#0d3b43]"
+                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs outline-none focus:border-[#231f20]"
                 />
               </div>
 
               <div>
-                <label className="block text-2xs font-bold text-[#08242a] mb-1">
+                <label className="block text-2xs font-bold text-[#231f20] mb-1">
                   نص الزر الرئيسي:
                 </label>
                 <input
@@ -932,19 +932,19 @@ export function NewsAdminTabs({
                       e.target.value
                     )
                   }
-                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs outline-none focus:border-[#0d3b43]"
+                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs outline-none focus:border-[#231f20]"
                 />
               </div>
 
               <div>
-                <label className="block text-2xs font-bold text-[#08242a] mb-1">
+                <label className="block text-2xs font-bold text-[#231f20] mb-1">
                   رابط الزر الرئيسي:
                 </label>
                 <input
                   type="text"
                   value={config.hero.primaryBtnUrl}
                   onChange={(e) => updateHero('primaryBtnUrl', e.target.value)}
-                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs outline-none focus:border-[#0d3b43]"
+                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs outline-none focus:border-[#231f20]"
                 />
               </div>
             </div>
@@ -952,7 +952,7 @@ export function NewsAdminTabs({
 
           {/* 4 Impact Stats */}
           <div className="bg-white p-6 rounded-2xl border border-[#e5e0d6] shadow-2xs space-y-4">
-            <h3 className="text-sm font-extrabold text-[#08242a] pb-2 border-b border-[#f4ede2] flex items-center gap-2">
+            <h3 className="text-sm font-extrabold text-[#231f20] pb-2 border-b border-[#FEF6CC] flex items-center gap-2">
               <span>📊</span>
               <span>مؤشرات وأرقام المركز الإعلامي الأربعة (4 Media KPIs)</span>
             </h3>
@@ -961,10 +961,10 @@ export function NewsAdminTabs({
               {config.stats.map((stat, idx) => (
                 <div
                   key={stat.id}
-                  className="p-4 rounded-xl border border-[#e5e0d6] bg-[#faf7f2] space-y-3"
+                  className="p-4 rounded-xl border border-[#e5e0d6] bg-[#F5F3EE] space-y-3"
                 >
                   <div className="flex items-center justify-between">
-                    <span className="text-3xs font-black text-[#0d3b43]">
+                    <span className="text-3xs font-black text-[#231f20]">
                       مؤشر {idx + 1}
                     </span>
                     <input
@@ -976,7 +976,7 @@ export function NewsAdminTabs({
                   </div>
 
                   <div>
-                    <label className="block text-3xs font-bold text-[#08242a] mb-1">
+                    <label className="block text-3xs font-bold text-[#231f20] mb-1">
                       القيمة ({activeLangTab.toUpperCase()}):
                     </label>
                     <input
@@ -1004,7 +1004,7 @@ export function NewsAdminTabs({
                   </div>
 
                   <div>
-                    <label className="block text-3xs font-bold text-[#08242a] mb-1">
+                    <label className="block text-3xs font-bold text-[#231f20] mb-1">
                       العنوان ({activeLangTab.toUpperCase()}):
                     </label>
                     <input
@@ -1037,14 +1037,14 @@ export function NewsAdminTabs({
 
           {/* CTA Banner Config */}
           <div className="bg-white p-6 rounded-2xl border border-[#e5e0d6] shadow-2xs space-y-4">
-            <h3 className="text-sm font-extrabold text-[#08242a] pb-2 border-b border-[#f4ede2] flex items-center gap-2">
+            <h3 className="text-sm font-extrabold text-[#231f20] pb-2 border-b border-[#FEF6CC] flex items-center gap-2">
               <span>📣</span>
               <span>بانر العلاقات الصحفية والإعلامية (Press & Media CTA)</span>
             </h3>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-2xs font-bold text-[#08242a] mb-1">
+                <label className="block text-2xs font-bold text-[#231f20] mb-1">
                   شارة البانر:
                 </label>
                 <input
@@ -1062,12 +1062,12 @@ export function NewsAdminTabs({
                       e.target.value
                     )
                   }
-                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs outline-none focus:border-[#0d3b43]"
+                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs outline-none focus:border-[#231f20]"
                 />
               </div>
 
               <div className="md:col-span-2">
-                <label className="block text-2xs font-bold text-[#08242a] mb-1">
+                <label className="block text-2xs font-bold text-[#231f20] mb-1">
                   عنوان البانر:
                 </label>
                 <input
@@ -1085,12 +1085,12 @@ export function NewsAdminTabs({
                       e.target.value
                     )
                   }
-                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs font-bold outline-none focus:border-[#0d3b43]"
+                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs font-bold outline-none focus:border-[#231f20]"
                 />
               </div>
 
               <div className="md:col-span-2">
-                <label className="block text-2xs font-bold text-[#08242a] mb-1">
+                <label className="block text-2xs font-bold text-[#231f20] mb-1">
                   نص الدعوة:
                 </label>
                 <textarea
@@ -1108,12 +1108,12 @@ export function NewsAdminTabs({
                       e.target.value
                     )
                   }
-                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs outline-none focus:border-[#0d3b43]"
+                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs outline-none focus:border-[#231f20]"
                 />
               </div>
 
               <div>
-                <label className="block text-2xs font-bold text-[#08242a] mb-1">
+                <label className="block text-2xs font-bold text-[#231f20] mb-1">
                   نص الزر الأساسي:
                 </label>
                 <input
@@ -1135,24 +1135,24 @@ export function NewsAdminTabs({
                       e.target.value
                     )
                   }
-                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs outline-none focus:border-[#0d3b43]"
+                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs outline-none focus:border-[#231f20]"
                 />
               </div>
 
               <div>
-                <label className="block text-2xs font-bold text-[#08242a] mb-1">
+                <label className="block text-2xs font-bold text-[#231f20] mb-1">
                   رابط الزر الأساسي:
                 </label>
                 <input
                   type="text"
                   value={config.cta.primaryBtnUrl}
                   onChange={(e) => updateCta('primaryBtnUrl', e.target.value)}
-                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs outline-none focus:border-[#0d3b43]"
+                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs outline-none focus:border-[#231f20]"
                 />
               </div>
 
               <div>
-                <label className="block text-2xs font-bold text-[#08242a] mb-1">
+                <label className="block text-2xs font-bold text-[#231f20] mb-1">
                   نص الزر الثانوي:
                 </label>
                 <input
@@ -1174,26 +1174,26 @@ export function NewsAdminTabs({
                       e.target.value
                     )
                   }
-                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs outline-none focus:border-[#0d3b43]"
+                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs outline-none focus:border-[#231f20]"
                 />
               </div>
 
               <div>
-                <label className="block text-2xs font-bold text-[#08242a] mb-1">
+                <label className="block text-2xs font-bold text-[#231f20] mb-1">
                   رابط الزر الثانوي:
                 </label>
                 <input
                   type="text"
                   value={config.cta.secondaryBtnUrl}
                   onChange={(e) => updateCta('secondaryBtnUrl', e.target.value)}
-                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs outline-none focus:border-[#0d3b43]"
+                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs outline-none focus:border-[#231f20]"
                 />
               </div>
             </div>
           </div>
 
           {/* Sticky Save Action Bar */}
-          <div className="sticky bottom-4 z-30 p-4 rounded-2xl bg-[#08242a]/95 backdrop-blur-md border border-white/20 shadow-xl flex items-center justify-between text-white">
+          <div className="sticky bottom-4 z-30 p-4 rounded-2xl bg-[#231f20]/95 backdrop-blur-md border border-white/20 shadow-xl flex items-center justify-between text-white">
             <div className="flex items-center gap-2">
               <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
               <span className="text-xs font-bold">
@@ -1205,7 +1205,7 @@ export function NewsAdminTabs({
               type="button"
               disabled={savingConfig}
               onClick={handleSaveConfig}
-              className="px-6 py-2.5 rounded-xl font-black text-xs bg-[#c85a32] hover:bg-[#b04b26] disabled:opacity-50 text-white transition-all shadow-md cursor-pointer flex items-center gap-2"
+              className="px-6 py-2.5 rounded-xl font-black text-xs bg-[#bd3227] hover:bg-[#a3261c] disabled:opacity-50 text-white transition-all shadow-md cursor-pointer flex items-center gap-2"
             >
               <span>💾</span>
               <span>{savingConfig ? 'جارٍ الحفظ والنشر...' : 'حفظ ونشر التعديلات'}</span>

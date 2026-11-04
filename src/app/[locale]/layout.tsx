@@ -60,7 +60,7 @@ export default async function LocaleLayout(props: {
       dir={dir}
       className={`h-full ${sora.variable} ${cairo.variable}`}
     >
-      <body className="flex flex-col min-h-full bg-[#faf7f2] text-[#111a1c] antialiased selection:bg-[#c85a32]/20 selection:text-[#08242a]">
+      <body className="flex flex-col min-h-full bg-[#F5F3EE] text-[#231f20] antialiased selection:bg-[#bd3227]/20 selection:text-[#231f20]">
         {props.children}
       </body>
     </html>

@@ -12,18 +12,18 @@ export default async function PrivacyPage(props: { params: Promise<{ locale: str
     <>
       <Header locale={locale} dict={dict} />
 
-      <main id="main-content" className="flex-1 bg-[#faf7f2]">
+      <main id="main-content" className="flex-1 bg-[#F5F3EE]">
         {/* Header Banner */}
-        <section className="relative overflow-hidden bg-gradient-to-b from-[#faf7f2] via-[#f7f2e9] to-[#faf7f2] border-b border-[#e5e0d6] py-16 lg:py-24 text-center">
+        <section className="relative overflow-hidden bg-gradient-to-b from-[#F5F3EE] via-[#F5F3EE] to-[#F5F3EE] border-b border-[#e5e0d6] py-16 lg:py-24 text-center">
           <div className="absolute inset-0 moroccan-pattern-light opacity-50 pointer-events-none" aria-hidden="true" />
           <div className="relative max-w-4xl mx-auto px-4 sm:px-6 space-y-4">
-            <span className="inline-block text-xs font-bold uppercase tracking-widest text-[#c85a32]">
+            <span className="inline-block text-xs font-bold uppercase tracking-widest text-[#bd3227]">
               AMYCC Legal & Privacy
             </span>
-            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-[#08242a] tracking-tight">
+            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-[#231f20] tracking-tight">
               {dict.footer.privacy}
             </h1>
-            <p className="text-xs sm:text-sm text-[#5f7174]">
+            <p className="text-xs sm:text-sm text-[#5C5A55]">
               {isAr
                 ? 'حماية المعطيات ذات الطابع الشخصي — القانون المغربي رقم 09-08'
                 : isFr
@@ -35,9 +35,9 @@ export default async function PrivacyPage(props: { params: Promise<{ locale: str
 
         {/* Content Body */}
         <section className="max-w-4xl mx-auto px-4 sm:px-6 py-16">
-          <div className="bg-white p-8 sm:p-12 rounded-3xl border border-[#e5e0d6] shadow-subtle space-y-8 text-xs sm:text-sm leading-relaxed text-[#445457]">
-            <section className="p-6 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6]">
-              <h2 className="text-base font-bold text-[#08242a] mb-2">
+          <div className="bg-white p-8 sm:p-12 rounded-3xl border border-[#e5e0d6] shadow-subtle space-y-8 text-xs sm:text-sm leading-relaxed text-[#5C5A55]">
+            <section className="p-6 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6]">
+              <h2 className="text-base font-bold text-[#231f20] mb-2">
                 {isAr ? '1. الإطار القانوني وحماية المعطيات بالمغرب' : isFr ? '1. Cadre Légal & Conformité CNDP' : '1. Legal Framework & CNDP Compliance'}
               </h2>
               <p>
@@ -50,7 +50,7 @@ export default async function PrivacyPage(props: { params: Promise<{ locale: str
             </section>
 
             <section className="space-y-3">
-              <h2 className="text-base font-bold text-[#08242a]">
+              <h2 className="text-base font-bold text-[#231f20]">
                 {isAr ? '2. طبيعة المعطيات التي يتم جمعها' : isFr ? '2. Nature des Données Collectées & Finalités' : '2. Purpose and Categories of Collected Data'}
               </h2>
               <p>
@@ -63,7 +63,7 @@ export default async function PrivacyPage(props: { params: Promise<{ locale: str
             </section>
 
             <section className="space-y-3">
-              <h2 className="text-base font-bold text-[#08242a]">
+              <h2 className="text-base font-bold text-[#231f20]">
                 {isAr ? '3. سياسة عدم البيع والسرية' : isFr ? '3. Confidentialité & Non-Cession des Données' : '3. Confidentiality & Non-Disclosure'}
               </h2>
               <p>
@@ -76,7 +76,7 @@ export default async function PrivacyPage(props: { params: Promise<{ locale: str
             </section>
 
             <section className="space-y-3">
-              <h2 className="text-base font-bold text-[#08242a]">
+              <h2 className="text-base font-bold text-[#231f20]">
                 {isAr ? '4. حقوق المستخدم (الولوج، التصحيح، والحذف)' : isFr ? '4. Droits d’Accès, de Rectification & de Suppression' : '4. User Rights: Access, Rectification & Erasure'}
               </h2>
               <p>
@@ -89,7 +89,7 @@ export default async function PrivacyPage(props: { params: Promise<{ locale: str
             </section>
 
             <section className="space-y-3">
-              <h2 className="text-base font-bold text-[#08242a]">
+              <h2 className="text-base font-bold text-[#231f20]">
                 {isAr ? '5. تدابير الحماية التقنية' : isFr ? '5. Mesures de Sécurité Technique' : '5. Technical Security Measures'}
               </h2>
               <p>

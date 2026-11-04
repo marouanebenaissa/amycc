@@ -54,7 +54,7 @@ export function Footer({ locale, dict }: FooterProps) {
   ]
 
   return (
-    <footer className="bg-[#051419] text-[#d8f0f4] pt-14 pb-8 border-t border-[#14505b]/40 text-start">
+    <footer className="bg-[#181516] text-[#FEF6CC] pt-14 pb-8 border-t border-[#d2a82b]/40 text-start">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
 
         {/* ============================================================
@@ -66,7 +66,7 @@ export function Footer({ locale, dict }: FooterProps) {
           <div className="lg:col-span-4 space-y-4">
             <Logo locale={locale} variant="dark" />
 
-            <p className="text-xs text-[#aedfe7] leading-relaxed max-w-sm pt-1">
+            <p className="text-xs text-[#d2a82b] leading-relaxed max-w-sm pt-1">
               {isAr
                 ? 'تجمع جمعية روح الفنون والثقافة (AMYCC) الشباب حول الإبداع الفني، الموسيقى، المسرح، وصون التراث المغربي والتمكين المجتمعي.'
                 : isFr
@@ -80,11 +80,11 @@ export function Footer({ locale, dict }: FooterProps) {
               </span>
               <a
                 href="mailto:contact@amycc.org"
-                className="text-xs text-[#74bfcd] hover:text-[#f4ce83] transition-colors block font-mono"
+                className="text-xs text-[#ffd22f] hover:text-[#ffd22f] transition-colors block font-mono"
               >
                 contact@amycc.org
               </a>
-              <span className="text-2xs text-[#5f7174] block">
+              <span className="text-2xs text-[#5C5A55] block">
                 {isAr ? 'مراكش • المملكة المغربية' : 'Marrakech • Kingdom of Morocco'}
               </span>
             </div>
@@ -100,7 +100,7 @@ export function Footer({ locale, dict }: FooterProps) {
                 <li key={idx}>
                   <Link
                     href={`/${locale}/${item.path}`}
-                    className="text-xs text-[#aedfe7] hover:text-white transition-colors"
+                    className="text-xs text-[#d2a82b] hover:text-white transition-colors"
                   >
                     {item.label}
                   </Link>
@@ -119,7 +119,7 @@ export function Footer({ locale, dict }: FooterProps) {
                 <li key={idx}>
                   <Link
                     href={`/${locale}/${item.path}`}
-                    className="text-xs text-[#aedfe7] hover:text-white transition-colors"
+                    className="text-xs text-[#d2a82b] hover:text-white transition-colors"
                   >
                     {item.label}
                   </Link>
@@ -133,7 +133,7 @@ export function Footer({ locale, dict }: FooterProps) {
             <h3 className="text-xs font-extrabold uppercase tracking-wider text-white">
               {isAr ? 'تابعنا' : isFr ? 'SUIVEZ-NOUS' : 'FOLLOW US'}
             </h3>
-            <p className="text-xs text-[#aedfe7] leading-relaxed">
+            <p className="text-xs text-[#d2a82b] leading-relaxed">
               {isAr
                 ? 'تابع آخر أخبار وفعاليات الجمعية.'
                 : isFr
@@ -148,7 +148,7 @@ export function Footer({ locale, dict }: FooterProps) {
                 href="https://instagram.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-9 h-9 rounded-full bg-[#0a242a] border border-[#1c6875]/60 hover:bg-[#c85a32] hover:border-[#c85a32] text-[#aedfe7] hover:text-white flex items-center justify-center transition-all hover:scale-105 shadow-2xs"
+                className="w-9 h-9 rounded-full bg-[#1c1819] border border-[#d2a82b]/60 hover:bg-[#bd3227] hover:border-[#bd3227] text-[#d2a82b] hover:text-white flex items-center justify-center transition-all hover:scale-105 shadow-2xs"
                 aria-label="Instagram"
               >
                 <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
@@ -161,7 +161,7 @@ export function Footer({ locale, dict }: FooterProps) {
                 href="https://linkedin.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-9 h-9 rounded-full bg-[#0a242a] border border-[#1c6875]/60 hover:bg-[#c85a32] hover:border-[#c85a32] text-[#aedfe7] hover:text-white flex items-center justify-center transition-all hover:scale-105 shadow-2xs"
+                className="w-9 h-9 rounded-full bg-[#1c1819] border border-[#d2a82b]/60 hover:bg-[#bd3227] hover:border-[#bd3227] text-[#d2a82b] hover:text-white flex items-center justify-center transition-all hover:scale-105 shadow-2xs"
                 aria-label="LinkedIn"
               >
                 <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
@@ -174,7 +174,7 @@ export function Footer({ locale, dict }: FooterProps) {
                 href="https://youtube.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-9 h-9 rounded-full bg-[#0a242a] border border-[#1c6875]/60 hover:bg-[#c85a32] hover:border-[#c85a32] text-[#aedfe7] hover:text-white flex items-center justify-center transition-all hover:scale-105 shadow-2xs"
+                className="w-9 h-9 rounded-full bg-[#1c1819] border border-[#d2a82b]/60 hover:bg-[#bd3227] hover:border-[#bd3227] text-[#d2a82b] hover:text-white flex items-center justify-center transition-all hover:scale-105 shadow-2xs"
                 aria-label="YouTube"
               >
                 <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
@@ -189,7 +189,7 @@ export function Footer({ locale, dict }: FooterProps) {
         {/* ============================================================
             2. THE MOROCCO88 STYLE SUBSCRIPTION CARD
             ============================================================ */}
-        <div className="p-6 sm:p-8 rounded-3xl bg-[#091f26] border border-[#14505b]/60 shadow-xl space-y-4">
+        <div className="p-6 sm:p-8 rounded-3xl bg-[#1c1819] border border-[#d2a82b]/60 shadow-xl space-y-4">
           <div className="space-y-1">
             <h3 className="text-base sm:text-lg font-bold text-white">
               {isAr
@@ -198,7 +198,7 @@ export function Footer({ locale, dict }: FooterProps) {
                 ? "Abonnez-vous aux dernières actualités d'AMYCC"
                 : 'Subscribe for the latest from AMYCC'}
             </h3>
-            <p className="text-xs text-[#aedfe7]">
+            <p className="text-xs text-[#d2a82b]">
               {isAr
                 ? 'أخبار الفعاليات، ورشات الإبداع والموسيقى، وأنشطة الشباب تصلك مباشرة.'
                 : isFr
@@ -208,8 +208,8 @@ export function Footer({ locale, dict }: FooterProps) {
           </div>
 
           {subscribed ? (
-            <div className="p-4 rounded-xl bg-[#0d3b43] border border-[#f4ce83]/40 text-xs text-white flex items-center gap-2">
-              <span className="text-[#f4ce83] font-bold">✓</span>
+            <div className="p-4 rounded-xl bg-[#231f20] border border-[#ffd22f]/40 text-xs text-white flex items-center gap-2">
+              <span className="text-[#ffd22f] font-bold">✓</span>
               <span>
                 {isAr
                   ? 'تم تسجيل اشتراكك بنجاح. شكراً لاهتمامك بمواكبة أنشطة AMYCC.'
@@ -231,7 +231,7 @@ export function Footer({ locale, dict }: FooterProps) {
                       ? 'Prénom (optionnel)'
                       : 'First name (optional)'
                   }
-                  className="w-full px-4 py-3 rounded-xl bg-[#051419] border border-[#1c6875]/50 text-xs text-white placeholder-[#5f7174] focus:outline-none focus:border-[#f4ce83] transition-all"
+                  className="w-full px-4 py-3 rounded-xl bg-[#181516] border border-[#d2a82b]/50 text-xs text-white placeholder-[#5C5A55] focus:outline-none focus:border-[#ffd22f] transition-all"
                 />
               </div>
 
@@ -249,17 +249,17 @@ export function Footer({ locale, dict }: FooterProps) {
                       ? 'Votre e-mail'
                       : 'Your email'
                   }
-                  className="flex-1 px-4 py-3 rounded-xl bg-[#051419] border border-[#1c6875]/50 text-xs text-white placeholder-[#5f7174] focus:outline-none focus:border-[#f4ce83] transition-all"
+                  className="flex-1 px-4 py-3 rounded-xl bg-[#181516] border border-[#d2a82b]/50 text-xs text-white placeholder-[#5C5A55] focus:outline-none focus:border-[#ffd22f] transition-all"
                 />
                 <button
                   type="submit"
-                  className="px-8 py-3 rounded-xl text-xs font-bold text-white bg-[#c85a32] hover:bg-[#b84e27] active:scale-95 transition-all shadow-md shrink-0"
+                  className="px-8 py-3 rounded-xl text-xs font-bold text-white bg-[#bd3227] hover:bg-[#a3261c] active:scale-95 transition-all shadow-md shrink-0"
                 >
                   {isAr ? 'اشتراك' : isFr ? "S'abonner" : 'Subscribe'}
                 </button>
               </div>
 
-              <p className="text-[10px] text-[#74bfcd]">
+              <p className="text-[10px] text-[#ffd22f]">
                 {isAr
                   ? 'بالاشتراك، أنت توافق على تلقي مستجدات AMYCC. يمكنك إلغاء الاشتراك في أي وقت.'
                   : isFr
@@ -273,7 +273,7 @@ export function Footer({ locale, dict }: FooterProps) {
         {/* ============================================================
             3. MINIMAL BOTTOM BAR
             ============================================================ */}
-        <div className="pt-4 flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] text-[#74bfcd] border-t border-[#14505b]/40">
+        <div className="pt-4 flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] text-[#ffd22f] border-t border-[#d2a82b]/40">
           <p className="whitespace-nowrap">
             © {currentYear} AMYCC — {dict.footer.rights}
           </p>
@@ -282,11 +282,11 @@ export function Footer({ locale, dict }: FooterProps) {
             <Link href={`/${locale}/privacy`} className="hover:text-white transition-colors">
               {dict.footer.privacy}
             </Link>
-            <span className="text-[#1c6875]">•</span>
+            <span className="text-[#d2a82b]">•</span>
             <Link href={`/${locale}/faq`} className="hover:text-white transition-colors">
               {dict.nav.faq}
             </Link>
-            <span className="text-[#1c6875]">•</span>
+            <span className="text-[#d2a82b]">•</span>
             <Link href={`/${locale}/contact`} className="hover:text-white transition-colors">
               {dict.nav.contact}
             </Link>
@@ -296,7 +296,7 @@ export function Footer({ locale, dict }: FooterProps) {
             <button
               type="button"
               onClick={scrollToTop}
-              className="inline-flex items-center gap-1 text-[11px] font-semibold text-[#aedfe7] hover:text-white transition-colors"
+              className="inline-flex items-center gap-1 text-[11px] font-semibold text-[#d2a82b] hover:text-white transition-colors"
               aria-label={isAr ? 'العودة إلى أعلى الصفحة' : 'Back to top'}
             >
               <span>{isAr ? 'العودة للأعلى' : 'Back to top'}</span>
@@ -305,7 +305,7 @@ export function Footer({ locale, dict }: FooterProps) {
 
             <Link
               href="/admin/login"
-              className="text-[#48828c] hover:text-[#f4ce83] transition-colors text-[11px]"
+              className="text-[#d2a82b] hover:text-[#ffd22f] transition-colors text-[11px]"
               title={isAr ? 'بوابة إدارة المنصة' : 'Admin Portal'}
             >
               🔒 {isAr ? 'الإدارة' : 'Admin'}

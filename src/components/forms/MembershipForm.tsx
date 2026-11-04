@@ -77,18 +77,18 @@ export function MembershipForm({ locale, tiers = [] }: MembershipFormProps) {
       onSubmit={handleSubmit}
       className="space-y-6 max-w-2xl mx-auto bg-white p-7 sm:p-10 rounded-3xl border border-[#e5e0d6] shadow-sm"
     >
-      <div className="border-b border-[#f4ede2] pb-4">
-        <span className="text-2xs font-extrabold uppercase tracking-widest text-[#c85a32]">
+      <div className="border-b border-[#FEF6CC] pb-4">
+        <span className="text-2xs font-extrabold uppercase tracking-widest text-[#bd3227]">
           {isAr ? 'استمارة الترشح الرسمية' : isFr ? 'Candidature Officielle' : 'Official Application'}
         </span>
-        <h3 className="text-xl sm:text-2xl font-black text-[#08242a] mt-1">
+        <h3 className="text-xl sm:text-2xl font-black text-[#231f20] mt-1">
           {isAr
             ? 'طلب الانخراط في جمعية روح الفنون والثقافة'
             : isFr
             ? 'Demande d’Adhésion à l’AMYCC'
             : 'AMYCC Membership Application'}
         </h3>
-        <p className="text-xs text-[#5f7174] mt-1">
+        <p className="text-xs text-[#5C5A55] mt-1">
           {isAr
             ? 'يرجى ملء البيانات بدقة لتيسير دراسة الملف من لدن المكتب التنفيذي للجمعية.'
             : isFr
@@ -124,7 +124,7 @@ export function MembershipForm({ locale, tiers = [] }: MembershipFormProps) {
       {/* Tier Selector if available */}
       {activeTiers.length > 0 && (
         <div>
-          <label className="block text-2xs font-extrabold uppercase tracking-wider text-[#08242a] mb-2">
+          <label className="block text-2xs font-extrabold uppercase tracking-wider text-[#231f20] mb-2">
             {isAr
               ? 'فئة الانخراط المرغوبة *'
               : isFr
@@ -145,20 +145,20 @@ export function MembershipForm({ locale, tiers = [] }: MembershipFormProps) {
                   onClick={() => setSelectedTierId(tier.id)}
                   className={`text-start p-3 rounded-2xl border transition-all cursor-pointer ${
                     isSelected
-                      ? 'bg-[#0d3b43]/5 border-[#0d3b43] shadow-2xs ring-1 ring-[#0d3b43]'
-                      : 'bg-[#faf7f2] border-[#e5e0d6] hover:bg-white'
+                      ? 'bg-[#231f20]/5 border-[#231f20] shadow-2xs ring-1 ring-[#231f20]'
+                      : 'bg-[#F5F3EE] border-[#e5e0d6] hover:bg-white'
                   }`}
                 >
                   <div className="flex items-center justify-between gap-1 mb-1">
-                    <span className="font-bold text-xs text-[#08242a]">{name}</span>
+                    <span className="font-bold text-xs text-[#231f20]">{name}</span>
                     {tier.recommended && (
-                      <span className="text-3xs font-black px-1.5 py-0.5 rounded-full bg-[#c85a32] text-white">
+                      <span className="text-3xs font-black px-1.5 py-0.5 rounded-full bg-[#bd3227] text-white">
                         ⭐
                       </span>
                     )}
                   </div>
-                  <div className="text-3xs font-black text-[#0d3b43]">
-                    {fee} <span className="text-[#5f7174] font-normal">/ {period}</span>
+                  <div className="text-3xs font-black text-[#231f20]">
+                    {fee} <span className="text-[#5C5A55] font-normal">/ {period}</span>
                   </div>
                 </button>
               )
@@ -169,14 +169,14 @@ export function MembershipForm({ locale, tiers = [] }: MembershipFormProps) {
 
       {/* Full Name */}
       <div>
-        <label className="block text-2xs font-extrabold uppercase tracking-wider text-[#08242a] mb-1.5">
+        <label className="block text-2xs font-extrabold uppercase tracking-wider text-[#231f20] mb-1.5">
           {isAr ? 'الاسم الكامل *' : isFr ? 'Nom complet *' : 'Full Name *'}
         </label>
         <input
           type="text"
           name="fullName"
           required
-          className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] text-xs text-[#08242a] focus:border-[#0d3b43] focus:ring-1 focus:ring-[#0d3b43] outline-none bg-[#faf7f2]"
+          className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] text-xs text-[#231f20] focus:border-[#231f20] focus:ring-1 focus:ring-[#231f20] outline-none bg-[#F5F3EE]"
           placeholder={isAr ? 'أدخل اسمك الكامل' : isFr ? 'Votre nom et prénom' : 'Enter your full name'}
         />
         {result?.errors?.fullName && (
@@ -187,14 +187,14 @@ export function MembershipForm({ locale, tiers = [] }: MembershipFormProps) {
       {/* Email & Phone */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <div>
-          <label className="block text-2xs font-extrabold uppercase tracking-wider text-[#08242a] mb-1.5">
+          <label className="block text-2xs font-extrabold uppercase tracking-wider text-[#231f20] mb-1.5">
             {isAr ? 'البريد الإلكتروني *' : isFr ? 'Adresse e-mail *' : 'Email Address *'}
           </label>
           <input
             type="email"
             name="email"
             required
-            className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] text-xs text-[#08242a] focus:border-[#0d3b43] focus:ring-1 focus:ring-[#0d3b43] outline-none bg-[#faf7f2]"
+            className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] text-xs text-[#231f20] focus:border-[#231f20] focus:ring-1 focus:ring-[#231f20] outline-none bg-[#F5F3EE]"
             placeholder="name@example.com"
           />
           {result?.errors?.email && (
@@ -203,14 +203,14 @@ export function MembershipForm({ locale, tiers = [] }: MembershipFormProps) {
         </div>
 
         <div>
-          <label className="block text-2xs font-extrabold uppercase tracking-wider text-[#08242a] mb-1.5">
+          <label className="block text-2xs font-extrabold uppercase tracking-wider text-[#231f20] mb-1.5">
             {isAr ? 'رقم الهاتف *' : isFr ? 'Numéro de téléphone *' : 'Phone Number *'}
           </label>
           <input
             type="tel"
             name="phone"
             required
-            className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] text-xs text-[#08242a] focus:border-[#0d3b43] focus:ring-1 focus:ring-[#0d3b43] outline-none bg-[#faf7f2]"
+            className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] text-xs text-[#231f20] focus:border-[#231f20] focus:ring-1 focus:ring-[#231f20] outline-none bg-[#F5F3EE]"
             placeholder="+212 6..."
           />
           {result?.errors?.phone && (
@@ -222,14 +222,14 @@ export function MembershipForm({ locale, tiers = [] }: MembershipFormProps) {
       {/* City & Profession */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <div>
-          <label className="block text-2xs font-extrabold uppercase tracking-wider text-[#08242a] mb-1.5">
+          <label className="block text-2xs font-extrabold uppercase tracking-wider text-[#231f20] mb-1.5">
             {isAr ? 'المدينة / الإقامة *' : isFr ? 'Ville de résidence *' : 'City / Residence *'}
           </label>
           <input
             type="text"
             name="city"
             required
-            className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] text-xs text-[#08242a] focus:border-[#0d3b43] focus:ring-1 focus:ring-[#0d3b43] outline-none bg-[#faf7f2]"
+            className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] text-xs text-[#231f20] focus:border-[#231f20] focus:ring-1 focus:ring-[#231f20] outline-none bg-[#F5F3EE]"
             placeholder={isAr ? 'مثال: الرباط، الدار البيضاء...' : 'Ex: Rabat, Casablanca...'}
           />
           {result?.errors?.city && (
@@ -238,13 +238,13 @@ export function MembershipForm({ locale, tiers = [] }: MembershipFormProps) {
         </div>
 
         <div>
-          <label className="block text-2xs font-extrabold uppercase tracking-wider text-[#08242a] mb-1.5">
+          <label className="block text-2xs font-extrabold uppercase tracking-wider text-[#231f20] mb-1.5">
             {isAr ? 'المهنة أو الصفة' : isFr ? 'Profession / Activité' : 'Profession / Status'}
           </label>
           <input
             type="text"
             name="profession"
-            className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] text-xs text-[#08242a] focus:border-[#0d3b43] focus:ring-1 focus:ring-[#0d3b43] outline-none bg-[#faf7f2]"
+            className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] text-xs text-[#231f20] focus:border-[#231f20] focus:ring-1 focus:ring-[#231f20] outline-none bg-[#F5F3EE]"
             placeholder={
               isAr
                 ? 'فنان، طالب، أستاذ، فاعل جمعوي...'
@@ -258,7 +258,7 @@ export function MembershipForm({ locale, tiers = [] }: MembershipFormProps) {
 
       {/* Interests Checkboxes */}
       <div>
-        <label className="block text-2xs font-extrabold uppercase tracking-wider text-[#08242a] mb-2">
+        <label className="block text-2xs font-extrabold uppercase tracking-wider text-[#231f20] mb-2">
           {isAr
             ? 'المجالات الفنية والثقافية محل الاهتمام:'
             : isFr
@@ -269,15 +269,15 @@ export function MembershipForm({ locale, tiers = [] }: MembershipFormProps) {
           {interestOptions.map((opt) => (
             <label
               key={opt.value}
-              className="flex items-center gap-2.5 p-3 rounded-xl border border-[#e5e0d6] bg-[#faf7f2] hover:bg-white cursor-pointer text-xs transition-colors"
+              className="flex items-center gap-2.5 p-3 rounded-xl border border-[#e5e0d6] bg-[#F5F3EE] hover:bg-white cursor-pointer text-xs transition-colors"
             >
               <input
                 type="checkbox"
                 name="interests"
                 value={opt.value}
-                className="w-4 h-4 text-[#0d3b43] rounded border-[#cfc7b9] focus:ring-[#0d3b43]"
+                className="w-4 h-4 text-[#231f20] rounded border-[#cfc7b9] focus:ring-[#231f20]"
               />
-              <span className="font-semibold text-[#08242a]">{opt.label}</span>
+              <span className="font-semibold text-[#231f20]">{opt.label}</span>
             </label>
           ))}
         </div>
@@ -285,7 +285,7 @@ export function MembershipForm({ locale, tiers = [] }: MembershipFormProps) {
 
       {/* Motivation */}
       <div>
-        <label className="block text-2xs font-extrabold uppercase tracking-wider text-[#08242a] mb-1.5">
+        <label className="block text-2xs font-extrabold uppercase tracking-wider text-[#231f20] mb-1.5">
           {isAr
             ? 'دوافع الانخراط ورسالتك إلى الجمعية *'
             : isFr
@@ -296,7 +296,7 @@ export function MembershipForm({ locale, tiers = [] }: MembershipFormProps) {
           name="motivation"
           required
           rows={4}
-          className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] text-xs text-[#08242a] focus:border-[#0d3b43] focus:ring-1 focus:ring-[#0d3b43] outline-none bg-[#faf7f2]"
+          className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] text-xs text-[#231f20] focus:border-[#231f20] focus:ring-1 focus:ring-[#231f20] outline-none bg-[#F5F3EE]"
           placeholder={
             isAr
               ? 'اذكر بإيجاز دوافعك للانخراط وما تأمل في تحقيقه أو المساهمة به ضمن برامج الجمعية...'
@@ -313,7 +313,7 @@ export function MembershipForm({ locale, tiers = [] }: MembershipFormProps) {
       <button
         type="submit"
         disabled={loading}
-        className="w-full py-4 px-6 rounded-2xl font-black text-white bg-[#0d3b43] hover:bg-[#14505b] disabled:opacity-60 transition-all text-xs shadow-md active:scale-98 flex items-center justify-center gap-2 cursor-pointer"
+        className="w-full py-4 px-6 rounded-2xl font-black text-white bg-[#231f20] hover:bg-[#d2a82b] disabled:opacity-60 transition-all text-xs shadow-md active:scale-98 flex items-center justify-center gap-2 cursor-pointer"
       >
         {loading ? (
           <>

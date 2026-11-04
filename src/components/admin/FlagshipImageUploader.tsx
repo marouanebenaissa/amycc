@@ -95,10 +95,10 @@ export function FlagshipImageUploader({
 
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div>
-          <label className="block text-2xs font-bold text-[#445457]">
+          <label className="block text-2xs font-bold text-[#5C5A55]">
             صورة بطاقة البرنامج الرائد (Spotlight Card Image)
           </label>
-          <span className="text-3xs text-[#819598]">
+          <span className="text-3xs text-[#5C5A55]">
             الصورة المعروضة في البطاقة الجانبية للبرنامج الرائد
           </span>
         </div>
@@ -108,7 +108,7 @@ export function FlagshipImageUploader({
             type="button"
             onClick={() => fileInputRef.current?.click()}
             disabled={uploading || deleting}
-            className="px-4 py-2 rounded-xl font-bold text-white bg-[#0d3b43] hover:bg-[#14505b] active:scale-98 transition-all text-xs inline-flex items-center gap-2 shadow-2xs cursor-pointer disabled:opacity-60"
+            className="px-4 py-2 rounded-xl font-bold text-white bg-[#231f20] hover:bg-[#d2a82b] active:scale-98 transition-all text-xs inline-flex items-center gap-2 shadow-2xs cursor-pointer disabled:opacity-60"
           >
             {uploading ? (
               <>
@@ -120,7 +120,7 @@ export function FlagshipImageUploader({
               </>
             ) : (
               <>
-                <svg className="w-4 h-4 text-[#f4ce83]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.2">
+                <svg className="w-4 h-4 text-[#ffd22f]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.2">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
                 </svg>
                 <span>استيراد صورة (Import)</span>
@@ -152,7 +152,7 @@ export function FlagshipImageUploader({
             setError(null)
           }}
           placeholder="/images/youth-in-action.jpg"
-          className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#0d3b43] font-mono bg-white text-left"
+          className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#231f20] font-mono bg-white text-left"
         />
       </div>
 
@@ -169,8 +169,8 @@ export function FlagshipImageUploader({
       )}
 
       {/* Visual Preview Card — Poster Showcase format */}
-      <div className="max-w-xs sm:max-w-sm mx-auto rounded-3xl p-3 bg-gradient-to-b from-[#14505b]/30 to-[#08242a] border border-[#268292]/30 shadow-2xl overflow-hidden">
-        <div className="relative aspect-[3/4] min-h-[440px] rounded-2xl overflow-hidden bg-[#0d3b43]">
+      <div className="max-w-xs sm:max-w-sm mx-auto rounded-3xl p-3 bg-gradient-to-b from-[#d2a82b]/30 to-[#231f20] border border-[#d2a82b]/30 shadow-2xl overflow-hidden">
+        <div className="relative aspect-[3/4] min-h-[440px] rounded-2xl overflow-hidden bg-[#231f20]">
           {imageUrl ? (
             <>
               <ImageWithFallback
@@ -182,12 +182,12 @@ export function FlagshipImageUploader({
                 sizes="(max-width: 640px) 100vw, 360px"
                 className="object-cover object-center"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#08242a] via-[#08242a]/30 to-black/20 opacity-85" />
-              <div className="absolute top-3 end-3 px-2.5 py-1 rounded-full bg-black/50 backdrop-blur-md border border-white/20 text-4xs font-bold text-[#f4ce83] uppercase tracking-wider">
+              <div className="absolute inset-0 bg-gradient-to-t from-[#231f20] via-[#231f20]/30 to-black/20 opacity-85" />
+              <div className="absolute top-3 end-3 px-2.5 py-1 rounded-full bg-black/50 backdrop-blur-md border border-white/20 text-4xs font-bold text-[#ffd22f] uppercase tracking-wider">
                 معاينة ملصق Poster
               </div>
               <div className="absolute bottom-4 start-4 end-4 text-white">
-                <span className="text-3xs text-[#f4ce83] font-bold uppercase tracking-wider block">
+                <span className="text-3xs text-[#ffd22f] font-bold uppercase tracking-wider block">
                   AMYCC Morocco
                 </span>
                 <span className="text-sm sm:text-base font-black block mt-1 leading-snug drop-shadow-md">
@@ -196,9 +196,9 @@ export function FlagshipImageUploader({
               </div>
             </>
           ) : (
-            <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center text-[#d8f0f4]">
+            <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center text-[#FEF6CC]">
               <span className="text-xs font-bold">لا توجد صورة محددة</span>
-              <span className="text-3xs text-[#819598] mt-1">انقر على &ldquo;استيراد صورة&rdquo; لرفع ملصق البرنامج</span>
+              <span className="text-3xs text-[#5C5A55] mt-1">انقر على &ldquo;استيراد صورة&rdquo; لرفع ملصق البرنامج</span>
             </div>
           )}
         </div>

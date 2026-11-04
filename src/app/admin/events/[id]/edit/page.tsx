@@ -39,7 +39,7 @@ export default async function EditEventPage(props: {
           </svg>
         </Link>
         <div>
-          <h1 className="text-2xl font-extrabold text-[#0a0f1d]">Edit Event</h1>
+          <h1 className="text-2xl font-extrabold text-[#181516]">Edit Event</h1>
           <p className="text-xs text-slate-500 mt-0.5">
             Modify event schedule, capacity, registration availability, and multilingual texts.
           </p>

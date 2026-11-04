@@ -102,15 +102,15 @@ export default async function PartnershipsPage(props: { params: Promise<{ locale
     <>
       <Header locale={locale} dict={dict} />
 
-      <main id="main-content" className="flex-1 bg-[#faf7f2]">
+      <main id="main-content" className="flex-1 bg-[#F5F3EE]">
         {/* ========================================================= */}
         {/* Hero Section: Institutional Moroccan Aesthetic */}
         {/* ========================================================= */}
         <section
           className={`relative overflow-hidden border-b transition-colors ${
             hasHeroImage
-              ? 'min-h-[520px] sm:min-h-[580px] lg:min-h-[640px] flex items-center bg-[#1c1917] text-white pt-16 pb-24 lg:pt-20 lg:pb-32 border-[#292524]'
-              : 'bg-gradient-to-b from-[#faf7f2] via-[#f7f2e9] to-[#faf7f2] border-[#e5e0d6] pt-16 pb-20 lg:pt-20 lg:pb-28 text-[#08242a]'
+              ? 'min-h-[520px] sm:min-h-[580px] lg:min-h-[640px] flex items-center bg-[#231f20] text-white pt-16 pb-24 lg:pt-20 lg:pb-32 border-[#231f20]'
+              : 'bg-gradient-to-b from-[#F5F3EE] via-[#F5F3EE] to-[#F5F3EE] border-[#e5e0d6] pt-16 pb-20 lg:pt-20 lg:pb-28 text-[#231f20]'
           }`}
         >
           {hasHeroImage ? (
@@ -126,14 +126,14 @@ export default async function PartnershipsPage(props: { params: Promise<{ locale
               <div className="absolute inset-0 bg-black/60" />
               <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/55 to-black/90" />
               <div className="absolute inset-0 moroccan-star-pattern opacity-15 pointer-events-none" />
-              <div className="absolute top-1/4 start-1/4 w-96 h-96 bg-[#c85a32]/20 rounded-full blur-3xl pointer-events-none" />
-              <div className="absolute bottom-10 end-10 w-96 h-96 bg-[#f4ce83]/20 rounded-full blur-3xl pointer-events-none" />
+              <div className="absolute top-1/4 start-1/4 w-96 h-96 bg-[#bd3227]/20 rounded-full blur-3xl pointer-events-none" />
+              <div className="absolute bottom-10 end-10 w-96 h-96 bg-[#ffd22f]/20 rounded-full blur-3xl pointer-events-none" />
             </div>
           ) : (
             <>
               <div className="absolute inset-0 moroccan-pattern-light opacity-50 pointer-events-none" aria-hidden="true" />
-              <div className="absolute top-1/4 start-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-[#c85a32]/10 rounded-full blur-3xl pointer-events-none" />
-              <div className="absolute bottom-0 end-12 w-72 h-72 bg-[#f4ce83]/15 rounded-full blur-3xl pointer-events-none" />
+              <div className="absolute top-1/4 start-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-[#bd3227]/10 rounded-full blur-3xl pointer-events-none" />
+              <div className="absolute bottom-0 end-12 w-72 h-72 bg-[#ffd22f]/15 rounded-full blur-3xl pointer-events-none" />
             </>
           )}
 
@@ -143,11 +143,11 @@ export default async function PartnershipsPage(props: { params: Promise<{ locale
               <span
                 className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs sm:text-sm font-bold ${
                   hasHeroImage
-                    ? 'bg-white/10 border border-white/20 text-[#f4ce83]'
-                    : 'bg-[#c85a32]/10 border border-[#c85a32]/20 text-[#c85a32]'
+                    ? 'bg-white/10 border border-white/20 text-[#ffd22f]'
+                    : 'bg-[#bd3227]/10 border border-[#bd3227]/20 text-[#bd3227]'
                 }`}
               >
-                <span className={`w-2 h-2 rounded-full ${hasHeroImage ? 'bg-[#f4ce83]' : 'bg-[#c85a32]'} animate-pulse`} />
+                <span className={`w-2 h-2 rounded-full ${hasHeroImage ? 'bg-[#ffd22f]' : 'bg-[#bd3227]'} animate-pulse`} />
                 <span>{isAr ? config.hero.tagAr : isFr ? config.hero.tagFr : config.hero.tagEn}</span>
               </span>
             </div>
@@ -155,7 +155,7 @@ export default async function PartnershipsPage(props: { params: Promise<{ locale
             {/* Main Headline */}
             <h1
               className={`text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-tight sm:leading-tight ${
-                hasHeroImage ? 'text-white drop-shadow-md' : 'text-[#08242a]'
+                hasHeroImage ? 'text-white drop-shadow-md' : 'text-[#231f20]'
               }`}
             >
               {isAr ? config.hero.titleAr : isFr ? config.hero.titleFr : config.hero.titleEn}
@@ -164,7 +164,7 @@ export default async function PartnershipsPage(props: { params: Promise<{ locale
             {/* Subtitle / Promise */}
             <p
               className={`text-lg sm:text-xl font-semibold max-w-3xl mx-auto leading-relaxed ${
-                hasHeroImage ? 'text-[#f4ce83]' : 'text-[#c85a32]'
+                hasHeroImage ? 'text-[#ffd22f]' : 'text-[#bd3227]'
               }`}
             >
               {isAr ? config.hero.subtitleAr : isFr ? config.hero.subtitleFr : config.hero.subtitleEn}
@@ -173,7 +173,7 @@ export default async function PartnershipsPage(props: { params: Promise<{ locale
             {/* Detailed Description */}
             <p
               className={`text-sm sm:text-base max-w-3xl mx-auto leading-relaxed font-medium ${
-                hasHeroImage ? 'text-stone-300' : 'text-[#445457]'
+                hasHeroImage ? 'text-stone-300' : 'text-[#5C5A55]'
               }`}
             >
               {isAr ? config.hero.descriptionAr : isFr ? config.hero.descriptionFr : config.hero.descriptionEn}
@@ -183,7 +183,7 @@ export default async function PartnershipsPage(props: { params: Promise<{ locale
             <div className="pt-4 flex flex-wrap items-center justify-center gap-4">
               <a
                 href={config.hero.primaryBtnUrl || '#proposal-form'}
-                className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-xl font-bold text-sm sm:text-base bg-[#c85a32] text-white hover:bg-[#a84420] transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0"
+                className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-xl font-bold text-sm sm:text-base bg-[#bd3227] text-white hover:bg-[#a3261c] transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0"
               >
                 <span>{isAr ? config.hero.primaryBtnTextAr : isFr ? config.hero.primaryBtnTextFr : config.hero.primaryBtnTextEn}</span>
                 <span className="rtl:rotate-180 transition-transform">→</span>
@@ -197,7 +197,7 @@ export default async function PartnershipsPage(props: { params: Promise<{ locale
                   className={`inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl font-bold text-sm sm:text-base border transition-all ${
                     hasHeroImage
                       ? 'bg-white/10 hover:bg-white/20 text-white border-white/20'
-                      : 'bg-white hover:bg-stone-50 text-[#08242a] border-[#e5e0d6] shadow-2xs'
+                      : 'bg-white hover:bg-stone-50 text-[#231f20] border-[#e5e0d6] shadow-2xs'
                   }`}
                 >
                   <span>📄</span>
@@ -211,7 +211,7 @@ export default async function PartnershipsPage(props: { params: Promise<{ locale
               <div className="pt-2">
                 <span
                   className={`inline-block text-xs font-semibold px-4 py-1 rounded-full ${
-                    hasHeroImage ? 'text-stone-400 bg-stone-900/60' : 'text-[#819598] bg-[#f0eae1]'
+                    hasHeroImage ? 'text-stone-400 bg-stone-900/60' : 'text-[#5C5A55] bg-[#FEF6CC]'
                   }`}
                 >
                   {isAr ? config.hero.badgeAr : isFr ? config.hero.badgeFr : config.hero.badgeEn}
@@ -235,10 +235,10 @@ export default async function PartnershipsPage(props: { params: Promise<{ locale
                   <span className="text-2xl sm:text-3xl mb-2 group-hover:scale-110 transition-transform select-none" aria-hidden="true">
                     {stat.icon}
                   </span>
-                  <div className="text-2xl sm:text-3xl font-black text-[#08242a] tracking-tight">
+                  <div className="text-2xl sm:text-3xl font-black text-[#231f20] tracking-tight">
                     {isAr ? (stat.valueAr || stat.value) : isFr ? (stat.valueFr || stat.value) : (stat.valueEn || stat.value)}
                   </div>
-                  <div className="text-xs sm:text-sm font-semibold text-[#65777a] mt-1">
+                  <div className="text-xs sm:text-sm font-semibold text-[#5C5A55] mt-1">
                     {isAr ? stat.labelAr : isFr ? stat.labelFr : stat.labelEn}
                   </div>
                 </div>
@@ -253,17 +253,17 @@ export default async function PartnershipsPage(props: { params: Promise<{ locale
         {config.pillars && config.pillars.length > 0 && (
           <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
             <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16 space-y-3">
-              <span className="inline-block text-xs font-bold uppercase tracking-wider text-[#c85a32] bg-[#c85a32]/10 px-3.5 py-1 rounded-full">
+              <span className="inline-block text-xs font-bold uppercase tracking-wider text-[#bd3227] bg-[#bd3227]/10 px-3.5 py-1 rounded-full">
                 {isAr ? 'محاور العمل المشترك' : isFr ? 'Axes Stratégiques' : 'Strategic Focus Areas'}
               </span>
-              <h2 className="text-2xl sm:text-4xl font-black text-[#08242a]">
+              <h2 className="text-2xl sm:text-4xl font-black text-[#231f20]">
                 {isAr
                   ? 'محاور ومجالات التعاون الاستراتيجي'
                   : isFr
                   ? 'Piliers et Domaines de Coopération Stratégique'
                   : 'Strategic Cooperation Pillars & Frameworks'}
               </h2>
-              <p className="text-sm sm:text-base text-[#445457] font-medium leading-relaxed">
+              <p className="text-sm sm:text-base text-[#5C5A55] font-medium leading-relaxed">
                 {isAr
                   ? 'نفتح آفاق الشراكة الثقافية والفنية في 4 محاور رئيسية تعزز الإبداع الشبابي والتنمية المستدامة.'
                   : isFr
@@ -276,28 +276,28 @@ export default async function PartnershipsPage(props: { params: Promise<{ locale
               {config.pillars.map((pillar) => (
                 <div
                   key={pillar.id}
-                  className="bg-white p-7 sm:p-8 rounded-3xl border border-[#e5e0d6] hover:border-[#c85a32]/30 shadow-subtle hover:shadow-md transition-all flex flex-col justify-between group"
+                  className="bg-white p-7 sm:p-8 rounded-3xl border border-[#e5e0d6] hover:border-[#bd3227]/30 shadow-subtle hover:shadow-md transition-all flex flex-col justify-between group"
                 >
                   <div className="space-y-4">
                     <div className="flex items-center justify-between gap-3">
-                      <span className="w-12 h-12 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6] flex items-center justify-center text-2xl select-none group-hover:scale-110 transition-transform">
+                      <span className="w-12 h-12 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6] flex items-center justify-center text-2xl select-none group-hover:scale-110 transition-transform">
                         {pillar.icon}
                       </span>
-                      <span className="text-3xs sm:text-2xs font-bold uppercase tracking-wider text-[#c85a32] bg-[#c85a32]/10 px-3 py-1 rounded-full">
+                      <span className="text-3xs sm:text-2xs font-bold uppercase tracking-wider text-[#bd3227] bg-[#bd3227]/10 px-3 py-1 rounded-full">
                         {isAr ? pillar.tagAr : isFr ? pillar.tagFr : pillar.tagEn}
                       </span>
                     </div>
 
-                    <h3 className="text-lg sm:text-xl font-bold text-[#08242a]">
+                    <h3 className="text-lg sm:text-xl font-bold text-[#231f20]">
                       {isAr ? pillar.titleAr : isFr ? pillar.titleFr : pillar.titleEn}
                     </h3>
 
-                    <p className="text-xs sm:text-sm text-[#445457] leading-relaxed font-medium">
+                    <p className="text-xs sm:text-sm text-[#5C5A55] leading-relaxed font-medium">
                       {isAr ? pillar.descriptionAr : isFr ? pillar.descriptionFr : pillar.descriptionEn}
                     </p>
                   </div>
 
-                  <div className="pt-6 border-t border-[#f0eae1] mt-6 flex items-center justify-between text-xs font-bold text-[#c85a32]">
+                  <div className="pt-6 border-t border-[#FEF6CC] mt-6 flex items-center justify-between text-xs font-bold text-[#bd3227]">
                     <span>{isAr ? 'برمجة وتنفيذ مشترك' : isFr ? 'Co-programmation' : 'Joint Curation'}</span>
                     <span className="rtl:rotate-180 group-hover:translate-x-1 transition-transform">→</span>
                   </div>
@@ -311,19 +311,19 @@ export default async function PartnershipsPage(props: { params: Promise<{ locale
         {/* Approved Partners Directory: Moving Images Carousel */}
         {/* ========================================================= */}
         {config.partners && config.partners.length > 0 && (
-          <section className="bg-gradient-to-b from-[#f7f2e9] via-[#faf7f2] to-[#f7f2e9] border-y border-[#e5e0d6] py-16 sm:py-20 overflow-hidden">
+          <section className="bg-gradient-to-b from-[#F5F3EE] via-[#F5F3EE] to-[#F5F3EE] border-y border-[#e5e0d6] py-16 sm:py-20 overflow-hidden">
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-8 sm:mb-12 space-y-3">
-              <span className="inline-block text-xs font-bold uppercase tracking-wider text-[#c85a32] bg-[#c85a32]/10 px-3.5 py-1 rounded-full">
+              <span className="inline-block text-xs font-bold uppercase tracking-wider text-[#bd3227] bg-[#bd3227]/10 px-3.5 py-1 rounded-full">
                 {isAr ? 'شبكة الحلفاء' : isFr ? 'Réseau de Partenaires' : 'Alliances Network'}
               </span>
-              <h2 className="text-2xl sm:text-4xl font-black text-[#08242a]">
+              <h2 className="text-2xl sm:text-4xl font-black text-[#231f20]">
                 {isAr
                   ? 'دليل الشركاء المعتمدين'
                   : isFr
                   ? 'Réseau des Partenaires Officiels'
                   : 'Official Partners & Alliances Network'}
               </h2>
-              <p className="text-sm sm:text-base text-[#445457] font-medium leading-relaxed max-w-3xl mx-auto">
+              <p className="text-sm sm:text-base text-[#5C5A55] font-medium leading-relaxed max-w-3xl mx-auto">
                 {isAr
                   ? 'نعتز بالتعاون مع نخبة من المؤسسات الثقافية، الأكاديمية، والمدنية لتوسيع الأثر المجتمعي وبناء مبادرات نوعية.'
                   : isFr
@@ -344,17 +344,17 @@ export default async function PartnershipsPage(props: { params: Promise<{ locale
         {config.benefits && config.benefits.length > 0 && (
           <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
             <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16 space-y-3">
-              <span className="inline-block text-xs font-bold uppercase tracking-wider text-[#c85a32] bg-[#c85a32]/10 px-3.5 py-1 rounded-full">
+              <span className="inline-block text-xs font-bold uppercase tracking-wider text-[#bd3227] bg-[#bd3227]/10 px-3.5 py-1 rounded-full">
                 {isAr ? 'القيمة المشتركة' : isFr ? 'Valeur Partagée' : 'Mutual Value'}
               </span>
-              <h2 className="text-2xl sm:text-4xl font-black text-[#08242a]">
+              <h2 className="text-2xl sm:text-4xl font-black text-[#231f20]">
                 {isAr
                   ? 'لماذا الشراكة مع جمعية روح الفنون والثقافة؟'
                   : isFr
                   ? 'Pourquoi bâtir une alliance avec l’AMYCC ?'
                   : 'Why Partner with Spirit of Arts and Culture Association?'}
               </h2>
-              <p className="text-sm sm:text-base text-[#445457] font-medium leading-relaxed">
+              <p className="text-sm sm:text-base text-[#5C5A55] font-medium leading-relaxed">
                 {isAr
                   ? 'نضمن لشركائنا إطاراً نموذجياً من التعاون المؤسساتي، الأثر الميداني الملموس، والالتزام الصارم بمعايير الجودة الثقافية.'
                   : isFr
@@ -369,13 +369,13 @@ export default async function PartnershipsPage(props: { params: Promise<{ locale
                   key={benefit.id}
                   className="bg-white p-6 rounded-3xl border border-[#e5e0d6] shadow-subtle hover:shadow-md transition-all flex flex-col space-y-3 group"
                 >
-                  <div className="w-12 h-12 rounded-2xl bg-[#faf7f2] border border-[#e5e0d6] flex items-center justify-center text-2xl select-none group-hover:scale-110 transition-transform">
+                  <div className="w-12 h-12 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6] flex items-center justify-center text-2xl select-none group-hover:scale-110 transition-transform">
                     {benefit.icon}
                   </div>
-                  <h3 className="text-base font-bold text-[#08242a]">
+                  <h3 className="text-base font-bold text-[#231f20]">
                     {isAr ? benefit.titleAr : isFr ? benefit.titleFr : benefit.titleEn}
                   </h3>
-                  <p className="text-xs sm:text-sm text-[#445457] leading-relaxed font-medium">
+                  <p className="text-xs sm:text-sm text-[#5C5A55] leading-relaxed font-medium">
                     {isAr ? benefit.descriptionAr : isFr ? benefit.descriptionFr : benefit.descriptionEn}
                   </p>
                 </div>
@@ -390,17 +390,17 @@ export default async function PartnershipsPage(props: { params: Promise<{ locale
         <section className="bg-white border-y border-[#e5e0d6] py-16 sm:py-20">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16 space-y-3">
-              <span className="inline-block text-xs font-bold uppercase tracking-wider text-[#c85a32] bg-[#c85a32]/10 px-3.5 py-1 rounded-full">
+              <span className="inline-block text-xs font-bold uppercase tracking-wider text-[#bd3227] bg-[#bd3227]/10 px-3.5 py-1 rounded-full">
                 {isAr ? 'منهجية العمل' : isFr ? 'Processus Collaboratif' : 'Partnership Journey'}
               </span>
-              <h2 className="text-2xl sm:text-4xl font-black text-[#08242a]">
+              <h2 className="text-2xl sm:text-4xl font-black text-[#231f20]">
                 {isAr
                   ? 'مسار الشراكة في 4 خطوات واضحة'
                   : isFr
                   ? 'Le parcours de partenariat en 4 étapes'
                   : 'Our 4-Step Collaborative Journey'}
               </h2>
-              <p className="text-sm sm:text-base text-[#445457] font-medium leading-relaxed">
+              <p className="text-sm sm:text-base text-[#5C5A55] font-medium leading-relaxed">
                 {isAr
                   ? 'من أول فكرة إلى الأثر الميداني الملموس، نتبع منهجية عمل شفافة ومرنة تضمن نجاح المبادرات المشتركة.'
                   : isFr
@@ -413,10 +413,10 @@ export default async function PartnershipsPage(props: { params: Promise<{ locale
               {steps.map((st, idx) => (
                 <div
                   key={st.num}
-                  className="p-6 rounded-3xl bg-[#faf7f2] border border-[#e5e0d6] relative flex flex-col space-y-3 hover:border-[#c85a32]/30 transition-all group"
+                  className="p-6 rounded-3xl bg-[#F5F3EE] border border-[#e5e0d6] relative flex flex-col space-y-3 hover:border-[#bd3227]/30 transition-all group"
                 >
                   <div className="flex items-center justify-between">
-                    <span className="text-xs font-black tracking-widest text-[#c85a32] bg-white px-2.5 py-1 rounded-lg border border-[#e5e0d6]">
+                    <span className="text-xs font-black tracking-widest text-[#bd3227] bg-white px-2.5 py-1 rounded-lg border border-[#e5e0d6]">
                       {st.num}
                     </span>
                     <span className="text-2xl select-none group-hover:scale-110 transition-transform">
@@ -424,16 +424,16 @@ export default async function PartnershipsPage(props: { params: Promise<{ locale
                     </span>
                   </div>
 
-                  <h3 className="text-base font-bold text-[#08242a] pt-1">
+                  <h3 className="text-base font-bold text-[#231f20] pt-1">
                     {isAr ? st.titleAr : isFr ? st.titleFr : st.titleEn}
                   </h3>
 
-                  <p className="text-xs sm:text-sm text-[#445457] leading-relaxed font-medium">
+                  <p className="text-xs sm:text-sm text-[#5C5A55] leading-relaxed font-medium">
                     {isAr ? st.descAr : isFr ? st.descFr : st.descEn}
                   </p>
 
                   {idx < 3 && (
-                    <div className="hidden lg:block absolute -end-3 top-1/2 -translate-y-1/2 z-10 text-[#c85a32]/40 text-lg font-bold rtl:rotate-180">
+                    <div className="hidden lg:block absolute -end-3 top-1/2 -translate-y-1/2 z-10 text-[#bd3227]/40 text-lg font-bold rtl:rotate-180">
                       →
                     </div>
                   )}
@@ -448,13 +448,13 @@ export default async function PartnershipsPage(props: { params: Promise<{ locale
         {/* ========================================================= */}
         <section id="proposal-form" className="scroll-mt-12 max-w-4xl mx-auto px-4 sm:px-6 py-16 sm:py-20">
           <div className="text-center max-w-2xl mx-auto mb-10 space-y-3">
-            <span className="inline-block text-xs font-bold uppercase tracking-wider text-[#c85a32] bg-[#c85a32]/10 px-3.5 py-1 rounded-full">
+            <span className="inline-block text-xs font-bold uppercase tracking-wider text-[#bd3227] bg-[#bd3227]/10 px-3.5 py-1 rounded-full">
               {isAr ? 'طلب شراكة' : isFr ? 'Demande de Partenariat' : 'Proposal Intake'}
             </span>
-            <h2 className="text-2xl sm:text-4xl font-black text-[#08242a]">
+            <h2 className="text-2xl sm:text-4xl font-black text-[#231f20]">
               {isAr ? 'تقديم مقترح شراكة رسمي' : isFr ? 'Formulaire officiel de proposition' : 'Official Partnership Proposal Form'}
             </h2>
-            <p className="text-sm sm:text-base text-[#445457] font-medium leading-relaxed">
+            <p className="text-sm sm:text-base text-[#5C5A55] font-medium leading-relaxed">
               {isAr
                 ? 'يرجى ملء النموذج أدناه بتفاصيل مؤسستكم ونوع التعاون المقترح. تلتزم الجمعية بدراسة كافة الملفات والتواصل معكم خلال 5 أيام عمل.'
                 : isFr
@@ -470,13 +470,13 @@ export default async function PartnershipsPage(props: { params: Promise<{ locale
         {/* Direct Institutional Contact Card */}
         {/* ========================================================= */}
         <section className="max-w-4xl mx-auto px-4 sm:px-6 pb-20">
-          <div className="bg-gradient-to-br from-[#08242a] to-[#123841] text-white p-8 sm:p-10 rounded-3xl shadow-xl relative overflow-hidden border border-[#1b434e]">
+          <div className="bg-gradient-to-br from-[#231f20] to-[#231f20] text-white p-8 sm:p-10 rounded-3xl shadow-xl relative overflow-hidden border border-[#231f20]">
             <div className="absolute inset-0 moroccan-star-pattern opacity-10 pointer-events-none" />
-            <div className="absolute top-0 end-0 w-80 h-80 bg-[#c85a32]/20 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute top-0 end-0 w-80 h-80 bg-[#bd3227]/20 rounded-full blur-3xl pointer-events-none" />
 
             <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
               <div className="space-y-2 max-w-xl">
-                <span className="text-2xs sm:text-xs font-bold uppercase tracking-widest text-[#f4ce83]">
+                <span className="text-2xs sm:text-xs font-bold uppercase tracking-widest text-[#ffd22f]">
                   {isAr ? config.cta.badgeAr : isFr ? config.cta.badgeFr : config.cta.badgeEn}
                 </span>
                 <h3 className="text-xl sm:text-2xl font-bold tracking-tight">
@@ -501,7 +501,7 @@ export default async function PartnershipsPage(props: { params: Promise<{ locale
                 {config.cta.phone && (
                   <a
                     href={`tel:${config.cta.phone}`}
-                    className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-[#c85a32] hover:bg-[#a84420] text-white font-bold text-xs sm:text-sm transition-all text-center justify-center shadow-md"
+                    className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-[#bd3227] hover:bg-[#a3261c] text-white font-bold text-xs sm:text-sm transition-all text-center justify-center shadow-md"
                   >
                     <span>📞</span>
                     <span dir="ltr">{config.cta.phone}</span>

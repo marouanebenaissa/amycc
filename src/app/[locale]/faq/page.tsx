@@ -43,11 +43,11 @@ export default async function FAQPage(props: { params: Promise<{ locale: string 
   return (
     <>
       <Header locale={locale} dict={dict} topBar={topBar} />
-      <main id="main-content" className="flex-1 bg-[#faf7f2] py-16 lg:py-24">
+      <main id="main-content" className="flex-1 bg-[#F5F3EE] py-16 lg:py-24">
         <div className="max-w-4xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-12">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#c85a32]">AMYCC Morocco</span>
-            <h1 className="text-3xl sm:text-5xl font-extrabold text-[#08242a] mt-2 mb-4">
+            <span className="text-xs font-bold uppercase tracking-wider text-[#bd3227]">AMYCC Morocco</span>
+            <h1 className="text-3xl sm:text-5xl font-extrabold text-[#231f20] mt-2 mb-4">
               {isAr ? 'الأسئلة الشائعة' : isFr ? 'Foire Aux Questions' : 'Frequently Asked Questions'}
             </h1>
             <p className="text-base text-slate-600 max-w-2xl mx-auto">
@@ -63,18 +63,18 @@ export default async function FAQPage(props: { params: Promise<{ locale: string 
             {faqs.map((faq, idx) => (
               <details
                 key={faq.id || idx}
-                className="group p-6 rounded-2xl bg-white border border-[#e5e0d6] open:border-[#0d3b43]/30 open:shadow-subtle transition-all"
+                className="group p-6 rounded-2xl bg-white border border-[#e5e0d6] open:border-[#231f20]/30 open:shadow-subtle transition-all"
               >
-                <summary className="font-bold text-base text-[#08242a] cursor-pointer flex items-center justify-between list-none">
+                <summary className="font-bold text-base text-[#231f20] cursor-pointer flex items-center justify-between list-none">
                   <span className="flex items-center gap-3">
-                    <span className="px-2.5 py-0.5 rounded-full text-4xs font-bold bg-[#faf7f2] border border-[#e5e0d6] text-[#0d3b43]">
+                    <span className="px-2.5 py-0.5 rounded-full text-4xs font-bold bg-[#F5F3EE] border border-[#e5e0d6] text-[#231f20]">
                       {faq.categoryLabel}
                     </span>
                     <span>{faq.q}</span>
                   </span>
-                  <span className="text-[#0d3b43] transition-transform group-open:rotate-180 shrink-0 ms-3">▼</span>
+                  <span className="text-[#231f20] transition-transform group-open:rotate-180 shrink-0 ms-3">▼</span>
                 </summary>
-                <p className="mt-4 text-sm text-[#445457] leading-relaxed border-t border-[#f4ede2] pt-4 whitespace-pre-line">
+                <p className="mt-4 text-sm text-[#5C5A55] leading-relaxed border-t border-[#FEF6CC] pt-4 whitespace-pre-line">
                   {faq.a}
                 </p>
               </details>
