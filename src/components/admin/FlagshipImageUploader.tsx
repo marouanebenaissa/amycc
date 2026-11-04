@@ -196,7 +196,7 @@ export function FlagshipImageUploader({
               </div>
             </>
           ) : (
-            <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center text-[#FEF6CC]">
+            <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center text-[#E2DED6]">
               <span className="text-xs font-bold">لا توجد صورة محددة</span>
               <span className="text-3xs text-[#5C5A55] mt-1">انقر على &ldquo;استيراد صورة&rdquo; لرفع ملصق البرنامج</span>
             </div>

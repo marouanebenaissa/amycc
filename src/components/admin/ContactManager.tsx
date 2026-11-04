@@ -133,7 +133,7 @@ export function ContactManager({ initialConfig, defaultConfig }: ContactManagerP
           className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer ${
             activeTab === 'channels'
               ? 'bg-[#231f20] text-white shadow-xs'
-              : 'text-[#5C5A55] hover:text-[#231f20] hover:bg-[#F5F3EE]'
+              : 'text-[#5C5A55] hover:text-[#231f20] hover:bg-[#FAF8F5]'
           }`}
         >
           <span>📞</span>
@@ -146,7 +146,7 @@ export function ContactManager({ initialConfig, defaultConfig }: ContactManagerP
           className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer ${
             activeTab === 'hero'
               ? 'bg-[#231f20] text-white shadow-xs'
-              : 'text-[#5C5A55] hover:text-[#231f20] hover:bg-[#F5F3EE]'
+              : 'text-[#5C5A55] hover:text-[#231f20] hover:bg-[#FAF8F5]'
           }`}
         >
           <span>🖼️</span>
@@ -159,7 +159,7 @@ export function ContactManager({ initialConfig, defaultConfig }: ContactManagerP
           className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer ${
             activeTab === 'topics'
               ? 'bg-[#d2a82b] text-white shadow-xs'
-              : 'text-[#5C5A55] hover:text-[#231f20] hover:bg-[#F5F3EE]'
+              : 'text-[#5C5A55] hover:text-[#231f20] hover:bg-[#FAF8F5]'
           }`}
         >
           <span>📋</span>
@@ -172,7 +172,7 @@ export function ContactManager({ initialConfig, defaultConfig }: ContactManagerP
           className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer ${
             activeTab === 'social'
               ? 'bg-[#231f20] text-white shadow-xs'
-              : 'text-[#5C5A55] hover:text-[#231f20] hover:bg-[#F5F3EE]'
+              : 'text-[#5C5A55] hover:text-[#231f20] hover:bg-[#FAF8F5]'
           }`}
         >
           <span>🌐</span>
@@ -185,7 +185,7 @@ export function ContactManager({ initialConfig, defaultConfig }: ContactManagerP
           ============================================================ */}
       {activeTab === 'channels' && (
         <div className="p-6 sm:p-8 rounded-3xl bg-white border border-[#e5e0d6] shadow-subtle space-y-6">
-          <div className="border-b border-[#FEF6CC] pb-4">
+          <div className="border-b border-[#E5E0D6] pb-4">
             <h2 className="text-xl font-black text-[#231f20] tracking-tight flex items-center gap-2">
               <span>📞</span>
               <span>قنوات الاتصال المباشرة ومقر الجمعية</span>
@@ -206,7 +206,7 @@ export function ContactManager({ initialConfig, defaultConfig }: ContactManagerP
                 value={config.channels.primaryEmail}
                 onChange={(e) => updateChannel('primaryEmail', e.target.value)}
                 placeholder="contact@amycc.org"
-                className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] font-mono focus:bg-white focus:outline-none focus:border-[#231f20]"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6] text-xs text-[#231f20] font-mono focus:bg-white focus:outline-none focus:border-[#231f20]"
               />
             </div>
 
@@ -220,7 +220,7 @@ export function ContactManager({ initialConfig, defaultConfig }: ContactManagerP
                 value={config.channels.secondaryEmail ?? ''}
                 onChange={(e) => updateChannel('secondaryEmail', e.target.value)}
                 placeholder="direction@amycc.org"
-                className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] font-mono focus:bg-white focus:outline-none focus:border-[#231f20]"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6] text-xs text-[#231f20] font-mono focus:bg-white focus:outline-none focus:border-[#231f20]"
               />
             </div>
 
@@ -234,7 +234,7 @@ export function ContactManager({ initialConfig, defaultConfig }: ContactManagerP
                 value={config.channels.phone}
                 onChange={(e) => updateChannel('phone', e.target.value)}
                 placeholder="+212 5 24 00 00 00"
-                className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] font-mono focus:bg-white focus:outline-none focus:border-[#231f20]"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6] text-xs text-[#231f20] font-mono focus:bg-white focus:outline-none focus:border-[#231f20]"
               />
             </div>
 
@@ -248,7 +248,7 @@ export function ContactManager({ initialConfig, defaultConfig }: ContactManagerP
                 value={config.channels.whatsapp ?? ''}
                 onChange={(e) => updateChannel('whatsapp', e.target.value)}
                 placeholder="+212 6 00 00 00 00"
-                className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] font-mono focus:bg-white focus:outline-none focus:border-[#231f20]"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6] text-xs text-[#231f20] font-mono focus:bg-white focus:outline-none focus:border-[#231f20]"
               />
             </div>
 
@@ -262,7 +262,7 @@ export function ContactManager({ initialConfig, defaultConfig }: ContactManagerP
                 value={config.channels.addressAr}
                 onChange={(e) => updateChannel('addressAr', e.target.value)}
                 placeholder="شارع محمد السادس، جليز، مراكش، المملكة المغربية"
-                className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
               />
             </div>
 
@@ -276,7 +276,7 @@ export function ContactManager({ initialConfig, defaultConfig }: ContactManagerP
                 value={config.channels.addressFr ?? ''}
                 onChange={(e) => updateChannel('addressFr', e.target.value)}
                 placeholder="Avenue Mohammed VI, Guéliz, Marrakech, Maroc"
-                className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
               />
             </div>
 
@@ -289,7 +289,7 @@ export function ContactManager({ initialConfig, defaultConfig }: ContactManagerP
                 value={config.channels.addressEn ?? ''}
                 onChange={(e) => updateChannel('addressEn', e.target.value)}
                 placeholder="Mohammed VI Avenue, Gueliz, Marrakech, Morocco"
-                className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
               />
             </div>
 
@@ -303,7 +303,7 @@ export function ContactManager({ initialConfig, defaultConfig }: ContactManagerP
                 value={config.channels.workingHoursAr}
                 onChange={(e) => updateChannel('workingHoursAr', e.target.value)}
                 placeholder="من الاثنين إلى الجمعة: 09:00 - 18:00 (السبت للورشات الميدانية)"
-                className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
               />
             </div>
 
@@ -317,7 +317,7 @@ export function ContactManager({ initialConfig, defaultConfig }: ContactManagerP
                 value={config.channels.workingHoursFr ?? ''}
                 onChange={(e) => updateChannel('workingHoursFr', e.target.value)}
                 placeholder="Du Lundi au Vendredi : 09h00 - 18h00"
-                className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
               />
             </div>
 
@@ -330,7 +330,7 @@ export function ContactManager({ initialConfig, defaultConfig }: ContactManagerP
                 value={config.channels.workingHoursEn ?? ''}
                 onChange={(e) => updateChannel('workingHoursEn', e.target.value)}
                 placeholder="Monday to Friday: 09:00 - 18:00"
-                className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
               />
             </div>
 
@@ -344,7 +344,7 @@ export function ContactManager({ initialConfig, defaultConfig }: ContactManagerP
                 value={config.channels.responseTimeAr}
                 onChange={(e) => updateChannel('responseTimeAr', e.target.value)}
                 placeholder="خلال 24 إلى 48 ساعة كحد أقصى (أيام العمل الرسمية)"
-                className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
               />
             </div>
 
@@ -358,7 +358,7 @@ export function ContactManager({ initialConfig, defaultConfig }: ContactManagerP
                 value={config.channels.mapLinkUrl ?? ''}
                 onChange={(e) => updateChannel('mapLinkUrl', e.target.value)}
                 placeholder="https://maps.google.com/?q=Marrakech,Morocco"
-                className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] font-mono focus:bg-white focus:outline-none focus:border-[#231f20]"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6] text-xs text-[#231f20] font-mono focus:bg-white focus:outline-none focus:border-[#231f20]"
               />
             </div>
           </div>
@@ -370,7 +370,7 @@ export function ContactManager({ initialConfig, defaultConfig }: ContactManagerP
           ============================================================ */}
       {activeTab === 'hero' && (
         <div className="p-6 sm:p-8 rounded-3xl bg-white border border-[#e5e0d6] shadow-subtle space-y-6">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#FEF6CC] pb-4">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#E5E0D6] pb-4">
             <div>
               <h2 className="text-xl font-black text-[#231f20] tracking-tight flex items-center gap-2">
                 <span>🖼️</span>
@@ -382,7 +382,7 @@ export function ContactManager({ initialConfig, defaultConfig }: ContactManagerP
             </div>
 
             {/* Language Switcher */}
-            <div className="flex items-center gap-1.5 p-1 bg-[#F5F3EE] rounded-xl border border-[#e5e0d6]">
+            <div className="flex items-center gap-1.5 p-1 bg-[#FAF8F5] rounded-xl border border-[#e5e0d6]">
               <button
                 type="button"
                 onClick={() => setActiveLangTab('ar')}
@@ -433,7 +433,7 @@ export function ContactManager({ initialConfig, defaultConfig }: ContactManagerP
                       value={config.hero.tagAr ?? ''}
                       onChange={(e) => updateHero('tagAr', e.target.value)}
                       placeholder="بوابة التواصل والإنصات المؤسسي"
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
                     />
                   </div>
                   <div>
@@ -445,7 +445,7 @@ export function ContactManager({ initialConfig, defaultConfig }: ContactManagerP
                       value={config.hero.badgeAr ?? ''}
                       onChange={(e) => updateHero('badgeAr', e.target.value)}
                       placeholder="المملكة المغربية • جمعية روح الفنون والثقافة"
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
                     />
                   </div>
                 </div>
@@ -459,7 +459,7 @@ export function ContactManager({ initialConfig, defaultConfig }: ContactManagerP
                     value={config.hero.titleAr ?? ''}
                     onChange={(e) => updateHero('titleAr', e.target.value)}
                     placeholder="يسعدنا التواصل معكم وبناء جسور التعاون الثقافي والفني"
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
                   />
                 </div>
 
@@ -472,7 +472,7 @@ export function ContactManager({ initialConfig, defaultConfig }: ContactManagerP
                     value={config.hero.descriptionAr ?? ''}
                     onChange={(e) => updateHero('descriptionAr', e.target.value)}
                     placeholder="فريق إدارة الجمعية ومكاتب التنسيق في خدمتكم..."
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
                   />
                 </div>
               </>
@@ -490,7 +490,7 @@ export function ContactManager({ initialConfig, defaultConfig }: ContactManagerP
                       value={config.hero.tagFr ?? ''}
                       onChange={(e) => updateHero('tagFr', e.target.value)}
                       placeholder="CANAL DE COMMUNICATION OFFICIEL"
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
                     />
                   </div>
                   <div>
@@ -502,7 +502,7 @@ export function ContactManager({ initialConfig, defaultConfig }: ContactManagerP
                       value={config.hero.badgeFr ?? ''}
                       onChange={(e) => updateHero('badgeFr', e.target.value)}
                       placeholder="Royaume du Maroc • AMYCC"
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
                     />
                   </div>
                 </div>
@@ -516,7 +516,7 @@ export function ContactManager({ initialConfig, defaultConfig }: ContactManagerP
                     value={config.hero.titleFr ?? ''}
                     onChange={(e) => updateHero('titleFr', e.target.value)}
                     placeholder="Contactez-nous & Développons la Création Culturelle"
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
                   />
                 </div>
 
@@ -529,7 +529,7 @@ export function ContactManager({ initialConfig, defaultConfig }: ContactManagerP
                     value={config.hero.descriptionFr ?? ''}
                     onChange={(e) => updateHero('descriptionFr', e.target.value)}
                     placeholder="L'équipe de direction de l'AMYCC est à votre disposition..."
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
                   />
                 </div>
               </>
@@ -547,7 +547,7 @@ export function ContactManager({ initialConfig, defaultConfig }: ContactManagerP
                       value={config.hero.tagEn ?? ''}
                       onChange={(e) => updateHero('tagEn', e.target.value)}
                       placeholder="OFFICIAL CONTACT GATEWAY"
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
                     />
                   </div>
                   <div>
@@ -559,7 +559,7 @@ export function ContactManager({ initialConfig, defaultConfig }: ContactManagerP
                       value={config.hero.badgeEn ?? ''}
                       onChange={(e) => updateHero('badgeEn', e.target.value)}
                       placeholder="Kingdom of Morocco • AMYCC"
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
                     />
                   </div>
                 </div>
@@ -573,7 +573,7 @@ export function ContactManager({ initialConfig, defaultConfig }: ContactManagerP
                     value={config.hero.titleEn ?? ''}
                     onChange={(e) => updateHero('titleEn', e.target.value)}
                     placeholder="Connect with Us & Co-Create Cultural Impact in Morocco"
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
                   />
                 </div>
 
@@ -586,7 +586,7 @@ export function ContactManager({ initialConfig, defaultConfig }: ContactManagerP
                     value={config.hero.descriptionEn ?? ''}
                     onChange={(e) => updateHero('descriptionEn', e.target.value)}
                     placeholder="The AMYCC leadership team is at your disposal..."
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
                   />
                 </div>
               </>
@@ -600,7 +600,7 @@ export function ContactManager({ initialConfig, defaultConfig }: ContactManagerP
           ============================================================ */}
       {activeTab === 'topics' && (
         <div className="p-6 sm:p-8 rounded-3xl bg-white border border-[#e5e0d6] shadow-subtle space-y-6">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#FEF6CC] pb-4">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#E5E0D6] pb-4">
             <div>
               <h2 className="text-xl font-black text-[#231f20] tracking-tight flex items-center gap-2">
                 <span>📋</span>
@@ -625,7 +625,7 @@ export function ContactManager({ initialConfig, defaultConfig }: ContactManagerP
             {config.formTopics.map((topic, index) => (
               <div
                 key={topic.id}
-                className="p-4 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3"
+                className="p-4 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6] flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3"
               >
                 <div className="flex items-center gap-3 flex-1">
                   <span className="w-6 h-6 rounded-md bg-[#231f20]/10 text-[#231f20] font-bold text-2xs flex items-center justify-center shrink-0">
@@ -667,7 +667,7 @@ export function ContactManager({ initialConfig, defaultConfig }: ContactManagerP
           ============================================================ */}
       {activeTab === 'social' && (
         <div className="p-6 sm:p-8 rounded-3xl bg-white border border-[#e5e0d6] shadow-subtle space-y-6">
-          <div className="border-b border-[#FEF6CC] pb-4">
+          <div className="border-b border-[#E5E0D6] pb-4">
             <h2 className="text-xl font-black text-[#231f20] tracking-tight flex items-center gap-2">
               <span>🌐</span>
               <span>روابط الحسابات الرسمية على مواقع التواصل</span>
@@ -687,7 +687,7 @@ export function ContactManager({ initialConfig, defaultConfig }: ContactManagerP
                 value={config.social.facebook ?? ''}
                 onChange={(e) => updateSocial('facebook', e.target.value)}
                 placeholder="https://facebook.com/amycc.morocco"
-                className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] font-mono focus:bg-white focus:outline-none focus:border-[#231f20]"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6] text-xs text-[#231f20] font-mono focus:bg-white focus:outline-none focus:border-[#231f20]"
               />
             </div>
 
@@ -700,7 +700,7 @@ export function ContactManager({ initialConfig, defaultConfig }: ContactManagerP
                 value={config.social.instagram ?? ''}
                 onChange={(e) => updateSocial('instagram', e.target.value)}
                 placeholder="https://instagram.com/amycc.morocco"
-                className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] font-mono focus:bg-white focus:outline-none focus:border-[#231f20]"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6] text-xs text-[#231f20] font-mono focus:bg-white focus:outline-none focus:border-[#231f20]"
               />
             </div>
 
@@ -713,7 +713,7 @@ export function ContactManager({ initialConfig, defaultConfig }: ContactManagerP
                 value={config.social.linkedin ?? ''}
                 onChange={(e) => updateSocial('linkedin', e.target.value)}
                 placeholder="https://linkedin.com/company/amycc"
-                className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] font-mono focus:bg-white focus:outline-none focus:border-[#231f20]"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6] text-xs text-[#231f20] font-mono focus:bg-white focus:outline-none focus:border-[#231f20]"
               />
             </div>
 
@@ -726,7 +726,7 @@ export function ContactManager({ initialConfig, defaultConfig }: ContactManagerP
                 value={config.social.youtube ?? ''}
                 onChange={(e) => updateSocial('youtube', e.target.value)}
                 placeholder="https://youtube.com/@amycc"
-                className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] font-mono focus:bg-white focus:outline-none focus:border-[#231f20]"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6] text-xs text-[#231f20] font-mono focus:bg-white focus:outline-none focus:border-[#231f20]"
               />
             </div>
           </div>
@@ -739,7 +739,7 @@ export function ContactManager({ initialConfig, defaultConfig }: ContactManagerP
           <Link
             href="/ar/contact"
             target="_blank"
-            className="px-3 py-1.5 rounded-xl bg-[#F5F3EE] hover:bg-[#FEF6CC] text-xs font-bold text-[#231f20] border border-[#e5e0d6] transition-colors"
+            className="px-3 py-1.5 rounded-xl bg-[#FAF8F5] hover:bg-[#F4EFE6] text-xs font-bold text-[#231f20] border border-[#e5e0d6] transition-colors"
           >
             معاينة صفحة اتصل بنا ↗
           </Link>

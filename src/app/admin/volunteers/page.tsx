@@ -71,7 +71,7 @@ export default async function AdminVolunteersPage() {
       <div className="bg-white rounded-2xl border border-[#e5e0d6] overflow-hidden shadow-2xs">
         <div className="overflow-x-auto">
           <table className="w-full text-start text-xs text-[#231f20]">
-            <thead className="bg-[#F5F3EE] border-b border-[#e5e0d6] text-2xs uppercase tracking-wider text-[#5C5A55] font-bold">
+            <thead className="bg-[#FAF8F5] border-b border-[#e5e0d6] text-2xs uppercase tracking-wider text-[#5C5A55] font-bold">
               <tr>
                 <th className="px-6 py-4 text-start">Volunteer</th>
                 <th className="px-6 py-4 text-start">City / Availability</th>
@@ -83,7 +83,7 @@ export default async function AdminVolunteersPage() {
             <tbody className="divide-y divide-[#FEF6CC]">
               {rows.length > 0 ? (
                 rows.map((vol) => (
-                  <tr key={vol.id} className="hover:bg-[#F5F3EE]/60 transition-colors">
+                  <tr key={vol.id} className="hover:bg-[#FAF8F5]/60 transition-colors">
                     <td className="px-6 py-4">
                       <div className="font-bold text-[#231f20]">{vol.full_name}</div>
                       <div className="text-3xs text-[#5C5A55]">{vol.email}</div>
@@ -94,7 +94,7 @@ export default async function AdminVolunteersPage() {
                       <span className="text-[#5C5A55] text-3xs">{vol.availability}</span>
                     </td>
                     <td className="px-6 py-4 max-w-xs">
-                      <span className="inline-block px-2 py-0.5 rounded text-3xs font-bold bg-[#FEF6CC] text-[#231f20] mb-1">
+                      <span className="inline-block px-2 py-0.5 rounded text-3xs font-bold bg-[#F4EFE6] text-[#231f20] mb-1">
                         {vol.initiative}
                       </span>
                       <p className="truncate text-[#5C5A55] text-xs" title={vol.skills}>

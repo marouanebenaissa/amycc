@@ -191,7 +191,7 @@ export function VolunteerForm({ locale }: { locale: string }) {
           </label>
           <select
             name="availability"
-            className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] text-xs text-[#231f20] bg-[#F5F3EE] font-semibold focus:border-[#231f20] outline-none"
+            className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] text-xs text-[#231f20] bg-[#FAF8F5] font-semibold focus:border-[#231f20] outline-none"
           >
             <option value="weekends">
               {isAr
@@ -238,7 +238,7 @@ export function VolunteerForm({ locale }: { locale: string }) {
           {interestOptions.map((opt) => (
             <label
               key={opt.value}
-              className="flex items-center gap-2.5 p-3 rounded-xl border border-[#e5e0d6] bg-[#F5F3EE] hover:bg-white cursor-pointer text-xs transition-colors"
+              className="flex items-center gap-2.5 p-3 rounded-xl border border-[#e5e0d6] bg-[#FAF8F5] hover:bg-white cursor-pointer text-xs transition-colors"
             >
               <input
                 type="checkbox"

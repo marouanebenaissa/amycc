@@ -117,7 +117,7 @@ export function ProgramForm({ program }: ProgramFormProps) {
 
       {/* Basic fields */}
       <div className="bg-white rounded-3xl border border-[#e5e0d6] p-6 sm:p-8 space-y-6 shadow-2xs">
-        <div className="border-b border-[#FEF6CC] pb-3">
+        <div className="border-b border-[#E5E0D6] pb-3">
           <h2 className="text-base font-black text-[#231f20]">المعلومات العامة للبرنامج (General Details)</h2>
           <p className="text-xs text-[#5C5A55] mt-0.5">
             تحديد التصنيف والمجال الثقافي، النطاق الجغرافي، والرابط الفريد للبرنامج.
@@ -172,7 +172,7 @@ export function ProgramForm({ program }: ProgramFormProps) {
             الصورة البارزة للبرنامج (Program Cover Image)
           </label>
 
-          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5 p-5 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6]">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5 p-5 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6]">
             {coverImageUrl ? (
               <div className="relative w-36 h-24 rounded-xl overflow-hidden border border-[#e5e0d6] shrink-0 bg-white shadow-2xs">
                 <Image
@@ -239,7 +239,7 @@ export function ProgramForm({ program }: ProgramFormProps) {
 
       {/* Trilingual Translations */}
       <div className="bg-white rounded-3xl border border-[#e5e0d6] p-6 sm:p-8 space-y-6 shadow-2xs">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#FEF6CC] pb-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#E5E0D6] pb-4">
           <div>
             <h2 className="text-base font-black text-[#231f20]">تفاصيل ومحتوى البرنامج باللغات الثلاث</h2>
             <p className="text-xs text-[#5C5A55] mt-0.5">
@@ -247,7 +247,7 @@ export function ProgramForm({ program }: ProgramFormProps) {
             </p>
           </div>
 
-          <div className="flex gap-1.5 p-1 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6] self-start sm:self-auto">
+          <div className="flex gap-1.5 p-1 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6] self-start sm:self-auto">
             {(['ar', 'fr', 'en'] as const).map((loc) => (
               <button
                 key={loc}
@@ -256,7 +256,7 @@ export function ProgramForm({ program }: ProgramFormProps) {
                 className={`px-4 py-1.5 text-xs font-black rounded-xl transition-all cursor-pointer ${
                   activeLocale === loc
                     ? 'bg-[#231f20] text-white shadow-xs'
-                    : 'text-[#5C5A55] hover:bg-[#FEF6CC]'
+                    : 'text-[#5C5A55] hover:bg-[#F4EFE6]'
                 }`}
               >
                 {loc === 'ar' ? 'العربية 🇲🇦' : loc === 'fr' ? 'Français 🇫🇷' : 'English 🇬🇧'}
@@ -429,7 +429,7 @@ export function ProgramForm({ program }: ProgramFormProps) {
         <button
           type="button"
           onClick={() => router.back()}
-          className="px-5 py-2.5 text-xs font-bold text-[#5C5A55] border border-[#cfc7b9] rounded-xl hover:bg-[#F5F3EE] transition-colors cursor-pointer"
+          className="px-5 py-2.5 text-xs font-bold text-[#5C5A55] border border-[#cfc7b9] rounded-xl hover:bg-[#FAF8F5] transition-colors cursor-pointer"
         >
           إلغاء والعودة
         </button>

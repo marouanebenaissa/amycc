@@ -299,7 +299,7 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
             <button
               type="button"
               onClick={handleReset}
-              className="px-3.5 py-2 rounded-xl text-xs font-bold text-[#5C5A55] bg-[#F5F3EE] border border-[#e5e0d6] hover:bg-[#FEF6CC] transition-colors"
+              className="px-3.5 py-2 rounded-xl text-xs font-bold text-[#5C5A55] bg-[#FAF8F5] border border-[#e5e0d6] hover:bg-[#F4EFE6] transition-colors"
             >
               استعادة الافتراضي
             </button>
@@ -308,7 +308,7 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
           <Link
             href="/ar/impact"
             target="_blank"
-            className="px-3.5 py-2 rounded-xl text-xs font-bold text-[#231f20] bg-[#FEF6CC] hover:bg-[#FEF6CC] transition-colors"
+            className="px-3.5 py-2 rounded-xl text-xs font-bold text-[#231f20] bg-[#F4EFE6] hover:bg-[#F4EFE6] transition-colors"
           >
             معاينة الصفحة ↗
           </Link>
@@ -362,7 +362,7 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
           className={`px-4 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 ${
             activeTab === 'hero'
               ? 'bg-[#231f20] text-white shadow-xs'
-              : 'bg-white text-[#5C5A55] border border-[#e5e0d6] hover:bg-[#F5F3EE]'
+              : 'bg-white text-[#5C5A55] border border-[#e5e0d6] hover:bg-[#FAF8F5]'
           }`}
         >
           <span>🖼️</span>
@@ -375,7 +375,7 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
           className={`px-4 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 ${
             activeTab === 'metrics'
               ? 'bg-[#231f20] text-white shadow-xs'
-              : 'bg-white text-[#5C5A55] border border-[#e5e0d6] hover:bg-[#F5F3EE]'
+              : 'bg-white text-[#5C5A55] border border-[#e5e0d6] hover:bg-[#FAF8F5]'
           }`}
         >
           <span>📊</span>
@@ -388,7 +388,7 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
           className={`px-4 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 ${
             activeTab === 'pillars'
               ? 'bg-[#231f20] text-white shadow-xs'
-              : 'bg-white text-[#5C5A55] border border-[#e5e0d6] hover:bg-[#F5F3EE]'
+              : 'bg-white text-[#5C5A55] border border-[#e5e0d6] hover:bg-[#FAF8F5]'
           }`}
         >
           <span>🏛️</span>
@@ -401,7 +401,7 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
           className={`px-4 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 ${
             activeTab === 'spotlight'
               ? 'bg-[#231f20] text-white shadow-xs'
-              : 'bg-white text-[#5C5A55] border border-[#e5e0d6] hover:bg-[#F5F3EE]'
+              : 'bg-white text-[#5C5A55] border border-[#e5e0d6] hover:bg-[#FAF8F5]'
           }`}
         >
           <span>🚀</span>
@@ -414,7 +414,7 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
           className={`px-4 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 ${
             activeTab === 'transparency_cta'
               ? 'bg-[#231f20] text-white shadow-xs'
-              : 'bg-white text-[#5C5A55] border border-[#e5e0d6] hover:bg-[#F5F3EE]'
+              : 'bg-white text-[#5C5A55] border border-[#e5e0d6] hover:bg-[#FAF8F5]'
           }`}
         >
           <span>⚖️</span>
@@ -435,7 +435,7 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
             className={`px-3 py-1 rounded-lg text-2xs font-extrabold transition-colors ${
               activeLangTab === 'ar'
                 ? 'bg-[#231f20] text-white'
-                : 'bg-[#F5F3EE] text-[#5C5A55] hover:bg-[#FEF6CC]'
+                : 'bg-[#FAF8F5] text-[#5C5A55] hover:bg-[#F4EFE6]'
             }`}
           >
             العربية (AR)
@@ -446,7 +446,7 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
             className={`px-3 py-1 rounded-lg text-2xs font-extrabold transition-colors ${
               activeLangTab === 'fr'
                 ? 'bg-[#231f20] text-white'
-                : 'bg-[#F5F3EE] text-[#5C5A55] hover:bg-[#FEF6CC]'
+                : 'bg-[#FAF8F5] text-[#5C5A55] hover:bg-[#F4EFE6]'
             }`}
           >
             Français (FR)
@@ -457,7 +457,7 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
             className={`px-3 py-1 rounded-lg text-2xs font-extrabold transition-colors ${
               activeLangTab === 'en'
                 ? 'bg-[#231f20] text-white'
-                : 'bg-[#F5F3EE] text-[#5C5A55] hover:bg-[#FEF6CC]'
+                : 'bg-[#FAF8F5] text-[#5C5A55] hover:bg-[#F4EFE6]'
             }`}
           >
             English (EN)
@@ -508,7 +508,7 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
                   className={`inline-block px-3 py-1 rounded-full text-2xs font-bold ${
                     config.hero.hasHeroImage && config.hero.heroImageUrl
                       ? 'bg-white/10 text-[#ffd22f] border border-white/20'
-                      : 'bg-[#FEF6CC] text-[#bd3227] border border-[#fde8e7]'
+                      : 'bg-[#F4EFE6] text-[#bd3227] border border-[#fde8e7]'
                   }`}
                 >
                   {activeLangTab === 'ar'
@@ -594,7 +594,7 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
 
           {/* Hero Image Controls */}
           <div className="bg-white p-6 rounded-2xl border border-[#e5e0d6] shadow-2xs space-y-5">
-            <div className="flex items-center justify-between pb-3 border-b border-[#FEF6CC]">
+            <div className="flex items-center justify-between pb-3 border-b border-[#E5E0D6]">
               <div>
                 <h3 className="text-sm font-extrabold text-[#231f20]">
                   صورة خلفية الهيدر (Hero Background Image)
@@ -658,7 +658,7 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
 
           {/* Hero Multilingual Text Fields */}
           <div className="bg-white p-6 rounded-2xl border border-[#e5e0d6] shadow-2xs space-y-4">
-            <h3 className="text-sm font-extrabold text-[#231f20] pb-2 border-b border-[#FEF6CC]">
+            <h3 className="text-sm font-extrabold text-[#231f20] pb-2 border-b border-[#E5E0D6]">
               نصوص الهيدر باللغة المختارة ({activeLangTab.toUpperCase()})
             </h3>
 
@@ -891,7 +891,7 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
             )}
 
             {/* Links and PDF */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-3 border-t border-[#FEF6CC]">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-3 border-t border-[#E5E0D6]">
               <div>
                 <label className="block text-2xs font-bold text-[#231f20] mb-1">
                   رابط الزر الرئيسي (Primary URL):
@@ -952,9 +952,9 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
                 key={metric.id}
                 className="bg-white p-5 rounded-2xl border border-[#e5e0d6] shadow-2xs space-y-4 relative"
               >
-                <div className="flex items-center justify-between pb-3 border-b border-[#FEF6CC]">
+                <div className="flex items-center justify-between pb-3 border-b border-[#E5E0D6]">
                   <div className="flex items-center gap-2">
-                    <span className="w-6 h-6 rounded-lg bg-[#F5F3EE] border border-[#e5e0d6] text-2xs font-bold flex items-center justify-center text-[#231f20]">
+                    <span className="w-6 h-6 rounded-lg bg-[#FAF8F5] border border-[#e5e0d6] text-2xs font-bold flex items-center justify-center text-[#231f20]">
                       {idx + 1}
                     </span>
                     <span className="text-xs font-black text-[#231f20]">
@@ -1095,9 +1095,9 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
                 key={pillar.id}
                 className="bg-white p-6 rounded-2xl border border-[#e5e0d6] shadow-2xs space-y-4 relative"
               >
-                <div className="flex items-center justify-between pb-3 border-b border-[#FEF6CC]">
+                <div className="flex items-center justify-between pb-3 border-b border-[#E5E0D6]">
                   <div className="flex items-center gap-2">
-                    <span className="text-xl p-1.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6]">
+                    <span className="text-xl p-1.5 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6]">
                       {pillar.icon}
                     </span>
                     <span className="text-xs font-black text-[#231f20]">
@@ -1227,7 +1227,7 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
         <div className="space-y-6">
           {/* Spotlight Section Form */}
           <div className="bg-white p-6 rounded-2xl border border-[#e5e0d6] shadow-2xs space-y-5">
-            <h3 className="text-base font-extrabold text-[#231f20] pb-2 border-b border-[#FEF6CC]">
+            <h3 className="text-base font-extrabold text-[#231f20] pb-2 border-b border-[#E5E0D6]">
               قصة الأثر الميداني — مبادرة شباب في العمل (Featured Spotlight Story)
             </h3>
 
@@ -1405,11 +1405,11 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
             </div>
 
             {/* Live Visual Preview of the Quote Box */}
-            <div className="pt-4 border-t border-[#FEF6CC] space-y-2">
+            <div className="pt-4 border-t border-[#E5E0D6] space-y-2">
               <span className="text-3xs font-extrabold text-[#bd3227] uppercase tracking-wider block">
                 معاينة حية ومباشرة لشكل الاقتباس على الموقع (Live Quote Simulation):
               </span>
-              <div className="p-4 rounded-xl bg-[#F5F3EE] border-r-4 rtl:border-r-4 ltr:border-l-4 border-[#bd3227] shadow-2xs space-y-2">
+              <div className="p-4 rounded-xl bg-[#FAF8F5] border-r-4 rtl:border-r-4 ltr:border-l-4 border-[#bd3227] shadow-2xs space-y-2">
                 <p className="text-xs sm:text-sm font-semibold italic text-[#231f20] leading-relaxed">
                   &ldquo;
                   {activeLangTab === 'ar'
@@ -1430,7 +1430,7 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
             </div>
 
             {/* In-tab Save Button */}
-            <div className="flex items-center justify-between pt-3 border-t border-[#FEF6CC]">
+            <div className="flex items-center justify-between pt-3 border-t border-[#E5E0D6]">
               <span className="text-3xs text-[#5C5A55]">
                 * اضغط حفظ ليتم نشر التعديلات فوراً على كافة صفحات الموقع.
               </span>
@@ -1457,7 +1457,7 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
 
           {/* Methodology 4 Steps */}
           <div className="bg-white p-6 rounded-2xl border border-[#e5e0d6] shadow-2xs space-y-5">
-            <h3 className="text-base font-extrabold text-[#231f20] pb-2 border-b border-[#FEF6CC]">
+            <h3 className="text-base font-extrabold text-[#231f20] pb-2 border-b border-[#E5E0D6]">
               خطوات ومنهجية تحقيق الأثر الأربعة (4-Step Impact Methodology)
             </h3>
 
@@ -1465,7 +1465,7 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
               {config.methodology.steps.map((step, idx) => (
                 <div
                   key={step.id}
-                  className="p-4 rounded-xl border border-[#e5e0d6] bg-[#F5F3EE] space-y-3"
+                  className="p-4 rounded-xl border border-[#e5e0d6] bg-[#FAF8F5] space-y-3"
                 >
                   <div className="flex items-center justify-between">
                     <span className="text-xs font-black text-[#bd3227]">
@@ -1561,7 +1561,7 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
               {config.transparency.items.map((item, idx) => (
                 <div
                   key={item.id}
-                  className="p-4 rounded-xl border border-[#e5e0d6] bg-[#F5F3EE] space-y-3"
+                  className="p-4 rounded-xl border border-[#e5e0d6] bg-[#FAF8F5] space-y-3"
                 >
                   <div className="flex items-center justify-between">
                     <span className="text-xs font-bold text-[#231f20]">
@@ -1637,7 +1637,7 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
 
           {/* CTA Banner Section */}
           <div className="bg-white p-6 rounded-2xl border border-[#e5e0d6] shadow-2xs space-y-4">
-            <h3 className="text-base font-extrabold text-[#231f20] pb-2 border-b border-[#FEF6CC]">
+            <h3 className="text-base font-extrabold text-[#231f20] pb-2 border-b border-[#E5E0D6]">
               بانر الدعوة للشراكة وتوسيع الأثر (Partnership CTA Banner)
             </h3>
 
@@ -1815,7 +1815,7 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
           <Link
             href="/ar/impact"
             target="_blank"
-            className="px-4 py-2 rounded-xl text-xs font-bold text-[#231f20] bg-[#FEF6CC] hover:bg-[#FEF6CC] transition-colors"
+            className="px-4 py-2 rounded-xl text-xs font-bold text-[#231f20] bg-[#F4EFE6] hover:bg-[#F4EFE6] transition-colors"
           >
             معاينة صفحة الأثر ↗
           </Link>

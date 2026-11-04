@@ -78,7 +78,7 @@ export function EventRegistrationModal({
                 setIsOpen(false)
                 setResponse(null)
               }}
-              className="absolute top-5 end-5 w-8 h-8 rounded-full bg-[#F5F3EE] hover:bg-[#FEF6CC] text-[#231f20] flex items-center justify-center font-bold text-sm transition-colors"
+              className="absolute top-5 end-5 w-8 h-8 rounded-full bg-[#FAF8F5] hover:bg-[#F4EFE6] text-[#231f20] flex items-center justify-center font-bold text-sm transition-colors"
               aria-label="Close"
             >
               ✕
@@ -186,7 +186,7 @@ export function EventRegistrationModal({
                 <button
                   type="button"
                   onClick={() => setIsOpen(false)}
-                  className="w-full py-2.5 px-4 rounded-xl font-bold text-[#231f20] bg-[#F5F3EE] hover:bg-[#FEF6CC] border border-[#e5e0d6] text-xs transition-colors"
+                  className="w-full py-2.5 px-4 rounded-xl font-bold text-[#231f20] bg-[#FAF8F5] hover:bg-[#F4EFE6] border border-[#e5e0d6] text-xs transition-colors"
                 >
                   {isAr ? 'إغلاق النافذة' : 'Close'}
                 </button>
@@ -194,7 +194,7 @@ export function EventRegistrationModal({
             )}
 
             {/* Event Article & Details Overview below registration area */}
-            <div className="mt-8 pt-6 border-t border-[#FEF6CC] space-y-4">
+            <div className="mt-8 pt-6 border-t border-[#E5E0D6] space-y-4">
               <div className="flex items-center gap-2">
                 <span className="w-1.5 h-4 bg-[#bd3227] rounded-full" />
                 <h4 className="text-xs sm:text-sm font-black text-[#231f20]">
@@ -203,11 +203,11 @@ export function EventRegistrationModal({
               </div>
 
               {eventDescription ? (
-                <div className="bg-[#F5F3EE] p-4 rounded-2xl border border-[#e5e0d6] text-xs leading-relaxed text-[#5C5A55] whitespace-pre-line font-medium">
+                <div className="bg-[#FAF8F5] p-4 rounded-2xl border border-[#e5e0d6] text-xs leading-relaxed text-[#5C5A55] whitespace-pre-line font-medium">
                   {eventDescription}
                 </div>
               ) : (
-                <div className="bg-[#F5F3EE] p-4 rounded-2xl border border-[#e5e0d6] text-xs leading-relaxed text-[#5C5A55]">
+                <div className="bg-[#FAF8F5] p-4 rounded-2xl border border-[#e5e0d6] text-xs leading-relaxed text-[#5C5A55]">
                   {isAr
                     ? 'فعالية ثقافية وفنية مميزة تنظمها جمعية روح الفنون والثقافة لتشجيع المواهب الصاعدة وتعزيز الحراك الثقافي المجتمعي.'
                     : 'A cultural and artistic event organized by AMYCC to foster emerging talents and cultural engagement.'}

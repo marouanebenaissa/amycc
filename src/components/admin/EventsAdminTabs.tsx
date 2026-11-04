@@ -372,7 +372,7 @@ export function EventsAdminTabs({
             className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-black transition-all cursor-pointer ${
               activeMainTab === 'events_list'
                 ? 'bg-[#231f20] text-white shadow-sm'
-                : 'text-[#5C5A55] hover:text-[#231f20] hover:bg-[#F5F3EE]'
+                : 'text-[#5C5A55] hover:text-[#231f20] hover:bg-[#FAF8F5]'
             }`}
           >
             <span>📅</span>
@@ -385,7 +385,7 @@ export function EventsAdminTabs({
             className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-black transition-all cursor-pointer ${
               activeMainTab === 'cms_header'
                 ? 'bg-[#bd3227] text-white shadow-sm'
-                : 'text-[#5C5A55] hover:text-[#231f20] hover:bg-[#F5F3EE]'
+                : 'text-[#5C5A55] hover:text-[#231f20] hover:bg-[#FAF8F5]'
             }`}
           >
             <span>✨</span>
@@ -396,7 +396,7 @@ export function EventsAdminTabs({
         <Link
           href="/ar/events"
           target="_blank"
-          className="px-4 py-2 rounded-xl text-xs font-bold text-[#bd3227] bg-[#FEF6CC] hover:bg-[#FEF6CC] transition-colors flex items-center gap-1.5"
+          className="px-4 py-2 rounded-xl text-xs font-bold text-[#bd3227] bg-[#F4EFE6] hover:bg-[#F4EFE6] transition-colors flex items-center gap-1.5"
         >
           <span>معاينة صفحة الفعاليات</span>
           <span>↗</span>
@@ -469,7 +469,7 @@ export function EventsAdminTabs({
           <div className="bg-white rounded-2xl border border-[#e5e0d6] overflow-hidden shadow-2xs">
             <div className="overflow-x-auto">
               <table className="w-full text-start text-xs text-[#231f20]">
-                <thead className="bg-[#F5F3EE] border-b border-[#e5e0d6] text-3xs uppercase tracking-wider text-[#5C5A55] font-bold">
+                <thead className="bg-[#FAF8F5] border-b border-[#e5e0d6] text-3xs uppercase tracking-wider text-[#5C5A55] font-bold">
                   <tr>
                     <th className="px-6 py-4 text-start">الفعالية</th>
                     <th className="px-6 py-4 text-start">التاريخ والفضاء</th>
@@ -493,7 +493,7 @@ export function EventsAdminTabs({
                       const dateObj = new Date(ev.start_date)
 
                       return (
-                        <tr key={ev.id} className="hover:bg-[#F5F3EE]/60 transition-colors">
+                        <tr key={ev.id} className="hover:bg-[#FAF8F5]/60 transition-colors">
                           <td className="px-6 py-4">
                             <div className="flex items-center gap-3">
                               <div className="w-12 h-12 rounded-xl bg-[#231f20] overflow-hidden shrink-0 relative border border-[#e5e0d6]">
@@ -574,7 +574,7 @@ export function EventsAdminTabs({
                               </button>
                               <Link
                                 href={`/admin/events/${ev.id}/edit`}
-                                className="px-3 py-1.5 rounded-lg text-2xs font-bold bg-[#F5F3EE] border border-[#e5e0d6] text-[#231f20] hover:bg-[#FEF6CC] transition-colors"
+                                className="px-3 py-1.5 rounded-lg text-2xs font-bold bg-[#FAF8F5] border border-[#e5e0d6] text-[#231f20] hover:bg-[#F4EFE6] transition-colors"
                               >
                                 تعديل
                               </Link>
@@ -623,7 +623,7 @@ export function EventsAdminTabs({
                 className={`px-3.5 py-1.5 rounded-lg text-2xs font-black transition-colors ${
                   activeLangTab === 'ar'
                     ? 'bg-[#231f20] text-white shadow-xs'
-                    : 'bg-[#F5F3EE] text-[#5C5A55] hover:bg-[#FEF6CC]'
+                    : 'bg-[#FAF8F5] text-[#5C5A55] hover:bg-[#F4EFE6]'
                 }`}
               >
                 العربية (AR)
@@ -634,7 +634,7 @@ export function EventsAdminTabs({
                 className={`px-3.5 py-1.5 rounded-lg text-2xs font-black transition-colors ${
                   activeLangTab === 'fr'
                     ? 'bg-[#231f20] text-white shadow-xs'
-                    : 'bg-[#F5F3EE] text-[#5C5A55] hover:bg-[#FEF6CC]'
+                    : 'bg-[#FAF8F5] text-[#5C5A55] hover:bg-[#F4EFE6]'
                 }`}
               >
                 Français (FR)
@@ -645,7 +645,7 @@ export function EventsAdminTabs({
                 className={`px-3.5 py-1.5 rounded-lg text-2xs font-black transition-colors ${
                   activeLangTab === 'en'
                     ? 'bg-[#231f20] text-white shadow-xs'
-                    : 'bg-[#F5F3EE] text-[#5C5A55] hover:bg-[#FEF6CC]'
+                    : 'bg-[#FAF8F5] text-[#5C5A55] hover:bg-[#F4EFE6]'
                 }`}
               >
                 English (EN)
@@ -691,7 +691,7 @@ export function EventsAdminTabs({
                   className={`inline-block px-3 py-1 rounded-full text-2xs font-bold ${
                     config.hero.hasHeroImage && config.hero.imageUrl
                       ? 'bg-white/10 text-[#ffd22f] border border-white/20'
-                      : 'bg-[#FEF6CC] text-[#bd3227] border border-[#fde8e7]'
+                      : 'bg-[#F4EFE6] text-[#bd3227] border border-[#fde8e7]'
                   }`}
                 >
                   {activeLangTab === 'ar'
@@ -767,7 +767,7 @@ export function EventsAdminTabs({
 
           {/* Hero Image Controls */}
           <div className="bg-white p-6 rounded-2xl border border-[#e5e0d6] shadow-2xs space-y-4">
-            <div className="flex items-center justify-between pb-3 border-b border-[#FEF6CC]">
+            <div className="flex items-center justify-between pb-3 border-b border-[#E5E0D6]">
               <div>
                 <h3 className="text-sm font-extrabold text-[#231f20]">
                   صورة خلفية الهيدر (Hero Background Image)
@@ -831,7 +831,7 @@ export function EventsAdminTabs({
 
           {/* Multilingual Text Inputs */}
           <div className="bg-white p-6 rounded-2xl border border-[#e5e0d6] shadow-2xs space-y-4">
-            <h3 className="text-sm font-extrabold text-[#231f20] pb-2 border-b border-[#FEF6CC]">
+            <h3 className="text-sm font-extrabold text-[#231f20] pb-2 border-b border-[#E5E0D6]">
               نصوص الهيدر والعناوين باللغة المختارة ({activeLangTab.toUpperCase()})
             </h3>
 
@@ -975,7 +975,7 @@ export function EventsAdminTabs({
 
           {/* 4 Impact Stats */}
           <div className="bg-white p-6 rounded-2xl border border-[#e5e0d6] shadow-2xs space-y-4">
-            <h3 className="text-sm font-extrabold text-[#231f20] pb-2 border-b border-[#FEF6CC]">
+            <h3 className="text-sm font-extrabold text-[#231f20] pb-2 border-b border-[#E5E0D6]">
               مؤشرات وأرقام الفعاليات الأربعة (4 Impact Stats)
             </h3>
 
@@ -983,7 +983,7 @@ export function EventsAdminTabs({
               {config.stats.map((stat, idx) => (
                 <div
                   key={stat.id}
-                  className="p-4 rounded-xl border border-[#e5e0d6] bg-[#F5F3EE] space-y-3"
+                  className="p-4 rounded-xl border border-[#e5e0d6] bg-[#FAF8F5] space-y-3"
                 >
                   <div className="flex items-center justify-between">
                     <span className="text-3xs font-black text-[#231f20]">
@@ -1059,7 +1059,7 @@ export function EventsAdminTabs({
 
           {/* Suggest Event / Partnership CTA Banner */}
           <div className="bg-white p-6 rounded-2xl border border-[#e5e0d6] shadow-2xs space-y-4">
-            <h3 className="text-sm font-extrabold text-[#231f20] pb-2 border-b border-[#FEF6CC]">
+            <h3 className="text-sm font-extrabold text-[#231f20] pb-2 border-b border-[#E5E0D6]">
               بانر اقتراح فعالية والشراكة الفنية (Partnership CTA Banner)
             </h3>
 
@@ -1204,7 +1204,7 @@ export function EventsAdminTabs({
                   setFeedback({ type: 'success', message: 'تم استرجاع الإعدادات الافتراضية. اضغط حفظ لتطبيقها.' })
                 }
               }}
-              className="px-3.5 py-2 rounded-xl text-xs font-bold text-[#5C5A55] bg-[#F5F3EE] border border-[#e5e0d6] hover:bg-[#FEF6CC] transition-colors"
+              className="px-3.5 py-2 rounded-xl text-xs font-bold text-[#5C5A55] bg-[#FAF8F5] border border-[#e5e0d6] hover:bg-[#F4EFE6] transition-colors"
             >
               استعادة الافتراضي
             </button>

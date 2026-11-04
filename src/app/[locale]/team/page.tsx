@@ -113,7 +113,7 @@ export default async function TeamPage(props: { params: Promise<{ locale: string
     <>
       <Header locale={locale} dict={dict} />
 
-      <main id="main-content" className="flex-1 bg-[#F5F3EE]">
+      <main id="main-content" className="flex-1 bg-[#FAF8F5]">
         {/* ============================================================
             1. HERO BANNER (Full-Bleed Moroccan Cinematic Hero or Ambient Pattern)
             ============================================================ */}
@@ -201,7 +201,7 @@ export default async function TeamPage(props: { params: Promise<{ locale: string
               </h1>
 
               <p className={`text-sm sm:text-base lg:text-lg max-w-3xl mx-auto leading-relaxed text-balance ${
-                hasHeroImage ? 'text-[#FEF6CC]/95 font-normal' : 'text-[#5C5A55] font-medium'
+                hasHeroImage ? 'text-[#E2DED6]/95 font-normal' : 'text-[#5C5A55] font-medium'
               }`}>
                 {heroDesc}
               </p>
@@ -270,7 +270,7 @@ export default async function TeamPage(props: { params: Promise<{ locale: string
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
               {/* Card 1: 6 Statutory Roles */}
-              <div className="p-5 sm:p-6 rounded-3xl bg-[#F5F3EE] border border-[#e5e0d6] hover:border-[#231f20]/30 transition-all text-center flex flex-col justify-between group shadow-2xs">
+              <div className="p-5 sm:p-6 rounded-3xl bg-[#FAF8F5] border border-[#e5e0d6] hover:border-[#231f20]/30 transition-all text-center flex flex-col justify-between group shadow-2xs">
                 <span className="text-xs font-bold text-[#5C5A55] block mb-1">
                   {isAr ? 'المكتب التنفيذي المنتخب' : isFr ? 'Bureau Exécutif Élu' : 'Elected Executive Board'}
                 </span>
@@ -289,7 +289,7 @@ export default async function TeamPage(props: { params: Promise<{ locale: string
               </div>
 
               {/* Card 2: 6 Specialized Hubs */}
-              <div className="p-5 sm:p-6 rounded-3xl bg-[#F5F3EE] border border-[#e5e0d6] hover:border-[#bd3227]/30 transition-all text-center flex flex-col justify-between group shadow-2xs">
+              <div className="p-5 sm:p-6 rounded-3xl bg-[#FAF8F5] border border-[#e5e0d6] hover:border-[#bd3227]/30 transition-all text-center flex flex-col justify-between group shadow-2xs">
                 <span className="text-xs font-bold text-[#5C5A55] block mb-1">
                   {isAr ? 'اللجان الميدانية المتخصصة' : isFr ? 'Commissions Thématiques' : 'Specialized Commissions'}
                 </span>
@@ -308,7 +308,7 @@ export default async function TeamPage(props: { params: Promise<{ locale: string
               </div>
 
               {/* Card 3: 100% Civic Volunteering */}
-              <div className="p-5 sm:p-6 rounded-3xl bg-[#F5F3EE] border border-[#e5e0d6] hover:border-[#d2a82b]/30 transition-all text-center flex flex-col justify-between group shadow-2xs">
+              <div className="p-5 sm:p-6 rounded-3xl bg-[#FAF8F5] border border-[#e5e0d6] hover:border-[#d2a82b]/30 transition-all text-center flex flex-col justify-between group shadow-2xs">
                 <span className="text-xs font-bold text-[#5C5A55] block mb-1">
                   {isAr ? 'روح العمل الجمعوي' : isFr ? 'Engagement Associatif' : 'Civic Dedication'}
                 </span>
@@ -327,7 +327,7 @@ export default async function TeamPage(props: { params: Promise<{ locale: string
               </div>
 
               {/* Card 4: Geographic Scope */}
-              <div className="p-5 sm:p-6 rounded-3xl bg-[#F5F3EE] border border-[#e5e0d6] hover:border-[#231f20]/30 transition-all text-center flex flex-col justify-between group shadow-2xs">
+              <div className="p-5 sm:p-6 rounded-3xl bg-[#FAF8F5] border border-[#e5e0d6] hover:border-[#231f20]/30 transition-all text-center flex flex-col justify-between group shadow-2xs">
                 <span className="text-xs font-bold text-[#5C5A55] block mb-1">
                   {isAr ? 'النطاق والمقر' : isFr ? 'Siège & Rayonnement' : 'Headquarters & Scope'}
                 </span>
@@ -351,7 +351,7 @@ export default async function TeamPage(props: { params: Promise<{ locale: string
         {/* ============================================================
             3. EXECUTIVE BOARD SECTION (المكتب التنفيذي للجمعية)
             ============================================================ */}
-        <section id="executive-board" className="py-20 bg-[#F5F3EE] border-b border-[#e5e0d6] scroll-mt-16">
+        <section id="executive-board" className="py-20 bg-[#FAF8F5] border-b border-[#e5e0d6] scroll-mt-16">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
             <div className="text-center max-w-3xl mx-auto space-y-3">
               <span className="text-xs font-bold uppercase tracking-widest text-[#231f20] px-3.5 py-1.5 rounded-full bg-[#231f20]/10 border border-[#231f20]/20">
@@ -451,14 +451,14 @@ export default async function TeamPage(props: { params: Promise<{ locale: string
 
                     {/* 2. Bio / Editorial Description */}
                     {desc && (
-                      <div className="p-3.5 rounded-2xl bg-[#F5F3EE] border border-[#FEF6CC] text-xs sm:text-sm text-[#5C5A55] leading-relaxed text-center sm:text-start">
+                      <div className="p-3.5 rounded-2xl bg-[#FAF8F5] border border-[#E5E0D6] text-xs sm:text-sm text-[#5C5A55] leading-relaxed text-center sm:text-start">
                         {desc}
                       </div>
                     )}
 
                     {/* 3. Core Duties / Focus Responsibilities */}
                     {duties.length > 0 && (
-                      <div className="space-y-2 pt-2 border-t border-[#FEF6CC]">
+                      <div className="space-y-2 pt-2 border-t border-[#E5E0D6]">
                         <span className="text-2xs font-bold text-[#5C5A55] uppercase tracking-wider block">
                           {isAr ? 'أبرز الصلاحيات والمهام:' : isFr ? 'Missions & Responsabilités :' : 'Key Responsibilities:'}
                         </span>
@@ -512,7 +512,7 @@ export default async function TeamPage(props: { params: Promise<{ locale: string
                 return (
                   <div
                     key={comm.id}
-                    className={`p-7 rounded-3xl bg-[#F5F3EE] border ${comm.borderClass || 'border-[#bd3227]/30 hover:border-[#bd3227]'} shadow-subtle hover:shadow-card hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group relative overflow-hidden`}
+                    className={`p-7 rounded-3xl bg-[#FAF8F5] border ${comm.borderClass || 'border-[#bd3227]/30 hover:border-[#bd3227]'} shadow-subtle hover:shadow-card hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group relative overflow-hidden`}
                   >
                     <div className="space-y-4">
                       {/* Header: Icon & Category Tag */}
@@ -608,7 +608,7 @@ export default async function TeamPage(props: { params: Promise<{ locale: string
                                 />
                               </div>
                             ) : (
-                              <span className="w-14 h-14 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6] flex items-center justify-center text-2xl shadow-2xs group-hover:scale-110 transition-transform shrink-0">
+                              <span className="w-14 h-14 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6] flex items-center justify-center text-2xl shadow-2xs group-hover:scale-110 transition-transform shrink-0">
                                 {member.icon || '👤'}
                               </span>
                             )}
@@ -641,7 +641,7 @@ export default async function TeamPage(props: { params: Promise<{ locale: string
                           )}
 
                           {duties.length > 0 && (
-                            <ul className="space-y-1 pt-2 border-t border-[#FEF6CC] text-xs text-[#5C5A55]">
+                            <ul className="space-y-1 pt-2 border-t border-[#E5E0D6] text-xs text-[#5C5A55]">
                               {duties.map((duty, dIdx) => (
                                 <li key={dIdx} className="flex items-start gap-1.5">
                                   <span className="text-emerald-600 font-bold">✓</span>
@@ -691,7 +691,7 @@ export default async function TeamPage(props: { params: Promise<{ locale: string
                   return (
                     <div
                       key={member.id}
-                      className={`p-6 rounded-3xl bg-[#F5F3EE] border ${member.colorClass} shadow-subtle hover:shadow-card hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group`}
+                      className={`p-6 rounded-3xl bg-[#FAF8F5] border ${member.colorClass} shadow-subtle hover:shadow-card hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group`}
                     >
                       <div className="space-y-4">
                         <div className="flex items-center gap-3.5">
@@ -749,7 +749,7 @@ export default async function TeamPage(props: { params: Promise<{ locale: string
         {/* ============================================================
             5. DEMOCRATIC ARCHITECTURE & PARTICIPATORY MODEL
             ============================================================ */}
-        <section id="architecture" className="py-20 bg-[#F5F3EE] border-b border-[#e5e0d6] scroll-mt-16">
+        <section id="architecture" className="py-20 bg-[#FAF8F5] border-b border-[#e5e0d6] scroll-mt-16">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
             <div className="text-center max-w-3xl mx-auto space-y-3">
               <span className="text-xs font-bold uppercase tracking-widest text-[#231f20] px-3.5 py-1.5 rounded-full bg-[#231f20]/10 border border-[#231f20]/20">
@@ -878,7 +878,7 @@ export default async function TeamPage(props: { params: Promise<{ locale: string
               {principles.map((p) => (
                 <div
                   key={p.num}
-                  className="p-6 rounded-3xl bg-[#F5F3EE] border border-[#e5e0d6] hover:border-[#231f20]/30 shadow-subtle hover:shadow-card hover:-translate-y-1 transition-all flex flex-col justify-between group"
+                  className="p-6 rounded-3xl bg-[#FAF8F5] border border-[#e5e0d6] hover:border-[#231f20]/30 shadow-subtle hover:shadow-card hover:-translate-y-1 transition-all flex flex-col justify-between group"
                 >
                   <div className="space-y-4">
                     <div className="flex items-center justify-between">
@@ -948,7 +948,7 @@ export default async function TeamPage(props: { params: Promise<{ locale: string
               )}
             </h2>
 
-            <p className="text-xs sm:text-base text-[#FEF6CC] max-w-2xl mx-auto leading-relaxed text-balance">
+            <p className="text-xs sm:text-base text-[#E2DED6] max-w-2xl mx-auto leading-relaxed text-balance">
               {isAr
                 ? 'سواء كنت ترغب في الانخراط كعضو نشيط بالجمعية، الانضمام لإحدى اللجان الفنية الست، أو قيادة المبادرات التطوعية ضمن برنامج "شباب في العمل"، نرحب بطاقتك وأفكارك لصناعة أثر ثقافي مستدام.'
                 : isFr

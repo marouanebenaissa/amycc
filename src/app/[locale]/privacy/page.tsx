@@ -12,7 +12,7 @@ export default async function PrivacyPage(props: { params: Promise<{ locale: str
     <>
       <Header locale={locale} dict={dict} />
 
-      <main id="main-content" className="flex-1 bg-[#F5F3EE]">
+      <main id="main-content" className="flex-1 bg-[#FAF8F5]">
         {/* Header Banner */}
         <section className="relative overflow-hidden bg-gradient-to-b from-[#F5F3EE] via-[#F5F3EE] to-[#F5F3EE] border-b border-[#e5e0d6] py-16 lg:py-24 text-center">
           <div className="absolute inset-0 moroccan-pattern-light opacity-50 pointer-events-none" aria-hidden="true" />
@@ -36,7 +36,7 @@ export default async function PrivacyPage(props: { params: Promise<{ locale: str
         {/* Content Body */}
         <section className="max-w-4xl mx-auto px-4 sm:px-6 py-16">
           <div className="bg-white p-8 sm:p-12 rounded-3xl border border-[#e5e0d6] shadow-subtle space-y-8 text-xs sm:text-sm leading-relaxed text-[#5C5A55]">
-            <section className="p-6 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6]">
+            <section className="p-6 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6]">
               <h2 className="text-base font-bold text-[#231f20] mb-2">
                 {isAr ? '1. الإطار القانوني وحماية المعطيات بالمغرب' : isFr ? '1. Cadre Légal & Conformité CNDP' : '1. Legal Framework & CNDP Compliance'}
               </h2>

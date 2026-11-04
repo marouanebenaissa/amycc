@@ -110,7 +110,7 @@ export function NewsCatalog({ articles, locale, readMoreLabel }: NewsCatalogProp
       case 'culture':
         return {
           label: isAr ? 'ثقافة وتراث' : isFr ? 'Culture & Arts' : 'Culture & Heritage',
-          badgeClass: 'bg-[#FEF6CC] text-[#231f20] border-[#FEF6CC]',
+          badgeClass: 'bg-[#F4EFE6] text-[#231f20] border-[#E5E0D6]',
           icon: '🎭',
         }
       case 'youth':
@@ -128,7 +128,7 @@ export function NewsCatalog({ articles, locale, readMoreLabel }: NewsCatalogProp
       default:
         return {
           label: isAr ? 'خبر الجمعية' : isFr ? 'Vie associative' : 'Association News',
-          badgeClass: 'bg-[#F5F3EE] text-[#231f20] border-[#e5e0d6]',
+          badgeClass: 'bg-[#FAF8F5] text-[#231f20] border-[#e5e0d6]',
           icon: '🏛️',
         }
     }
@@ -159,7 +159,7 @@ export function NewsCatalog({ articles, locale, readMoreLabel }: NewsCatalogProp
                 ? 'Rechercher un article, un communiqué ou une annonce...'
                 : 'Search articles, press releases, or keywords...'
             }
-            className="w-full ps-11 pe-4 py-3 sm:py-3.5 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs sm:text-sm text-[#231f20] placeholder-[#5C5A55] focus:bg-white focus:border-[#231f20] focus:outline-none transition-all"
+            className="w-full ps-11 pe-4 py-3 sm:py-3.5 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6] text-xs sm:text-sm text-[#231f20] placeholder-[#5C5A55] focus:bg-white focus:border-[#231f20] focus:outline-none transition-all"
           />
           <span className="absolute start-4 top-1/2 -translate-y-1/2 text-base pointer-events-none text-[#5C5A55]">
             🔍
@@ -188,7 +188,7 @@ export function NewsCatalog({ articles, locale, readMoreLabel }: NewsCatalogProp
                 className={`px-4 py-2 rounded-xl text-xs font-black shrink-0 transition-all cursor-pointer ${
                   isActive
                     ? 'bg-[#231f20] text-white shadow-2xs scale-102'
-                    : 'bg-[#F5F3EE] text-[#5C5A55] hover:bg-[#FEF6CC] border border-[#e5e0d6]'
+                    : 'bg-[#FAF8F5] text-[#5C5A55] hover:bg-[#F4EFE6] border border-[#e5e0d6]'
                 }`}
               >
                 {label}
@@ -297,7 +297,7 @@ export function NewsCatalog({ articles, locale, readMoreLabel }: NewsCatalogProp
                 )}
               </div>
 
-              <div className="pt-4 border-t border-[#FEF6CC] flex items-center justify-between">
+              <div className="pt-4 border-t border-[#E5E0D6] flex items-center justify-between">
                 <Link
                   href={`/${locale}/news/${featuredArticle.slug}`}
                   className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-extrabold text-xs text-white bg-[#231f20] hover:bg-[#d2a82b] active:scale-98 transition-all shadow-xs"
@@ -394,7 +394,7 @@ export function NewsCatalog({ articles, locale, readMoreLabel }: NewsCatalogProp
 
                 {/* Footer Action */}
                 <div className="p-6 pt-0">
-                  <div className="pt-4 border-t border-[#FEF6CC] flex items-center justify-between">
+                  <div className="pt-4 border-t border-[#E5E0D6] flex items-center justify-between">
                     <Link
                       href={`/${locale}/news/${art.slug}`}
                       className="inline-flex items-center gap-1 text-xs font-black text-[#231f20] group-hover:text-[#bd3227] transition-colors"

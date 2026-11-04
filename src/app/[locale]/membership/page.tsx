@@ -60,7 +60,7 @@ export default async function MembershipPage(props: { params: Promise<{ locale: 
     <>
       <Header locale={locale} dict={dict} />
 
-      <main id="main-content" className="flex-1 bg-[#F5F3EE]">
+      <main id="main-content" className="flex-1 bg-[#FAF8F5]">
         {/* ========================================================= */}
         {/* HERO SECTION: Moroccan Institutional Portal               */}
         {/* ========================================================= */}
@@ -301,7 +301,7 @@ export default async function MembershipPage(props: { params: Promise<{ locale: 
                     </p>
 
                     {/* Benefits List */}
-                    <div className="space-y-2 border-t border-[#FEF6CC] pt-4 mb-6">
+                    <div className="space-y-2 border-t border-[#E5E0D6] pt-4 mb-6">
                       <span className="text-3xs font-black uppercase text-[#231f20] block mb-2">
                         {isAr
                           ? 'الامتيازات والحقوق الممنوحة:'
@@ -324,7 +324,7 @@ export default async function MembershipPage(props: { params: Promise<{ locale: 
                     className={`w-full py-3 px-4 rounded-xl text-xs font-bold text-center block transition-all active:scale-98 ${
                       tier.recommended
                         ? 'bg-[#bd3227] text-white hover:bg-[#a3261c] shadow-md shadow-[#bd3227]/20'
-                        : 'bg-[#F5F3EE] text-[#231f20] hover:bg-[#231f20] hover:text-white border border-[#e5e0d6]'
+                        : 'bg-[#FAF8F5] text-[#231f20] hover:bg-[#231f20] hover:text-white border border-[#e5e0d6]'
                     }`}
                   >
                     {isAr
@@ -480,7 +480,7 @@ export default async function MembershipPage(props: { params: Promise<{ locale: 
               ).map((item, idx) => (
                 <div
                   key={idx}
-                  className="flex items-start gap-2.5 p-3 rounded-2xl bg-[#F5F3EE] border border-[#FEF6CC] text-xs text-[#231f20]"
+                  className="flex items-start gap-2.5 p-3 rounded-2xl bg-[#FAF8F5] border border-[#E5E0D6] text-xs text-[#231f20]"
                 >
                   <span className="text-emerald-600 font-bold mt-0.5">✓</span>
                   <span className="leading-snug">{item}</span>

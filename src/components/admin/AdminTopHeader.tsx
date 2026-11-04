@@ -44,7 +44,7 @@ export function AdminTopHeader({
         {onToggleMobileMenu && (
           <button
             onClick={onToggleMobileMenu}
-            className="md:hidden p-2 rounded-xl bg-[#F5F3EE] hover:bg-[#FEF6CC] border border-[#e5e0d6] text-[#231f20] focus:outline-none transition-colors"
+            className="md:hidden p-2 rounded-xl bg-[#FAF8F5] hover:bg-[#F4EFE6] border border-[#e5e0d6] text-[#231f20] focus:outline-none transition-colors"
             aria-label="Toggle menu"
           >
             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -74,7 +74,7 @@ export function AdminTopHeader({
       {/* Right / End: Language Switcher, Public Site Link & User Chip */}
       <div className="flex items-center gap-2 sm:gap-3 shrink-0">
         {/* Language Switcher Pills */}
-        <div className="flex items-center p-1 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] shadow-2xs">
+        <div className="flex items-center p-1 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6] shadow-2xs">
           <button
             type="button"
             onClick={() => setLocale('ar')}
@@ -118,7 +118,7 @@ export function AdminTopHeader({
           href={`/${publicSiteLocale}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white hover:bg-[#F5F3EE] border border-[#e5e0d6] text-2xs font-bold text-[#231f20] transition-all hover:border-[#231f20]/30 shadow-2xs group"
+          className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white hover:bg-[#FAF8F5] border border-[#e5e0d6] text-2xs font-bold text-[#231f20] transition-all hover:border-[#231f20]/30 shadow-2xs group"
         >
           <span>🌐</span>
           <span>{t('view_site')}</span>
@@ -126,7 +126,7 @@ export function AdminTopHeader({
         </Link>
 
         {/* User Identity Chip */}
-        <div className="hidden lg:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6]">
+        <div className="hidden lg:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6]">
           <div className="w-6 h-6 rounded-lg bg-[#bd3227] text-white font-bold text-3xs flex items-center justify-center">
             AM
           </div>

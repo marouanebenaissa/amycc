@@ -61,14 +61,14 @@ export function ContactAdminTabs({
   return (
     <div className="space-y-6">
       {/* Primary Section Switcher Tabs */}
-      <div className="flex flex-wrap items-center gap-2 p-1.5 bg-[#F5F3EE] rounded-2xl border border-[#e5e0d6] w-full sm:w-fit shadow-2xs">
+      <div className="flex flex-wrap items-center gap-2 p-1.5 bg-[#FAF8F5] rounded-2xl border border-[#e5e0d6] w-full sm:w-fit shadow-2xs">
         <button
           type="button"
           onClick={() => setActiveTab('cms')}
           className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-black transition-all cursor-pointer ${
             activeTab === 'cms'
               ? 'bg-[#231f20] text-white shadow-sm'
-              : 'text-[#5C5A55] hover:text-[#231f20] hover:bg-[#FEF6CC]'
+              : 'text-[#5C5A55] hover:text-[#231f20] hover:bg-[#F4EFE6]'
           }`}
         >
           <span>⚙️</span>
@@ -81,7 +81,7 @@ export function ContactAdminTabs({
           className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-black transition-all cursor-pointer ${
             activeTab === 'inbox'
               ? 'bg-[#bd3227] text-white shadow-sm'
-              : 'text-[#5C5A55] hover:text-[#231f20] hover:bg-[#FEF6CC]'
+              : 'text-[#5C5A55] hover:text-[#231f20] hover:bg-[#F4EFE6]'
           }`}
         >
           <span>📨</span>
@@ -107,13 +107,13 @@ export function ContactAdminTabs({
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 placeholder="البحث بالاسم، البريد، أو الموضوع..."
-                className="w-full sm:w-72 px-3.5 py-2 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
+                className="w-full sm:w-72 px-3.5 py-2 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
               />
 
               <select
                 value={filterStatus}
                 onChange={(e) => setFilterStatus(e.target.value)}
-                className="px-3 py-2 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] focus:outline-none"
+                className="px-3 py-2 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6] text-xs text-[#231f20] focus:outline-none"
               >
                 <option value="all">كافة الحالات</option>
                 <option value="unread">غير مقروء (Unread)</option>
@@ -131,7 +131,7 @@ export function ContactAdminTabs({
           <div className="bg-white rounded-2xl border border-[#e5e0d6] overflow-hidden shadow-2xs">
             <div className="overflow-x-auto">
               <table className="w-full text-start text-xs text-[#231f20]">
-                <thead className="bg-[#F5F3EE] border-b border-[#e5e0d6] text-2xs uppercase tracking-wider text-[#5C5A55] font-bold">
+                <thead className="bg-[#FAF8F5] border-b border-[#e5e0d6] text-2xs uppercase tracking-wider text-[#5C5A55] font-bold">
                   <tr>
                     <th className="px-6 py-4 text-start">المرسل (Sender)</th>
                     <th className="px-6 py-4 text-start">الموضوع والرسالة</th>
@@ -143,7 +143,7 @@ export function ContactAdminTabs({
                 <tbody className="divide-y divide-[#FEF6CC]">
                   {filteredMessages.length > 0 ? (
                     filteredMessages.map((msg) => (
-                      <tr key={msg.id} className="hover:bg-[#F5F3EE]/60 transition-colors">
+                      <tr key={msg.id} className="hover:bg-[#FAF8F5]/60 transition-colors">
                         <td className="px-6 py-4">
                           <div className="font-bold text-[#231f20]">{msg.full_name}</div>
                           <a href={`mailto:${msg.email}`} className="text-3xs text-[#231f20] hover:underline block">
@@ -153,7 +153,7 @@ export function ContactAdminTabs({
                         </td>
                         <td className="px-6 py-4 max-w-md">
                           {msg.subject && (
-                            <span className="inline-block px-2 py-0.5 rounded-md bg-[#F5F3EE] border border-[#e5e0d6] font-bold text-[#231f20] text-3xs mb-1">
+                            <span className="inline-block px-2 py-0.5 rounded-md bg-[#FAF8F5] border border-[#e5e0d6] font-bold text-[#231f20] text-3xs mb-1">
                               {msg.subject}
                             </span>
                           )}
@@ -182,7 +182,7 @@ export function ContactAdminTabs({
                             <button
                               type="button"
                               onClick={() => onUpdateStatus(msg.id, 'read')}
-                              className="px-2.5 py-1 rounded-lg text-2xs font-bold bg-[#FEF6CC] text-[#231f20] hover:bg-[#d2a82b] transition-colors cursor-pointer"
+                              className="px-2.5 py-1 rounded-lg text-2xs font-bold bg-[#F4EFE6] text-[#231f20] hover:bg-[#d2a82b] transition-colors cursor-pointer"
                             >
                               تعليم كمقروء
                             </button>
@@ -198,7 +198,7 @@ export function ContactAdminTabs({
                           )}
                           <a
                             href={`mailto:${msg.email}?subject=Re: ${encodeURIComponent(msg.subject || 'AMYCC Contact')}`}
-                            className="px-2.5 py-1 rounded-lg text-2xs font-bold bg-[#F5F3EE] border border-[#e5e0d6] text-[#231f20] hover:bg-[#FEF6CC] transition-colors inline-block"
+                            className="px-2.5 py-1 rounded-lg text-2xs font-bold bg-[#FAF8F5] border border-[#e5e0d6] text-[#231f20] hover:bg-[#F4EFE6] transition-colors inline-block"
                           >
                             رد عبر البريد ↗
                           </a>

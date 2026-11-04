@@ -543,7 +543,7 @@ export function PartnershipsAdminTabs({
       }`}
     >
       {/* Partner Photo */}
-      <div className="relative w-full h-32 rounded-2xl overflow-hidden bg-[#F5F3EE] border border-[#FEF6CC]">
+      <div className="relative w-full h-32 rounded-2xl overflow-hidden bg-[#FAF8F5] border border-[#E5E0D6]">
         <ImageWithFallback
           src={partner.logoUrl}
           fallbackSrc="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=600&q=80"
@@ -576,14 +576,14 @@ export function PartnershipsAdminTabs({
       </div>
 
       {/* Card Action Buttons */}
-      <div className="pt-2 border-t border-[#FEF6CC] flex items-center justify-between gap-1 text-2xs" dir="rtl">
+      <div className="pt-2 border-t border-[#E5E0D6] flex items-center justify-between gap-1 text-2xs" dir="rtl">
         <button
           type="button"
           onClick={(e) => {
             e.stopPropagation()
             openEditPartnerModal(partner)
           }}
-          className="px-2.5 py-1 rounded-lg font-bold bg-[#F5F3EE] hover:bg-[#FEF6CC] text-[#231f20] border border-[#e5e0d6] transition-colors cursor-pointer"
+          className="px-2.5 py-1 rounded-lg font-bold bg-[#FAF8F5] hover:bg-[#F4EFE6] text-[#231f20] border border-[#e5e0d6] transition-colors cursor-pointer"
           tabIndex={isClone ? -1 : undefined}
         >
           ✏️ تعديل
@@ -638,14 +638,14 @@ export function PartnershipsAdminTabs({
         </div>
 
         {/* Tab Buttons */}
-        <div className="flex items-center p-1 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6] shadow-2xs self-start sm:self-auto overflow-x-auto max-w-full">
+        <div className="flex items-center p-1 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6] shadow-2xs self-start sm:self-auto overflow-x-auto max-w-full">
           <button
             type="button"
             onClick={() => setActiveTab('partners')}
             className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-2 shrink-0 ${
               activeTab === 'partners'
                 ? 'bg-[#231f20] text-white shadow-xs'
-                : 'text-[#5C5A55] hover:bg-[#FEF6CC]'
+                : 'text-[#5C5A55] hover:bg-[#F4EFE6]'
             }`}
           >
             <span>🎬</span>
@@ -658,7 +658,7 @@ export function PartnershipsAdminTabs({
             className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-2 shrink-0 ${
               activeTab === 'inquiries'
                 ? 'bg-[#231f20] text-white shadow-xs'
-                : 'text-[#5C5A55] hover:bg-[#FEF6CC]'
+                : 'text-[#5C5A55] hover:bg-[#F4EFE6]'
             }`}
           >
             <span>📥</span>
@@ -671,7 +671,7 @@ export function PartnershipsAdminTabs({
             className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-2 shrink-0 ${
               activeTab === 'page-settings'
                 ? 'bg-[#231f20] text-white shadow-xs'
-                : 'text-[#5C5A55] hover:bg-[#FEF6CC]'
+                : 'text-[#5C5A55] hover:bg-[#F4EFE6]'
             }`}
           >
             <span>⚙️</span>
@@ -754,7 +754,7 @@ export function PartnershipsAdminTabs({
                   value={searchInquiry}
                   onChange={(e) => setSearchInquiry(e.target.value)}
                   placeholder="بحث باسم الهيئة، المسؤول، المدينة..."
-                  className="w-full ps-9 pe-4 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE] focus:bg-white focus:border-[#231f20] outline-none transition-all"
+                  className="w-full ps-9 pe-4 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#FAF8F5] focus:bg-white focus:border-[#231f20] outline-none transition-all"
                 />
                 <span className="absolute start-3 top-1/2 -translate-y-1/2 text-xs text-[#5C5A55]">
                   🔍
@@ -775,7 +775,7 @@ export function PartnershipsAdminTabs({
                 <select
                   value={statusFilter}
                   onChange={(e) => setStatusFilter(e.target.value)}
-                  className="px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs font-bold bg-[#F5F3EE] text-[#231f20] outline-none"
+                  className="px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs font-bold bg-[#FAF8F5] text-[#231f20] outline-none"
                 >
                   <option value="all">كافة الحالات</option>
                   <option value="pending">جديد (Pending)</option>
@@ -787,7 +787,7 @@ export function PartnershipsAdminTabs({
                 <select
                   value={typeFilter}
                   onChange={(e) => setTypeFilter(e.target.value)}
-                  className="px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs font-bold bg-[#F5F3EE] text-[#231f20] outline-none"
+                  className="px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs font-bold bg-[#FAF8F5] text-[#231f20] outline-none"
                 >
                   <option value="all">كافة أنواع الهيئات</option>
                   <option value="cultural_center">مراكز ثقافية</option>
@@ -806,7 +806,7 @@ export function PartnershipsAdminTabs({
           <div className="bg-white rounded-2xl border border-[#e5e0d6] overflow-hidden shadow-2xs">
             <div className="overflow-x-auto">
               <table className="w-full text-start text-xs text-[#231f20]">
-                <thead className="bg-[#F5F3EE] border-b border-[#e5e0d6] text-3xs uppercase tracking-wider text-[#5C5A55] font-extrabold">
+                <thead className="bg-[#FAF8F5] border-b border-[#e5e0d6] text-3xs uppercase tracking-wider text-[#5C5A55] font-extrabold">
                   <tr>
                     <th className="px-6 py-4 text-start">الهيئة أو المؤسسة</th>
                     <th className="px-6 py-4 text-start">الشخص المسؤول</th>
@@ -820,12 +820,12 @@ export function PartnershipsAdminTabs({
                     filteredInquiries.map((inq) => {
                       const dateObj = new Date(inq.created_at)
                       return (
-                        <tr key={inq.id} className="hover:bg-[#F5F3EE]/60 transition-colors">
+                        <tr key={inq.id} className="hover:bg-[#FAF8F5]/60 transition-colors">
                           <td className="px-6 py-4">
                             <div className="font-extrabold text-[#231f20] text-xs">
                               {inq.organization_name}
                             </div>
-                            <span className="inline-block mt-1 px-2 py-0.5 rounded text-4xs font-bold bg-[#F5F3EE] border border-[#e5e0d6] text-[#bd3227]">
+                            <span className="inline-block mt-1 px-2 py-0.5 rounded text-4xs font-bold bg-[#FAF8F5] border border-[#e5e0d6] text-[#bd3227]">
                               {inq.organization_type}
                             </span>
                             <div className="text-3xs text-[#5C5A55] mt-0.5">
@@ -885,7 +885,7 @@ export function PartnershipsAdminTabs({
                               <button
                                 type="button"
                                 onClick={() => setViewingInquiry(inq)}
-                                className="px-3 py-1.5 rounded-lg text-2xs font-bold bg-[#F5F3EE] border border-[#e5e0d6] text-[#231f20] hover:bg-[#FEF6CC] transition-colors cursor-pointer"
+                                className="px-3 py-1.5 rounded-lg text-2xs font-bold bg-[#FAF8F5] border border-[#e5e0d6] text-[#231f20] hover:bg-[#F4EFE6] transition-colors cursor-pointer"
                                 title="عرض المقترح كاملاً"
                               >
                                 عرض المقترح
@@ -941,7 +941,7 @@ export function PartnershipsAdminTabs({
                 <button
                   type="button"
                   onClick={handleSeedDefaultPartners}
-                  className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-[#F5F3EE] border border-[#e5e0d6] text-[#231f20] text-xs font-bold rounded-xl hover:bg-[#FEF6CC] transition-all cursor-pointer shadow-2xs"
+                  className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-[#FAF8F5] border border-[#e5e0d6] text-[#231f20] text-xs font-bold rounded-xl hover:bg-[#F4EFE6] transition-all cursor-pointer shadow-2xs"
                   title="استيراد الشركاء الأربعة النموذجيين"
                 >
                   <span>📥</span>
@@ -979,7 +979,7 @@ export function PartnershipsAdminTabs({
                   <span className="text-[#231f20]">
                     شريط الصور المتحركة الحي (المعروض في الموقع حالياً)
                   </span>
-                  <span className="text-2xs font-bold bg-[#F5F3EE] px-2 py-0.5 rounded-md border border-[#e5e0d6] text-[#5C5A55]">
+                  <span className="text-2xs font-bold bg-[#FAF8F5] px-2 py-0.5 rounded-md border border-[#e5e0d6] text-[#5C5A55]">
                     {activePartnersCount} صور نشطة تتحرك
                   </span>
                 </div>
@@ -1027,7 +1027,7 @@ export function PartnershipsAdminTabs({
 
           {/* Quick Management Table for Full Control & Search */}
           <div className="bg-white rounded-2xl border border-[#e5e0d6] shadow-2xs overflow-hidden">
-            <div className="p-4 sm:p-5 border-b border-[#FEF6CC] flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div className="p-4 sm:p-5 border-b border-[#E5E0D6] flex flex-col sm:flex-row sm:items-center justify-between gap-3">
               <div className="flex items-center gap-2">
                 <span className="text-base">📋</span>
                 <h3 className="text-xs sm:text-sm font-black text-[#231f20]">
@@ -1042,7 +1042,7 @@ export function PartnershipsAdminTabs({
                     value={searchPartner}
                     onChange={(e) => setSearchPartner(e.target.value)}
                     placeholder="بحث في اسم الشريك..."
-                    className="w-full ps-8 pe-3 py-1.5 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE] outline-none"
+                    className="w-full ps-8 pe-3 py-1.5 rounded-xl border border-[#e5e0d6] text-xs bg-[#FAF8F5] outline-none"
                   />
                   <span className="absolute start-2.5 top-1/2 -translate-y-1/2 text-xs text-[#5C5A55]">
                     🔍
@@ -1053,7 +1053,7 @@ export function PartnershipsAdminTabs({
 
             <div className="overflow-x-auto">
               <table className="w-full text-start text-xs">
-                <thead className="bg-[#F5F3EE] text-[#5C5A55] font-bold border-b border-[#e5e0d6]">
+                <thead className="bg-[#FAF8F5] text-[#5C5A55] font-bold border-b border-[#e5e0d6]">
                   <tr>
                     <th className="px-5 py-3 text-start">الصورة</th>
                     <th className="px-5 py-3 text-start">اسم الشريك</th>
@@ -1067,7 +1067,7 @@ export function PartnershipsAdminTabs({
                     filteredPartners.map((partner) => (
                       <tr key={partner.id} className="hover:bg-stone-50/50 transition-colors">
                         <td className="px-5 py-3">
-                          <div className="relative w-12 h-12 rounded-xl border border-[#e5e0d6] overflow-hidden bg-[#F5F3EE] shrink-0">
+                          <div className="relative w-12 h-12 rounded-xl border border-[#e5e0d6] overflow-hidden bg-[#FAF8F5] shrink-0">
                             <ImageWithFallback
                               src={partner.logoUrl}
                               fallbackSrc="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=300&q=80"
@@ -1084,7 +1084,7 @@ export function PartnershipsAdminTabs({
                           )}
                         </td>
                         <td className="px-5 py-3">
-                          <span className="inline-block px-2 py-0.5 rounded text-4xs font-bold bg-[#F5F3EE] border border-[#e5e0d6] text-[#bd3227]">
+                          <span className="inline-block px-2 py-0.5 rounded text-4xs font-bold bg-[#FAF8F5] border border-[#e5e0d6] text-[#bd3227]">
                             {tierLabels[partner.tier]?.ar || partner.tier}
                           </span>
                         </td>
@@ -1106,7 +1106,7 @@ export function PartnershipsAdminTabs({
                             <button
                               type="button"
                               onClick={() => openEditPartnerModal(partner)}
-                              className="px-2.5 py-1 rounded-lg text-2xs font-bold bg-[#F5F3EE] border border-[#e5e0d6] hover:bg-[#FEF6CC] text-[#231f20] transition-colors cursor-pointer"
+                              className="px-2.5 py-1 rounded-lg text-2xs font-bold bg-[#FAF8F5] border border-[#e5e0d6] hover:bg-[#F4EFE6] text-[#231f20] transition-colors cursor-pointer"
                             >
                               تعديل
                             </button>
@@ -1145,7 +1145,7 @@ export function PartnershipsAdminTabs({
             <span className="text-xs font-extrabold text-[#231f20]">
               لغة التحرير والمعاينة:
             </span>
-            <div className="flex items-center gap-1 bg-[#F5F3EE] p-1 rounded-xl border border-[#e5e0d6]">
+            <div className="flex items-center gap-1 bg-[#FAF8F5] p-1 rounded-xl border border-[#e5e0d6]">
               {(['ar', 'fr', 'en'] as const).map((lang) => (
                 <button
                   key={lang}
@@ -1154,7 +1154,7 @@ export function PartnershipsAdminTabs({
                   className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
                     activeLangTab === lang
                       ? 'bg-[#231f20] text-white shadow-2xs'
-                      : 'text-[#5C5A55] hover:bg-[#FEF6CC]'
+                      : 'text-[#5C5A55] hover:bg-[#F4EFE6]'
                   }`}
                 >
                   {lang === 'ar' ? 'العربية (AR)' : lang === 'fr' ? 'Français (FR)' : 'English (EN)'}
@@ -1165,7 +1165,7 @@ export function PartnershipsAdminTabs({
 
           {/* Section 1: Hero Section */}
           <div className="bg-white p-6 rounded-2xl border border-[#e5e0d6] shadow-2xs space-y-5">
-            <div className="flex items-center justify-between pb-3 border-b border-[#FEF6CC]">
+            <div className="flex items-center justify-between pb-3 border-b border-[#E5E0D6]">
               <div>
                 <h3 className="font-extrabold text-sm text-[#231f20]">
                   واجهة الترويسة الرئيسية (Hero Section)
@@ -1174,7 +1174,7 @@ export function PartnershipsAdminTabs({
                   عنوان الصفحة، الشارة الترحيبية، أزرار التفاعل، وصورة الشراكات الرئيسية
                 </p>
               </div>
-              <span className="px-2.5 py-1 rounded-md text-3xs font-extrabold bg-[#F5F3EE] text-[#231f20] border border-[#e5e0d6]">
+              <span className="px-2.5 py-1 rounded-md text-3xs font-extrabold bg-[#FAF8F5] text-[#231f20] border border-[#e5e0d6]">
                 {activeLangTab.toUpperCase()}
               </span>
             </div>
@@ -1203,7 +1203,7 @@ export function PartnershipsAdminTabs({
                       e.target.value
                     )
                   }
-                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE] focus:bg-white focus:border-[#231f20] outline-none"
+                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#FAF8F5] focus:bg-white focus:border-[#231f20] outline-none"
                 />
               </div>
 
@@ -1230,7 +1230,7 @@ export function PartnershipsAdminTabs({
                       e.target.value
                     )
                   }
-                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE] focus:bg-white focus:border-[#231f20] outline-none"
+                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#FAF8F5] focus:bg-white focus:border-[#231f20] outline-none"
                 />
               </div>
 
@@ -1257,7 +1257,7 @@ export function PartnershipsAdminTabs({
                       e.target.value
                     )
                   }
-                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE] focus:bg-white focus:border-[#231f20] outline-none font-bold"
+                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#FAF8F5] focus:bg-white focus:border-[#231f20] outline-none font-bold"
                 />
               </div>
 
@@ -1284,7 +1284,7 @@ export function PartnershipsAdminTabs({
                       e.target.value
                     )
                   }
-                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE] focus:bg-white focus:border-[#231f20] outline-none"
+                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#FAF8F5] focus:bg-white focus:border-[#231f20] outline-none"
                 />
               </div>
 
@@ -1311,7 +1311,7 @@ export function PartnershipsAdminTabs({
                       e.target.value
                     )
                   }
-                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE] focus:bg-white focus:border-[#231f20] outline-none leading-relaxed"
+                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#FAF8F5] focus:bg-white focus:border-[#231f20] outline-none leading-relaxed"
                 />
               </div>
 
@@ -1339,7 +1339,7 @@ export function PartnershipsAdminTabs({
                       e.target.value
                     )
                   }
-                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE] focus:bg-white focus:border-[#231f20] outline-none"
+                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#FAF8F5] focus:bg-white focus:border-[#231f20] outline-none"
                 />
               </div>
 
@@ -1366,12 +1366,12 @@ export function PartnershipsAdminTabs({
                       e.target.value
                     )
                   }
-                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE] focus:bg-white focus:border-[#231f20] outline-none"
+                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#FAF8F5] focus:bg-white focus:border-[#231f20] outline-none"
                 />
               </div>
 
               {/* Image Uploader */}
-              <div className="sm:col-span-2 pt-2 border-t border-[#FEF6CC]">
+              <div className="sm:col-span-2 pt-2 border-t border-[#E5E0D6]">
                 <label className="block text-2xs font-extrabold text-[#231f20] mb-1.5">
                   صورة الغلاف المؤسساتي (Hero Image)
                 </label>
@@ -1388,7 +1388,7 @@ export function PartnershipsAdminTabs({
                     value={config.hero.imageUrl}
                     onChange={(e) => updateHero('imageUrl', e.target.value)}
                     placeholder="https://images.unsplash.com/... or /uploads/..."
-                    className="flex-1 px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs font-mono bg-[#F5F3EE] outline-none"
+                    className="flex-1 px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs font-mono bg-[#FAF8F5] outline-none"
                   />
                   <button
                     type="button"
@@ -1406,14 +1406,14 @@ export function PartnershipsAdminTabs({
 
           {/* Section 2: Key Partnership KPIs */}
           <div className="bg-white p-6 rounded-2xl border border-[#e5e0d6] shadow-2xs space-y-4">
-            <h3 className="font-extrabold text-sm text-[#231f20] pb-2 border-b border-[#FEF6CC]">
+            <h3 className="font-extrabold text-sm text-[#231f20] pb-2 border-b border-[#E5E0D6]">
               إحصائيات وأرقام أثر الشراكات (Key Metrics)
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {config.stats.map((stat, idx) => (
                 <div
                   key={stat.id || idx}
-                  className="p-4 rounded-xl border border-[#e5e0d6] bg-[#F5F3EE] space-y-3"
+                  className="p-4 rounded-xl border border-[#e5e0d6] bg-[#FAF8F5] space-y-3"
                 >
                   <div className="flex items-center justify-between">
                     <span className="text-xl">{stat.icon}</span>
@@ -1488,14 +1488,14 @@ export function PartnershipsAdminTabs({
 
           {/* Section 3: Partnership Pillars */}
           <div className="bg-white p-6 rounded-2xl border border-[#e5e0d6] shadow-2xs space-y-4">
-            <h3 className="font-extrabold text-sm text-[#231f20] pb-2 border-b border-[#FEF6CC]">
+            <h3 className="font-extrabold text-sm text-[#231f20] pb-2 border-b border-[#E5E0D6]">
               محاور ومجالات التعاون الاستراتيجي (Cooperation Pillars)
             </h3>
             <div className="space-y-4">
               {config.pillars.map((pillar, idx) => (
                 <div
                   key={pillar.id || idx}
-                  className="p-4 rounded-xl border border-[#e5e0d6] bg-[#F5F3EE] space-y-3"
+                  className="p-4 rounded-xl border border-[#e5e0d6] bg-[#FAF8F5] space-y-3"
                 >
                   <div className="flex items-center gap-3">
                     <input
@@ -1583,14 +1583,14 @@ export function PartnershipsAdminTabs({
 
           {/* Section 4: Strategic Benefits */}
           <div className="bg-white p-6 rounded-2xl border border-[#e5e0d6] shadow-2xs space-y-4">
-            <h3 className="font-extrabold text-sm text-[#231f20] pb-2 border-b border-[#FEF6CC]">
+            <h3 className="font-extrabold text-sm text-[#231f20] pb-2 border-b border-[#E5E0D6]">
               القيمة المضافة والمكتسبات المشتركة (Strategic Benefits)
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {config.benefits.map((benefit, idx) => (
                 <div
                   key={benefit.id || idx}
-                  className="p-4 rounded-xl border border-[#e5e0d6] bg-[#F5F3EE] space-y-2"
+                  className="p-4 rounded-xl border border-[#e5e0d6] bg-[#FAF8F5] space-y-2"
                 >
                   <div className="flex items-center gap-2">
                     <input
@@ -1653,7 +1653,7 @@ export function PartnershipsAdminTabs({
 
           {/* Section 5: Bottom CTA */}
           <div className="bg-white p-6 rounded-2xl border border-[#e5e0d6] shadow-2xs space-y-4">
-            <h3 className="font-extrabold text-sm text-[#231f20] pb-2 border-b border-[#FEF6CC]">
+            <h3 className="font-extrabold text-sm text-[#231f20] pb-2 border-b border-[#E5E0D6]">
               صندوق الدعوة والتواصل المؤسساتي (Call-to-Action)
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -1680,7 +1680,7 @@ export function PartnershipsAdminTabs({
                       e.target.value
                     )
                   }
-                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE] font-bold"
+                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#FAF8F5] font-bold"
                 />
               </div>
 
@@ -1707,7 +1707,7 @@ export function PartnershipsAdminTabs({
                       e.target.value
                     )
                   }
-                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE]"
+                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#FAF8F5]"
                 />
               </div>
 
@@ -1719,7 +1719,7 @@ export function PartnershipsAdminTabs({
                   type="email"
                   value={config.cta.email}
                   onChange={(e) => updateCta('email', e.target.value)}
-                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs font-mono bg-[#F5F3EE]"
+                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs font-mono bg-[#FAF8F5]"
                 />
               </div>
 
@@ -1731,7 +1731,7 @@ export function PartnershipsAdminTabs({
                   type="text"
                   value={config.cta.phone}
                   onChange={(e) => updateCta('phone', e.target.value)}
-                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs font-mono bg-[#F5F3EE]"
+                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs font-mono bg-[#FAF8F5]"
                 />
               </div>
             </div>
@@ -1763,9 +1763,9 @@ export function PartnershipsAdminTabs({
       {viewingInquiry && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs">
           <div className="bg-white rounded-3xl max-w-2xl w-full p-6 sm:p-8 space-y-6 max-h-[90vh] overflow-y-auto shadow-2xl border border-[#e5e0d6]">
-            <div className="flex items-start justify-between gap-4 pb-4 border-b border-[#FEF6CC]">
+            <div className="flex items-start justify-between gap-4 pb-4 border-b border-[#E5E0D6]">
               <div>
-                <span className="inline-block px-2.5 py-1 rounded text-3xs font-extrabold bg-[#F5F3EE] border border-[#e5e0d6] text-[#bd3227] mb-1.5">
+                <span className="inline-block px-2.5 py-1 rounded text-3xs font-extrabold bg-[#FAF8F5] border border-[#e5e0d6] text-[#bd3227] mb-1.5">
                   {viewingInquiry.organization_type}
                 </span>
                 <h3 className="text-lg font-black text-[#231f20]">
@@ -1779,14 +1779,14 @@ export function PartnershipsAdminTabs({
               <button
                 type="button"
                 onClick={() => setViewingInquiry(null)}
-                className="w-8 h-8 rounded-full bg-[#F5F3EE] flex items-center justify-center text-xs font-bold text-[#5C5A55] hover:text-[#231f20]"
+                className="w-8 h-8 rounded-full bg-[#FAF8F5] flex items-center justify-center text-xs font-bold text-[#5C5A55] hover:text-[#231f20]"
               >
                 ✕
               </button>
             </div>
 
             {/* Contact details */}
-            <div className="p-4 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6] grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+            <div className="p-4 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6] grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
               <div>
                 <span className="block text-3xs font-bold text-[#5C5A55]">المسؤول عن التواصل:</span>
                 <span className="font-extrabold text-[#231f20]">{viewingInquiry.contact_name}</span>
@@ -1822,14 +1822,14 @@ export function PartnershipsAdminTabs({
               </div>
             </div>
 
-            <div className="flex items-center justify-between pt-4 border-t border-[#FEF6CC]">
+            <div className="flex items-center justify-between pt-4 border-t border-[#E5E0D6]">
               <select
                 value={viewingInquiry.status}
                 onChange={(e) => {
                   handleStatusChange(viewingInquiry.id, e.target.value)
                   setViewingInquiry((prev) => (prev ? { ...prev, status: e.target.value } : null))
                 }}
-                className="px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs font-bold bg-[#F5F3EE] text-[#231f20]"
+                className="px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs font-bold bg-[#FAF8F5] text-[#231f20]"
               >
                 <option value="pending">جديد (Pending)</option>
                 <option value="under_review">قيد الدراسة</option>
@@ -1859,7 +1859,7 @@ export function PartnershipsAdminTabs({
             onSubmit={handleSavePartnerSubmit}
             className="bg-white rounded-3xl max-w-xl w-full p-6 sm:p-8 space-y-5 max-h-[90vh] overflow-y-auto shadow-2xl border border-[#e5e0d6]"
           >
-            <div className="flex items-center justify-between pb-3 border-b border-[#FEF6CC]">
+            <div className="flex items-center justify-between pb-3 border-b border-[#E5E0D6]">
               <h3 className="text-base font-black text-[#231f20]">
                 {editingPartner ? 'تعديل بيانات الشريك' : 'إضافة شريك رسمي جديد'}
               </h3>
@@ -1869,7 +1869,7 @@ export function PartnershipsAdminTabs({
                   setIsAddingPartner(false)
                   setEditingPartner(null)
                 }}
-                className="w-8 h-8 rounded-full bg-[#F5F3EE] flex items-center justify-center text-xs font-bold text-[#5C5A55] hover:text-[#231f20]"
+                className="w-8 h-8 rounded-full bg-[#FAF8F5] flex items-center justify-center text-xs font-bold text-[#5C5A55] hover:text-[#231f20]"
               >
                 ✕
               </button>
@@ -1886,7 +1886,7 @@ export function PartnershipsAdminTabs({
                   value={partnerForm.nameAr}
                   onChange={(e) => setPartnerForm((p) => ({ ...p, nameAr: e.target.value }))}
                   placeholder="مثال: شبكة المراكز الثقافية ودور الشباب"
-                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE] font-bold"
+                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#FAF8F5] font-bold"
                 />
               </div>
 
@@ -1900,7 +1900,7 @@ export function PartnershipsAdminTabs({
                     value={partnerForm.nameFr || ''}
                     onChange={(e) => setPartnerForm((p) => ({ ...p, nameFr: e.target.value }))}
                     placeholder="Nom en français"
-                    className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE]"
+                    className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#FAF8F5]"
                   />
                 </div>
                 <div>
@@ -1912,7 +1912,7 @@ export function PartnershipsAdminTabs({
                     value={partnerForm.nameEn || ''}
                     onChange={(e) => setPartnerForm((p) => ({ ...p, nameEn: e.target.value }))}
                     placeholder="Name in English"
-                    className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE]"
+                    className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#FAF8F5]"
                   />
                 </div>
               </div>
@@ -1926,7 +1926,7 @@ export function PartnershipsAdminTabs({
                   onChange={(e) =>
                     setPartnerForm((p) => ({ ...p, tier: e.target.value as PartnerTier }))
                   }
-                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs font-bold bg-[#F5F3EE] text-[#231f20]"
+                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs font-bold bg-[#FAF8F5] text-[#231f20]"
                 >
                   <option value="cultural">مركز ثقافي وفني</option>
                   <option value="educational">مؤسسة تعليمية / جامعة</option>
@@ -1954,7 +1954,7 @@ export function PartnershipsAdminTabs({
                     value={partnerForm.logoUrl}
                     onChange={(e) => setPartnerForm((p) => ({ ...p, logoUrl: e.target.value }))}
                     placeholder="https://... or /uploads/..."
-                    className="flex-1 px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs font-mono bg-[#F5F3EE]"
+                    className="flex-1 px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs font-mono bg-[#FAF8F5]"
                   />
                   <button
                     type="button"
@@ -1976,7 +1976,7 @@ export function PartnershipsAdminTabs({
                   value={partnerForm.websiteUrl || ''}
                   onChange={(e) => setPartnerForm((p) => ({ ...p, websiteUrl: e.target.value }))}
                   placeholder="https://partner-website.com"
-                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs font-mono bg-[#F5F3EE]"
+                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs font-mono bg-[#FAF8F5]"
                 />
               </div>
 
@@ -1997,14 +1997,14 @@ export function PartnershipsAdminTabs({
               </div>
             </div>
 
-            <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#FEF6CC]">
+            <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#E5E0D6]">
               <button
                 type="button"
                 onClick={() => {
                   setIsAddingPartner(false)
                   setEditingPartner(null)
                 }}
-                className="px-4 py-2 rounded-xl text-xs font-bold text-[#5C5A55] hover:bg-[#F5F3EE]"
+                className="px-4 py-2 rounded-xl text-xs font-bold text-[#5C5A55] hover:bg-[#FAF8F5]"
               >
                 إلغاء
               </button>

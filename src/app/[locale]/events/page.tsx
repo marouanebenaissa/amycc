@@ -109,7 +109,7 @@ export default async function EventsPage(props: { params: Promise<{ locale: stri
     <>
       <Header locale={locale} dict={dict} />
 
-      <main id="main-content" className="flex-1 bg-[#F5F3EE]">
+      <main id="main-content" className="flex-1 bg-[#FAF8F5]">
         {/* ========================================================= */}
         {/* Moroccan Cinematic Ambient Hero Section (Clean Non-Green) */}
         {/* ========================================================= */}
@@ -255,7 +255,7 @@ export default async function EventsPage(props: { params: Promise<{ locale: stri
                 className={`px-6 py-3.5 rounded-xl font-bold transition-all text-xs sm:text-sm hover:scale-105 active:scale-95 ${
                   hasHeroImage
                     ? 'text-white bg-white/10 hover:bg-white/20 border border-white/20 backdrop-blur-md'
-                    : 'text-[#231f20] bg-white hover:bg-[#F5F3EE] border border-[#cfc7b9] shadow-2xs'
+                    : 'text-[#231f20] bg-white hover:bg-[#FAF8F5] border border-[#cfc7b9] shadow-2xs'
                 }`}
               >
                 {isAr ? 'البرنامج السنوي للموسم' : isFr ? 'Programme Annuel' : 'Annual Program'}
@@ -274,7 +274,7 @@ export default async function EventsPage(props: { params: Promise<{ locale: stri
                 key={stat.id}
                 className="luxury-card p-5 sm:p-6 text-center flex flex-col justify-between items-center group bg-white shadow-card border border-[#e5e0d6] hover:border-[#bd3227]/40 transition-all rounded-2xl"
               >
-                <div className="w-12 h-12 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6] flex items-center justify-center p-2 mb-3 shadow-2xs group-hover:scale-110 transition-transform overflow-hidden text-2xl">
+                <div className="w-12 h-12 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6] flex items-center justify-center p-2 mb-3 shadow-2xs group-hover:scale-110 transition-transform overflow-hidden text-2xl">
                   {stat.icon}
                 </div>
                 <div className="text-3xl sm:text-4xl font-black text-[#231f20] mb-1 tracking-tight">

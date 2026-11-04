@@ -113,7 +113,7 @@ export function LocaleTab({
       onClick={onClick}
       className={[
         'px-4 py-2 text-xs font-bold rounded-xl transition-all',
-        active ? 'bg-[#231f20] text-white shadow-xs' : 'text-[#5C5A55] hover:bg-[#FEF6CC]',
+        active ? 'bg-[#231f20] text-white shadow-xs' : 'text-[#5C5A55] hover:bg-[#F4EFE6]',
       ].join(' ')}
     >
       {locale.toUpperCase()} — {label}

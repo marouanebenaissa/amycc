@@ -58,7 +58,7 @@ export default async function ImpactPage(props: { params: Promise<{ locale: stri
     <>
       <Header locale={locale} dict={dict} />
 
-      <main id="main-content" className="flex-1 bg-[#F5F3EE]">
+      <main id="main-content" className="flex-1 bg-[#FAF8F5]">
         {/* ========================================================= */}
         {/* Moroccan Cinematic Ambient Hero Section (Clean Non-Green) */}
         {/* ========================================================= */}
@@ -159,7 +159,7 @@ export default async function ImpactPage(props: { params: Promise<{ locale: stri
                   className={`inline-flex items-center gap-2 px-6 py-3.5 rounded-xl font-bold transition-all text-xs sm:text-sm hover:scale-105 active:scale-95 ${
                     hasHeroImage
                       ? 'text-white bg-white/10 hover:bg-white/20 border border-white/20 backdrop-blur-md'
-                      : 'text-[#231f20] bg-white hover:bg-[#F5F3EE] border border-[#cfc7b9] shadow-2xs'
+                      : 'text-[#231f20] bg-white hover:bg-[#FAF8F5] border border-[#cfc7b9] shadow-2xs'
                   }`}
                 >
                   <span>📄</span>
@@ -180,7 +180,7 @@ export default async function ImpactPage(props: { params: Promise<{ locale: stri
                 key={metric.id}
                 className="luxury-card p-5 sm:p-6 text-center flex flex-col justify-between items-center group bg-white shadow-card border border-[#e5e0d6] hover:border-[#bd3227]/40 transition-all rounded-2xl"
               >
-                <div className="w-12 h-12 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6] flex items-center justify-center p-2 mb-3 shadow-2xs group-hover:scale-110 transition-transform overflow-hidden">
+                <div className="w-12 h-12 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6] flex items-center justify-center p-2 mb-3 shadow-2xs group-hover:scale-110 transition-transform overflow-hidden">
                   <IconWithFallback
                     src={metric.iconSrc}
                     fallbackEmoji={metric.icon}
@@ -208,7 +208,7 @@ export default async function ImpactPage(props: { params: Promise<{ locale: stri
         {/* ========================================================= */}
         <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
           <div className="max-w-3xl mx-auto text-center mb-14 space-y-3">
-            <span className="inline-block text-xs font-bold uppercase tracking-widest text-[#bd3227] px-3.5 py-1 rounded-full bg-[#FEF6CC] border border-[#fde8e7]">
+            <span className="inline-block text-xs font-bold uppercase tracking-widest text-[#bd3227] px-3.5 py-1 rounded-full bg-[#F4EFE6] border border-[#fde8e7]">
               {isAr ? 'محاور العمل الاستراتيجي' : isFr ? 'Axes Stratégiques' : 'Strategic Impact Pillars'}
             </span>
             <h2 className="text-2xl sm:text-4xl font-black text-[#231f20]">
@@ -240,7 +240,7 @@ export default async function ImpactPage(props: { params: Promise<{ locale: stri
                 >
                   <div>
                     <div className="flex items-center justify-between gap-3 mb-4">
-                      <div className="w-12 h-12 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6] flex items-center justify-center p-2.5 shadow-2xs group-hover:scale-105 transition-transform overflow-hidden">
+                      <div className="w-12 h-12 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6] flex items-center justify-center p-2.5 shadow-2xs group-hover:scale-105 transition-transform overflow-hidden">
                         <IconWithFallback
                           src={pillar.iconSrc}
                           fallbackEmoji={pillar.icon}
@@ -250,7 +250,7 @@ export default async function ImpactPage(props: { params: Promise<{ locale: stri
                         />
                       </div>
                       {badge && (
-                        <span className="px-3 py-1 rounded-full text-3xs font-extrabold bg-[#FEF6CC] text-[#bd3227] border border-[#fde8e7]">
+                        <span className="px-3 py-1 rounded-full text-3xs font-extrabold bg-[#F4EFE6] text-[#bd3227] border border-[#fde8e7]">
                           {badge}
                         </span>
                       )}
@@ -278,7 +278,7 @@ export default async function ImpactPage(props: { params: Promise<{ locale: stri
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
               {/* Text & Testimonial Column */}
               <div className="lg:col-span-7 space-y-6">
-                <span className="inline-block px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-widest bg-[#FEF6CC] text-[#bd3227] border border-[#fde8e7]">
+                <span className="inline-block px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-widest bg-[#F4EFE6] text-[#bd3227] border border-[#fde8e7]">
                   {isAr ? config.spotlight.badgeAr : isFr ? config.spotlight.badgeFr : config.spotlight.badgeEn}
                 </span>
 
@@ -292,7 +292,7 @@ export default async function ImpactPage(props: { params: Promise<{ locale: stri
 
                 {/* Quote Box */}
                 {(isAr ? config.spotlight.quoteAr : isFr ? config.spotlight.quoteFr : config.spotlight.quoteEn) && (
-                  <div className="p-5 sm:p-6 rounded-2xl bg-[#F5F3EE] border-r-4 border-l-0 rtl:border-r-4 ltr:border-l-4 ltr:border-r-0 border-[#bd3227] shadow-2xs space-y-3">
+                  <div className="p-5 sm:p-6 rounded-2xl bg-[#FAF8F5] border-r-4 border-l-0 rtl:border-r-4 ltr:border-l-4 ltr:border-r-0 border-[#bd3227] shadow-2xs space-y-3">
                     <p className="text-xs sm:text-sm font-semibold italic text-[#231f20] leading-relaxed">
                       &ldquo;{isAr ? config.spotlight.quoteAr : isFr ? config.spotlight.quoteFr : config.spotlight.quoteEn}&rdquo;
                     </p>
@@ -323,7 +323,7 @@ export default async function ImpactPage(props: { params: Promise<{ locale: stri
                         ? `/${locale}${config.spotlight.secondaryBtnUrl}`
                         : config.spotlight.secondaryBtnUrl
                     }
-                    className="px-6 py-3 rounded-xl font-bold text-[#231f20] bg-[#F5F3EE] border border-[#cfc7b9] hover:bg-[#FEF6CC] transition-all text-xs hover:scale-105 active:scale-95"
+                    className="px-6 py-3 rounded-xl font-bold text-[#231f20] bg-[#FAF8F5] border border-[#cfc7b9] hover:bg-[#F4EFE6] transition-all text-xs hover:scale-105 active:scale-95"
                   >
                     {isAr ? config.spotlight.secondaryBtnTextAr : isFr ? config.spotlight.secondaryBtnTextFr : config.spotlight.secondaryBtnTextEn}
                   </Link>
@@ -361,7 +361,7 @@ export default async function ImpactPage(props: { params: Promise<{ locale: stri
         {/* ========================================================= */}
         <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
           <div className="max-w-3xl mx-auto text-center mb-14 space-y-3">
-            <span className="inline-block text-xs font-bold uppercase tracking-widest text-[#bd3227] px-3.5 py-1 rounded-full bg-[#FEF6CC] border border-[#fde8e7]">
+            <span className="inline-block text-xs font-bold uppercase tracking-widest text-[#bd3227] px-3.5 py-1 rounded-full bg-[#F4EFE6] border border-[#fde8e7]">
               {isAr ? config.methodology.badgeAr : isFr ? config.methodology.badgeFr : config.methodology.badgeEn}
             </span>
             <h2 className="text-2xl sm:text-4xl font-black text-[#231f20]">
@@ -387,7 +387,7 @@ export default async function ImpactPage(props: { params: Promise<{ locale: stri
                       <span className="text-2xl sm:text-3xl font-black text-[#bd3227]/25 group-hover:text-[#bd3227] transition-colors">
                         {step.stepNumber}
                       </span>
-                      <span className="text-xl p-2 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6]">
+                      <span className="text-xl p-2 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6]">
                         {step.icon}
                       </span>
                     </div>
@@ -409,7 +409,7 @@ export default async function ImpactPage(props: { params: Promise<{ locale: stri
         {/* ========================================================= */}
         {/* Civil Society Transparency & Integrity Section           */}
         {/* ========================================================= */}
-        <section className="bg-[#F5F3EE] border-y border-[#e5e0d6] py-16 lg:py-20">
+        <section className="bg-[#FAF8F5] border-y border-[#e5e0d6] py-16 lg:py-20">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-3xl mx-auto text-center mb-12 space-y-3">
               <span className="inline-block text-xs font-bold uppercase tracking-widest text-[#bd3227] px-3.5 py-1 rounded-full bg-white border border-[#e5e0d6]">
@@ -433,7 +433,7 @@ export default async function ImpactPage(props: { params: Promise<{ locale: stri
                     key={item.id}
                     className="p-5 sm:p-6 rounded-2xl bg-white border border-[#e5e0d6] shadow-2xs flex items-start gap-4 hover:border-[#bd3227]/30 transition-all"
                   >
-                    <div className="text-2xl p-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] shrink-0">
+                    <div className="text-2xl p-2.5 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6] shrink-0">
                       {item.icon}
                     </div>
                     <div>
@@ -454,7 +454,7 @@ export default async function ImpactPage(props: { params: Promise<{ locale: stri
         {/* ========================================================= */}
         {/* Institutional Partnership & Amplification CTA Banner      */}
         {/* ========================================================= */}
-        <section className="py-20 bg-[#F5F3EE] relative overflow-hidden">
+        <section className="py-20 bg-[#FAF8F5] relative overflow-hidden">
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="relative rounded-3xl overflow-hidden bg-gradient-to-r from-[#231f20] via-[#231f20] to-[#231f20] text-white p-8 sm:p-12 lg:p-14 shadow-card text-center space-y-6">
               <div className="absolute inset-0 moroccan-pattern-dark opacity-20 pointer-events-none" aria-hidden="true" />

@@ -288,7 +288,7 @@ export function CommissionsManager({ initialConfig, defaultItems = [] }: Commiss
             className={`px-3 py-2 rounded-xl text-xs font-bold transition-all border ${
               showSectionSettings
                 ? 'bg-[#231f20] text-white border-[#231f20]'
-                : 'bg-[#F5F3EE] hover:bg-[#FEF6CC] text-[#231f20] border-[#e5e0d6]'
+                : 'bg-[#FAF8F5] hover:bg-[#F4EFE6] text-[#231f20] border-[#e5e0d6]'
             }`}
           >
             ⚙️ عنوان ومقدمة القسم العام
@@ -358,7 +358,7 @@ export function CommissionsManager({ initialConfig, defaultItems = [] }: Commiss
       {/* Section Header Settings Drawer */}
       {showSectionSettings && (
         <div className="p-5 rounded-2xl bg-white border border-[#231f20]/30 shadow-subtle space-y-4">
-          <div className="flex items-center justify-between border-b border-[#FEF6CC] pb-3">
+          <div className="flex items-center justify-between border-b border-[#E5E0D6] pb-3">
             <div>
               <h3 className="text-sm font-black text-[#231f20]">
                 تعديل نصوص ترويسة قسم اللجان الوظيفية في صفحة الموقع
@@ -388,7 +388,7 @@ export function CommissionsManager({ initialConfig, defaultItems = [] }: Commiss
                   setConfig((prev) => ({ ...prev, sectionTagAr: e.target.value }))
                   setHasUnsavedChanges(true)
                 }}
-                className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] bg-[#F5F3EE] text-xs"
+                className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] bg-[#FAF8F5] text-xs"
               />
             </div>
             <div>
@@ -402,7 +402,7 @@ export function CommissionsManager({ initialConfig, defaultItems = [] }: Commiss
                   setConfig((prev) => ({ ...prev, sectionTitleAr: e.target.value }))
                   setHasUnsavedChanges(true)
                 }}
-                className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] bg-[#F5F3EE] text-xs font-bold"
+                className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] bg-[#FAF8F5] text-xs font-bold"
               />
             </div>
           </div>
@@ -418,7 +418,7 @@ export function CommissionsManager({ initialConfig, defaultItems = [] }: Commiss
                 setConfig((prev) => ({ ...prev, sectionDescAr: e.target.value }))
                 setHasUnsavedChanges(true)
               }}
-              className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] bg-[#F5F3EE] text-xs"
+              className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] bg-[#FAF8F5] text-xs"
             />
           </div>
         </div>
@@ -437,7 +437,7 @@ export function CommissionsManager({ initialConfig, defaultItems = [] }: Commiss
               {/* Header: Icon & Category Tag + Reorder */}
               <div className="flex items-start justify-between gap-3">
                 <div className="flex items-center gap-3">
-                  <span className="w-12 h-12 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6] flex items-center justify-center text-2xl shadow-2xs">
+                  <span className="w-12 h-12 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6] flex items-center justify-center text-2xl shadow-2xs">
                     {item.icon}
                   </span>
                   <div>
@@ -456,7 +456,7 @@ export function CommissionsManager({ initialConfig, defaultItems = [] }: Commiss
                     type="button"
                     disabled={index === 0}
                     onClick={() => moveItem(index, 'up')}
-                    className="w-6 h-6 rounded-md bg-[#F5F3EE] hover:bg-[#FEF6CC] text-[#231f20] disabled:opacity-30 disabled:cursor-not-allowed flex items-center justify-center text-3xs font-bold transition-colors"
+                    className="w-6 h-6 rounded-md bg-[#FAF8F5] hover:bg-[#F4EFE6] text-[#231f20] disabled:opacity-30 disabled:cursor-not-allowed flex items-center justify-center text-3xs font-bold transition-colors"
                     title="تحريك لأعلى"
                   >
                     ▲
@@ -465,7 +465,7 @@ export function CommissionsManager({ initialConfig, defaultItems = [] }: Commiss
                     type="button"
                     disabled={index === config.items.length - 1}
                     onClick={() => moveItem(index, 'down')}
-                    className="w-6 h-6 rounded-md bg-[#F5F3EE] hover:bg-[#FEF6CC] text-[#231f20] disabled:opacity-30 disabled:cursor-not-allowed flex items-center justify-center text-3xs font-bold transition-colors"
+                    className="w-6 h-6 rounded-md bg-[#FAF8F5] hover:bg-[#F4EFE6] text-[#231f20] disabled:opacity-30 disabled:cursor-not-allowed flex items-center justify-center text-3xs font-bold transition-colors"
                     title="تحريك لأسفل"
                   >
                     ▼
@@ -480,7 +480,7 @@ export function CommissionsManager({ initialConfig, defaultItems = [] }: Commiss
 
               {/* Points Preview */}
               {item.pointsAr && item.pointsAr.length > 0 && (
-                <div className="space-y-1 pt-2 border-t border-[#FEF6CC]">
+                <div className="space-y-1 pt-2 border-t border-[#E5E0D6]">
                   <span className="text-3xs font-bold text-[#5C5A55] block">أبرز الأنشطة الميدانية:</span>
                   <ul className="text-3xs text-[#5C5A55] space-y-1">
                     {item.pointsAr.slice(0, 2).map((point, pIdx) => (
@@ -500,12 +500,12 @@ export function CommissionsManager({ initialConfig, defaultItems = [] }: Commiss
             </div>
 
             {/* Footer Actions */}
-            <div className="pt-3 mt-4 border-t border-[#FEF6CC] flex items-center justify-between text-xs">
+            <div className="pt-3 mt-4 border-t border-[#E5E0D6] flex items-center justify-between text-xs">
               <div className="flex items-center gap-1">
                 <button
                   type="button"
                   onClick={() => handleEdit(item)}
-                  className="px-2.5 py-1 rounded-lg bg-[#F5F3EE] hover:bg-[#231f20] hover:text-white text-[#231f20] text-3xs font-bold transition-all cursor-pointer"
+                  className="px-2.5 py-1 rounded-lg bg-[#FAF8F5] hover:bg-[#231f20] hover:text-white text-[#231f20] text-3xs font-bold transition-all cursor-pointer"
                 >
                   ✏️ تعديل
                 </button>
@@ -536,7 +536,7 @@ export function CommissionsManager({ initialConfig, defaultItems = [] }: Commiss
       </div>
 
       {/* Footer Tools */}
-      <div className="flex items-center justify-between p-4 bg-[#F5F3EE] rounded-2xl border border-[#e5e0d6] text-xs">
+      <div className="flex items-center justify-between p-4 bg-[#FAF8F5] rounded-2xl border border-[#e5e0d6] text-xs">
         <span className="text-3xs text-[#5C5A55]">
           التعديلات المحفوظة هنا تنعكس فوراً في قسم اللجان الميدانية بصفحة فريق العمل.
         </span>
@@ -571,21 +571,21 @@ export function CommissionsManager({ initialConfig, defaultItems = [] }: Commiss
               <button
                 type="button"
                 onClick={() => setIsModalOpen(false)}
-                className="w-8 h-8 rounded-full bg-[#F5F3EE] hover:bg-[#FEF6CC] text-[#231f20] flex items-center justify-center font-bold text-sm"
+                className="w-8 h-8 rounded-full bg-[#FAF8F5] hover:bg-[#F4EFE6] text-[#231f20] flex items-center justify-center font-bold text-sm"
               >
                 ✕
               </button>
             </div>
 
             {/* Navigation Tabs */}
-            <div className="px-6 pt-4 pb-2 border-b border-[#FEF6CC] flex items-center gap-2">
+            <div className="px-6 pt-4 pb-2 border-b border-[#E5E0D6] flex items-center gap-2">
               <button
                 type="button"
                 onClick={() => setModalTab('info')}
                 className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all ${
                   modalTab === 'info'
                     ? 'bg-[#231f20] text-white shadow-xs'
-                    : 'bg-[#F5F3EE] text-[#5C5A55] hover:bg-[#FEF6CC]'
+                    : 'bg-[#FAF8F5] text-[#5C5A55] hover:bg-[#F4EFE6]'
                 }`}
               >
                 1. بيانات وهوية اللجنة
@@ -596,7 +596,7 @@ export function CommissionsManager({ initialConfig, defaultItems = [] }: Commiss
                 className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all ${
                   modalTab === 'points'
                     ? 'bg-[#231f20] text-white shadow-xs'
-                    : 'bg-[#F5F3EE] text-[#5C5A55] hover:bg-[#FEF6CC]'
+                    : 'bg-[#FAF8F5] text-[#5C5A55] hover:bg-[#F4EFE6]'
                 }`}
               >
                 2. التدخلات والأنشطة الميدانية ({modalForm.pointsAr?.length || 0})
@@ -609,7 +609,7 @@ export function CommissionsManager({ initialConfig, defaultItems = [] }: Commiss
               {modalTab === 'info' && (
                 <div className="space-y-4">
                   {/* Language Tab */}
-                  <div className="flex items-center justify-between pb-2 border-b border-[#FEF6CC]">
+                  <div className="flex items-center justify-between pb-2 border-b border-[#E5E0D6]">
                     <span className="text-3xs font-bold text-[#5C5A55]">لغة الإدخال الحالية:</span>
                     <div className="flex items-center gap-1">
                       {(['ar', 'fr', 'en'] as const).map((lng) => (
@@ -620,7 +620,7 @@ export function CommissionsManager({ initialConfig, defaultItems = [] }: Commiss
                           className={`px-2.5 py-1 rounded-lg text-3xs font-bold uppercase transition-all ${
                             langTab === lng
                               ? 'bg-[#bd3227] text-white'
-                              : 'bg-[#F5F3EE] text-[#5C5A55] hover:bg-[#FEF6CC]'
+                              : 'bg-[#FAF8F5] text-[#5C5A55] hover:bg-[#F4EFE6]'
                           }`}
                         >
                           {lng}
@@ -631,7 +631,7 @@ export function CommissionsManager({ initialConfig, defaultItems = [] }: Commiss
 
                   {/* Trilingual inputs */}
                   {langTab === 'ar' && (
-                    <div className="space-y-3 p-4 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6]">
+                    <div className="space-y-3 p-4 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6]">
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         <div>
                           <label className="block text-xs font-bold text-[#231f20] mb-1">
@@ -676,7 +676,7 @@ export function CommissionsManager({ initialConfig, defaultItems = [] }: Commiss
                   )}
 
                   {langTab === 'fr' && (
-                    <div className="space-y-3 p-4 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6]">
+                    <div className="space-y-3 p-4 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6]">
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         <div>
                           <label className="block text-xs font-bold text-[#231f20] mb-1">
@@ -720,7 +720,7 @@ export function CommissionsManager({ initialConfig, defaultItems = [] }: Commiss
                   )}
 
                   {langTab === 'en' && (
-                    <div className="space-y-3 p-4 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6]">
+                    <div className="space-y-3 p-4 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6]">
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         <div>
                           <label className="block text-xs font-bold text-[#231f20] mb-1">
@@ -782,7 +782,7 @@ export function CommissionsManager({ initialConfig, defaultItems = [] }: Commiss
                               key={ico}
                               type="button"
                               onClick={() => setModalForm((prev) => ({ ...prev, icon: ico }))}
-                              className="w-7 h-7 rounded-lg bg-[#F5F3EE] hover:bg-[#FEF6CC] flex items-center justify-center text-sm"
+                              className="w-7 h-7 rounded-lg bg-[#FAF8F5] hover:bg-[#F4EFE6] flex items-center justify-center text-sm"
                             >
                               {ico}
                             </button>
@@ -822,7 +822,7 @@ export function CommissionsManager({ initialConfig, defaultItems = [] }: Commiss
               {/* TAB 2: INTERVENTIONS / POINTS */}
               {modalTab === 'points' && (
                 <div className="space-y-4">
-                  <div className="p-4 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6] space-y-4">
+                  <div className="p-4 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6] space-y-4">
                     <span className="text-xs font-bold text-[#231f20] block">
                       أبرز التدخلات والأنشطة الميدانية للجنة
                     </span>
@@ -1029,7 +1029,7 @@ export function CommissionsManager({ initialConfig, defaultItems = [] }: Commiss
               )}
 
               {/* Status Active Toggle */}
-              <div className="flex items-center justify-between p-3 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6]">
+              <div className="flex items-center justify-between p-3 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6]">
                 <div>
                   <span className="block text-xs font-bold text-[#231f20]">تفعيل ظهور اللجنة في الموقع</span>
                   <span className="block text-3xs text-[#5C5A55]">عند التعطيل، تبقى اللجنة محفوظة في لوحة التحكم وتختفي من الصفحة العامة.</span>
@@ -1050,7 +1050,7 @@ export function CommissionsManager({ initialConfig, defaultItems = [] }: Commiss
                 <button
                   type="button"
                   onClick={() => setIsModalOpen(false)}
-                  className="px-4 py-2 rounded-xl bg-[#F5F3EE] hover:bg-[#FEF6CC] text-[#231f20] text-xs font-bold transition-colors cursor-pointer"
+                  className="px-4 py-2 rounded-xl bg-[#FAF8F5] hover:bg-[#F4EFE6] text-[#231f20] text-xs font-bold transition-colors cursor-pointer"
                 >
                   إلغاء
                 </button>

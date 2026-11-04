@@ -69,7 +69,7 @@ export default async function AdminRegistrationsPage() {
       <div className="bg-white rounded-2xl border border-[#e5e0d6] overflow-hidden shadow-2xs">
         <div className="overflow-x-auto">
           <table className="w-full text-start text-xs text-[#231f20]">
-            <thead className="bg-[#F5F3EE] border-b border-[#e5e0d6] text-2xs uppercase tracking-wider text-[#5C5A55] font-bold">
+            <thead className="bg-[#FAF8F5] border-b border-[#e5e0d6] text-2xs uppercase tracking-wider text-[#5C5A55] font-bold">
               <tr>
                 <th className="px-6 py-4 text-start">Attendee</th>
                 <th className="px-6 py-4 text-start">Event</th>
@@ -84,7 +84,7 @@ export default async function AdminRegistrationsPage() {
                   const eventTitle =
                     reg.events?.event_translations?.[0]?.title || reg.events?.slug || 'Cultural Event'
                   return (
-                    <tr key={reg.id} className="hover:bg-[#F5F3EE]/60 transition-colors">
+                    <tr key={reg.id} className="hover:bg-[#FAF8F5]/60 transition-colors">
                       <td className="px-6 py-4">
                         <div className="font-bold text-[#231f20]">{reg.full_name}</div>
                         <div className="text-3xs text-[#5C5A55]">{reg.email}</div>
@@ -116,7 +116,7 @@ export default async function AdminRegistrationsPage() {
                           <form action={handleStatusUpdate.bind(null, reg.id, 'attended')} className="inline">
                             <button
                               type="submit"
-                              className="px-2.5 py-1 rounded-lg text-2xs font-bold bg-[#FEF6CC] text-[#231f20] hover:bg-[#d2a82b] transition-colors"
+                              className="px-2.5 py-1 rounded-lg text-2xs font-bold bg-[#F4EFE6] text-[#231f20] hover:bg-[#d2a82b] transition-colors"
                             >
                               Mark Attended
                             </button>

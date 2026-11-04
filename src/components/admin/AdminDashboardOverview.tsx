@@ -29,7 +29,7 @@ export function AdminDashboardOverview({ counts }: AdminDashboardOverviewProps) 
       count: counts.membershipCount,
       href: '/admin/memberships',
       icon: '👥',
-      color: 'bg-[#FEF6CC] text-[#231f20]',
+      color: 'bg-[#F4EFE6] text-[#231f20]',
       badgeColor: 'bg-[#231f20]',
     },
     {
@@ -124,7 +124,7 @@ export function AdminDashboardOverview({ counts }: AdminDashboardOverviewProps) 
         <div className="flex items-center gap-2">
           <Link
             href="/admin/translations"
-            className="px-3.5 py-2 rounded-xl bg-white hover:bg-[#F5F3EE] border border-[#e5e0d6] text-xs font-bold text-[#231f20] shadow-2xs transition-colors flex items-center gap-2"
+            className="px-3.5 py-2 rounded-xl bg-white hover:bg-[#FAF8F5] border border-[#e5e0d6] text-xs font-bold text-[#231f20] shadow-2xs transition-colors flex items-center gap-2"
           >
             <span>🌐</span>
             <span>
@@ -192,7 +192,7 @@ export function AdminDashboardOverview({ counts }: AdminDashboardOverviewProps) 
 
       {/* Content Counts Strip */}
       <div className="bg-white p-5 rounded-2xl border border-[#e5e0d6] shadow-2xs grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
-        <div className="p-3.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] transition-all hover:border-[#231f20]/30">
+        <div className="p-3.5 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6] transition-all hover:border-[#231f20]/30">
           <span className="text-3xs text-[#5C5A55] font-bold block">
             {isAr
               ? 'البرامج الثقافية المعتمدة'
@@ -211,7 +211,7 @@ export function AdminDashboardOverview({ counts }: AdminDashboardOverviewProps) 
           </Link>
         </div>
 
-        <div className="p-3.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] transition-all hover:border-[#231f20]/30">
+        <div className="p-3.5 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6] transition-all hover:border-[#231f20]/30">
           <span className="text-3xs text-[#5C5A55] font-bold block">
             {isAr
               ? 'الفعاليات والورش المجدولة'
@@ -230,7 +230,7 @@ export function AdminDashboardOverview({ counts }: AdminDashboardOverviewProps) 
           </Link>
         </div>
 
-        <div className="p-3.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] transition-all hover:border-[#231f20]/30">
+        <div className="p-3.5 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6] transition-all hover:border-[#231f20]/30">
           <span className="text-3xs text-[#5C5A55] font-bold block">
             {isAr
               ? 'الأخبار والبيانات الصحفية'
@@ -268,7 +268,7 @@ export function AdminDashboardOverview({ counts }: AdminDashboardOverviewProps) 
           <div className="space-y-2.5">
             <Link
               href="/admin/programs/new"
-              className="flex items-center justify-between p-3 rounded-xl bg-[#F5F3EE] hover:bg-[#FEF6CC] transition-colors text-xs font-bold text-[#231f20] group"
+              className="flex items-center justify-between p-3 rounded-xl bg-[#FAF8F5] hover:bg-[#F4EFE6] transition-colors text-xs font-bold text-[#231f20] group"
             >
               <div className="flex items-center gap-2">
                 <span>🎨</span>
@@ -287,7 +287,7 @@ export function AdminDashboardOverview({ counts }: AdminDashboardOverviewProps) 
 
             <Link
               href="/admin/news/new"
-              className="flex items-center justify-between p-3 rounded-xl bg-[#F5F3EE] hover:bg-[#FEF6CC] transition-colors text-xs font-bold text-[#231f20] group"
+              className="flex items-center justify-between p-3 rounded-xl bg-[#FAF8F5] hover:bg-[#F4EFE6] transition-colors text-xs font-bold text-[#231f20] group"
             >
               <div className="flex items-center gap-2">
                 <span>📰</span>
@@ -306,7 +306,7 @@ export function AdminDashboardOverview({ counts }: AdminDashboardOverviewProps) 
 
             <Link
               href="/admin/events/new"
-              className="flex items-center justify-between p-3 rounded-xl bg-[#F5F3EE] hover:bg-[#FEF6CC] transition-colors text-xs font-bold text-[#231f20] group"
+              className="flex items-center justify-between p-3 rounded-xl bg-[#FAF8F5] hover:bg-[#F4EFE6] transition-colors text-xs font-bold text-[#231f20] group"
             >
               <div className="flex items-center gap-2">
                 <span>📅</span>
@@ -325,7 +325,7 @@ export function AdminDashboardOverview({ counts }: AdminDashboardOverviewProps) 
 
             <Link
               href="/admin/donations"
-              className="flex items-center justify-between p-3 rounded-xl bg-[#F5F3EE] hover:bg-[#FEF6CC] transition-colors text-xs font-bold text-[#231f20] group"
+              className="flex items-center justify-between p-3 rounded-xl bg-[#FAF8F5] hover:bg-[#F4EFE6] transition-colors text-xs font-bold text-[#231f20] group"
             >
               <div className="flex items-center gap-2">
                 <span>💝</span>
@@ -358,7 +358,7 @@ export function AdminDashboardOverview({ counts }: AdminDashboardOverviewProps) 
           </h2>
 
           <div className="space-y-3 text-xs text-[#5C5A55]">
-            <div className="flex items-center justify-between pb-2.5 border-b border-[#FEF6CC]">
+            <div className="flex items-center justify-between pb-2.5 border-b border-[#E5E0D6]">
               <span className="font-medium">
                 {isAr ? 'قاعدة البيانات المؤسسية' : isFr ? 'Base de Données PostgreSQL' : 'PostgreSQL Database'}
               </span>
@@ -368,7 +368,7 @@ export function AdminDashboardOverview({ counts }: AdminDashboardOverviewProps) 
               </span>
             </div>
 
-            <div className="flex items-center justify-between pb-2.5 border-b border-[#FEF6CC]">
+            <div className="flex items-center justify-between pb-2.5 border-b border-[#E5E0D6]">
               <span className="font-medium">
                 {isAr ? 'سياسات أمان البيانات (RLS)' : isFr ? 'Sécurité des Données (RLS)' : 'Row Level Security (RLS)'}
               </span>
@@ -377,7 +377,7 @@ export function AdminDashboardOverview({ counts }: AdminDashboardOverviewProps) 
               </span>
             </div>
 
-            <div className="flex items-center justify-between pb-2.5 border-b border-[#FEF6CC]">
+            <div className="flex items-center justify-between pb-2.5 border-b border-[#E5E0D6]">
               <span className="font-medium">
                 {isAr ? 'الصلاحيات الإدارية المعتمدة' : isFr ? 'Matrice des Rôles (RBAC)' : 'Roles & RBAC Matrix'}
               </span>

@@ -43,7 +43,7 @@ export default async function FAQPage(props: { params: Promise<{ locale: string 
   return (
     <>
       <Header locale={locale} dict={dict} topBar={topBar} />
-      <main id="main-content" className="flex-1 bg-[#F5F3EE] py-16 lg:py-24">
+      <main id="main-content" className="flex-1 bg-[#FAF8F5] py-16 lg:py-24">
         <div className="max-w-4xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-12">
             <span className="text-xs font-bold uppercase tracking-wider text-[#bd3227]">AMYCC Morocco</span>
@@ -67,14 +67,14 @@ export default async function FAQPage(props: { params: Promise<{ locale: string 
               >
                 <summary className="font-bold text-base text-[#231f20] cursor-pointer flex items-center justify-between list-none">
                   <span className="flex items-center gap-3">
-                    <span className="px-2.5 py-0.5 rounded-full text-4xs font-bold bg-[#F5F3EE] border border-[#e5e0d6] text-[#231f20]">
+                    <span className="px-2.5 py-0.5 rounded-full text-4xs font-bold bg-[#FAF8F5] border border-[#e5e0d6] text-[#231f20]">
                       {faq.categoryLabel}
                     </span>
                     <span>{faq.q}</span>
                   </span>
                   <span className="text-[#231f20] transition-transform group-open:rotate-180 shrink-0 ms-3">▼</span>
                 </summary>
-                <p className="mt-4 text-sm text-[#5C5A55] leading-relaxed border-t border-[#FEF6CC] pt-4 whitespace-pre-line">
+                <p className="mt-4 text-sm text-[#5C5A55] leading-relaxed border-t border-[#E5E0D6] pt-4 whitespace-pre-line">
                   {faq.a}
                 </p>
               </details>

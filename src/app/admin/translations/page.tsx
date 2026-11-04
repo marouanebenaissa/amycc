@@ -198,7 +198,7 @@ export default async function AdminTranslationsPage() {
 
       {/* Content Translations Matrix Table */}
       <div className="bg-white rounded-2xl border border-[#e5e0d6] overflow-hidden shadow-2xs">
-        <div className="p-4 bg-[#F5F3EE] border-b border-[#e5e0d6] flex items-center justify-between">
+        <div className="p-4 bg-[#FAF8F5] border-b border-[#e5e0d6] flex items-center justify-between">
           <h2 className="text-xs font-bold text-[#231f20] uppercase tracking-wider">
             مصفوفة حالة الترجمة لعناصر المحتوى (Content Translation Matrix)
           </h2>
@@ -209,7 +209,7 @@ export default async function AdminTranslationsPage() {
 
         <div className="overflow-x-auto">
           <table className="w-full text-start text-xs text-[#231f20]">
-            <thead className="bg-[#F5F3EE]/50 border-b border-[#e5e0d6] text-2xs uppercase tracking-wider text-[#5C5A55] font-bold">
+            <thead className="bg-[#FAF8F5]/50 border-b border-[#e5e0d6] text-2xs uppercase tracking-wider text-[#5C5A55] font-bold">
               <tr>
                 <th className="px-6 py-4 text-start">نوع المحتوى / Content Type</th>
                 <th className="px-6 py-4 text-start">العنوان / المعرف (Slug)</th>
@@ -230,9 +230,9 @@ export default async function AdminTranslationsPage() {
                       : 'خبر / News'
 
                   return (
-                    <tr key={`${item.type}-${item.id}`} className="hover:bg-[#F5F3EE]/60 transition-colors">
+                    <tr key={`${item.type}-${item.id}`} className="hover:bg-[#FAF8F5]/60 transition-colors">
                       <td className="px-6 py-4">
-                        <span className="px-2 py-0.5 rounded-lg text-3xs font-bold bg-[#F5F3EE] border border-[#e5e0d6] text-[#231f20]">
+                        <span className="px-2 py-0.5 rounded-lg text-3xs font-bold bg-[#FAF8F5] border border-[#e5e0d6] text-[#231f20]">
                           {typeLabel}
                         </span>
                       </td>

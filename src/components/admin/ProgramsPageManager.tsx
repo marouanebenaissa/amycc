@@ -142,7 +142,7 @@ export function ProgramsPageManager({ initialConfig, defaultConfig }: ProgramsPa
           className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer ${
             activeTab === 'hero'
               ? 'bg-[#231f20] text-white shadow-xs'
-              : 'text-[#5C5A55] hover:text-[#231f20] hover:bg-[#F5F3EE]'
+              : 'text-[#5C5A55] hover:text-[#231f20] hover:bg-[#FAF8F5]'
           }`}
         >
           <span>🖼️</span>
@@ -155,7 +155,7 @@ export function ProgramsPageManager({ initialConfig, defaultConfig }: ProgramsPa
           className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer ${
             activeTab === 'stats'
               ? 'bg-[#bd3227] text-white shadow-xs'
-              : 'text-[#5C5A55] hover:text-[#231f20] hover:bg-[#F5F3EE]'
+              : 'text-[#5C5A55] hover:text-[#231f20] hover:bg-[#FAF8F5]'
           }`}
         >
           <span>📊</span>
@@ -168,7 +168,7 @@ export function ProgramsPageManager({ initialConfig, defaultConfig }: ProgramsPa
           className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer ${
             activeTab === 'cta'
               ? 'bg-[#d2a82b] text-white shadow-xs'
-              : 'text-[#5C5A55] hover:text-[#231f20] hover:bg-[#F5F3EE]'
+              : 'text-[#5C5A55] hover:text-[#231f20] hover:bg-[#FAF8F5]'
           }`}
         >
           <span>📢</span>
@@ -181,7 +181,7 @@ export function ProgramsPageManager({ initialConfig, defaultConfig }: ProgramsPa
           ============================================================ */}
       {activeTab === 'hero' && (
         <div className="p-6 sm:p-8 rounded-3xl bg-white border border-[#e5e0d6] shadow-subtle space-y-6">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#FEF6CC] pb-4">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#E5E0D6] pb-4">
             <div>
               <h2 className="text-xl font-black text-[#231f20] tracking-tight flex items-center gap-2">
                 <span>🖼️</span>
@@ -192,7 +192,7 @@ export function ProgramsPageManager({ initialConfig, defaultConfig }: ProgramsPa
               </p>
             </div>
 
-            <div className="flex gap-1.5 p-1 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6] self-start sm:self-auto">
+            <div className="flex gap-1.5 p-1 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6] self-start sm:self-auto">
               {(['ar', 'fr', 'en'] as const).map((loc) => (
                 <button
                   key={loc}
@@ -201,7 +201,7 @@ export function ProgramsPageManager({ initialConfig, defaultConfig }: ProgramsPa
                   className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                     activeLangTab === loc
                       ? 'bg-[#231f20] text-white shadow-xs'
-                      : 'text-[#5C5A55] hover:bg-[#FEF6CC]'
+                      : 'text-[#5C5A55] hover:bg-[#F4EFE6]'
                   }`}
                 >
                   {loc === 'ar' ? 'العربية' : loc === 'fr' ? 'Français' : 'English'}
@@ -211,7 +211,7 @@ export function ProgramsPageManager({ initialConfig, defaultConfig }: ProgramsPa
           </div>
 
           {/* Hero Visual Image */}
-          <div className="space-y-4 p-5 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6]">
+          <div className="space-y-4 p-5 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6]">
             <div className="flex items-center justify-between">
               <label className="block text-xs font-bold text-[#231f20]">
                 صورة خلفية أو بصرية لقسم رأس الصفحة (Hero Visual Image)
@@ -282,7 +282,7 @@ export function ProgramsPageManager({ initialConfig, defaultConfig }: ProgramsPa
                   className="w-full px-3.5 py-2 rounded-xl bg-white border border-[#e5e0d6] text-xs font-mono text-[#231f20] focus:outline-none focus:border-[#231f20] text-left"
                 />
 
-                <label className="flex items-center gap-3 p-2.5 rounded-xl bg-white border border-[#e5e0d6] cursor-pointer hover:bg-[#FEF6CC] transition-colors">
+                <label className="flex items-center gap-3 p-2.5 rounded-xl bg-white border border-[#e5e0d6] cursor-pointer hover:bg-[#F4EFE6] transition-colors">
                   <input
                     type="checkbox"
                     checked={config.hero.showImage !== false}
@@ -341,7 +341,7 @@ export function ProgramsPageManager({ initialConfig, defaultConfig }: ProgramsPa
                   </h3>
                   <p
                     className={`text-xs line-clamp-2 ${
-                      config.hero.showImage !== false && config.hero.imageUrl ? 'text-[#FEF6CC]/95' : 'text-[#5C5A55]'
+                      config.hero.showImage !== false && config.hero.imageUrl ? 'text-[#E2DED6]/95' : 'text-[#5C5A55]'
                     }`}
                   >
                     {config.hero.descriptionAr || 'وصف رأس صفحة البرامج...'}
@@ -365,7 +365,7 @@ export function ProgramsPageManager({ initialConfig, defaultConfig }: ProgramsPa
                       value={config.hero.tagAr}
                       onChange={(e) => updateHero('tagAr', e.target.value)}
                       placeholder="بوابة البرامج والمشاريع الثقافية • AMYCC Programs"
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
                     />
                   </div>
                   <div>
@@ -377,7 +377,7 @@ export function ProgramsPageManager({ initialConfig, defaultConfig }: ProgramsPa
                       value={config.hero.badgeAr}
                       onChange={(e) => updateHero('badgeAr', e.target.value)}
                       placeholder="المملكة المغربية • تمكين الشباب وصون التراث"
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
                     />
                   </div>
                 </div>
@@ -391,7 +391,7 @@ export function ProgramsPageManager({ initialConfig, defaultConfig }: ProgramsPa
                     value={config.hero.titleAr}
                     onChange={(e) => updateHero('titleAr', e.target.value)}
                     placeholder="برامجنا ومبادراتنا: فضاءات حية لاكتشاف المواهب وبناء الأثر الثقافي"
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
                   />
                 </div>
 
@@ -404,7 +404,7 @@ export function ProgramsPageManager({ initialConfig, defaultConfig }: ProgramsPa
                     value={config.hero.descriptionAr}
                     onChange={(e) => updateHero('descriptionAr', e.target.value)}
                     placeholder="تضع جمعية روح الفنون والثقافة في صلب رسالتها..."
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
                   />
                 </div>
               </>
@@ -422,7 +422,7 @@ export function ProgramsPageManager({ initialConfig, defaultConfig }: ProgramsPa
                       value={config.hero.tagFr ?? ''}
                       onChange={(e) => updateHero('tagFr', e.target.value)}
                       placeholder="PROGRAMMES & INITIATIVES CULTURELLES"
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
                     />
                   </div>
                   <div>
@@ -434,7 +434,7 @@ export function ProgramsPageManager({ initialConfig, defaultConfig }: ProgramsPa
                       value={config.hero.badgeFr ?? ''}
                       onChange={(e) => updateHero('badgeFr', e.target.value)}
                       placeholder="Royaume du Maroc • Jeunesse & Patrimoine"
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
                     />
                   </div>
                 </div>
@@ -448,7 +448,7 @@ export function ProgramsPageManager({ initialConfig, defaultConfig }: ProgramsPa
                     value={config.hero.titleFr ?? ''}
                     onChange={(e) => updateHero('titleFr', e.target.value)}
                     placeholder="Nos Programmes : Espaces Vivants..."
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
                   />
                 </div>
 
@@ -461,7 +461,7 @@ export function ProgramsPageManager({ initialConfig, defaultConfig }: ProgramsPa
                     value={config.hero.descriptionFr ?? ''}
                     onChange={(e) => updateHero('descriptionFr', e.target.value)}
                     placeholder="L'AMYCC conçoit et déploie des programmes pérennes..."
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
                   />
                 </div>
               </>
@@ -479,7 +479,7 @@ export function ProgramsPageManager({ initialConfig, defaultConfig }: ProgramsPa
                       value={config.hero.tagEn ?? ''}
                       onChange={(e) => updateHero('tagEn', e.target.value)}
                       placeholder="CULTURAL PROGRAMS & INITIATIVES"
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
                     />
                   </div>
                   <div>
@@ -491,7 +491,7 @@ export function ProgramsPageManager({ initialConfig, defaultConfig }: ProgramsPa
                       value={config.hero.badgeEn ?? ''}
                       onChange={(e) => updateHero('badgeEn', e.target.value)}
                       placeholder="Kingdom of Morocco • Youth & Heritage"
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
                     />
                   </div>
                 </div>
@@ -505,7 +505,7 @@ export function ProgramsPageManager({ initialConfig, defaultConfig }: ProgramsPa
                     value={config.hero.titleEn ?? ''}
                     onChange={(e) => updateHero('titleEn', e.target.value)}
                     placeholder="Our Programs: Vibrant Spaces..."
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
                   />
                 </div>
 
@@ -518,7 +518,7 @@ export function ProgramsPageManager({ initialConfig, defaultConfig }: ProgramsPa
                     value={config.hero.descriptionEn ?? ''}
                     onChange={(e) => updateHero('descriptionEn', e.target.value)}
                     placeholder="AMYCC designs and leads enduring cultural initiatives..."
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
                   />
                 </div>
               </>
@@ -532,7 +532,7 @@ export function ProgramsPageManager({ initialConfig, defaultConfig }: ProgramsPa
           ============================================================ */}
       {activeTab === 'stats' && (
         <div className="p-6 sm:p-8 rounded-3xl bg-white border border-[#e5e0d6] shadow-subtle space-y-6">
-          <div className="border-b border-[#FEF6CC] pb-4">
+          <div className="border-b border-[#E5E0D6] pb-4">
             <h2 className="text-xl font-black text-[#231f20] tracking-tight flex items-center gap-2">
               <span>📊</span>
               <span>أرقام ومؤشرات أثر البرامج (Impact Stats Ribbon)</span>
@@ -546,7 +546,7 @@ export function ProgramsPageManager({ initialConfig, defaultConfig }: ProgramsPa
             {config.stats.map((stat, idx) => (
               <div
                 key={stat.id}
-                className="p-5 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6] space-y-3"
+                className="p-5 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6] space-y-3"
               >
                 <div className="flex items-center justify-between">
                   <span className="text-xs font-bold text-[#bd3227]">
@@ -620,7 +620,7 @@ export function ProgramsPageManager({ initialConfig, defaultConfig }: ProgramsPa
           ============================================================ */}
       {activeTab === 'cta' && (
         <div className="p-6 sm:p-8 rounded-3xl bg-white border border-[#e5e0d6] shadow-subtle space-y-6">
-          <div className="border-b border-[#FEF6CC] pb-4">
+          <div className="border-b border-[#E5E0D6] pb-4">
             <h2 className="text-xl font-black text-[#231f20] tracking-tight flex items-center gap-2">
               <span>📢</span>
               <span>شريط الدعوة لاقتراح المشاريع والانخراط (CTA Banner)</span>
@@ -639,7 +639,7 @@ export function ProgramsPageManager({ initialConfig, defaultConfig }: ProgramsPa
                 type="text"
                 value={config.cta.titleAr}
                 onChange={(e) => updateCta('titleAr', e.target.value)}
-                className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] font-bold focus:bg-white focus:outline-none focus:border-[#231f20]"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6] text-xs text-[#231f20] font-bold focus:bg-white focus:outline-none focus:border-[#231f20]"
               />
             </div>
 
@@ -651,12 +651,12 @@ export function ProgramsPageManager({ initialConfig, defaultConfig }: ProgramsPa
                 rows={3}
                 value={config.cta.descAr}
                 onChange={(e) => updateCta('descAr', e.target.value)}
-                className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
               />
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
-              <div className="p-4 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6] space-y-3">
+              <div className="p-4 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6] space-y-3">
                 <span className="text-xs font-bold text-[#231f20] block">الزر الأساسي (Primary CTA)</span>
                 <div>
                   <label className="block text-3xs font-bold text-[#5C5A55] uppercase mb-1">نص الزر بالعربية</label>
@@ -678,7 +678,7 @@ export function ProgramsPageManager({ initialConfig, defaultConfig }: ProgramsPa
                 </div>
               </div>
 
-              <div className="p-4 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6] space-y-3">
+              <div className="p-4 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6] space-y-3">
                 <span className="text-xs font-bold text-[#bd3227] block">الزر الثانوي (Secondary CTA)</span>
                 <div>
                   <label className="block text-3xs font-bold text-[#5C5A55] uppercase mb-1">نص الزر بالعربية</label>
@@ -710,7 +710,7 @@ export function ProgramsPageManager({ initialConfig, defaultConfig }: ProgramsPa
           <Link
             href="/ar/programs"
             target="_blank"
-            className="px-3.5 py-2 rounded-xl bg-[#F5F3EE] hover:bg-[#FEF6CC] text-xs font-bold text-[#231f20] border border-[#e5e0d6] transition-colors"
+            className="px-3.5 py-2 rounded-xl bg-[#FAF8F5] hover:bg-[#F4EFE6] text-xs font-bold text-[#231f20] border border-[#e5e0d6] transition-colors"
           >
             معاينة صفحة البرامج ↗
           </Link>

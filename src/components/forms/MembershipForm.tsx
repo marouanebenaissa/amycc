@@ -77,7 +77,7 @@ export function MembershipForm({ locale, tiers = [] }: MembershipFormProps) {
       onSubmit={handleSubmit}
       className="space-y-6 max-w-2xl mx-auto bg-white p-7 sm:p-10 rounded-3xl border border-[#e5e0d6] shadow-sm"
     >
-      <div className="border-b border-[#FEF6CC] pb-4">
+      <div className="border-b border-[#E5E0D6] pb-4">
         <span className="text-2xs font-extrabold uppercase tracking-widest text-[#bd3227]">
           {isAr ? 'استمارة الترشح الرسمية' : isFr ? 'Candidature Officielle' : 'Official Application'}
         </span>
@@ -146,7 +146,7 @@ export function MembershipForm({ locale, tiers = [] }: MembershipFormProps) {
                   className={`text-start p-3 rounded-2xl border transition-all cursor-pointer ${
                     isSelected
                       ? 'bg-[#231f20]/5 border-[#231f20] shadow-2xs ring-1 ring-[#231f20]'
-                      : 'bg-[#F5F3EE] border-[#e5e0d6] hover:bg-white'
+                      : 'bg-[#FAF8F5] border-[#e5e0d6] hover:bg-white'
                   }`}
                 >
                   <div className="flex items-center justify-between gap-1 mb-1">
@@ -176,7 +176,7 @@ export function MembershipForm({ locale, tiers = [] }: MembershipFormProps) {
           type="text"
           name="fullName"
           required
-          className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] text-xs text-[#231f20] focus:border-[#231f20] focus:ring-1 focus:ring-[#231f20] outline-none bg-[#F5F3EE]"
+          className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] text-xs text-[#231f20] focus:border-[#231f20] focus:ring-1 focus:ring-[#231f20] outline-none bg-[#FAF8F5]"
           placeholder={isAr ? 'أدخل اسمك الكامل' : isFr ? 'Votre nom et prénom' : 'Enter your full name'}
         />
         {result?.errors?.fullName && (
@@ -194,7 +194,7 @@ export function MembershipForm({ locale, tiers = [] }: MembershipFormProps) {
             type="email"
             name="email"
             required
-            className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] text-xs text-[#231f20] focus:border-[#231f20] focus:ring-1 focus:ring-[#231f20] outline-none bg-[#F5F3EE]"
+            className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] text-xs text-[#231f20] focus:border-[#231f20] focus:ring-1 focus:ring-[#231f20] outline-none bg-[#FAF8F5]"
             placeholder="name@example.com"
           />
           {result?.errors?.email && (
@@ -210,7 +210,7 @@ export function MembershipForm({ locale, tiers = [] }: MembershipFormProps) {
             type="tel"
             name="phone"
             required
-            className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] text-xs text-[#231f20] focus:border-[#231f20] focus:ring-1 focus:ring-[#231f20] outline-none bg-[#F5F3EE]"
+            className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] text-xs text-[#231f20] focus:border-[#231f20] focus:ring-1 focus:ring-[#231f20] outline-none bg-[#FAF8F5]"
             placeholder="+212 6..."
           />
           {result?.errors?.phone && (
@@ -229,7 +229,7 @@ export function MembershipForm({ locale, tiers = [] }: MembershipFormProps) {
             type="text"
             name="city"
             required
-            className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] text-xs text-[#231f20] focus:border-[#231f20] focus:ring-1 focus:ring-[#231f20] outline-none bg-[#F5F3EE]"
+            className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] text-xs text-[#231f20] focus:border-[#231f20] focus:ring-1 focus:ring-[#231f20] outline-none bg-[#FAF8F5]"
             placeholder={isAr ? 'مثال: الرباط، الدار البيضاء...' : 'Ex: Rabat, Casablanca...'}
           />
           {result?.errors?.city && (
@@ -244,7 +244,7 @@ export function MembershipForm({ locale, tiers = [] }: MembershipFormProps) {
           <input
             type="text"
             name="profession"
-            className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] text-xs text-[#231f20] focus:border-[#231f20] focus:ring-1 focus:ring-[#231f20] outline-none bg-[#F5F3EE]"
+            className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] text-xs text-[#231f20] focus:border-[#231f20] focus:ring-1 focus:ring-[#231f20] outline-none bg-[#FAF8F5]"
             placeholder={
               isAr
                 ? 'فنان، طالب، أستاذ، فاعل جمعوي...'
@@ -269,7 +269,7 @@ export function MembershipForm({ locale, tiers = [] }: MembershipFormProps) {
           {interestOptions.map((opt) => (
             <label
               key={opt.value}
-              className="flex items-center gap-2.5 p-3 rounded-xl border border-[#e5e0d6] bg-[#F5F3EE] hover:bg-white cursor-pointer text-xs transition-colors"
+              className="flex items-center gap-2.5 p-3 rounded-xl border border-[#e5e0d6] bg-[#FAF8F5] hover:bg-white cursor-pointer text-xs transition-colors"
             >
               <input
                 type="checkbox"
@@ -296,7 +296,7 @@ export function MembershipForm({ locale, tiers = [] }: MembershipFormProps) {
           name="motivation"
           required
           rows={4}
-          className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] text-xs text-[#231f20] focus:border-[#231f20] focus:ring-1 focus:ring-[#231f20] outline-none bg-[#F5F3EE]"
+          className="w-full px-4 py-3 rounded-xl border border-[#e5e0d6] text-xs text-[#231f20] focus:border-[#231f20] focus:ring-1 focus:ring-[#231f20] outline-none bg-[#FAF8F5]"
           placeholder={
             isAr
               ? 'اذكر بإيجاز دوافعك للانخراط وما تأمل في تحقيقه أو المساهمة به ضمن برامج الجمعية...'

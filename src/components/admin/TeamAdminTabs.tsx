@@ -24,14 +24,14 @@ export function TeamAdminTabs({
   return (
     <div className="space-y-6">
       {/* Primary Section Switcher Tabs */}
-      <div className="flex flex-wrap items-center gap-2 p-1.5 bg-[#F5F3EE] rounded-2xl border border-[#e5e0d6] w-full sm:w-fit shadow-2xs">
+      <div className="flex flex-wrap items-center gap-2 p-1.5 bg-[#FAF8F5] rounded-2xl border border-[#e5e0d6] w-full sm:w-fit shadow-2xs">
         <button
           type="button"
           onClick={() => setActiveTab('hero')}
           className={`flex-1 sm:flex-initial flex items-center justify-center gap-2 px-4 sm:px-5 py-2.5 rounded-xl text-xs sm:text-sm font-black transition-all cursor-pointer ${
             activeTab === 'hero'
               ? 'bg-[#231f20] text-white shadow-sm'
-              : 'text-[#5C5A55] hover:text-[#231f20] hover:bg-[#FEF6CC]'
+              : 'text-[#5C5A55] hover:text-[#231f20] hover:bg-[#F4EFE6]'
           }`}
         >
           <span>🖼️</span>
@@ -44,7 +44,7 @@ export function TeamAdminTabs({
           className={`flex-1 sm:flex-initial flex items-center justify-center gap-2 px-4 sm:px-5 py-2.5 rounded-xl text-xs sm:text-sm font-black transition-all cursor-pointer ${
             activeTab === 'members'
               ? 'bg-[#231f20] text-white shadow-sm'
-              : 'text-[#5C5A55] hover:text-[#231f20] hover:bg-[#FEF6CC]'
+              : 'text-[#5C5A55] hover:text-[#231f20] hover:bg-[#F4EFE6]'
           }`}
         >
           <span>👥</span>
@@ -57,7 +57,7 @@ export function TeamAdminTabs({
           className={`flex-1 sm:flex-initial flex items-center justify-center gap-2 px-4 sm:px-5 py-2.5 rounded-xl text-xs sm:text-sm font-black transition-all cursor-pointer ${
             activeTab === 'commissions'
               ? 'bg-[#bd3227] text-white shadow-sm'
-              : 'text-[#5C5A55] hover:text-[#231f20] hover:bg-[#FEF6CC]'
+              : 'text-[#5C5A55] hover:text-[#231f20] hover:bg-[#F4EFE6]'
           }`}
         >
           <span>🎨</span>

@@ -348,14 +348,14 @@ export function NewsAdminTabs({
         </div>
 
         {/* Tab Buttons */}
-        <div className="flex items-center p-1 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6] shadow-2xs self-start sm:self-auto">
+        <div className="flex items-center p-1 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6] shadow-2xs self-start sm:self-auto">
           <button
             type="button"
             onClick={() => setActiveTab('articles')}
             className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-2 ${
               activeTab === 'articles'
                 ? 'bg-[#231f20] text-white shadow-xs'
-                : 'text-[#5C5A55] hover:bg-[#FEF6CC]'
+                : 'text-[#5C5A55] hover:bg-[#F4EFE6]'
             }`}
           >
             <span>📑</span>
@@ -367,7 +367,7 @@ export function NewsAdminTabs({
             className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-2 ${
               activeTab === 'page-settings'
                 ? 'bg-[#231f20] text-white shadow-xs'
-                : 'text-[#5C5A55] hover:bg-[#FEF6CC]'
+                : 'text-[#5C5A55] hover:bg-[#F4EFE6]'
             }`}
           >
             <span>⚙️</span>
@@ -442,7 +442,7 @@ export function NewsAdminTabs({
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="بحث في المقالات بالعنوان أو الرابط..."
-                  className="w-full ps-9 pe-4 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE] focus:bg-white focus:border-[#231f20] outline-none transition-all"
+                  className="w-full ps-9 pe-4 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#FAF8F5] focus:bg-white focus:border-[#231f20] outline-none transition-all"
                 />
                 <span className="absolute start-3 top-1/2 -translate-y-1/2 text-xs text-[#5C5A55]">
                   🔍
@@ -463,7 +463,7 @@ export function NewsAdminTabs({
                 <select
                   value={statusFilter}
                   onChange={(e) => setStatusFilter(e.target.value as 'all' | 'published' | 'draft')}
-                  className="px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs font-bold bg-[#F5F3EE] text-[#231f20] outline-none"
+                  className="px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs font-bold bg-[#FAF8F5] text-[#231f20] outline-none"
                 >
                   <option value="all">كافة الحالات</option>
                   <option value="published">المنشورة فقط</option>
@@ -474,7 +474,7 @@ export function NewsAdminTabs({
                   type="button"
                   disabled={seedingArticles}
                   onClick={handleSeedDefaultArticles}
-                  className="inline-flex items-center gap-2 px-3.5 py-2 bg-[#F5F3EE] border border-[#e5e0d6] text-[#231f20] text-xs font-bold rounded-xl hover:bg-[#FEF6CC] active:scale-98 transition-all shadow-2xs disabled:opacity-50 cursor-pointer"
+                  className="inline-flex items-center gap-2 px-3.5 py-2 bg-[#FAF8F5] border border-[#e5e0d6] text-[#231f20] text-xs font-bold rounded-xl hover:bg-[#F4EFE6] active:scale-98 transition-all shadow-2xs disabled:opacity-50 cursor-pointer"
                   title="استيراد وتحديث المقالات النموذجية الرسمية الثلاث"
                 >
                   <span>📥</span>
@@ -508,7 +508,7 @@ export function NewsAdminTabs({
                   className={`px-3 py-1.5 rounded-lg font-bold transition-all cursor-pointer shrink-0 ${
                     selectedCategory === c.id
                       ? 'bg-[#231f20] text-white shadow-2xs'
-                      : 'bg-[#F5F3EE] text-[#5C5A55] hover:bg-[#FEF6CC]'
+                      : 'bg-[#FAF8F5] text-[#5C5A55] hover:bg-[#F4EFE6]'
                   }`}
                 >
                   {c.label}
@@ -521,7 +521,7 @@ export function NewsAdminTabs({
           <div className="bg-white rounded-2xl border border-[#e5e0d6] overflow-hidden shadow-2xs">
             <div className="overflow-x-auto">
               <table className="w-full text-start text-xs text-[#231f20]">
-                <thead className="bg-[#F5F3EE] border-b border-[#e5e0d6] text-3xs uppercase tracking-wider text-[#5C5A55] font-black">
+                <thead className="bg-[#FAF8F5] border-b border-[#e5e0d6] text-3xs uppercase tracking-wider text-[#5C5A55] font-black">
                   <tr>
                     <th className="px-6 py-4 text-start">المقال والغلاف</th>
                     <th className="px-6 py-4 text-start">التصنيف</th>
@@ -537,7 +537,7 @@ export function NewsAdminTabs({
                       const dateObj = art.published_at ? new Date(art.published_at) : null
 
                       return (
-                        <tr key={art.id} className="hover:bg-[#F5F3EE]/60 transition-colors">
+                        <tr key={art.id} className="hover:bg-[#FAF8F5]/60 transition-colors">
                           <td className="px-6 py-4">
                             <div className="flex items-center gap-3">
                               <div className="relative w-12 h-12 rounded-xl bg-[#231f20] overflow-hidden shrink-0 border border-[#e5e0d6]">
@@ -566,7 +566,7 @@ export function NewsAdminTabs({
                             </div>
                           </td>
                           <td className="px-6 py-4">
-                            <span className="px-2.5 py-1 rounded-md text-3xs font-extrabold bg-[#F5F3EE] border border-[#e5e0d6] text-[#231f20]">
+                            <span className="px-2.5 py-1 rounded-md text-3xs font-extrabold bg-[#FAF8F5] border border-[#e5e0d6] text-[#231f20]">
                               {art.category}
                             </span>
                           </td>
@@ -605,7 +605,7 @@ export function NewsAdminTabs({
                                 href={`/ar/news/${art.slug}`}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="px-2.5 py-1.5 rounded-lg text-2xs font-bold bg-[#F5F3EE] border border-[#e5e0d6] text-[#231f20] hover:bg-[#FEF6CC] transition-colors flex items-center gap-1"
+                                className="px-2.5 py-1.5 rounded-lg text-2xs font-bold bg-[#FAF8F5] border border-[#e5e0d6] text-[#231f20] hover:bg-[#F4EFE6] transition-colors flex items-center gap-1"
                                 title="معاينة المقال في الموقع"
                               >
                                 <span>معاينة</span>
@@ -613,7 +613,7 @@ export function NewsAdminTabs({
                               </a>
                               <Link
                                 href={`/admin/news/${art.id}/edit`}
-                                className="px-3 py-1.5 rounded-lg text-2xs font-bold bg-[#F5F3EE] border border-[#e5e0d6] text-[#231f20] hover:bg-[#FEF6CC] transition-colors"
+                                className="px-3 py-1.5 rounded-lg text-2xs font-bold bg-[#FAF8F5] border border-[#e5e0d6] text-[#231f20] hover:bg-[#F4EFE6] transition-colors"
                               >
                                 تعديل
                               </Link>
@@ -635,7 +635,7 @@ export function NewsAdminTabs({
                       <td colSpan={5} className="px-6 py-12 text-center">
                         {articles.length === 0 ? (
                           <div className="max-w-md mx-auto space-y-3">
-                            <div className="w-12 h-12 mx-auto rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6] flex items-center justify-center text-xl">
+                            <div className="w-12 h-12 mx-auto rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6] flex items-center justify-center text-xl">
                               📰
                             </div>
                             <h3 className="text-sm font-extrabold text-[#231f20]">
@@ -656,7 +656,7 @@ export function NewsAdminTabs({
                               </button>
                               <Link
                                 href="/admin/news/new"
-                                className="inline-flex items-center gap-2 px-4 py-2 bg-[#F5F3EE] border border-[#e5e0d6] text-[#231f20] text-xs font-bold rounded-xl hover:bg-[#FEF6CC] transition-all"
+                                className="inline-flex items-center gap-2 px-4 py-2 bg-[#FAF8F5] border border-[#e5e0d6] text-[#231f20] text-xs font-bold rounded-xl hover:bg-[#F4EFE6] transition-all"
                               >
                                 <span>✍️</span>
                                 <span>كتابة مقال جديد</span>
@@ -688,7 +688,7 @@ export function NewsAdminTabs({
             <span className="text-xs font-extrabold text-[#231f20]">
               لغة التحرير والمعاينة:
             </span>
-            <div className="flex gap-1.5 p-1 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6]">
+            <div className="flex gap-1.5 p-1 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6]">
               {(['ar', 'fr', 'en'] as const).map((lang) => (
                 <button
                   key={lang}
@@ -697,7 +697,7 @@ export function NewsAdminTabs({
                   className={`px-3 py-1.5 text-xs font-black rounded-lg transition-all cursor-pointer ${
                     activeLangTab === lang
                       ? 'bg-[#231f20] text-white shadow-xs'
-                      : 'text-[#5C5A55] hover:bg-[#FEF6CC]'
+                      : 'text-[#5C5A55] hover:bg-[#F4EFE6]'
                   }`}
                 >
                   {lang === 'ar' ? 'العربية (AR)' : lang === 'fr' ? 'Français (FR)' : 'English (EN)'}
@@ -708,13 +708,13 @@ export function NewsAdminTabs({
 
           {/* Hero Section Config */}
           <div className="bg-white p-6 rounded-2xl border border-[#e5e0d6] shadow-2xs space-y-4">
-            <h3 className="text-sm font-extrabold text-[#231f20] pb-2 border-b border-[#FEF6CC] flex items-center gap-2">
+            <h3 className="text-sm font-extrabold text-[#231f20] pb-2 border-b border-[#E5E0D6] flex items-center gap-2">
               <span>🖼️</span>
               <span>واجهة الهيدر الرئيسي لصفحة الأخبار (Hero Section)</span>
             </h3>
 
             {/* Hero Image Settings */}
-            <div className="p-4 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] space-y-3">
+            <div className="p-4 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6] space-y-3">
               <div className="flex items-center justify-between">
                 <div>
                   <span className="text-xs font-bold text-[#231f20] block">
@@ -952,7 +952,7 @@ export function NewsAdminTabs({
 
           {/* 4 Impact Stats */}
           <div className="bg-white p-6 rounded-2xl border border-[#e5e0d6] shadow-2xs space-y-4">
-            <h3 className="text-sm font-extrabold text-[#231f20] pb-2 border-b border-[#FEF6CC] flex items-center gap-2">
+            <h3 className="text-sm font-extrabold text-[#231f20] pb-2 border-b border-[#E5E0D6] flex items-center gap-2">
               <span>📊</span>
               <span>مؤشرات وأرقام المركز الإعلامي الأربعة (4 Media KPIs)</span>
             </h3>
@@ -961,7 +961,7 @@ export function NewsAdminTabs({
               {config.stats.map((stat, idx) => (
                 <div
                   key={stat.id}
-                  className="p-4 rounded-xl border border-[#e5e0d6] bg-[#F5F3EE] space-y-3"
+                  className="p-4 rounded-xl border border-[#e5e0d6] bg-[#FAF8F5] space-y-3"
                 >
                   <div className="flex items-center justify-between">
                     <span className="text-3xs font-black text-[#231f20]">
@@ -1037,7 +1037,7 @@ export function NewsAdminTabs({
 
           {/* CTA Banner Config */}
           <div className="bg-white p-6 rounded-2xl border border-[#e5e0d6] shadow-2xs space-y-4">
-            <h3 className="text-sm font-extrabold text-[#231f20] pb-2 border-b border-[#FEF6CC] flex items-center gap-2">
+            <h3 className="text-sm font-extrabold text-[#231f20] pb-2 border-b border-[#E5E0D6] flex items-center gap-2">
               <span>📣</span>
               <span>بانر العلاقات الصحفية والإعلامية (Press & Media CTA)</span>
             </h3>

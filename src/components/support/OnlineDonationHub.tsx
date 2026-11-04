@@ -175,7 +175,7 @@ export function OnlineDonationHub({ config, locale }: OnlineDonationHubProps) {
   return (
     <div id="online-donation" className="max-w-4xl mx-auto bg-white rounded-3xl border border-[#e5e0d6] shadow-xl overflow-hidden">
       {/* Header Tabs */}
-      <div className="bg-[#F5F3EE] border-b border-[#e5e0d6] p-2 flex gap-2">
+      <div className="bg-[#FAF8F5] border-b border-[#e5e0d6] p-2 flex gap-2">
         {gateway.enabled && (
           <button
             type="button"
@@ -299,7 +299,7 @@ export function OnlineDonationHub({ config, locale }: OnlineDonationHubProps) {
                         className={`py-3 px-2 rounded-2xl text-xs sm:text-sm font-black border transition-all cursor-pointer ${
                           isSelected
                             ? 'bg-[#231f20] text-white border-[#231f20] shadow-md scale-102 ring-2 ring-[#231f20]/30'
-                            : 'bg-[#F5F3EE] text-[#231f20] border-[#e5e0d6] hover:bg-white'
+                            : 'bg-[#FAF8F5] text-[#231f20] border-[#e5e0d6] hover:bg-white'
                         }`}
                       >
                         {amt.toLocaleString()} {gateway.currency || 'MAD'}
@@ -325,7 +325,7 @@ export function OnlineDonationHub({ config, locale }: OnlineDonationHubProps) {
                       className={`w-full px-4 py-3 rounded-2xl border text-xs sm:text-sm outline-none font-bold transition-all ${
                         isCustomAmount
                           ? 'border-[#231f20] ring-1 ring-[#231f20] bg-white'
-                          : 'border-[#e5e0d6] bg-[#F5F3EE]'
+                          : 'border-[#e5e0d6] bg-[#FAF8F5]'
                       }`}
                     />
                     <span className="absolute left-4 top-3 text-xs font-bold text-[#5C5A55]">
@@ -347,7 +347,7 @@ export function OnlineDonationHub({ config, locale }: OnlineDonationHubProps) {
                 <select
                   value={selectedCause}
                   onChange={(e) => setSelectedCause(e.target.value)}
-                  className="w-full px-4 py-3 rounded-2xl border border-[#e5e0d6] text-xs font-bold text-[#231f20] bg-[#F5F3EE] outline-none"
+                  className="w-full px-4 py-3 rounded-2xl border border-[#e5e0d6] text-xs font-bold text-[#231f20] bg-[#FAF8F5] outline-none"
                 >
                   {causes.map((c) => (
                     <option key={c.id} value={c.id}>
@@ -358,7 +358,7 @@ export function OnlineDonationHub({ config, locale }: OnlineDonationHubProps) {
               </div>
 
               {/* Step 3: Donor Details */}
-              <div className="space-y-4 pt-2 border-t border-[#FEF6CC]">
+              <div className="space-y-4 pt-2 border-t border-[#E5E0D6]">
                 <span className="text-2xs font-extrabold uppercase tracking-wider text-[#231f20] block">
                   {isAr
                     ? '3. بيانات المتبرع (لتحرير وصل الإبراء القانوني) *'
@@ -378,7 +378,7 @@ export function OnlineDonationHub({ config, locale }: OnlineDonationHubProps) {
                       value={donorName}
                       onChange={(e) => setDonorName(e.target.value)}
                       placeholder={isAr ? 'الاسم الكامل' : 'Full Name'}
-                      className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE]"
+                      className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs bg-[#FAF8F5]"
                     />
                   </div>
 
@@ -392,7 +392,7 @@ export function OnlineDonationHub({ config, locale }: OnlineDonationHubProps) {
                       value={donorEmail}
                       onChange={(e) => setDonorEmail(e.target.value)}
                       placeholder="name@example.com"
-                      className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE]"
+                      className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs bg-[#FAF8F5]"
                     />
                   </div>
 
@@ -405,7 +405,7 @@ export function OnlineDonationHub({ config, locale }: OnlineDonationHubProps) {
                       value={donorPhone}
                       onChange={(e) => setDonorPhone(e.target.value)}
                       placeholder="+212 6..."
-                      className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE]"
+                      className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs bg-[#FAF8F5]"
                     />
                   </div>
                 </div>
@@ -423,7 +423,7 @@ export function OnlineDonationHub({ config, locale }: OnlineDonationHubProps) {
                         ? 'مثال: دعماً لمواهب مسرح الشباب في إقليم...'
                         : 'e.g. In support of youth theatre...'
                     }
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE]"
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs bg-[#FAF8F5]"
                   />
                 </div>
               </div>
@@ -551,7 +551,7 @@ export function OnlineDonationHub({ config, locale }: OnlineDonationHubProps) {
           </div>
 
           {/* Instructions Box */}
-          <div className="p-5 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6] space-y-2">
+          <div className="p-5 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6] space-y-2">
             <span className="text-2xs font-extrabold uppercase text-[#231f20] block">
               {isAr ? 'إرشادات إتمام التحويل البنكي والتسليم:' : 'Bank Transfer Guidelines:'}
             </span>

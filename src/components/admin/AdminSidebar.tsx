@@ -190,7 +190,7 @@ export function AdminSidebar({
                           className={`group flex items-center justify-between px-2.5 py-2 rounded-xl text-xs font-semibold transition-all ${
                             active
                               ? 'bg-[#d2a82b] text-white shadow-xs border-s-4 border-[#bd3227]'
-                              : 'text-[#FEF6CC] hover:text-white hover:bg-[#231f20] active:scale-98'
+                              : 'text-[#E2DED6] hover:text-white hover:bg-[#231f20] active:scale-98'
                           }`}
                         >
                           <div className="flex items-center gap-2.5 min-w-0">

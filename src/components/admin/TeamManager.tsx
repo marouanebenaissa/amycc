@@ -418,7 +418,7 @@ export function TeamManager({ initialConfig, defaultMembers = [] }: TeamManagerP
               className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all ${
                 selectedCategory === cat.key
                   ? 'bg-[#231f20] text-white shadow-xs'
-                  : 'bg-[#F5F3EE] text-[#5C5A55] hover:bg-[#FEF6CC]'
+                  : 'bg-[#FAF8F5] text-[#5C5A55] hover:bg-[#F4EFE6]'
               }`}
             >
               {cat.labelAr}
@@ -517,7 +517,7 @@ export function TeamManager({ initialConfig, defaultMembers = [] }: TeamManagerP
                           />
                         </div>
                       ) : (
-                        <div className="w-16 h-16 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6] flex items-center justify-center text-3xl shadow-2xs">
+                        <div className="w-16 h-16 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6] flex items-center justify-center text-3xl shadow-2xs">
                           {member.icon || '👤'}
                         </div>
                       )}
@@ -563,7 +563,7 @@ export function TeamManager({ initialConfig, defaultMembers = [] }: TeamManagerP
                       type="button"
                       disabled={globalIndex === 0}
                       onClick={() => moveMember(globalIndex, 'up')}
-                      className="w-6 h-6 rounded-md bg-[#F5F3EE] hover:bg-[#FEF6CC] text-[#231f20] disabled:opacity-30 disabled:cursor-not-allowed flex items-center justify-center text-3xs font-bold transition-colors"
+                      className="w-6 h-6 rounded-md bg-[#FAF8F5] hover:bg-[#F4EFE6] text-[#231f20] disabled:opacity-30 disabled:cursor-not-allowed flex items-center justify-center text-3xs font-bold transition-colors"
                       title="تحريك لأعلى"
                     >
                       ▲
@@ -572,7 +572,7 @@ export function TeamManager({ initialConfig, defaultMembers = [] }: TeamManagerP
                       type="button"
                       disabled={globalIndex === config.members.length - 1}
                       onClick={() => moveMember(globalIndex, 'down')}
-                      className="w-6 h-6 rounded-md bg-[#F5F3EE] hover:bg-[#FEF6CC] text-[#231f20] disabled:opacity-30 disabled:cursor-not-allowed flex items-center justify-center text-3xs font-bold transition-colors"
+                      className="w-6 h-6 rounded-md bg-[#FAF8F5] hover:bg-[#F4EFE6] text-[#231f20] disabled:opacity-30 disabled:cursor-not-allowed flex items-center justify-center text-3xs font-bold transition-colors"
                       title="تحريك لأسفل"
                     >
                       ▼
@@ -596,7 +596,7 @@ export function TeamManager({ initialConfig, defaultMembers = [] }: TeamManagerP
 
                 {/* Duties Preview */}
                 {member.dutiesAr && member.dutiesAr.length > 0 && (
-                  <div className="space-y-1 pt-2 border-t border-[#FEF6CC]">
+                  <div className="space-y-1 pt-2 border-t border-[#E5E0D6]">
                     <span className="text-3xs font-bold text-[#5C5A55] block">المهام الأساسية:</span>
                     <ul className="text-3xs text-[#5C5A55] space-y-0.5">
                       {member.dutiesAr.slice(0, 2).map((duty, dIdx) => (
@@ -616,7 +616,7 @@ export function TeamManager({ initialConfig, defaultMembers = [] }: TeamManagerP
               </div>
 
               {/* Card Footer Actions */}
-              <div className="pt-3 mt-4 border-t border-[#FEF6CC] flex items-center justify-between text-xs gap-2">
+              <div className="pt-3 mt-4 border-t border-[#E5E0D6] flex items-center justify-between text-xs gap-2">
                 <div className="flex items-center gap-1.5 flex-wrap">
                   <button
                     type="button"
@@ -634,7 +634,7 @@ export function TeamManager({ initialConfig, defaultMembers = [] }: TeamManagerP
                   <button
                     type="button"
                     onClick={() => handleEdit(member)}
-                    className="px-2.5 py-1 rounded-lg bg-[#F5F3EE] hover:bg-[#231f20] hover:text-white text-[#231f20] text-3xs font-bold transition-all cursor-pointer"
+                    className="px-2.5 py-1 rounded-lg bg-[#FAF8F5] hover:bg-[#231f20] hover:text-white text-[#231f20] text-3xs font-bold transition-all cursor-pointer"
                   >
                     ✏️ تعديل
                   </button>
@@ -684,7 +684,7 @@ export function TeamManager({ initialConfig, defaultMembers = [] }: TeamManagerP
       )}
 
       {/* Footer Tools */}
-      <div className="flex items-center justify-between p-4 bg-[#F5F3EE] rounded-2xl border border-[#e5e0d6] text-xs">
+      <div className="flex items-center justify-between p-4 bg-[#FAF8F5] rounded-2xl border border-[#e5e0d6] text-xs">
         <span className="text-3xs text-[#5C5A55]">
           الهيكلة الرسمية متوافقة مع مقتضيات الظهير الشريف رقم 1.58.376 المنظم للجمعيات بالمملكة المغربية.
         </span>
@@ -721,21 +721,21 @@ export function TeamManager({ initialConfig, defaultMembers = [] }: TeamManagerP
               <button
                 type="button"
                 onClick={() => setIsModalOpen(false)}
-                className="w-8 h-8 rounded-full bg-[#F5F3EE] hover:bg-[#FEF6CC] text-[#231f20] flex items-center justify-center font-bold text-sm"
+                className="w-8 h-8 rounded-full bg-[#FAF8F5] hover:bg-[#F4EFE6] text-[#231f20] flex items-center justify-center font-bold text-sm"
               >
                 ✕
               </button>
             </div>
 
             {/* Modal Navigation Tabs */}
-            <div className="px-6 pt-4 pb-2 border-b border-[#FEF6CC] flex items-center gap-2">
+            <div className="px-6 pt-4 pb-2 border-b border-[#E5E0D6] flex items-center gap-2">
               <button
                 type="button"
                 onClick={() => setModalTab('info')}
                 className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all ${
                   modalTab === 'info'
                     ? 'bg-[#231f20] text-white shadow-xs'
-                    : 'bg-[#F5F3EE] text-[#5C5A55] hover:bg-[#FEF6CC]'
+                    : 'bg-[#FAF8F5] text-[#5C5A55] hover:bg-[#F4EFE6]'
                 }`}
               >
                 1. البيانات الأساسية والرتبة
@@ -746,7 +746,7 @@ export function TeamManager({ initialConfig, defaultMembers = [] }: TeamManagerP
                 className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 ${
                   modalTab === 'photo'
                     ? 'bg-[#231f20] text-white shadow-xs'
-                    : 'bg-[#F5F3EE] text-[#5C5A55] hover:bg-[#FEF6CC]'
+                    : 'bg-[#FAF8F5] text-[#5C5A55] hover:bg-[#F4EFE6]'
                 }`}
               >
                 <span>2. الصورة الشخصية</span>
@@ -758,7 +758,7 @@ export function TeamManager({ initialConfig, defaultMembers = [] }: TeamManagerP
                 className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all ${
                   modalTab === 'duties'
                     ? 'bg-[#231f20] text-white shadow-xs'
-                    : 'bg-[#F5F3EE] text-[#5C5A55] hover:bg-[#FEF6CC]'
+                    : 'bg-[#FAF8F5] text-[#5C5A55] hover:bg-[#F4EFE6]'
                 }`}
               >
                 3. المهام والمسؤوليات ({modalForm.dutiesAr?.length || 0})
@@ -788,7 +788,7 @@ export function TeamManager({ initialConfig, defaultMembers = [] }: TeamManagerP
                           className={`p-3 rounded-xl border text-start transition-all ${
                             modalForm.category === cat.key
                               ? 'border-[#231f20] bg-[#231f20]/5 ring-1 ring-[#231f20]'
-                              : 'border-[#e5e0d6] hover:bg-[#F5F3EE]'
+                              : 'border-[#e5e0d6] hover:bg-[#FAF8F5]'
                           }`}
                         >
                           <span className="block text-xs font-bold text-[#231f20]">{cat.label}</span>
@@ -799,7 +799,7 @@ export function TeamManager({ initialConfig, defaultMembers = [] }: TeamManagerP
                   </div>
 
                   {/* Language Selector for Text Fields */}
-                  <div className="flex items-center justify-between pt-2 border-t border-[#FEF6CC]">
+                  <div className="flex items-center justify-between pt-2 border-t border-[#E5E0D6]">
                     <span className="text-3xs font-bold text-[#5C5A55]">لغة الإدخال الحالية:</span>
                     <div className="flex items-center gap-1">
                       {(['ar', 'fr', 'en'] as const).map((lng) => (
@@ -810,7 +810,7 @@ export function TeamManager({ initialConfig, defaultMembers = [] }: TeamManagerP
                           className={`px-2.5 py-1 rounded-lg text-3xs font-bold uppercase transition-all ${
                             langTab === lng
                               ? 'bg-[#bd3227] text-white'
-                              : 'bg-[#F5F3EE] text-[#5C5A55] hover:bg-[#FEF6CC]'
+                              : 'bg-[#FAF8F5] text-[#5C5A55] hover:bg-[#F4EFE6]'
                           }`}
                         >
                           {lng}
@@ -821,7 +821,7 @@ export function TeamManager({ initialConfig, defaultMembers = [] }: TeamManagerP
 
                   {/* Trilingual Name & Role */}
                   {langTab === 'ar' && (
-                    <div className="space-y-3 p-4 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6]">
+                    <div className="space-y-3 p-4 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6]">
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         <div>
                           <label className="block text-xs font-bold text-[#231f20] mb-1">
@@ -893,7 +893,7 @@ export function TeamManager({ initialConfig, defaultMembers = [] }: TeamManagerP
                   )}
 
                   {langTab === 'fr' && (
-                    <div className="space-y-3 p-4 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6]">
+                    <div className="space-y-3 p-4 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6]">
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         <div>
                           <label className="block text-xs font-bold text-[#231f20] mb-1">
@@ -964,7 +964,7 @@ export function TeamManager({ initialConfig, defaultMembers = [] }: TeamManagerP
                   )}
 
                   {langTab === 'en' && (
-                    <div className="space-y-3 p-4 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6]">
+                    <div className="space-y-3 p-4 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6]">
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         <div>
                           <label className="block text-xs font-bold text-[#231f20] mb-1">
@@ -1053,7 +1053,7 @@ export function TeamManager({ initialConfig, defaultMembers = [] }: TeamManagerP
                               key={ico}
                               type="button"
                               onClick={() => setModalForm((prev) => ({ ...prev, icon: ico }))}
-                              className="w-7 h-7 rounded-lg bg-[#F5F3EE] hover:bg-[#FEF6CC] flex items-center justify-center text-sm"
+                              className="w-7 h-7 rounded-lg bg-[#FAF8F5] hover:bg-[#F4EFE6] flex items-center justify-center text-sm"
                             >
                               {ico}
                             </button>
@@ -1092,7 +1092,7 @@ export function TeamManager({ initialConfig, defaultMembers = [] }: TeamManagerP
               {/* TAB 2: PHOTO UPLOAD */}
               {modalTab === 'photo' && (
                 <div className="space-y-4">
-                  <div className="p-4 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6] space-y-4">
+                  <div className="p-4 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6] space-y-4">
                     <span className="text-xs font-bold text-[#231f20] block">
                       صورة العضو الشخصية أو الرسمية
                     </span>
@@ -1113,7 +1113,7 @@ export function TeamManager({ initialConfig, defaultMembers = [] }: TeamManagerP
                           />
                         </div>
                       ) : (
-                        <div className="w-24 h-24 rounded-2xl bg-[#F5F3EE] border border-dashed border-[#5C5A55] flex flex-col items-center justify-center text-[#5C5A55] shrink-0">
+                        <div className="w-24 h-24 rounded-2xl bg-[#FAF8F5] border border-dashed border-[#5C5A55] flex flex-col items-center justify-center text-[#5C5A55] shrink-0">
                           <span className="text-2xl mb-1">👤</span>
                           <span className="text-3xs font-bold">بدون صورة</span>
                         </div>
@@ -1200,7 +1200,7 @@ export function TeamManager({ initialConfig, defaultMembers = [] }: TeamManagerP
               {/* TAB 3: DUTIES & RESPONSIBILITIES */}
               {modalTab === 'duties' && (
                 <div className="space-y-4">
-                  <div className="p-4 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6] space-y-4">
+                  <div className="p-4 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6] space-y-4">
                     <div className="flex items-center justify-between">
                       <span className="text-xs font-bold text-[#231f20] block">
                         قائمة المهام والمسؤوليات النظامية
@@ -1412,7 +1412,7 @@ export function TeamManager({ initialConfig, defaultMembers = [] }: TeamManagerP
               )}
 
               {/* Status Active Toggle */}
-              <div className="flex items-center justify-between p-3 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6]">
+              <div className="flex items-center justify-between p-3 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6]">
                 <div>
                   <span className="block text-xs font-bold text-[#231f20]">تفعيل ظهور العضو في الموقع</span>
                   <span className="block text-3xs text-[#5C5A55]">عند التعطيل، يبقى العضو محفوظاً في لوحة التحكم ويختفي من الصفحة العامة.</span>
@@ -1433,7 +1433,7 @@ export function TeamManager({ initialConfig, defaultMembers = [] }: TeamManagerP
                 <button
                   type="button"
                   onClick={() => setIsModalOpen(false)}
-                  className="px-4 py-2 rounded-xl bg-[#F5F3EE] hover:bg-[#FEF6CC] text-[#231f20] text-xs font-bold transition-colors cursor-pointer"
+                  className="px-4 py-2 rounded-xl bg-[#FAF8F5] hover:bg-[#F4EFE6] text-[#231f20] text-xs font-bold transition-colors cursor-pointer"
                 >
                   إلغاء
                 </button>

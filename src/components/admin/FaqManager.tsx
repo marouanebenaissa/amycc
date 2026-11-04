@@ -244,7 +244,7 @@ export function FaqManager({ initialItems, defaultItems = [] }: FaqManagerProps)
             <button
               type="button"
               onClick={handleRestoreDefaults}
-              className="px-3.5 py-2.5 rounded-xl text-3xs font-bold text-[#5C5A55] bg-[#F5F3EE] border border-[#e5e0d6] hover:bg-[#FEF6CC] active:scale-98 transition-all cursor-pointer"
+              className="px-3.5 py-2.5 rounded-xl text-3xs font-bold text-[#5C5A55] bg-[#FAF8F5] border border-[#e5e0d6] hover:bg-[#F4EFE6] active:scale-98 transition-all cursor-pointer"
               title="استعادة الأسئلة الافتراضية الرسمية"
             >
               استعادة الافتراضي
@@ -279,20 +279,20 @@ export function FaqManager({ initialItems, defaultItems = [] }: FaqManagerProps)
         </div>
 
         {/* Stats Row */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-3 border-t border-[#FEF6CC]">
-          <div className="p-3 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6]">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-3 border-t border-[#E5E0D6]">
+          <div className="p-3 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6]">
             <span className="text-3xs font-bold text-[#5C5A55] block">إجمالي الأسئلة</span>
             <span className="text-xl font-black text-[#231f20]">{totalCount}</span>
           </div>
-          <div className="p-3 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6]">
+          <div className="p-3 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6]">
             <span className="text-3xs font-bold text-[#5C5A55] block">معروض في الرئيسية</span>
             <span className="text-xl font-black text-[#231f20]">{homeCount}</span>
           </div>
-          <div className="p-3 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6]">
+          <div className="p-3 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6]">
             <span className="text-3xs font-bold text-[#5C5A55] block">منشور ومرئي</span>
             <span className="text-xl font-black text-emerald-700">{publishedCount}</span>
           </div>
-          <div className="p-3 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6]">
+          <div className="p-3 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6]">
             <span className="text-3xs font-bold text-[#5C5A55] block">حالة التعديلات</span>
             <span className={`text-xs font-bold block mt-1 ${hasUnsavedChanges ? 'text-[#bd3227]' : 'text-emerald-700'}`}>
               {hasUnsavedChanges ? '⚠️ تعديلات غير محفوظة' : '✓ كافة التغييرات محفوظة'}
@@ -342,7 +342,7 @@ export function FaqManager({ initialItems, defaultItems = [] }: FaqManagerProps)
             className={`px-3 py-1.5 rounded-xl text-3xs font-bold transition-all cursor-pointer ${
               selectedCategory === 'all'
                 ? 'bg-[#231f20] text-white shadow-2xs'
-                : 'bg-[#F5F3EE] text-[#5C5A55] hover:bg-[#FEF6CC]'
+                : 'bg-[#FAF8F5] text-[#5C5A55] hover:bg-[#F4EFE6]'
             }`}
           >
             الكل ({items.length})
@@ -357,7 +357,7 @@ export function FaqManager({ initialItems, defaultItems = [] }: FaqManagerProps)
                 className={`px-3 py-1.5 rounded-xl text-3xs font-bold transition-all cursor-pointer ${
                   selectedCategory === catKey
                     ? 'bg-[#231f20] text-white shadow-2xs'
-                    : 'bg-[#F5F3EE] text-[#5C5A55] hover:bg-[#FEF6CC]'
+                    : 'bg-[#FAF8F5] text-[#5C5A55] hover:bg-[#F4EFE6]'
                 }`}
               >
                 {labelAr} ({count})
@@ -393,7 +393,7 @@ export function FaqManager({ initialItems, defaultItems = [] }: FaqManagerProps)
                         type="button"
                         onClick={() => moveItem(items.findIndex((i) => i.id === item.id), 'up')}
                         disabled={items.findIndex((i) => i.id === item.id) === 0}
-                        className="w-6 h-6 rounded-md bg-[#F5F3EE] hover:bg-[#e5e0d6] disabled:opacity-30 disabled:pointer-events-none flex items-center justify-center text-3xs font-bold text-[#231f20] cursor-pointer"
+                        className="w-6 h-6 rounded-md bg-[#FAF8F5] hover:bg-[#e5e0d6] disabled:opacity-30 disabled:pointer-events-none flex items-center justify-center text-3xs font-bold text-[#231f20] cursor-pointer"
                         title="تحريك لأعلى"
                       >
                         ▲
@@ -402,14 +402,14 @@ export function FaqManager({ initialItems, defaultItems = [] }: FaqManagerProps)
                         type="button"
                         onClick={() => moveItem(items.findIndex((i) => i.id === item.id), 'down')}
                         disabled={items.findIndex((i) => i.id === item.id) === items.length - 1}
-                        className="w-6 h-6 rounded-md bg-[#F5F3EE] hover:bg-[#e5e0d6] disabled:opacity-30 disabled:pointer-events-none flex items-center justify-center text-3xs font-bold text-[#231f20] cursor-pointer"
+                        className="w-6 h-6 rounded-md bg-[#FAF8F5] hover:bg-[#e5e0d6] disabled:opacity-30 disabled:pointer-events-none flex items-center justify-center text-3xs font-bold text-[#231f20] cursor-pointer"
                         title="تحريك لأسفل"
                       >
                         ▼
                       </button>
                     </div>
 
-                    <span className="w-8 h-8 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] flex items-center justify-center text-xs font-black text-[#231f20]">
+                    <span className="w-8 h-8 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6] flex items-center justify-center text-xs font-black text-[#231f20]">
                       #{item.order}
                     </span>
                   </div>
@@ -475,7 +475,7 @@ export function FaqManager({ initialItems, defaultItems = [] }: FaqManagerProps)
                     <button
                       type="button"
                       onClick={() => handleEdit(item)}
-                      className="px-3 py-1.5 rounded-xl text-3xs font-bold bg-[#F5F3EE] border border-[#e5e0d6] hover:bg-[#231f20] hover:text-white transition-all text-[#231f20] cursor-pointer inline-flex items-center gap-1"
+                      className="px-3 py-1.5 rounded-xl text-3xs font-bold bg-[#FAF8F5] border border-[#e5e0d6] hover:bg-[#231f20] hover:text-white transition-all text-[#231f20] cursor-pointer inline-flex items-center gap-1"
                     >
                       <span>✏️</span>
                       <span>تعديل</span>
@@ -502,7 +502,7 @@ export function FaqManager({ initialItems, defaultItems = [] }: FaqManagerProps)
       {isModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs overflow-y-auto">
           <div className="bg-white rounded-3xl border border-[#e5e0d6] w-full max-w-2xl max-h-[90vh] overflow-y-auto p-6 shadow-2xl space-y-5 my-8">
-            <div className="flex items-center justify-between pb-3 border-b border-[#FEF6CC]">
+            <div className="flex items-center justify-between pb-3 border-b border-[#E5E0D6]">
               <div className="flex items-center gap-2">
                 <span className="text-xl">❓</span>
                 <h3 className="text-base font-black text-[#231f20]">
@@ -512,7 +512,7 @@ export function FaqManager({ initialItems, defaultItems = [] }: FaqManagerProps)
               <button
                 type="button"
                 onClick={() => setIsModalOpen(false)}
-                className="w-8 h-8 rounded-full bg-[#F5F3EE] text-[#5C5A55] hover:text-[#231f20] flex items-center justify-center font-bold text-sm cursor-pointer"
+                className="w-8 h-8 rounded-full bg-[#FAF8F5] text-[#5C5A55] hover:text-[#231f20] flex items-center justify-center font-bold text-sm cursor-pointer"
               >
                 ✕
               </button>
@@ -520,7 +520,7 @@ export function FaqManager({ initialItems, defaultItems = [] }: FaqManagerProps)
 
             <form onSubmit={handleModalSave} className="space-y-4">
               {/* Category & Visibility Settings */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 p-3.5 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6]">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 p-3.5 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6]">
                 <div>
                   <label className="block text-3xs font-bold text-[#5C5A55] mb-1">
                     التصنيف (Category)
@@ -609,7 +609,7 @@ export function FaqManager({ initialItems, defaultItems = [] }: FaqManagerProps)
               </div>
 
               {/* French (Optional) */}
-              <div className="space-y-3 p-4 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6]">
+              <div className="space-y-3 p-4 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6]">
                 <div className="flex items-center gap-1.5 text-xs font-bold text-[#231f20]">
                   <span>🇫🇷</span>
                   <span>الترجمة بالفرنسية (Français — اختياري)</span>
@@ -643,7 +643,7 @@ export function FaqManager({ initialItems, defaultItems = [] }: FaqManagerProps)
               </div>
 
               {/* English (Optional) */}
-              <div className="space-y-3 p-4 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6]">
+              <div className="space-y-3 p-4 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6]">
                 <div className="flex items-center gap-1.5 text-xs font-bold text-[#231f20]">
                   <span>🇬🇧</span>
                   <span>الترجمة بالإنجليزية (English — اختياري)</span>
@@ -677,11 +677,11 @@ export function FaqManager({ initialItems, defaultItems = [] }: FaqManagerProps)
               </div>
 
               {/* Modal Buttons */}
-              <div className="flex items-center justify-end gap-2.5 pt-3 border-t border-[#FEF6CC]">
+              <div className="flex items-center justify-end gap-2.5 pt-3 border-t border-[#E5E0D6]">
                 <button
                   type="button"
                   onClick={() => setIsModalOpen(false)}
-                  className="px-4 py-2 rounded-xl text-xs font-bold text-[#5C5A55] bg-[#F5F3EE] hover:bg-[#FEF6CC] transition-colors cursor-pointer"
+                  className="px-4 py-2 rounded-xl text-xs font-bold text-[#5C5A55] bg-[#FAF8F5] hover:bg-[#F4EFE6] transition-colors cursor-pointer"
                 >
                   إلغاء
                 </button>

@@ -214,7 +214,7 @@ export function HeroImageUploader({
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 w-full">
                 <div className="flex items-center gap-2">
                   <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                  <span className="text-3xs text-[#FEF6CC] font-medium bg-[#231f20]/80 px-2.5 py-1 rounded-md border border-white/10 w-fit">
+                  <span className="text-3xs text-[#E2DED6] font-medium bg-[#231f20]/80 px-2.5 py-1 rounded-md border border-white/10 w-fit">
                     معاينة حية للصورة المختارة (Cinematic Preview)
                   </span>
                 </div>
@@ -232,7 +232,7 @@ export function HeroImageUploader({
               </svg>
             </div>
             <span className="text-xs font-bold text-white">لا توجد صورة خلفية (تم حذف الصورة)</span>
-            <span className="text-3xs text-[#FEF6CC]/80 mt-1 max-w-sm">
+            <span className="text-3xs text-[#E2DED6]/80 mt-1 max-w-sm">
               سيتم عرض الخلفية الهندسية المغربية الداكنة الفاخرة بدلاً من الصورة، أو يمكنك استيراد صورة جديدة
             </span>
           </div>
@@ -240,7 +240,7 @@ export function HeroImageUploader({
       </div>
 
       {/* Helpful Instructions */}
-      <div className="p-3.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-3xs space-y-1.5 text-[#5C5A55]">
+      <div className="p-3.5 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6] text-3xs space-y-1.5 text-[#5C5A55]">
         <div className="font-bold text-[#231f20] flex items-center gap-1.5">
           <span>💡 خيارات إدارة الصورة:</span>
         </div>

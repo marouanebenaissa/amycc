@@ -165,7 +165,7 @@ export function TeamHeroManager({
 
       {/* Section 1: Hero Image Upload & Live Preview */}
       <div className="p-6 sm:p-8 rounded-3xl bg-white border border-[#e5e0d6] shadow-subtle space-y-6">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#FEF6CC]">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#E5E0D6]">
           <div>
             <h2 className="text-xl font-black text-[#231f20] tracking-tight flex items-center gap-2">
               <span>🖼️</span>
@@ -201,7 +201,7 @@ export function TeamHeroManager({
             <button
               type="button"
               onClick={handleResetToDefaults}
-              className="px-3.5 py-2 rounded-xl bg-[#F5F3EE] hover:bg-[#FEF6CC] text-[#5C5A55] text-xs font-bold border border-[#e5e0d6] transition-all cursor-pointer"
+              className="px-3.5 py-2 rounded-xl bg-[#FAF8F5] hover:bg-[#F4EFE6] text-[#5C5A55] text-xs font-bold border border-[#e5e0d6] transition-all cursor-pointer"
             >
               ↺ استعادة الافتراضي
             </button>
@@ -210,7 +210,7 @@ export function TeamHeroManager({
 
         {/* Visibility Toggle & Image URL Input */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
-          <label className="flex items-center gap-3 p-3.5 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6] cursor-pointer hover:bg-[#FEF6CC] transition-colors">
+          <label className="flex items-center gap-3 p-3.5 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6] cursor-pointer hover:bg-[#F4EFE6] transition-colors">
             <input
               type="checkbox"
               checked={hero.showImage !== false}
@@ -232,7 +232,7 @@ export function TeamHeroManager({
               value={hero.imageUrl || ''}
               onChange={(e) => setHero((prev) => ({ ...prev, imageUrl: e.target.value }))}
               placeholder="/images/youth-in-action.jpg أو رابط خارجي..."
-              className="w-full px-3.5 py-2 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
+              className="w-full px-3.5 py-2 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
             />
           </div>
         </div>
@@ -305,7 +305,7 @@ export function TeamHeroManager({
 
               {/* Description preview */}
               <p className={`text-xs sm:text-sm line-clamp-3 leading-relaxed max-w-xl mx-auto ${
-                hero.imageUrl && hero.showImage !== false ? 'text-[#FEF6CC]/90' : 'text-[#5C5A55]'
+                hero.imageUrl && hero.showImage !== false ? 'text-[#E2DED6]/90' : 'text-[#5C5A55]'
               }`}>
                 {hero.descriptionAr || defaultHero.descriptionAr}
               </p>
@@ -316,7 +316,7 @@ export function TeamHeroManager({
 
       {/* Section 2: Trilingual Text Customization */}
       <div className="p-6 sm:p-8 rounded-3xl bg-white border border-[#e5e0d6] shadow-subtle space-y-6">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#FEF6CC]">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#E5E0D6]">
           <div>
             <h2 className="text-xl font-black text-[#231f20] tracking-tight flex items-center gap-2">
               <span>✍️</span>
@@ -328,7 +328,7 @@ export function TeamHeroManager({
           </div>
 
           {/* Language Switcher Tabs */}
-          <div className="flex items-center gap-1.5 p-1 bg-[#F5F3EE] rounded-xl border border-[#e5e0d6]">
+          <div className="flex items-center gap-1.5 p-1 bg-[#FAF8F5] rounded-xl border border-[#e5e0d6]">
             <button
               type="button"
               onClick={() => setActiveLangTab('ar')}
@@ -379,7 +379,7 @@ export function TeamHeroManager({
                     value={hero.badge1Ar ?? ''}
                     onChange={(e) => setHero((prev) => ({ ...prev, badge1Ar: e.target.value }))}
                     placeholder={defaultHero.badge1Ar}
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
                   />
                 </div>
                 <div>
@@ -391,7 +391,7 @@ export function TeamHeroManager({
                     value={hero.badge2Ar ?? ''}
                     onChange={(e) => setHero((prev) => ({ ...prev, badge2Ar: e.target.value }))}
                     placeholder={defaultHero.badge2Ar}
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
                   />
                 </div>
               </div>
@@ -405,7 +405,7 @@ export function TeamHeroManager({
                   value={hero.titleAr ?? ''}
                   onChange={(e) => setHero((prev) => ({ ...prev, titleAr: e.target.value }))}
                   placeholder={defaultHero.titleAr}
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
                 />
               </div>
 
@@ -418,7 +418,7 @@ export function TeamHeroManager({
                   value={hero.descriptionAr ?? ''}
                   onChange={(e) => setHero((prev) => ({ ...prev, descriptionAr: e.target.value }))}
                   placeholder={defaultHero.descriptionAr}
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
                 />
               </div>
             </>
@@ -436,7 +436,7 @@ export function TeamHeroManager({
                     value={hero.badge1Fr ?? ''}
                     onChange={(e) => setHero((prev) => ({ ...prev, badge1Fr: e.target.value }))}
                     placeholder={defaultHero.badge1Fr}
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
                   />
                 </div>
                 <div>
@@ -448,7 +448,7 @@ export function TeamHeroManager({
                     value={hero.badge2Fr ?? ''}
                     onChange={(e) => setHero((prev) => ({ ...prev, badge2Fr: e.target.value }))}
                     placeholder={defaultHero.badge2Fr}
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
                   />
                 </div>
               </div>
@@ -462,7 +462,7 @@ export function TeamHeroManager({
                   value={hero.titleFr ?? ''}
                   onChange={(e) => setHero((prev) => ({ ...prev, titleFr: e.target.value }))}
                   placeholder={defaultHero.titleFr}
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
                 />
               </div>
 
@@ -475,7 +475,7 @@ export function TeamHeroManager({
                   value={hero.descriptionFr ?? ''}
                   onChange={(e) => setHero((prev) => ({ ...prev, descriptionFr: e.target.value }))}
                   placeholder={defaultHero.descriptionFr}
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
                 />
               </div>
             </>
@@ -493,7 +493,7 @@ export function TeamHeroManager({
                     value={hero.badge1En ?? ''}
                     onChange={(e) => setHero((prev) => ({ ...prev, badge1En: e.target.value }))}
                     placeholder={defaultHero.badge1En}
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
                   />
                 </div>
                 <div>
@@ -505,7 +505,7 @@ export function TeamHeroManager({
                     value={hero.badge2En ?? ''}
                     onChange={(e) => setHero((prev) => ({ ...prev, badge2En: e.target.value }))}
                     placeholder={defaultHero.badge2En}
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
                   />
                 </div>
               </div>
@@ -519,7 +519,7 @@ export function TeamHeroManager({
                   value={hero.titleEn ?? ''}
                   onChange={(e) => setHero((prev) => ({ ...prev, titleEn: e.target.value }))}
                   placeholder={defaultHero.titleEn}
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
                 />
               </div>
 
@@ -532,7 +532,7 @@ export function TeamHeroManager({
                   value={hero.descriptionEn ?? ''}
                   onChange={(e) => setHero((prev) => ({ ...prev, descriptionEn: e.target.value }))}
                   placeholder={defaultHero.descriptionEn}
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6] text-xs text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
                 />
               </div>
             </>

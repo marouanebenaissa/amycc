@@ -65,7 +65,7 @@ export function RichTextEditor({
       dir={dir}
     >
       {/* Toolbar */}
-      <div className="flex flex-wrap items-center gap-1 px-3 py-2 bg-[#F5F3EE] border-b border-[#e5e0d6]">
+      <div className="flex flex-wrap items-center gap-1 px-3 py-2 bg-[#FAF8F5] border-b border-[#e5e0d6]">
         <ToolbarButton
           onClick={() => editor?.chain().focus().toggleBold().run()}
           active={editor?.isActive('bold')}
@@ -155,7 +155,7 @@ export function RichTextEditor({
       <EditorContent editor={editor} />
 
       {/* Character count + hidden input */}
-      <div className="px-3 py-1.5 bg-[#F5F3EE] border-t border-[#FEF6CC] flex justify-end">
+      <div className="px-3 py-1.5 bg-[#FAF8F5] border-t border-[#E5E0D6] flex justify-end">
         <span className="text-3xs text-[#5C5A55] font-mono">{count} characters</span>
       </div>
 
@@ -187,7 +187,7 @@ function ToolbarButton({
         'px-2 py-1 rounded text-xs font-bold transition-all',
         active
           ? 'bg-[#231f20] text-white'
-          : 'text-[#5C5A55] hover:bg-[#FEF6CC] disabled:opacity-40 disabled:cursor-not-allowed',
+          : 'text-[#5C5A55] hover:bg-[#F4EFE6] disabled:opacity-40 disabled:cursor-not-allowed',
       ].join(' ')}
     >
       {children}

@@ -326,7 +326,7 @@ export default async function AdminSettingsPage() {
             HERO SECTION CONTROL (Full-Bleed Morocco88 Style)
             ============================================================ */}
         <div className="bg-white p-8 rounded-2xl border border-[#e5e0d6] shadow-2xs space-y-6">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-[#FEF6CC]">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-[#E5E0D6]">
             <div>
               <div className="flex items-center gap-2">
                 <span className="text-lg">🎬</span>
@@ -350,7 +350,7 @@ export default async function AdminSettingsPage() {
           />
 
           {/* Eyebrow Tag (Golden Tag) */}
-          <div className="space-y-4 pt-2 border-t border-[#FEF6CC]">
+          <div className="space-y-4 pt-2 border-t border-[#E5E0D6]">
             <h3 className="text-2xs font-bold text-[#5C5A55] uppercase tracking-wider">
               الشارة التمهيدية الذهبية (Eyebrow Tag — e.g. MUSIC FOR IMPACT)
             </h3>
@@ -389,7 +389,7 @@ export default async function AdminSettingsPage() {
           </div>
 
           {/* Main Headline */}
-          <div className="space-y-4 pt-2 border-t border-[#FEF6CC]">
+          <div className="space-y-4 pt-2 border-t border-[#E5E0D6]">
             <h3 className="text-2xs font-bold text-[#5C5A55] uppercase tracking-wider">
               العنوان الرئيسي الكبير (Grand Main Headline)
             </h3>
@@ -430,7 +430,7 @@ export default async function AdminSettingsPage() {
           </div>
 
           {/* Description Paragraph */}
-          <div className="space-y-4 pt-2 border-t border-[#FEF6CC]">
+          <div className="space-y-4 pt-2 border-t border-[#E5E0D6]">
             <h3 className="text-2xs font-bold text-[#5C5A55] uppercase tracking-wider">
               النص التعريفي والمهمة (Mission & Story Description)
             </h3>
@@ -468,12 +468,12 @@ export default async function AdminSettingsPage() {
           </div>
 
           {/* CTA Buttons */}
-          <div className="space-y-4 pt-2 border-t border-[#FEF6CC]">
+          <div className="space-y-4 pt-2 border-t border-[#E5E0D6]">
             <h3 className="text-2xs font-bold text-[#5C5A55] uppercase tracking-wider">
               أزرار الدعوة للعمل (CTA Buttons)
             </h3>
             {/* Primary Button */}
-            <div className="bg-[#F5F3EE] p-4 rounded-xl border border-[#FEF6CC] space-y-3">
+            <div className="bg-[#FAF8F5] p-4 rounded-xl border border-[#E5E0D6] space-y-3">
               <span className="text-2xs font-black text-[#231f20] block">
                 الزر الرئيسي (الزر الذهبي المدور — مثل See our impact)
               </span>
@@ -518,7 +518,7 @@ export default async function AdminSettingsPage() {
             </div>
 
             {/* Secondary Button */}
-            <div className="bg-[#F5F3EE] p-4 rounded-xl border border-[#FEF6CC] space-y-3">
+            <div className="bg-[#FAF8F5] p-4 rounded-xl border border-[#E5E0D6] space-y-3">
               <span className="text-2xs font-black text-[#231f20] block">
                 الزر الثانوي (الزر الشفاف بحدود بيضاء — مثل Partner with us)
               </span>
@@ -564,7 +564,7 @@ export default async function AdminSettingsPage() {
           </div>
 
           {/* Bottom Sub-strip */}
-          <div className="space-y-4 pt-2 border-t border-[#FEF6CC]">
+          <div className="space-y-4 pt-2 border-t border-[#E5E0D6]">
             <h3 className="text-2xs font-bold text-[#5C5A55] uppercase tracking-wider">
               الشريط السفلي للمصداقية (Bottom Institutional Sub-strip)
             </h3>
@@ -604,7 +604,7 @@ export default async function AdminSettingsPage() {
 
         {/* Flagship Program Spotlight Control (البرنامج الرائد ومبادرة الاستقطاب) */}
         <div className="bg-white p-8 rounded-2xl border border-[#e5e0d6] shadow-2xs space-y-6">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-[#FEF6CC]">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-[#E5E0D6]">
             <div>
               <div className="flex items-center gap-2">
                 <span className="text-base">⭐</span>
@@ -633,7 +633,7 @@ export default async function AdminSettingsPage() {
           </div>
 
           {/* Toggle Enable / Disable */}
-          <div className="p-4 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] flex items-center justify-between">
+          <div className="p-4 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6] flex items-center justify-between">
             <div>
               <label htmlFor="flagshipEnabled" className="text-xs font-bold text-[#231f20] block cursor-pointer">
                 عرض قسم البرنامج الرائد في الصفحة الرئيسية
@@ -676,7 +676,7 @@ export default async function AdminSettingsPage() {
           </div>
 
           {/* Image Uploader */}
-          <div className="pt-2 border-t border-[#FEF6CC]">
+          <div className="pt-2 border-t border-[#E5E0D6]">
             <FlagshipImageUploader
               initialImageUrl={flagshipVal.imageUrl}
               defaultImageUrl={defaultFlagshipProgramConfig.imageUrl}
@@ -685,7 +685,7 @@ export default async function AdminSettingsPage() {
           </div>
 
           {/* Badge & Caption */}
-          <div className="space-y-4 pt-2 border-t border-[#FEF6CC]">
+          <div className="space-y-4 pt-2 border-t border-[#E5E0D6]">
             <h3 className="text-2xs font-bold text-[#5C5A55] uppercase tracking-wider">
               شارة وتسميات البرنامج الرائد (Badge & Card Labels)
             </h3>
@@ -768,7 +768,7 @@ export default async function AdminSettingsPage() {
           </div>
 
           {/* Title & Description */}
-          <div className="space-y-4 pt-2 border-t border-[#FEF6CC]">
+          <div className="space-y-4 pt-2 border-t border-[#E5E0D6]">
             <h3 className="text-2xs font-bold text-[#5C5A55] uppercase tracking-wider">
               العنوان والوصف التعريفي (Title & Description)
             </h3>
@@ -837,13 +837,13 @@ export default async function AdminSettingsPage() {
           </div>
 
           {/* 4 Steps Journey */}
-          <div className="space-y-4 pt-2 border-t border-[#FEF6CC]">
+          <div className="space-y-4 pt-2 border-t border-[#E5E0D6]">
             <h3 className="text-2xs font-bold text-[#5C5A55] uppercase tracking-wider">
               المراحل والخطوات الأربع (The 4 Journey Steps)
             </h3>
 
             {/* Step 1 */}
-            <div className="p-3.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] space-y-3">
+            <div className="p-3.5 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6] space-y-3">
               <span className="text-2xs font-bold text-[#231f20] block">المرحلة 1:</span>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <input name="step1TitleAr" placeholder="العنوان (AR)" defaultValue={flagshipVal.step1TitleAr || defaultFlagshipProgramConfig.step1TitleAr} className="px-3 py-1.5 text-xs rounded-lg border border-[#e5e0d6] bg-white" />
@@ -858,7 +858,7 @@ export default async function AdminSettingsPage() {
             </div>
 
             {/* Step 2 */}
-            <div className="p-3.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] space-y-3">
+            <div className="p-3.5 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6] space-y-3">
               <span className="text-2xs font-bold text-[#231f20] block">المرحلة 2:</span>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <input name="step2TitleAr" placeholder="العنوان (AR)" defaultValue={flagshipVal.step2TitleAr || defaultFlagshipProgramConfig.step2TitleAr} className="px-3 py-1.5 text-xs rounded-lg border border-[#e5e0d6] bg-white" />
@@ -873,7 +873,7 @@ export default async function AdminSettingsPage() {
             </div>
 
             {/* Step 3 */}
-            <div className="p-3.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] space-y-3">
+            <div className="p-3.5 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6] space-y-3">
               <span className="text-2xs font-bold text-[#231f20] block">المرحلة 3:</span>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <input name="step3TitleAr" placeholder="العنوان (AR)" defaultValue={flagshipVal.step3TitleAr || defaultFlagshipProgramConfig.step3TitleAr} className="px-3 py-1.5 text-xs rounded-lg border border-[#e5e0d6] bg-white" />
@@ -888,7 +888,7 @@ export default async function AdminSettingsPage() {
             </div>
 
             {/* Step 4 */}
-            <div className="p-3.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] space-y-3">
+            <div className="p-3.5 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6] space-y-3">
               <span className="text-2xs font-bold text-[#231f20] block">المرحلة 4:</span>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <input name="step4TitleAr" placeholder="العنوان (AR)" defaultValue={flagshipVal.step4TitleAr || defaultFlagshipProgramConfig.step4TitleAr} className="px-3 py-1.5 text-xs rounded-lg border border-[#e5e0d6] bg-white" />
@@ -904,7 +904,7 @@ export default async function AdminSettingsPage() {
           </div>
 
           {/* Action Buttons */}
-          <div className="space-y-4 pt-2 border-t border-[#FEF6CC]">
+          <div className="space-y-4 pt-2 border-t border-[#E5E0D6]">
             <h3 className="text-2xs font-bold text-[#5C5A55] uppercase tracking-wider">
               أزرار التوجيه (Action Buttons)
             </h3>
@@ -934,7 +934,7 @@ export default async function AdminSettingsPage() {
 
         {/* Top Bar Notification & Institutional Banner Control */}
         <div className="bg-white p-8 rounded-2xl border border-[#e5e0d6] shadow-2xs space-y-6">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-[#FEF6CC]">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-[#E5E0D6]">
             <div>
               <div className="flex items-center gap-2">
                 <span className="text-base">📢</span>
@@ -963,7 +963,7 @@ export default async function AdminSettingsPage() {
           </div>
 
           {/* Toggle Switch Card */}
-          <div className="bg-[#F5F3EE] p-5 rounded-xl border border-[#FEF6CC] flex items-center justify-between gap-4">
+          <div className="bg-[#FAF8F5] p-5 rounded-xl border border-[#E5E0D6] flex items-center justify-between gap-4">
             <div className="space-y-1">
               <label htmlFor="topBarEnabled" className="text-xs font-bold text-[#231f20] cursor-pointer block">
                 تفعيل وإظهار الشريط العلوي (Show Top Announcement Bar)
@@ -1114,7 +1114,7 @@ export default async function AdminSettingsPage() {
                 إدارة مجالات التدخل الستة والنوافذ المنبثقة (Areas CMS)
               </h3>
             </div>
-            <p className="text-xs text-[#FEF6CC]/85 max-w-xl leading-relaxed">
+            <p className="text-xs text-[#E2DED6]/85 max-w-xl leading-relaxed">
               تخصيص نصوص بطاقات الواجهة، الأيقونات، والرؤية التفصيلية والأهداف والورشات الميدانية المعروضة داخل النافذة المنبثقة لكل مجال.
             </p>
           </div>
@@ -1135,7 +1135,7 @@ export default async function AdminSettingsPage() {
                 إدارة بنك الأسئلة الشائعة (FAQ Management)
               </h3>
             </div>
-            <p className="text-xs text-[#FEF6CC]/85 max-w-xl leading-relaxed">
+            <p className="text-xs text-[#E2DED6]/85 max-w-xl leading-relaxed">
               تحكم كامل في نصوص الأسئلة والإجابات بثلاث لغات (العربية، الفرنسية، الإنجليزية)، ترتيبها، واختيار ما يعرض منها في الواجهة الرئيسية.
             </p>
           </div>

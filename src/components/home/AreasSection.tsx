@@ -480,7 +480,7 @@ export function AreasSection({
             {areas.map((area) => (
               <div
                 key={area.key}
-                className="bg-[#F5F3EE] p-7 rounded-3xl border border-[#e5e0d6] shadow-subtle hover:shadow-card hover:border-[#cfc7b9] transition-all flex flex-col justify-between group relative overflow-hidden text-start"
+                className="bg-[#FAF8F5] p-7 rounded-3xl border border-[#e5e0d6] shadow-subtle hover:shadow-card hover:border-[#cfc7b9] transition-all flex flex-col justify-between group relative overflow-hidden text-start"
               >
                 <div
                   className={`absolute top-0 end-0 w-32 h-32 bg-gradient-to-bl ${area.bgGlow} rounded-bl-full pointer-events-none`}
@@ -551,7 +551,7 @@ export function AreasSection({
             <div className="h-2.5 w-full bg-gradient-to-r from-[#bd3227] via-[#ffd22f] to-[#231f20]" />
 
             {/* Modal Header */}
-            <div className="p-6 sm:p-7 border-b border-[#FEF6CC] flex items-start justify-between gap-4 relative bg-[#F5F3EE]/50">
+            <div className="p-6 sm:p-7 border-b border-[#E5E0D6] flex items-start justify-between gap-4 relative bg-[#FAF8F5]/50">
               <div className="flex items-start gap-4">
                 <div className="w-14 h-14 rounded-2xl bg-white border border-[#e5e0d6] flex items-center justify-center p-2.5 text-3xl shadow-sm shrink-0">
                   <IconWithFallback
@@ -585,7 +585,7 @@ export function AreasSection({
               <button
                 type="button"
                 onClick={() => setSelectedArea(null)}
-                className="w-9 h-9 rounded-full bg-white hover:bg-[#F5F3EE] border border-[#e5e0d6] text-[#231f20] flex items-center justify-center font-bold text-sm transition-all shadow-2xs shrink-0 cursor-pointer hover:rotate-90"
+                className="w-9 h-9 rounded-full bg-white hover:bg-[#FAF8F5] border border-[#e5e0d6] text-[#231f20] flex items-center justify-center font-bold text-sm transition-all shadow-2xs shrink-0 cursor-pointer hover:rotate-90"
                 aria-label={isAr ? 'إغلاق النافذة' : 'Close window'}
               >
                 ✕
@@ -595,7 +595,7 @@ export function AreasSection({
             {/* Modal Scrollable Body */}
             <div className="p-6 sm:p-7 overflow-y-auto space-y-6 flex-1">
               {/* Comprehensive Description Box */}
-              <div className="p-4 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs sm:text-sm text-[#5C5A55] leading-relaxed">
+              <div className="p-4 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6] text-xs sm:text-sm text-[#5C5A55] leading-relaxed">
                 {selectedArea.desc}
               </div>
 
@@ -634,7 +634,7 @@ export function AreasSection({
                 selectedArea.showInitiatives &&
                 selectedArea.initiatives &&
                 selectedArea.initiatives.length > 0 && (
-                  <div className="space-y-3 pt-4 border-t border-[#FEF6CC]">
+                  <div className="space-y-3 pt-4 border-t border-[#E5E0D6]">
                     <div className="flex items-center gap-2">
                       <span className="w-6 h-6 rounded-lg bg-[#bd3227] text-white flex items-center justify-center text-xs font-bold shrink-0">
                         ✨
@@ -668,11 +668,11 @@ export function AreasSection({
             </div>
 
             {/* Modal Footer Bar */}
-            <div className="p-4 sm:p-5 border-t border-[#FEF6CC] bg-[#F5F3EE] flex flex-col sm:flex-row items-center justify-between gap-3">
+            <div className="p-4 sm:p-5 border-t border-[#E5E0D6] bg-[#FAF8F5] flex flex-col sm:flex-row items-center justify-between gap-3">
               <button
                 type="button"
                 onClick={() => setSelectedArea(null)}
-                className="w-full sm:w-auto px-4 py-2.5 rounded-xl text-xs font-bold text-[#5C5A55] bg-white border border-[#e5e0d6] hover:bg-[#FEF6CC] transition-all cursor-pointer text-center"
+                className="w-full sm:w-auto px-4 py-2.5 rounded-xl text-xs font-bold text-[#5C5A55] bg-white border border-[#e5e0d6] hover:bg-[#F4EFE6] transition-all cursor-pointer text-center"
               >
                 {isAr ? 'إغلاق النافذة' : isFr ? 'Fermer' : 'Close'}
               </button>

@@ -17,16 +17,16 @@
 
 @theme inline {
   /* --- Primary Yellow & Gold Scale (Brand & Seal) --- */
-  --color-gold-50:  #FEF6CC;
-  --color-gold-100: #fef0a3;
-  --color-gold-200: #fee266;
-  --color-gold-300: #ffd22f;
-  --color-gold-400: #e6bd2b;
-  --color-gold-500: #d2a82b;
-  --color-gold-600: #b58d22;
-  --color-gold-700: #8c6c16;
-  --color-gold-800: #634d10;
-  --color-gold-900: #3d2f0a;
+  --color-gold-50:  #FBF7E8;
+  --color-gold-100: #F7EFC8;
+  --color-gold-200: #F3E5A2;
+  --color-gold-300: #E8B828;
+  --color-gold-400: #D9A726;
+  --color-gold-500: #C59928;
+  --color-gold-600: #A8801C;
+  --color-gold-700: #8C6A14;
+  --color-gold-800: #6B510D;
+  --color-gold-900: #423207;
 
   /* --- Warm Brick Red Scale (Buttons & Accents) --- */
   --color-terracotta-900: #5c130d;
@@ -38,74 +38,74 @@
   --color-terracotta-300: #e5997d;
   --color-terracotta-200: #fde8e7;
   --color-terracotta-100: #fde8e7;
-  --color-terracotta-50:  #FEF6CC;
+  --color-terracotta-50:  #FBF7E8;
 
-  /* --- Warm Ivory & Yellow Surfaces (Surfaces & Backgrounds) --- */
+  /* --- Warm Ivory & Sand Surfaces --- */
   --color-ivory-50:  #FFFFFF;
-  --color-ivory-100: #F5F3EE;
-  --color-ivory-200: #FEF6CC;
-  --color-ivory-300: #FEF6CC;
-  --color-ivory-400: #e5e0d6;
+  --color-ivory-100: #FAF8F5;
+  --color-ivory-200: #F4EFE6;
+  --color-ivory-300: #EDE7DC;
+  --color-ivory-400: #E2DCD0;
 
   /* --- Jet Black & Warm Gray Typography (Accessible High Contrast) --- */
-  --color-charcoal-950: #181516;
-  --color-charcoal-900: #231f20;
-  --color-charcoal-800: #231f20;
-  --color-charcoal-700: #332f30;
+  --color-charcoal-950: #141213;
+  --color-charcoal-900: #231F20;
+  --color-charcoal-800: #231F20;
+  --color-charcoal-700: #332F30;
   --color-charcoal-600: #5C5A55;
   --color-charcoal-500: #5C5A55;
-  --color-charcoal-400: #5C5A55;
-  --color-charcoal-300: #a39f99;
-  --color-charcoal-200: #dcdad5;
-  --color-charcoal-100: #F5F3EE;
-  --color-charcoal-50:  #F5F3EE;
+  --color-charcoal-400: #7D7A75;
+  --color-charcoal-300: #A8A49C;
+  --color-charcoal-200: #D8D4CC;
+  --color-charcoal-100: #FAF8F5;
+  --color-charcoal-50:  #FAF8F5;
 
-  /* --- Backward Compatible Teal Scale (Mapped to New System) --- */
-  --color-teal-950: #181516;
-  --color-teal-900: #231f20;
-  --color-teal-850: #1c1819;
-  --color-teal-800: #231f20;
-  --color-teal-700: #d2a82b;
-  --color-teal-600: #d2a82b;
-  --color-teal-500: #d2a82b;
-  --color-teal-400: #ffd22f;
-  --color-teal-300: #ffd22f;
-  --color-teal-200: #FEF6CC;
-  --color-teal-100: #FEF6CC;
-  --color-teal-50:  #FEF6CC;
+  /* --- Backward Compatible Scales --- */
+  --color-teal-950: #141213;
+  --color-teal-900: #231F20;
+  --color-teal-850: #1C1819;
+  --color-teal-800: #231F20;
+  --color-teal-700: #C59928;
+  --color-teal-600: #C59928;
+  --color-teal-500: #C59928;
+  --color-teal-400: #E8B828;
+  --color-teal-300: #E8B828;
+  --color-teal-200: #F4EFE6;
+  --color-teal-100: #F4EFE6;
+  --color-teal-50:  #F4EFE6;
 
   /* --- Restrained Amber / Gold Scale --- */
-  --color-amber-700: #8c6c16;
-  --color-amber-600: #d2a82b;
-  --color-amber-500: #d2a82b;
-  --color-amber-400: #ffd22f;
-  --color-amber-300: #ffd22f;
-  --color-amber-100: #FEF6CC;
-  --color-amber-50:  #FEF6CC;
+  --color-amber-700: #8C6A14;
+  --color-amber-600: #C59928;
+  --color-amber-500: #C59928;
+  --color-amber-400: #E8B828;
+  --color-amber-300: #E8B828;
+  --color-amber-100: #F4EFE6;
+  --color-amber-50:  #F4EFE6;
 
   /* --- Semantic Aliases --- */
-  --color-brand-primary:       #231f20;
-  --color-brand-primary-dark:  #181516;
-  --color-brand-primary-light: #d2a82b;
-  --color-brand-accent:        #bd3227;
-  --color-brand-accent-hover:  #a3261c;
-  --color-brand-highlight:     #ffd22f;
+  --color-brand-primary:       #231F20;
+  --color-brand-primary-dark:  #141213;
+  --color-brand-primary-light: #C59928;
+  --color-brand-accent:        #BD3227;
+  --color-brand-accent-hover:  #A3261C;
+  --color-brand-highlight:     #E8B828;
 
-  --color-surface-base:        #F5F3EE;
+  --color-surface-base:        #FAF8F5;
   --color-surface-card:        #ffffff;
-  --color-surface-muted:       #FEF6CC;
-  --color-border-subtle:       #e5e0d6;
-  --color-border-strong:       #cfc7b9;
+  --color-surface-muted:       #F4EFE6;
+  --color-border-subtle:       #E5E0D6;
+  --color-border-strong:       #CFC7B9;
 
-  --color-text-main:           #231f20;
+  --color-text-main:           #231F20;
   --color-text-muted:          #5C5A55;
-  --color-text-subtle:         #5C5A55;
+  --color-text-subtle:         #7D7A75;
   --color-text-inverse:        #ffffff;
 
-  --color-success:  #18794e;
-  --color-warning:  #d2a82b;
-  --color-error:    #bd3227;
-  --color-info:     #231f20;
+  --color-success:  #18794E;
+  --color-warning:  #C59928;
+  --color-error:    #BD3227;
+  --color-info:     #231F20;
 
   /* --- Typography --- */
   --font-sans: var(--font-sans), 'Sora', system-ui, -apple-system, sans-serif;
@@ -128,11 +128,11 @@
   --radius-2xl: 1.25rem;
   --radius-3xl: 1.75rem;
 
-  /* --- Warm Ambient Shadows --- */
-  --shadow-subtle: 0 1px 3px 0 rgb(35 31 32 / 0.05), 0 1px 2px -1px rgb(35 31 32 / 0.03);
-  --shadow-card:   0 2px 6px -1px rgb(35 31 32 / 0.06), 0 1px 4px -2px rgb(35 31 32 / 0.04);
-  --shadow-card-hover: 0 12px 24px -4px rgb(35 31 32 / 0.1), 0 4px 8px -2px rgb(35 31 32 / 0.06);
-  --shadow-glow:   0 0 24px rgb(189 50 39 / 0.2);
+  /* --- Soft Ambient Architectural Shadows --- */
+  --shadow-subtle: 0 1px 3px 0 rgb(35 31 32 / 0.04), 0 1px 2px -1px rgb(35 31 32 / 0.02);
+  --shadow-card:   0 2px 8px -1px rgb(35 31 32 / 0.05), 0 1px 4px -2px rgb(35 31 32 / 0.03);
+  --shadow-card-hover: 0 12px 24px -4px rgb(35 31 32 / 0.08), 0 4px 8px -2px rgb(35 31 32 / 0.04);
+  --shadow-glow:   0 0 24px rgb(189 50 39 / 0.15);
 }
 
 /* ============================================================
@@ -189,16 +189,16 @@ body:has([dir="rtl"]) {
    ============================================================ */
 
 .moroccan-pattern {
-  background-color: #231f20;
-  background-image: radial-gradient(#d2a82b 1px, transparent 1px),
-    radial-gradient(#d2a82b 1px, #231f20 1px);
+  background-color: #1E1B1C;
+  background-image: radial-gradient(rgba(210, 168, 43, 0.2) 1px, transparent 1px),
+    radial-gradient(rgba(210, 168, 43, 0.2) 1px, #1E1B1C 1px);
   background-size: 24px 24px;
   background-position: 0 0, 12px 12px;
 }
 
 .moroccan-pattern-light {
-  background-color: #F5F3EE;
-  background-image: radial-gradient(var(--color-border-subtle) 1px, transparent 1px);
+  background-color: #FAF8F5;
+  background-image: radial-gradient(rgba(210, 168, 43, 0.12) 1px, transparent 1px);
   background-size: 20px 20px;
 }
 

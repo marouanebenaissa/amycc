@@ -46,7 +46,7 @@ export default async function AdminUsersPage() {
       <div className="bg-white rounded-2xl border border-[#e5e0d6] overflow-hidden shadow-2xs">
         <div className="overflow-x-auto">
           <table className="w-full text-start text-xs text-[#231f20]">
-            <thead className="bg-[#F5F3EE] border-b border-[#e5e0d6] text-2xs uppercase tracking-wider text-[#5C5A55] font-bold">
+            <thead className="bg-[#FAF8F5] border-b border-[#e5e0d6] text-2xs uppercase tracking-wider text-[#5C5A55] font-bold">
               <tr>
                 <th className="px-6 py-4 text-start">Staff User</th>
                 <th className="px-6 py-4 text-start">Assigned Roles</th>
@@ -58,7 +58,7 @@ export default async function AdminUsersPage() {
                 profiles.map((p) => {
                   const userRoles = p.user_roles?.map((ur) => ur.roles?.name).filter((name): name is string => Boolean(name)) || []
                   return (
-                    <tr key={p.id} className="hover:bg-[#F5F3EE]/60 transition-colors">
+                    <tr key={p.id} className="hover:bg-[#FAF8F5]/60 transition-colors">
                       <td className="px-6 py-4">
                         <div className="font-bold text-[#231f20]">{p.full_name || 'Staff Member'}</div>
                         <div className="text-[#5C5A55] text-3xs font-mono">{p.email}</div>
@@ -72,7 +72,7 @@ export default async function AdminUsersPage() {
                                 className={`px-2.5 py-0.5 rounded-full text-3xs font-bold uppercase tracking-wider ${
                                   r === 'super_admin'
                                     ? 'bg-[#fde8e7] text-[#bd3227] border border-[#fde8e7]'
-                                    : 'bg-[#FEF6CC] text-[#231f20] border border-[#d2a82b]'
+                                    : 'bg-[#F4EFE6] text-[#231f20] border border-[#d2a82b]'
                                 }`}
                               >
                                 {r.replace('_', ' ')}
@@ -109,7 +109,7 @@ export default async function AdminUsersPage() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
           {roles && roles.length > 0 ? (
             roles.map((role) => (
-              <div key={role.id} className="p-3 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs">
+              <div key={role.id} className="p-3 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6] text-xs">
                 <span className="font-bold text-[#231f20] capitalize block">
                   {role.name.replace(/_/g, ' ')}
                 </span>

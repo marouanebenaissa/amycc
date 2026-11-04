@@ -408,8 +408,8 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
     <header
       className={`sticky top-0 z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-[#F5F3EE]/95 backdrop-blur-md border-b border-[#e5e0d6] shadow-sm'
-          : 'bg-[#F5F3EE] border-b border-[#FEF6CC]'
+          ? 'bg-[#FAF8F5]/95 backdrop-blur-md border-b border-[#e5e0d6] shadow-sm'
+          : 'bg-[#FAF8F5] border-b border-[#E5E0D6]'
       }`}
     >
       {/* Skip to main content — accessibility */}
@@ -424,7 +424,7 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
       {topBarVisible && (
         <aside
           aria-label={isAr ? 'شريط الإعلانات المؤسسي' : 'Announcement Bar'}
-          className="bg-[#231f20] text-[#FEF6CC] py-1.5 px-4 text-3xs border-b border-[#d2a82b]/40 animate-fade-in"
+          className="bg-[#231f20] text-[#E2DED6] py-1.5 px-4 text-3xs border-b border-[#d2a82b]/40 animate-fade-in"
         >
           <div className="max-w-7xl mx-auto flex items-center justify-between gap-3">
             <div className="flex items-center gap-2.5 min-w-0">
@@ -482,7 +482,7 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
               className={`px-3 py-2 rounded-lg text-xs font-bold transition-all ${
                 isHomeActive
                   ? 'bg-[#231f20]/8 text-[#231f20] font-black'
-                  : 'text-[#231f20] hover:text-[#231f20] hover:bg-[#FEF6CC]/50'
+                  : 'text-[#231f20] hover:text-[#231f20] hover:bg-[#231F20]/5'
               }`}
             >
               {dict.nav.home}
@@ -505,7 +505,7 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
                 className={`px-3 py-2 rounded-lg text-xs font-bold transition-all inline-flex items-center gap-1.5 ${
                   isAboutActive || aboutDropdownOpen
                     ? 'bg-[#231f20]/8 text-[#231f20] font-black'
-                    : 'text-[#231f20] hover:text-[#231f20] hover:bg-[#FEF6CC]/50'
+                    : 'text-[#231f20] hover:text-[#231f20] hover:bg-[#231F20]/5'
                 }`}
                 aria-expanded={aboutDropdownOpen}
                 aria-haspopup="true"
@@ -527,7 +527,7 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
               {/* Floating Luxury Dropdown for About */}
               {aboutDropdownOpen && (
                 <div className="absolute top-full start-0 mt-1.5 w-72 rounded-2xl bg-white border border-[#e5e0d6] shadow-xl p-2.5 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
-                  <div className="px-3 py-1.5 text-4xs font-bold uppercase tracking-wider text-[#5C5A55] border-b border-[#FEF6CC] mb-1">
+                  <div className="px-3 py-1.5 text-4xs font-bold uppercase tracking-wider text-[#5C5A55] border-b border-[#E5E0D6] mb-1">
                     {isAr ? 'الهوية والتنظيم والتواصل' : 'Organization & Team'}
                   </div>
 
@@ -543,11 +543,11 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
                           onClick={() => setAboutDropdownOpen(false)}
                           className={`group/item flex items-start gap-3 p-2.5 rounded-xl transition-all ${
                             isActive
-                              ? 'bg-[#FEF6CC]/80 text-[#231f20]'
-                              : 'hover:bg-[#F5F3EE] text-[#231f20]'
+                              ? 'bg-[#F4EFE6] text-[#231f20]'
+                              : 'hover:bg-[#FAF8F5] text-[#231f20]'
                           }`}
                         >
-                          <div className="w-8 h-8 rounded-lg bg-[#F5F3EE] border border-[#e5e0d6] flex items-center justify-center shrink-0 p-1.5 shadow-2xs group-hover/item:scale-105 transition-transform text-[#231f20] group-hover/item:text-[#bd3227]">
+                          <div className="w-8 h-8 rounded-lg bg-[#FAF8F5] border border-[#e5e0d6] flex items-center justify-center shrink-0 p-1.5 shadow-2xs group-hover/item:scale-105 transition-transform text-[#231f20] group-hover/item:text-[#bd3227]">
                             {renderNavIcon(sub.key, 'w-4 h-4')}
                           </div>
 
@@ -588,7 +588,7 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
                 className={`px-3 py-2 rounded-lg text-xs font-bold transition-all inline-flex items-center gap-1.5 ${
                   isProgramsActive || programsDropdownOpen
                     ? 'bg-[#231f20]/8 text-[#231f20] font-black'
-                    : 'text-[#231f20] hover:text-[#231f20] hover:bg-[#FEF6CC]/50'
+                    : 'text-[#231f20] hover:text-[#231f20] hover:bg-[#231F20]/5'
                 }`}
                 aria-expanded={programsDropdownOpen}
                 aria-haspopup="true"
@@ -610,7 +610,7 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
               {/* Floating Luxury Dropdown for Programs */}
               {programsDropdownOpen && (
                 <div className="absolute top-full start-0 mt-1.5 w-72 rounded-2xl bg-white border border-[#e5e0d6] shadow-xl p-2.5 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
-                  <div className="px-3 py-1.5 text-4xs font-bold uppercase tracking-wider text-[#5C5A55] border-b border-[#FEF6CC] mb-1">
+                  <div className="px-3 py-1.5 text-4xs font-bold uppercase tracking-wider text-[#5C5A55] border-b border-[#E5E0D6] mb-1">
                     {dict.nav.programs_group || dict.nav.programs}
                   </div>
 
@@ -626,11 +626,11 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
                           onClick={() => setProgramsDropdownOpen(false)}
                           className={`group/item flex items-start gap-3 p-2.5 rounded-xl transition-all ${
                             isActive
-                              ? 'bg-[#FEF6CC]/80 text-[#231f20]'
-                              : 'hover:bg-[#F5F3EE] text-[#231f20]'
+                              ? 'bg-[#F4EFE6] text-[#231f20]'
+                              : 'hover:bg-[#FAF8F5] text-[#231f20]'
                           }`}
                         >
-                          <div className="w-8 h-8 rounded-lg bg-[#F5F3EE] border border-[#e5e0d6] flex items-center justify-center shrink-0 p-1.5 shadow-2xs group-hover/item:scale-105 transition-transform text-[#231f20] group-hover/item:text-[#bd3227]">
+                          <div className="w-8 h-8 rounded-lg bg-[#FAF8F5] border border-[#e5e0d6] flex items-center justify-center shrink-0 p-1.5 shadow-2xs group-hover/item:scale-105 transition-transform text-[#231f20] group-hover/item:text-[#bd3227]">
                             {renderNavIcon(sub.key, 'w-4 h-4')}
                           </div>
 
@@ -671,7 +671,7 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
                 className={`px-3 py-2 rounded-lg text-xs font-bold transition-all inline-flex items-center gap-1.5 ${
                   isExploreActive || exploreDropdownOpen
                     ? 'bg-[#231f20]/8 text-[#231f20] font-black'
-                    : 'text-[#231f20] hover:text-[#231f20] hover:bg-[#FEF6CC]/50'
+                    : 'text-[#231f20] hover:text-[#231f20] hover:bg-[#231F20]/5'
                 }`}
                 aria-expanded={exploreDropdownOpen}
                 aria-haspopup="true"
@@ -693,7 +693,7 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
               {/* Floating Luxury Dropdown for Explore */}
               {exploreDropdownOpen && (
                 <div className="absolute top-full start-0 mt-1.5 w-72 rounded-2xl bg-white border border-[#e5e0d6] shadow-xl p-2.5 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
-                  <div className="px-3 py-1.5 text-4xs font-bold uppercase tracking-wider text-[#5C5A55] border-b border-[#FEF6CC] mb-1">
+                  <div className="px-3 py-1.5 text-4xs font-bold uppercase tracking-wider text-[#5C5A55] border-b border-[#E5E0D6] mb-1">
                     {dict.nav.explore || (isAr ? 'استكشف أنشطتنا' : 'Explore Activities')}
                   </div>
 
@@ -709,11 +709,11 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
                           onClick={() => setExploreDropdownOpen(false)}
                           className={`group/item flex items-start gap-3 p-2.5 rounded-xl transition-all ${
                             isActive
-                              ? 'bg-[#FEF6CC]/80 text-[#231f20]'
-                              : 'hover:bg-[#F5F3EE] text-[#231f20]'
+                              ? 'bg-[#F4EFE6] text-[#231f20]'
+                              : 'hover:bg-[#FAF8F5] text-[#231f20]'
                           }`}
                         >
-                          <div className="w-8 h-8 rounded-lg bg-[#F5F3EE] border border-[#e5e0d6] flex items-center justify-center shrink-0 p-1.5 shadow-2xs group-hover/item:scale-105 transition-transform text-[#231f20] group-hover/item:text-[#bd3227]">
+                          <div className="w-8 h-8 rounded-lg bg-[#FAF8F5] border border-[#e5e0d6] flex items-center justify-center shrink-0 p-1.5 shadow-2xs group-hover/item:scale-105 transition-transform text-[#231f20] group-hover/item:text-[#bd3227]">
                             {renderNavIcon(sub.key, 'w-4 h-4')}
                           </div>
 
@@ -749,7 +749,7 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
                   className={`px-3 py-2 rounded-lg text-xs font-bold transition-all ${
                     isActive
                       ? 'bg-[#231f20]/8 text-[#231f20] font-black'
-                      : 'text-[#231f20] hover:text-[#231f20] hover:bg-[#FEF6CC]/50'
+                      : 'text-[#231f20] hover:text-[#231f20] hover:bg-[#231F20]/5'
                   }`}
                 >
                   {title}
@@ -764,7 +764,7 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
 
             <Link
               href={`/${locale}/membership`}
-              className="hidden sm:inline-flex items-center justify-center px-4 py-2.5 rounded-xl text-xs font-bold text-white bg-[#231f20] hover:bg-[#d2a82b] active:scale-95 transition-all shadow-subtle hover:shadow-card gap-1.5 group"
+              className="hidden sm:inline-flex items-center justify-center px-4 py-2.5 rounded-xl text-xs font-bold text-white bg-[#bd3227] hover:bg-[#a3261c] active:scale-95 transition-all shadow-sm hover:shadow-md gap-1.5 group"
             >
               <span>{dict.membership.apply}</span>
               <span className="group-hover:translate-x-0.5 transition-transform" aria-hidden="true">
@@ -776,7 +776,7 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
             <button
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden p-2.5 rounded-xl text-[#231f20] hover:bg-[#FEF6CC] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#bd3227]"
+              className="lg:hidden p-2.5 rounded-xl text-[#231f20] hover:bg-[#F4EFE6] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#bd3227]"
               aria-expanded={mobileMenuOpen}
               aria-label={mobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
             >
@@ -797,7 +797,7 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
       {/* Mobile Drawer Navigation (Refined & Elevated) */}
       {mobileMenuOpen && (
         <div className="lg:hidden fixed inset-0 top-[calc(5rem+1px)] z-40 bg-[#231f20]/60 backdrop-blur-xs animate-in fade-in duration-200">
-          <div className="bg-[#F5F3EE] border-b border-[#e5e0d6] shadow-2xl p-6 max-h-[calc(100vh-5rem)] overflow-y-auto">
+          <div className="bg-[#FAF8F5] border-b border-[#e5e0d6] shadow-2xl p-6 max-h-[calc(100vh-5rem)] overflow-y-auto">
             <nav className="flex flex-col space-y-2" aria-label="Mobile Navigation">
               {/* Home */}
               <Link
@@ -805,8 +805,8 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
                 onClick={() => setMobileMenuOpen(false)}
                 className={`px-4 py-3 rounded-xl text-sm font-bold transition-all flex items-center justify-between ${
                   isHomeActive
-                    ? 'bg-[#FEF6CC] text-[#231f20] font-black shadow-2xs'
-                    : 'text-[#231f20] hover:bg-[#FEF6CC]'
+                    ? 'bg-[#F4EFE6] text-[#231f20] font-black shadow-2xs'
+                    : 'text-[#231f20] hover:bg-[#F4EFE6]'
                 }`}
               >
                 <div className="flex items-center gap-3">
@@ -850,7 +850,7 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
                 </button>
 
                 {mobileAboutOpen && (
-                  <div className="bg-[#F5F3EE] p-2 space-y-1 border-t border-[#e5e0d6]">
+                  <div className="bg-[#FAF8F5] p-2 space-y-1 border-t border-[#e5e0d6]">
                     {aboutSubItems.map((sub) => {
                       const fullPath = `/${locale}/${sub.path}`
                       const isActive = pathname.startsWith(fullPath)
@@ -861,7 +861,7 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
                           onClick={() => setMobileMenuOpen(false)}
                           className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-xs font-bold transition-all ${
                             isActive
-                              ? 'bg-[#FEF6CC] text-[#231f20] font-black'
+                              ? 'bg-[#F4EFE6] text-[#231f20] font-black'
                               : 'text-[#5C5A55] hover:bg-white'
                           }`}
                         >
@@ -904,7 +904,7 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
                 </button>
 
                 {mobileProgramsOpen && (
-                  <div className="bg-[#F5F3EE] p-2 space-y-1 border-t border-[#e5e0d6]">
+                  <div className="bg-[#FAF8F5] p-2 space-y-1 border-t border-[#e5e0d6]">
                     {programSubItems.map((sub) => {
                       const fullPath = `/${locale}/${sub.path}`
                       const isActive = pathname.startsWith(fullPath)
@@ -915,7 +915,7 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
                           onClick={() => setMobileMenuOpen(false)}
                           className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-xs font-bold transition-all ${
                             isActive
-                              ? 'bg-[#FEF6CC] text-[#231f20] font-black'
+                              ? 'bg-[#F4EFE6] text-[#231f20] font-black'
                               : 'text-[#5C5A55] hover:bg-white'
                           }`}
                         >
@@ -958,7 +958,7 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
                 </button>
 
                 {mobileExploreOpen && (
-                  <div className="bg-[#F5F3EE] p-2 space-y-1 border-t border-[#e5e0d6]">
+                  <div className="bg-[#FAF8F5] p-2 space-y-1 border-t border-[#e5e0d6]">
                     {exploreSubItems.map((sub) => {
                       const fullPath = `/${locale}/${sub.path}`
                       const isActive = pathname.startsWith(fullPath)
@@ -969,7 +969,7 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
                           onClick={() => setMobileMenuOpen(false)}
                           className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-xs font-bold transition-all ${
                             isActive
-                              ? 'bg-[#FEF6CC] text-[#231f20] font-black'
+                              ? 'bg-[#F4EFE6] text-[#231f20] font-black'
                               : 'text-[#5C5A55] hover:bg-white'
                           }`}
                         >
@@ -992,8 +992,8 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
                   onClick={() => setMobileMenuOpen(false)}
                   className={`px-4 py-3 rounded-xl text-sm font-bold transition-all flex items-center justify-between ${
                     isPathActive(path)
-                      ? 'bg-[#FEF6CC] text-[#231f20] font-black shadow-2xs'
-                      : 'text-[#231f20] hover:bg-[#FEF6CC]'
+                      ? 'bg-[#F4EFE6] text-[#231f20] font-black shadow-2xs'
+                      : 'text-[#231f20] hover:bg-[#F4EFE6]'
                   }`}
                 >
                   <div className="flex items-center gap-3">
@@ -1022,7 +1022,7 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
                 <Link
                   href={`/${locale}/contact`}
                   onClick={() => setMobileMenuOpen(false)}
-                  className="w-full flex items-center justify-center py-3.5 px-4 rounded-xl text-sm font-bold text-[#231f20] bg-white border border-[#cfc7b9] hover:bg-[#FEF6CC] transition-all shadow-2xs"
+                  className="w-full flex items-center justify-center py-3.5 px-4 rounded-xl text-sm font-bold text-[#231f20] bg-white border border-[#cfc7b9] hover:bg-[#F4EFE6] transition-all shadow-2xs"
                 >
                   {dict.nav.contact}
                 </Link>

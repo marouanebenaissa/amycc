@@ -82,7 +82,7 @@ export default async function AdminLoginPage(props: {
           </button>
         </form>
 
-        <div className="pt-6 mt-6 border-t border-[#FEF6CC] text-center space-y-2">
+        <div className="pt-6 mt-6 border-t border-[#E5E0D6] text-center space-y-2">
           <p className="text-3xs text-[#5C5A55]">
             Protected institutional area. Row Level Security & Session Auditing Enforced.
           </p>

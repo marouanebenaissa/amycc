@@ -246,7 +246,7 @@ export function AnnualProgramManager({ initialConfig, defaultConfig }: AnnualPro
           <Link
             href="/ar/annual-program"
             target="_blank"
-            className="px-3.5 py-2 rounded-xl text-xs font-bold text-[#231f20] bg-[#F5F3EE] hover:bg-[#FEF6CC] border border-[#e5e0d6] transition-all flex items-center gap-1.5"
+            className="px-3.5 py-2 rounded-xl text-xs font-bold text-[#231f20] bg-[#FAF8F5] hover:bg-[#F4EFE6] border border-[#e5e0d6] transition-all flex items-center gap-1.5"
           >
             <span>معاينة المنشور</span>
             <span>↗</span>
@@ -256,7 +256,7 @@ export function AnnualProgramManager({ initialConfig, defaultConfig }: AnnualPro
             <button
               type="button"
               onClick={handleReset}
-              className="px-3.5 py-2 rounded-xl text-xs font-bold text-[#5C5A55] hover:text-[#231f20] hover:bg-[#F5F3EE] border border-[#e5e0d6] transition-colors"
+              className="px-3.5 py-2 rounded-xl text-xs font-bold text-[#5C5A55] hover:text-[#231f20] hover:bg-[#FAF8F5] border border-[#e5e0d6] transition-colors"
             >
               استعادة الافتراضي
             </button>
@@ -291,7 +291,7 @@ export function AnnualProgramManager({ initialConfig, defaultConfig }: AnnualPro
           className={`px-4 py-2.5 rounded-2xl text-xs sm:text-sm font-bold transition-all whitespace-nowrap cursor-pointer flex items-center gap-2 ${
             activeTab === 'hero'
               ? 'bg-[#231f20] text-white shadow-xs'
-              : 'bg-white text-[#5C5A55] hover:bg-[#F5F3EE] border border-[#e5e0d6]'
+              : 'bg-white text-[#5C5A55] hover:bg-[#FAF8F5] border border-[#e5e0d6]'
           }`}
         >
           <span>🖼️</span>
@@ -304,7 +304,7 @@ export function AnnualProgramManager({ initialConfig, defaultConfig }: AnnualPro
           className={`px-4 py-2.5 rounded-2xl text-xs sm:text-sm font-bold transition-all whitespace-nowrap cursor-pointer flex items-center gap-2 ${
             activeTab === 'stats_pillars'
               ? 'bg-[#231f20] text-white shadow-xs'
-              : 'bg-white text-[#5C5A55] hover:bg-[#F5F3EE] border border-[#e5e0d6]'
+              : 'bg-white text-[#5C5A55] hover:bg-[#FAF8F5] border border-[#e5e0d6]'
           }`}
         >
           <span>📊</span>
@@ -317,7 +317,7 @@ export function AnnualProgramManager({ initialConfig, defaultConfig }: AnnualPro
           className={`px-4 py-2.5 rounded-2xl text-xs sm:text-sm font-bold transition-all whitespace-nowrap cursor-pointer flex items-center gap-2 ${
             activeTab === 'quarters'
               ? 'bg-[#231f20] text-white shadow-xs'
-              : 'bg-white text-[#5C5A55] hover:bg-[#F5F3EE] border border-[#e5e0d6]'
+              : 'bg-white text-[#5C5A55] hover:bg-[#FAF8F5] border border-[#e5e0d6]'
           }`}
         >
           <span>🗓️</span>
@@ -330,7 +330,7 @@ export function AnnualProgramManager({ initialConfig, defaultConfig }: AnnualPro
           className={`px-4 py-2.5 rounded-2xl text-xs sm:text-sm font-bold transition-all whitespace-nowrap cursor-pointer flex items-center gap-2 ${
             activeTab === 'cta'
               ? 'bg-[#231f20] text-white shadow-xs'
-              : 'bg-white text-[#5C5A55] hover:bg-[#F5F3EE] border border-[#e5e0d6]'
+              : 'bg-white text-[#5C5A55] hover:bg-[#FAF8F5] border border-[#e5e0d6]'
           }`}
         >
           <span>📢</span>
@@ -354,7 +354,7 @@ export function AnnualProgramManager({ initialConfig, defaultConfig }: AnnualPro
             </div>
 
             {/* Language Switcher */}
-            <div className="flex gap-1.5 p-1 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] self-start sm:self-auto">
+            <div className="flex gap-1.5 p-1 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6] self-start sm:self-auto">
               {(['ar', 'fr', 'en'] as const).map((lang) => (
                 <button
                   key={lang}
@@ -363,7 +363,7 @@ export function AnnualProgramManager({ initialConfig, defaultConfig }: AnnualPro
                   className={`px-3 py-1.5 text-xs font-bold rounded-lg transition-all ${
                     activeLangTab === lang
                       ? 'bg-[#231f20] text-white shadow-xs'
-                      : 'text-[#5C5A55] hover:bg-[#FEF6CC]'
+                      : 'text-[#5C5A55] hover:bg-[#F4EFE6]'
                   }`}
                 >
                   {lang === 'ar' ? 'العربية' : lang === 'fr' ? 'Français' : 'English'}
@@ -373,7 +373,7 @@ export function AnnualProgramManager({ initialConfig, defaultConfig }: AnnualPro
           </div>
 
           {/* Year & Brochure Link Settings */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 p-5 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6]">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 p-5 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6]">
             <div className="space-y-1.5">
               <label className="block text-xs font-bold text-[#231f20]">
                 السنة الثقافية المستهدفة (Season Year)
@@ -403,7 +403,7 @@ export function AnnualProgramManager({ initialConfig, defaultConfig }: AnnualPro
           </div>
 
           {/* Hero Visual Image */}
-          <div className="space-y-4 p-5 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6]">
+          <div className="space-y-4 p-5 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6]">
             <div className="flex items-center justify-between">
               <label className="block text-xs font-bold text-[#231f20]">
                 صورة خلفية أو بصرية لقسم رأس البرنامج السنوي (Hero Visual Image)
@@ -474,7 +474,7 @@ export function AnnualProgramManager({ initialConfig, defaultConfig }: AnnualPro
                   className="w-full px-3.5 py-2 rounded-xl bg-white border border-[#e5e0d6] text-xs font-mono text-[#231f20] focus:outline-none focus:border-[#231f20] text-left"
                 />
 
-                <label className="flex items-center gap-3 p-2.5 rounded-xl bg-white border border-[#e5e0d6] cursor-pointer hover:bg-[#FEF6CC] transition-colors">
+                <label className="flex items-center gap-3 p-2.5 rounded-xl bg-white border border-[#e5e0d6] cursor-pointer hover:bg-[#F4EFE6] transition-colors">
                   <input
                     type="checkbox"
                     checked={config.hero.showImage !== false}
@@ -536,7 +536,7 @@ export function AnnualProgramManager({ initialConfig, defaultConfig }: AnnualPro
                   </h3>
                   <p
                     className={`text-xs line-clamp-2 ${
-                      config.hero.showImage !== false && config.hero.imageUrl ? 'text-[#FEF6CC]/95' : 'text-[#5C5A55]'
+                      config.hero.showImage !== false && config.hero.imageUrl ? 'text-[#E2DED6]/95' : 'text-[#5C5A55]'
                     }`}
                   >
                     {config.hero.descriptionAr}
@@ -782,7 +782,7 @@ export function AnnualProgramManager({ initialConfig, defaultConfig }: AnnualPro
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               {config.stats.map((st, idx) => (
-                <div key={st.id} className="p-4 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6] space-y-3">
+                <div key={st.id} className="p-4 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6] space-y-3">
                   <div className="flex items-center gap-2">
                     <input
                       type="text"
@@ -844,7 +844,7 @@ export function AnnualProgramManager({ initialConfig, defaultConfig }: AnnualPro
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {config.pillars.map((pillar, pIdx) => (
-                <div key={pillar.id} className="p-5 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6] space-y-4">
+                <div key={pillar.id} className="p-5 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6] space-y-4">
                   <div className="flex items-center gap-3">
                     <input
                       type="text"
@@ -939,7 +939,7 @@ export function AnnualProgramManager({ initialConfig, defaultConfig }: AnnualPro
             </div>
 
             {/* Quarter Selector Tabs */}
-            <div className="flex gap-1.5 p-1 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] self-start sm:self-auto overflow-x-auto">
+            <div className="flex gap-1.5 p-1 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6] self-start sm:self-auto overflow-x-auto">
               {config.quarters.map((q, idx) => (
                 <button
                   key={q.id}
@@ -948,7 +948,7 @@ export function AnnualProgramManager({ initialConfig, defaultConfig }: AnnualPro
                   className={`px-3.5 py-1.5 text-xs font-bold rounded-lg transition-all flex items-center gap-1.5 whitespace-nowrap ${
                     activeQuarterIdx === idx
                       ? 'bg-[#231f20] text-white shadow-xs'
-                      : 'text-[#5C5A55] hover:bg-[#FEF6CC]'
+                      : 'text-[#5C5A55] hover:bg-[#F4EFE6]'
                   }`}
                 >
                   <span>{q.icon || '📌'}</span>
@@ -962,7 +962,7 @@ export function AnnualProgramManager({ initialConfig, defaultConfig }: AnnualPro
           {currentQuarter && (
             <div className="space-y-6">
               {/* Quarter Info Box */}
-              <div className="p-5 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6] space-y-4">
+              <div className="p-5 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6] space-y-4">
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
                   <div className="space-y-1">
                     <label className="block text-2xs font-bold text-[#231f20]">
@@ -1052,7 +1052,7 @@ export function AnnualProgramManager({ initialConfig, defaultConfig }: AnnualPro
                       key={event.id}
                       className="p-5 rounded-2xl bg-white border border-[#e5e0d6] shadow-2xs space-y-4 hover:border-[#231f20]/30 transition-all"
                     >
-                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-[#FEF6CC]">
+                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-[#E5E0D6]">
                         <div className="flex items-center gap-2 flex-wrap">
                           <span className="w-6 h-6 rounded-full bg-[#231f20] text-white text-2xs font-black flex items-center justify-center">
                             {eIdx + 1}
@@ -1076,7 +1076,7 @@ export function AnnualProgramManager({ initialConfig, defaultConfig }: AnnualPro
                           <select
                             value={event.status || 'upcoming'}
                             onChange={(e) => updateQuarterEvent(activeQuarterIdx, eIdx, 'status', e.target.value)}
-                            className="px-2.5 py-1 rounded-lg bg-[#F5F3EE] border border-[#e5e0d6] text-2xs font-bold text-[#231f20]"
+                            className="px-2.5 py-1 rounded-lg bg-[#FAF8F5] border border-[#e5e0d6] text-2xs font-bold text-[#231f20]"
                           >
                             <option value="upcoming">مرتقبة (À venir)</option>
                             <option value="in_progress">جارية حالياً (En cours)</option>
@@ -1104,7 +1104,7 @@ export function AnnualProgramManager({ initialConfig, defaultConfig }: AnnualPro
                             dir="rtl"
                             value={event.titleAr}
                             onChange={(e) => updateQuarterEvent(activeQuarterIdx, eIdx, 'titleAr', e.target.value)}
-                            className="w-full px-3 py-1.5 rounded-lg bg-[#F5F3EE] border border-[#e5e0d6] text-xs font-bold text-[#231f20]"
+                            className="w-full px-3 py-1.5 rounded-lg bg-[#FAF8F5] border border-[#e5e0d6] text-xs font-bold text-[#231f20]"
                           />
                         </div>
 
@@ -1117,7 +1117,7 @@ export function AnnualProgramManager({ initialConfig, defaultConfig }: AnnualPro
                             dir="rtl"
                             value={event.categoryAr}
                             onChange={(e) => updateQuarterEvent(activeQuarterIdx, eIdx, 'categoryAr', e.target.value)}
-                            className="w-full px-3 py-1.5 rounded-lg bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20]"
+                            className="w-full px-3 py-1.5 rounded-lg bg-[#FAF8F5] border border-[#e5e0d6] text-xs text-[#231f20]"
                           />
                         </div>
                       </div>
@@ -1131,7 +1131,7 @@ export function AnnualProgramManager({ initialConfig, defaultConfig }: AnnualPro
                           dir="rtl"
                           value={event.descAr}
                           onChange={(e) => updateQuarterEvent(activeQuarterIdx, eIdx, 'descAr', e.target.value)}
-                          className="w-full px-3 py-1.5 rounded-lg bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20]"
+                          className="w-full px-3 py-1.5 rounded-lg bg-[#FAF8F5] border border-[#e5e0d6] text-xs text-[#231f20]"
                         />
                       </div>
 
@@ -1145,7 +1145,7 @@ export function AnnualProgramManager({ initialConfig, defaultConfig }: AnnualPro
                             dir="rtl"
                             value={event.venueAr || ''}
                             onChange={(e) => updateQuarterEvent(activeQuarterIdx, eIdx, 'venueAr', e.target.value)}
-                            className="w-full px-3 py-1.5 rounded-lg bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20]"
+                            className="w-full px-3 py-1.5 rounded-lg bg-[#FAF8F5] border border-[#e5e0d6] text-xs text-[#231f20]"
                           />
                         </div>
 
@@ -1158,7 +1158,7 @@ export function AnnualProgramManager({ initialConfig, defaultConfig }: AnnualPro
                             dir="ltr"
                             value={event.titleFr || ''}
                             onChange={(e) => updateQuarterEvent(activeQuarterIdx, eIdx, 'titleFr', e.target.value)}
-                            className="w-full px-3 py-1.5 rounded-lg bg-[#F5F3EE] border border-[#e5e0d6] text-xs text-[#231f20]"
+                            className="w-full px-3 py-1.5 rounded-lg bg-[#FAF8F5] border border-[#e5e0d6] text-xs text-[#231f20]"
                           />
                         </div>
                       </div>
@@ -1242,7 +1242,7 @@ export function AnnualProgramManager({ initialConfig, defaultConfig }: AnnualPro
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4 border-t border-[#e5e0d6]">
               {/* Primary Button */}
-              <div className="p-4 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6] space-y-3">
+              <div className="p-4 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6] space-y-3">
                 <span className="text-xs font-black text-[#231f20] block">الزر الأساسي (Primary Button)</span>
                 <input
                   type="text"
@@ -1263,7 +1263,7 @@ export function AnnualProgramManager({ initialConfig, defaultConfig }: AnnualPro
               </div>
 
               {/* Secondary Button */}
-              <div className="p-4 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6] space-y-3">
+              <div className="p-4 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6] space-y-3">
                 <span className="text-xs font-black text-[#231f20] block">الزر الثانوي (Secondary Button)</span>
                 <input
                   type="text"

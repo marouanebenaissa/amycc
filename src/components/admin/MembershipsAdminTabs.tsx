@@ -514,7 +514,7 @@ export function MembershipsAdminTabs({
       )}
 
       {/* Main Tabs Segment Control */}
-      <div className="bg-[#FEF6CC] p-1.5 rounded-2xl flex flex-wrap gap-1 border border-[#e5e0d6]">
+      <div className="bg-[#F4EFE6] p-1.5 rounded-2xl flex flex-wrap gap-1 border border-[#e5e0d6]">
         <button
           onClick={() => setActiveTab('applications')}
           className={`flex-1 min-w-[160px] py-3 px-4 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2 cursor-pointer ${
@@ -625,7 +625,7 @@ export function MembershipsAdminTabs({
                   value={searchApplication}
                   onChange={(e) => setSearchApplication(e.target.value)}
                   placeholder="بحث بالاسم، البريد، الهاتف، المدينة، المهنة أو الدافع..."
-                  className="w-full pl-4 pr-10 py-2.5 rounded-xl border border-[#e5e0d6] text-xs outline-none focus:border-[#231f20] bg-[#F5F3EE]"
+                  className="w-full pl-4 pr-10 py-2.5 rounded-xl border border-[#e5e0d6] text-xs outline-none focus:border-[#231f20] bg-[#FAF8F5]"
                 />
                 <span className="absolute right-3.5 top-2.5 text-slate-400">🔍</span>
               </div>
@@ -633,7 +633,7 @@ export function MembershipsAdminTabs({
               <select
                 value={statusFilter}
                 onChange={(e) => setStatusFilter(e.target.value)}
-                className="px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs font-bold text-[#231f20] bg-[#F5F3EE] outline-none"
+                className="px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs font-bold text-[#231f20] bg-[#FAF8F5] outline-none"
               >
                 <option value="all">كل الحالات ({totalAppsCount})</option>
                 <option value="pending">قيد الانتظار ({pendingAppsCount})</option>
@@ -651,7 +651,7 @@ export function MembershipsAdminTabs({
           <div className="bg-white rounded-2xl border border-[#e5e0d6] overflow-hidden shadow-2xs">
             <div className="overflow-x-auto">
               <table className="w-full text-start text-xs text-[#231f20]">
-                <thead className="bg-[#F5F3EE] border-b border-[#e5e0d6] text-2xs uppercase tracking-wider text-[#5C5A55] font-bold">
+                <thead className="bg-[#FAF8F5] border-b border-[#e5e0d6] text-2xs uppercase tracking-wider text-[#5C5A55] font-bold">
                   <tr>
                     <th className="px-6 py-4 text-start">المترشح للعضوية</th>
                     <th className="px-6 py-4 text-start">المدينة / المهنة</th>
@@ -664,7 +664,7 @@ export function MembershipsAdminTabs({
                 <tbody className="divide-y divide-[#FEF6CC]">
                   {filteredApplications.length > 0 ? (
                     filteredApplications.map((app) => (
-                      <tr key={app.id} className="hover:bg-[#F5F3EE]/60 transition-colors">
+                      <tr key={app.id} className="hover:bg-[#FAF8F5]/60 transition-colors">
                         {/* Applicant details */}
                         <td className="px-6 py-4">
                           <div className="font-bold text-[#231f20] text-xs">{app.full_name}</div>
@@ -698,7 +698,7 @@ export function MembershipsAdminTabs({
                               app.interests.map((interest, idx) => (
                                 <span
                                   key={idx}
-                                  className="px-2 py-0.5 rounded-full text-3xs font-bold bg-[#F5F3EE] border border-[#e5e0d6] text-[#231f20]"
+                                  className="px-2 py-0.5 rounded-full text-3xs font-bold bg-[#FAF8F5] border border-[#e5e0d6] text-[#231f20]"
                                 >
                                   {interest}
                                 </span>
@@ -747,7 +747,7 @@ export function MembershipsAdminTabs({
                           <div className="flex items-center justify-center gap-1.5">
                             <button
                               onClick={() => setViewingApp(app)}
-                              className="px-2.5 py-1 rounded-lg text-2xs font-bold bg-[#F5F3EE] text-[#231f20] hover:bg-[#FEF6CC] border border-[#e5e0d6] transition-colors cursor-pointer"
+                              className="px-2.5 py-1 rounded-lg text-2xs font-bold bg-[#FAF8F5] text-[#231f20] hover:bg-[#F4EFE6] border border-[#e5e0d6] transition-colors cursor-pointer"
                               title="عرض بطاقة المترشح الكاملة"
                             >
                               عرض الملف
@@ -873,7 +873,7 @@ export function MembershipsAdminTabs({
                   </p>
 
                   {/* Benefits checklist */}
-                  <div className="space-y-2 border-t border-[#FEF6CC] pt-4 mb-6">
+                  <div className="space-y-2 border-t border-[#E5E0D6] pt-4 mb-6">
                     <span className="text-2xs font-extrabold uppercase text-[#231f20] block mb-2">
                       الامتيازات والصلاحيات القانونية:
                     </span>
@@ -935,7 +935,7 @@ export function MembershipsAdminTabs({
               </h2>
             </div>
 
-            <div className="flex items-center bg-[#FEF6CC] p-1 rounded-xl border border-[#e5e0d6]">
+            <div className="flex items-center bg-[#F4EFE6] p-1 rounded-xl border border-[#e5e0d6]">
               <button
                 type="button"
                 onClick={() => setActiveLangTab('ar')}
@@ -974,7 +974,7 @@ export function MembershipsAdminTabs({
 
           {/* SECTION 1: HERO */}
           <div className="bg-white p-6 sm:p-8 rounded-3xl border border-[#e5e0d6] shadow-2xs space-y-6">
-            <div className="flex items-center justify-between border-b border-[#FEF6CC] pb-4">
+            <div className="flex items-center justify-between border-b border-[#E5E0D6] pb-4">
               <div>
                 <span className="text-2xs font-bold uppercase tracking-wider text-[#bd3227]">
                   واجهة الترحيب
@@ -1005,7 +1005,7 @@ export function MembershipsAdminTabs({
                       e.target.value
                     )
                   }
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE] outline-none focus:border-[#231f20]"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs bg-[#FAF8F5] outline-none focus:border-[#231f20]"
                 />
               </div>
 
@@ -1029,7 +1029,7 @@ export function MembershipsAdminTabs({
                       e.target.value
                     )
                   }
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE] outline-none focus:border-[#231f20]"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs bg-[#FAF8F5] outline-none focus:border-[#231f20]"
                 />
               </div>
 
@@ -1053,7 +1053,7 @@ export function MembershipsAdminTabs({
                       e.target.value
                     )
                   }
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE] font-bold outline-none focus:border-[#231f20]"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs bg-[#FAF8F5] font-bold outline-none focus:border-[#231f20]"
                 />
               </div>
 
@@ -1077,7 +1077,7 @@ export function MembershipsAdminTabs({
                       e.target.value
                     )
                   }
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE] outline-none focus:border-[#231f20]"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs bg-[#FAF8F5] outline-none focus:border-[#231f20]"
                 />
               </div>
 
@@ -1101,12 +1101,12 @@ export function MembershipsAdminTabs({
                       e.target.value
                     )
                   }
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE] outline-none focus:border-[#231f20]"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs bg-[#FAF8F5] outline-none focus:border-[#231f20]"
                 />
               </div>
 
               {/* Hero Image */}
-              <div className="sm:col-span-2 pt-2 border-t border-[#FEF6CC]">
+              <div className="sm:col-span-2 pt-2 border-t border-[#E5E0D6]">
                 <label className="block text-2xs font-extrabold text-[#231f20] mb-1.5">
                   صورة الغلاف البانورامي (Hero Image)
                 </label>
@@ -1123,7 +1123,7 @@ export function MembershipsAdminTabs({
                     value={config.hero.imageUrl}
                     onChange={(e) => updateHero('imageUrl', e.target.value)}
                     placeholder="https://images.unsplash.com/... أو مسار الصورة"
-                    className="flex-1 px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs font-mono bg-[#F5F3EE] outline-none"
+                    className="flex-1 px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs font-mono bg-[#FAF8F5] outline-none"
                   />
                   <button
                     type="button"
@@ -1172,7 +1172,7 @@ export function MembershipsAdminTabs({
                       e.target.value
                     )
                   }
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE] outline-none"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs bg-[#FAF8F5] outline-none"
                 />
               </div>
 
@@ -1185,7 +1185,7 @@ export function MembershipsAdminTabs({
                   value={config.hero.primaryBtnUrl}
                   onChange={(e) => updateHero('primaryBtnUrl', e.target.value)}
                   placeholder="#membership-form"
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs font-mono bg-[#F5F3EE] outline-none"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs font-mono bg-[#FAF8F5] outline-none"
                 />
               </div>
             </div>
@@ -1193,7 +1193,7 @@ export function MembershipsAdminTabs({
 
           {/* SECTION 2: STATS */}
           <div className="bg-white p-6 sm:p-8 rounded-3xl border border-[#e5e0d6] shadow-2xs space-y-6">
-            <div className="border-b border-[#FEF6CC] pb-4">
+            <div className="border-b border-[#E5E0D6] pb-4">
               <span className="text-2xs font-bold uppercase tracking-wider text-[#bd3227]">
                 أرقام ومؤشرات الانخراط
               </span>
@@ -1204,7 +1204,7 @@ export function MembershipsAdminTabs({
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
               {(config.stats || []).map((stat, idx) => (
-                <div key={stat.id || idx} className="p-4 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6] space-y-3">
+                <div key={stat.id || idx} className="p-4 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6] space-y-3">
                   <div className="flex items-center gap-2">
                     <input
                       type="text"
@@ -1254,7 +1254,7 @@ export function MembershipsAdminTabs({
 
           {/* SECTION 3: BENEFITS */}
           <div className="bg-white p-6 sm:p-8 rounded-3xl border border-[#e5e0d6] shadow-2xs space-y-6">
-            <div className="border-b border-[#FEF6CC] pb-4">
+            <div className="border-b border-[#E5E0D6] pb-4">
               <span className="text-2xs font-bold uppercase tracking-wider text-[#bd3227]">
                 مزايا وحقوق العضو
               </span>
@@ -1265,7 +1265,7 @@ export function MembershipsAdminTabs({
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
               {(config.benefits || []).map((b, idx) => (
-                <div key={b.id || idx} className="p-4 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6] space-y-3">
+                <div key={b.id || idx} className="p-4 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6] space-y-3">
                   <div className="flex items-center gap-2">
                     <input
                       type="text"
@@ -1324,7 +1324,7 @@ export function MembershipsAdminTabs({
 
           {/* SECTION 4: STEPS */}
           <div className="bg-white p-6 sm:p-8 rounded-3xl border border-[#e5e0d6] shadow-2xs space-y-6">
-            <div className="border-b border-[#FEF6CC] pb-4">
+            <div className="border-b border-[#E5E0D6] pb-4">
               <span className="text-2xs font-bold uppercase tracking-wider text-[#bd3227]">
                 مسار العضوية
               </span>
@@ -1335,7 +1335,7 @@ export function MembershipsAdminTabs({
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
               {(config.steps || []).map((s, idx) => (
-                <div key={s.id || idx} className="p-4 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6] space-y-3">
+                <div key={s.id || idx} className="p-4 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6] space-y-3">
                   <div className="w-7 h-7 rounded-full bg-[#231f20] text-white flex items-center justify-center font-bold text-xs">
                     {idx + 1}
                   </div>
@@ -1386,7 +1386,7 @@ export function MembershipsAdminTabs({
 
           {/* SECTION 5: REQUIREMENTS */}
           <div className="bg-white p-6 sm:p-8 rounded-3xl border border-[#e5e0d6] shadow-2xs space-y-6">
-            <div className="border-b border-[#FEF6CC] pb-4">
+            <div className="border-b border-[#E5E0D6] pb-4">
               <span className="text-2xs font-bold uppercase tracking-wider text-[#bd3227]">
                 الشروط القانونية
               </span>
@@ -1422,7 +1422,7 @@ export function MembershipsAdminTabs({
                       },
                     }))
                   }
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE] font-bold"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs bg-[#FAF8F5] font-bold"
                 />
               </div>
 
@@ -1456,7 +1456,7 @@ export function MembershipsAdminTabs({
                       },
                     }))
                   }}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE] outline-none"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs bg-[#FAF8F5] outline-none"
                 />
               </div>
             </div>
@@ -1464,7 +1464,7 @@ export function MembershipsAdminTabs({
 
           {/* SECTION 6: CTA / SUPPORT */}
           <div className="bg-white p-6 sm:p-8 rounded-3xl border border-[#e5e0d6] shadow-2xs space-y-6">
-            <div className="border-b border-[#FEF6CC] pb-4">
+            <div className="border-b border-[#E5E0D6] pb-4">
               <span className="text-2xs font-bold uppercase tracking-wider text-[#bd3227]">
                 المساعدة والتواصل
               </span>
@@ -1493,7 +1493,7 @@ export function MembershipsAdminTabs({
                       e.target.value
                     )
                   }
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE]"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs bg-[#FAF8F5]"
                 />
               </div>
 
@@ -1516,7 +1516,7 @@ export function MembershipsAdminTabs({
                       e.target.value
                     )
                   }
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE] font-bold"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs bg-[#FAF8F5] font-bold"
                 />
               </div>
 
@@ -1543,7 +1543,7 @@ export function MembershipsAdminTabs({
                       e.target.value
                     )
                   }
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE]"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs bg-[#FAF8F5]"
                 />
               </div>
 
@@ -1555,7 +1555,7 @@ export function MembershipsAdminTabs({
                   type="email"
                   value={config.cta.email}
                   onChange={(e) => updateCta('email', e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE]"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs bg-[#FAF8F5]"
                 />
               </div>
 
@@ -1567,7 +1567,7 @@ export function MembershipsAdminTabs({
                   type="text"
                   value={config.cta.phone}
                   onChange={(e) => updateCta('phone', e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE]"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs bg-[#FAF8F5]"
                 />
               </div>
             </div>
@@ -1620,7 +1620,7 @@ export function MembershipsAdminTabs({
       {viewingApp && (
         <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
           <div className="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto border border-[#e5e0d6] shadow-2xl p-6 sm:p-8 space-y-6">
-            <div className="flex items-center justify-between border-b border-[#FEF6CC] pb-4">
+            <div className="flex items-center justify-between border-b border-[#E5E0D6] pb-4">
               <div>
                 <span className="text-2xs font-extrabold uppercase tracking-widest text-[#bd3227]">
                   بطاقة فحص طلب الانخراط
@@ -1629,14 +1629,14 @@ export function MembershipsAdminTabs({
               </div>
               <button
                 onClick={() => setViewingApp(null)}
-                className="w-8 h-8 rounded-full bg-[#F5F3EE] hover:bg-[#FEF6CC] flex items-center justify-center text-sm font-bold text-[#231f20] cursor-pointer"
+                className="w-8 h-8 rounded-full bg-[#FAF8F5] hover:bg-[#F4EFE6] flex items-center justify-center text-sm font-bold text-[#231f20] cursor-pointer"
               >
                 ✕
               </button>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
-              <div className="p-3.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6]">
+              <div className="p-3.5 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6]">
                 <span className="text-3xs text-[#5C5A55] font-bold block mb-1">
                   البريد الإلكتروني
                 </span>
@@ -1648,7 +1648,7 @@ export function MembershipsAdminTabs({
                 </a>
               </div>
 
-              <div className="p-3.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6]">
+              <div className="p-3.5 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6]">
                 <span className="text-3xs text-[#5C5A55] font-bold block mb-1">الهاتف</span>
                 <a
                   href={`tel:${viewingApp.phone}`}
@@ -1659,12 +1659,12 @@ export function MembershipsAdminTabs({
                 </a>
               </div>
 
-              <div className="p-3.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6]">
+              <div className="p-3.5 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6]">
                 <span className="text-3xs text-[#5C5A55] font-bold block mb-1">المدينة</span>
                 <span className="font-bold text-[#231f20]">{viewingApp.city}</span>
               </div>
 
-              <div className="p-3.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6]">
+              <div className="p-3.5 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6]">
                 <span className="text-3xs text-[#5C5A55] font-bold block mb-1">
                   المهنة أو التخصص
                 </span>
@@ -1684,7 +1684,7 @@ export function MembershipsAdminTabs({
                   viewingApp.interests.map((it, idx) => (
                     <span
                       key={idx}
-                      className="px-3 py-1 rounded-full text-2xs font-bold bg-[#F5F3EE] border border-[#e5e0d6] text-[#231f20]"
+                      className="px-3 py-1 rounded-full text-2xs font-bold bg-[#FAF8F5] border border-[#e5e0d6] text-[#231f20]"
                     >
                       {it}
                     </span>
@@ -1696,7 +1696,7 @@ export function MembershipsAdminTabs({
             </div>
 
             {/* Motivation statement */}
-            <div className="p-4 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6] space-y-2">
+            <div className="p-4 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6] space-y-2">
               <span className="text-2xs font-extrabold text-[#231f20] block">
                 دوافع الانخراط ورسالة المترشح:
               </span>
@@ -1706,7 +1706,7 @@ export function MembershipsAdminTabs({
             </div>
 
             {/* Current Status and Modal Actions */}
-            <div className="flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-[#FEF6CC]">
+            <div className="flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-[#E5E0D6]">
               <div className="flex items-center gap-2">
                 <span className="text-2xs font-bold text-[#5C5A55]">الحالة الحالية:</span>
                 <span
@@ -1766,7 +1766,7 @@ export function MembershipsAdminTabs({
       {(isAddingTier || editingTier) && (
         <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
           <div className="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto border border-[#e5e0d6] shadow-2xl p-6 sm:p-8 space-y-6">
-            <div className="flex items-center justify-between border-b border-[#FEF6CC] pb-4">
+            <div className="flex items-center justify-between border-b border-[#E5E0D6] pb-4">
               <div>
                 <span className="text-2xs font-extrabold uppercase tracking-widest text-[#bd3227]">
                   {editingTier ? 'تعديل فئة عضوية' : 'إضافة فئة عضوية جديدة'}
@@ -1780,7 +1780,7 @@ export function MembershipsAdminTabs({
                   setEditingTier(null)
                   setIsAddingTier(false)
                 }}
-                className="w-8 h-8 rounded-full bg-[#F5F3EE] hover:bg-[#FEF6CC] flex items-center justify-center text-sm font-bold text-[#231f20] cursor-pointer"
+                className="w-8 h-8 rounded-full bg-[#FAF8F5] hover:bg-[#F4EFE6] flex items-center justify-center text-sm font-bold text-[#231f20] cursor-pointer"
               >
                 ✕
               </button>
@@ -1798,7 +1798,7 @@ export function MembershipsAdminTabs({
                     value={tierForm.nameAr}
                     onChange={(e) => setTierForm((p) => ({ ...p, nameAr: e.target.value }))}
                     placeholder="مثال: عضو فاعل وممارس"
-                    className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE] font-bold"
+                    className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#FAF8F5] font-bold"
                   />
                 </div>
                 <div>
@@ -1810,7 +1810,7 @@ export function MembershipsAdminTabs({
                     value={tierForm.nameFr}
                     onChange={(e) => setTierForm((p) => ({ ...p, nameFr: e.target.value }))}
                     placeholder="Ex: Membre Actif"
-                    className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE]"
+                    className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#FAF8F5]"
                   />
                 </div>
                 <div>
@@ -1822,7 +1822,7 @@ export function MembershipsAdminTabs({
                     value={tierForm.nameEn}
                     onChange={(e) => setTierForm((p) => ({ ...p, nameEn: e.target.value }))}
                     placeholder="Ex: Active Member"
-                    className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE]"
+                    className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#FAF8F5]"
                   />
                 </div>
               </div>
@@ -1838,7 +1838,7 @@ export function MembershipsAdminTabs({
                     value={tierForm.feeAr}
                     onChange={(e) => setTierForm((p) => ({ ...p, feeAr: e.target.value }))}
                     placeholder="200 درهم"
-                    className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE]"
+                    className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#FAF8F5]"
                   />
                 </div>
                 <div>
@@ -1852,7 +1852,7 @@ export function MembershipsAdminTabs({
                       setTierForm((p) => ({ ...p, feeFr: e.target.value, feeEn: e.target.value }))
                     }
                     placeholder="200 MAD"
-                    className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE]"
+                    className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#FAF8F5]"
                   />
                 </div>
                 <div>
@@ -1864,7 +1864,7 @@ export function MembershipsAdminTabs({
                     value={tierForm.periodAr}
                     onChange={(e) => setTierForm((p) => ({ ...p, periodAr: e.target.value }))}
                     placeholder="سنوياً"
-                    className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE]"
+                    className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#FAF8F5]"
                   />
                 </div>
                 <div>
@@ -1882,7 +1882,7 @@ export function MembershipsAdminTabs({
                       }))
                     }
                     placeholder="Par an"
-                    className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE]"
+                    className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#FAF8F5]"
                   />
                 </div>
               </div>
@@ -1898,7 +1898,7 @@ export function MembershipsAdminTabs({
                     value={tierForm.badgeAr || ''}
                     onChange={(e) => setTierForm((p) => ({ ...p, badgeAr: e.target.value }))}
                     placeholder="الفئة الأكثر تميزاً"
-                    className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE]"
+                    className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#FAF8F5]"
                   />
                 </div>
                 <div>
@@ -1909,7 +1909,7 @@ export function MembershipsAdminTabs({
                     type="text"
                     value={tierForm.badgeFr || ''}
                     onChange={(e) => setTierForm((p) => ({ ...p, badgeFr: e.target.value }))}
-                    className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE]"
+                    className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#FAF8F5]"
                   />
                 </div>
                 <div>
@@ -1920,7 +1920,7 @@ export function MembershipsAdminTabs({
                     type="text"
                     value={tierForm.badgeEn || ''}
                     onChange={(e) => setTierForm((p) => ({ ...p, badgeEn: e.target.value }))}
-                    className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE]"
+                    className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#FAF8F5]"
                   />
                 </div>
               </div>
@@ -1934,7 +1934,7 @@ export function MembershipsAdminTabs({
                   rows={2}
                   value={tierForm.descriptionAr}
                   onChange={(e) => setTierForm((p) => ({ ...p, descriptionAr: e.target.value }))}
-                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE]"
+                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#FAF8F5]"
                 />
               </div>
 
@@ -1947,7 +1947,7 @@ export function MembershipsAdminTabs({
                     rows={2}
                     value={tierForm.descriptionFr}
                     onChange={(e) => setTierForm((p) => ({ ...p, descriptionFr: e.target.value }))}
-                    className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE]"
+                    className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#FAF8F5]"
                   />
                 </div>
                 <div>
@@ -1958,7 +1958,7 @@ export function MembershipsAdminTabs({
                     rows={2}
                     value={tierForm.descriptionEn}
                     onChange={(e) => setTierForm((p) => ({ ...p, descriptionEn: e.target.value }))}
-                    className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE]"
+                    className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#FAF8F5]"
                   />
                 </div>
               </div>
@@ -1973,7 +1973,7 @@ export function MembershipsAdminTabs({
                   value={tierBenefitsArText}
                   onChange={(e) => setTierBenefitsArText(e.target.value)}
                   placeholder="بطاقة عضوية رقمية ومطبوعة&#10;حق التصويت بالجمع العام&#10;أولوية في التسجيل بالمحترفات"
-                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE]"
+                  className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#FAF8F5]"
                 />
               </div>
 
@@ -1986,7 +1986,7 @@ export function MembershipsAdminTabs({
                     rows={2}
                     value={tierBenefitsFrText}
                     onChange={(e) => setTierBenefitsFrText(e.target.value)}
-                    className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE]"
+                    className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#FAF8F5]"
                   />
                 </div>
                 <div>
@@ -1997,7 +1997,7 @@ export function MembershipsAdminTabs({
                     rows={2}
                     value={tierBenefitsEnText}
                     onChange={(e) => setTierBenefitsEnText(e.target.value)}
-                    className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE]"
+                    className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#FAF8F5]"
                   />
                 </div>
               </div>
@@ -2027,7 +2027,7 @@ export function MembershipsAdminTabs({
             </div>
 
             {/* Modal Actions */}
-            <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#FEF6CC]">
+            <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#E5E0D6]">
               <button
                 type="button"
                 onClick={() => {

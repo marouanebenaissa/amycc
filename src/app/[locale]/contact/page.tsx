@@ -41,7 +41,7 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
     <>
       <Header locale={locale} dict={dict} />
 
-      <main id="main-content" className="flex-1 bg-[#F5F3EE]">
+      <main id="main-content" className="flex-1 bg-[#FAF8F5]">
         {/* ============================================================
             1. HERO BANNER WITH MOROCCAN PATTERN & AMBIENT GLOW
             ============================================================ */}
@@ -120,7 +120,7 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
                   </a>
                 )}
               </div>
-              <div className="mt-5 pt-3.5 border-t border-[#FEF6CC]">
+              <div className="mt-5 pt-3.5 border-t border-[#E5E0D6]">
                 <a
                   href={`mailto:${channels.primaryEmail}`}
                   className="text-xs sm:text-sm font-bold text-[#231f20] group-hover:underline inline-flex items-center gap-1.5"
@@ -153,7 +153,7 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
                   </span>
                 )}
               </div>
-              <div className="mt-5 pt-3.5 border-t border-[#FEF6CC]">
+              <div className="mt-5 pt-3.5 border-t border-[#E5E0D6]">
                 {whatsappUrl ? (
                   <a
                     href={whatsappUrl}
@@ -192,7 +192,7 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
                   {address}
                 </p>
               </div>
-              <div className="mt-5 pt-3.5 border-t border-[#FEF6CC]">
+              <div className="mt-5 pt-3.5 border-t border-[#E5E0D6]">
                 {channels.mapLinkUrl ? (
                   <a
                     href={channels.mapLinkUrl}
@@ -227,7 +227,7 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
                   ● {responseTime}
                 </span>
               </div>
-              <div className="mt-5 pt-3.5 border-t border-[#FEF6CC] flex items-center justify-center gap-2 text-xs sm:text-sm font-bold text-emerald-700">
+              <div className="mt-5 pt-3.5 border-t border-[#E5E0D6] flex items-center justify-center gap-2 text-xs sm:text-sm font-bold text-emerald-700">
                 <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
                 <span>{isAr ? 'فريق الإنصات نشط' : 'Listening Team Active'}</span>
               </div>
@@ -291,7 +291,7 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
                       <h4 className="text-sm sm:text-base font-black">
                         {isAr ? 'مراكش الحمراء • المملكة المغربية' : 'Marrakech, Kingdom of Morocco'}
                       </h4>
-                      <p className="text-xs text-[#FEF6CC]/90 mt-1 leading-relaxed">
+                      <p className="text-xs text-[#E2DED6]/90 mt-1 leading-relaxed">
                         {isAr
                           ? 'استقبال المرتفقين والشركاء يتم بموعد مسبق أو خلال أوقات الاستقبال الرسمية.'
                           : 'Public reception by appointment during statutory business hours.'}
@@ -314,7 +314,7 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
 
               {/* Social Channels Hub */}
               <div className="p-6 sm:p-7 rounded-3xl bg-white border border-[#e5e0d6] shadow-subtle space-y-4">
-                <div className="flex items-center justify-between pb-3 border-b border-[#FEF6CC]">
+                <div className="flex items-center justify-between pb-3 border-b border-[#E5E0D6]">
                   <h3 className="text-base font-black text-[#231f20] flex items-center gap-2">
                     <span>🌐</span>
                     <span>{isAr ? 'تابع الجمعية على المنصات الرقمية' : 'Official Social Channels'}</span>
@@ -328,7 +328,7 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
                       href={social.facebook}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="p-3.5 rounded-xl bg-[#F5F3EE] hover:bg-[#1877f2] text-[#231f20] hover:text-white transition-all flex items-center gap-2.5 text-xs sm:text-sm font-bold group border border-[#e5e0d6]"
+                      className="p-3.5 rounded-xl bg-[#FAF8F5] hover:bg-[#1877f2] text-[#231f20] hover:text-white transition-all flex items-center gap-2.5 text-xs sm:text-sm font-bold group border border-[#e5e0d6]"
                     >
                       <span className="text-base">📘</span>
                       <span>Facebook</span>
@@ -340,7 +340,7 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
                       href={social.instagram}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="p-3.5 rounded-xl bg-[#F5F3EE] hover:bg-[#e4405f] text-[#231f20] hover:text-white transition-all flex items-center gap-2.5 text-xs sm:text-sm font-bold group border border-[#e5e0d6]"
+                      className="p-3.5 rounded-xl bg-[#FAF8F5] hover:bg-[#e4405f] text-[#231f20] hover:text-white transition-all flex items-center gap-2.5 text-xs sm:text-sm font-bold group border border-[#e5e0d6]"
                     >
                       <span className="text-base">📸</span>
                       <span>Instagram</span>
@@ -352,7 +352,7 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
                       href={social.linkedin}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="p-3.5 rounded-xl bg-[#F5F3EE] hover:bg-[#0a66c2] text-[#231f20] hover:text-white transition-all flex items-center gap-2.5 text-xs sm:text-sm font-bold group border border-[#e5e0d6]"
+                      className="p-3.5 rounded-xl bg-[#FAF8F5] hover:bg-[#0a66c2] text-[#231f20] hover:text-white transition-all flex items-center gap-2.5 text-xs sm:text-sm font-bold group border border-[#e5e0d6]"
                     >
                       <span className="text-base">💼</span>
                       <span>LinkedIn</span>
@@ -364,7 +364,7 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
                       href={social.youtube}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="p-3.5 rounded-xl bg-[#F5F3EE] hover:bg-[#ff0000] text-[#231f20] hover:text-white transition-all flex items-center gap-2.5 text-xs sm:text-sm font-bold group border border-[#e5e0d6]"
+                      className="p-3.5 rounded-xl bg-[#FAF8F5] hover:bg-[#ff0000] text-[#231f20] hover:text-white transition-all flex items-center gap-2.5 text-xs sm:text-sm font-bold group border border-[#e5e0d6]"
                     >
                       <span className="text-base">▶️</span>
                       <span>YouTube</span>

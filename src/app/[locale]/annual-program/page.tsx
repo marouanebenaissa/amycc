@@ -45,7 +45,7 @@ export default async function AnnualProgramPage(props: { params: Promise<{ local
     <>
       <Header locale={locale} dict={dict} />
 
-      <main id="main-content" className="flex-1 bg-[#F5F3EE]">
+      <main id="main-content" className="flex-1 bg-[#FAF8F5]">
         {/* ============================================================
             1. HERO BANNER (Full-Bleed Moroccan Cinematic Hero or Ambient Pattern)
             ============================================================ */}
@@ -155,7 +155,7 @@ export default async function AnnualProgramPage(props: { params: Promise<{ local
             {/* Description */}
             <p
               className={`text-base sm:text-lg lg:text-xl max-w-3xl mx-auto leading-relaxed text-balance ${
-                hasHeroImage ? 'text-[#FEF6CC]/95 font-normal drop-shadow-xs' : 'text-[#5C5A55] font-medium'
+                hasHeroImage ? 'text-[#E2DED6]/95 font-normal drop-shadow-xs' : 'text-[#5C5A55] font-medium'
               }`}
             >
               {heroDesc}
@@ -190,7 +190,7 @@ export default async function AnnualProgramPage(props: { params: Promise<{ local
                 className={`inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-xs sm:text-sm transition-all ${
                   hasHeroImage
                     ? 'text-white bg-white/10 hover:bg-white/20 border border-white/20 backdrop-blur-md'
-                    : 'text-[#231f20] bg-white hover:bg-[#F5F3EE] border border-[#e5e0d6]'
+                    : 'text-[#231f20] bg-white hover:bg-[#FAF8F5] border border-[#e5e0d6]'
                 }`}
               >
                 <span>👥</span>
@@ -262,7 +262,7 @@ export default async function AnnualProgramPage(props: { params: Promise<{ local
                   className="p-6 rounded-3xl bg-white border border-[#e5e0d6] hover:border-[#231f20]/40 shadow-subtle hover:shadow-card transition-all flex flex-col justify-between group space-y-4"
                 >
                   <div className="space-y-3">
-                    <div className="w-12 h-12 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6] flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
+                    <div className="w-12 h-12 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6] flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
                       {pillar.icon || '🎨'}
                     </div>
                     <h3 className="text-base font-black text-[#231f20] group-hover:text-[#231f20] transition-colors leading-snug">
@@ -272,7 +272,7 @@ export default async function AnnualProgramPage(props: { params: Promise<{ local
                       {desc}
                     </p>
                   </div>
-                  <div className="pt-2 border-t border-[#FEF6CC] text-3xs font-bold text-[#5C5A55]">
+                  <div className="pt-2 border-t border-[#E5E0D6] text-3xs font-bold text-[#5C5A55]">
                     AMYCC Season 2026
                   </div>
                 </div>
@@ -361,7 +361,7 @@ export default async function AnnualProgramPage(props: { params: Promise<{ local
               {ctaTitle}
             </h2>
 
-            <p className="text-sm sm:text-base text-[#FEF6CC]/90 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-sm sm:text-base text-[#E2DED6]/90 max-w-2xl mx-auto leading-relaxed">
               {ctaDesc}
             </p>
 

@@ -58,7 +58,7 @@ export function EventRegistrationForm({
 
   if (!registrationOpen) {
     return (
-      <div className="bg-[#F5F3EE] rounded-3xl border border-[#e5e0d6] p-6 sm:p-8 text-center space-y-3 shadow-sm">
+      <div className="bg-[#FAF8F5] rounded-3xl border border-[#e5e0d6] p-6 sm:p-8 text-center space-y-3 shadow-sm">
         <div className="w-12 h-12 rounded-2xl bg-slate-200 text-slate-600 flex items-center justify-center mx-auto text-xl">
           🔒
         </div>
@@ -86,7 +86,7 @@ export function EventRegistrationForm({
       <div className="absolute top-0 start-0 end-0 h-1.5 bg-gradient-to-r from-[#231f20] via-[#bd3227] to-[#231f20]" />
 
       <div className="mb-6">
-        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-3xs font-extrabold bg-[#FEF6CC] text-[#bd3227] mb-2">
+        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-3xs font-extrabold bg-[#F4EFE6] text-[#bd3227] mb-2">
           <span className="w-1.5 h-1.5 rounded-full bg-[#bd3227] animate-pulse" />
           <span>{isAr ? 'تأكيد الحجز والتسجيل' : isFr ? 'Réservation & Enregistrement' : 'Direct Registration'}</span>
         </span>
@@ -209,7 +209,7 @@ export function EventRegistrationForm({
       </form>
 
       {/* Confirmation & ticket note */}
-      <div className="mt-5 pt-5 border-t border-[#FEF6CC] flex items-center justify-between text-3xs text-[#5C5A55]">
+      <div className="mt-5 pt-5 border-t border-[#E5E0D6] flex items-center justify-between text-3xs text-[#5C5A55]">
         <span className="flex items-center gap-1 font-bold text-[#231f20]">
           <span>🎟️</span>
           <span>{isAr ? 'تأكيد فوري لحجز المقعد' : isFr ? 'Confirmation immédiate' : 'Instant Confirmation'}</span>

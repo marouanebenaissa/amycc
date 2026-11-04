@@ -244,7 +244,7 @@ export function EventForm({ event }: EventFormProps) {
           )}
 
           {coverImage && (
-            <div className="mt-3 p-3 rounded-2xl border border-[#e5e0d6] bg-[#F5F3EE] flex items-center gap-3 max-w-md">
+            <div className="mt-3 p-3 rounded-2xl border border-[#e5e0d6] bg-[#FAF8F5] flex items-center gap-3 max-w-md">
               <div className="relative w-16 h-16 rounded-xl overflow-hidden border border-[#e5e0d6] bg-black/5 shrink-0">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
@@ -270,7 +270,7 @@ export function EventForm({ event }: EventFormProps) {
       <div className="bg-white rounded-2xl border border-[#e5e0d6] p-6 space-y-5 shadow-2xs">
         <div className="flex items-center justify-between">
           <h2 className="text-xs font-bold text-[#231f20] uppercase tracking-wider">Trilingual Event Descriptions</h2>
-          <div className="flex gap-1.5 p-1 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6]">
+          <div className="flex gap-1.5 p-1 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6]">
             {(['ar', 'fr', 'en'] as const).map((loc) => (
               <button
                 key={loc}
@@ -280,7 +280,7 @@ export function EventForm({ event }: EventFormProps) {
                   'px-3 py-1.5 text-xs font-bold rounded-lg transition-all',
                   activeLocale === loc
                     ? 'bg-[#231f20] text-white shadow-xs'
-                    : 'text-[#5C5A55] hover:bg-[#FEF6CC]',
+                    : 'text-[#5C5A55] hover:bg-[#F4EFE6]',
                 ].join(' ')}
               >
                 {loc.toUpperCase()}
@@ -328,7 +328,7 @@ export function EventForm({ event }: EventFormProps) {
         <button
           type="button"
           onClick={() => router.back()}
-          className="px-5 py-2.5 text-xs font-bold text-[#5C5A55] border border-[#cfc7b9] rounded-xl hover:bg-[#F5F3EE] transition-colors"
+          className="px-5 py-2.5 text-xs font-bold text-[#5C5A55] border border-[#cfc7b9] rounded-xl hover:bg-[#FAF8F5] transition-colors"
         >
           Cancel
         </button>

@@ -264,7 +264,7 @@ export default async function NewsDetailPage(props: {
     <>
       <Header locale={locale} dict={dict} />
 
-      <main id="main-content" className="flex-1 bg-[#F5F3EE] py-12 lg:py-16">
+      <main id="main-content" className="flex-1 bg-[#FAF8F5] py-12 lg:py-16">
         <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
           {/* Breadcrumb & Navigation */}
           <div className="flex items-center justify-between text-xs font-bold text-[#5C5A55]">
@@ -356,7 +356,7 @@ export default async function NewsDetailPage(props: {
 
             <Link
               href={`/${locale}/news`}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold text-[#231f20] bg-[#F5F3EE] hover:bg-[#FEF6CC] border border-[#e5e0d6] transition-all"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold text-[#231f20] bg-[#FAF8F5] hover:bg-[#F4EFE6] border border-[#e5e0d6] transition-all"
             >
               <span className="rtl:rotate-180">←</span>
               <span>{backToNewsLabel}</span>

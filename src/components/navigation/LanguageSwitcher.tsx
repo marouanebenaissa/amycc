@@ -20,7 +20,7 @@ export function LanguageSwitcher({ currentLocale }: LanguageSwitcherProps) {
 
   return (
     <div
-      className="inline-flex items-center p-1 rounded-xl bg-[#FEF6CC] border border-[#e5e0d6]"
+      className="inline-flex items-center p-1 rounded-xl bg-[#F4EFE6] border border-[#e5e0d6]"
       role="navigation"
       aria-label="Language selector"
     >
@@ -34,7 +34,7 @@ export function LanguageSwitcher({ currentLocale }: LanguageSwitcherProps) {
             className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all ${
               isCurrent
                 ? 'bg-[#231f20] text-white shadow-xs'
-                : 'text-[#5C5A55] hover:text-[#231f20] hover:bg-[#FEF6CC]'
+                : 'text-[#5C5A55] hover:text-[#231f20] hover:bg-[#F4EFE6]'
             }`}
             aria-current={isCurrent ? 'true' : undefined}
             aria-label={localeNames[locale]}

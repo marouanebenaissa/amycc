@@ -108,7 +108,7 @@ export function ProgramsListManager({
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="البحث في البرامج بالاسم، الرابط، أو المدينة..."
-            className="w-full ps-10 pe-4 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs sm:text-sm text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
+            className="w-full ps-10 pe-4 py-2.5 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6] text-xs sm:text-sm text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
           />
         </div>
 
@@ -116,7 +116,7 @@ export function ProgramsListManager({
           <select
             value={selectedCategory}
             onChange={(e) => setSelectedCategory(e.target.value)}
-            className="px-3 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs font-bold text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
+            className="px-3 py-2.5 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6] text-xs font-bold text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
           >
             <option value="all">كل المجالات ({programs.length})</option>
             <option value="arts">فنون تشكيلية</option>
@@ -129,7 +129,7 @@ export function ProgramsListManager({
           <select
             value={selectedStatus}
             onChange={(e) => setSelectedStatus(e.target.value)}
-            className="px-3 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs font-bold text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
+            className="px-3 py-2.5 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6] text-xs font-bold text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20]"
           >
             <option value="all">كل الحالات</option>
             <option value="published">المنشورة فقط</option>
@@ -150,7 +150,7 @@ export function ProgramsListManager({
       <div className="bg-white rounded-3xl border border-[#e5e0d6] overflow-hidden shadow-2xs">
         <div className="overflow-x-auto">
           <table className="w-full text-start text-xs text-[#231f20]">
-            <thead className="bg-[#F5F3EE] border-b border-[#e5e0d6] text-2xs uppercase tracking-wider text-[#5C5A55] font-bold">
+            <thead className="bg-[#FAF8F5] border-b border-[#e5e0d6] text-2xs uppercase tracking-wider text-[#5C5A55] font-bold">
               <tr>
                 <th className="px-6 py-4 text-start">البرنامج (العنوان والرابط)</th>
                 <th className="px-6 py-4 text-start">المجال / المدينة</th>
@@ -166,7 +166,7 @@ export function ProgramsListManager({
                   const title = arTrans?.title || enTrans?.title || prog.slug
 
                   return (
-                    <tr key={prog.id} className="hover:bg-[#F5F3EE]/60 transition-colors">
+                    <tr key={prog.id} className="hover:bg-[#FAF8F5]/60 transition-colors">
                       <td className="px-6 py-4">
                         <div className="flex items-center gap-3.5">
                           {prog.cover_image ? (
@@ -220,7 +220,7 @@ export function ProgramsListManager({
                         <div className="flex items-center gap-2 flex-wrap">
                           <Link
                             href={`/admin/programs/${prog.id}/edit`}
-                            className="px-3 py-1.5 rounded-xl text-xs font-bold bg-[#F5F3EE] text-[#231f20] hover:bg-[#FEF6CC] border border-[#e5e0d6] transition-colors"
+                            className="px-3 py-1.5 rounded-xl text-xs font-bold bg-[#FAF8F5] text-[#231f20] hover:bg-[#F4EFE6] border border-[#e5e0d6] transition-colors"
                           >
                             تعديل
                           </Link>

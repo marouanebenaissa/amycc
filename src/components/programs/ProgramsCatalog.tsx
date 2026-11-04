@@ -139,7 +139,7 @@ export function ProgramsCatalog({ programs, locale, dict }: ProgramsCatalogProps
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder={isAr ? 'ابحث في البرامج والورشات...' : isFr ? 'Rechercher un programme...' : 'Search programs...'}
-              className="w-full ps-10 pe-4 py-2.5 rounded-xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs sm:text-sm text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20] transition-all"
+              className="w-full ps-10 pe-4 py-2.5 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6] text-xs sm:text-sm text-[#231f20] focus:bg-white focus:outline-none focus:border-[#231f20] transition-all"
             />
             {searchQuery && (
               <button
@@ -165,7 +165,7 @@ export function ProgramsCatalog({ programs, locale, dict }: ProgramsCatalogProps
                 className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all cursor-pointer ${
                   isActive
                     ? 'bg-[#231f20] text-white shadow-xs'
-                    : 'bg-[#F5F3EE] text-[#5C5A55] hover:bg-[#FEF6CC] hover:text-[#231f20] border border-[#e5e0d6]'
+                    : 'bg-[#FAF8F5] text-[#5C5A55] hover:bg-[#F4EFE6] hover:text-[#231f20] border border-[#e5e0d6]'
                 }`}
               >
                 <span>{getCategoryIcon(catKey)}</span>
@@ -255,7 +255,7 @@ export function ProgramsCatalog({ programs, locale, dict }: ProgramsCatalogProps
 
                     {/* Objectives & Audience Pills */}
                     {(prog.objectives || prog.target_audience) && (
-                      <div className="p-4 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6] space-y-2.5 text-xs">
+                      <div className="p-4 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6] space-y-2.5 text-xs">
                         {prog.objectives && (
                           <div className="space-y-0.5">
                             <span className="font-bold text-[#231f20] flex items-center gap-1.5">
@@ -269,7 +269,7 @@ export function ProgramsCatalog({ programs, locale, dict }: ProgramsCatalogProps
                         )}
 
                         {prog.target_audience && (
-                          <div className="space-y-0.5 pt-2 border-t border-[#FEF6CC]">
+                          <div className="space-y-0.5 pt-2 border-t border-[#E5E0D6]">
                             <span className="font-bold text-[#231f20] flex items-center gap-1.5">
                               <span>👥</span>
                               <span>{isAr ? 'الفئة المستهدفة:' : isFr ? 'Public cible :' : 'Target Audience:'}</span>
@@ -285,7 +285,7 @@ export function ProgramsCatalog({ programs, locale, dict }: ProgramsCatalogProps
                 </div>
 
                 {/* Footer Action Buttons */}
-                <div className="p-6 sm:p-7 pt-0 border-t border-[#FEF6CC] flex items-center justify-between gap-3 mt-4">
+                <div className="p-6 sm:p-7 pt-0 border-t border-[#E5E0D6] flex items-center justify-between gap-3 mt-4">
                   <Link
                     href={`/${locale}/programs/${prog.slug}`}
                     className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-[#bd3227] hover:text-[#8f1f16] transition-colors"
@@ -296,7 +296,7 @@ export function ProgramsCatalog({ programs, locale, dict }: ProgramsCatalogProps
 
                   <Link
                     href={`/${locale}/contact`}
-                    className="px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold text-[#231f20] bg-[#F5F3EE] hover:bg-[#231f20] hover:text-white border border-[#e5e0d6] transition-all shadow-2xs"
+                    className="px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold text-[#231f20] bg-[#FAF8F5] hover:bg-[#231f20] hover:text-white border border-[#e5e0d6] transition-all shadow-2xs"
                   >
                     {isAr ? 'استفسر أو انخرط' : isFr ? 'Participer ou s\'informer' : 'Inquire or Join'}
                   </Link>

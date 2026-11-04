@@ -41,7 +41,7 @@ export function PartnersDirectory({ partners, locale }: PartnersDirectoryProps) 
     const card = (
       <div className="group/card relative w-60 sm:w-72 h-44 sm:h-52 bg-white rounded-3xl border border-[#e5e0d6] p-3 shadow-2xs hover:shadow-xl hover:border-[#bd3227]/50 transition-all duration-300 flex flex-col justify-between shrink-0 overflow-hidden cursor-pointer">
         {/* Moving Picture Container */}
-        <div className="relative w-full flex-1 rounded-2xl overflow-hidden bg-[#F5F3EE] border border-[#FEF6CC]">
+        <div className="relative w-full flex-1 rounded-2xl overflow-hidden bg-[#FAF8F5] border border-[#E5E0D6]">
           <ImageWithFallback
             src={partner.logoUrl}
             fallbackSrc="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=600&q=80"

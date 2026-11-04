@@ -162,7 +162,7 @@ export default async function AdminRolesPage() {
             <select
               name="userId"
               required
-              className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE] font-semibold text-[#231f20]"
+              className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#FAF8F5] font-semibold text-[#231f20]"
             >
               <option value="">— اختر مستخدماً —</option>
               {profiles.map((p) => (
@@ -180,7 +180,7 @@ export default async function AdminRolesPage() {
             <select
               name="roleId"
               required
-              className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#F5F3EE] font-semibold text-[#231f20]"
+              className="w-full px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#FAF8F5] font-semibold text-[#231f20]"
             >
               <option value="">— اختر دوراً —</option>
               {rbacMatrix.map((r) => (
@@ -219,7 +219,7 @@ export default async function AdminRolesPage() {
               >
                 <div>
                   <div className="flex items-start justify-between gap-2 mb-2">
-                    <span className="w-7 h-7 rounded-lg bg-[#F5F3EE] border border-[#e5e0d6] flex items-center justify-center text-xs font-black text-[#bd3227]">
+                    <span className="w-7 h-7 rounded-lg bg-[#FAF8F5] border border-[#e5e0d6] flex items-center justify-center text-xs font-black text-[#bd3227]">
                       {role.id}
                     </span>
                     <span className="font-mono text-3xs px-2 py-0.5 rounded-full bg-[#231f20]/5 text-[#231f20] font-bold">
@@ -235,7 +235,7 @@ export default async function AdminRolesPage() {
                     {role.descriptionAr}
                   </p>
 
-                  <div className="pt-3 border-t border-[#FEF6CC] mb-3">
+                  <div className="pt-3 border-t border-[#E5E0D6] mb-3">
                     <span className="text-4xs uppercase tracking-wider font-extrabold text-[#ffd22f] block mb-1.5">
                       نطاق الصلاحيات الممنوحة:
                     </span>
@@ -243,7 +243,7 @@ export default async function AdminRolesPage() {
                       {role.scope.map((s) => (
                         <span
                           key={s}
-                          className="px-2 py-0.5 rounded-md text-4xs font-bold bg-[#F5F3EE] text-[#231f20] border border-[#e5e0d6]"
+                          className="px-2 py-0.5 rounded-md text-4xs font-bold bg-[#FAF8F5] text-[#231f20] border border-[#e5e0d6]"
                         >
                           ✓ {s}
                         </span>
@@ -253,7 +253,7 @@ export default async function AdminRolesPage() {
                 </div>
 
                 {/* Assigned Users in this role */}
-                <div className="pt-3 border-t border-[#FEF6CC]">
+                <div className="pt-3 border-t border-[#E5E0D6]">
                   <span className="text-4xs uppercase tracking-wider font-extrabold text-[#5C5A55] block mb-1">
                     المستخدمون الحاملون لهذا الدور ({assignedUsers.length}):
                   </span>
@@ -262,7 +262,7 @@ export default async function AdminRolesPage() {
                       {assignedUsers.map((au) => (
                         <div
                           key={`${au.user_id}-${role.id}`}
-                          className="flex items-center justify-between text-3xs p-1.5 rounded-lg bg-[#F5F3EE] border border-[#e5e0d6]"
+                          className="flex items-center justify-between text-3xs p-1.5 rounded-lg bg-[#FAF8F5] border border-[#e5e0d6]"
                         >
                           <span className="truncate font-semibold text-[#231f20]">
                             {au.profiles?.full_name || au.profiles?.email}

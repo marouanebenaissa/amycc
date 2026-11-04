@@ -2270,7 +2270,7 @@ export const defaultAnnualProgramConfig: AnnualProgramConfig = {
       icon: '🌱',
       iconSrc: '/icons/season-q1.png',
       color: 'border-[#231f20]',
-      accentBg: 'bg-[#FEF6CC] text-[#231f20]',
+      accentBg: 'bg-[#F4EFE6] text-[#231f20]',
       events: [
         {
           id: 'q1-e1',
@@ -2416,7 +2416,7 @@ export const defaultAnnualProgramConfig: AnnualProgramConfig = {
       icon: '☀️',
       iconSrc: '/icons/season-q3.png',
       color: 'border-[#d2a82b]',
-      accentBg: 'bg-[#FEF6CC] text-[#d2a82b]',
+      accentBg: 'bg-[#F4EFE6] text-[#d2a82b]',
       events: [
         {
           id: 'q3-e1',
@@ -2489,7 +2489,7 @@ export const defaultAnnualProgramConfig: AnnualProgramConfig = {
       icon: '🏆',
       iconSrc: '/icons/season-q4.png',
       color: 'border-[#231f20]',
-      accentBg: 'bg-[#FEF6CC] text-[#231f20]',
+      accentBg: 'bg-[#F4EFE6] text-[#231f20]',
       events: [
         {
           id: 'q4-e1',
@@ -2652,7 +2652,7 @@ export async function getAnnualProgramSettings(): Promise<AnnualProgramConfig> {
               icon: q.icon || '🗓️',
               iconSrc: q.iconSrc || '',
               color: q.color || 'border-[#231f20]',
-              accentBg: q.accentBg || 'bg-[#FEF6CC] text-[#231f20]',
+              accentBg: q.accentBg || 'bg-[#F4EFE6] text-[#231f20]',
               events: Array.isArray(q.events)
                 ? q.events
                     .filter((e): e is AnnualProgramEventItem => typeof e === 'object' && e !== null && typeof e.id === 'string')

@@ -94,7 +94,7 @@ export function EventsCatalog({ events, locale }: EventsCatalogProps) {
                   ? 'Rechercher par titre, ville ou lieu...'
                   : 'Search by title, city, or venue...'
               }
-              className="w-full ps-11 pe-4 py-3 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6] text-xs sm:text-sm text-[#231f20] focus:bg-white focus:border-[#bd3227] focus:ring-1 focus:ring-[#bd3227] outline-none transition-all placeholder:text-slate-400 font-medium"
+              className="w-full ps-11 pe-4 py-3 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6] text-xs sm:text-sm text-[#231f20] focus:bg-white focus:border-[#bd3227] focus:ring-1 focus:ring-[#bd3227] outline-none transition-all placeholder:text-slate-400 font-medium"
             />
             {searchQuery && (
               <button
@@ -108,7 +108,7 @@ export function EventsCatalog({ events, locale }: EventsCatalogProps) {
           </div>
 
           {/* Status Filter Pills */}
-          <div className="flex items-center gap-1.5 p-1 bg-[#F5F3EE] rounded-2xl border border-[#e5e0d6] overflow-x-auto shrink-0">
+          <div className="flex items-center gap-1.5 p-1 bg-[#FAF8F5] rounded-2xl border border-[#e5e0d6] overflow-x-auto shrink-0">
             <button
               type="button"
               onClick={() => setSelectedFilter('all')}
@@ -148,7 +148,7 @@ export function EventsCatalog({ events, locale }: EventsCatalogProps) {
 
         {/* Cities Filter (if there are multiple cities) */}
         {uniqueCities.length > 0 && (
-          <div className="flex items-center gap-2 pt-2 border-t border-[#FEF6CC] overflow-x-auto pb-1 text-2xs sm:text-xs">
+          <div className="flex items-center gap-2 pt-2 border-t border-[#E5E0D6] overflow-x-auto pb-1 text-2xs sm:text-xs">
             <span className="text-[#5C5A55] font-bold shrink-0">
               📍 {isAr ? 'تصفية حسب المدينة:' : isFr ? 'Filtrer par ville :' : 'Filter by city:'}
             </span>
@@ -158,7 +158,7 @@ export function EventsCatalog({ events, locale }: EventsCatalogProps) {
               className={`px-3 py-1 rounded-lg font-bold transition-all whitespace-nowrap ${
                 selectedCity === 'all'
                   ? 'bg-[#231f20] text-white'
-                  : 'bg-[#F5F3EE] text-[#5C5A55] hover:bg-[#FEF6CC]'
+                  : 'bg-[#FAF8F5] text-[#5C5A55] hover:bg-[#F4EFE6]'
               }`}
             >
               {isAr ? 'جميع المدن' : isFr ? 'Toutes les villes' : 'All Cities'}
@@ -171,7 +171,7 @@ export function EventsCatalog({ events, locale }: EventsCatalogProps) {
                 className={`px-3 py-1 rounded-lg font-bold transition-all whitespace-nowrap ${
                   selectedCity === city
                     ? 'bg-[#231f20] text-white'
-                    : 'bg-[#F5F3EE] text-[#5C5A55] hover:bg-[#FEF6CC]'
+                    : 'bg-[#FAF8F5] text-[#5C5A55] hover:bg-[#F4EFE6]'
                 }`}
               >
                 {city}
@@ -316,13 +316,13 @@ export function EventsCatalog({ events, locale }: EventsCatalogProps) {
 
                 {/* Footer Action Button */}
                 <div className="p-6 pt-0">
-                  <div className="pt-4 border-t border-[#FEF6CC]">
+                  <div className="pt-4 border-t border-[#E5E0D6]">
                     <Link
                       href={`/${locale}/events/${ev.slug}`}
                       className={`w-full py-3 px-4 rounded-xl font-extrabold text-center text-xs transition-all flex items-center justify-center gap-2 shadow-2xs group-hover:shadow-md ${
                         ev.registration_open
                           ? 'text-white bg-[#bd3227] hover:bg-[#a3261c] active:scale-98'
-                          : 'text-[#231f20] bg-[#F5F3EE] hover:bg-[#FEF6CC] border border-[#e5e0d6]'
+                          : 'text-[#231f20] bg-[#FAF8F5] hover:bg-[#F4EFE6] border border-[#e5e0d6]'
                       }`}
                     >
                       <span>

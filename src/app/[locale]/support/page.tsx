@@ -61,7 +61,7 @@ export default async function SupportPage(props: { params: Promise<{ locale: str
     <>
       <Header locale={locale} dict={dict} />
 
-      <main id="main-content" className="flex-1 bg-[#F5F3EE]">
+      <main id="main-content" className="flex-1 bg-[#FAF8F5]">
         {/* ========================================================= */}
         {/* HERO SECTION: Moroccan Patronage & Cultural Portal        */}
         {/* ========================================================= */}
@@ -324,7 +324,7 @@ export default async function SupportPage(props: { params: Promise<{ locale: str
                         {desc}
                       </p>
 
-                      <div className="p-3.5 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6] mb-5">
+                      <div className="p-3.5 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6] mb-5">
                         <span className="text-3xs font-black text-[#bd3227] block mb-1">
                           {isAr ? 'الأثر الميداني المباشر:' : isFr ? 'Impact direct financé :' : 'Direct Impact Funded:'}
                         </span>
@@ -333,7 +333,7 @@ export default async function SupportPage(props: { params: Promise<{ locale: str
                         </p>
                       </div>
 
-                      <div className="space-y-2 border-t border-[#FEF6CC] pt-4 mb-6">
+                      <div className="space-y-2 border-t border-[#E5E0D6] pt-4 mb-6">
                         <span className="text-3xs font-black uppercase text-[#231f20] block mb-2">
                           {isAr ? 'الامتيازات الممنوحة للراعي:' : isFr ? 'Avantages du mécène :' : 'Patron Privileges:'}
                         </span>
@@ -351,7 +351,7 @@ export default async function SupportPage(props: { params: Promise<{ locale: str
                       className={`w-full py-3.5 px-4 rounded-xl text-xs font-bold text-center block transition-all active:scale-98 ${
                         pkg.recommended
                           ? 'bg-[#bd3227] text-white hover:bg-[#a3261c] shadow-md shadow-[#bd3227]/20'
-                          : 'bg-[#F5F3EE] text-[#231f20] hover:bg-[#231f20] hover:text-white border border-[#e5e0d6]'
+                          : 'bg-[#FAF8F5] text-[#231f20] hover:bg-[#231f20] hover:text-white border border-[#e5e0d6]'
                       }`}
                     >
                       {isAr

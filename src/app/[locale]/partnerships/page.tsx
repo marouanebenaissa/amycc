@@ -102,7 +102,7 @@ export default async function PartnershipsPage(props: { params: Promise<{ locale
     <>
       <Header locale={locale} dict={dict} />
 
-      <main id="main-content" className="flex-1 bg-[#F5F3EE]">
+      <main id="main-content" className="flex-1 bg-[#FAF8F5]">
         {/* ========================================================= */}
         {/* Hero Section: Institutional Moroccan Aesthetic */}
         {/* ========================================================= */}
@@ -211,7 +211,7 @@ export default async function PartnershipsPage(props: { params: Promise<{ locale
               <div className="pt-2">
                 <span
                   className={`inline-block text-xs font-semibold px-4 py-1 rounded-full ${
-                    hasHeroImage ? 'text-stone-400 bg-stone-900/60' : 'text-[#5C5A55] bg-[#FEF6CC]'
+                    hasHeroImage ? 'text-stone-400 bg-stone-900/60' : 'text-[#5C5A55] bg-[#F4EFE6]'
                   }`}
                 >
                   {isAr ? config.hero.badgeAr : isFr ? config.hero.badgeFr : config.hero.badgeEn}
@@ -280,7 +280,7 @@ export default async function PartnershipsPage(props: { params: Promise<{ locale
                 >
                   <div className="space-y-4">
                     <div className="flex items-center justify-between gap-3">
-                      <span className="w-12 h-12 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6] flex items-center justify-center text-2xl select-none group-hover:scale-110 transition-transform">
+                      <span className="w-12 h-12 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6] flex items-center justify-center text-2xl select-none group-hover:scale-110 transition-transform">
                         {pillar.icon}
                       </span>
                       <span className="text-3xs sm:text-2xs font-bold uppercase tracking-wider text-[#bd3227] bg-[#bd3227]/10 px-3 py-1 rounded-full">
@@ -297,7 +297,7 @@ export default async function PartnershipsPage(props: { params: Promise<{ locale
                     </p>
                   </div>
 
-                  <div className="pt-6 border-t border-[#FEF6CC] mt-6 flex items-center justify-between text-xs font-bold text-[#bd3227]">
+                  <div className="pt-6 border-t border-[#E5E0D6] mt-6 flex items-center justify-between text-xs font-bold text-[#bd3227]">
                     <span>{isAr ? 'برمجة وتنفيذ مشترك' : isFr ? 'Co-programmation' : 'Joint Curation'}</span>
                     <span className="rtl:rotate-180 group-hover:translate-x-1 transition-transform">→</span>
                   </div>
@@ -369,7 +369,7 @@ export default async function PartnershipsPage(props: { params: Promise<{ locale
                   key={benefit.id}
                   className="bg-white p-6 rounded-3xl border border-[#e5e0d6] shadow-subtle hover:shadow-md transition-all flex flex-col space-y-3 group"
                 >
-                  <div className="w-12 h-12 rounded-2xl bg-[#F5F3EE] border border-[#e5e0d6] flex items-center justify-center text-2xl select-none group-hover:scale-110 transition-transform">
+                  <div className="w-12 h-12 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6] flex items-center justify-center text-2xl select-none group-hover:scale-110 transition-transform">
                     {benefit.icon}
                   </div>
                   <h3 className="text-base font-bold text-[#231f20]">
@@ -413,7 +413,7 @@ export default async function PartnershipsPage(props: { params: Promise<{ locale
               {steps.map((st, idx) => (
                 <div
                   key={st.num}
-                  className="p-6 rounded-3xl bg-[#F5F3EE] border border-[#e5e0d6] relative flex flex-col space-y-3 hover:border-[#bd3227]/30 transition-all group"
+                  className="p-6 rounded-3xl bg-[#FAF8F5] border border-[#e5e0d6] relative flex flex-col space-y-3 hover:border-[#bd3227]/30 transition-all group"
                 >
                   <div className="flex items-center justify-between">
                     <span className="text-xs font-black tracking-widest text-[#bd3227] bg-white px-2.5 py-1 rounded-lg border border-[#e5e0d6]">

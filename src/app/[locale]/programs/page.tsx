@@ -160,7 +160,7 @@ export default async function ProgramsPage(props: { params: Promise<{ locale: st
     <>
       <Header locale={locale} dict={dict} />
 
-      <main id="main-content" className="flex-1 bg-[#F5F3EE]">
+      <main id="main-content" className="flex-1 bg-[#FAF8F5]">
         {/* ============================================================
             1. HERO BANNER (Full-Bleed Moroccan Cinematic Hero or Ambient Pattern)
             ============================================================ */}
@@ -260,7 +260,7 @@ export default async function ProgramsPage(props: { params: Promise<{ locale: st
             {/* Description */}
             <p
               className={`text-base sm:text-lg lg:text-xl max-w-3xl mx-auto leading-relaxed text-balance ${
-                hasHeroImage ? 'text-[#FEF6CC]/95 font-normal drop-shadow-xs' : 'text-[#5C5A55] font-medium'
+                hasHeroImage ? 'text-[#E2DED6]/95 font-normal drop-shadow-xs' : 'text-[#5C5A55] font-medium'
               }`}
             >
               {heroDesc}
@@ -314,7 +314,7 @@ export default async function ProgramsPage(props: { params: Promise<{ locale: st
                   {isAr ? 'مبادرة شباب في العمل (Youth in Action)' : isFr ? 'Initiative Jeunesse en Action (Youth in Action)' : 'Youth in Action Initiative'}
                 </h2>
 
-                <p className="text-sm sm:text-base text-[#FEF6CC]/90 leading-relaxed max-w-2xl">
+                <p className="text-sm sm:text-base text-[#E2DED6]/90 leading-relaxed max-w-2xl">
                   {isAr
                     ? 'المحرك التطوعي والتأطيري الأساسي لجمعية روح الفنون والثقافة، الذي يفتح آفاقاً واسعة أمام الشباب المغربي للمشاركة في تدبير الفعاليات الثقافية، قيادة الورشات الميدانية، وتطوير المهارات الحياتية.'
                     : isFr
@@ -346,7 +346,7 @@ export default async function ProgramsPage(props: { params: Promise<{ locale: st
                   <h4 className="font-bold text-sm sm:text-base text-[#ffd22f]">
                     {isAr ? 'تأطير مجتمعي وتضامني' : isFr ? 'Mentorat Civique & Solidaire' : 'Civic Mentorship'}
                   </h4>
-                  <p className="text-xs text-[#FEF6CC]/80 leading-relaxed">
+                  <p className="text-xs text-[#E2DED6]/80 leading-relaxed">
                     {isAr
                       ? 'مواكبة دورية ومشاريع ميدانية لخدمة الثقافة والشباب بالمملكة المغربية.'
                       : isFr
@@ -399,7 +399,7 @@ export default async function ProgramsPage(props: { params: Promise<{ locale: st
 
               <Link
                 href={`/${locale}${cta.secondaryBtnUrl || '/membership'}`}
-                className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl font-bold text-xs sm:text-sm text-[#231f20] bg-[#F5F3EE] hover:bg-[#FEF6CC] border border-[#e5e0d6] transition-all cursor-pointer"
+                className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl font-bold text-xs sm:text-sm text-[#231f20] bg-[#FAF8F5] hover:bg-[#F4EFE6] border border-[#e5e0d6] transition-all cursor-pointer"
               >
                 <span>{ctaSecondaryText}</span>
               </Link>
