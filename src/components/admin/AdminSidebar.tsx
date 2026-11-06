@@ -1,7 +1,8 @@
 'use client'
 
-import React, { useState, useMemo } from 'react'
+import React, { useState, useMemo, useEffect, useRef } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { logoutAdmin } from '@/lib/actions/admin'
 import { useAdminLocale, ADMIN_NAV_CATEGORIES } from './AdminLocaleContext'
@@ -22,6 +23,7 @@ export function AdminSidebar({
   const pathname = usePathname()
   const { locale, setLocale, isAr, isFr, t } = useAdminLocale()
   const [searchQuery, setSearchQuery] = useState('')
+  const searchInputRef = useRef<HTMLInputElement>(null)
 
   function isActive(href: string) {
     if (href === '/admin') {
@@ -29,6 +31,22 @@ export function AdminSidebar({
     }
     return pathname.startsWith(href)
   }
+
+  // Keyboard shortcut listener to focus search when pressing '/'
+  useEffect(() => {
+    function handleKeyDown(e: KeyboardEvent) {
+      if (
+        e.key === '/' &&
+        document.activeElement?.tagName !== 'INPUT' &&
+        document.activeElement?.tagName !== 'TEXTAREA'
+      ) {
+        e.preventDefault()
+        searchInputRef.current?.focus()
+      }
+    }
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [])
 
   // Filter navigation categories & items based on search query
   const filteredCategories = useMemo(() => {
@@ -60,39 +78,61 @@ export function AdminSidebar({
     return filteredCategories.reduce((acc, cat) => acc + cat.items.length, 0)
   }, [filteredCategories])
 
+  const staffInitial = userName
+    ? userName.charAt(0).toUpperCase()
+    : userEmail.charAt(0).toUpperCase()
+
+  const offscreenClass = isAr ? 'translate-x-full' : '-translate-x-full'
+
   return (
     <>
       {/* Backdrop for Mobile Drawer */}
       {mobileOpen && (
         <div
-          className="fixed inset-0 bg-black/60 z-40 md:hidden backdrop-blur-xs"
+          className="fixed inset-0 bg-black/70 z-40 md:hidden backdrop-blur-sm transition-opacity"
           onClick={onCloseMobile}
+          aria-hidden="true"
         />
       )}
 
       {/* Sidebar Container */}
       <aside
-        className={`fixed md:sticky top-0 start-0 z-50 h-screen w-72 bg-[#231f20] text-white flex flex-col justify-between p-4 border-e border-[#d2a82b]/40 transition-transform duration-300 ease-in-out shrink-0 overflow-y-auto ${
-          mobileOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
+        className={`fixed md:sticky top-0 start-0 z-50 h-screen w-72 sm:w-80 bg-gradient-to-b from-[#1b1819] via-[#211d1e] to-[#181516] text-white flex flex-col justify-between p-4 sm:p-5 border-e border-[#d2a82b]/30 shadow-2xl transition-transform duration-300 ease-in-out shrink-0 overflow-y-auto ${
+          mobileOpen ? 'translate-x-0' : `${offscreenClass} md:translate-x-0`
         }`}
       >
         <div className="space-y-4">
           {/* Brand Header */}
-          <div className="flex items-center justify-between pb-3.5 border-b border-[#d2a82b]/60">
+          <div className="flex items-center justify-between pb-4 border-b border-white/10">
             <Link
               href="/admin"
-              className="flex items-center gap-2.5 group"
+              className="flex items-center gap-3 group"
               onClick={onCloseMobile}
             >
-              <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#bd3227] to-[#a3261c] group-hover:scale-105 flex items-center justify-center font-black text-white text-sm shadow-md transition-all">
-                AM
+              {/* Standalone Logo Without Box Container */}
+              <div className="relative w-10 h-10 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform duration-200">
+                <Image
+                  src="/logo.png"
+                  alt="AMYCC Logo"
+                  width={40}
+                  height={40}
+                  className="object-contain w-auto h-auto max-w-full max-h-full drop-shadow-md"
+                  priority
+                />
               </div>
-              <div>
-                <span className="font-black text-xs sm:text-sm block leading-tight text-white tracking-tight">
-                  {t('admin_title')}
-                </span>
-                <span className="text-4xs text-[#ffd22f] font-semibold block truncate max-w-[170px]">
+
+              <div className="min-w-0">
+                <div className="flex items-center gap-1.5">
+                  <span className="font-black text-sm text-white tracking-tight block truncate">
+                    {t('admin_title')}
+                  </span>
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0" title="Online" />
+                </div>
+                <span className="text-3xs text-[#ffd22f] font-semibold block truncate">
                   {t('association_name')}
+                </span>
+                <span className="text-4xs text-white/50 block font-mono truncate">
+                  {t('legal_framework')}
                 </span>
               </div>
             </Link>
@@ -100,7 +140,7 @@ export function AdminSidebar({
             {onCloseMobile && (
               <button
                 onClick={onCloseMobile}
-                className="md:hidden text-slate-400 hover:text-white p-1 rounded-lg"
+                className="md:hidden text-white/60 hover:text-white p-1.5 rounded-xl hover:bg-white/10 transition-colors"
                 aria-label="Close menu"
               >
                 ✕
@@ -111,32 +151,37 @@ export function AdminSidebar({
           {/* Quick Search / Filter Input */}
           <div className="relative">
             <input
+              ref={searchInputRef}
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder={t('search_placeholder')}
-              className="w-full ps-8 pe-7 py-2 rounded-xl bg-[#231f20]/70 hover:bg-[#231f20] focus:bg-[#231f20] border border-[#d2a82b] focus:border-[#ffd22f] text-white placeholder-slate-400 text-2xs transition-all outline-none"
+              className="w-full ps-9 pe-8 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 focus:bg-white/10 border border-white/10 focus:border-[#d2a82b] text-white placeholder-white/40 text-xs transition-all outline-hidden font-medium"
             />
-            <span className="absolute start-2.5 top-1/2 -translate-y-1/2 text-3xs text-slate-400 pointer-events-none">
+            <span className="absolute start-3 top-1/2 -translate-y-1/2 text-xs text-white/40 pointer-events-none">
               🔍
             </span>
-            {searchQuery && (
+            {searchQuery ? (
               <button
                 type="button"
                 onClick={() => setSearchQuery('')}
-                className="absolute end-2 top-1/2 -translate-y-1/2 text-3xs text-slate-400 hover:text-white p-0.5"
-                title="Clear search"
+                className="absolute end-2.5 top-1/2 -translate-y-1/2 text-3xs text-white/40 hover:text-white p-1 rounded-md"
+                title="Clear"
               >
                 ✕
               </button>
+            ) : (
+              <span className="absolute end-2.5 top-1/2 -translate-y-1/2 text-4xs font-mono font-bold px-1.5 py-0.5 rounded-md bg-white/10 text-white/40 pointer-events-none hidden sm:inline-block">
+                /
+              </span>
             )}
           </div>
 
-          {/* Live search feedback if filtering */}
+          {/* Search feedback if query active */}
           {searchQuery && (
             <div className="px-1 text-4xs font-bold text-[#ffd22f] flex items-center justify-between">
-              <span>نتائج البحث / Results:</span>
-              <span>
+              <span>{isAr ? 'أقسام مطابقة للبحث:' : isFr ? 'Sections trouvées:' : 'Matched sections:'}</span>
+              <span className="font-mono">
                 {totalMatchingItems} {t('total_sections')}
               </span>
             </div>
@@ -144,9 +189,9 @@ export function AdminSidebar({
 
           {/* Empty search state */}
           {filteredCategories.length === 0 && (
-            <div className="p-4 rounded-xl bg-[#231f20]/40 border border-[#d2a82b] text-center text-3xs text-slate-400 space-y-1">
-              <span>⚠️</span>
-              <p>{t('no_results')}</p>
+            <div className="p-4 rounded-2xl bg-white/5 border border-white/10 text-center text-xs text-white/60 space-y-1">
+              <span className="text-xl block">🔍</span>
+              <p className="font-semibold">{t('no_results')}</p>
             </div>
           )}
 
@@ -162,13 +207,13 @@ export function AdminSidebar({
               return (
                 <div key={category.id} className="space-y-1">
                   {/* Category Header */}
-                  <div className="px-2.5 py-1 text-4xs font-extrabold uppercase tracking-wider text-[#ffd22f] flex items-center gap-1.5 border-b border-[#d2a82b]/30">
-                    <span aria-hidden="true">{category.icon}</span>
+                  <div className="px-2 py-1 text-3xs font-extrabold uppercase tracking-wider text-[#ffd22f]/90 flex items-center gap-1.5 border-b border-white/5">
+                    <span aria-hidden="true" className="text-xs">{category.icon}</span>
                     <span className="truncate">{catTitle}</span>
                   </div>
 
                   {/* Category Items */}
-                  <div className="space-y-0.5 pt-0.5">
+                  <div className="space-y-1 pt-1">
                     {category.items.map((item) => {
                       const active = isActive(item.href)
                       const itemLabel = isAr
@@ -187,10 +232,10 @@ export function AdminSidebar({
                           key={item.href}
                           href={item.href}
                           onClick={onCloseMobile}
-                          className={`group flex items-center justify-between px-2.5 py-2 rounded-xl text-xs font-semibold transition-all ${
+                          className={`group flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-semibold transition-all ${
                             active
-                              ? 'bg-[#d2a82b] text-white shadow-xs border-s-4 border-[#bd3227]'
-                              : 'text-[#E2DED6] hover:text-white hover:bg-[#231f20] active:scale-98'
+                              ? 'bg-gradient-to-r from-[#bd3227] to-[#8f231b] text-white shadow-md shadow-[#bd3227]/30 border-s-4 border-[#ffd22f]'
+                              : 'text-white/80 hover:text-white hover:bg-white/10 active:scale-98'
                           }`}
                         >
                           <div className="flex items-center gap-2.5 min-w-0">
@@ -203,10 +248,10 @@ export function AdminSidebar({
                               </span>
                               {itemDesc && (
                                 <span
-                                  className={`text-4xs truncate leading-none mt-0.5 ${
+                                  className={`text-4xs truncate leading-none mt-1 ${
                                     active
                                       ? 'text-[#ffd22f]'
-                                      : 'text-slate-400 group-hover:text-slate-300'
+                                      : 'text-white/40 group-hover:text-white/70'
                                   }`}
                                 >
                                   {itemDesc}
@@ -216,7 +261,7 @@ export function AdminSidebar({
                           </div>
 
                           {item.badge && (
-                            <span className="px-1.5 py-0.5 rounded-full text-4xs font-bold bg-[#bd3227] text-white shrink-0">
+                            <span className="px-1.5 py-0.5 rounded-full text-4xs font-bold bg-[#bd3227] text-white shrink-0 shadow-xs">
                               {item.badge}
                             </span>
                           )}
@@ -231,20 +276,20 @@ export function AdminSidebar({
         </div>
 
         {/* Footer: Language Switcher, User Session & Logout */}
-        <div className="pt-3 mt-4 border-t border-[#d2a82b]/60 space-y-2.5">
-          {/* Quick Language Switcher in Sidebar */}
-          <div className="flex items-center justify-between p-1 rounded-xl bg-[#231f20]/60 border border-[#d2a82b]">
-            <span className="text-4xs text-[#ffd22f] px-1 font-bold">
+        <div className="pt-4 mt-4 border-t border-white/10 space-y-3">
+          {/* Language Switcher in Sidebar */}
+          <div className="flex items-center justify-between p-1.5 rounded-xl bg-white/5 border border-white/10">
+            <span className="text-3xs text-[#ffd22f] px-1 font-bold">
               {t('language')}:
             </span>
-            <div className="flex items-center gap-1 text-4xs font-black">
+            <div className="flex items-center gap-1 text-3xs font-black">
               <button
                 type="button"
                 onClick={() => setLocale('ar')}
-                className={`px-2 py-0.5 rounded-lg transition-colors ${
+                className={`px-2.5 py-1 rounded-lg transition-all ${
                   locale === 'ar'
-                    ? 'bg-[#bd3227] text-white'
-                    : 'text-slate-300 hover:text-white'
+                    ? 'bg-[#bd3227] text-white shadow-xs'
+                    : 'text-white/60 hover:text-white hover:bg-white/10'
                 }`}
               >
                 عربي
@@ -252,10 +297,10 @@ export function AdminSidebar({
               <button
                 type="button"
                 onClick={() => setLocale('fr')}
-                className={`px-2 py-0.5 rounded-lg transition-colors ${
+                className={`px-2.5 py-1 rounded-lg transition-all ${
                   locale === 'fr'
-                    ? 'bg-[#bd3227] text-white'
-                    : 'text-slate-300 hover:text-white'
+                    ? 'bg-[#bd3227] text-white shadow-xs'
+                    : 'text-white/60 hover:text-white hover:bg-white/10'
                 }`}
               >
                 FR
@@ -263,10 +308,10 @@ export function AdminSidebar({
               <button
                 type="button"
                 onClick={() => setLocale('en')}
-                className={`px-2 py-0.5 rounded-lg transition-colors ${
+                className={`px-2.5 py-1 rounded-lg transition-all ${
                   locale === 'en'
-                    ? 'bg-[#bd3227] text-white'
-                    : 'text-slate-300 hover:text-white'
+                    ? 'bg-[#bd3227] text-white shadow-xs'
+                    : 'text-white/60 hover:text-white hover:bg-white/10'
                 }`}
               >
                 EN
@@ -274,29 +319,34 @@ export function AdminSidebar({
             </div>
           </div>
 
-          {/* User Session */}
-          <div className="bg-[#231f20]/40 p-2 rounded-xl border border-[#d2a82b]/40">
-            <span className="text-4xs text-[#ffd22f] uppercase font-bold tracking-wider block">
-              {t('authenticated_admin')}
-            </span>
-            <span className="font-bold text-white text-xs block truncate mt-0.5">
-              {userName || 'مدير النظام (Admin)'}
-            </span>
-            <span className="text-4xs text-slate-400 block truncate font-mono">
-              {userEmail}
-            </span>
-          </div>
+          {/* Staff User Session Card */}
+          <div className="bg-white/5 p-3 rounded-2xl border border-white/10 flex items-center justify-between gap-2.5">
+            <div className="flex items-center gap-2.5 min-w-0">
+              <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#bd3227] to-[#d2a82b] text-white flex items-center justify-center font-black text-sm shrink-0 shadow-md">
+                {staffInitial}
+              </div>
+              <div className="min-w-0">
+                <span className="text-xs font-bold text-white block truncate leading-tight">
+                  {userName || 'Staff Administrator'}
+                </span>
+                <span className="text-4xs text-white/50 block truncate font-mono mt-0.5">
+                  {userEmail}
+                </span>
+              </div>
+            </div>
 
-          {/* Sign Out */}
-          <form action={logoutAdmin}>
-            <button
-              type="submit"
-              className="w-full flex items-center justify-center gap-2 text-2xs font-bold py-1.5 px-3 rounded-xl bg-[#231f20] hover:bg-[#bd3227] text-white transition-all shadow-xs active:scale-98"
-            >
-              <span>{t('sign_out')}</span>
-              <span aria-hidden="true">→</span>
-            </button>
-          </form>
+            <div className="shrink-0 flex items-center gap-1">
+              <form action={logoutAdmin}>
+                <button
+                  type="submit"
+                  className="p-2 rounded-xl text-white/60 hover:text-white hover:bg-red-600/30 transition-all cursor-pointer"
+                  title={t('sign_out')}
+                >
+                  <span className="text-sm">🚪</span>
+                </button>
+              </form>
+            </div>
+          </div>
         </div>
       </aside>
     </>

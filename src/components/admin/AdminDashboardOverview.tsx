@@ -1,10 +1,12 @@
 'use client'
 
-import React from 'react'
+import React, { useMemo } from 'react'
 import Link from 'next/link'
 import { useAdminLocale } from './AdminLocaleContext'
 
 interface AdminDashboardOverviewProps {
+  userName?: string | null
+  userEmail: string
   counts: {
     membershipCount: number
     volunteerCount: number
@@ -15,74 +17,16 @@ interface AdminDashboardOverviewProps {
     programCount: number
     eventCount: number
     newsCount: number
+    staffUsersCount?: number
   }
 }
 
-export function AdminDashboardOverview({ counts }: AdminDashboardOverviewProps) {
-  const { isAr, isFr, t } = useAdminLocale()
-
-  const inboxes = [
-    {
-      labelAr: 'طلبات العضوية والانخراط',
-      labelFr: 'Demandes d\'Adhésion',
-      labelEn: 'Membership Applications',
-      count: counts.membershipCount,
-      href: '/admin/memberships',
-      icon: '👥',
-      color: 'bg-[#F4EFE6] text-[#231f20]',
-      badgeColor: 'bg-[#231f20]',
-    },
-    {
-      labelAr: 'متطوعو شباب في العمل',
-      labelFr: 'Bénévoles Jeunesse en Action',
-      labelEn: 'Volunteer Applicants',
-      count: counts.volunteerCount,
-      href: '/admin/volunteers',
-      icon: '🤝',
-      color: 'bg-emerald-50 text-emerald-700',
-      badgeColor: 'bg-emerald-600',
-    },
-    {
-      labelAr: 'تسجيلات حضور الفعاليات',
-      labelFr: 'Inscriptions aux Événements',
-      labelEn: 'Event Registrations',
-      count: counts.registrationCount,
-      href: '/admin/registrations',
-      icon: '🎟️',
-      color: 'bg-blue-50 text-blue-700',
-      badgeColor: 'bg-blue-600',
-    },
-    {
-      labelAr: 'مقترحات الشراكة المؤسسية',
-      labelFr: 'Partenariats Institutionnels',
-      labelEn: 'Partnership Inquiries',
-      count: counts.partnershipCount,
-      href: '/admin/partnerships',
-      icon: '🏛️',
-      color: 'bg-[#fde8e7] text-[#bd3227]',
-      badgeColor: 'bg-[#bd3227]',
-    },
-    {
-      labelAr: 'رسائل التواصل والاستفسارات',
-      labelFr: 'Messages de Contact',
-      labelEn: 'Contact Messages',
-      count: counts.contactCount,
-      href: '/admin/contacts',
-      icon: '💬',
-      color: 'bg-amber-50 text-amber-700',
-      badgeColor: 'bg-amber-600',
-    },
-    {
-      labelAr: 'الدعم والمساهمات وبوابة CMI',
-      labelFr: 'Dons & Passerelle CMI',
-      labelEn: 'Donations & CMI Gateway',
-      count: counts.donationCount,
-      href: '/admin/donations',
-      icon: '💝',
-      color: 'bg-purple-50 text-purple-700',
-      badgeColor: 'bg-purple-600',
-    },
-  ]
+export function AdminDashboardOverview({
+  userName,
+  userEmail,
+  counts,
+}: AdminDashboardOverviewProps) {
+  const { locale, isAr, isFr, t } = useAdminLocale()
 
   const totalInquiries =
     counts.membershipCount +
@@ -92,97 +36,423 @@ export function AdminDashboardOverview({ counts }: AdminDashboardOverviewProps) 
     counts.contactCount +
     counts.donationCount
 
-  return (
-    <div className="space-y-8">
-      {/* Title & Quick Status Banner */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-[#e5e0d6]">
-        <div>
-          <div className="flex items-center gap-2 text-3xs font-extrabold text-[#bd3227] uppercase tracking-wider mb-1">
-            <span>{isAr ? 'لوحة التحكم المؤسسية' : isFr ? 'Administration Centrale' : 'Institutional Admin'}</span>
-            <span>•</span>
-            <span className="text-emerald-700 font-bold flex items-center gap-1">
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-              {t('system_healthy')}
-            </span>
-          </div>
-          <h1 className="text-2xl sm:text-3xl font-black text-[#231f20]">
-            {isAr
-              ? 'نظرة عامة وإحصائيات المنصة'
-              : isFr
-              ? 'Vue d\'Ensemble & Indicateurs Clés'
-              : 'Platform Overview & Core Metrics'}
-          </h1>
-          <p className="text-xs sm:text-sm text-[#5C5A55] mt-1 font-medium">
-            {isAr
-              ? 'جمعية روح الفنون والثقافة (المملكة المغربية) — مركز القيادة وإدارة المحتوى والطلبات الواردة.'
-              : isFr
-              ? 'Association Marocaine Youth Culture & Creativity — Centre de gestion du contenu et des requêtes.'
-              : 'Moroccan Youth Culture & Creativity Association — Central command for content & submissions.'}
-          </p>
-        </div>
+  // Current formatted date per active locale
+  const formattedDate = useMemo(() => {
+    try {
+      return new Date().toLocaleDateString(
+        locale === 'ar' ? 'ar-MA' : locale === 'fr' ? 'fr-FR' : 'en-US',
+        {
+          weekday: 'long',
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+        }
+      )
+    } catch {
+      return ''
+    }
+  }, [locale])
 
-        <div className="flex items-center gap-2">
-          <Link
-            href="/admin/translations"
-            className="px-3.5 py-2 rounded-xl bg-white hover:bg-[#FAF8F5] border border-[#e5e0d6] text-xs font-bold text-[#231f20] shadow-2xs transition-colors flex items-center gap-2"
-          >
-            <span>🌐</span>
-            <span>
-              {isAr
-                ? 'تتبع اكتمال الترجمة ↗'
-                : isFr
-                ? 'Suivi des Traductions ↗'
-                : 'Translation Status ↗'}
-            </span>
-          </Link>
+  // 6 Incoming Inboxes
+  const inboxes = [
+    {
+      id: 'memberships',
+      labelAr: 'طلبات العضوية والانخراط السنوي',
+      labelFr: 'Demandes d\'Adhésion Annuelle',
+      labelEn: 'Annual Membership Applications',
+      descAr: 'مراجعة طلبات الانخراط وتدقيق هوية الأعضاء وتصدير القوائم الرسمية.',
+      descFr: 'Examen des adhésions annuelles, validation et export des registres.',
+      descEn: 'Review annual membership inquiries, verify members, and export registries.',
+      count: counts.membershipCount,
+      href: '/admin/memberships',
+      icon: '👥',
+      colorBg: 'bg-[#FAF8F5]',
+      iconBg: 'bg-emerald-50 text-emerald-700 border-emerald-200',
+      badgeColor: 'bg-emerald-600',
+    },
+    {
+      id: 'volunteers',
+      labelAr: 'متطوعو مبادرة شباب في العمل',
+      labelFr: 'Bénévoles Jeunesse en Action',
+      labelEn: 'Youth in Action Volunteer Applicants',
+      descAr: 'استمارات التطوع الميداني للشباب وتوزيع المهام على الفعاليات والورش.',
+      descFr: 'Candidatures de volontariat civique et affectations aux événements.',
+      descEn: 'Youth volunteering inquiries, civic orientation, and event assignments.',
+      count: counts.volunteerCount,
+      href: '/admin/volunteers',
+      icon: '🤝',
+      colorBg: 'bg-[#FAF8F5]',
+      iconBg: 'bg-amber-50 text-amber-700 border-amber-200',
+      badgeColor: 'bg-amber-600',
+    },
+    {
+      id: 'registrations',
+      labelAr: 'تسجيلات حضور الفعاليات الثقافية',
+      labelFr: 'Inscriptions aux Événements & Ateliers',
+      labelEn: 'Event & Workshop Registrations',
+      descAr: 'تأكيد المقاعد، ضبط الطاقة الاستيعابية، وتتبع قوائم الحضور الرسمية.',
+      descFr: 'Gestion des jauges, validation des réservations et listes de présence.',
+      descEn: 'Audience ticket bookings, capacity management, and attendance check-in.',
+      count: counts.registrationCount,
+      href: '/admin/registrations',
+      icon: '🎟️',
+      colorBg: 'bg-[#FAF8F5]',
+      iconBg: 'bg-blue-50 text-blue-700 border-blue-200',
+      badgeColor: 'bg-blue-600',
+    },
+    {
+      id: 'partnerships',
+      labelAr: 'مقترحات الشراكة المؤسسية',
+      labelFr: 'Partenariats & Mécénat Institutionnels',
+      labelEn: 'Institutional Partnership Proposals',
+      descAr: 'عروض التعاون المقدمة من المؤسسات الثقافية، القطاع العام، والشركاء.',
+      descFr: 'Propositions de coopération d\'organismes publics, culturels et mécènes.',
+      descEn: 'Cooperation proposals from cultural organizations, public entities, and patrons.',
+      count: counts.partnershipCount,
+      href: '/admin/partnerships',
+      icon: '🏛️',
+      colorBg: 'bg-[#FAF8F5]',
+      iconBg: 'bg-[#fde8e7] text-[#bd3227] border-[#f8b4af]',
+      badgeColor: 'bg-[#bd3227]',
+    },
+    {
+      id: 'contacts',
+      labelAr: 'رسائل واستفسارات الزوار',
+      labelFr: 'Messages de Contact & Courriers',
+      labelEn: 'Visitor Inquiries & Contact Messages',
+      descAr: 'استفسارات ومراسلات العموم عبر الموقع الرسمي وقنوات التواصل.',
+      descFr: 'Questions et messages envoyés par le public via le portail officiel.',
+      descEn: 'Public questions, communications, and official outreach correspondence.',
+      count: counts.contactCount,
+      href: '/admin/contacts',
+      icon: '💬',
+      colorBg: 'bg-[#FAF8F5]',
+      iconBg: 'bg-cyan-50 text-cyan-700 border-cyan-200',
+      badgeColor: 'bg-cyan-600',
+    },
+    {
+      id: 'donations',
+      labelAr: 'الدعم والمساهمات وبوابة CMI',
+      labelFr: 'Dons & Passerelle Bancaire CMI',
+      labelEn: 'Donations & CMI Payment Gateway',
+      descAr: 'سجلات التبرعات الإلكترونية عبر البطاقات البنكية، والتحويلات المصرفية.',
+      descFr: 'Suivi des transactions de mécénat bancaire, virements et reçus fiscaux.',
+      descEn: 'Online card contributions via CMI gateway, bank wire receipts, and records.',
+      count: counts.donationCount,
+      href: '/admin/donations',
+      icon: '💝',
+      colorBg: 'bg-[#FAF8F5]',
+      iconBg: 'bg-purple-50 text-purple-700 border-purple-200',
+      badgeColor: 'bg-purple-600',
+    },
+  ]
+
+  // Quick Operational Actions
+  const operationalActions = [
+    {
+      titleAr: 'إضافة برنامج ثقافي جديد (3 لغات)',
+      titleFr: 'Ajouter un programme culturel (Trilingue)',
+      titleEn: 'Add New Cultural Program (Trilingual)',
+      descAr: 'صياغة المحتوى والمسار التدريبي وربطه بالمحترفات الفنية.',
+      descFr: 'Publication trilingue, parcours et ateliers créatifs.',
+      descEn: 'Author trilingual syllabus, methodology, and creative workshops.',
+      href: '/admin/programs/new',
+      icon: '🎨',
+      badgeAr: 'جديد +',
+      badgeFr: 'Nouveau +',
+      badgeEn: 'New +',
+    },
+    {
+      titleAr: 'تحرير مقال أو بيان صحفي بمحرر TipTap',
+      titleFr: 'Rédiger un article ou communiqué de presse',
+      titleEn: 'Compose Press Release or News Article',
+      descAr: 'محرر غني متكامل مع تحميل الصور والوسائط وتنسيق الأخبار.',
+      descFr: 'Éditeur de texte riche avec intégration multimédia.',
+      descEn: 'Rich text TipTap editor with media uploads and typography.',
+      href: '/admin/news/new',
+      icon: '📰',
+      badgeAr: 'جديد +',
+      badgeFr: 'Nouveau +',
+      badgeEn: 'New +',
+    },
+    {
+      titleAr: 'جدولة فعالية ثقافية وتحديد المقاعد',
+      titleFr: 'Programmer un événement & quota de places',
+      titleEn: 'Schedule Public Event & Seat Quota',
+      descAr: 'تحديد التاريخ، الموقع الجغرافي بمراكش، والطاقة الاستيعابية.',
+      descFr: 'Date, lieu géographique à Marrakech et gestion de jauge.',
+      descEn: 'Set performance date, Marrakech venue, and booking capacity.',
+      href: '/admin/events/new',
+      icon: '📅',
+      badgeAr: 'جديد +',
+      badgeFr: 'Nouveau +',
+      badgeEn: 'New +',
+    },
+    {
+      titleAr: 'المستخدمون المشرفون ومصفوفة الصلاحيات (RBAC)',
+      titleFr: 'Comptes Administrateurs & Rôles (RBAC)',
+      titleEn: 'Staff Users & Role-Based Permissions (RBAC)',
+      descAr: 'إضافة مشرفين جدد وتوزيع الأدوار الـ 9 بدقة وفق مبدأ الحد الأدنى.',
+      descFr: 'Gestion des accès collaborateurs selon le principe du moindre privilège.',
+      descEn: 'Provision staff accounts and assign from 9 predefined security roles.',
+      href: '/admin/users',
+      icon: '🛡️',
+      badgeAr: 'أمان 🔒',
+      badgeFr: 'Sécurité 🔒',
+      badgeEn: 'Security 🔒',
+    },
+    {
+      titleAr: 'ضبط بوابة الأداء CMI والحساب البنكي',
+      titleFr: 'Passerelle CMI, RIB Bancaire & Mécénat',
+      titleEn: 'CMI Payment Switch, Bank Wire & Patronage',
+      descAr: 'بيانات الحساب البنكي الرسمي، باقات الرعاية، وتأكيدات الدفع.',
+      descFr: 'Configuration bancaire officielle, paliers de don et reçus.',
+      descEn: 'Official association bank account, sponsorship tiers, and CMI.',
+      href: '/admin/donations',
+      icon: '💳',
+      badgeAr: 'مالية 💰',
+      badgeFr: 'Finance 💰',
+      badgeEn: 'Finance 💰',
+    },
+    {
+      titleAr: 'تتبع اكتمال الترجمات الثلاث (AR • FR • EN)',
+      titleFr: 'Suivi de l\'achèvement des traductions (Trilingue)',
+      titleEn: 'Trilingual Translation Completeness Tracker',
+      descAr: 'مؤشرات دقيقة لجاهزية اللغات الثلاث لكافة صفحات ومحتويات المنصة.',
+      descFr: 'Indicateurs de couverture linguistique intégrale de la plateforme.',
+      descEn: 'Track readiness and translation completeness across all CMS sections.',
+      href: '/admin/translations',
+      icon: '🌐',
+      badgeAr: '3 لغات',
+      badgeFr: '3 Langues',
+      badgeEn: '3 Languages',
+    },
+  ]
+
+  return (
+    <div className="space-y-8 max-w-7xl mx-auto pb-12">
+      {/* 1. Executive Institutional Command Hero Card */}
+      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#1c191a] via-[#241f20] to-[#161314] text-white p-6 sm:p-8 lg:p-10 shadow-2xl border border-white/10">
+        {/* Moroccan Atmospheric Lighting Orbs */}
+        <div className="absolute -top-32 -left-32 w-80 h-80 rounded-full bg-[#bd3227]/25 blur-3xl pointer-events-none" />
+        <div className="absolute -bottom-32 -right-32 w-80 h-80 rounded-full bg-[#d2a82b]/20 blur-3xl pointer-events-none" />
+
+        <div className="relative z-10 space-y-6">
+          {/* Top Metadata Badges */}
+          <div className="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-white/10">
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="px-3 py-1 rounded-full bg-white/10 backdrop-blur-xs border border-white/15 text-3xs font-extrabold uppercase tracking-widest text-[#ffd22f] flex items-center gap-1.5">
+                <span>🇲🇦</span>
+                <span>{t('legal_framework')}</span>
+              </span>
+              <span className="px-3 py-1 rounded-full bg-emerald-500/20 border border-emerald-400/30 text-3xs font-bold text-emerald-300 flex items-center gap-1.5">
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                <span>{t('system_healthy')}</span>
+              </span>
+            </div>
+
+            {formattedDate && (
+              <span className="text-3xs sm:text-2xs text-[#e5e0d6]/80 font-medium">
+                🗓️ {formattedDate}
+              </span>
+            )}
+          </div>
+
+          {/* Main Title & Personalized Welcome */}
+          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+            <div className="space-y-2 max-w-3xl">
+              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black text-white tracking-tight leading-tight">
+                {t('welcome_banner_title')}
+              </h1>
+              <p className="text-xs sm:text-sm text-[#e5e0d6]/90 leading-relaxed">
+                {isAr
+                  ? `مرحباً بك ${userName ? `يا ${userName}` : ''} (${userEmail}). ${t('welcome_banner_subtitle')}`
+                  : isFr
+                  ? `Bienvenue ${userName || ''} (${userEmail}). ${t('welcome_banner_subtitle')}`
+                  : `Welcome ${userName || ''} (${userEmail}). ${t('welcome_banner_subtitle')}`}
+              </p>
+            </div>
+
+            {/* Quick CTAs inside Hero */}
+            <div className="flex flex-wrap items-center gap-3 shrink-0">
+              <Link
+                href="/admin/programs/new"
+                className="px-4 py-2.5 rounded-2xl bg-gradient-to-r from-[#bd3227] to-[#d2a82b] hover:from-[#a0281f] hover:to-[#b89123] text-white font-bold text-xs shadow-lg shadow-[#bd3227]/25 hover:shadow-xl hover:scale-102 active:scale-98 transition-all flex items-center gap-2"
+              >
+                <span>+</span>
+                <span>{t('new_program')}</span>
+              </Link>
+              <Link
+                href="/admin/translations"
+                className="px-4 py-2.5 rounded-2xl bg-white/10 hover:bg-white/20 text-white font-semibold text-xs border border-white/15 backdrop-blur-xs transition-all flex items-center gap-2"
+              >
+                <span>🌐</span>
+                <span>{t('translations_tracker')}</span>
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
 
-      {/* Primary Inboxes Metric Cards Grid */}
-      <div>
-        <div className="flex items-center justify-between mb-3.5">
-          <h2 className="text-xs font-extrabold text-[#231f20] uppercase tracking-wider flex items-center gap-2">
-            <span>📥</span>
+      {/* 2. Top Executive KPI Metric Highlights (4 Cards) */}
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+        {/* KPI 1: Total Inquiries */}
+        <div className="bg-white p-5 sm:p-6 rounded-3xl border border-[#e5e0d6] shadow-2xs hover:shadow-card hover:border-[#231f20]/20 transition-all">
+          <div className="flex items-center justify-between gap-2 mb-3">
+            <span className="text-3xs font-black uppercase tracking-wider text-[#bd3227]">
+              {t('kpi_inquiries')}
+            </span>
+            <span className="w-9 h-9 rounded-2xl bg-[#fde8e7] flex items-center justify-center text-sm shadow-xs">
+              📥
+            </span>
+          </div>
+          <div className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#231f20]">
+            {totalInquiries}
+          </div>
+          <div className="text-3xs text-[#5C5A55] mt-1.5 font-medium flex items-center gap-1">
+            <span>✓</span>
             <span>
               {isAr
-                ? 'الطلبات والمشاركات الواردة حديثاً'
+                ? 'عضوية، تطوع، شراكات، ورسائل'
                 : isFr
-                ? 'Demandes et Candidatures Entrantes'
-                : 'Incoming Inquiries & Applications'}
+                ? 'Adhésions, dons & messages'
+                : 'Memberships, inquiries & donors'}
             </span>
-          </h2>
-          <span className="text-3xs font-bold text-[#5C5A55]">
-            {isAr ? 'الإجمالي:' : isFr ? 'Total:' : 'Total:'}{' '}
-            <strong className="text-[#231f20]">{totalInquiries}</strong>
-          </span>
+          </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {/* KPI 2: Cultural Programs */}
+        <div className="bg-white p-5 sm:p-6 rounded-3xl border border-[#e5e0d6] shadow-2xs hover:shadow-card hover:border-[#231f20]/20 transition-all">
+          <div className="flex items-center justify-between gap-2 mb-3">
+            <span className="text-3xs font-black uppercase tracking-wider text-[#d2a82b]">
+              {t('kpi_programs')}
+            </span>
+            <span className="w-9 h-9 rounded-2xl bg-[#FEF6CC] flex items-center justify-center text-sm shadow-xs">
+              🎨
+            </span>
+          </div>
+          <div className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#231f20]">
+            {counts.programCount}
+          </div>
+          <div className="text-3xs text-[#5C5A55] mt-1.5 font-medium flex items-center gap-1">
+            <Link href="/admin/programs" className="text-[#bd3227] hover:underline font-bold">
+              {isAr ? 'عرض وتعديل البرامج ↗' : isFr ? 'Voir les programmes ↗' : 'View programs ↗'}
+            </Link>
+          </div>
+        </div>
+
+        {/* KPI 3: Scheduled Events */}
+        <div className="bg-white p-5 sm:p-6 rounded-3xl border border-[#e5e0d6] shadow-2xs hover:shadow-card hover:border-[#231f20]/20 transition-all">
+          <div className="flex items-center justify-between gap-2 mb-3">
+            <span className="text-3xs font-black uppercase tracking-wider text-blue-700">
+              {t('kpi_events')}
+            </span>
+            <span className="w-9 h-9 rounded-2xl bg-blue-50 flex items-center justify-center text-sm shadow-xs">
+              📅
+            </span>
+          </div>
+          <div className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#231f20]">
+            {counts.eventCount}
+          </div>
+          <div className="text-3xs text-[#5C5A55] mt-1.5 font-medium flex items-center gap-1">
+            <Link href="/admin/events" className="text-blue-700 hover:underline font-bold">
+              {isAr ? 'عرض جدول الفعاليات ↗' : isFr ? 'Gérer les événements ↗' : 'Manage events ↗'}
+            </Link>
+          </div>
+        </div>
+
+        {/* KPI 4: Published News */}
+        <div className="bg-white p-5 sm:p-6 rounded-3xl border border-[#e5e0d6] shadow-2xs hover:shadow-card hover:border-[#231f20]/20 transition-all">
+          <div className="flex items-center justify-between gap-2 mb-3">
+            <span className="text-3xs font-black uppercase tracking-wider text-purple-700">
+              {t('kpi_news')}
+            </span>
+            <span className="w-9 h-9 rounded-2xl bg-purple-50 flex items-center justify-center text-sm shadow-xs">
+              📰
+            </span>
+          </div>
+          <div className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#231f20]">
+            {counts.newsCount}
+          </div>
+          <div className="text-3xs text-[#5C5A55] mt-1.5 font-medium flex items-center gap-1">
+            <Link href="/admin/news" className="text-purple-700 hover:underline font-bold">
+              {isAr ? 'المركز الإعلامي والأخبار ↗' : isFr ? 'Centre des médias ↗' : 'Press & News ↗'}
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      {/* 3. Inboxes Hub (صناديق الطلبات والمشاركات الواردة) */}
+      <div className="space-y-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+          <div>
+            <div className="inline-flex items-center gap-1.5 text-2xs font-extrabold text-[#bd3227] uppercase tracking-wider mb-0.5">
+              <span>📥</span>
+              <span>AMYCC Inboxes Matrix</span>
+            </div>
+            <h2 className="text-lg sm:text-xl font-black text-[#231f20]">
+              {t('inboxes_title')}
+            </h2>
+            <p className="text-3xs sm:text-xs text-[#5C5A55] mt-0.5">
+              {t('inboxes_subtitle')}
+            </p>
+          </div>
+
+          <div className="text-3xs font-bold text-[#5C5A55] self-start sm:self-auto bg-white px-3 py-1.5 rounded-xl border border-[#e5e0d6] shadow-2xs">
+            {isAr ? 'الإجمالي النشط:' : isFr ? 'Total en attente:' : 'Total Active:'}{' '}
+            <strong className="text-[#bd3227] font-black">{totalInquiries}</strong>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
           {inboxes.map((item) => {
-            const label = isAr ? item.labelAr : isFr ? item.labelFr : item.labelEn
+            const title = isAr
+              ? item.labelAr
+              : isFr
+              ? item.labelFr
+              : item.labelEn
+            const desc = isAr
+              ? item.descAr
+              : isFr
+              ? item.descFr
+              : item.descEn
 
             return (
               <Link
-                key={item.href}
+                key={item.id}
                 href={item.href}
-                className="p-5 rounded-2xl bg-white border border-[#e5e0d6] shadow-2xs hover:shadow-card hover:border-[#231f20]/30 transition-all block group"
+                className="p-5 sm:p-6 rounded-3xl bg-white border border-[#e5e0d6] shadow-2xs hover:shadow-card hover:border-[#bd3227]/40 transition-all flex flex-col justify-between group block"
               >
-                <div className="flex items-center justify-between mb-3">
-                  <span
-                    className={`w-10 h-10 rounded-xl flex items-center justify-center text-lg ${item.color} shadow-xs`}
-                  >
-                    {item.icon}
-                  </span>
-                  <span className="text-2xs font-bold text-[#5C5A55] group-hover:text-[#bd3227] transition-colors flex items-center gap-1">
-                    <span>{t('manage')}</span>
-                    <span aria-hidden="true">←</span>
-                  </span>
+                <div>
+                  <div className="flex items-center justify-between mb-4">
+                    <span
+                      className={`w-12 h-12 rounded-2xl border flex items-center justify-center text-xl shadow-xs group-hover:scale-105 transition-transform ${item.iconBg}`}
+                    >
+                      {item.icon}
+                    </span>
+
+                    <span className="text-2xs font-extrabold text-[#5C5A55] group-hover:text-[#bd3227] transition-colors flex items-center gap-1 bg-[#FAF8F5] px-3 py-1 rounded-full border border-[#e5e0d6]">
+                      <span>{t('manage')}</span>
+                      <span aria-hidden="true" className="group-hover:translate-x-0.5 transition-transform">
+                        {isAr ? '←' : '→'}
+                      </span>
+                    </span>
+                  </div>
+
+                  <div className="text-3xl sm:text-4xl font-black text-[#231f20] mb-1">
+                    {item.count}
+                  </div>
+                  <h3 className="text-sm font-black text-[#231f20] leading-snug mb-1 group-hover:text-[#bd3227] transition-colors">
+                    {title}
+                  </h3>
+                  <p className="text-3xs text-[#5C5A55] leading-relaxed">
+                    {desc}
+                  </p>
                 </div>
-                <div className="text-2xl sm:text-3xl font-black text-[#231f20]">
-                  {item.count}
-                </div>
-                <div className="text-xs font-bold text-[#231f20] mt-1 truncate">
-                  {label}
+
+                <div className="pt-3 mt-4 border-t border-[#e5e0d6]/70 flex items-center justify-between text-3xs font-bold text-[#8a6e14]">
+                  <span>{isAr ? 'سجل قاعدة البيانات' : isFr ? 'Registre sécurisé' : 'Database table'}</span>
+                  <span className="font-mono text-4xs text-[#5C5A55]">RLS Active ✓</span>
                 </div>
               </Link>
             )
@@ -190,211 +460,183 @@ export function AdminDashboardOverview({ counts }: AdminDashboardOverviewProps) 
         </div>
       </div>
 
-      {/* Content Counts Strip */}
-      <div className="bg-white p-5 rounded-2xl border border-[#e5e0d6] shadow-2xs grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
-        <div className="p-3.5 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6] transition-all hover:border-[#231f20]/30">
-          <span className="text-3xs text-[#5C5A55] font-bold block">
-            {isAr
-              ? 'البرامج الثقافية المعتمدة'
-              : isFr
-              ? 'Programmes Culturels Actifs'
-              : 'Active Cultural Programs'}
-          </span>
-          <span className="text-2xl font-black text-[#231f20] mt-0.5 block">
-            {counts.programCount}
-          </span>
-          <Link
-            href="/admin/programs"
-            className="text-3xs text-[#bd3227] font-bold inline-block mt-1 hover:underline"
-          >
-            {isAr ? 'عرض البرامج ↗' : isFr ? 'Voir les programmes ↗' : 'View Programs ↗'}
-          </Link>
+      {/* 4. Two Comprehensive Operations & Security Modules */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* Module 1: Fast Operational Actions */}
+        <div className="p-6 sm:p-8 rounded-3xl bg-white border border-[#e5e0d6] shadow-2xs space-y-5">
+          <div className="flex items-center justify-between pb-3 border-b border-[#e5e0d6]">
+            <div>
+              <div className="inline-flex items-center gap-1.5 text-2xs font-bold text-[#bd3227] uppercase tracking-wider mb-0.5">
+                <span>⚡</span>
+                <span>Operations Center</span>
+              </div>
+              <h2 className="text-base sm:text-lg font-black text-[#231f20]">
+                {t('quick_actions_title')}
+              </h2>
+            </div>
+            <span className="text-3xs font-mono font-bold px-2 py-1 rounded-lg bg-[#FAF8F5] text-[#5C5A55] border border-[#e5e0d6]">
+              6 Core Tools
+            </span>
+          </div>
+
+          <div className="space-y-2.5">
+            {operationalActions.map((action, idx) => {
+              const actTitle = isAr
+                ? action.titleAr
+                : isFr
+                ? action.titleFr
+                : action.titleEn
+              const actDesc = isAr
+                ? action.descAr
+                : isFr
+                ? action.descFr
+                : action.descEn
+              const actBadge = isAr
+                ? action.badgeAr
+                : isFr
+                ? action.badgeFr
+                : action.badgeEn
+
+              return (
+                <Link
+                  key={idx}
+                  href={action.href}
+                  className="p-3.5 rounded-2xl bg-[#FAF8F5] hover:bg-[#FEF6CC]/30 border border-[#e5e0d6] hover:border-[#bd3227]/30 transition-all flex items-center justify-between gap-3 group block"
+                >
+                  <div className="flex items-center gap-3 min-w-0">
+                    <span className="w-10 h-10 rounded-xl bg-white border border-[#e5e0d6] flex items-center justify-center text-lg shrink-0 group-hover:scale-105 transition-transform shadow-xs">
+                      {action.icon}
+                    </span>
+                    <div className="min-w-0">
+                      <div className="font-bold text-xs text-[#231f20] group-hover:text-[#bd3227] transition-colors truncate">
+                        {actTitle}
+                      </div>
+                      <div className="text-3xs text-[#5C5A55] truncate mt-0.5">
+                        {actDesc}
+                      </div>
+                    </div>
+                  </div>
+
+                  <span className="px-2.5 py-1 rounded-full text-4xs font-black bg-white border border-[#e5e0d6] text-[#bd3227] shrink-0 shadow-2xs">
+                    {actBadge}
+                  </span>
+                </Link>
+              )
+            })}
+          </div>
         </div>
 
-        <div className="p-3.5 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6] transition-all hover:border-[#231f20]/30">
-          <span className="text-3xs text-[#5C5A55] font-bold block">
-            {isAr
-              ? 'الفعاليات والورش المجدولة'
-              : isFr
-              ? 'Événements & Ateliers Programmés'
-              : 'Scheduled Events & Workshops'}
-          </span>
-          <span className="text-2xl font-black text-[#231f20] mt-0.5 block">
-            {counts.eventCount}
-          </span>
-          <Link
-            href="/admin/events"
-            className="text-3xs text-[#bd3227] font-bold inline-block mt-1 hover:underline"
-          >
-            {isAr ? 'عرض الفعاليات ↗' : isFr ? 'Voir les événements ↗' : 'View Events ↗'}
-          </Link>
-        </div>
+        {/* Module 2: Institutional Architecture & Platform Security */}
+        <div className="p-6 sm:p-8 rounded-3xl bg-white border border-[#e5e0d6] shadow-2xs space-y-5">
+          <div className="flex items-center justify-between pb-3 border-b border-[#e5e0d6]">
+            <div>
+              <div className="inline-flex items-center gap-1.5 text-2xs font-bold text-emerald-700 uppercase tracking-wider mb-0.5">
+                <span>🛡️</span>
+                <span>Security & Statutory Matrix</span>
+              </div>
+              <h2 className="text-base sm:text-lg font-black text-[#231f20]">
+                {t('security_title')}
+              </h2>
+            </div>
+            <span className="text-3xs font-mono font-bold px-2 py-1 rounded-lg bg-emerald-50 text-emerald-800 border border-emerald-200">
+              100% Enforced
+            </span>
+          </div>
 
-        <div className="p-3.5 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6] transition-all hover:border-[#231f20]/30">
-          <span className="text-3xs text-[#5C5A55] font-bold block">
-            {isAr
-              ? 'الأخبار والبيانات الصحفية'
-              : isFr
-              ? 'Articles & Communiqués Publiés'
-              : 'Published News & Press'}
-          </span>
-          <span className="text-2xl font-black text-[#231f20] mt-0.5 block">
-            {counts.newsCount}
-          </span>
-          <Link
-            href="/admin/news"
-            className="text-3xs text-[#bd3227] font-bold inline-block mt-1 hover:underline"
-          >
-            {isAr ? 'عرض الأخبار ↗' : isFr ? 'Voir les articles ↗' : 'View News ↗'}
-          </Link>
+          <div className="space-y-4 text-xs text-[#5C5A55]">
+            {/* Dahir 1.58.376 */}
+            <div className="p-4 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6] space-y-1">
+              <div className="flex items-center justify-between">
+                <span className="font-black text-[#231f20] text-xs">
+                  {isAr ? 'الإطار القانوني المؤسسي' : isFr ? 'Cadre Légal Institutionnel' : 'Statutory Legal Framework'}
+                </span>
+                <span className="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-3xs font-bold">
+                  ✓ {t('status_verified')}
+                </span>
+              </div>
+              <p className="text-3xs text-[#5C5A55] leading-relaxed">
+                {isAr
+                  ? 'جمعية روح الفنون والثقافة خاضعة لمقتضيات الظهير الشريف رقم 1.58.376 المنظم لحق تأسيس الجمعيات بالمملكة المغربية.'
+                  : isFr
+                  ? 'Régie par les dispositions du Dahir n° 1.58.376 réglementant le droit d\'association au Royaume du Maroc.'
+                  : 'Governed by the provisions of Moroccan Dahir No. 1.58.376 regulating non-profit cultural associations.'}
+              </p>
+            </div>
+
+            {/* PostgreSQL RLS */}
+            <div className="p-4 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6] space-y-1">
+              <div className="flex items-center justify-between">
+                <span className="font-black text-[#231f20] text-xs">
+                  {t('rls_status')}
+                </span>
+                <span className="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-3xs font-bold">
+                  {t('status_active')}
+                </span>
+              </div>
+              <p className="text-3xs text-[#5C5A55] leading-relaxed">
+                {isAr
+                  ? 'عزل صارم للبيانات على مستوى جداول قاعدة البيانات الـ 16 لمنع أي وصول غير مصرح به.'
+                  : isFr
+                  ? 'Isolation stricte des données au niveau des 16 tables pour prévenir toute fuite.'
+                  : 'Strict data isolation across all 16 database tables preventing unauthorized escalation.'}
+              </p>
+            </div>
+
+            {/* 9 Predefined RBAC Roles */}
+            <div className="p-4 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6] space-y-1">
+              <div className="flex items-center justify-between">
+                <span className="font-black text-[#231f20] text-xs">
+                  {t('rbac_status')}
+                </span>
+                <Link href="/admin/roles" className="text-[#bd3227] font-bold text-3xs hover:underline">
+                  {isAr ? 'استعراض المصفوفة ↗' : isFr ? 'Voir la matrice ↗' : 'View Matrix ↗'}
+                </Link>
+              </div>
+              <p className="text-3xs text-[#5C5A55] leading-relaxed">
+                {isAr
+                  ? 'تطبيق مبدأ الحد الأدنى من الصلاحيات (Least Privilege) على كافة حسابات المشرفين.'
+                  : isFr
+                  ? 'Application stricte du principe du moindre privilège sur tous les profils staff.'
+                  : 'Principle of least privilege enforced across all authenticated staff accounts.'}
+              </p>
+            </div>
+
+            {/* Immutable Audit Trail */}
+            <div className="p-4 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6] space-y-1">
+              <div className="flex items-center justify-between">
+                <span className="font-black text-[#231f20] text-xs">
+                  {t('audit_status')}
+                </span>
+                <Link href="/admin/audit-logs" className="text-[#bd3227] font-bold text-3xs hover:underline">
+                  {isAr ? 'سجل التدقيق ↗' : isFr ? 'Journal d\'audit ↗' : 'Audit Trail ↗'}
+                </Link>
+              </div>
+              <p className="text-3xs text-[#5C5A55] leading-relaxed">
+                {isAr
+                  ? 'تسجيل كل عملية دخول، تعديل محتوى، تغيير صلاحيات، أو معالجة طلب مع التوقيت وعنوان الـ IP.'
+                  : isFr
+                  ? 'Enregistrement sécurisé de chaque action avec horodatage, utilisateur et IP.'
+                  : 'Immutable recording of logins, CMS modifications, role changes, and IP addresses.'}
+              </p>
+            </div>
+          </div>
         </div>
       </div>
 
-      {/* Two Column Section: Quick Actions & Organized Modules */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Fast Action Shortcuts */}
-        <div className="p-6 rounded-2xl bg-white border border-[#e5e0d6] shadow-2xs space-y-4">
-          <h2 className="text-xs font-bold text-[#231f20] uppercase tracking-wider flex items-center gap-2">
-            <span>⚡</span>
-            <span>
-              {isAr
-                ? 'إجراءات سريعة لإدارة المحتوى'
-                : isFr
-                ? 'Actions Rapides d\'Administration'
-                : 'Fast Administrative Actions'}
-            </span>
-          </h2>
-
-          <div className="space-y-2.5">
-            <Link
-              href="/admin/programs/new"
-              className="flex items-center justify-between p-3 rounded-xl bg-[#FAF8F5] hover:bg-[#F4EFE6] transition-colors text-xs font-bold text-[#231f20] group"
-            >
-              <div className="flex items-center gap-2">
-                <span>🎨</span>
-                <span>
-                  {isAr
-                    ? 'إضافة برنامج ثقافي أو فني جديد (بـ 3 لغات)'
-                    : isFr
-                    ? 'Ajouter un nouveau programme culturel (Trilingue)'
-                    : 'Add a new Cultural Program (Trilingual)'}
-                </span>
-              </div>
-              <span className="text-[#bd3227] text-2xs group-hover:underline">
-                {isAr ? 'جديد +' : isFr ? 'Nouveau +' : 'New +'}
-              </span>
-            </Link>
-
-            <Link
-              href="/admin/news/new"
-              className="flex items-center justify-between p-3 rounded-xl bg-[#FAF8F5] hover:bg-[#F4EFE6] transition-colors text-xs font-bold text-[#231f20] group"
-            >
-              <div className="flex items-center gap-2">
-                <span>📰</span>
-                <span>
-                  {isAr
-                    ? 'تحرير مقال أو بيان صحفي بمحرر TipTap الغني'
-                    : isFr
-                    ? 'Rédiger un article ou communiqué de presse'
-                    : 'Compose News Article or Press Release'}
-                </span>
-              </div>
-              <span className="text-[#bd3227] text-2xs group-hover:underline">
-                {isAr ? 'جديد +' : isFr ? 'Nouveau +' : 'New +'}
-              </span>
-            </Link>
-
-            <Link
-              href="/admin/events/new"
-              className="flex items-center justify-between p-3 rounded-xl bg-[#FAF8F5] hover:bg-[#F4EFE6] transition-colors text-xs font-bold text-[#231f20] group"
-            >
-              <div className="flex items-center gap-2">
-                <span>📅</span>
-                <span>
-                  {isAr
-                    ? 'جدولة فعالية ثقافية وتحديد الطاقة الاستيعابية'
-                    : isFr
-                    ? 'Planifier un événement culturel & places'
-                    : 'Schedule Event & Set Capacity'}
-                </span>
-              </div>
-              <span className="text-[#bd3227] text-2xs group-hover:underline">
-                {isAr ? 'جديد +' : isFr ? 'Nouveau +' : 'New +'}
-              </span>
-            </Link>
-
-            <Link
-              href="/admin/donations"
-              className="flex items-center justify-between p-3 rounded-xl bg-[#FAF8F5] hover:bg-[#F4EFE6] transition-colors text-xs font-bold text-[#231f20] group"
-            >
-              <div className="flex items-center gap-2">
-                <span>💝</span>
-                <span>
-                  {isAr
-                    ? 'ضبط بوابة الأداء CMI والحساب البنكي وباقات الرعاية'
-                    : isFr
-                    ? 'Configurer la passerelle CMI, RIB et mécénat'
-                    : 'Manage CMI Payment Switch, Bank Wire & Patronage'}
-                </span>
-              </div>
-              <span className="text-[#bd3227] text-2xs group-hover:underline">
-                {isAr ? 'إدارة ⚙️' : isFr ? 'Gérer ⚙️' : 'Manage ⚙️'}
-              </span>
-            </Link>
-          </div>
+      {/* 5. Institutional Footer Signature */}
+      <div className="pt-6 border-t border-[#e5e0d6] flex flex-col sm:flex-row items-center justify-between gap-3 text-3xs text-[#5C5A55]">
+        <div className="flex items-center gap-2">
+          <span>🇲🇦</span>
+          <span>{t('all_rights_reserved')}</span>
         </div>
-
-        {/* System & Institutional Organization */}
-        <div className="p-6 rounded-2xl bg-white border border-[#e5e0d6] shadow-2xs space-y-4">
-          <h2 className="text-xs font-bold text-[#231f20] uppercase tracking-wider flex items-center gap-2">
-            <span>🛡️</span>
-            <span>
-              {isAr
-                ? 'الهيكلة والتنظيم المؤسسي'
-                : isFr
-                ? 'Organisation & Cadre Institutionnel'
-                : 'Structure & Platform Operations'}
-            </span>
-          </h2>
-
-          <div className="space-y-3 text-xs text-[#5C5A55]">
-            <div className="flex items-center justify-between pb-2.5 border-b border-[#E5E0D6]">
-              <span className="font-medium">
-                {isAr ? 'قاعدة البيانات المؤسسية' : isFr ? 'Base de Données PostgreSQL' : 'PostgreSQL Database'}
-              </span>
-              <span className="font-bold text-emerald-700 flex items-center gap-1.5">
-                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />{' '}
-                {isAr ? 'متصل ومؤمن' : isFr ? 'Opérationnelle' : 'Connected & Stable'}
-              </span>
-            </div>
-
-            <div className="flex items-center justify-between pb-2.5 border-b border-[#E5E0D6]">
-              <span className="font-medium">
-                {isAr ? 'سياسات أمان البيانات (RLS)' : isFr ? 'Sécurité des Données (RLS)' : 'Row Level Security (RLS)'}
-              </span>
-              <span className="font-bold text-emerald-700">
-                {isAr ? 'مفعلة بالكامل (16 جدولاً)' : isFr ? 'Activée (16 tables)' : 'Active (16 tables)'}
-              </span>
-            </div>
-
-            <div className="flex items-center justify-between pb-2.5 border-b border-[#E5E0D6]">
-              <span className="font-medium">
-                {isAr ? 'الصلاحيات الإدارية المعتمدة' : isFr ? 'Matrice des Rôles (RBAC)' : 'Roles & RBAC Matrix'}
-              </span>
-              <Link href="/admin/roles" className="font-bold text-[#bd3227] hover:underline">
-                {isAr ? 'مصفوفة الأدوار ↗' : isFr ? 'Voir les rôles ↗' : 'View Roles ↗'}
-              </Link>
-            </div>
-
-            <div className="flex items-center justify-between">
-              <span className="font-medium">
-                {isAr ? 'سجل العمليات الإدارية' : isFr ? 'Journal d\'Audit' : 'Audit Logs'}
-              </span>
-              <Link href="/admin/audit-logs" className="font-bold text-[#bd3227] hover:underline">
-                {isAr ? 'سجل التدقيق ↗' : isFr ? 'Consulter le journal ↗' : 'Audit Trail ↗'}
-              </Link>
-            </div>
-          </div>
+        <div className="flex items-center gap-3">
+          <Link href={`/${locale}`} target="_blank" className="hover:text-[#bd3227] transition-colors">
+            {t('view_site')} ↗
+          </Link>
+          <span>•</span>
+          <Link href="/admin/settings" className="hover:text-[#bd3227] transition-colors">
+            {t('security_title')}
+          </Link>
         </div>
       </div>
     </div>
