@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useAdminLocale } from './AdminLocaleContext'
 import {
@@ -12,6 +12,7 @@ interface AdminProfileClientProps {
   userId: string
   userEmail: string
   initialName: string
+  initialAvatar?: string
   roleTitle: string
   createdAt?: string
 }
@@ -20,6 +21,7 @@ export function AdminProfileClient({
   userId,
   userEmail,
   initialName,
+  initialAvatar = '',
   roleTitle,
   createdAt,
 }: AdminProfileClientProps) {
@@ -32,6 +34,9 @@ export function AdminProfileClient({
 
   // Profile Info Form State
   const [displayName, setDisplayName] = useState(initialName)
+  const [avatarUrl, setAvatarUrl] = useState(initialAvatar)
+  const [uploadingAvatar, setUploadingAvatar] = useState(false)
+  const avatarFileInputRef = useRef<HTMLInputElement>(null)
   const [savingProfile, setSavingProfile] = useState(false)
   const [profileFeedback, setProfileFeedback] = useState<{
     type: 'success' | 'error'
@@ -70,6 +75,46 @@ export function AdminProfileClient({
       : isFr
       ? '🔑 Changer le Mot de Passe'
       : '🔑 Change Password',
+    avatarSectionTitle: isAr
+      ? 'الصورة الشخصية للمشرف'
+      : isFr
+      ? 'Photo de Profil'
+      : 'Profile Picture',
+    avatarHint: isAr
+      ? 'الصيغ الموصى بها: JPG أو PNG أو WebP مربعة ونقية (الحد الأقصى 5 ميغابايت).'
+      : isFr
+      ? 'Formats recommandés : JPG, PNG ou WebP carrée (max 5 Mo).'
+      : 'Recommended: Square JPG, PNG, or WebP photo (max 5MB).',
+    uploadAvatarBtn: isAr
+      ? 'تحميل صورة جديدة'
+      : isFr
+      ? 'Changer la photo'
+      : 'Upload Photo',
+    uploadingAvatar: isAr
+      ? 'جارٍ الرفع...'
+      : isFr
+      ? 'Téléversement...'
+      : 'Uploading...',
+    removeAvatarBtn: isAr
+      ? 'إزالة الصورة'
+      : isFr
+      ? 'Supprimer'
+      : 'Remove Photo',
+    avatarUploaded: isAr
+      ? 'تم رفع الصورة بنجاح! اضغط على "حفظ بيانات الملف الشخصي" لتثبيتها.'
+      : isFr
+      ? 'Image téléversée ! Cliquez sur "Enregistrer" pour confirmer.'
+      : 'Photo uploaded! Click "Save Profile Information" to apply.',
+    avatarRemoved: isAr
+      ? 'تمت إزالة الصورة. اضغط "حفظ بيانات الملف الشخصي" لتأكيد التغيير.'
+      : isFr
+      ? 'Photo supprimée. Cliquez sur "Enregistrer" pour confirmer.'
+      : 'Photo removed. Click "Save Profile Information" to apply.',
+    fileTooLarge: isAr
+      ? 'حجم الصورة كبير جداً (الحد الأقصى 5 ميغابايت).'
+      : isFr
+      ? 'Fichier trop volumineux (max 5 Mo).'
+      : 'File too large (max 5MB).',
     fullNameLabel: isAr
       ? 'الاسم الكامل / اسم العرض'
       : isFr
@@ -186,13 +231,60 @@ export function AdminProfileClient({
   const isPasswordMatch =
     newPassword.length > 0 && newPassword === confirmPassword
 
+  async function handleAvatarUpload(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0]
+    if (!file) return
+
+    if (file.size > 5 * 1024 * 1024) {
+      setProfileFeedback({
+        type: 'error',
+        message: t.fileTooLarge,
+      })
+      return
+    }
+
+    setUploadingAvatar(true)
+    setProfileFeedback(null)
+
+    try {
+      const formData = new FormData()
+      formData.append('file', file)
+
+      const res = await fetch('/api/admin/upload', {
+        method: 'POST',
+        body: formData,
+      })
+
+      const data = await res.json()
+      if (!res.ok || !data.success) {
+        throw new Error(data.error || 'Failed to upload image')
+      }
+
+      setAvatarUrl(data.url)
+      setProfileFeedback({
+        type: 'success',
+        message: t.avatarUploaded,
+      })
+    } catch (err: unknown) {
+      setProfileFeedback({
+        type: 'error',
+        message: err instanceof Error ? err.message : 'Error uploading photo',
+      })
+    } finally {
+      setUploadingAvatar(false)
+      if (avatarFileInputRef.current) {
+        avatarFileInputRef.current.value = ''
+      }
+    }
+  }
+
   async function handleProfileSubmit(e: React.FormEvent) {
     e.preventDefault()
     setSavingProfile(true)
     setProfileFeedback(null)
 
     try {
-      const res = await updateAdminProfileAction(displayName.trim())
+      const res = await updateAdminProfileAction(displayName.trim(), avatarUrl)
       if (!res.success) {
         throw new Error(res.error || 'Failed to update profile')
       }
@@ -259,8 +351,17 @@ export function AdminProfileClient({
       {/* Header Banner */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-6 bg-gradient-to-br from-[#1c191a] via-[#241f20] to-[#161314] text-white rounded-3xl border border-white/10 shadow-xl">
         <div className="flex items-center gap-4">
-          <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#bd3227] to-[#d2a82b] text-white flex items-center justify-center font-black text-2xl shadow-lg shrink-0">
-            {staffInitial}
+          <div className="w-16 h-16 rounded-2xl overflow-hidden bg-gradient-to-br from-[#bd3227] to-[#d2a82b] text-white flex items-center justify-center font-black text-2xl shadow-lg shrink-0 border-2 border-white/20">
+            {avatarUrl ? (
+              /* eslint-disable-next-line @next/next/no-img-element */
+              <img
+                src={avatarUrl}
+                alt={displayName}
+                className="w-full h-full object-cover"
+              />
+            ) : (
+              staffInitial
+            )}
           </div>
           <div>
             <div className="flex items-center gap-2">
@@ -317,6 +418,80 @@ export function AdminProfileClient({
               <span>{profileFeedback.message}</span>
             </div>
           )}
+
+          {/* Dedicated Avatar Upload Box */}
+          <div className="p-5 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6] flex flex-col sm:flex-row items-center gap-5">
+            <div className="relative group shrink-0">
+              <div className="w-24 h-24 rounded-2xl overflow-hidden bg-gradient-to-br from-[#bd3227] to-[#d2a82b] text-white flex items-center justify-center font-black text-3xl shadow-md border-2 border-white">
+                {avatarUrl ? (
+                  /* eslint-disable-next-line @next/next/no-img-element */
+                  <img
+                    src={avatarUrl}
+                    alt={displayName}
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  staffInitial
+                )}
+              </div>
+              {uploadingAvatar && (
+                <div className="absolute inset-0 bg-black/60 rounded-2xl flex items-center justify-center">
+                  <span className="w-6 h-6 border-2 border-white/40 border-t-white rounded-full animate-spin" />
+                </div>
+              )}
+            </div>
+
+            <div className="flex-1 text-center sm:text-start space-y-2">
+              <div>
+                <h3 className="text-xs font-black text-[#231f20]">
+                  {t.avatarSectionTitle}
+                </h3>
+                <p className="text-3xs text-[#5C5A55] mt-0.5">
+                  {t.avatarHint}
+                </p>
+              </div>
+
+              <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2 pt-1">
+                <input
+                  ref={avatarFileInputRef}
+                  type="file"
+                  accept="image/jpeg,image/png,image/webp,image/avif"
+                  onChange={handleAvatarUpload}
+                  className="hidden"
+                  id="avatar-upload-file"
+                />
+
+                <label
+                  htmlFor="avatar-upload-file"
+                  className={`px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2 cursor-pointer shadow-2xs ${
+                    uploadingAvatar
+                      ? 'bg-zinc-300 text-zinc-600 pointer-events-none'
+                      : 'bg-[#231f20] hover:bg-[#d2a82b] text-white'
+                  }`}
+                >
+                  <span>📷</span>
+                  <span>{uploadingAvatar ? t.uploadingAvatar : t.uploadAvatarBtn}</span>
+                </label>
+
+                {avatarUrl && (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setAvatarUrl('')
+                      setProfileFeedback({
+                        type: 'success',
+                        message: t.avatarRemoved,
+                      })
+                    }}
+                    className="px-3.5 py-2 rounded-xl text-xs font-bold text-rose-600 hover:bg-rose-50 border border-rose-200 transition-all cursor-pointer"
+                  >
+                    <span>🗑️</span>
+                    <span>{t.removeAvatarBtn}</span>
+                  </button>
+                )}
+              </div>
+            </div>
+          </div>
 
           <form onSubmit={handleProfileSubmit} className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -378,12 +553,12 @@ export function AdminProfileClient({
 
               <button
                 type="submit"
-                disabled={savingProfile}
-                className="px-6 py-2.5 rounded-xl bg-[#231f20] hover:bg-[#d2a82b] text-white text-xs font-black shadow-md transition-all disabled:opacity-50 cursor-pointer flex items-center gap-2"
+                disabled={savingProfile || uploadingAvatar}
+                className="px-6 py-3 rounded-2xl bg-[#231f20] hover:bg-[#d2a82b] text-white text-xs font-bold transition-all disabled:opacity-50 flex items-center gap-2 shadow-sm cursor-pointer"
               >
                 {savingProfile ? (
                   <>
-                    <span className="w-3.5 h-3.5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                    <span className="w-3.5 h-3.5 border-2 border-white/40 border-t-white rounded-full animate-spin" />
                     <span>{t.savingBtn}</span>
                   </>
                 ) : (
@@ -427,16 +602,16 @@ export function AdminProfileClient({
                     required
                     value={newPassword}
                     onChange={(e) => setNewPassword(e.target.value)}
-                    className="w-full px-4 py-3 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6] text-xs font-mono text-[#231f20] focus:ring-2 focus:ring-[#bd3227] focus:outline-none transition-all pe-10"
+                    className="w-full px-4 py-3 pe-12 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6] text-xs font-semibold text-[#231f20] focus:ring-2 focus:ring-[#bd3227] focus:outline-none transition-all"
                     placeholder="••••••••••••"
                   />
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute end-3 top-1/2 -translate-y-1/2 text-sm text-[#5C5A55] hover:text-[#231f20] cursor-pointer"
+                    className="absolute end-3.5 top-1/2 -translate-y-1/2 text-sm text-[#5C5A55] hover:text-[#231f20]"
                     title={showPassword ? t.hidePassword : t.showPassword}
                   >
-                    {showPassword ? '👁️' : '🔒'}
+                    {showPassword ? '🙈' : '👁️'}
                   </button>
                 </div>
               </div>
@@ -446,67 +621,56 @@ export function AdminProfileClient({
                 <label className="block text-xs font-bold text-[#231f20]">
                   {t.confirmPasswordLabel}
                 </label>
-                <div className="relative">
-                  <input
-                    type={showPassword ? 'text' : 'password'}
-                    required
-                    value={confirmPassword}
-                    onChange={(e) => setConfirmPassword(e.target.value)}
-                    className="w-full px-4 py-3 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6] text-xs font-mono text-[#231f20] focus:ring-2 focus:ring-[#bd3227] focus:outline-none transition-all pe-10"
-                    placeholder="••••••••••••"
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowPassword(!showPassword)}
-                    className="absolute end-3 top-1/2 -translate-y-1/2 text-sm text-[#5C5A55] hover:text-[#231f20] cursor-pointer"
-                    title={showPassword ? t.hidePassword : t.showPassword}
-                  >
-                    {showPassword ? '👁️' : '🔒'}
-                  </button>
-                </div>
+                <input
+                  type={showPassword ? 'text' : 'password'}
+                  required
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  className="w-full px-4 py-3 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6] text-xs font-semibold text-[#231f20] focus:ring-2 focus:ring-[#bd3227] focus:outline-none transition-all"
+                  placeholder="••••••••••••"
+                />
               </div>
             </div>
 
-            {/* Password Validation Checklist */}
+            {/* Validation Checklist */}
             <div className="p-4 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6] space-y-2">
-              <span className="text-3xs font-extrabold text-[#231f20] block">
+              <span className="text-3xs font-extrabold uppercase text-[#5C5A55] tracking-wider block">
                 {t.passwordRequirements}
               </span>
-              <div className="flex flex-wrap items-center gap-4 text-3xs font-bold">
-                <span
-                  className={`flex items-center gap-1.5 transition-colors ${
+              <div className="flex flex-col sm:flex-row gap-3">
+                <div
+                  className={`flex items-center gap-1.5 text-xs font-bold ${
                     isPasswordLengthValid ? 'text-emerald-700' : 'text-[#5C5A55]'
                   }`}
                 >
                   <span>{isPasswordLengthValid ? '✓' : '○'}</span>
                   <span>{t.reqLength}</span>
-                </span>
-                <span
-                  className={`flex items-center gap-1.5 transition-colors ${
+                </div>
+                <div
+                  className={`flex items-center gap-1.5 text-xs font-bold ${
                     isPasswordMatch ? 'text-emerald-700' : 'text-[#5C5A55]'
                   }`}
                 >
                   <span>{isPasswordMatch ? '✓' : '○'}</span>
                   <span>{t.reqMatch}</span>
-                </span>
+                </div>
               </div>
             </div>
 
-            <div className="pt-4 border-t border-[#e5e0d6] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-              <span className="text-3xs text-[#5C5A55]">
-                🔒 {t.systemProtectionNotice}
+            <div className="pt-4 border-t border-[#e5e0d6] flex items-center justify-between gap-4">
+              <span className="text-3xs text-[#5C5A55] flex items-center gap-1">
+                <span>🛡️</span>
+                <span>{t.systemProtectionNotice}</span>
               </span>
 
               <button
                 type="submit"
-                disabled={
-                  savingPassword || !isPasswordLengthValid || !isPasswordMatch
-                }
-                className="px-6 py-2.5 rounded-xl bg-[#bd3227] hover:bg-[#a3261c] disabled:bg-zinc-300 text-white text-xs font-black shadow-md transition-all cursor-pointer disabled:cursor-not-allowed flex items-center gap-2 self-end sm:self-auto"
+                disabled={savingPassword || !isPasswordLengthValid || !isPasswordMatch}
+                className="px-6 py-3 rounded-2xl bg-[#bd3227] hover:bg-[#a0281f] text-white text-xs font-bold transition-all disabled:opacity-40 flex items-center gap-2 shadow-sm cursor-pointer"
               >
                 {savingPassword ? (
                   <>
-                    <span className="w-3.5 h-3.5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                    <span className="w-3.5 h-3.5 border-2 border-white/40 border-t-white rounded-full animate-spin" />
                     <span>{t.savingBtn}</span>
                   </>
                 ) : (

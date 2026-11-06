@@ -38,11 +38,17 @@ export default async function AdminProfilePage() {
     user.email?.split('@')[0] ||
     'Staff Admin'
 
+  const initialAvatar =
+    (user.user_metadata?.avatar_url as string) ||
+    (user.user_metadata?.picture as string) ||
+    ''
+
   return (
     <AdminProfileClient
       userId={user.id}
       userEmail={user.email || ''}
       initialName={initialName}
+      initialAvatar={initialAvatar}
       roleTitle={roleTitle}
       createdAt={user.created_at}
     />

@@ -10,6 +10,7 @@ import { useAdminLocale, ADMIN_NAV_CATEGORIES } from './AdminLocaleContext'
 interface AdminSidebarProps {
   userEmail: string
   userName?: string | null
+  userAvatar?: string | null
   mobileOpen?: boolean
   onCloseMobile?: () => void
 }
@@ -17,6 +18,7 @@ interface AdminSidebarProps {
 export function AdminSidebar({
   userEmail,
   userName,
+  userAvatar,
   mobileOpen = false,
   onCloseMobile,
 }: AdminSidebarProps) {
@@ -326,8 +328,17 @@ export function AdminSidebar({
               className="flex items-center gap-2.5 min-w-0 group hover:opacity-90 transition-opacity"
               title={t('profile_settings')}
             >
-              <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#bd3227] to-[#d2a82b] text-white flex items-center justify-center font-black text-sm shrink-0 shadow-md group-hover:scale-105 transition-transform">
-                {staffInitial}
+              <div className="w-9 h-9 rounded-xl overflow-hidden bg-gradient-to-br from-[#bd3227] to-[#d2a82b] text-white flex items-center justify-center font-black text-sm shrink-0 shadow-md group-hover:scale-105 transition-transform">
+                {userAvatar ? (
+                  /* eslint-disable-next-line @next/next/no-img-element */
+                  <img
+                    src={userAvatar}
+                    alt={userName || 'Avatar'}
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  staffInitial
+                )}
               </div>
               <div className="min-w-0">
                 <span className="text-xs font-bold text-white block truncate leading-tight group-hover:text-[#ffd22f] transition-colors">

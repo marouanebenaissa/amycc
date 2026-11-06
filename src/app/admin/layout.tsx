@@ -34,13 +34,22 @@ export default async function AdminLayout({
   } = await supabase.auth.getUser()
 
   let userFullName: string | null = null
+  let userAvatarUrl: string | null = null
   if (user) {
     const { data: profile } = await supabase
       .from('profiles')
       .select('full_name')
       .eq('id', user.id)
       .maybeSingle()
-    userFullName = profile?.full_name ?? null
+    userFullName =
+      profile?.full_name ??
+      (user.user_metadata?.full_name as string) ??
+      (user.user_metadata?.name as string) ??
+      null
+    userAvatarUrl =
+      (user.user_metadata?.avatar_url as string) ??
+      (user.user_metadata?.picture as string) ??
+      null
   }
 
   return (
@@ -58,6 +67,7 @@ export default async function AdminLayout({
           <AdminLayoutClient
             userEmail={user.email || 'admin@amycc.org'}
             userName={userFullName}
+            userAvatar={userAvatarUrl}
           >
             {children}
           </AdminLayoutClient>

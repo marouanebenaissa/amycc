@@ -8,12 +8,14 @@ import { AdminTopHeader } from './AdminTopHeader'
 interface AdminLayoutClientProps {
   userEmail: string
   userName?: string | null
+  userAvatar?: string | null
   children: React.ReactNode
 }
 
 export function AdminLayoutClient({
   userEmail,
   userName,
+  userAvatar,
   children,
 }: AdminLayoutClientProps) {
   const [mobileOpen, setMobileOpen] = useState(false)
@@ -24,6 +26,7 @@ export function AdminLayoutClient({
         <AdminSidebar
           userEmail={userEmail}
           userName={userName}
+          userAvatar={userAvatar}
           mobileOpen={mobileOpen}
           onCloseMobile={() => setMobileOpen(false)}
         />
@@ -32,6 +35,7 @@ export function AdminLayoutClient({
           <AdminTopHeader
             userEmail={userEmail}
             userName={userName}
+            userAvatar={userAvatar}
             onToggleMobileMenu={() => setMobileOpen((prev) => !prev)}
           />
 

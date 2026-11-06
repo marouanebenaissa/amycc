@@ -950,7 +950,10 @@ export async function updateAdminPasswordAction(newPassword: string): Promise<{ 
   }
 }
 
-export async function updateAdminProfileAction(displayName: string): Promise<{ success: boolean; error?: string }> {
+export async function updateAdminProfileAction(
+  displayName: string,
+  avatarUrl?: string | null
+): Promise<{ success: boolean; error?: string }> {
   try {
     const supabase = await createClient()
     const { data: { user }, error: userError } = await supabase.auth.getUser()
@@ -959,23 +962,46 @@ export async function updateAdminProfileAction(displayName: string): Promise<{ s
       return { success: false, error: 'انتهت الجلسة. يرجى تسجيل الدخول مجدداً.' }
     }
 
+    const newMetadata: Record<string, unknown> = {
+      ...(user.user_metadata || {}),
+      full_name: displayName,
+      name: displayName,
+    }
+
+    if (avatarUrl !== undefined) {
+      newMetadata.avatar_url = avatarUrl || ''
+      newMetadata.picture = avatarUrl || ''
+    }
+
     const { error: updateError } = await supabase.auth.updateUser({
-      data: {
-        full_name: displayName,
-        name: displayName,
-      },
+      data: newMetadata,
     })
 
     if (updateError) {
       return { success: false, error: updateError.message }
     }
 
+    // Gracefully update profiles table if available
+    try {
+      const adminClient = createAdminClientSafe()
+      const client = adminClient || supabase
+      await client
+        .from('profiles')
+        .update({
+          full_name: displayName,
+        })
+        .eq('id', user.id)
+    } catch {
+      // Ignore background sync errors
+    }
+
     await recordAuditLog('profile_updated', 'auth_users', user.id, {
       display_name: displayName,
+      has_avatar: Boolean(avatarUrl),
       updated_at: new Date().toISOString(),
     })
 
-    revalidatePath('/admin')
+    revalidatePath('/admin', 'layout')
     revalidatePath('/admin/profile')
     return { success: true }
   } catch (err) {

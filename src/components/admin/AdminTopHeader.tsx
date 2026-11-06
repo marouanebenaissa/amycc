@@ -9,12 +9,14 @@ import { logoutAdmin } from '@/lib/actions/admin'
 interface AdminTopHeaderProps {
   userEmail: string
   userName?: string | null
+  userAvatar?: string | null
   onToggleMobileMenu?: () => void
 }
 
 export function AdminTopHeader({
   userEmail,
   userName,
+  userAvatar,
   onToggleMobileMenu,
 }: AdminTopHeaderProps) {
   const pathname = usePathname()
@@ -246,8 +248,17 @@ export function AdminTopHeader({
             className="flex items-center gap-2.5 px-3 py-1.5 rounded-xl bg-[#FAF8F5] hover:bg-[#F4EFE6] border border-[#e5e0d6] transition-all cursor-pointer group active:scale-98"
             title={t('profile_settings')}
           >
-            <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-[#bd3227] to-[#d2a82b] text-white font-black text-xs flex items-center justify-center shadow-xs group-hover:scale-105 transition-transform">
-              {staffInitial}
+            <div className="w-7 h-7 rounded-lg overflow-hidden bg-gradient-to-br from-[#bd3227] to-[#d2a82b] text-white font-black text-xs flex items-center justify-center shadow-xs group-hover:scale-105 transition-transform shrink-0">
+              {userAvatar ? (
+                /* eslint-disable-next-line @next/next/no-img-element */
+                <img
+                  src={userAvatar}
+                  alt={userName || 'Avatar'}
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                staffInitial
+              )}
             </div>
             <div className="hidden sm:block text-start leading-none max-w-[130px]">
               <span className="text-xs font-bold text-[#231f20] block truncate">
@@ -264,13 +275,27 @@ export function AdminTopHeader({
 
           {isUserMenuOpen && (
             <div className="absolute end-0 top-full mt-2 w-64 bg-white rounded-2xl shadow-xl border border-[#e5e0d6] p-2 z-50 space-y-1 animate-fadeIn">
-              <div className="px-3 py-2 border-b border-[#e5e0d6] mb-1">
-                <span className="text-2xs font-extrabold text-[#231f20] block truncate">
-                  {userName || 'Staff Administrator'}
-                </span>
-                <span className="text-3xs text-[#5C5A55] font-mono block truncate">
-                  {userEmail}
-                </span>
+              <div className="px-3 py-2 border-b border-[#e5e0d6] mb-1 flex items-center gap-2.5">
+                <div className="w-8 h-8 rounded-xl overflow-hidden bg-gradient-to-br from-[#bd3227] to-[#d2a82b] text-white font-black text-xs flex items-center justify-center shrink-0">
+                  {userAvatar ? (
+                    /* eslint-disable-next-line @next/next/no-img-element */
+                    <img
+                      src={userAvatar}
+                      alt={userName || 'Avatar'}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    staffInitial
+                  )}
+                </div>
+                <div className="min-w-0">
+                  <span className="text-2xs font-extrabold text-[#231f20] block truncate">
+                    {userName || 'Staff Administrator'}
+                  </span>
+                  <span className="text-3xs text-[#5C5A55] font-mono block truncate">
+                    {userEmail}
+                  </span>
+                </div>
               </div>
               <Link
                 href="/admin/profile"
