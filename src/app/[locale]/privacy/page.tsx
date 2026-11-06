@@ -84,7 +84,7 @@ export default async function PrivacyPage(props: { params: Promise<{ locale: str
                   ? 'تطبيقاً لأحكام القانون 09-08، يحق لكل مستخدم ممارسة حقه في الاطلاع على معطياته، أو طلب تصحيحها، أو تحيينها، أو حذفها نهائياً من سجلات الجمعية عبر توجيه رسالة رسمية إلى البريد الإلكتروني: contact@amycc.org.'
                   : isFr
                   ? 'Conformément à la loi n° 09-08, vous disposez d’un droit d’accès, de rectification et d’opposition sur vos données personnelles en adressant une demande officielle par courriel à : contact@amycc.org.'
-                  : 'Pursuant to Law 09-08, users may exercise their rights of access, correction, and deletion at any time by contacting our data protection officer at: info@amycc.org.'}
+                  : 'Pursuant to Law 09-08, users may exercise their rights of access, correction, and deletion at any time by contacting our data protection officer at: contact@amycc.org.'}
               </p>
             </section>
 

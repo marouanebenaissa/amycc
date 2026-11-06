@@ -381,7 +381,7 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
         </section>
       </main>
 
-      <Footer locale={locale} dict={dict} />
+      <Footer locale={locale} dict={dict} contactEmail={channels.primaryEmail} />
     </>
   )
 }

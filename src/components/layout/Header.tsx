@@ -105,6 +105,7 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
   const [mobileExploreOpen, setMobileExploreOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [clientTopBar, setClientTopBar] = useState<TopBarConfig | null>(null)
+  const [dynamicContactEmail, setDynamicContactEmail] = useState<string>('')
   const [dismissed, setDismissed] = useState(false)
   const pathname = usePathname()
   const [prevPathname, setPrevPathname] = useState(pathname)
@@ -142,17 +143,28 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
 
   // Dynamic top bar configuration — fetches from API if not passed via props
   useEffect(() => {
-    if (topBar !== undefined) return
-
     let isMounted = true
-    fetch('/api/settings/top-bar')
+
+    if (topBar === undefined) {
+      fetch('/api/settings/top-bar')
+        .then((res) => (res.ok ? res.json() : null))
+        .then((data: TopBarConfig | null) => {
+          if (isMounted && data) {
+            setClientTopBar(data)
+          }
+        })
+        .catch(() => {})
+    }
+
+    fetch('/api/settings/contact')
       .then((res) => (res.ok ? res.json() : null))
-      .then((data: TopBarConfig | null) => {
-        if (isMounted && data) {
-          setClientTopBar(data)
+      .then((data) => {
+        if (isMounted && data?.channels?.primaryEmail) {
+          setDynamicContactEmail(data.channels.primaryEmail)
         }
       })
       .catch(() => {})
+
     return () => {
       isMounted = false
     }
@@ -392,7 +404,7 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
       : (effectiveTopBar?.linkTextEn || 'Youth in Action Initiative')
 
   const topBarLinkUrl = effectiveTopBar?.linkUrl || '/programs/youth-in-action'
-  const topBarContact = effectiveTopBar?.contactEmail || 'contact@amycc.org'
+  const topBarContact = effectiveTopBar?.contactEmail || dynamicContactEmail || 'contact@amycc.org'
 
   function resolveTopBarUrl(url: string) {
     if (!url) return `/${locale}`
@@ -1033,7 +1045,7 @@ export function Header({ locale, dict, topBar }: HeaderProps) {
                 <span className="font-bold text-[#231f20] block mb-1">
                   {isAr ? 'جمعية روح الفنون والثقافة — AMYCC' : 'Spirit of Arts & Culture Association'}
                 </span>
-                <span>info@amycc.org • {isAr ? 'المملكة المغربية' : 'Morocco'}</span>
+                <span>{topBarContact} • {isAr ? 'المملكة المغربية' : 'Morocco'}</span>
               </div>
             </nav>
           </div>

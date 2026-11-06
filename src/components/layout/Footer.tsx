@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { Logo } from '@/components/ui/Logo'
 import type { Dictionary } from '@/lib/i18n/dictionaries'
@@ -8,15 +8,32 @@ import type { Dictionary } from '@/lib/i18n/dictionaries'
 interface FooterProps {
   locale: string
   dict: Dictionary
+  contactEmail?: string
 }
 
-export function Footer({ locale, dict }: FooterProps) {
+export function Footer({ locale, dict, contactEmail: initialEmail }: FooterProps) {
   const currentYear = 2026
   const isAr = locale === 'ar'
   const isFr = locale === 'fr'
 
+  const [contactEmail, setContactEmail] = useState<string>(initialEmail || '')
   const [email, setEmail] = useState('')
   const [subscribed, setSubscribed] = useState(false)
+
+  useEffect(() => {
+    if (!initialEmail) {
+      fetch('/api/settings/contact')
+        .then((r) => r.json())
+        .then((data) => {
+          if (data?.channels?.primaryEmail) {
+            setContactEmail(data.channels.primaryEmail)
+          }
+        })
+        .catch(() => {})
+    }
+  }, [initialEmail])
+
+  const displayEmail = contactEmail || initialEmail || 'contact@amycc.org'
 
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault()
@@ -83,10 +100,10 @@ export function Footer({ locale, dict }: FooterProps) {
               <div className="flex items-center gap-2">
                 <span className="text-3xs text-[#ffd22f]">✉️</span>
                 <a
-                  href="mailto:contact@amycc.org"
+                  href={`mailto:${displayEmail}`}
                   className="text-xs text-[#cfcac2] hover:text-[#ffd22f] transition-colors font-mono"
                 >
-                  contact@amycc.org
+                  {displayEmail}
                 </a>
               </div>
               <div className="flex items-center gap-2 text-2xs text-[#8a857b]">

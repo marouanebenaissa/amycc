@@ -356,6 +356,27 @@ export async function saveContactConfiguration(
       },
     ])
 
+    // 3. Synchronize top_bar contact email if present
+    const { data: topBarRow } = await supabase
+      .from('site_settings')
+      .select('value')
+      .eq('key', 'top_bar')
+      .maybeSingle()
+
+    if (topBarRow?.value) {
+      const topBarVal = topBarRow.value as Record<string, unknown>
+      await supabase.from('site_settings').upsert([
+        {
+          key: 'top_bar',
+          value: {
+            ...topBarVal,
+            contactEmail: config.channels.primaryEmail,
+          },
+          updated_at: now,
+        },
+      ])
+    }
+
     await recordAuditLog('contact_settings_updated', 'site_settings', 'contact', {
       email: config.channels.primaryEmail,
       phone: config.channels.phone,
@@ -364,6 +385,7 @@ export async function saveContactConfiguration(
     revalidatePath('/admin/contacts')
     revalidatePath('/admin/settings')
     revalidatePath('/[locale]/contact')
+    revalidatePath('/', 'layout')
     revalidatePath('/[locale]', 'layout')
     return { success: true }
   } catch (err) {

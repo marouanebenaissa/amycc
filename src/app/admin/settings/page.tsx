@@ -9,6 +9,8 @@ import {
   type HeroConfig,
   defaultFlagshipProgramConfig,
   type FlagshipProgramConfig,
+  defaultContactConfig,
+  type ContactConfig,
 } from '@/lib/settings'
 import { HeroImageUploader } from '@/components/admin/HeroImageUploader'
 import { FlagshipImageUploader } from '@/components/admin/FlagshipImageUploader'
@@ -163,7 +165,34 @@ export default async function AdminSettingsPage() {
     const flagshipCtaSecondaryTextEn = (formData.get('flagshipCtaSecondaryTextEn') as string) || ''
     const flagshipCtaSecondaryUrl = (formData.get('flagshipCtaSecondaryUrl') as string) || ''
 
+    // Fetch existing contact config to keep contact and contact_info synchronized
+    const { data: existingContactRes } = await sb
+      .from('site_settings')
+      .select('value')
+      .eq('key', 'contact')
+      .maybeSingle()
+
+    const rawContact = (existingContactRes?.value as ContactConfig) || defaultContactConfig
+    const updatedContactConfig: ContactConfig = {
+      ...rawContact,
+      channels: {
+        ...(rawContact.channels || defaultContactConfig.channels),
+        primaryEmail: contactEmail || rawContact.channels?.primaryEmail || 'contact@amycc.org',
+        phone: contactPhone || rawContact.channels?.phone || '+212 5 24 00 00 00',
+        addressAr: contactAddress || rawContact.channels?.addressAr || 'شارع محمد السادس، جليز، مراكش، المملكة المغربية',
+      },
+      social: {
+        ...(rawContact.social || defaultContactConfig.social),
+        facebook: facebookUrl || rawContact.social?.facebook,
+        instagram: instagramUrl || rawContact.social?.instagram,
+      },
+    }
+
     await sb.from('site_settings').upsert([
+      {
+        key: 'contact',
+        value: updatedContactConfig,
+      },
       {
         key: 'contact_info',
         value: { email: contactEmail, phone: contactPhone, address: contactAddress },
@@ -274,11 +303,17 @@ export default async function AdminSettingsPage() {
     ])
 
     revalidatePath('/admin/settings')
+    revalidatePath('/admin/contacts')
+    revalidatePath('/[locale]/contact')
     revalidatePath('/', 'layout')
     revalidatePath('/[locale]', 'layout')
   }
 
   const contactVal = (settingsMap['contact_info'] as Record<string, string>) || {}
+  const rawContactSetting = (settingsMap['contact'] as ContactConfig) || defaultContactConfig
+  const effectiveEmail = contactVal.email || rawContactSetting.channels?.primaryEmail || 'contact@amycc.org'
+  const effectivePhone = contactVal.phone || rawContactSetting.channels?.phone || '+212 5 24 00 00 00'
+  const effectiveAddress = contactVal.address || rawContactSetting.channels?.addressAr || 'Marrakech / مراكش، المملكة المغربية'
   const socialVal = (settingsMap['social_links'] as Record<string, string>) || {}
   const topBarVal = (settingsMap['top_bar'] as Partial<TopBarConfig>) || {}
   const isTopBarEnabled = typeof topBarVal.enabled === 'boolean' ? topBarVal.enabled : false
@@ -1157,23 +1192,23 @@ export default async function AdminSettingsPage() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="block text-2xs font-bold text-[#5C5A55] mb-1">
-                  Official Contact Email
+                  Official Contact Email / البريد الرسمي الأساسي
                 </label>
                 <input
                   name="contactEmail"
                   type="email"
-                  defaultValue={contactVal.email || 'contact@amycc.org'}
+                  defaultValue={effectiveEmail}
                   className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#231f20]"
                 />
               </div>
               <div>
                 <label className="block text-2xs font-bold text-[#5C5A55] mb-1">
-                  Official Telephone Number
+                  Official Telephone Number / الهاتف الرسمي
                 </label>
                 <input
                   name="contactPhone"
                   type="tel"
-                  defaultValue={contactVal.phone || '+212 500-000000'}
+                  defaultValue={effectivePhone}
                   className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#231f20]"
                 />
               </div>
@@ -1181,12 +1216,12 @@ export default async function AdminSettingsPage() {
 
             <div>
               <label className="block text-2xs font-bold text-[#5C5A55] mb-1">
-                Registered Association Office / City
+                Registered Association Office / المقر الإداري الرسمي
               </label>
               <input
                 name="contactAddress"
                 type="text"
-                defaultValue={contactVal.address || 'Marrakech / مراكش، المملكة المغربية'}
+                defaultValue={effectiveAddress}
                 className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#231f20]"
               />
             </div>
