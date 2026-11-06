@@ -10,7 +10,7 @@ interface ContactManagerProps {
   defaultConfig?: ContactConfig
 }
 
-export function ContactManager({ initialConfig, defaultConfig }: ContactManagerProps) {
+export function ContactManager({ initialConfig }: ContactManagerProps) {
   const [config, setConfig] = useState<ContactConfig>(initialConfig)
   const [activeTab, setActiveTab] = useState<'channels' | 'hero' | 'topics' | 'social'>('channels')
   const [activeLangTab, setActiveLangTab] = useState<'ar' | 'fr' | 'en'>('ar')
@@ -65,17 +65,6 @@ export function ContactManager({ initialConfig, defaultConfig }: ContactManagerP
       ...prev,
       formTopics: prev.formTopics.filter((t) => t.id !== id),
     }))
-  }
-
-  function handleReset() {
-    if (!defaultConfig) return
-    if (confirm('هل ترغب حقاً في استعادة بيانات التواصل الافتراضية بالكامل؟')) {
-      setConfig({ ...defaultConfig })
-      setFeedback({
-        type: 'success',
-        message: 'تمت استعادة الإعدادات الافتراضية. اضغط على "حفظ كافة بيانات التواصل" لتثبيتها.',
-      })
-    }
   }
 
   async function handleSave() {
@@ -743,13 +732,7 @@ export function ContactManager({ initialConfig, defaultConfig }: ContactManagerP
           >
             معاينة صفحة اتصل بنا ↗
           </Link>
-          <button
-            type="button"
-            onClick={handleReset}
-            className="text-xs text-[#5C5A55] hover:text-[#bd3227] underline cursor-pointer"
-          >
-            استعادة الافتراضي
-          </button>
+
         </div>
 
         <button

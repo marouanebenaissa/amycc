@@ -92,16 +92,6 @@ export function TeamHeroManager({
     })
   }
 
-  function handleResetToDefaults() {
-    if (confirm('هل ترغب حقاً في استعادة النصوص وصورة الغلاف الافتراضية؟')) {
-      setHero({ ...defaultHero })
-      setFeedback({
-        type: 'success',
-        message: 'تمت استعادة الإعدادات الافتراضية. اضغط على "حفظ إعدادات الواجهة" لتثبيتها.',
-      })
-    }
-  }
-
   async function handleSave() {
     setSaving(true)
     setFeedback(null)
@@ -198,13 +188,7 @@ export function TeamHeroManager({
               </button>
             )}
 
-            <button
-              type="button"
-              onClick={handleResetToDefaults}
-              className="px-3.5 py-2 rounded-xl bg-[#FAF8F5] hover:bg-[#F4EFE6] text-[#5C5A55] text-xs font-bold border border-[#e5e0d6] transition-all cursor-pointer"
-            >
-              ↺ استعادة الافتراضي
-            </button>
+
           </div>
         </div>
 

@@ -26,7 +26,7 @@ const COLOR_OPTIONS = [
   { label: 'نيلي / كحلي', border: 'border-[#231f20]/30 hover:border-[#231f20]', badge: 'bg-[#231f20]/10 text-[#231f20]' },
 ]
 
-export function TeamManager({ initialConfig, defaultMembers = [] }: TeamManagerProps) {
+export function TeamManager({ initialConfig }: TeamManagerProps) {
   const [config, setConfig] = useState<TeamConfig>(initialConfig)
   const [selectedCategory, setSelectedCategory] = useState<string>('all')
   const [saving, setSaving] = useState(false)
@@ -312,17 +312,6 @@ export function TeamManager({ initialConfig, defaultMembers = [] }: TeamManagerP
         m.id === id ? { ...m, enabled: !m.enabled } : m
       ),
     }))
-    setHasUnsavedChanges(true)
-  }
-
-  // Reset to default
-  function handleResetToDefaults() {
-    if (!window.confirm('هل أنت متأكد من استعادة أعضاء الهيكلة الافتراضية؟ سيتم استبدال التعديلات غير المحفوظة.')) {
-      return
-    }
-    setConfig({
-      members: defaultMembers.length > 0 ? defaultMembers : initialConfig.members,
-    })
     setHasUnsavedChanges(true)
   }
 
@@ -688,13 +677,7 @@ export function TeamManager({ initialConfig, defaultMembers = [] }: TeamManagerP
         <span className="text-3xs text-[#5C5A55]">
           الهيكلة الرسمية متوافقة مع مقتضيات الظهير الشريف رقم 1.58.376 المنظم للجمعيات بالمملكة المغربية.
         </span>
-        <button
-          type="button"
-          onClick={handleResetToDefaults}
-          className="text-3xs font-bold text-[#5C5A55] hover:text-[#bd3227] underline"
-        >
-          استعادة الهيكلة الافتراضية
-        </button>
+
       </div>
 
       {/* ============================================================

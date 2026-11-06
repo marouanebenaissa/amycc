@@ -15,7 +15,7 @@ interface AnnualProgramManagerProps {
   defaultConfig?: AnnualProgramConfig
 }
 
-export function AnnualProgramManager({ initialConfig, defaultConfig }: AnnualProgramManagerProps) {
+export function AnnualProgramManager({ initialConfig }: AnnualProgramManagerProps) {
   const [config, setConfig] = useState<AnnualProgramConfig>(initialConfig)
   const [activeTab, setActiveTab] = useState<'hero' | 'stats_pillars' | 'quarters' | 'cta'>('hero')
   const [activeLangTab, setActiveLangTab] = useState<'ar' | 'fr' | 'en'>('ar')
@@ -166,17 +166,6 @@ export function AnnualProgramManager({ initialConfig, defaultConfig }: AnnualPro
     }
   }
 
-  function handleReset() {
-    if (!defaultConfig) return
-    if (confirm('هل ترغب حقاً في استعادة إعدادات البرنامج السنوي الافتراضية بالكامل؟')) {
-      setConfig({ ...defaultConfig })
-      setFeedback({
-        type: 'success',
-        message: 'تمت استعادة الإعدادات الافتراضية. اضغط على "حفظ إعدادات البرنامج السنوي" للتثبيت.',
-      })
-    }
-  }
-
   async function handleSave() {
     setSaving(true)
     setFeedback(null)
@@ -251,16 +240,6 @@ export function AnnualProgramManager({ initialConfig, defaultConfig }: AnnualPro
             <span>معاينة المنشور</span>
             <span>↗</span>
           </Link>
-
-          {defaultConfig && (
-            <button
-              type="button"
-              onClick={handleReset}
-              className="px-3.5 py-2 rounded-xl text-xs font-bold text-[#5C5A55] hover:text-[#231f20] hover:bg-[#FAF8F5] border border-[#e5e0d6] transition-colors"
-            >
-              استعادة الافتراضي
-            </button>
-          )}
 
           <button
             type="button"

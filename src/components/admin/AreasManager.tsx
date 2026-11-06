@@ -9,7 +9,7 @@ interface AreasManagerProps {
   defaultItems?: AreaItemConfig[]
 }
 
-export function AreasManager({ initialConfig, defaultItems = [] }: AreasManagerProps) {
+export function AreasManager({ initialConfig }: AreasManagerProps) {
   const [config, setConfig] = useState<AreasConfig>(initialConfig)
   const [saving, setSaving] = useState(false)
   const [successMessage, setSuccessMessage] = useState<string | null>(null)
@@ -246,22 +246,6 @@ export function AreasManager({ initialConfig, defaultItems = [] }: AreasManagerP
     }))
   }
 
-  // Restore Defaults
-  function handleRestoreDefaults() {
-    if (
-      !window.confirm(
-        'هل تريد استعادة مجالات التدخل الستة الافتراضية لجمعية AMYCC؟ ستحل محل البيانات الحالية (تحتاج لحفظ التغييرات بعدها).'
-      )
-    ) {
-      return
-    }
-    setConfig((prev) => ({
-      ...prev,
-      items: defaultItems.length > 0 ? defaultItems : prev.items,
-    }))
-    setHasUnsavedChanges(true)
-  }
-
   // Save All Changes to Supabase
   async function handleSaveAll() {
     setSaving(true)
@@ -320,15 +304,6 @@ export function AreasManager({ initialConfig, defaultItems = [] }: AreasManagerP
                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
               </svg>
               <span>إضافة مجال جديد</span>
-            </button>
-
-            <button
-              type="button"
-              onClick={handleRestoreDefaults}
-              className="px-3.5 py-2.5 rounded-xl text-3xs font-bold text-[#5C5A55] bg-[#FAF8F5] border border-[#e5e0d6] hover:bg-[#F4EFE6] active:scale-98 transition-all cursor-pointer"
-              title="استعادة مجالات الجمعية الرسمية"
-            >
-              استعادة الافتراضي
             </button>
 
             <button

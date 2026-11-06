@@ -18,7 +18,7 @@ const COLOR_OPTIONS = [
   { label: 'زمردي / أخضر (تطوع وبيئة)', border: 'border-emerald-600/30 hover:border-emerald-600', text: 'text-emerald-700', bg: 'bg-emerald-50' },
 ]
 
-export function CommissionsManager({ initialConfig, defaultItems = [] }: CommissionsManagerProps) {
+export function CommissionsManager({ initialConfig }: CommissionsManagerProps) {
   const [config, setConfig] = useState<CommissionsConfig>(initialConfig)
   const [saving, setSaving] = useState(false)
   const [successMessage, setSuccessMessage] = useState<string | null>(null)
@@ -211,18 +211,6 @@ export function CommissionsManager({ initialConfig, defaultItems = [] }: Commiss
       items: prev.items.map((item) =>
         item.id === id ? { ...item, enabled: !item.enabled } : item
       ),
-    }))
-    setHasUnsavedChanges(true)
-  }
-
-  // Reset to default
-  function handleResetToDefaults() {
-    if (!window.confirm('هل أنت متأكد من استعادة اللجان الافتراضية الست؟ سيتم استبدال أي تعديلات غير محفوظة.')) {
-      return
-    }
-    setConfig((prev) => ({
-      ...prev,
-      items: defaultItems.length > 0 ? defaultItems : initialConfig.items,
     }))
     setHasUnsavedChanges(true)
   }
@@ -540,13 +528,7 @@ export function CommissionsManager({ initialConfig, defaultItems = [] }: Commiss
         <span className="text-3xs text-[#5C5A55]">
           التعديلات المحفوظة هنا تنعكس فوراً في قسم اللجان الميدانية بصفحة فريق العمل.
         </span>
-        <button
-          type="button"
-          onClick={handleResetToDefaults}
-          className="text-3xs font-bold text-[#5C5A55] hover:text-[#bd3227] underline"
-        >
-          استعادة اللجان الافتراضية الست
-        </button>
+
       </div>
 
       {/* ============================================================

@@ -18,7 +18,7 @@ interface ImpactManagerProps {
   defaultConfig?: ImpactConfig
 }
 
-export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerProps) {
+export function ImpactManager({ initialConfig }: ImpactManagerProps) {
   const router = useRouter()
   const [config, setConfig] = useState<ImpactConfig>(initialConfig)
   const [activeTab, setActiveTab] = useState<'hero' | 'metrics' | 'pillars' | 'spotlight' | 'transparency_cta'>('hero')
@@ -269,13 +269,6 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
     }
   }
 
-  function handleReset() {
-    if (defaultConfig && confirm('هل أنت متأكد من استعادة القيم الافتراضية الأولية للأثر المجتمعي؟')) {
-      setConfig(defaultConfig)
-      setFeedback({ type: 'success', message: 'تم استرجاع الإعدادات الافتراضية. اضغط حفظ لتطبيقها.' })
-    }
-  }
-
   return (
     <div className="space-y-6">
       {/* Top Controls Bar */}
@@ -295,16 +288,6 @@ export function ImpactManager({ initialConfig, defaultConfig }: ImpactManagerPro
         </div>
 
         <div className="flex items-center gap-2">
-          {defaultConfig && (
-            <button
-              type="button"
-              onClick={handleReset}
-              className="px-3.5 py-2 rounded-xl text-xs font-bold text-[#5C5A55] bg-[#FAF8F5] border border-[#e5e0d6] hover:bg-[#F4EFE6] transition-colors"
-            >
-              استعادة الافتراضي
-            </button>
-          )}
-
           <Link
             href="/ar/impact"
             target="_blank"

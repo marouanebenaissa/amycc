@@ -11,7 +11,7 @@ interface ProgramsPageManagerProps {
   defaultConfig?: ProgramsPageConfig
 }
 
-export function ProgramsPageManager({ initialConfig, defaultConfig }: ProgramsPageManagerProps) {
+export function ProgramsPageManager({ initialConfig }: ProgramsPageManagerProps) {
   const [config, setConfig] = useState<ProgramsPageConfig>(initialConfig)
   const [activeTab, setActiveTab] = useState<'hero' | 'stats' | 'cta'>('hero')
   const [activeLangTab, setActiveLangTab] = useState<'ar' | 'fr' | 'en'>('ar')
@@ -73,17 +73,6 @@ export function ProgramsPageManager({ initialConfig, defaultConfig }: ProgramsPa
       alert(err instanceof Error ? err.message : 'حدث خطأ أثناء رفع الصورة')
     } finally {
       setUploadingImage(false)
-    }
-  }
-
-  function handleReset() {
-    if (!defaultConfig) return
-    if (confirm('هل ترغب حقاً في استعادة إعدادات صفحة البرامج الافتراضية؟')) {
-      setConfig({ ...defaultConfig })
-      setFeedback({
-        type: 'success',
-        message: 'تمت استعادة الإعدادات الافتراضية. اضغط على "حفظ إعدادات صفحة البرامج" للتثبيت.',
-      })
     }
   }
 
@@ -714,13 +703,7 @@ export function ProgramsPageManager({ initialConfig, defaultConfig }: ProgramsPa
           >
             معاينة صفحة البرامج ↗
           </Link>
-          <button
-            type="button"
-            onClick={handleReset}
-            className="text-xs text-[#5C5A55] hover:text-[#bd3227] underline cursor-pointer"
-          >
-            استعادة الافتراضي
-          </button>
+
         </div>
 
         <button

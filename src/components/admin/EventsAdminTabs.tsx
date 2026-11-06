@@ -46,7 +46,6 @@ interface EventsAdminTabsProps {
 export function EventsAdminTabs({
   events,
   initialPageConfig,
-  defaultPageConfig,
   onToggleRegistration,
   onDeleteEvent,
 }: EventsAdminTabsProps) {
@@ -1195,20 +1194,7 @@ export function EventsAdminTabs({
           <span>لوحة التحكم نشطة — التعديلات جاهزة للحفظ والنشر الفوري</span>
         </div>
         <div className="flex items-center gap-2">
-          {defaultPageConfig && (
-            <button
-              type="button"
-              onClick={() => {
-                if (confirm('هل ترغب في استرجاع الإعدادات الافتراضية لواجهة الفعاليات؟')) {
-                  setConfig(defaultPageConfig)
-                  setFeedback({ type: 'success', message: 'تم استرجاع الإعدادات الافتراضية. اضغط حفظ لتطبيقها.' })
-                }
-              }}
-              className="px-3.5 py-2 rounded-xl text-xs font-bold text-[#5C5A55] bg-[#FAF8F5] border border-[#e5e0d6] hover:bg-[#F4EFE6] transition-colors"
-            >
-              استعادة الافتراضي
-            </button>
-          )}
+
 
           <button
             type="button"
