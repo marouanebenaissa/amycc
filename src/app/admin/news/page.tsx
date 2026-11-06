@@ -1,5 +1,5 @@
 import { createClient } from '@/lib/supabase/server'
-import { createAdminClient } from '@/lib/supabase/admin'
+import { createAdminClientSafe } from '@/lib/supabase/admin'
 import { redirect } from 'next/navigation'
 import { revalidatePath } from 'next/cache'
 import { getNewsPageSettings } from '@/lib/settings'
@@ -20,8 +20,8 @@ export default async function AdminNewsPage() {
     redirect('/admin/login')
   }
 
-  // Fetch articles via admin client to ensure all records (published, drafts) load reliably
-  const admin = createAdminClient()
+  // Fetch articles via admin client (or fallback) to ensure all records (published, drafts) load reliably
+  const admin = createAdminClientSafe() || supabase
   const [{ data: articles }, config] = await Promise.all([
     admin
       .from('news_articles')
