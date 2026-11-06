@@ -14,6 +14,7 @@ import {
 } from '@/lib/settings'
 import { HeroImageUploader } from '@/components/admin/HeroImageUploader'
 import { FlagshipImageUploader } from '@/components/admin/FlagshipImageUploader'
+import { AdminPageHeader } from '@/components/admin/AdminPageHeader'
 
 interface SiteSettingRow {
   key: string
@@ -323,12 +324,18 @@ export default async function AdminSettingsPage() {
 
   return (
     <div className="space-y-8 max-w-4xl">
-      <div>
-        <h1 className="text-2xl font-black text-[#231f20]">Platform & Site Settings</h1>
-        <p className="text-xs text-[#5C5A55] mt-1">
-          إدارة إعدادات المنصة، الهوية المؤسسية، والتحكم الشامل في واجهة الاستقبال والشريط العلوي.
-        </p>
-      </div>
+      <AdminPageHeader
+        title={{
+          ar: 'إعدادات المنصة والموقع العام',
+          fr: 'Paramètres Généraux de la Plateforme',
+          en: 'Platform & Site Settings',
+        }}
+        subtitle={{
+          ar: 'إدارة إعدادات المنصة، الهوية المؤسسية، والتحكم الشامل في واجهة الاستقبال والشريط العلوي.',
+          fr: 'Gestion de la plateforme, de l\'identité institutionnelle, du bandeau et de la section Hero.',
+          en: 'Manage platform settings, institutional identity, top notification bar, and hero showcase.',
+        }}
+      />
 
       {/* Organization Identity Overview */}
       <div className="bg-white p-8 rounded-2xl border border-[#e5e0d6] shadow-2xs space-y-6">

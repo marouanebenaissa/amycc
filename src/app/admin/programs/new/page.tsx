@@ -1,7 +1,7 @@
 import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
-import Link from 'next/link'
 import { ProgramForm } from '@/components/admin/ProgramForm'
+import { AdminPageHeader } from '@/components/admin/AdminPageHeader'
 
 export default async function NewProgramPage() {
   const supabase = await createClient()
@@ -15,23 +15,16 @@ export default async function NewProgramPage() {
 
   return (
     <div className="space-y-6 max-w-4xl">
-      <div className="flex items-center gap-3">
-        <Link
-          href="/admin/programs"
-          className="p-2 text-slate-400 hover:text-slate-600 rounded-lg hover:bg-slate-100 transition-colors"
-          title="Back to Programs"
-        >
-          <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-          </svg>
-        </Link>
-        <div>
-          <h1 className="text-2xl font-extrabold text-[#181516]">Create New Program</h1>
-          <p className="text-xs text-slate-500 mt-0.5">
-            Define program details and trilingual translations (Arabic, French, English).
-          </p>
-        </div>
-      </div>
+      <AdminPageHeader
+        backHref="/admin/programs"
+        backTitle={{ ar: 'العودة للبرامج', fr: 'Retour aux programmes', en: 'Back to Programs' }}
+        title={{ ar: 'إضافة برنامج ثقافي جديد', fr: 'Créer un nouveau programme', en: 'Create New Program' }}
+        subtitle={{
+          ar: 'تحديد تفاصيل المبادرة وإدخال الترجمات الثلاث (العربية، الفرنسية، الإنجليزية).',
+          fr: 'Définir les détails du programme et les contenus trilingues (Arabe, Français, Anglais).',
+          en: 'Define program details and trilingual translations (Arabic, French, English).',
+        }}
+      />
 
       <ProgramForm />
     </div>

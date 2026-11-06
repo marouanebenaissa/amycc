@@ -3,10 +3,173 @@
 import { useState } from 'react'
 import type { CommissionsConfig, CommissionItemConfig } from '@/lib/settings'
 import { saveCommissionsConfiguration } from '@/lib/actions/admin'
+import { useAdminLocale } from './AdminLocaleContext'
 
 interface CommissionsManagerProps {
   initialConfig: CommissionsConfig
   defaultItems?: CommissionItemConfig[]
+}
+
+const COMMISSION_STRINGS = {
+  ar: {
+    totalCommissions: 'إجمالي اللجان الميدانية',
+    totalCommissionsSub: 'محاور وظيفية متخصصة',
+    activeCommissions: 'اللجان النشطة',
+    activeCommissionsSub: 'ظاهرة في الصفحة العامة',
+    totalInterventions: 'إجمالي الأنشطة والتدخلات',
+    totalInterventionsSub: 'محور عمل وتأطير ميداني',
+    fieldScope: 'نطاق التدخل الميداني',
+    fieldScopeValue: 'دور الشباب • مراكز',
+    fieldScopeSub: 'فضاءات ثقافية بالمغرب',
+    sectionSettingsBtn: '⚙️ عنوان ومقدمة القسم العام',
+    addCommissionBtn: '+ إضافة لجنة جديدة',
+    saveBtn: 'حفظ التغييرات',
+    savingBtn: 'جارٍ الحفظ...',
+    unsavedChanges: 'لديك تعديلات غير محفوظة على اللجان الوظيفية! انقر على زر «حفظ التغييرات» لتثبيتها في الموقع العام.',
+    saveNow: 'حفظ الآن',
+    sectionHeaderTitle: 'تعديل نصوص ترويسة قسم اللجان الوظيفية في صفحة الموقع',
+    sectionHeaderSub: 'العنوان الرئيسي، الشارة العلوية، والفقرة التمهيدية المعروضة فوق بطاقات اللجان',
+    closeBtn: '✕ إغلاق',
+    sectionTagLabel: 'الشارة العلوية',
+    sectionTitleLabel: 'العنوان الرئيسي للقسم',
+    sectionDescLabel: 'الفقرة التعريفية للقسم',
+    activeHighlights: 'أبرز الأنشطة الميدانية:',
+    morePoints: (count: number) => `+${count} أنشطة إضافية...`,
+    editBtn: '✏️ تعديل',
+    deleteBtn: '🗑️ حذف',
+    enabledStatus: 'مفعّلة',
+    disabledStatus: 'معطّلة',
+    footerNotice: 'التعديلات المحفوظة هنا تنعكس فوراً في قسم اللجان الميدانية بصفحة فريق العمل.',
+    modalEditTitle: (title: string) => `تعديل: ${title}`,
+    modalAddTitle: 'إضافة لجنة وظيفية جديدة',
+    modalSub: 'حدد الاسم، الوسم، والأنشطة والتدخلات الميدانية',
+    tabBasicInfo: '1. بيانات وهوية اللجنة',
+    tabPoints: (count: number) => `2. التدخلات والأنشطة الميدانية (${count})`,
+    currentInputLang: 'لغة الإدخال الحالية:',
+    commTitleLabel: 'عنوان اللجنة',
+    commTagLabel: 'وسم التصنيف',
+    commDescLabel: 'وصف دور وأهداف اللجنة',
+    iconLabel: 'رمز الأيقونة (إيموجي)',
+    colorThemeLabel: 'نمط الألوان والحدود',
+    pointsHeading: 'أبرز التدخلات والأنشطة الميدانية للجنة',
+    pointsInLang: (lang: string, count: number) => `الأنشطة بـ ${lang} (${count})`,
+    pointPlaceholder: 'أدخل نشاطاً ميدانياً واضغط إضافة...',
+    addPointBtn: 'إضافة',
+    noPoints: 'لم تتم إضافة أي أنشطة بعد.',
+    cancelBtn: 'إلغاء وتراجع',
+    saveCommissionBtn: 'تطبيق التعديلات ✓',
+    deleteConfirm: (title: string) => `هل أنت متأكد من حذف لجنة "${title}"؟ لن تظهر في الموقع بعد الحفظ.`,
+    saveSuccess: 'تم حفظ بيانات اللجان الوظيفية وفرق التأطير بنجاح في الموقع!',
+    saveError: 'تعذر حفظ بيانات اللجان',
+    enableVisibility: 'تفعيل ظهور اللجنة في الموقع',
+    enableVisibilityHint: 'عند التعطيل، تبقى اللجنة محفوظة في لوحة التحكم وتختفي من الصفحة العامة.',
+  },
+  fr: {
+    totalCommissions: 'Total des Commissions',
+    totalCommissionsSub: 'Pôles thématiques spécialisés',
+    activeCommissions: 'Commissions Actives',
+    activeCommissionsSub: 'Visibles sur le site public',
+    totalInterventions: 'Actions & Interventions',
+    totalInterventionsSub: 'Axes d\'action sur le terrain',
+    fieldScope: 'Périmètre d\'Intervention',
+    fieldScopeValue: 'Maisons de Jeunes • Centres',
+    fieldScopeSub: 'Espaces culturels au Maroc',
+    sectionSettingsBtn: '⚙️ Titre & Introduction de la Section',
+    addCommissionBtn: '+ Nouvelle Commission',
+    saveBtn: 'Enregistrer les modifications',
+    savingBtn: 'Enregistrement...',
+    unsavedChanges: 'Vous avez des modifications non enregistrées sur les commissions. Cliquez sur « Enregistrer ».',
+    saveNow: 'Enregistrer maintenant',
+    sectionHeaderTitle: 'Configuration de l\'en-tête de la section Commissions',
+    sectionHeaderSub: 'Titre principal, badge supérieur et description introductive',
+    closeBtn: '✕ Fermer',
+    sectionTagLabel: 'Badge Supérieur',
+    sectionTitleLabel: 'Titre Principal de la Section',
+    sectionDescLabel: 'Description Introductive',
+    activeHighlights: 'Principales actions terrain :',
+    morePoints: (count: number) => `+${count} actions supplémentaires...`,
+    editBtn: '✏️ Modifier',
+    deleteBtn: '🗑️ Supprimer',
+    enabledStatus: 'Active',
+    disabledStatus: 'Masquée',
+    footerNotice: 'Les modifications enregistrées s\'appliquent immédiatement à la page Équipe du site public.',
+    modalEditTitle: (title: string) => `Modifier : ${title}`,
+    modalAddTitle: 'Ajouter une Nouvelle Commission',
+    modalSub: 'Définissez le titre, le tag et les actions de terrain',
+    tabBasicInfo: '1. Informations Générales & Style',
+    tabPoints: (count: number) => `2. Actions & Interventions Terrain (${count})`,
+    currentInputLang: 'Langue de saisie :',
+    commTitleLabel: 'Titre de la Commission',
+    commTagLabel: 'Tag / Catégorie',
+    commDescLabel: 'Description des missions & objectifs',
+    iconLabel: 'Icône (Émoji)',
+    colorThemeLabel: 'Thème de couleur & bordure',
+    pointsHeading: 'Principales actions et interventions de la commission',
+    pointsInLang: (lang: string, count: number) => `Actions en ${lang} (${count})`,
+    pointPlaceholder: 'Saisissez une action terrain et cliquez sur Ajouter...',
+    addPointBtn: 'Ajouter',
+    noPoints: 'Aucune action enregistrée pour le moment.',
+    cancelBtn: 'Annuler',
+    saveCommissionBtn: 'Appliquer les modifications ✓',
+    deleteConfirm: (title: string) => `Êtes-vous certain de vouloir supprimer la commission "${title}" ?`,
+    saveSuccess: 'Configuration des commissions enregistrée avec succès sur le site !',
+    saveError: 'Impossible d\'enregistrer les commissions',
+    enableVisibility: 'Activer la visibilité sur le site',
+    enableVisibilityHint: 'Si désactivée, la commission reste enregistrée mais masquée sur le site public.',
+  },
+  en: {
+    totalCommissions: 'Total Commissions',
+    totalCommissionsSub: 'Specialized functional committees',
+    activeCommissions: 'Active Commissions',
+    activeCommissionsSub: 'Visible on public site',
+    totalInterventions: 'Total Action Points',
+    totalInterventionsSub: 'Field training & workshop tracks',
+    fieldScope: 'Field Reach & Scope',
+    fieldScopeValue: 'Youth Centers • Cultural Hubs',
+    fieldScopeSub: 'Across the Kingdom of Morocco',
+    sectionSettingsBtn: '⚙️ Section Title & Header CMS',
+    addCommissionBtn: '+ Add New Commission',
+    saveBtn: 'Save Changes',
+    savingBtn: 'Saving...',
+    unsavedChanges: 'You have unsaved changes on commissions. Click «Save Changes» to apply.',
+    saveNow: 'Save Now',
+    sectionHeaderTitle: 'Section Header & Intro Narrative Settings',
+    sectionHeaderSub: 'Main title, eyebrow badge, and introductory paragraph displayed above cards',
+    closeBtn: '✕ Close',
+    sectionTagLabel: 'Eyebrow Badge',
+    sectionTitleLabel: 'Main Section Title',
+    sectionDescLabel: 'Section Introductory Narrative',
+    activeHighlights: 'Core Field Activities:',
+    morePoints: (count: number) => `+${count} additional activities...`,
+    editBtn: '✏️ Edit',
+    deleteBtn: '🗑️ Delete',
+    enabledStatus: 'Active',
+    disabledStatus: 'Hidden',
+    footerNotice: 'Changes saved here immediately update the commissions section on the Team page.',
+    modalEditTitle: (title: string) => `Edit: ${title}`,
+    modalAddTitle: 'Add New Specialized Commission',
+    modalSub: 'Define committee title, tag, narrative, and field action points',
+    tabBasicInfo: '1. Identity, Narrative & Colors',
+    tabPoints: (count: number) => `2. Field Action Points & Activities (${count})`,
+    currentInputLang: 'Current Input Language:',
+    commTitleLabel: 'Commission Title',
+    commTagLabel: 'Category Tag',
+    commDescLabel: 'Commission Purpose & Narrative',
+    iconLabel: 'Icon Symbol (Emoji)',
+    colorThemeLabel: 'Accent Color & Border Theme',
+    pointsHeading: 'Core field interventions and workshop activities',
+    pointsInLang: (lang: string, count: number) => `Action Points in ${lang} (${count})`,
+    pointPlaceholder: 'Enter field action point and click Add...',
+    addPointBtn: 'Add',
+    noPoints: 'No action points added yet.',
+    cancelBtn: 'Cancel',
+    saveCommissionBtn: 'Apply Changes ✓',
+    deleteConfirm: (title: string) => `Are you sure you want to delete commission "${title}"?`,
+    saveSuccess: 'Commissions and field teams saved successfully to public site!',
+    saveError: 'Failed to save commissions',
+    enableVisibility: 'Enable Visibility on Public Site',
+    enableVisibilityHint: 'When disabled, the commission stays saved in admin but hidden from public.',
+  },
 }
 
 const COLOR_OPTIONS = [
@@ -19,6 +182,8 @@ const COLOR_OPTIONS = [
 ]
 
 export function CommissionsManager({ initialConfig }: CommissionsManagerProps) {
+  const { locale, dir } = useAdminLocale()
+  const tr = COMMISSION_STRINGS[locale] || COMMISSION_STRINGS.ar
   const [config, setConfig] = useState<CommissionsConfig>(initialConfig)
   const [saving, setSaving] = useState(false)
   const [successMessage, setSuccessMessage] = useState<string | null>(null)
@@ -170,7 +335,15 @@ export function CommissionsManager({ initialConfig }: CommissionsManagerProps) {
 
   // Delete Commission
   function handleDelete(id: string) {
-    if (!window.confirm('هل أنت متأكد من حذف هذه اللجنة؟ لن يتم تطبيق الحذف حتى تضغط «حفظ كافة التغييرات».')) {
+    const targetItem = config.items.find((item) => item.id === id)
+    const title = targetItem
+      ? locale === 'ar'
+        ? targetItem.titleAr
+        : locale === 'fr'
+        ? targetItem.titleFr || targetItem.titleAr
+        : targetItem.titleEn || targetItem.titleAr
+      : ''
+    if (!window.confirm(tr.deleteConfirm(title))) {
       return
     }
     setConfig((prev) => ({
@@ -224,46 +397,46 @@ export function CommissionsManager({ initialConfig }: CommissionsManagerProps) {
     try {
       const res = await saveCommissionsConfiguration(config)
       if (!res.success) {
-        throw new Error(res.error || 'تعذر حفظ بيانات اللجان')
+        throw new Error(res.error || tr.saveError)
       }
 
       setHasUnsavedChanges(false)
-      setSuccessMessage('تم حفظ بيانات اللجان الوظيفية وفرق التأطير بنجاح في الموقع!')
+      setSuccessMessage(tr.saveSuccess)
       setTimeout(() => setSuccessMessage(null), 5000)
     } catch (err: unknown) {
-      setErrorMessage(err instanceof Error ? err.message : 'حدث خطأ غير متوقع أثناء الحفظ')
+      setErrorMessage(err instanceof Error ? err.message : tr.saveError)
     } finally {
       setSaving(false)
     }
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6" dir={dir}>
       {/* Top Banner & Quick Metrics */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
         <div className="p-4 rounded-2xl bg-white border border-[#e5e0d6] shadow-2xs">
-          <span className="text-3xs font-bold text-[#5C5A55] block">إجمالي اللجان الميدانية</span>
+          <span className="text-3xs font-bold text-[#5C5A55] block">{tr.totalCommissions}</span>
           <span className="text-2xl font-black text-[#231f20]">{config.items.length}</span>
-          <span className="text-3xs text-[#5C5A55] block mt-0.5">محاور وظيفية متخصصة</span>
+          <span className="text-3xs text-[#5C5A55] block mt-0.5">{tr.totalCommissionsSub}</span>
         </div>
         <div className="p-4 rounded-2xl bg-white border border-emerald-500/30 shadow-2xs">
-          <span className="text-3xs font-bold text-emerald-700 block">اللجان النشطة</span>
+          <span className="text-3xs font-bold text-emerald-700 block">{tr.activeCommissions}</span>
           <span className="text-2xl font-black text-emerald-600">
             {config.items.filter((item) => item.enabled).length}
           </span>
-          <span className="text-3xs text-[#5C5A55] block mt-0.5">ظاهرة في الصفحة العامة</span>
+          <span className="text-3xs text-[#5C5A55] block mt-0.5">{tr.activeCommissionsSub}</span>
         </div>
         <div className="p-4 rounded-2xl bg-white border border-[#bd3227]/30 shadow-2xs">
-          <span className="text-3xs font-bold text-[#bd3227] block">إجمالي الأنشطة والتدخلات</span>
+          <span className="text-3xs font-bold text-[#bd3227] block">{tr.totalInterventions}</span>
           <span className="text-2xl font-black text-[#bd3227]">
             {config.items.reduce((acc, item) => acc + (item.pointsAr?.length || 0), 0)}
           </span>
-          <span className="text-3xs text-[#5C5A55] block mt-0.5">محور عمل وتأطير ميداني</span>
+          <span className="text-3xs text-[#5C5A55] block mt-0.5">{tr.totalInterventionsSub}</span>
         </div>
         <div className="p-4 rounded-2xl bg-white border border-[#231f20]/30 shadow-2xs">
-          <span className="text-3xs font-bold text-[#231f20] block">نطاق التدخل الميداني</span>
-          <span className="text-lg font-black text-[#231f20] truncate block mt-1">دور الشباب • مراكز</span>
-          <span className="text-3xs text-[#5C5A55] block mt-0.5">فضاءات ثقافية بالمغرب</span>
+          <span className="text-3xs font-bold text-[#231f20] block">{tr.fieldScope}</span>
+          <span className="text-lg font-black text-[#231f20] truncate block mt-1">{tr.fieldScopeValue}</span>
+          <span className="text-3xs text-[#5C5A55] block mt-0.5">{tr.fieldScopeSub}</span>
         </div>
       </div>
 
@@ -279,7 +452,7 @@ export function CommissionsManager({ initialConfig }: CommissionsManagerProps) {
                 : 'bg-[#FAF8F5] hover:bg-[#F4EFE6] text-[#231f20] border-[#e5e0d6]'
             }`}
           >
-            ⚙️ عنوان ومقدمة القسم العام
+            {tr.sectionSettingsBtn}
           </button>
         </div>
 
@@ -290,7 +463,7 @@ export function CommissionsManager({ initialConfig }: CommissionsManagerProps) {
             className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl bg-[#bd3227] hover:bg-[#a3261c] text-white text-xs font-bold transition-all shadow-xs cursor-pointer"
           >
             <span>+</span>
-            <span>إضافة لجنة جديدة</span>
+            <span>{tr.addCommissionBtn}</span>
           </button>
 
           <button
@@ -304,7 +477,7 @@ export function CommissionsManager({ initialConfig }: CommissionsManagerProps) {
             }`}
           >
             <span>💾</span>
-            <span>{saving ? 'جارٍ الحفظ...' : 'حفظ التغييرات'}</span>
+            <span>{saving ? tr.savingBtn : tr.saveBtn}</span>
             {hasUnsavedChanges && (
               <span className="w-2 h-2 rounded-full bg-amber-300 animate-ping" />
             )}
@@ -331,14 +504,14 @@ export function CommissionsManager({ initialConfig }: CommissionsManagerProps) {
         <div className="p-3 rounded-xl bg-amber-50 border border-amber-200 text-amber-900 text-xs font-bold flex items-center justify-between">
           <div className="flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
-            <span>لديك تعديلات غير محفوظة على اللجان الوظيفية! انقر على زر «حفظ التغييرات» لتثبيتها في الموقع العام.</span>
+            <span>{tr.unsavedChanges}</span>
           </div>
           <button
             onClick={handleSaveAll}
             disabled={saving}
             className="px-3 py-1 rounded-lg bg-amber-600 hover:bg-amber-700 text-white text-3xs font-bold"
           >
-            حفظ الآن
+            {tr.saveNow}
           </button>
         </div>
       )}
@@ -349,10 +522,10 @@ export function CommissionsManager({ initialConfig }: CommissionsManagerProps) {
           <div className="flex items-center justify-between border-b border-[#E5E0D6] pb-3">
             <div>
               <h3 className="text-sm font-black text-[#231f20]">
-                تعديل نصوص ترويسة قسم اللجان الوظيفية في صفحة الموقع
+                {tr.sectionHeaderTitle}
               </h3>
               <p className="text-3xs text-[#5C5A55]">
-                العنوان الرئيسي، الشارة العلوية، والفقرة التمهيدية المعروضة فوق بطاقات اللجان
+                {tr.sectionHeaderSub}
               </p>
             </div>
             <button
@@ -360,14 +533,14 @@ export function CommissionsManager({ initialConfig }: CommissionsManagerProps) {
               onClick={() => setShowSectionSettings(false)}
               className="text-xs text-[#5C5A55] hover:text-[#231f20]"
             >
-              ✕ إغلاق
+              {tr.closeBtn}
             </button>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label className="block text-xs font-bold text-[#231f20] mb-1">
-                الشارة العلوية (بالعربية)
+                {tr.sectionTagLabel} (AR)
               </label>
               <input
                 type="text"
@@ -381,7 +554,7 @@ export function CommissionsManager({ initialConfig }: CommissionsManagerProps) {
             </div>
             <div>
               <label className="block text-xs font-bold text-[#231f20] mb-1">
-                العنوان الرئيسي للقسم (بالعربية)
+                {tr.sectionTitleLabel} (AR)
               </label>
               <input
                 type="text"
@@ -397,7 +570,7 @@ export function CommissionsManager({ initialConfig }: CommissionsManagerProps) {
 
           <div>
             <label className="block text-xs font-bold text-[#231f20] mb-1">
-              الفقرة التعريفية للقسم (بالعربية)
+              {tr.sectionDescLabel} (AR)
             </label>
             <textarea
               rows={2}
@@ -414,121 +587,151 @@ export function CommissionsManager({ initialConfig }: CommissionsManagerProps) {
 
       {/* Commissions Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-        {config.items.map((item, index) => (
-          <div
-            key={item.id}
-            className={`p-5 rounded-2xl bg-white border ${
-              item.enabled ? item.borderClass : 'border-gray-200 opacity-60'
-            } shadow-2xs hover:shadow-subtle transition-all flex flex-col justify-between group relative`}
-          >
-            <div className="space-y-4">
-              {/* Header: Icon & Category Tag + Reorder */}
-              <div className="flex items-start justify-between gap-3">
-                <div className="flex items-center gap-3">
-                  <span className="w-12 h-12 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6] flex items-center justify-center text-2xl shadow-2xs">
-                    {item.icon}
-                  </span>
-                  <div>
-                    <span className={`inline-block px-2.5 py-0.5 rounded-full text-3xs font-bold ${item.accentBg} ${item.accentColor}`}>
-                      {item.tagAr}
+        {config.items.map((item, index) => {
+          const itemTitle =
+            locale === 'ar'
+              ? item.titleAr
+              : locale === 'fr'
+              ? item.titleFr || item.titleAr
+              : item.titleEn || item.titleAr
+          const itemTag =
+            locale === 'ar'
+              ? item.tagAr
+              : locale === 'fr'
+              ? item.tagFr || item.tagAr
+              : item.tagEn || item.tagAr
+          const itemDesc =
+            locale === 'ar'
+              ? item.descAr
+              : locale === 'fr'
+              ? item.descFr || item.descAr
+              : item.descEn || item.descAr
+          const itemPoints =
+            locale === 'ar'
+              ? item.pointsAr
+              : locale === 'fr'
+              ? item.pointsFr?.length
+                ? item.pointsFr
+                : item.pointsAr
+              : item.pointsEn?.length
+              ? item.pointsEn
+              : item.pointsAr
+
+          return (
+            <div
+              key={item.id}
+              className={`p-5 rounded-2xl bg-white border ${
+                item.enabled ? item.borderClass : 'border-gray-200 opacity-60'
+              } shadow-2xs hover:shadow-subtle transition-all flex flex-col justify-between group relative`}
+            >
+              <div className="space-y-4">
+                {/* Header: Icon & Category Tag + Reorder */}
+                <div className="flex items-start justify-between gap-3">
+                  <div className="flex items-center gap-3">
+                    <span className="w-12 h-12 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6] flex items-center justify-center text-2xl shadow-2xs">
+                      {item.icon}
                     </span>
-                    <h3 className="text-sm font-black text-[#231f20] mt-1 leading-snug">
-                      {item.titleAr}
-                    </h3>
+                    <div>
+                      <span className={`inline-block px-2.5 py-0.5 rounded-full text-3xs font-bold ${item.accentBg} ${item.accentColor}`}>
+                        {itemTag}
+                      </span>
+                      <h3 className="text-sm font-black text-[#231f20] mt-1 leading-snug">
+                        {itemTitle}
+                      </h3>
+                    </div>
+                  </div>
+
+                  {/* Reorder Buttons */}
+                  <div className="flex flex-col gap-1 shrink-0">
+                    <button
+                      type="button"
+                      disabled={index === 0}
+                      onClick={() => moveItem(index, 'up')}
+                      className="w-6 h-6 rounded-md bg-[#FAF8F5] hover:bg-[#F4EFE6] text-[#231f20] disabled:opacity-30 disabled:cursor-not-allowed flex items-center justify-center text-3xs font-bold transition-colors"
+                      title="Move Up"
+                    >
+                      ▲
+                    </button>
+                    <button
+                      type="button"
+                      disabled={index === config.items.length - 1}
+                      onClick={() => moveItem(index, 'down')}
+                      className="w-6 h-6 rounded-md bg-[#FAF8F5] hover:bg-[#F4EFE6] text-[#231f20] disabled:opacity-30 disabled:cursor-not-allowed flex items-center justify-center text-3xs font-bold transition-colors"
+                      title="Move Down"
+                    >
+                      ▼
+                    </button>
                   </div>
                 </div>
 
-                {/* Reorder Buttons */}
-                <div className="flex flex-col gap-1 shrink-0">
+                {/* Description */}
+                <p className="text-xs text-[#5C5A55] line-clamp-2 leading-relaxed">
+                  {itemDesc}
+                </p>
+
+                {/* Points Preview */}
+                {itemPoints && itemPoints.length > 0 && (
+                  <div className="space-y-1 pt-2 border-t border-[#E5E0D6]">
+                    <span className="text-3xs font-bold text-[#5C5A55] block">{tr.activeHighlights}</span>
+                    <ul className="text-3xs text-[#5C5A55] space-y-1">
+                      {itemPoints.slice(0, 2).map((point, pIdx) => (
+                        <li key={pIdx} className="truncate flex items-center gap-1.5">
+                          <span className={`${item.accentColor} font-bold`}>✦</span>
+                          <span>{point}</span>
+                        </li>
+                      ))}
+                      {itemPoints.length > 2 && (
+                        <li className="text-3xs text-[#5C5A55] italic">
+                          {tr.morePoints(itemPoints.length - 2)}
+                        </li>
+                      )}
+                    </ul>
+                  </div>
+                )}
+              </div>
+
+              {/* Footer Actions */}
+              <div className="pt-3 mt-4 border-t border-[#E5E0D6] flex items-center justify-between text-xs">
+                <div className="flex items-center gap-1">
                   <button
                     type="button"
-                    disabled={index === 0}
-                    onClick={() => moveItem(index, 'up')}
-                    className="w-6 h-6 rounded-md bg-[#FAF8F5] hover:bg-[#F4EFE6] text-[#231f20] disabled:opacity-30 disabled:cursor-not-allowed flex items-center justify-center text-3xs font-bold transition-colors"
-                    title="تحريك لأعلى"
+                    onClick={() => handleEdit(item)}
+                    className="px-2.5 py-1 rounded-lg bg-[#FAF8F5] hover:bg-[#231f20] hover:text-white text-[#231f20] text-3xs font-bold transition-all cursor-pointer"
                   >
-                    ▲
+                    {tr.editBtn}
                   </button>
                   <button
                     type="button"
-                    disabled={index === config.items.length - 1}
-                    onClick={() => moveItem(index, 'down')}
-                    className="w-6 h-6 rounded-md bg-[#FAF8F5] hover:bg-[#F4EFE6] text-[#231f20] disabled:opacity-30 disabled:cursor-not-allowed flex items-center justify-center text-3xs font-bold transition-colors"
-                    title="تحريك لأسفل"
+                    onClick={() => toggleEnabled(item.id)}
+                    className={`px-2 py-1 rounded-lg text-3xs font-bold transition-all ${
+                      item.enabled
+                        ? 'bg-emerald-50 text-emerald-800 hover:bg-emerald-100'
+                        : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                    }`}
                   >
-                    ▼
+                    {item.enabled ? tr.enabledStatus : tr.disabledStatus}
                   </button>
                 </div>
-              </div>
 
-              {/* Description */}
-              <p className="text-xs text-[#5C5A55] line-clamp-2 leading-relaxed">
-                {item.descAr}
-              </p>
-
-              {/* Points Preview */}
-              {item.pointsAr && item.pointsAr.length > 0 && (
-                <div className="space-y-1 pt-2 border-t border-[#E5E0D6]">
-                  <span className="text-3xs font-bold text-[#5C5A55] block">أبرز الأنشطة الميدانية:</span>
-                  <ul className="text-3xs text-[#5C5A55] space-y-1">
-                    {item.pointsAr.slice(0, 2).map((point, pIdx) => (
-                      <li key={pIdx} className="truncate flex items-center gap-1.5">
-                        <span className={`${item.accentColor} font-bold`}>✦</span>
-                        <span>{point}</span>
-                      </li>
-                    ))}
-                    {item.pointsAr.length > 2 && (
-                      <li className="text-3xs text-[#5C5A55] italic">
-                        +{item.pointsAr.length - 2} أنشطة إضافية...
-                      </li>
-                    )}
-                  </ul>
-                </div>
-              )}
-            </div>
-
-            {/* Footer Actions */}
-            <div className="pt-3 mt-4 border-t border-[#E5E0D6] flex items-center justify-between text-xs">
-              <div className="flex items-center gap-1">
                 <button
                   type="button"
-                  onClick={() => handleEdit(item)}
-                  className="px-2.5 py-1 rounded-lg bg-[#FAF8F5] hover:bg-[#231f20] hover:text-white text-[#231f20] text-3xs font-bold transition-all cursor-pointer"
+                  onClick={() => handleDelete(item.id)}
+                  className="px-2 py-1 rounded-lg text-red-600 hover:bg-red-50 text-3xs font-bold transition-colors cursor-pointer"
+                  title={tr.deleteBtn}
                 >
-                  ✏️ تعديل
-                </button>
-                <button
-                  type="button"
-                  onClick={() => toggleEnabled(item.id)}
-                  className={`px-2 py-1 rounded-lg text-3xs font-bold transition-all ${
-                    item.enabled
-                      ? 'bg-emerald-50 text-emerald-800 hover:bg-emerald-100'
-                      : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-                  }`}
-                >
-                  {item.enabled ? 'مفعّلة' : 'معطّلة'}
+                  {tr.deleteBtn}
                 </button>
               </div>
-
-              <button
-                type="button"
-                onClick={() => handleDelete(item.id)}
-                className="px-2 py-1 rounded-lg text-red-600 hover:bg-red-50 text-3xs font-bold transition-colors cursor-pointer"
-                title="حذف اللجنة"
-              >
-                🗑️ حذف
-              </button>
             </div>
-          </div>
-        ))}
+          )
+        })}
       </div>
 
       {/* Footer Tools */}
       <div className="flex items-center justify-between p-4 bg-[#FAF8F5] rounded-2xl border border-[#e5e0d6] text-xs">
         <span className="text-3xs text-[#5C5A55]">
-          التعديلات المحفوظة هنا تنعكس فوراً في قسم اللجان الميدانية بصفحة فريق العمل.
+          {tr.footerNotice}
         </span>
-
       </div>
 
       {/* ============================================================
@@ -536,17 +739,25 @@ export function CommissionsManager({ initialConfig }: CommissionsManagerProps) {
           ============================================================ */}
       {isModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs overflow-y-auto">
-          <div className="bg-white rounded-3xl max-w-2xl w-full max-h-[92vh] overflow-y-auto shadow-2xl border border-[#e5e0d6]">
+          <div className="bg-white rounded-3xl max-w-2xl w-full max-h-[92vh] overflow-y-auto shadow-2xl border border-[#e5e0d6]" dir={dir}>
             {/* Modal Header */}
             <div className="sticky top-0 bg-white border-b border-[#e5e0d6] px-6 py-4 flex items-center justify-between z-10">
               <div className="flex items-center gap-3">
                 <span className="text-2xl">{editingItem ? '✏️' : '➕'}</span>
                 <div>
                   <h2 className="text-base font-black text-[#231f20]">
-                    {editingItem ? `تعديل: ${editingItem.titleAr}` : 'إضافة لجنة وظيفية جديدة'}
+                    {editingItem
+                      ? tr.modalEditTitle(
+                          locale === 'ar'
+                            ? editingItem.titleAr
+                            : locale === 'fr'
+                            ? editingItem.titleFr || editingItem.titleAr
+                            : editingItem.titleEn || editingItem.titleAr
+                        )
+                      : tr.modalAddTitle}
                   </h2>
                   <p className="text-3xs text-[#5C5A55]">
-                    حدد الاسم، الوسم، والأنشطة والتدخلات الميدانية
+                    {tr.modalSub}
                   </p>
                 </div>
               </div>
@@ -570,7 +781,7 @@ export function CommissionsManager({ initialConfig }: CommissionsManagerProps) {
                     : 'bg-[#FAF8F5] text-[#5C5A55] hover:bg-[#F4EFE6]'
                 }`}
               >
-                1. بيانات وهوية اللجنة
+                {tr.tabBasicInfo}
               </button>
               <button
                 type="button"
@@ -581,7 +792,11 @@ export function CommissionsManager({ initialConfig }: CommissionsManagerProps) {
                     : 'bg-[#FAF8F5] text-[#5C5A55] hover:bg-[#F4EFE6]'
                 }`}
               >
-                2. التدخلات والأنشطة الميدانية ({modalForm.pointsAr?.length || 0})
+                {tr.tabPoints(
+                  (modalForm.pointsAr?.length || 0) +
+                    (modalForm.pointsFr?.length || 0) +
+                    (modalForm.pointsEn?.length || 0)
+                )}
               </button>
             </div>
 
@@ -592,7 +807,7 @@ export function CommissionsManager({ initialConfig }: CommissionsManagerProps) {
                 <div className="space-y-4">
                   {/* Language Tab */}
                   <div className="flex items-center justify-between pb-2 border-b border-[#E5E0D6]">
-                    <span className="text-3xs font-bold text-[#5C5A55]">لغة الإدخال الحالية:</span>
+                    <span className="text-3xs font-bold text-[#5C5A55]">{tr.currentInputLang}</span>
                     <div className="flex items-center gap-1">
                       {(['ar', 'fr', 'en'] as const).map((lng) => (
                         <button
@@ -617,7 +832,7 @@ export function CommissionsManager({ initialConfig }: CommissionsManagerProps) {
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         <div>
                           <label className="block text-xs font-bold text-[#231f20] mb-1">
-                            عنوان اللجنة (بالعربية) *
+                            {tr.commTitleLabel} (AR) *
                           </label>
                           <input
                             type="text"
@@ -630,7 +845,7 @@ export function CommissionsManager({ initialConfig }: CommissionsManagerProps) {
                         </div>
                         <div>
                           <label className="block text-xs font-bold text-[#231f20] mb-1">
-                            وسم التصنيف (بالعربية)
+                            {tr.commTagLabel} (AR)
                           </label>
                           <input
                             type="text"
@@ -644,7 +859,7 @@ export function CommissionsManager({ initialConfig }: CommissionsManagerProps) {
 
                       <div>
                         <label className="block text-xs font-bold text-[#231f20] mb-1">
-                          وصف دور وأهداف اللجنة (بالعربية)
+                          {tr.commDescLabel} (AR)
                         </label>
                         <textarea
                           rows={3}
@@ -662,7 +877,7 @@ export function CommissionsManager({ initialConfig }: CommissionsManagerProps) {
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         <div>
                           <label className="block text-xs font-bold text-[#231f20] mb-1">
-                            Nom de la Commission (FR)
+                            {tr.commTitleLabel} (FR)
                           </label>
                           <input
                             type="text"
@@ -674,7 +889,7 @@ export function CommissionsManager({ initialConfig }: CommissionsManagerProps) {
                         </div>
                         <div>
                           <label className="block text-xs font-bold text-[#231f20] mb-1">
-                            Tag / Catégorie (FR)
+                            {tr.commTagLabel} (FR)
                           </label>
                           <input
                             type="text"
@@ -688,7 +903,7 @@ export function CommissionsManager({ initialConfig }: CommissionsManagerProps) {
 
                       <div>
                         <label className="block text-xs font-bold text-[#231f20] mb-1">
-                          Description (FR)
+                          {tr.commDescLabel} (FR)
                         </label>
                         <textarea
                           rows={3}
@@ -706,7 +921,7 @@ export function CommissionsManager({ initialConfig }: CommissionsManagerProps) {
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         <div>
                           <label className="block text-xs font-bold text-[#231f20] mb-1">
-                            Commission Title (EN)
+                            {tr.commTitleLabel} (EN)
                           </label>
                           <input
                             type="text"
@@ -718,7 +933,7 @@ export function CommissionsManager({ initialConfig }: CommissionsManagerProps) {
                         </div>
                         <div>
                           <label className="block text-xs font-bold text-[#231f20] mb-1">
-                            Tag (EN)
+                            {tr.commTagLabel} (EN)
                           </label>
                           <input
                             type="text"
@@ -732,7 +947,7 @@ export function CommissionsManager({ initialConfig }: CommissionsManagerProps) {
 
                       <div>
                         <label className="block text-xs font-bold text-[#231f20] mb-1">
-                          Description (EN)
+                          {tr.commDescLabel} (EN)
                         </label>
                         <textarea
                           rows={3}
@@ -749,7 +964,33 @@ export function CommissionsManager({ initialConfig }: CommissionsManagerProps) {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
                     <div>
                       <label className="block text-xs font-bold text-[#231f20] mb-1">
-                        رمز الأيقونة (إيموجي)
+                        {tr.iconLabel}
+                      </label>
+                      <div className="flex items-center gap-2">
+                        <input
+                          type="text"
+                          value={modalForm.icon || '🎨'}
+                          onChange={(e) => setModalForm((prev) => ({ ...prev, icon: e.target.value }))}
+                          className="w-16 text-center text-xl py-1.5 rounded-xl border border-[#e5e0d6] bg-white focus:outline-none"
+                        />
+                        <div className="flex flex-wrap gap-1">
+                          {['🎨', '🎭', '🎵', '📸', '🚀', '📚', '🎪', '🎻', '🎬', '🌟'].map((ico) => (
+                            <button
+                              key={ico}
+                              type="button"
+                              onClick={() => setModalForm((prev) => ({ ...prev, icon: ico }))}
+                              className="w-7 h-7 rounded-lg bg-[#FAF8F5] hover:bg-[#F4EFE6] flex items-center justify-center text-sm"
+                            >
+                              {ico}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-bold text-[#231f20] mb-1">
+                        {tr.colorThemeLabel}
                       </label>
                       <div className="flex items-center gap-2">
                         <input
@@ -806,13 +1047,13 @@ export function CommissionsManager({ initialConfig }: CommissionsManagerProps) {
                 <div className="space-y-4">
                   <div className="p-4 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6] space-y-4">
                     <span className="text-xs font-bold text-[#231f20] block">
-                      أبرز التدخلات والأنشطة الميدانية للجنة
+                      {tr.pointsHeading}
                     </span>
 
                     {/* Arabic Points */}
                     <div className="space-y-2">
                       <label className="block text-3xs font-bold text-[#231f20]">
-                        الأنشطة بالعربية ({modalForm.pointsAr?.length || 0})
+                        {tr.pointsInLang('AR', modalForm.pointsAr?.length || 0)}
                       </label>
                       <div className="flex items-center gap-2">
                         <input
@@ -831,7 +1072,7 @@ export function CommissionsManager({ initialConfig }: CommissionsManagerProps) {
                               }
                             }
                           }}
-                          placeholder="أدخل نشاطاً ميدانياً واضغط إضافة..."
+                          placeholder={tr.pointPlaceholder}
                           className="flex-1 px-3 py-1.5 rounded-xl border border-[#e5e0d6] bg-white text-xs focus:outline-none"
                         />
                         <button
@@ -847,7 +1088,7 @@ export function CommissionsManager({ initialConfig }: CommissionsManagerProps) {
                           }}
                           className="px-3 py-1.5 rounded-xl bg-[#231f20] text-white text-xs font-bold"
                         >
-                          إضافة
+                          {tr.addPointBtn}
                         </button>
                       </div>
 
@@ -878,7 +1119,7 @@ export function CommissionsManager({ initialConfig }: CommissionsManagerProps) {
                     {/* French Points */}
                     <div className="space-y-2 pt-2 border-t border-[#e5e0d6]">
                       <label className="block text-3xs font-bold text-[#bd3227]">
-                        Points en Français ({modalForm.pointsFr?.length || 0})
+                        {tr.pointsInLang('FR', modalForm.pointsFr?.length || 0)}
                       </label>
                       <div className="flex items-center gap-2">
                         <input
@@ -897,7 +1138,7 @@ export function CommissionsManager({ initialConfig }: CommissionsManagerProps) {
                               }
                             }
                           }}
-                          placeholder="Ajouter une action en français..."
+                          placeholder={tr.pointPlaceholder}
                           className="flex-1 px-3 py-1.5 rounded-xl border border-[#e5e0d6] bg-white text-xs focus:outline-none"
                         />
                         <button
@@ -913,7 +1154,7 @@ export function CommissionsManager({ initialConfig }: CommissionsManagerProps) {
                           }}
                           className="px-3 py-1.5 rounded-xl bg-[#bd3227] text-white text-xs font-bold"
                         >
-                          Ajouter
+                          {tr.addPointBtn}
                         </button>
                       </div>
 
@@ -944,7 +1185,7 @@ export function CommissionsManager({ initialConfig }: CommissionsManagerProps) {
                     {/* English Points */}
                     <div className="space-y-2 pt-2 border-t border-[#e5e0d6]">
                       <label className="block text-3xs font-bold text-[#d2a82b]">
-                        Interventions in English ({modalForm.pointsEn?.length || 0})
+                        {tr.pointsInLang('EN', modalForm.pointsEn?.length || 0)}
                       </label>
                       <div className="flex items-center gap-2">
                         <input
@@ -963,7 +1204,7 @@ export function CommissionsManager({ initialConfig }: CommissionsManagerProps) {
                               }
                             }
                           }}
-                          placeholder="Add an intervention in English..."
+                          placeholder={tr.pointPlaceholder}
                           className="flex-1 px-3 py-1.5 rounded-xl border border-[#e5e0d6] bg-white text-xs focus:outline-none"
                         />
                         <button
@@ -979,7 +1220,7 @@ export function CommissionsManager({ initialConfig }: CommissionsManagerProps) {
                           }}
                           className="px-3 py-1.5 rounded-xl bg-[#d2a82b] text-white text-xs font-bold"
                         >
-                          Add
+                          {tr.addPointBtn}
                         </button>
                       </div>
 
@@ -1013,8 +1254,8 @@ export function CommissionsManager({ initialConfig }: CommissionsManagerProps) {
               {/* Status Active Toggle */}
               <div className="flex items-center justify-between p-3 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6]">
                 <div>
-                  <span className="block text-xs font-bold text-[#231f20]">تفعيل ظهور اللجنة في الموقع</span>
-                  <span className="block text-3xs text-[#5C5A55]">عند التعطيل، تبقى اللجنة محفوظة في لوحة التحكم وتختفي من الصفحة العامة.</span>
+                  <span className="block text-xs font-bold text-[#231f20]">{tr.enableVisibility}</span>
+                  <span className="block text-3xs text-[#5C5A55]">{tr.enableVisibilityHint}</span>
                 </div>
                 <label className="relative inline-flex items-center cursor-pointer">
                   <input
@@ -1034,13 +1275,13 @@ export function CommissionsManager({ initialConfig }: CommissionsManagerProps) {
                   onClick={() => setIsModalOpen(false)}
                   className="px-4 py-2 rounded-xl bg-[#FAF8F5] hover:bg-[#F4EFE6] text-[#231f20] text-xs font-bold transition-colors cursor-pointer"
                 >
-                  إلغاء
+                  {tr.cancelBtn}
                 </button>
                 <button
                   type="submit"
                   className="px-5 py-2 rounded-xl bg-[#231f20] hover:bg-[#d2a82b] text-white text-xs font-bold transition-all shadow-xs cursor-pointer"
                 >
-                  {editingItem ? 'تحديث بيانات اللجنة' : 'إضافة اللجنة للقائمة'}
+                  {tr.saveCommissionBtn}
                 </button>
               </div>
             </form>

@@ -4,6 +4,79 @@ import { useState, useRef } from 'react'
 import type { TeamConfig, TeamMemberConfig } from '@/lib/settings'
 import { saveTeamConfiguration } from '@/lib/actions/admin'
 import { ImageWithFallback } from '@/components/ui/ImageWithFallback'
+import { useAdminLocale } from './AdminLocaleContext'
+
+const TM_STRINGS = {
+  ar: {
+    totalMembers: 'إجمالي الأعضاء',
+    totalMembersSub: 'مسجل في الهيكلة',
+    execBoard: 'المكتب التنفيذي',
+    execBoardSub: 'مناصب أساسية',
+    committees: 'اللجان والتأطير',
+    committeesSub: 'منسقون ومؤطرون',
+    advisory: 'الهيئة الاستشارية',
+    advisorySub: 'خبراء ومرشدون',
+    photosUploaded: 'الصور المرفوعة',
+    photosUploadedSub: 'صورة شخصية معتمدة',
+    addMemberBtn: '+ إضافة عضو جديد',
+    saveBtn: 'حفظ التغييرات',
+    savingBtn: 'جارٍ الحفظ...',
+    unsavedChanges: 'لديك تعديلات غير محفوظة! انقر على زر «حفظ التغييرات» لتثبيتها.',
+    saveNow: 'حفظ الآن',
+    editMember: 'تعديل',
+    deleteMember: 'حذف',
+    quickUpload: 'رفع صورة',
+    uploadingPhoto: 'جارٍ الرفع...',
+    enableMember: 'مفعل في الموقع',
+    disableMember: 'مخفي مؤقتاً',
+  },
+  fr: {
+    totalMembers: 'Total des Membres',
+    totalMembersSub: 'Enregistrés dans l\'organigramme',
+    execBoard: 'Bureau Exécutif',
+    execBoardSub: 'Postes statutaires',
+    committees: 'Commissions & Pôles',
+    committeesSub: 'Coordinateurs & Cadres',
+    advisory: 'Collège Consultatif',
+    advisorySub: 'Experts & Mentors',
+    photosUploaded: 'Portraits Profil',
+    photosUploadedSub: 'Portraits enregistrés',
+    addMemberBtn: '+ Ajouter un membre',
+    saveBtn: 'Enregistrer les modifications',
+    savingBtn: 'Enregistrement...',
+    unsavedChanges: 'Vous avez des modifications non enregistrées. Cliquez sur « Enregistrer ».',
+    saveNow: 'Enregistrer maintenant',
+    editMember: 'Modifier',
+    deleteMember: 'Supprimer',
+    quickUpload: 'Changer photo',
+    uploadingPhoto: 'Téléversement...',
+    enableMember: 'Actif sur le site',
+    disableMember: 'Masqué',
+  },
+  en: {
+    totalMembers: 'Total Members',
+    totalMembersSub: 'Registered in leadership',
+    execBoard: 'Executive Board',
+    execBoardSub: 'Key statutory roles',
+    committees: 'Committees & Teams',
+    committeesSub: 'Coordinators & leaders',
+    advisory: 'Advisory Council',
+    advisorySub: 'Experts & advisors',
+    photosUploaded: 'Profile Photos',
+    photosUploadedSub: 'Portraits uploaded',
+    addMemberBtn: '+ Add New Member',
+    saveBtn: 'Save Changes',
+    savingBtn: 'Saving...',
+    unsavedChanges: 'You have unsaved changes. Click «Save Changes» to apply to public site.',
+    saveNow: 'Save Now',
+    editMember: 'Edit',
+    deleteMember: 'Delete',
+    quickUpload: 'Upload Photo',
+    uploadingPhoto: 'Uploading...',
+    enableMember: 'Active on site',
+    disableMember: 'Hidden',
+  },
+}
 
 interface TeamManagerProps {
   initialConfig: TeamConfig
@@ -11,10 +84,10 @@ interface TeamManagerProps {
 }
 
 const CATEGORIES = [
-  { key: 'all', labelAr: 'الكل (جميع الأعضاء)', labelEn: 'All' },
-  { key: 'executive', labelAr: 'المكتب التنفيذي (الأعضاء الأساسيون)', labelEn: 'Executive Board' },
-  { key: 'committee', labelAr: 'اللجان الوظيفية وفرق التأطير', labelEn: 'Committees & Coordinators' },
-  { key: 'advisor', labelAr: 'الهيئة الاستشارية والخبراء', labelEn: 'Advisors & Mentors' },
+  { key: 'all', labelAr: 'الكل (جميع الأعضاء)', labelFr: 'Tous les membres', labelEn: 'All Members' },
+  { key: 'executive', labelAr: 'المكتب التنفيذي (الأعضاء الأساسيون)', labelFr: 'Bureau Exécutif', labelEn: 'Executive Board' },
+  { key: 'committee', labelAr: 'اللجان الوظيفية وفرق التأطير', labelFr: 'Commissions & Encadrement', labelEn: 'Committees & Coordinators' },
+  { key: 'advisor', labelAr: 'الهيئة الاستشارية والخبراء', labelFr: 'Conseillers & Experts', labelEn: 'Advisors & Mentors' },
 ] as const
 
 const COLOR_OPTIONS = [
@@ -27,6 +100,8 @@ const COLOR_OPTIONS = [
 ]
 
 export function TeamManager({ initialConfig }: TeamManagerProps) {
+  const { locale, dir } = useAdminLocale()
+  const tr = TM_STRINGS[locale] || TM_STRINGS.ar
   const [config, setConfig] = useState<TeamConfig>(initialConfig)
   const [selectedCategory, setSelectedCategory] = useState<string>('all')
   const [saving, setSaving] = useState(false)
@@ -351,7 +426,7 @@ export function TeamManager({ initialConfig }: TeamManagerProps) {
   const withPhotosCount = config.members.filter((m) => Boolean(m.photoUrl)).length
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6" dir={dir}>
       {/* Hidden file input for quick card upload */}
       <input
         ref={cardFileInputRef}
@@ -369,29 +444,29 @@ export function TeamManager({ initialConfig }: TeamManagerProps) {
       {/* Top Banner & Quick Metrics */}
       <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
         <div className="p-4 rounded-2xl bg-white border border-[#e5e0d6] shadow-2xs">
-          <span className="text-3xs font-bold text-[#5C5A55] block">إجمالي الأعضاء</span>
+          <span className="text-3xs font-bold text-[#5C5A55] block">{tr.totalMembers}</span>
           <span className="text-2xl font-black text-[#231f20]">{totalCount}</span>
-          <span className="text-3xs text-[#5C5A55] block mt-0.5">مسجل في الهيكلة</span>
+          <span className="text-3xs text-[#5C5A55] block mt-0.5">{tr.totalMembersSub}</span>
         </div>
         <div className="p-4 rounded-2xl bg-white border border-[#231f20]/30 shadow-2xs">
-          <span className="text-3xs font-bold text-[#231f20] block">المكتب التنفيذي</span>
+          <span className="text-3xs font-bold text-[#231f20] block">{tr.execBoard}</span>
           <span className="text-2xl font-black text-[#231f20]">{executiveCount}</span>
-          <span className="text-3xs text-[#5C5A55] block mt-0.5">مناصب أساسية</span>
+          <span className="text-3xs text-[#5C5A55] block mt-0.5">{tr.execBoardSub}</span>
         </div>
         <div className="p-4 rounded-2xl bg-white border border-[#bd3227]/30 shadow-2xs">
-          <span className="text-3xs font-bold text-[#bd3227] block">اللجان والتأطير</span>
+          <span className="text-3xs font-bold text-[#bd3227] block">{tr.committees}</span>
           <span className="text-2xl font-black text-[#bd3227]">{committeeCount}</span>
-          <span className="text-3xs text-[#5C5A55] block mt-0.5">منسقون ومؤطرون</span>
+          <span className="text-3xs text-[#5C5A55] block mt-0.5">{tr.committeesSub}</span>
         </div>
         <div className="p-4 rounded-2xl bg-white border border-[#d2a82b]/30 shadow-2xs">
-          <span className="text-3xs font-bold text-[#d2a82b] block">الهيئة الاستشارية</span>
+          <span className="text-3xs font-bold text-[#d2a82b] block">{tr.advisory}</span>
           <span className="text-2xl font-black text-[#d2a82b]">{advisorCount}</span>
-          <span className="text-3xs text-[#5C5A55] block mt-0.5">خبراء ومرشدون</span>
+          <span className="text-3xs text-[#5C5A55] block mt-0.5">{tr.advisorySub}</span>
         </div>
         <div className="p-4 rounded-2xl bg-white border border-emerald-500/30 shadow-2xs col-span-2 sm:col-span-1">
-          <span className="text-3xs font-bold text-emerald-700 block">الصور المرفوعة</span>
+          <span className="text-3xs font-bold text-emerald-700 block">{tr.photosUploaded}</span>
           <span className="text-2xl font-black text-emerald-600">{withPhotosCount} / {totalCount}</span>
-          <span className="text-3xs text-[#5C5A55] block mt-0.5">صورة شخصية معتمدة</span>
+          <span className="text-3xs text-[#5C5A55] block mt-0.5">{tr.photosUploadedSub}</span>
         </div>
       </div>
 
@@ -410,7 +485,7 @@ export function TeamManager({ initialConfig }: TeamManagerProps) {
                   : 'bg-[#FAF8F5] text-[#5C5A55] hover:bg-[#F4EFE6]'
               }`}
             >
-              {cat.labelAr}
+              {locale === 'ar' ? cat.labelAr : locale === 'fr' ? cat.labelFr : cat.labelEn}
             </button>
           ))}
         </div>
@@ -423,7 +498,7 @@ export function TeamManager({ initialConfig }: TeamManagerProps) {
             className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl bg-[#bd3227] hover:bg-[#a3261c] text-white text-xs font-bold transition-all shadow-xs cursor-pointer"
           >
             <span>+</span>
-            <span>إضافة عضو جديد</span>
+            <span>{tr.addMemberBtn}</span>
           </button>
 
           <button
@@ -437,7 +512,7 @@ export function TeamManager({ initialConfig }: TeamManagerProps) {
             }`}
           >
             <span>💾</span>
-            <span>{saving ? 'جارٍ الحفظ...' : 'حفظ التغييرات'}</span>
+            <span>{saving ? tr.savingBtn : tr.saveBtn}</span>
             {hasUnsavedChanges && (
               <span className="w-2 h-2 rounded-full bg-amber-300 animate-ping" />
             )}
@@ -464,14 +539,14 @@ export function TeamManager({ initialConfig }: TeamManagerProps) {
         <div className="p-3 rounded-xl bg-amber-50 border border-amber-200 text-amber-900 text-xs font-bold flex items-center justify-between">
           <div className="flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
-            <span>لديك تعديلات غير محفوظة على هيكلة الفريق أو الصور! انقر على زر «حفظ التغييرات» لتثبيتها في الواجهة العامة.</span>
+            <span>{tr.unsavedChanges}</span>
           </div>
           <button
             onClick={handleSaveAll}
             disabled={saving}
             className="px-3 py-1 rounded-lg bg-amber-600 hover:bg-amber-700 text-white text-3xs font-bold"
           >
-            حفظ الآن
+            {tr.saveNow}
           </button>
         </div>
       )}

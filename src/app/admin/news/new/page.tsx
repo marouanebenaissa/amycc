@@ -1,7 +1,7 @@
 import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
-import Link from 'next/link'
 import { NewsForm } from '@/components/admin/NewsForm'
+import { AdminPageHeader } from '@/components/admin/AdminPageHeader'
 
 export default async function NewNewsArticlePage() {
   const supabase = await createClient()
@@ -15,23 +15,16 @@ export default async function NewNewsArticlePage() {
 
   return (
     <div className="space-y-6 max-w-4xl">
-      <div className="flex items-center gap-3">
-        <Link
-          href="/admin/news"
-          className="p-2 text-slate-400 hover:text-slate-600 rounded-lg hover:bg-slate-100 transition-colors"
-          title="Back to News"
-        >
-          <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-          </svg>
-        </Link>
-        <div>
-          <h1 className="text-2xl font-extrabold text-[#181516]">Write New Article</h1>
-          <p className="text-xs text-slate-500 mt-0.5">
-            Compose announcements and news articles in Arabic, French, and English with rich formatting.
-          </p>
-        </div>
-      </div>
+      <AdminPageHeader
+        backHref="/admin/news"
+        backTitle={{ ar: 'العودة للأخبار', fr: 'Retour aux actualités', en: 'Back to News' }}
+        title={{ ar: 'تحرير مقال إخباري أو بيان صحفي', fr: 'Rédiger un nouvel article', en: 'Write New Article' }}
+        subtitle={{
+          ar: 'صياغة ونشر الأخبار والبيانات الرسمية بالعربية والفرنسية والإنجليزية.',
+          fr: 'Rédiger et publier des communiqués officiels en arabe, français et anglais.',
+          en: 'Compose announcements and news articles in Arabic, French, and English.',
+        }}
+      />
 
       <NewsForm />
     </div>

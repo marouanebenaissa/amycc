@@ -1,23 +1,135 @@
 'use client'
 
 import { useState } from 'react'
+import Link from 'next/link'
 import type { FaqItemConfig } from '@/lib/settings'
 import { saveFaqConfiguration } from '@/lib/actions/admin'
+import { useAdminLocale } from './AdminLocaleContext'
 
 interface FaqManagerProps {
   initialItems: FaqItemConfig[]
   defaultItems?: FaqItemConfig[]
 }
 
-const CATEGORY_MAP: Record<string, { labelAr: string; color: string }> = {
-  general: { labelAr: 'عامة', color: 'bg-emerald-50 text-emerald-800 border-emerald-200' },
-  membership: { labelAr: 'العضوية والانخراط', color: 'bg-blue-50 text-blue-800 border-blue-200' },
-  volunteering: { labelAr: 'التطوع — شباب في العمل', color: 'bg-amber-50 text-amber-800 border-amber-200' },
-  partnerships: { labelAr: 'الشراكات المؤسسية', color: 'bg-purple-50 text-purple-800 border-purple-200' },
-  events: { labelAr: 'الفعاليات والتذاكر', color: 'bg-rose-50 text-rose-800 border-rose-200' },
+const CATEGORY_MAP: Record<string, { labelAr: string; labelFr: string; labelEn: string; color: string }> = {
+  general: { labelAr: 'عامة', labelFr: 'Général', labelEn: 'General', color: 'bg-emerald-50 text-emerald-800 border-emerald-200' },
+  membership: { labelAr: 'العضوية والانخراط', labelFr: 'Adhésion', labelEn: 'Membership', color: 'bg-blue-50 text-blue-800 border-blue-200' },
+  volunteering: { labelAr: 'التطوع — شباب في العمل', labelFr: 'Bénévolat — Jeunesse', labelEn: 'Volunteering', color: 'bg-amber-50 text-amber-800 border-amber-200' },
+  partnerships: { labelAr: 'الشراكات المؤسسية', labelFr: 'Partenariats', labelEn: 'Partnerships', color: 'bg-purple-50 text-purple-800 border-purple-200' },
+  events: { labelAr: 'الفعاليات والتذاكر', labelFr: 'Événements', labelEn: 'Events & Tickets', color: 'bg-rose-50 text-rose-800 border-rose-200' },
+}
+
+const FAQ_STRINGS = {
+  ar: {
+    title: 'إدارة بنك الأسئلة الشائعة (FAQ CMS)',
+    subtitle: 'تحكم كامل في الأسئلة الشائعة، ترتيبها، واختيار ما يُعرض في الصفحة الرئيسية وصفحة الأسئلة.',
+    previewFront: 'معاينة صفحة الأسئلة',
+    addNew: 'إضافة سؤال جديد',
+    saveAll: 'حفظ كافة التغييرات',
+    saving: 'جاري الحفظ...',
+    totalQuestions: 'إجمالي الأسئلة',
+    showHome: 'معروض في الرئيسية',
+    published: 'منشور ومرئي',
+    changesState: 'حالة التعديلات',
+    hasUnsaved: '⚠️ تعديلات غير محفوظة',
+    allSaved: '✓ كافة التغييرات محفوظة',
+    searchPlaceholder: 'بحث في نصوص الأسئلة والإجابات...',
+    all: 'الكل',
+    noResults: 'لا توجد أسئلة تطابق معايير البحث الحالية.',
+    noResultsHint: 'جرب تغيير عبارة البحث أو اختيار تصنيف مختلف.',
+    publishedBadge: '✓ منشور',
+    hiddenBadge: '✕ مسودة (مخفي)',
+    homeBadge: '★ يظهر بالرئيسية',
+    faqOnlyBadge: 'صفحة الأسئلة فقط',
+    edit: 'تعديل',
+    delete: 'حذف',
+    deleteConfirm: 'هل أنت متأكد من حذف هذا السؤال؟ لن يتم اعتماده حتى تضغط على "حفظ كافة التغييرات".',
+    saveSuccess: 'تم حفظ وتحديث الأسئلة الشائعة بنجاح في قاعدة البيانات والصفحة الرئيسية!',
+    saveError: 'فشل حفظ الأسئلة الشائعة',
+    modalEditTitle: 'تعديل السؤال الشائع',
+    modalAddTitle: 'إضافة سؤال شائع جديد',
+    cancel: 'إلغاء',
+    applyChanges: 'تطبيق التعديلات',
+    frAvailable: '✓ الفرنسية متوفرة',
+    frMissing: '○ لا توجد ترجمة فرنسية',
+    enAvailable: '✓ الإنجليزية متوفرة',
+    enMissing: '○ لا توجد ترجمة إنجليزية',
+  },
+  fr: {
+    title: 'Foire Aux Questions (FAQ CMS)',
+    subtitle: 'Gestion de la base de questions fréquentes, ordre d\'affichage et sélection pour la page d\'accueil.',
+    previewFront: 'Aperçu page FAQ',
+    addNew: 'Ajouter une question',
+    saveAll: 'Enregistrer tout',
+    saving: 'Enregistrement...',
+    totalQuestions: 'Total Questions',
+    showHome: 'Visible en Accueil',
+    published: 'Publiées & Visibles',
+    changesState: 'État des modifications',
+    hasUnsaved: '⚠️ Modifications non enregistrées',
+    allSaved: '✓ Tout est synchronisé',
+    searchPlaceholder: 'Rechercher dans les questions et réponses...',
+    all: 'Tous',
+    noResults: 'Aucune question ne correspond à vos critères de recherche.',
+    noResultsHint: 'Essayez de modifier vos termes de recherche ou de sélectionner une autre catégorie.',
+    publishedBadge: '✓ Publié',
+    hiddenBadge: '✕ Brouillon (masqué)',
+    homeBadge: '★ Visible en Accueil',
+    faqOnlyBadge: 'Page FAQ uniquement',
+    edit: 'Modifier',
+    delete: 'Supprimer',
+    deleteConfirm: 'Voulez-vous vraiment supprimer cette question ?',
+    saveSuccess: 'Questions fréquentes mises à jour avec succès !',
+    saveError: 'Erreur lors de l\'enregistrement de la FAQ',
+    modalEditTitle: 'Modifier la question FAQ',
+    modalAddTitle: 'Ajouter une nouvelle question',
+    cancel: 'Annuler',
+    applyChanges: 'Appliquer les modifications',
+    frAvailable: '✓ Français disponible',
+    frMissing: '○ Traduction française manquante',
+    enAvailable: '✓ Anglais disponible',
+    enMissing: '○ Traduction anglaise manquante',
+  },
+  en: {
+    title: 'Frequently Asked Questions (FAQ CMS)',
+    subtitle: 'Manage institutional FAQs, ordering, translations, and select which questions appear on the homepage.',
+    previewFront: 'Preview FAQ Page',
+    addNew: 'Add New Question',
+    saveAll: 'Save All Changes',
+    saving: 'Saving...',
+    totalQuestions: 'Total Questions',
+    showHome: 'Featured on Homepage',
+    published: 'Published & Visible',
+    changesState: 'Changes Status',
+    hasUnsaved: '⚠️ Unsaved Changes',
+    allSaved: '✓ Everything Synced',
+    searchPlaceholder: 'Search questions and answers...',
+    all: 'All',
+    noResults: 'No questions match your current search criteria.',
+    noResultsHint: 'Try changing your search terms or picking another category.',
+    publishedBadge: '✓ Published',
+    hiddenBadge: '✕ Draft (Hidden)',
+    homeBadge: '★ On Homepage',
+    faqOnlyBadge: 'FAQ Page Only',
+    edit: 'Edit',
+    delete: 'Delete',
+    deleteConfirm: 'Are you sure you want to delete this question?',
+    saveSuccess: 'Frequently asked questions saved and updated successfully!',
+    saveError: 'Failed to save FAQs',
+    modalEditTitle: 'Edit FAQ Question',
+    modalAddTitle: 'Add New FAQ Question',
+    cancel: 'Cancel',
+    applyChanges: 'Apply Changes',
+    frAvailable: '✓ French available',
+    frMissing: '○ French missing',
+    enAvailable: '✓ English available',
+    enMissing: '○ English missing',
+  },
 }
 
 export function FaqManager({ initialItems }: FaqManagerProps) {
+  const { locale, dir } = useAdminLocale()
+  const tr = FAQ_STRINGS[locale] || FAQ_STRINGS.ar
   const [items, setItems] = useState<FaqItemConfig[]>(initialItems)
   const [searchQuery, setSearchQuery] = useState('')
   const [selectedCategory, setSelectedCategory] = useState<string>('all')
@@ -71,12 +183,11 @@ export function FaqManager({ initialItems }: FaqManagerProps) {
   function handleModalSave(e: React.FormEvent) {
     e.preventDefault()
     if (!modalForm.questionAr?.trim() || !modalForm.answerAr?.trim()) {
-      alert('يرجى ملء السؤال والجواب باللغة العربية على الأقل.')
+      alert(locale === 'ar' ? 'يرجى ملء السؤال والجواب باللغة العربية على الأقل.' : locale === 'fr' ? 'Veuillez renseigner au moins la question et la réponse en arabe.' : 'Please provide question and answer in Arabic at least.')
       return
     }
 
     if (editingItem) {
-      // Update existing
       setItems((prev) =>
         prev.map((item) =>
           item.id === editingItem.id
@@ -88,7 +199,6 @@ export function FaqManager({ initialItems }: FaqManagerProps) {
         )
       )
     } else {
-      // Add new
       const newItem: FaqItemConfig = {
         id: modalForm.id || `faq-${Date.now()}`,
         questionAr: modalForm.questionAr || '',
@@ -111,7 +221,7 @@ export function FaqManager({ initialItems }: FaqManagerProps) {
 
   // Delete item
   function handleDelete(id: string) {
-    if (!window.confirm('هل أنت متأكد من حذف هذا السؤال؟ لن يتم اعتماده حتى تضغط على "حفظ التغييرات".')) {
+    if (!window.confirm(tr.deleteConfirm)) {
       return
     }
     setItems((prev) =>
@@ -132,7 +242,6 @@ export function FaqManager({ initialItems }: FaqManagerProps) {
     newItems[index] = newItems[targetIndex]
     newItems[targetIndex] = temp
 
-    // Re-assign 1-based order
     const reordered = newItems.map((item, idx) => ({ ...item, order: idx + 1 }))
     setItems(reordered)
     setHasUnsavedChanges(true)
@@ -167,13 +276,13 @@ export function FaqManager({ initialItems }: FaqManagerProps) {
     try {
       const result = await saveFaqConfiguration(items)
       if (!result.success) {
-        throw new Error(result.error || 'فشل حفظ الأسئلة الشائعة')
+        throw new Error(result.error || tr.saveError)
       }
-      setSuccessMessage('تم حفظ وتحديث الأسئلة الشائعة بنجاح في قاعدة البيانات والصفحة الرئيسية!')
+      setSuccessMessage(tr.saveSuccess)
       setHasUnsavedChanges(false)
       setTimeout(() => setSuccessMessage(null), 5000)
     } catch (err: unknown) {
-      const msg = err instanceof Error ? err.message : 'حدث خطأ أثناء الحفظ'
+      const msg = err instanceof Error ? err.message : tr.saveError
       setErrorMessage(msg)
     } finally {
       setSaving(false)
@@ -200,7 +309,7 @@ export function FaqManager({ initialItems }: FaqManagerProps) {
   const publishedCount = items.filter((i) => i.published).length
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6" dir={dir}>
       {/* Top Banner / Actions Bar */}
       <div className="bg-white rounded-3xl border border-[#e5e0d6] p-6 shadow-xs space-y-4">
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
@@ -208,15 +317,24 @@ export function FaqManager({ initialItems }: FaqManagerProps) {
             <div className="flex items-center gap-2">
               <span className="text-xl">❓</span>
               <h2 className="text-lg font-black text-[#231f20]">
-                إدارة الأسئلة الشائعة (FAQ CMS)
+                {tr.title}
               </h2>
             </div>
             <p className="text-xs text-[#5C5A55] mt-1">
-              تحكم كامل في الأسئلة الشائعة المعروضة في الصفحة الرئيسية وصفحة الأسئلة الشائعة بثلاث لغات.
+              {tr.subtitle}
             </p>
           </div>
 
           <div className="flex flex-wrap items-center gap-2.5">
+            <Link
+              href={`/${locale}/faq`}
+              target="_blank"
+              className="px-3.5 py-2.5 rounded-xl text-3xs font-bold text-[#231f20] bg-[#FAF8F5] border border-[#e5e0d6] hover:bg-[#F4EFE6] active:scale-98 transition-all cursor-pointer inline-flex items-center gap-1.5"
+            >
+              <span>{tr.previewFront}</span>
+              <span>↗</span>
+            </Link>
+
             <button
               type="button"
               onClick={handleAddNew}
@@ -225,7 +343,7 @@ export function FaqManager({ initialItems }: FaqManagerProps) {
               <svg className="w-4 h-4 text-[#ffd22f]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
               </svg>
-              <span>إضافة سؤال جديد</span>
+              <span>{tr.addNew}</span>
             </button>
 
             <button
@@ -244,12 +362,12 @@ export function FaqManager({ initialItems }: FaqManagerProps) {
                     <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                     <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z" />
                   </svg>
-                  <span>جاري الحفظ...</span>
+                  <span>{tr.saving}</span>
                 </>
               ) : (
                 <>
                   <span>💾</span>
-                  <span>حفظ كافة التغييرات {hasUnsavedChanges ? '*' : ''}</span>
+                  <span>{tr.saveAll} {hasUnsavedChanges ? '*' : ''}</span>
                 </>
               )}
             </button>
@@ -259,21 +377,21 @@ export function FaqManager({ initialItems }: FaqManagerProps) {
         {/* Stats Row */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-3 border-t border-[#E5E0D6]">
           <div className="p-3 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6]">
-            <span className="text-3xs font-bold text-[#5C5A55] block">إجمالي الأسئلة</span>
+            <span className="text-3xs font-bold text-[#5C5A55] block">{tr.totalQuestions}</span>
             <span className="text-xl font-black text-[#231f20]">{totalCount}</span>
           </div>
           <div className="p-3 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6]">
-            <span className="text-3xs font-bold text-[#5C5A55] block">معروض في الرئيسية</span>
+            <span className="text-3xs font-bold text-[#5C5A55] block">{tr.showHome}</span>
             <span className="text-xl font-black text-[#231f20]">{homeCount}</span>
           </div>
           <div className="p-3 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6]">
-            <span className="text-3xs font-bold text-[#5C5A55] block">منشور ومرئي</span>
+            <span className="text-3xs font-bold text-[#5C5A55] block">{tr.published}</span>
             <span className="text-xl font-black text-emerald-700">{publishedCount}</span>
           </div>
           <div className="p-3 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6]">
-            <span className="text-3xs font-bold text-[#5C5A55] block">حالة التعديلات</span>
+            <span className="text-3xs font-bold text-[#5C5A55] block">{tr.changesState}</span>
             <span className={`text-xs font-bold block mt-1 ${hasUnsavedChanges ? 'text-[#bd3227]' : 'text-emerald-700'}`}>
-              {hasUnsavedChanges ? '⚠️ تعديلات غير محفوظة' : '✓ كافة التغييرات محفوظة'}
+              {hasUnsavedChanges ? tr.hasUnsaved : tr.allSaved}
             </span>
           </div>
         </div>
@@ -299,7 +417,7 @@ export function FaqManager({ initialItems }: FaqManagerProps) {
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="بحث في نصوص الأسئلة والإجابات..."
+            placeholder={tr.searchPlaceholder}
             className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] focus:border-[#231f20] outline-none"
           />
           {searchQuery && (
@@ -323,10 +441,11 @@ export function FaqManager({ initialItems }: FaqManagerProps) {
                 : 'bg-[#FAF8F5] text-[#5C5A55] hover:bg-[#F4EFE6]'
             }`}
           >
-            الكل ({items.length})
+            {tr.all} ({items.length})
           </button>
-          {Object.entries(CATEGORY_MAP).map(([catKey, { labelAr }]) => {
+          {Object.entries(CATEGORY_MAP).map(([catKey, cat]) => {
             const count = items.filter((i) => i.category === catKey).length
+            const label = locale === 'fr' ? cat.labelFr : locale === 'en' ? cat.labelEn : cat.labelAr
             return (
               <button
                 key={catKey}
@@ -338,7 +457,7 @@ export function FaqManager({ initialItems }: FaqManagerProps) {
                     : 'bg-[#FAF8F5] text-[#5C5A55] hover:bg-[#F4EFE6]'
                 }`}
               >
-                {labelAr} ({count})
+                {label} ({count})
               </button>
             )
           })}
@@ -350,12 +469,16 @@ export function FaqManager({ initialItems }: FaqManagerProps) {
         {filteredItems.length === 0 ? (
           <div className="p-12 text-center bg-white rounded-3xl border border-[#e5e0d6]">
             <span className="text-3xl block mb-2">🔍</span>
-            <h3 className="text-sm font-bold text-[#231f20]">لم يتم العثور على أي أسئلة مطابقة</h3>
-            <p className="text-3xs text-[#5C5A55] mt-1">جرب تغيير عبارة البحث أو اختيار تصنيف مختلف.</p>
+            <h3 className="text-sm font-bold text-[#231f20]">{tr.noResults}</h3>
+            <p className="text-3xs text-[#5C5A55] mt-1">{tr.noResultsHint}</p>
           </div>
         ) : (
           filteredItems.map((item) => {
             const catInfo = CATEGORY_MAP[item.category] || CATEGORY_MAP.general
+            const catLabel = locale === 'fr' ? catInfo.labelFr : locale === 'en' ? catInfo.labelEn : catInfo.labelAr
+            const questionText = locale === 'fr' ? (item.questionFr || item.questionAr) : locale === 'en' ? (item.questionEn || item.questionAr) : item.questionAr
+            const answerText = locale === 'fr' ? (item.answerFr || item.answerAr) : locale === 'en' ? (item.answerEn || item.answerAr) : item.answerAr
+
             return (
               <div
                 key={item.id}
@@ -372,7 +495,7 @@ export function FaqManager({ initialItems }: FaqManagerProps) {
                         onClick={() => moveItem(items.findIndex((i) => i.id === item.id), 'up')}
                         disabled={items.findIndex((i) => i.id === item.id) === 0}
                         className="w-6 h-6 rounded-md bg-[#FAF8F5] hover:bg-[#e5e0d6] disabled:opacity-30 disabled:pointer-events-none flex items-center justify-center text-3xs font-bold text-[#231f20] cursor-pointer"
-                        title="تحريك لأعلى"
+                        title="▲"
                       >
                         ▲
                       </button>
@@ -381,7 +504,7 @@ export function FaqManager({ initialItems }: FaqManagerProps) {
                         onClick={() => moveItem(items.findIndex((i) => i.id === item.id), 'down')}
                         disabled={items.findIndex((i) => i.id === item.id) === items.length - 1}
                         className="w-6 h-6 rounded-md bg-[#FAF8F5] hover:bg-[#e5e0d6] disabled:opacity-30 disabled:pointer-events-none flex items-center justify-center text-3xs font-bold text-[#231f20] cursor-pointer"
-                        title="تحريك لأسفل"
+                        title="▼"
                       >
                         ▼
                       </button>
@@ -396,7 +519,7 @@ export function FaqManager({ initialItems }: FaqManagerProps) {
                   <div className="flex-1 space-y-2">
                     <div className="flex flex-wrap items-center gap-2">
                       <span className={`px-2.5 py-0.5 rounded-full text-4xs font-bold border ${catInfo.color}`}>
-                        {catInfo.labelAr}
+                        {catLabel}
                       </span>
 
                       {/* Homepage toggle pill */}
@@ -408,9 +531,9 @@ export function FaqManager({ initialItems }: FaqManagerProps) {
                             ? 'bg-amber-50 text-amber-800 border-amber-200 hover:bg-amber-100'
                             : 'bg-gray-100 text-gray-500 border-gray-200 hover:bg-gray-200'
                         }`}
-                        title="انقر للتبديل بين إظهار / إخفاء من الصفحة الرئيسية"
+                        title="Toggle homepage"
                       >
-                        {item.showOnHome ? '★ يظهر بالرئيسية' : 'صفحة الأسئلة فقط'}
+                        {item.showOnHome ? tr.homeBadge : tr.faqOnlyBadge}
                       </button>
 
                       {/* Published toggle pill */}
@@ -422,28 +545,28 @@ export function FaqManager({ initialItems }: FaqManagerProps) {
                             ? 'bg-emerald-50 text-emerald-800 border-emerald-200 hover:bg-emerald-100'
                             : 'bg-red-50 text-red-700 border-red-200 hover:bg-red-100'
                         }`}
-                        title="انقر للتبديل بين منشور / مسودة"
+                        title="Toggle publish"
                       >
-                        {item.published ? '✓ منشور' : '✕ مسودة (مخفي)'}
+                        {item.published ? tr.publishedBadge : tr.hiddenBadge}
                       </button>
                     </div>
 
                     <h4 className="text-sm font-bold text-[#231f20] leading-snug">
-                      {item.questionAr}
+                      {questionText}
                     </h4>
 
                     <p className="text-xs text-[#5C5A55] leading-relaxed">
-                      {item.answerAr}
+                      {answerText}
                     </p>
 
                     {/* Multilingual Indicators */}
                     <div className="pt-2 flex flex-wrap items-center gap-3 text-4xs text-[#5C5A55]">
                       <span className={item.questionFr ? 'text-emerald-700 font-bold' : 'text-gray-400'}>
-                        {item.questionFr ? '✓ الفرنسية متوفرة' : '○ لا توجد ترجمة فرنسية'}
+                        {item.questionFr ? tr.frAvailable : tr.frMissing}
                       </span>
                       <span>•</span>
                       <span className={item.questionEn ? 'text-emerald-700 font-bold' : 'text-gray-400'}>
-                        {item.questionEn ? '✓ الإنجليزية متوفرة' : '○ لا توجد ترجمة إنجليزية'}
+                        {item.questionEn ? tr.enAvailable : tr.enMissing}
                       </span>
                     </div>
                   </div>
@@ -456,7 +579,7 @@ export function FaqManager({ initialItems }: FaqManagerProps) {
                       className="px-3 py-1.5 rounded-xl text-3xs font-bold bg-[#FAF8F5] border border-[#e5e0d6] hover:bg-[#231f20] hover:text-white transition-all text-[#231f20] cursor-pointer inline-flex items-center gap-1"
                     >
                       <span>✏️</span>
-                      <span>تعديل</span>
+                      <span>{tr.edit}</span>
                     </button>
                     <button
                       type="button"
@@ -464,7 +587,7 @@ export function FaqManager({ initialItems }: FaqManagerProps) {
                       className="px-3 py-1.5 rounded-xl text-3xs font-bold bg-red-50 border border-red-200 text-red-600 hover:bg-red-100 transition-all cursor-pointer inline-flex items-center gap-1"
                     >
                       <span>🗑️</span>
-                      <span>حذف</span>
+                      <span>{tr.delete}</span>
                     </button>
                   </div>
                 </div>
@@ -484,7 +607,7 @@ export function FaqManager({ initialItems }: FaqManagerProps) {
               <div className="flex items-center gap-2">
                 <span className="text-xl">❓</span>
                 <h3 className="text-base font-black text-[#231f20]">
-                  {editingItem ? 'تعديل السؤال والإجابة' : 'إضافة سؤال جديد'}
+                  {editingItem ? tr.modalEditTitle : tr.modalAddTitle}
                 </h3>
               </div>
               <button
@@ -552,11 +675,11 @@ export function FaqManager({ initialItems }: FaqManagerProps) {
                 </div>
               </div>
 
-              {/* Arabic (Required) */}
-              <div className="space-y-3 p-4 rounded-2xl bg-amber-50/40 border border-amber-200/60">
-                <div className="flex items-center gap-1.5 text-xs font-bold text-amber-900">
-                  <span>🇲🇦</span>
-                  <span>اللغة العربية (إلزامية — الركيزة الأساسية)</span>
+              {/* Arabic */}
+              <div className="p-3.5 rounded-2xl bg-white border border-[#e5e0d6] space-y-2.5">
+                <div className="flex items-center justify-between border-b border-[#E5E0D6] pb-1">
+                  <span className="text-3xs font-bold text-[#231f20]">العربية (Arabic — إجباري)</span>
+                  <span className="text-4xs text-[#5C5A55]">اللغة الأساسية</span>
                 </div>
                 <div>
                   <label className="block text-3xs font-bold text-[#5C5A55] mb-1">
@@ -568,46 +691,46 @@ export function FaqManager({ initialItems }: FaqManagerProps) {
                     value={modalForm.questionAr || ''}
                     onChange={(e) => setModalForm({ ...modalForm, questionAr: e.target.value })}
                     placeholder="مثال: كيف يمكنني الانخراط في الجمعية؟"
-                    className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] focus:border-[#231f20] outline-none bg-white"
+                    className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] focus:border-[#231f20] outline-none"
                   />
                 </div>
                 <div>
                   <label className="block text-3xs font-bold text-[#5C5A55] mb-1">
-                    الإجابة بالعربية *
+                    الجواب بالعربية *
                   </label>
                   <textarea
                     required
-                    rows={3}
+                    rows={2}
                     value={modalForm.answerAr || ''}
                     onChange={(e) => setModalForm({ ...modalForm, answerAr: e.target.value })}
-                    placeholder="اكتب الإجابة المفصلة والواضحة هنا..."
-                    className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] focus:border-[#231f20] outline-none bg-white leading-relaxed"
+                    placeholder="اكتب الإجابة المفصلة..."
+                    className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] focus:border-[#231f20] outline-none"
                   />
                 </div>
               </div>
 
-              {/* French (Optional) */}
-              <div className="space-y-3 p-4 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6]">
-                <div className="flex items-center gap-1.5 text-xs font-bold text-[#231f20]">
-                  <span>🇫🇷</span>
-                  <span>الترجمة بالفرنسية (Français — اختياري)</span>
+              {/* French */}
+              <div className="p-3.5 rounded-2xl bg-white border border-[#e5e0d6] space-y-2.5">
+                <div className="flex items-center justify-between border-b border-[#E5E0D6] pb-1">
+                  <span className="text-3xs font-bold text-[#231f20]">الفرنسية (French)</span>
+                  <span className="text-4xs text-[#5C5A55]">Optionnel</span>
                 </div>
                 <div>
                   <label className="block text-3xs font-bold text-[#5C5A55] mb-1">
-                    Question en Français
+                    Question en français
                   </label>
                   <input
                     type="text"
                     dir="ltr"
                     value={modalForm.questionFr || ''}
                     onChange={(e) => setModalForm({ ...modalForm, questionFr: e.target.value })}
-                    placeholder="ex: Comment devenir membre de l'AMYCC ?"
-                    className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] focus:border-[#231f20] outline-none bg-white text-left font-sans"
+                    placeholder="Ex: Comment puis-je adhérer à l'association ?"
+                    className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] focus:border-[#231f20] outline-none text-left font-sans"
                   />
                 </div>
                 <div>
                   <label className="block text-3xs font-bold text-[#5C5A55] mb-1">
-                    Réponse en Français
+                    Réponse en français
                   </label>
                   <textarea
                     dir="ltr"
@@ -615,16 +738,16 @@ export function FaqManager({ initialItems }: FaqManagerProps) {
                     value={modalForm.answerFr || ''}
                     onChange={(e) => setModalForm({ ...modalForm, answerFr: e.target.value })}
                     placeholder="Réponse détaillée..."
-                    className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] focus:border-[#231f20] outline-none bg-white text-left font-sans leading-relaxed"
+                    className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] focus:border-[#231f20] outline-none text-left font-sans leading-relaxed"
                   />
                 </div>
               </div>
 
-              {/* English (Optional) */}
-              <div className="space-y-3 p-4 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6]">
-                <div className="flex items-center gap-1.5 text-xs font-bold text-[#231f20]">
-                  <span>🇬🇧</span>
-                  <span>الترجمة بالإنجليزية (English — اختياري)</span>
+              {/* English */}
+              <div className="p-3.5 rounded-2xl bg-white border border-[#e5e0d6] space-y-2.5">
+                <div className="flex items-center justify-between border-b border-[#E5E0D6] pb-1">
+                  <span className="text-3xs font-bold text-[#231f20]">الإنجليزية (English)</span>
+                  <span className="text-4xs text-[#5C5A55]">Optional</span>
                 </div>
                 <div>
                   <label className="block text-3xs font-bold text-[#5C5A55] mb-1">
@@ -635,7 +758,7 @@ export function FaqManager({ initialItems }: FaqManagerProps) {
                     dir="ltr"
                     value={modalForm.questionEn || ''}
                     onChange={(e) => setModalForm({ ...modalForm, questionEn: e.target.value })}
-                    placeholder="e.g. How can I become an active member?"
+                    placeholder="e.g. How can I join the association?"
                     className="w-full px-3.5 py-2 text-xs rounded-xl border border-[#e5e0d6] focus:border-[#231f20] outline-none bg-white text-left font-sans"
                   />
                 </div>
@@ -661,13 +784,13 @@ export function FaqManager({ initialItems }: FaqManagerProps) {
                   onClick={() => setIsModalOpen(false)}
                   className="px-4 py-2 rounded-xl text-xs font-bold text-[#5C5A55] bg-[#FAF8F5] hover:bg-[#F4EFE6] transition-colors cursor-pointer"
                 >
-                  إلغاء
+                  {tr.cancel}
                 </button>
                 <button
                   type="submit"
                   className="px-5 py-2 rounded-xl text-xs font-bold text-white bg-[#231f20] hover:bg-[#d2a82b] transition-all cursor-pointer shadow-xs"
                 >
-                  {editingItem ? 'تحديث في القائمة' : 'إضافة إلى القائمة'}
+                  {tr.applyChanges}
                 </button>
               </div>
             </form>

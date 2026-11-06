@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Link from 'next/link'
 import type { ContactConfig } from '@/lib/settings'
 import { ContactManager } from '@/components/admin/ContactManager'
 import { CsvExportButton } from '@/components/admin/CsvExportButton'
@@ -27,6 +28,9 @@ interface ContactAdminTabsProps {
 
 const STRINGS = {
   ar: {
+    pageTitle: 'إدارة بيانات التواصل والرسائل الواردة',
+    pageSubtitle: 'تحكم كامل في أرقام الهاتف، العناوين، قنوات الاتصال، واستقبال رسائل واستفسارات الزوار والشركاء.',
+    previewFront: 'معاينة صفحة اتصل بنا',
     tabCms: 'إدارة صفحة ومعلومات اتصل بنا (Contact CMS)',
     tabInbox: 'صندوق الرسائل الواردة',
     newBadge: 'جديد',
@@ -48,6 +52,9 @@ const STRINGS = {
     confirmDelete: 'هل ترغب في حذف هذه الرسالة نهائياً؟',
   },
   fr: {
+    pageTitle: 'Centre de Contact & Messages Reçus',
+    pageSubtitle: 'Gestion des coordonnées, adresses officielles, réseaux sociaux et traitement des messages entrants.',
+    previewFront: 'Voir la page contact',
     tabCms: 'Configuration CMS Contact',
     tabInbox: 'Messages Reçus',
     newBadge: 'Nouveau',
@@ -69,6 +76,9 @@ const STRINGS = {
     confirmDelete: 'Êtes-vous sûr de vouloir supprimer ce message ?',
   },
   en: {
+    pageTitle: 'Contact Center & Inquiries',
+    pageSubtitle: 'Manage institutional phone numbers, physical address, communication channels, and visitor inquiries.',
+    previewFront: 'Preview Contact Page',
     tabCms: 'Contact Page CMS',
     tabInbox: 'Incoming Messages',
     newBadge: 'New',
@@ -98,7 +108,7 @@ export function ContactAdminTabs({
   onUpdateStatus,
   onDeleteMessage,
 }: ContactAdminTabsProps) {
-  const { locale } = useAdminLocale()
+  const { locale, dir } = useAdminLocale()
   const tr = STRINGS[locale] || STRINGS.ar
 
   const [activeTab, setActiveTab] = useState<'cms' | 'inbox'>('cms')
@@ -129,7 +139,28 @@ export function ContactAdminTabs({
   }))
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6" dir={dir}>
+      {/* Top Header */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2 border-b border-[#e5e0d6]">
+        <div>
+          <h1 className="text-xl sm:text-2xl font-black text-[#231f20] tracking-tight">
+            {tr.pageTitle}
+          </h1>
+          <p className="text-xs sm:text-sm text-[#5C5A55] mt-1">
+            {tr.pageSubtitle}
+          </p>
+        </div>
+
+        <Link
+          href={`/${locale}/contact`}
+          target="_blank"
+          className="px-4 py-2 rounded-xl text-xs font-bold text-[#bd3227] bg-[#FAF8F5] hover:bg-[#F4EFE6] border border-[#e5e0d6] transition-colors flex items-center gap-1.5 self-start sm:self-auto shrink-0"
+        >
+          <span>{tr.previewFront}</span>
+          <span>↗</span>
+        </Link>
+      </div>
+
       {/* Primary Section Switcher Tabs */}
       <div className="flex flex-wrap items-center gap-2 p-1.5 bg-[#FAF8F5] rounded-2xl border border-[#e5e0d6] w-full sm:w-fit shadow-2xs">
         <button

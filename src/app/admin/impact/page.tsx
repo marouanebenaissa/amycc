@@ -20,22 +20,9 @@ export default async function AdminImpactPage() {
   const initialConfig = await getImpactSettings()
 
   return (
-    <div className="space-y-6">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div>
-          <h1 className="text-2xl sm:text-3xl font-black text-[#231f20] tracking-tight">
-            إدارة الأثر المجتمعي (Community Impact CMS)
-          </h1>
-          <p className="text-xs sm:text-sm text-[#5C5A55] mt-1">
-            التحكم في واجهة الأثر، مؤشرات الإنجاز، المحاور الاستراتيجية، قصة شباب في العمل، ودليل النزاهة والشفافية.
-          </p>
-        </div>
-      </div>
-
-      <ImpactManager
-        initialConfig={initialConfig}
-        defaultConfig={defaultImpactConfig}
-      />
-    </div>
+    <ImpactManager
+      initialConfig={initialConfig}
+      defaultConfig={defaultImpactConfig}
+    />
   )
 }

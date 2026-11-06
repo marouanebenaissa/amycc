@@ -1,7 +1,7 @@
 import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
-import Link from 'next/link'
 import { EventForm } from '@/components/admin/EventForm'
+import { AdminPageHeader } from '@/components/admin/AdminPageHeader'
 
 export default async function NewEventPage() {
   const supabase = await createClient()
@@ -15,23 +15,16 @@ export default async function NewEventPage() {
 
   return (
     <div className="space-y-6 max-w-4xl">
-      <div className="flex items-center gap-3">
-        <Link
-          href="/admin/events"
-          className="p-2 text-slate-400 hover:text-slate-600 rounded-lg hover:bg-slate-100 transition-colors"
-          title="Back to Events"
-        >
-          <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-          </svg>
-        </Link>
-        <div>
-          <h1 className="text-2xl font-extrabold text-[#181516]">Schedule New Event</h1>
-          <p className="text-xs text-slate-500 mt-0.5">
-            Configure dates, venue, capacity, registration parameters, and descriptions.
-          </p>
-        </div>
-      </div>
+      <AdminPageHeader
+        backHref="/admin/events"
+        backTitle={{ ar: 'العودة للفعاليات', fr: 'Retour aux événements', en: 'Back to Events' }}
+        title={{ ar: 'جدولة فعالية أو ورشة جديدة', fr: 'Planifier un nouvel événement', en: 'Schedule New Event' }}
+        subtitle={{
+          ar: 'تحديد المواعيد، مكان الانعقاد، السعة الاستيعابية، والتفاصيل بثلاث لغات.',
+          fr: 'Configurer dates, lieu, jauge d\'accueil, inscriptions et descriptions.',
+          en: 'Configure dates, venue, capacity, registration parameters, and descriptions.',
+        }}
+      />
 
       <EventForm />
     </div>

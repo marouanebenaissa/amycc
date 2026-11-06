@@ -9,16 +9,61 @@ import type {
   AnnualProgramEventItem,
 } from '@/lib/settings'
 import { saveAnnualProgramConfiguration } from '@/lib/actions/admin'
+import { useAdminLocale } from './AdminLocaleContext'
 
 interface AnnualProgramManagerProps {
   initialConfig: AnnualProgramConfig
   defaultConfig?: AnnualProgramConfig
 }
 
+const ANNUAL_STRINGS = {
+  ar: {
+    pageTitle: 'إدارة البرنامج والموسم الثقافي السنوي',
+    pageSubtitle: 'تخصيص الواجهة، المحاور الأربعة، الأجندة الفصلية (Q1-Q4)، ودليل البرنامج الرسمي.',
+    previewPublished: 'معاينة المنشور ↗',
+    saveBtn: 'حفظ إعدادات البرنامج السنوي',
+    savingBtn: 'جارٍ الحفظ...',
+    tabHero: 'واجهة ورأس البرنامج (Hero & Brochure)',
+    tabStatsPillars: 'مؤشرات الأثر والمحاور (Stats & Pillars)',
+    tabQuarters: 'الأجندة والمحطات الفصلية (Q1 — Q4)',
+    tabCta: 'قسم الدعوة واحتضان الفعاليات (CTA)',
+    saveSuccess: 'تم حفظ إعدادات وأجندة البرنامج السنوي بنجاح وتحديث الموقع مباشرة!',
+    saveError: 'تعذر حفظ الإعدادات',
+  },
+  fr: {
+    pageTitle: 'Feuille de Route & Programme Annuel',
+    pageSubtitle: 'Configuration de l\'en-tête, des 4 piliers stratégiques, de l\'agenda trimestriel (T1-T4) et de la brochure.',
+    previewPublished: 'Voir le programme publié ↗',
+    saveBtn: 'Enregistrer le programme annuel',
+    savingBtn: 'Enregistrement...',
+    tabHero: 'En-tête & Brochure (Hero & Brochure)',
+    tabStatsPillars: 'Piliers & Indicateurs (Stats & Pillars)',
+    tabQuarters: 'Agenda Trimestriel (T1 — T4)',
+    tabCta: 'Appel & Partenariats (CTA)',
+    saveSuccess: 'Programme annuel enregistré avec succès sur le site !',
+    saveError: 'Impossible d\'enregistrer le programme',
+  },
+  en: {
+    pageTitle: 'Annual Cultural Roadmap & Programs',
+    pageSubtitle: 'Manage hero showcase, strategic pillars, quarterly agenda (Q1-Q4), and downloadable program guide.',
+    previewPublished: 'View Live Program ↗',
+    saveBtn: 'Save Annual Program',
+    savingBtn: 'Saving...',
+    tabHero: 'Hero & Brochure (Hero & Brochure)',
+    tabStatsPillars: 'Pillars & Key Metrics (Stats & Pillars)',
+    tabQuarters: 'Quarterly Milestones (Q1 — Q4)',
+    tabCta: 'Call to Action & Hosting (CTA)',
+    saveSuccess: 'Annual program configuration saved successfully and live on public site!',
+    saveError: 'Failed to save configuration',
+  },
+}
+
 export function AnnualProgramManager({ initialConfig }: AnnualProgramManagerProps) {
+  const { locale, dir } = useAdminLocale()
+  const tr = ANNUAL_STRINGS[locale] || ANNUAL_STRINGS.ar
   const [config, setConfig] = useState<AnnualProgramConfig>(initialConfig)
   const [activeTab, setActiveTab] = useState<'hero' | 'stats_pillars' | 'quarters' | 'cta'>('hero')
-  const [activeLangTab, setActiveLangTab] = useState<'ar' | 'fr' | 'en'>('ar')
+  const [activeLangTab, setActiveLangTab] = useState<'ar' | 'fr' | 'en'>(locale)
   const [activeQuarterIdx, setActiveQuarterIdx] = useState<number>(0)
   const [saving, setSaving] = useState(false)
   const [uploadingImage, setUploadingImage] = useState(false)
@@ -173,15 +218,15 @@ export function AnnualProgramManager({ initialConfig }: AnnualProgramManagerProp
     try {
       const res = await saveAnnualProgramConfiguration(config)
       if (!res.success) {
-        throw new Error(res.error || 'فشل حفظ الإعدادات')
+        throw new Error(res.error || tr.saveError)
       }
 
       setFeedback({
         type: 'success',
-        message: 'تم حفظ إعدادات وأجندة البرنامج السنوي 2026 بنجاح وتحديث الموقع مباشرة!',
+        message: tr.saveSuccess,
       })
     } catch (err: unknown) {
-      const msg = err instanceof Error ? err.message : 'تعذر حفظ الإعدادات'
+      const msg = err instanceof Error ? err.message : tr.saveError
       setFeedback({ type: 'error', message: msg })
     } finally {
       setSaving(false)
@@ -191,7 +236,7 @@ export function AnnualProgramManager({ initialConfig }: AnnualProgramManagerProp
   const currentQuarter = config.quarters[activeQuarterIdx] || config.quarters[0]
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-8" dir={dir}>
       {/* Alert Banner */}
       {feedback && (
         <div
@@ -223,22 +268,21 @@ export function AnnualProgramManager({ initialConfig }: AnnualProgramManagerProp
           </div>
           <div>
             <h2 className="text-base sm:text-lg font-black text-[#231f20]">
-              إدارة البرنامج والموسم الثقافي السنوي 2026
+              {tr.pageTitle}
             </h2>
             <p className="text-3xs sm:text-xs text-[#5C5A55]">
-              تخصيص الواجهة، المحاور الأربعة، الأجندة الفصلية (Q1-Q4)، ودليل البرنامج الرسمي.
+              {tr.pageSubtitle}
             </p>
           </div>
         </div>
 
         <div className="flex items-center gap-2.5 flex-wrap">
           <Link
-            href="/ar/annual-program"
+            href={`/${locale}/annual-program`}
             target="_blank"
             className="px-3.5 py-2 rounded-xl text-xs font-bold text-[#231f20] bg-[#FAF8F5] hover:bg-[#F4EFE6] border border-[#e5e0d6] transition-all flex items-center gap-1.5"
           >
-            <span>معاينة المنشور</span>
-            <span>↗</span>
+            <span>{tr.previewPublished}</span>
           </Link>
 
           <button
@@ -250,12 +294,12 @@ export function AnnualProgramManager({ initialConfig }: AnnualProgramManagerProp
             {saving ? (
               <>
                 <span className="w-3.5 h-3.5 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                <span>جارٍ الحفظ...</span>
+                <span>{tr.savingBtn}</span>
               </>
             ) : (
               <>
                 <span>💾</span>
-                <span>حفظ إعدادات البرنامج السنوي</span>
+                <span>{tr.saveBtn}</span>
               </>
             )}
           </button>
@@ -274,7 +318,7 @@ export function AnnualProgramManager({ initialConfig }: AnnualProgramManagerProp
           }`}
         >
           <span>🖼️</span>
-          <span>واجهة ورأس البرنامج (Hero & Brochure)</span>
+          <span>{tr.tabHero}</span>
         </button>
 
         <button
@@ -287,7 +331,7 @@ export function AnnualProgramManager({ initialConfig }: AnnualProgramManagerProp
           }`}
         >
           <span>📊</span>
-          <span>مؤشرات الأثر والمحاور (Stats & Pillars)</span>
+          <span>{tr.tabStatsPillars}</span>
         </button>
 
         <button
@@ -300,7 +344,7 @@ export function AnnualProgramManager({ initialConfig }: AnnualProgramManagerProp
           }`}
         >
           <span>🗓️</span>
-          <span>الأجندة والمحطات الفصلية (Q1 — Q4)</span>
+          <span>{tr.tabQuarters}</span>
         </button>
 
         <button
@@ -313,7 +357,7 @@ export function AnnualProgramManager({ initialConfig }: AnnualProgramManagerProp
           }`}
         >
           <span>📢</span>
-          <span>قسم الدعوة واحتضان الفعاليات (CTA)</span>
+          <span>{tr.tabCta}</span>
         </button>
       </div>
 

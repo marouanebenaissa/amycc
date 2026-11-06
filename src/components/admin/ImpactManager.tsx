@@ -12,6 +12,55 @@ import type {
   ImpactTransparencyItem,
 } from '@/lib/settings'
 import { saveImpactConfiguration } from '@/lib/actions/admin'
+import { useAdminLocale } from './AdminLocaleContext'
+
+const IMPACT_STRINGS = {
+  ar: {
+    title: 'إدارة محتوى صفحة الأثر المجتمعي (Community Impact CMS)',
+    subtitle: 'تخصيص الواجهة المغربية، مؤشرات الأثر، المحاور الاستراتيجية، قصة شباب في العمل، ومنهجية الشفافية والنزاهة.',
+    previewFront: 'معاينة الصفحة ↗',
+    saveBtn: 'حفظ التعديلات',
+    savingBtn: 'جاري الحفظ...',
+    tabHero: 'الهيدر والتقرير (Hero & Report)',
+    tabMetrics: 'مؤشرات الأثر',
+    tabPillars: 'المحاور الاستراتيجية',
+    tabSpotlight: 'قصة الأثر والمنهجية',
+    tabTransparency: 'الشفافية والدعوة للشراكة (Transparency & CTA)',
+    langSelectorLabel: 'اختر لغة تحرير النصوص:',
+    saveSuccess: 'تم حفظ كافة بيانات وإعدادات صفحة الأثر المجتمعي بنجاح وتحديث الموقع العام فوراً!',
+    saveError: 'فشل حفظ الإعدادات',
+  },
+  fr: {
+    title: 'Impact Communautaire (Community Impact CMS)',
+    subtitle: 'Configuration de l\'en-tête, des indicateurs d\'impact, des axes stratégiques, du programme Jeunesse en Action et de la transparence.',
+    previewFront: 'Voir la page d\'impact ↗',
+    saveBtn: 'Enregistrer les modifications',
+    savingBtn: 'Enregistrement...',
+    tabHero: 'En-tête & Rapport (Hero & Report)',
+    tabMetrics: 'Indicateurs d\'impact',
+    tabPillars: 'Axes Stratégiques',
+    tabSpotlight: 'Histoire d\'impact & Méthode',
+    tabTransparency: 'Transparence & Partenariats (CTA)',
+    langSelectorLabel: 'Langue d\'édition des champs :',
+    saveSuccess: 'Données de la page d\'impact enregistrées avec succès sur le site !',
+    saveError: 'Erreur lors de l\'enregistrement de l\'impact',
+  },
+  en: {
+    title: 'Community Impact & Transparency (Impact CMS)',
+    subtitle: 'Manage impact showcase, key performance metrics, strategic pillars, Youth in Action story, and institutional transparency.',
+    previewFront: 'View Impact Page ↗',
+    saveBtn: 'Save Changes',
+    savingBtn: 'Saving...',
+    tabHero: 'Hero & Report (Hero & Report)',
+    tabMetrics: 'Impact Metrics',
+    tabPillars: 'Strategic Pillars',
+    tabSpotlight: 'Impact Spotlight & Method',
+    tabTransparency: 'Transparency & Partnership CTA',
+    langSelectorLabel: 'Content Editing Language:',
+    saveSuccess: 'Community impact settings saved and published successfully!',
+    saveError: 'Failed to save impact settings',
+  },
+}
 
 interface ImpactManagerProps {
   initialConfig: ImpactConfig
@@ -20,9 +69,11 @@ interface ImpactManagerProps {
 
 export function ImpactManager({ initialConfig }: ImpactManagerProps) {
   const router = useRouter()
+  const { locale, dir } = useAdminLocale()
+  const tr = IMPACT_STRINGS[locale] || IMPACT_STRINGS.ar
   const [config, setConfig] = useState<ImpactConfig>(initialConfig)
   const [activeTab, setActiveTab] = useState<'hero' | 'metrics' | 'pillars' | 'spotlight' | 'transparency_cta'>('hero')
-  const [activeLangTab, setActiveLangTab] = useState<'ar' | 'fr' | 'en'>('ar')
+  const [activeLangTab, setActiveLangTab] = useState<'ar' | 'fr' | 'en'>(locale)
   const [saving, setSaving] = useState(false)
   const [uploadingImage, setUploadingImage] = useState(false)
   const [uploadingSpotlightImg, setUploadingSpotlightImg] = useState(false)
@@ -251,18 +302,18 @@ export function ImpactManager({ initialConfig }: ImpactManagerProps) {
         router.refresh()
         setFeedback({
           type: 'success',
-          message: 'تم حفظ كافة بيانات وإعدادات صفحة الأثر المجتمعي بنجاح وتحديث الموقع العام فوراً!',
+          message: tr.saveSuccess,
         })
       } else {
         setFeedback({
           type: 'error',
-          message: res.error || 'حدث خطأ أثناء حفظ الإعدادات',
+          message: res.error || tr.saveError,
         })
       }
     } catch (err: unknown) {
       setFeedback({
         type: 'error',
-        message: err instanceof Error ? err.message : 'فشل حفظ الإعدادات',
+        message: err instanceof Error ? err.message : tr.saveError,
       })
     } finally {
       setSaving(false)
@@ -270,7 +321,7 @@ export function ImpactManager({ initialConfig }: ImpactManagerProps) {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6" dir={dir}>
       {/* Top Controls Bar */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 bg-white rounded-2xl border border-[#e5e0d6] shadow-2xs">
         <div className="flex items-center gap-3">
@@ -279,21 +330,21 @@ export function ImpactManager({ initialConfig }: ImpactManagerProps) {
           </div>
           <div>
             <h2 className="text-base font-extrabold text-[#231f20]">
-              إدارة محتوى صفحة الأثر المجتمعي (Community Impact CMS)
+              {tr.title}
             </h2>
             <p className="text-3xs sm:text-2xs text-[#5C5A55]">
-              تخصيص الهيدر المغربي، مؤشرات الأثر، المحاور الاستراتيجية، قصة شباب في العمل، ومنهجية العمل والشفافية.
+              {tr.subtitle}
             </p>
           </div>
         </div>
 
         <div className="flex items-center gap-2">
           <Link
-            href="/ar/impact"
+            href={`/${locale}/impact`}
             target="_blank"
             className="px-3.5 py-2 rounded-xl text-xs font-bold text-[#231f20] bg-[#F4EFE6] hover:bg-[#F4EFE6] transition-colors"
           >
-            معاينة الصفحة ↗
+            {tr.previewFront}
           </Link>
 
           <button
@@ -305,12 +356,12 @@ export function ImpactManager({ initialConfig }: ImpactManagerProps) {
             {saving ? (
               <>
                 <span className="w-3.5 h-3.5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                <span>جاري الحفظ...</span>
+                <span>{tr.savingBtn}</span>
               </>
             ) : (
               <>
                 <span>💾</span>
-                <span>حفظ التعديلات</span>
+                <span>{tr.saveBtn}</span>
               </>
             )}
           </button>
@@ -349,7 +400,7 @@ export function ImpactManager({ initialConfig }: ImpactManagerProps) {
           }`}
         >
           <span>🖼️</span>
-          <span>الهيدر والتقرير (Hero & Report)</span>
+          <span>{tr.tabHero}</span>
         </button>
 
         <button
@@ -362,7 +413,7 @@ export function ImpactManager({ initialConfig }: ImpactManagerProps) {
           }`}
         >
           <span>📊</span>
-          <span>مؤشرات الأثر ({config.metrics.length})</span>
+          <span>{tr.tabMetrics} ({config.metrics.length})</span>
         </button>
 
         <button
@@ -375,7 +426,7 @@ export function ImpactManager({ initialConfig }: ImpactManagerProps) {
           }`}
         >
           <span>🏛️</span>
-          <span>المحاور الاستراتيجية ({config.pillars.length})</span>
+          <span>{tr.tabPillars} ({config.pillars.length})</span>
         </button>
 
         <button
@@ -388,7 +439,7 @@ export function ImpactManager({ initialConfig }: ImpactManagerProps) {
           }`}
         >
           <span>🚀</span>
-          <span>قصة الأثر والمنهجية</span>
+          <span>{tr.tabSpotlight}</span>
         </button>
 
         <button
@@ -401,7 +452,7 @@ export function ImpactManager({ initialConfig }: ImpactManagerProps) {
           }`}
         >
           <span>⚖️</span>
-          <span>النزاهة والشفافية والدعوة للشراكة</span>
+          <span>{tr.tabTransparency}</span>
         </button>
       </div>
 
@@ -409,7 +460,7 @@ export function ImpactManager({ initialConfig }: ImpactManagerProps) {
       <div className="flex items-center justify-between bg-white p-3 rounded-xl border border-[#e5e0d6]">
         <div className="text-2xs font-bold text-[#5C5A55] flex items-center gap-2">
           <span>🌐</span>
-          <span>اختر لغة إدخال النصوص (Trilingual Input Selector):</span>
+          <span>{tr.langSelectorLabel}</span>
         </div>
         <div className="flex items-center gap-1">
           <button

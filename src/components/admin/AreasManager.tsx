@@ -1,8 +1,136 @@
 'use client'
 
 import { useState } from 'react'
+import Link from 'next/link'
 import type { AreasConfig, AreaItemConfig } from '@/lib/settings'
 import { saveAreasConfiguration } from '@/lib/actions/admin'
+import { useAdminLocale } from './AdminLocaleContext'
+
+const AREAS_STRINGS = {
+  ar: {
+    title: 'إدارة مجالات النشاط والتدخل الجمعوي (Areas CMS)',
+    subtitle: 'تحكم كامل في نصوص البطاقات ومحتوى النوافذ المنبثقة التفاعلية في الواجهة الرئيسية.',
+    previewFront: 'معاينة الواجهة',
+    toggleHeader: 'نصوص القسم',
+    hideHeader: 'إخفاء نصوص القسم',
+    addNew: 'إضافة مجال جديد',
+    saveAll: 'حفظ كافة التغييرات',
+    saving: 'جاري الحفظ...',
+    totalDisciplines: 'إجمالي المجالات',
+    activeHomepage: 'مفعلة بالرئيسية',
+    popupContent: 'محتوى النوافذ',
+    popupActive: '✓ نوافذ تفاعلية منبثقة',
+    changesState: 'حالة التعديلات',
+    hasUnsaved: '⚠️ تعديلات غير محفوظة',
+    allSaved: '✓ كافة التغييرات محفوظة',
+    saveSuccess: 'تم حفظ مجالات النشاط ومحتوى النوافذ المنبثقة بنجاح على الصفحة الرئيسية!',
+    saveError: 'فشل حفظ مجالات النشاط',
+    sectionEyebrow: 'الشارة العلوية بالعربية (Eyebrow)',
+    sectionTitle: 'العنوان الرئيسي بالعربية (Title)',
+    sectionSubtitle: 'الوصف التوضيحي بالعربية (Subtitle)',
+    globalWorkshops: 'إظهار قسم البرامج والورشات في كافة المجالات (تحكم عام)',
+    globalWorkshopsDesc: 'تفعيل أو تعطيل ظهور قسم البرامج والورشات بالنوافذ لجميع المجالات دفعة واحدة',
+    enabled: '✓ مفعّل ومعروض',
+    disabled: '✕ معطّل ومخفي',
+    workshopsShown: '✨ الورشات: معروضة بالنافذة',
+    workshopsHidden: '✨ الورشات: مخفية من النافذة',
+    stratObjectives: 'أهداف استراتيجية',
+    workshopsAndProgs: 'ورشات وبرامج',
+    hiddenLabel: '(مخفية)',
+    btnLink: 'رابط الزر:',
+    editDomain: 'تعديل المجال والنافذة',
+    delete: 'حذف',
+    deleteConfirm: 'هل أنت متأكد من رغبتك في حذف هذا المجال؟',
+    modalEditTitle: 'تعديل مجال النشاط والنافذة المنبثقة',
+    modalAddTitle: 'إضافة مجال نشاط جديد',
+    tabCard: 'بطاقة الواجهة الرئيسية (Card)',
+    tabModal: 'محتوى النافذة المنبثقة (Modal Dialog)',
+    cancel: 'إلغاء',
+    applyChanges: 'تطبيق التعديلات',
+  },
+  fr: {
+    title: 'Domaines d\'Intervention & Disciplines (Areas CMS)',
+    subtitle: 'Contrôle complet des cartes et fenêtres modales interactives sur la page d\'accueil.',
+    previewFront: 'Aperçu du site',
+    toggleHeader: 'Textes de section',
+    hideHeader: 'Masquer textes',
+    addNew: 'Ajouter un domaine',
+    saveAll: 'Enregistrer tout',
+    saving: 'Enregistrement...',
+    totalDisciplines: 'Total Domaines',
+    activeHomepage: 'Actifs en Accueil',
+    popupContent: 'Contenu Modales',
+    popupActive: '✓ Modales interactives',
+    changesState: 'État des modifications',
+    hasUnsaved: '⚠️ Modifications non enregistrées',
+    allSaved: '✓ Tout est synchronisé',
+    saveSuccess: 'Domaines d\'intervention et modales enregistrés avec succès !',
+    saveError: 'Erreur lors de l\'enregistrement des domaines',
+    sectionEyebrow: 'Surtitre de section (Eyebrow)',
+    sectionTitle: 'Titre principal de section',
+    sectionSubtitle: 'Description de la section',
+    globalWorkshops: 'Afficher les ateliers dans tous les domaines (Global)',
+    globalWorkshopsDesc: 'Activer ou masquer la liste des ateliers pour tous les domaines en un clic',
+    enabled: '✓ Actif & Visible',
+    disabled: '✕ Désactivé & Masqué',
+    workshopsShown: '✨ Ateliers : visibles en modale',
+    workshopsHidden: '✨ Ateliers : masqués en modale',
+    stratObjectives: 'objectifs stratégiques',
+    workshopsAndProgs: 'ateliers & programmes',
+    hiddenLabel: '(masqué)',
+    btnLink: 'Lien bouton :',
+    editDomain: 'Modifier le domaine & modale',
+    delete: 'Supprimer',
+    deleteConfirm: 'Voulez-vous vraiment supprimer ce domaine ?',
+    modalEditTitle: 'Modifier le domaine et la fenêtre modale',
+    modalAddTitle: 'Ajouter un nouveau domaine d\'intervention',
+    tabCard: 'Carte d\'accueil (Card)',
+    tabModal: 'Contenu fenêtre modale (Modal Dialog)',
+    cancel: 'Annuler',
+    applyChanges: 'Appliquer les modifications',
+  },
+  en: {
+    title: 'Core Focus Areas & Disciplines (Areas CMS)',
+    subtitle: 'Manage the 6 strategic discipline cards, objectives, and interactive modal dialogs on homepage.',
+    previewFront: 'Preview Homepage',
+    toggleHeader: 'Section Texts',
+    hideHeader: 'Hide Texts',
+    addNew: 'Add New Domain',
+    saveAll: 'Save All Changes',
+    saving: 'Saving...',
+    totalDisciplines: 'Total Disciplines',
+    activeHomepage: 'Active on Homepage',
+    popupContent: 'Modal Content',
+    popupActive: '✓ Interactive Dialogs',
+    changesState: 'Changes Status',
+    hasUnsaved: '⚠️ Unsaved Changes',
+    allSaved: '✓ Everything Synced',
+    saveSuccess: 'Focus disciplines and interactive modals saved successfully!',
+    saveError: 'Failed to save focus areas',
+    sectionEyebrow: 'Section Eyebrow Badge',
+    sectionTitle: 'Main Section Title',
+    sectionSubtitle: 'Section Description',
+    globalWorkshops: 'Show workshops across all disciplines (Global)',
+    globalWorkshopsDesc: 'Toggle visibility of the workshops and initiatives list across all disciplines at once',
+    enabled: '✓ Active & Visible',
+    disabled: '✕ Disabled & Hidden',
+    workshopsShown: '✨ Workshops: visible in modal',
+    workshopsHidden: '✨ Workshops: hidden from modal',
+    stratObjectives: 'strategic objectives',
+    workshopsAndProgs: 'workshops & programs',
+    hiddenLabel: '(hidden)',
+    btnLink: 'Button link:',
+    editDomain: 'Edit Domain & Modal',
+    delete: 'Delete',
+    deleteConfirm: 'Are you sure you want to delete this discipline?',
+    modalEditTitle: 'Edit Focus Area & Modal Dialog',
+    modalAddTitle: 'Add New Focus Discipline',
+    tabCard: 'Homepage Card View',
+    tabModal: 'Interactive Modal Dialog Content',
+    cancel: 'Cancel',
+    applyChanges: 'Apply Changes',
+  },
+}
 
 interface AreasManagerProps {
   initialConfig: AreasConfig
@@ -10,6 +138,8 @@ interface AreasManagerProps {
 }
 
 export function AreasManager({ initialConfig }: AreasManagerProps) {
+  const { locale, dir } = useAdminLocale()
+  const tr = AREAS_STRINGS[locale] || AREAS_STRINGS.ar
   const [config, setConfig] = useState<AreasConfig>(initialConfig)
   const [saving, setSaving] = useState(false)
   const [successMessage, setSuccessMessage] = useState<string | null>(null)
@@ -159,7 +289,7 @@ export function AreasManager({ initialConfig }: AreasManagerProps) {
 
   // Delete Area
   function handleDelete(key: string) {
-    if (!window.confirm('هل أنت متأكد من حذف هذا المجال؟ لن يتم تطبيق الحذف حتى تضغط "حفظ كافة التغييرات".')) {
+    if (!window.confirm(tr.deleteConfirm)) {
       return
     }
     setConfig((prev) => ({
@@ -255,13 +385,13 @@ export function AreasManager({ initialConfig }: AreasManagerProps) {
     try {
       const result = await saveAreasConfiguration(config)
       if (!result.success) {
-        throw new Error(result.error || 'فشل حفظ مجالات التدخل')
+        throw new Error(result.error || tr.saveError)
       }
-      setSuccessMessage('تم حفظ مجالات التدخل ومحتوى النوافذ المنبثقة بنجاح على الصفحة الرئيسية!')
+      setSuccessMessage(tr.saveSuccess)
       setHasUnsavedChanges(false)
       setTimeout(() => setSuccessMessage(null), 5000)
     } catch (err: unknown) {
-      const msg = err instanceof Error ? err.message : 'حدث خطأ أثناء الحفظ'
+      const msg = err instanceof Error ? err.message : tr.saveError
       setErrorMessage(msg)
     } finally {
       setSaving(false)
@@ -269,7 +399,7 @@ export function AreasManager({ initialConfig }: AreasManagerProps) {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6" dir={dir}>
       {/* Top Banner and Actions */}
       <div className="bg-white rounded-3xl border border-[#e5e0d6] p-6 shadow-xs space-y-4">
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
@@ -277,22 +407,31 @@ export function AreasManager({ initialConfig }: AreasManagerProps) {
             <div className="flex items-center gap-2">
               <span className="text-xl">🎯</span>
               <h2 className="text-lg font-black text-[#231f20]">
-                إدارة مجالات التدخل الستة ومحتوى النوافذ المنبثقة (Areas CMS)
+                {tr.title}
               </h2>
             </div>
             <p className="text-xs text-[#5C5A55] mt-1">
-              تحكم كامل في نصوص البطاقات الستة ومحتوى النافذة التفاعلية (الأهداف، الورشات، والشارات) في الواجهة الرئيسية.
+              {tr.subtitle}
             </p>
           </div>
 
           <div className="flex flex-wrap items-center gap-2.5">
+            <Link
+              href={`/${locale}#areas`}
+              target="_blank"
+              className="px-3.5 py-2.5 rounded-xl text-3xs font-bold text-[#231f20] bg-[#FAF8F5] border border-[#e5e0d6] hover:bg-[#F4EFE6] active:scale-98 transition-all cursor-pointer inline-flex items-center gap-1.5"
+            >
+              <span>{tr.previewFront}</span>
+              <span>↗</span>
+            </Link>
+
             <button
               type="button"
               onClick={() => setShowSectionSettings(!showSectionSettings)}
               className="px-3.5 py-2.5 rounded-xl text-3xs font-bold text-[#231f20] bg-[#FAF8F5] border border-[#e5e0d6] hover:bg-[#F4EFE6] active:scale-98 transition-all cursor-pointer inline-flex items-center gap-1.5"
             >
               <span>⚙️</span>
-              <span>{showSectionSettings ? 'إخفاء نصوص القسم' : 'تعديل نصوص القسم'}</span>
+              <span>{showSectionSettings ? tr.hideHeader : tr.toggleHeader}</span>
             </button>
 
             <button
@@ -303,7 +442,7 @@ export function AreasManager({ initialConfig }: AreasManagerProps) {
               <svg className="w-4 h-4 text-[#ffd22f]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
               </svg>
-              <span>إضافة مجال جديد</span>
+              <span>{tr.addNew}</span>
             </button>
 
             <button
@@ -322,12 +461,12 @@ export function AreasManager({ initialConfig }: AreasManagerProps) {
                     <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                     <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z" />
                   </svg>
-                  <span>جاري الحفظ...</span>
+                  <span>{tr.saving}</span>
                 </>
               ) : (
                 <>
                   <span>💾</span>
-                  <span>حفظ كافة التغييرات {hasUnsavedChanges ? '*' : ''}</span>
+                  <span>{tr.saveAll} {hasUnsavedChanges ? '*' : ''}</span>
                 </>
               )}
             </button>
@@ -337,23 +476,23 @@ export function AreasManager({ initialConfig }: AreasManagerProps) {
         {/* Status Indicators */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-3 border-t border-[#E5E0D6]">
           <div className="p-3 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6]">
-            <span className="text-3xs font-bold text-[#5C5A55] block">إجمالي المجالات</span>
+            <span className="text-3xs font-bold text-[#5C5A55] block">{tr.totalDisciplines}</span>
             <span className="text-xl font-black text-[#231f20]">{config.items.length}</span>
           </div>
           <div className="p-3 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6]">
-            <span className="text-3xs font-bold text-[#5C5A55] block">مفعلة بالرئيسية</span>
+            <span className="text-3xs font-bold text-[#5C5A55] block">{tr.activeHomepage}</span>
             <span className="text-xl font-black text-emerald-700">
               {config.items.filter((i) => i.enabled).length}
             </span>
           </div>
           <div className="p-3 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6]">
-            <span className="text-3xs font-bold text-[#5C5A55] block">محتوى النوافذ</span>
-            <span className="text-xs font-bold text-[#231f20] block mt-1">✓ نوافذ تفاعلية منبثقة</span>
+            <span className="text-3xs font-bold text-[#5C5A55] block">{tr.popupContent}</span>
+            <span className="text-xs font-bold text-[#231f20] block mt-1">{tr.popupActive}</span>
           </div>
           <div className="p-3 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6]">
-            <span className="text-3xs font-bold text-[#5C5A55] block">حالة التعديلات</span>
+            <span className="text-3xs font-bold text-[#5C5A55] block">{tr.changesState}</span>
             <span className={`text-xs font-bold block mt-1 ${hasUnsavedChanges ? 'text-[#bd3227]' : 'text-emerald-700'}`}>
-              {hasUnsavedChanges ? '⚠️ تعديلات غير محفوظة' : '✓ كافة التغييرات محفوظة'}
+              {hasUnsavedChanges ? tr.hasUnsaved : tr.allSaved}
             </span>
           </div>
         </div>
@@ -504,7 +643,7 @@ export function AreasManager({ initialConfig }: AreasManagerProps) {
               <div className="flex-1 space-y-2">
                 <div className="flex flex-wrap items-center gap-2">
                   <span className={`px-2.5 py-0.5 rounded-full text-4xs font-black border bg-white ${area.accent || 'text-[#231f20]'}`}>
-                    {area.tagAr}
+                    {locale === 'fr' ? (area.tagFr || area.tagAr) : locale === 'en' ? (area.tagEn || area.tagAr) : area.tagAr}
                   </span>
 
                   <button
@@ -516,7 +655,7 @@ export function AreasManager({ initialConfig }: AreasManagerProps) {
                         : 'bg-red-50 text-red-700 border-red-200 hover:bg-red-100'
                     }`}
                   >
-                    {area.enabled ? '✓ مفعّل ومعروض' : '✕ معطّل ومخفي'}
+                    {area.enabled ? tr.enabled : tr.disabled}
                   </button>
 
                   <button
@@ -527,9 +666,9 @@ export function AreasManager({ initialConfig }: AreasManagerProps) {
                         ? 'bg-amber-50 text-amber-900 border-amber-200 hover:bg-amber-100'
                         : 'bg-gray-100 text-gray-500 border-gray-200 hover:bg-gray-200'
                     }`}
-                    title="الضغط لإظهار أو إخفاء قسم البرامج والورشات الميدانية في النافذة المنبثقة لهذا المجال"
+                    title="Toggle workshops visibility in modal"
                   >
-                    {area.showInitiatives !== false ? '✨ الورشات: معروضة بالنافذة' : '✨ الورشات: مخفية من النافذة'}
+                    {area.showInitiatives !== false ? tr.workshopsShown : tr.workshopsHidden}
                   </button>
 
                   <span className="text-4xs text-[#5C5A55] font-mono">
@@ -538,27 +677,27 @@ export function AreasManager({ initialConfig }: AreasManagerProps) {
                 </div>
 
                 <h3 className="text-base font-black text-[#231f20]">
-                  {area.titleAr}
+                  {locale === 'fr' ? (area.titleFr || area.titleAr) : locale === 'en' ? (area.titleEn || area.titleAr) : area.titleAr}
                 </h3>
 
                 <p className="text-xs text-[#5C5A55] leading-relaxed">
-                  {area.descAr}
+                  {locale === 'fr' ? (area.descFr || area.descAr) : locale === 'en' ? (area.descEn || area.descAr) : area.descAr}
                 </p>
 
                 {/* Modal details summary badges */}
                 <div className="pt-2 flex flex-wrap items-center gap-3 text-3xs text-[#5C5A55]">
                   <span className="px-2 py-0.5 rounded-md bg-[#FAF8F5] border border-[#e5e0d6] text-[#231f20] font-bold">
-                    🎯 {area.objectivesAr?.length || 0} أهداف استراتيجية
+                    🎯 {area.objectivesAr?.length || 0} {tr.stratObjectives}
                   </span>
                   <span className={`px-2 py-0.5 rounded-md border font-bold ${
                     area.showInitiatives !== false
                       ? 'bg-amber-50/70 border-amber-200 text-[#bd3227]'
                       : 'bg-gray-100 border-gray-200 text-gray-400 line-through'
                   }`}>
-                    ✨ {area.initiativesAr?.length || 0} ورشات وبرامج {area.showInitiatives === false ? '(مخفية)' : ''}
+                    ✨ {area.initiativesAr?.length || 0} {tr.workshopsAndProgs} {area.showInitiatives === false ? tr.hiddenLabel : ''}
                   </span>
                   <span>•</span>
-                  <span>رابط الزر: <code className="font-mono text-[#231f20]">{area.actionUrl}</code></span>
+                  <span>{tr.btnLink} <code className="font-mono text-[#231f20]">{area.actionUrl}</code></span>
                 </div>
               </div>
 
@@ -570,7 +709,7 @@ export function AreasManager({ initialConfig }: AreasManagerProps) {
                   className="px-4 py-2 rounded-xl text-xs font-bold bg-[#FAF8F5] border border-[#e5e0d6] hover:bg-[#231f20] hover:text-white transition-all text-[#231f20] cursor-pointer inline-flex items-center gap-1.5 shadow-2xs"
                 >
                   <span>✏️</span>
-                  <span>تعديل المجال والنافذة</span>
+                  <span>{tr.editDomain}</span>
                 </button>
 
                 <button
@@ -579,7 +718,7 @@ export function AreasManager({ initialConfig }: AreasManagerProps) {
                   className="px-3 py-2 rounded-xl text-xs font-bold bg-red-50 border border-red-200 text-red-600 hover:bg-red-100 transition-all cursor-pointer inline-flex items-center gap-1"
                 >
                   <span>🗑️</span>
-                  <span>حذف</span>
+                  <span>{tr.delete}</span>
                 </button>
               </div>
             </div>
@@ -598,9 +737,11 @@ export function AreasManager({ initialConfig }: AreasManagerProps) {
                 <span className="text-2xl">{modalForm.icon || '🎯'}</span>
                 <div>
                   <h3 className="text-base font-black text-[#231f20]">
-                    {editingArea ? `تعديل مجال: ${modalForm.titleAr || editingArea.titleAr}` : 'إضافة مجال تدخل جديد'}
+                    {editingArea ? `${tr.modalEditTitle}: ${modalForm.titleAr || editingArea.titleAr}` : tr.modalAddTitle}
                   </h3>
-                  <span className="text-3xs text-[#5C5A55]">تخصيص بيانات البطاقة ومحتوى النافذة المنبثقة التفصيلية</span>
+                  <span className="text-3xs text-[#5C5A55]">
+                    {locale === 'ar' ? 'تخصيص بيانات البطاقة ومحتوى النافذة المنبثقة التفصيلية' : locale === 'fr' ? 'Configuration de la carte et du contenu de la fenêtre modale' : 'Configure card display and interactive modal dialog content'}
+                  </span>
                 </div>
               </div>
               <button
@@ -623,7 +764,7 @@ export function AreasManager({ initialConfig }: AreasManagerProps) {
                     : 'bg-[#FAF8F5] text-[#5C5A55] hover:bg-[#F4EFE6]'
                 }`}
               >
-                1. بطاقة العرض بالرئيسية (Card Basics)
+                {tr.tabCard}
               </button>
               <button
                 type="button"
@@ -634,7 +775,7 @@ export function AreasManager({ initialConfig }: AreasManagerProps) {
                     : 'bg-[#FAF8F5] text-[#5C5A55] hover:bg-[#F4EFE6]'
                 }`}
               >
-                2. محتوى النافذة المنبثقة (Popup Modal Content)
+                {tr.tabModal}
               </button>
             </div>
 
@@ -1053,13 +1194,13 @@ export function AreasManager({ initialConfig }: AreasManagerProps) {
                   onClick={() => setIsModalOpen(false)}
                   className="px-4 py-2 rounded-xl text-xs font-bold text-[#5C5A55] bg-[#FAF8F5] hover:bg-[#F4EFE6] cursor-pointer"
                 >
-                  إلغاء
+                  {tr.cancel}
                 </button>
                 <button
                   type="submit"
                   className="px-5 py-2 rounded-xl text-xs font-bold text-white bg-[#231f20] hover:bg-[#d2a82b] shadow-xs cursor-pointer"
                 >
-                  {editingArea ? 'تحديث بيانات المجال' : 'إضافة إلى القائمة'}
+                  {tr.applyChanges}
                 </button>
               </div>
             </form>

@@ -4,16 +4,61 @@ import { useState } from 'react'
 import Link from 'next/link'
 import type { ContactConfig, ContactFormTopicConfig } from '@/lib/settings'
 import { saveContactConfiguration } from '@/lib/actions/admin'
+import { useAdminLocale } from './AdminLocaleContext'
 
 interface ContactManagerProps {
   initialConfig: ContactConfig
   defaultConfig?: ContactConfig
 }
 
+const CONTACT_MGR_STRINGS = {
+  ar: {
+    tabChannels: 'قنوات الاتصال والعناوين',
+    tabHero: 'واجهة ورأس الصفحة (Hero)',
+    tabTopics: 'مواضيع الاستمارة',
+    tabSocial: 'منصات التواصل الاجتماعي',
+    channelsTitle: 'قنوات الاتصال المباشرة ومقر الجمعية',
+    channelsSub: 'إدارة عناوين البريد الرسمي، أرقام الهاتف والواتساب، والعنوان الجغرافي للمقر بمراكش وجهات المملكة.',
+    previewContact: 'معاينة صفحة اتصل بنا ↗',
+    saveBtn: 'حفظ كافة بيانات التواصل',
+    savingBtn: 'جارٍ الحفظ...',
+    saveSuccess: 'تم حفظ كافة بيانات وصفحة اتصل بنا بنجاح! تم تحديث الموقع مباشرة.',
+    saveError: 'تعذر حفظ الإعدادات',
+  },
+  fr: {
+    tabChannels: 'Coordonnées & Siège',
+    tabHero: 'En-tête & Vitrine (Hero)',
+    tabTopics: 'Sujets du Formulaire',
+    tabSocial: 'Réseaux Sociaux',
+    channelsTitle: 'Canaux de Contact Directs & Siège Officiel',
+    channelsSub: 'Gestion des emails officiels, numéros de téléphone et adresse du siège à Marrakech.',
+    previewContact: 'Voir la page Contact ↗',
+    saveBtn: 'Enregistrer les coordonnées',
+    savingBtn: 'Enregistrement...',
+    saveSuccess: 'Coordonnées et paramètres de contact enregistrés avec succès !',
+    saveError: 'Impossible d\'enregistrer les coordonnées',
+  },
+  en: {
+    tabChannels: 'Channels & Headquarters',
+    tabHero: 'Hero & Showcase (Hero)',
+    tabTopics: 'Inquiry Topics',
+    tabSocial: 'Social Media Channels',
+    channelsTitle: 'Direct Outreach Channels & Official Headquarters',
+    channelsSub: 'Official emails, phone numbers, WhatsApp, and geographical headquarters in Marrakech.',
+    previewContact: 'View Contact Page ↗',
+    saveBtn: 'Save All Contact Info',
+    savingBtn: 'Saving...',
+    saveSuccess: 'Contact channels and settings saved successfully!',
+    saveError: 'Failed to save contact settings',
+  },
+}
+
 export function ContactManager({ initialConfig }: ContactManagerProps) {
+  const { locale, dir } = useAdminLocale()
+  const tr = CONTACT_MGR_STRINGS[locale] || CONTACT_MGR_STRINGS.ar
   const [config, setConfig] = useState<ContactConfig>(initialConfig)
   const [activeTab, setActiveTab] = useState<'channels' | 'hero' | 'topics' | 'social'>('channels')
-  const [activeLangTab, setActiveLangTab] = useState<'ar' | 'fr' | 'en'>('ar')
+  const [activeLangTab, setActiveLangTab] = useState<'ar' | 'fr' | 'en'>(locale)
   const [saving, setSaving] = useState(false)
   const [feedback, setFeedback] = useState<{ type: 'success' | 'error'; message: string } | null>(null)
 
@@ -90,7 +135,7 @@ export function ContactManager({ initialConfig }: ContactManagerProps) {
   }
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-8" dir={dir}>
       {/* Alert Banner */}
       {feedback && (
         <div
@@ -126,7 +171,7 @@ export function ContactManager({ initialConfig }: ContactManagerProps) {
           }`}
         >
           <span>📞</span>
-          <span>قنوات الاتصال والعناوين</span>
+          <span>{tr.tabChannels}</span>
         </button>
 
         <button
@@ -139,7 +184,7 @@ export function ContactManager({ initialConfig }: ContactManagerProps) {
           }`}
         >
           <span>🖼️</span>
-          <span>واجهة ورأس الصفحة (Hero)</span>
+          <span>{tr.tabHero}</span>
         </button>
 
         <button
@@ -152,7 +197,7 @@ export function ContactManager({ initialConfig }: ContactManagerProps) {
           }`}
         >
           <span>📋</span>
-          <span>مواضيع الاستمارة ({config.formTopics.length})</span>
+          <span>{tr.tabTopics} ({config.formTopics.length})</span>
         </button>
 
         <button
@@ -165,7 +210,7 @@ export function ContactManager({ initialConfig }: ContactManagerProps) {
           }`}
         >
           <span>🌐</span>
-          <span>منصات التواصل الاجتماعي</span>
+          <span>{tr.tabSocial}</span>
         </button>
       </div>
 
@@ -177,10 +222,10 @@ export function ContactManager({ initialConfig }: ContactManagerProps) {
           <div className="border-b border-[#E5E0D6] pb-4">
             <h2 className="text-xl font-black text-[#231f20] tracking-tight flex items-center gap-2">
               <span>📞</span>
-              <span>قنوات الاتصال المباشرة ومقر الجمعية</span>
+              <span>{tr.channelsTitle}</span>
             </h2>
             <p className="text-xs text-[#5C5A55] mt-1">
-              إدارة عناوين البريد الرسمي، أرقام الهاتف والواتساب، والعنوان الجغرافي للمقر بمراكش وجهات المملكة.
+              {tr.channelsSub}
             </p>
           </div>
 
@@ -726,13 +771,12 @@ export function ContactManager({ initialConfig }: ContactManagerProps) {
       <div className="sticky bottom-4 z-20 p-4 rounded-2xl bg-white/95 backdrop-blur-md border border-[#e5e0d6] shadow-xl flex items-center justify-between gap-4">
         <div className="flex items-center gap-3">
           <Link
-            href="/ar/contact"
+            href={`/${locale}/contact`}
             target="_blank"
             className="px-3 py-1.5 rounded-xl bg-[#FAF8F5] hover:bg-[#F4EFE6] text-xs font-bold text-[#231f20] border border-[#e5e0d6] transition-colors"
           >
-            معاينة صفحة اتصل بنا ↗
+            {tr.previewContact}
           </Link>
-
         </div>
 
         <button
@@ -742,7 +786,7 @@ export function ContactManager({ initialConfig }: ContactManagerProps) {
           className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-[#231f20] hover:bg-[#231f20] text-white text-xs sm:text-sm font-black transition-all shadow-md hover:shadow-lg disabled:opacity-50 cursor-pointer"
         >
           <span>{saving ? '⏳' : '💾'}</span>
-          <span>{saving ? 'جارٍ الحفظ...' : 'حفظ كافة بيانات التواصل'}</span>
+          <span>{saving ? tr.savingBtn : tr.saveBtn}</span>
         </button>
       </div>
     </div>

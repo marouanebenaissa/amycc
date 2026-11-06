@@ -1,6 +1,5 @@
 import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
-import Link from 'next/link'
 import { updateApplicationStatus, deleteApplicationRecord } from '@/lib/actions/admin'
 import { getContactSettings, defaultContactConfig } from '@/lib/settings'
 import { ContactAdminTabs } from '@/components/admin/ContactAdminTabs'
@@ -44,58 +43,12 @@ export default async function AdminContactsPage() {
   }
 
   return (
-    <div className="space-y-6">
-      {/* Page Header and Breadcrumb */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2 border-b border-[#e5e0d6]">
-        <div>
-          <div className="flex items-center gap-2 text-3xs font-bold text-[#5C5A55] mb-1">
-            <Link href="/admin" className="hover:text-[#231f20] transition-colors">لوحة التحكم</Link>
-            <span>/</span>
-            <span className="text-[#231f20]">بوابة التواصل وصفحة اتصل بنا (Contact CMS & Inbox)</span>
-          </div>
-          <h1 className="text-2xl font-black text-[#231f20] tracking-tight">
-            إدارة بيانات التواصل والرسائل الواردة — Contact Center
-          </h1>
-          <p className="text-xs text-[#5C5A55] mt-1">
-            تحكم كامل في أرقام الهاتف، العناوين، قنوات الاتصال، واستقبال رسائل واستفسارات المواطنين والشركاء.
-          </p>
-        </div>
-
-        {/* Public Preview Links */}
-        <div className="flex items-center gap-2">
-          <span className="text-3xs text-[#5C5A55] font-bold">معاينة صفحة اتصل بنا:</span>
-          <Link
-            href="/ar/contact"
-            target="_blank"
-            className="px-2.5 py-1 rounded-lg bg-white border border-[#e5e0d6] hover:bg-[#231f20] hover:text-white text-3xs font-bold text-[#231f20] transition-all shadow-2xs"
-          >
-            عربي ↗
-          </Link>
-          <Link
-            href="/fr/contact"
-            target="_blank"
-            className="px-2.5 py-1 rounded-lg bg-white border border-[#e5e0d6] hover:bg-[#231f20] hover:text-white text-3xs font-bold text-[#231f20] transition-all shadow-2xs"
-          >
-            FR ↗
-          </Link>
-          <Link
-            href="/en/contact"
-            target="_blank"
-            className="px-2.5 py-1 rounded-lg bg-white border border-[#e5e0d6] hover:bg-[#231f20] hover:text-white text-3xs font-bold text-[#231f20] transition-all shadow-2xs"
-          >
-            EN ↗
-          </Link>
-        </div>
-      </div>
-
-      {/* Main Interactive Tabs */}
-      <ContactAdminTabs
-        initialConfig={contactSettings}
-        defaultConfig={defaultContactConfig}
-        messages={messages}
-        onUpdateStatus={handleStatus}
-        onDeleteMessage={handleDelete}
-      />
-    </div>
+    <ContactAdminTabs
+      initialConfig={contactSettings}
+      defaultConfig={defaultContactConfig}
+      messages={messages}
+      onUpdateStatus={handleStatus}
+      onDeleteMessage={handleDelete}
+    />
   )
 }

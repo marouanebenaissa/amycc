@@ -5,16 +5,133 @@ import Image from 'next/image'
 import Link from 'next/link'
 import type { ProgramsPageConfig, ProgramStatItem } from '@/lib/settings'
 import { saveProgramsPageConfiguration } from '@/lib/actions/admin'
+import { useAdminLocale } from './AdminLocaleContext'
 
 interface ProgramsPageManagerProps {
   initialConfig: ProgramsPageConfig
   defaultConfig?: ProgramsPageConfig
 }
 
+const PROGRAM_HERO_STRINGS = {
+  ar: {
+    tabHero: 'واجهة ورأس صفحة البرامج (Hero Banner)',
+    tabStats: 'أرقام ومؤشرات الأثر (Impact Stats)',
+    tabCta: 'قسم الدعوة للمبادرة (CTA Banner)',
+    heroSectionTitle: 'رأس وواجهة صفحة البرامج (Hero Section)',
+    heroSectionSub: 'تخصيص العناوين والوسوم التقديمية والصورة البارزة المعروضة في أعلى صفحة البرامج.',
+    previewPublished: 'معاينة صفحة البرامج ↗',
+    coverImageLabel: 'صورة خلفية أو بصرية لقسم رأس الصفحة (Hero Visual Image)',
+    noImageHint: 'لا توجد صورة (نمط مغربي افتراضي)',
+    uploadImageBtn: '📁 رفع صورة للواجهة',
+    uploadingImageBtn: '⏳ جارٍ الرفع...',
+    removeImageBtn: 'حذف الصورة',
+    enableCoverImage: 'تفعيل صورة الغلاف على واجهة البرامج المنشورة',
+    enableCoverImageHint: 'إذا تم التعطيل، ستظهر واجهة البرامج بنمط الزخرفة المغربية الأنيق.',
+    livePreviewTitle: 'معاينة حية لشكل رأس الصفحة (Live Preview):',
+    eyebrowTagLabel: 'الوسم العلوي (Eyebrow Tag)',
+    badgeLabel: 'شارة الاعتماد (Statutory Badge)',
+    headlineLabel: 'العنوان الرئيسي (Headline Title)',
+    descLabel: 'الفقرة التقديمية (Description)',
+    statsSectionTitle: 'أرقام ومؤشرات أثر البرامج (Impact Stats Ribbon)',
+    statsSectionSub: 'تظهر هذه الأرقام في شريط بارز أسفل رأس الصفحة لإبراز حجم المشاركة والانتشار الوطني للبرامج.',
+    statIndex: (i: number) => `مؤشر #${i}`,
+    numericValueLabel: 'القيمة الرقمية (مثال: +1,500 أو 100%)',
+    descInLang: (lang: string) => `الوصف بـ ${lang}`,
+    ctaSectionTitle: 'شريط الدعوة لاقتراح المشاريع والانخراط (CTA Banner)',
+    ctaSectionSub: 'يظهر في نهاية صفحة البرامج لدعوة الزوار، الفنانين، والشباب للتواصل أو تقديم مقترحات برامج جديدة.',
+    ctaTitleLabel: 'عنوان النداء',
+    ctaDescLabel: 'نص التوضيح',
+    primaryCtaBlock: 'الزر الأساسي (Primary CTA)',
+    secondaryCtaBlock: 'الزر الثانوي (Secondary CTA)',
+    btnTextLabel: 'نص الزر',
+    btnUrlLabel: 'رابط الوجهة (URL)',
+    saveBtn: 'حفظ إعدادات صفحة البرامج',
+    savingBtn: 'جارٍ الحفظ...',
+    saveSuccess: 'تم حفظ كافة إعدادات صفحة البرامج بنجاح وتحديث الموقع مباشرة!',
+    saveError: 'تعذر حفظ الإعدادات',
+  },
+  fr: {
+    tabHero: 'Bannière d\'en-tête (Hero Banner)',
+    tabStats: 'Indicateurs d\'Impact (Impact Stats)',
+    tabCta: 'Appel à Projets & Action (CTA Banner)',
+    heroSectionTitle: 'En-tête et Vitrine des Programmes (Hero Section)',
+    heroSectionSub: 'Personnalisation des titres, badges d\'autorité et image principale de la page Programmes.',
+    previewPublished: 'Voir la page Programmes ↗',
+    coverImageLabel: 'Image de couverture de l\'en-tête (Hero Visual Image)',
+    noImageHint: 'Aucune image (fond sobre marocain par défaut)',
+    uploadImageBtn: '📁 Téléverser une image',
+    uploadingImageBtn: '⏳ Téléversement...',
+    removeImageBtn: 'Supprimer l\'image',
+    enableCoverImage: 'Activer l\'image de couverture sur le site public',
+    enableCoverImageHint: 'Si désactivée, un motif marocain élégant sera affiché en arrière-plan.',
+    livePreviewTitle: 'Aperçu en direct de l\'en-tête (Live Preview) :',
+    eyebrowTagLabel: 'Tag Supérieur (Eyebrow Tag)',
+    badgeLabel: 'Badge Institutionnel (Statutory Badge)',
+    headlineLabel: 'Grand Titre (Headline Title)',
+    descLabel: 'Description Introductive (Description)',
+    statsSectionTitle: 'Indicateurs d\'Impact des Programmes (Impact Stats Ribbon)',
+    statsSectionSub: 'Ces chiffres clés apparaissent en ruban sous l\'en-tête pour illustrer l\'envergure nationale.',
+    statIndex: (i: number) => `Indicateur #${i}`,
+    numericValueLabel: 'Valeur Chiffrée (ex : +1,500 ou 100%)',
+    descInLang: (lang: string) => `Description en ${lang}`,
+    ctaSectionTitle: 'Bannière d\'Appel à l\'Initiative (CTA Banner)',
+    ctaSectionSub: 'Affichée en bas de page pour inciter créateurs, artistes et jeunes à proposer des initiatives.',
+    ctaTitleLabel: 'Titre de l\'Appel',
+    ctaDescLabel: 'Texte Explicatif',
+    primaryCtaBlock: 'Bouton d\'Action Principal (Primary CTA)',
+    secondaryCtaBlock: 'Bouton d\'Action Secondaire (Secondary CTA)',
+    btnTextLabel: 'Texte du Bouton',
+    btnUrlLabel: 'Lien de Destination (URL)',
+    saveBtn: 'Enregistrer les paramètres de la page',
+    savingBtn: 'Enregistrement...',
+    saveSuccess: 'Tous les paramètres de la page Programmes ont été enregistrés avec succès !',
+    saveError: 'Impossible d\'enregistrer les paramètres',
+  },
+  en: {
+    tabHero: 'Hero Header Banner (Hero Banner)',
+    tabStats: 'Key Impact Metrics (Impact Stats)',
+    tabCta: 'Call to Action Banner (CTA Banner)',
+    heroSectionTitle: 'Programs Page Showcase & Hero (Hero Section)',
+    heroSectionSub: 'Customize headline titles, statutory badges, and primary banner imagery on the Programs page.',
+    previewPublished: 'View Live Programs Page ↗',
+    coverImageLabel: 'Programs Page Hero Visual Image',
+    noImageHint: 'No image (default Moroccan cultural texture)',
+    uploadImageBtn: '📁 Upload Hero Image',
+    uploadingImageBtn: '⏳ Uploading...',
+    removeImageBtn: 'Remove Image',
+    enableCoverImage: 'Enable cover image on public Programs showcase',
+    enableCoverImageHint: 'When disabled, an elegant Moroccan cultural pattern will serve as background.',
+    livePreviewTitle: 'Live Interactive Showcase Preview (Live Preview):',
+    eyebrowTagLabel: 'Eyebrow Tag',
+    badgeLabel: 'Statutory Authority Badge',
+    headlineLabel: 'Main Headline Title',
+    descLabel: 'Introductory Narrative (Description)',
+    statsSectionTitle: 'Programs Impact Metrics Ribbon',
+    statsSectionSub: 'Displayed in a prominent ribbon below the header to highlight national cultural footprint.',
+    statIndex: (i: number) => `Metric #${i}`,
+    numericValueLabel: 'Numeric Metric Value (e.g. +1,500 or 100%)',
+    descInLang: (lang: string) => `Description in ${lang}`,
+    ctaSectionTitle: 'Project Proposal & Call to Action (CTA Banner)',
+    ctaSectionSub: 'Displayed at page bottom to invite artists, youth, and partners to submit initiatives.',
+    ctaTitleLabel: 'Call to Action Headline',
+    ctaDescLabel: 'Explanatory Narrative',
+    primaryCtaBlock: 'Primary Action Button (Primary CTA)',
+    secondaryCtaBlock: 'Secondary Action Button (Secondary CTA)',
+    btnTextLabel: 'Button Label',
+    btnUrlLabel: 'Target Destination URL',
+    saveBtn: 'Save Programs Page Configuration',
+    savingBtn: 'Saving...',
+    saveSuccess: 'All Programs page settings saved successfully and live on public site!',
+    saveError: 'Failed to save configuration',
+  },
+}
+
 export function ProgramsPageManager({ initialConfig }: ProgramsPageManagerProps) {
+  const { locale, dir } = useAdminLocale()
+  const tr = PROGRAM_HERO_STRINGS[locale] || PROGRAM_HERO_STRINGS.ar
   const [config, setConfig] = useState<ProgramsPageConfig>(initialConfig)
   const [activeTab, setActiveTab] = useState<'hero' | 'stats' | 'cta'>('hero')
-  const [activeLangTab, setActiveLangTab] = useState<'ar' | 'fr' | 'en'>('ar')
+  const [activeLangTab, setActiveLangTab] = useState<'ar' | 'fr' | 'en'>(locale)
   const [saving, setSaving] = useState(false)
   const [uploadingImage, setUploadingImage] = useState(false)
   const [feedback, setFeedback] = useState<{ type: 'success' | 'error'; message: string } | null>(null)
@@ -99,7 +216,7 @@ export function ProgramsPageManager({ initialConfig }: ProgramsPageManagerProps)
   }
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-8" dir={dir}>
       {/* Alert Banner */}
       {feedback && (
         <div
@@ -135,7 +252,7 @@ export function ProgramsPageManager({ initialConfig }: ProgramsPageManagerProps)
           }`}
         >
           <span>🖼️</span>
-          <span>واجهة ورأس صفحة البرامج (Hero Banner)</span>
+          <span>{tr.tabHero}</span>
         </button>
 
         <button
@@ -148,7 +265,7 @@ export function ProgramsPageManager({ initialConfig }: ProgramsPageManagerProps)
           }`}
         >
           <span>📊</span>
-          <span>أرقام ومؤشرات الأثر (Impact Stats)</span>
+          <span>{tr.tabStats}</span>
         </button>
 
         <button
@@ -161,7 +278,7 @@ export function ProgramsPageManager({ initialConfig }: ProgramsPageManagerProps)
           }`}
         >
           <span>📢</span>
-          <span>قسم الدعوة للمبادرة (CTA Banner)</span>
+          <span>{tr.tabCta}</span>
         </button>
       </div>
 
@@ -174,10 +291,10 @@ export function ProgramsPageManager({ initialConfig }: ProgramsPageManagerProps)
             <div>
               <h2 className="text-xl font-black text-[#231f20] tracking-tight flex items-center gap-2">
                 <span>🖼️</span>
-                <span>رأس وواجهة صفحة البرامج (Hero Section)</span>
+                <span>{tr.heroSectionTitle}</span>
               </h2>
               <p className="text-xs text-[#5C5A55] mt-1">
-                تخصيص العناوين والوسوم التقديمية والصورة البارزة المعروضة في أعلى صفحة البرامج.
+                {tr.heroSectionSub}
               </p>
             </div>
 
@@ -203,15 +320,14 @@ export function ProgramsPageManager({ initialConfig }: ProgramsPageManagerProps)
           <div className="space-y-4 p-5 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6]">
             <div className="flex items-center justify-between">
               <label className="block text-xs font-bold text-[#231f20]">
-                صورة خلفية أو بصرية لقسم رأس الصفحة (Hero Visual Image)
+                {tr.coverImageLabel}
               </label>
               <Link
-                href="/ar/programs"
+                href={`/${locale}/programs`}
                 target="_blank"
                 className="text-xs font-bold text-[#231f20] hover:underline flex items-center gap-1"
               >
-                <span>معاينة صفحة البرامج</span>
-                <span>↗</span>
+                <span>{tr.previewPublished}</span>
               </Link>
             </div>
 
@@ -229,7 +345,7 @@ export function ProgramsPageManager({ initialConfig }: ProgramsPageManagerProps)
               ) : (
                 <div className="w-48 h-28 rounded-xl border border-dashed border-[#cfc7b9] flex flex-col items-center justify-center text-[#5C5A55] shrink-0 bg-white">
                   <span className="text-2xl">🖼️</span>
-                  <span className="text-3xs mt-1">لا توجد صورة (نمط مغربي افتراضي)</span>
+                  <span className="text-3xs mt-1">{tr.noImageHint}</span>
                 </div>
               )}
 
@@ -248,7 +364,7 @@ export function ProgramsPageManager({ initialConfig }: ProgramsPageManagerProps)
                     disabled={uploadingImage}
                     className="px-4 py-2 rounded-xl bg-[#231f20] text-white text-xs font-bold hover:bg-[#d2a82b] transition-all shadow-xs disabled:opacity-50 cursor-pointer"
                   >
-                    {uploadingImage ? '⏳ جارٍ الرفع...' : '📁 رفع صورة للواجهة'}
+                    {uploadingImage ? tr.uploadingImageBtn : tr.uploadImageBtn}
                   </button>
 
                   {config.hero.imageUrl && (
@@ -257,7 +373,7 @@ export function ProgramsPageManager({ initialConfig }: ProgramsPageManagerProps)
                       onClick={() => updateHero('imageUrl', '')}
                       className="px-3 py-2 rounded-xl text-xs font-bold text-rose-600 hover:bg-rose-50 transition-colors"
                     >
-                      حذف الصورة
+                      {tr.removeImageBtn}
                     </button>
                   )}
                 </div>
@@ -279,8 +395,8 @@ export function ProgramsPageManager({ initialConfig }: ProgramsPageManagerProps)
                     className="w-4 h-4 rounded text-[#231f20] focus:ring-[#231f20]"
                   />
                   <div className="text-xs">
-                    <span className="font-bold text-[#231f20] block">تفعيل صورة الغلاف على واجهة البرامج المنشورة</span>
-                    <span className="text-[#5C5A55] block">إذا تم التعطيل، ستظهر واجهة البرامج بنمط الزخرفة المغربية الأنيق.</span>
+                    <span className="font-bold text-[#231f20] block">{tr.enableCoverImage}</span>
+                    <span className="text-[#5C5A55] block">{tr.enableCoverImageHint}</span>
                   </div>
                 </label>
               </div>
@@ -288,7 +404,7 @@ export function ProgramsPageManager({ initialConfig }: ProgramsPageManagerProps)
 
             {/* Live Interactive Simulation Preview */}
             <div className="pt-3 border-t border-[#e5e0d6] space-y-2">
-              <span className="text-2xs font-bold text-[#5C5A55] block">معاينة حية لشكل رأس الصفحة (Live Preview):</span>
+              <span className="text-2xs font-bold text-[#5C5A55] block">{tr.livePreviewTitle}</span>
               <div
                 className={`relative rounded-2xl overflow-hidden p-6 text-center border transition-all ${
                   config.hero.showImage !== false && config.hero.imageUrl
@@ -318,7 +434,11 @@ export function ProgramsPageManager({ initialConfig }: ProgramsPageManagerProps)
                           : 'bg-[#bd3227]/10 text-[#bd3227]'
                       }`}
                     >
-                      {config.hero.tagAr || 'بوابة البرامج والمشاريع الثقافية'}
+                      {activeLangTab === 'ar'
+                        ? config.hero.tagAr || 'بوابة البرامج والمشاريع الثقافية'
+                        : activeLangTab === 'fr'
+                        ? config.hero.tagFr || 'Programmes & Projets Culturels'
+                        : config.hero.tagEn || 'Cultural Programs & Initiatives'}
                     </span>
                   </div>
                   <h3
@@ -326,14 +446,22 @@ export function ProgramsPageManager({ initialConfig }: ProgramsPageManagerProps)
                       config.hero.showImage !== false && config.hero.imageUrl ? 'text-white' : 'text-[#231f20]'
                     }`}
                   >
-                    {config.hero.titleAr || 'عنوان رأس صفحة البرامج'}
+                    {activeLangTab === 'ar'
+                      ? config.hero.titleAr || 'عنوان رأس صفحة البرامج'
+                      : activeLangTab === 'fr'
+                      ? config.hero.titleFr || 'Titre de la page des programmes'
+                      : config.hero.titleEn || 'Programs Page Headline'}
                   </h3>
                   <p
                     className={`text-xs line-clamp-2 ${
                       config.hero.showImage !== false && config.hero.imageUrl ? 'text-[#E2DED6]/95' : 'text-[#5C5A55]'
                     }`}
                   >
-                    {config.hero.descriptionAr || 'وصف رأس صفحة البرامج...'}
+                    {activeLangTab === 'ar'
+                      ? config.hero.descriptionAr || 'وصف رأس صفحة البرامج...'
+                      : activeLangTab === 'fr'
+                      ? config.hero.descriptionFr || 'Description introductive...'
+                      : config.hero.descriptionEn || 'Programs overview narrative...'}
                   </p>
                 </div>
               </div>
@@ -347,7 +475,7 @@ export function ProgramsPageManager({ initialConfig }: ProgramsPageManagerProps)
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-2xs font-bold text-[#5C5A55] uppercase tracking-wider mb-1">
-                      الوسم العلوي (Eyebrow Tag)
+                      {tr.eyebrowTagLabel} (AR)
                     </label>
                     <input
                       type="text"
@@ -359,7 +487,7 @@ export function ProgramsPageManager({ initialConfig }: ProgramsPageManagerProps)
                   </div>
                   <div>
                     <label className="block text-2xs font-bold text-[#5C5A55] uppercase tracking-wider mb-1">
-                      شارة الاعتماد (Statutory Badge)
+                      {tr.badgeLabel} (AR)
                     </label>
                     <input
                       type="text"
@@ -373,7 +501,7 @@ export function ProgramsPageManager({ initialConfig }: ProgramsPageManagerProps)
 
                 <div>
                   <label className="block text-2xs font-bold text-[#5C5A55] uppercase tracking-wider mb-1">
-                    العنوان الرئيسي (Headline Title)
+                    {tr.headlineLabel} (AR)
                   </label>
                   <textarea
                     rows={2}
@@ -386,7 +514,7 @@ export function ProgramsPageManager({ initialConfig }: ProgramsPageManagerProps)
 
                 <div>
                   <label className="block text-2xs font-bold text-[#5C5A55] uppercase tracking-wider mb-1">
-                    الفقرة التقديمية (Description)
+                    {tr.descLabel} (AR)
                   </label>
                   <textarea
                     rows={3}
@@ -404,7 +532,7 @@ export function ProgramsPageManager({ initialConfig }: ProgramsPageManagerProps)
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-2xs font-bold text-[#5C5A55] uppercase tracking-wider mb-1">
-                      Tag Supérieur (Français)
+                      {tr.eyebrowTagLabel} (FR)
                     </label>
                     <input
                       type="text"
@@ -416,7 +544,7 @@ export function ProgramsPageManager({ initialConfig }: ProgramsPageManagerProps)
                   </div>
                   <div>
                     <label className="block text-2xs font-bold text-[#5C5A55] uppercase tracking-wider mb-1">
-                      Badge (Français)
+                      {tr.badgeLabel} (FR)
                     </label>
                     <input
                       type="text"
@@ -430,7 +558,7 @@ export function ProgramsPageManager({ initialConfig }: ProgramsPageManagerProps)
 
                 <div>
                   <label className="block text-2xs font-bold text-[#5C5A55] uppercase tracking-wider mb-1">
-                    Titre Principal (Français)
+                    {tr.headlineLabel} (FR)
                   </label>
                   <textarea
                     rows={2}
@@ -443,7 +571,7 @@ export function ProgramsPageManager({ initialConfig }: ProgramsPageManagerProps)
 
                 <div>
                   <label className="block text-2xs font-bold text-[#5C5A55] uppercase tracking-wider mb-1">
-                    Description (Français)
+                    {tr.descLabel} (FR)
                   </label>
                   <textarea
                     rows={3}
@@ -461,7 +589,7 @@ export function ProgramsPageManager({ initialConfig }: ProgramsPageManagerProps)
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-2xs font-bold text-[#5C5A55] uppercase tracking-wider mb-1">
-                      Eyebrow Tag (English)
+                      {tr.eyebrowTagLabel} (EN)
                     </label>
                     <input
                       type="text"
@@ -473,7 +601,7 @@ export function ProgramsPageManager({ initialConfig }: ProgramsPageManagerProps)
                   </div>
                   <div>
                     <label className="block text-2xs font-bold text-[#5C5A55] uppercase tracking-wider mb-1">
-                      Badge (English)
+                      {tr.badgeLabel} (EN)
                     </label>
                     <input
                       type="text"
@@ -487,7 +615,7 @@ export function ProgramsPageManager({ initialConfig }: ProgramsPageManagerProps)
 
                 <div>
                   <label className="block text-2xs font-bold text-[#5C5A55] uppercase tracking-wider mb-1">
-                    Headline Title (English)
+                    {tr.headlineLabel} (EN)
                   </label>
                   <textarea
                     rows={2}
@@ -500,7 +628,7 @@ export function ProgramsPageManager({ initialConfig }: ProgramsPageManagerProps)
 
                 <div>
                   <label className="block text-2xs font-bold text-[#5C5A55] uppercase tracking-wider mb-1">
-                    Description (English)
+                    {tr.descLabel} (EN)
                   </label>
                   <textarea
                     rows={3}
@@ -524,10 +652,10 @@ export function ProgramsPageManager({ initialConfig }: ProgramsPageManagerProps)
           <div className="border-b border-[#E5E0D6] pb-4">
             <h2 className="text-xl font-black text-[#231f20] tracking-tight flex items-center gap-2">
               <span>📊</span>
-              <span>أرقام ومؤشرات أثر البرامج (Impact Stats Ribbon)</span>
+              <span>{tr.statsSectionTitle}</span>
             </h2>
             <p className="text-xs text-[#5C5A55] mt-1">
-              تظهر هذه الأرقام في شريط بارز أسفل رأس الصفحة لإبراز حجم المشاركة والانتشار الوطني للبرامج.
+              {tr.statsSectionSub}
             </p>
           </div>
 
@@ -539,20 +667,20 @@ export function ProgramsPageManager({ initialConfig }: ProgramsPageManagerProps)
               >
                 <div className="flex items-center justify-between">
                   <span className="text-xs font-bold text-[#bd3227]">
-                    مؤشر #{idx + 1}
+                    {tr.statIndex(idx + 1)}
                   </span>
                   <input
                     type="text"
                     value={stat.icon}
                     onChange={(e) => updateStat(stat.id, { icon: e.target.value })}
                     className="w-10 h-10 text-center text-lg rounded-xl bg-white border border-[#e5e0d6]"
-                    title="أيقونة أو إيموجي"
+                    title="Icon"
                   />
                 </div>
 
                 <div>
                   <label className="block text-3xs font-bold text-[#5C5A55] uppercase mb-1">
-                    القيمة الرقمية (الرقم أو النسبة، مثال: +1,500 أو 100%)
+                    {tr.numericValueLabel}
                   </label>
                   <input
                     type="text"
@@ -564,7 +692,7 @@ export function ProgramsPageManager({ initialConfig }: ProgramsPageManagerProps)
 
                 <div>
                   <label className="block text-3xs font-bold text-[#5C5A55] uppercase mb-1">
-                    الوصف بالعربية *
+                    {tr.descInLang('AR')} *
                   </label>
                   <input
                     type="text"
@@ -577,7 +705,7 @@ export function ProgramsPageManager({ initialConfig }: ProgramsPageManagerProps)
                 <div className="grid grid-cols-2 gap-2">
                   <div>
                     <label className="block text-3xs font-bold text-[#5C5A55] uppercase mb-1">
-                      الوصف بالفرنسية
+                      {tr.descInLang('FR')}
                     </label>
                     <input
                       type="text"
@@ -588,7 +716,7 @@ export function ProgramsPageManager({ initialConfig }: ProgramsPageManagerProps)
                   </div>
                   <div>
                     <label className="block text-3xs font-bold text-[#5C5A55] uppercase mb-1">
-                      الوصف بالإنجليزية
+                      {tr.descInLang('EN')}
                     </label>
                     <input
                       type="text"
@@ -612,17 +740,17 @@ export function ProgramsPageManager({ initialConfig }: ProgramsPageManagerProps)
           <div className="border-b border-[#E5E0D6] pb-4">
             <h2 className="text-xl font-black text-[#231f20] tracking-tight flex items-center gap-2">
               <span>📢</span>
-              <span>شريط الدعوة لاقتراح المشاريع والانخراط (CTA Banner)</span>
+              <span>{tr.ctaSectionTitle}</span>
             </h2>
             <p className="text-xs text-[#5C5A55] mt-1">
-              يظهر في نهاية صفحة البرامج لدعوة الزوار، الفنانين، والشباب للتواصل أو تقديم مقترحات برامج جديدة.
+              {tr.ctaSectionSub}
             </p>
           </div>
 
           <div className="space-y-4">
             <div>
               <label className="block text-2xs font-bold text-[#5C5A55] uppercase tracking-wider mb-1">
-                عنوان النداء بالعربية *
+                {tr.ctaTitleLabel} (AR) *
               </label>
               <input
                 type="text"
@@ -634,7 +762,7 @@ export function ProgramsPageManager({ initialConfig }: ProgramsPageManagerProps)
 
             <div>
               <label className="block text-2xs font-bold text-[#5C5A55] uppercase tracking-wider mb-1">
-                نص التوضيح بالعربية *
+                {tr.ctaDescLabel} (AR) *
               </label>
               <textarea
                 rows={3}
@@ -646,9 +774,9 @@ export function ProgramsPageManager({ initialConfig }: ProgramsPageManagerProps)
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
               <div className="p-4 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6] space-y-3">
-                <span className="text-xs font-bold text-[#231f20] block">الزر الأساسي (Primary CTA)</span>
+                <span className="text-xs font-bold text-[#231f20] block">{tr.primaryCtaBlock}</span>
                 <div>
-                  <label className="block text-3xs font-bold text-[#5C5A55] uppercase mb-1">نص الزر بالعربية</label>
+                  <label className="block text-3xs font-bold text-[#5C5A55] uppercase mb-1">{tr.btnTextLabel} (AR)</label>
                   <input
                     type="text"
                     value={config.cta.primaryBtnTextAr}
@@ -657,7 +785,7 @@ export function ProgramsPageManager({ initialConfig }: ProgramsPageManagerProps)
                   />
                 </div>
                 <div>
-                  <label className="block text-3xs font-bold text-[#5C5A55] uppercase mb-1">رابط الوجهة (URL)</label>
+                  <label className="block text-3xs font-bold text-[#5C5A55] uppercase mb-1">{tr.btnUrlLabel}</label>
                   <input
                     type="text"
                     value={config.cta.primaryBtnUrl}
@@ -668,9 +796,9 @@ export function ProgramsPageManager({ initialConfig }: ProgramsPageManagerProps)
               </div>
 
               <div className="p-4 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6] space-y-3">
-                <span className="text-xs font-bold text-[#bd3227] block">الزر الثانوي (Secondary CTA)</span>
+                <span className="text-xs font-bold text-[#bd3227] block">{tr.secondaryCtaBlock}</span>
                 <div>
-                  <label className="block text-3xs font-bold text-[#5C5A55] uppercase mb-1">نص الزر بالعربية</label>
+                  <label className="block text-3xs font-bold text-[#5C5A55] uppercase mb-1">{tr.btnTextLabel} (AR)</label>
                   <input
                     type="text"
                     value={config.cta.secondaryBtnTextAr}
@@ -679,7 +807,7 @@ export function ProgramsPageManager({ initialConfig }: ProgramsPageManagerProps)
                   />
                 </div>
                 <div>
-                  <label className="block text-3xs font-bold text-[#5C5A55] uppercase mb-1">رابط الوجهة (URL)</label>
+                  <label className="block text-3xs font-bold text-[#5C5A55] uppercase mb-1">{tr.btnUrlLabel}</label>
                   <input
                     type="text"
                     value={config.cta.secondaryBtnUrl}
@@ -697,13 +825,12 @@ export function ProgramsPageManager({ initialConfig }: ProgramsPageManagerProps)
       <div className="sticky bottom-4 z-20 p-4 rounded-2xl bg-white/95 backdrop-blur-md border border-[#e5e0d6] shadow-xl flex items-center justify-between gap-4">
         <div className="flex items-center gap-3">
           <Link
-            href="/ar/programs"
+            href={`/${locale}/programs`}
             target="_blank"
             className="px-3.5 py-2 rounded-xl bg-[#FAF8F5] hover:bg-[#F4EFE6] text-xs font-bold text-[#231f20] border border-[#e5e0d6] transition-colors"
           >
-            معاينة صفحة البرامج ↗
+            {tr.previewPublished}
           </Link>
-
         </div>
 
         <button
@@ -713,7 +840,7 @@ export function ProgramsPageManager({ initialConfig }: ProgramsPageManagerProps)
           className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-[#231f20] hover:bg-[#231f20] text-white text-xs sm:text-sm font-black transition-all shadow-md hover:shadow-lg disabled:opacity-50 cursor-pointer"
         >
           <span>{saving ? '⏳' : '💾'}</span>
-          <span>{saving ? 'جارٍ الحفظ...' : 'حفظ إعدادات صفحة البرامج'}</span>
+          <span>{saving ? tr.savingBtn : tr.saveBtn}</span>
         </button>
       </div>
     </div>

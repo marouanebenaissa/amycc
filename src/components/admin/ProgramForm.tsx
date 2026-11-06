@@ -5,6 +5,37 @@ import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import { FormField, Input, Textarea, Select, SectionDivider } from '@/components/admin/FormControls'
 import { createProgram, updateProgram } from '@/lib/actions/content'
+import { useAdminLocale } from './AdminLocaleContext'
+
+const PROGRAM_FORM_STRINGS = {
+  ar: {
+    cancel: 'إلغاء والعودة',
+    saving: 'جارٍ الحفظ...',
+    update: 'حفظ تعديلات البرنامج',
+    create: 'إنشاء البرنامج ونشره',
+    uploadBtn: '📁 رفع صورة من الجهاز',
+    uploading: '⏳ جارٍ رفع الصورة...',
+    deleteImg: 'حذف الصورة',
+  },
+  fr: {
+    cancel: 'Annuler et revenir',
+    saving: 'Enregistrement...',
+    update: 'Enregistrer les modifications',
+    create: 'Créer et publier le programme',
+    uploadBtn: '📁 Téléverser une image',
+    uploading: '⏳ Téléversement...',
+    deleteImg: 'Supprimer l\'image',
+  },
+  en: {
+    cancel: 'Cancel & Return',
+    saving: 'Saving...',
+    update: 'Save Program Changes',
+    create: 'Create & Publish Program',
+    uploadBtn: '📁 Upload Image',
+    uploading: '⏳ Uploading...',
+    deleteImg: 'Remove Image',
+  },
+}
 
 const CATEGORIES = [
   { value: 'arts', label: '🎨 الفنون التشكيلية والتراث الإبداعي (Arts & Creativity)' },
@@ -43,9 +74,11 @@ interface ProgramFormProps {
 
 export function ProgramForm({ program }: ProgramFormProps) {
   const router = useRouter()
+  const { locale, dir } = useAdminLocale()
+  const tr = PROGRAM_FORM_STRINGS[locale] || PROGRAM_FORM_STRINGS.ar
   const [isPending, startTransition] = useTransition()
   const [error, setError] = useState<string | null>(null)
-  const [activeLocale, setActiveLocale] = useState<'ar' | 'fr' | 'en'>('ar')
+  const [activeLocale, setActiveLocale] = useState<'ar' | 'fr' | 'en'>(locale)
   const [coverImageUrl, setCoverImageUrl] = useState<string>(program?.cover_image || '')
   const [uploadingImage, setUploadingImage] = useState(false)
   const fileInputRef = useRef<HTMLInputElement>(null)
@@ -205,7 +238,7 @@ export function ProgramForm({ program }: ProgramFormProps) {
                   disabled={uploadingImage}
                   className="px-4 py-2 rounded-xl bg-[#231f20] text-white text-xs font-bold hover:bg-[#d2a82b] transition-all shadow-xs disabled:opacity-50 cursor-pointer"
                 >
-                  {uploadingImage ? '⏳ جارٍ رفع الصورة...' : '📁 رفع صورة من الجهاز'}
+                  {uploadingImage ? tr.uploading : tr.uploadBtn}
                 </button>
 
                 {coverImageUrl && (
@@ -214,7 +247,7 @@ export function ProgramForm({ program }: ProgramFormProps) {
                     onClick={() => setCoverImageUrl('')}
                     className="px-3 py-2 rounded-xl text-xs font-bold text-rose-600 hover:bg-rose-50 transition-colors"
                   >
-                    حذف الصورة
+                    {tr.deleteImg}
                   </button>
                 )}
               </div>
@@ -425,22 +458,22 @@ export function ProgramForm({ program }: ProgramFormProps) {
       </div>
 
       {/* Action Footer */}
-      <div className="flex items-center justify-between gap-4 p-4 rounded-2xl bg-white border border-[#e5e0d6] shadow-subtle">
+      <div className="flex items-center justify-between gap-4 p-4 rounded-2xl bg-white border border-[#e5e0d6] shadow-subtle" dir={dir}>
         <button
           type="button"
           onClick={() => router.back()}
           className="px-5 py-2.5 text-xs font-bold text-[#5C5A55] border border-[#cfc7b9] rounded-xl hover:bg-[#FAF8F5] transition-colors cursor-pointer"
         >
-          إلغاء والعودة
+          {tr.cancel}
         </button>
 
         <button
           type="submit"
           disabled={isPending}
-          className="inline-flex items-center gap-2 px-8 py-3 text-xs sm:text-sm font-black text-white bg-[#231f20] hover:bg-[#231f20] active:scale-98 rounded-xl disabled:opacity-60 disabled:cursor-not-allowed transition-all shadow-md hover:shadow-lg cursor-pointer"
+          className="inline-flex items-center gap-2 px-8 py-3 text-xs sm:text-sm font-black text-white bg-[#231f20] hover:bg-[#d2a82b] active:scale-98 rounded-xl disabled:opacity-60 disabled:cursor-not-allowed transition-all shadow-md hover:shadow-lg cursor-pointer"
         >
           <span>{isPending ? '⏳' : '💾'}</span>
-          <span>{isPending ? 'جارٍ الحفظ...' : program ? 'حفظ تعديلات البرنامج' : 'إنشاء البرنامج ونشره'}</span>
+          <span>{isPending ? tr.saving : program ? tr.update : tr.create}</span>
         </button>
       </div>
     </form>

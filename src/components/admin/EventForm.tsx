@@ -4,6 +4,34 @@ import { useState, useTransition, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import { FormField, Input, Textarea, SectionDivider } from '@/components/admin/FormControls'
 import { createEvent, updateEvent } from '@/lib/actions/content'
+import { useAdminLocale } from './AdminLocaleContext'
+
+const EVENT_FORM_STRINGS = {
+  ar: {
+    cancel: 'إلغاء والعودة',
+    saving: 'جارٍ الحفظ...',
+    update: 'تحديث بيانات الفعالية',
+    create: 'جدولة ونشر الفعالية',
+    uploadBtn: 'رفع صورة الغلاف',
+    uploading: 'جارٍ الرفع...',
+  },
+  fr: {
+    cancel: 'Annuler et revenir',
+    saving: 'Enregistrement...',
+    update: 'Mettre à jour l\'événement',
+    create: 'Créer et planifier l\'événement',
+    uploadBtn: 'Téléverser la couverture',
+    uploading: 'Téléversement...',
+  },
+  en: {
+    cancel: 'Cancel & Return',
+    saving: 'Saving...',
+    update: 'Update Event',
+    create: 'Create & Schedule Event',
+    uploadBtn: 'Upload Cover Image',
+    uploading: 'Uploading...',
+  },
+}
 
 interface EventTranslation {
   locale: string
@@ -31,9 +59,11 @@ interface EventFormProps {
 
 export function EventForm({ event }: EventFormProps) {
   const router = useRouter()
+  const { locale, dir } = useAdminLocale()
+  const tr = EVENT_FORM_STRINGS[locale] || EVENT_FORM_STRINGS.ar
   const [isPending, startTransition] = useTransition()
   const [error, setError] = useState<string | null>(null)
-  const [activeLocale, setActiveLocale] = useState<'ar' | 'fr' | 'en'>('ar')
+  const [activeLocale, setActiveLocale] = useState<'ar' | 'fr' | 'en'>(locale)
   const [coverImage, setCoverImage] = useState(event?.cover_image || '')
   const [uploadingImage, setUploadingImage] = useState(false)
   const [uploadError, setUploadError] = useState<string | null>(null)
@@ -324,20 +354,20 @@ export function EventForm({ event }: EventFormProps) {
       </div>
 
       {/* Actions */}
-      <div className="flex items-center justify-between gap-4">
+      <div className="flex items-center justify-between gap-4" dir={dir}>
         <button
           type="button"
           onClick={() => router.back()}
           className="px-5 py-2.5 text-xs font-bold text-[#5C5A55] border border-[#cfc7b9] rounded-xl hover:bg-[#FAF8F5] transition-colors"
         >
-          Cancel
+          {tr.cancel}
         </button>
         <button
           type="submit"
           disabled={isPending}
           className="px-6 py-2.5 text-xs font-bold text-white bg-[#231f20] hover:bg-[#d2a82b] active:scale-98 rounded-xl disabled:opacity-60 disabled:cursor-not-allowed transition-all shadow-subtle hover:shadow-card"
         >
-          {isPending ? 'Saving…' : event ? 'Update Event' : 'Create Event'}
+          {isPending ? tr.saving : event ? tr.update : tr.create}
         </button>
       </div>
     </form>

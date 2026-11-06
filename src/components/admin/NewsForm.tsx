@@ -5,6 +5,34 @@ import { useRouter } from 'next/navigation'
 import { RichTextEditor } from '@/components/admin/RichTextEditor'
 import { FormField, Input, Textarea, Select, SectionDivider } from '@/components/admin/FormControls'
 import { createNewsArticle, updateNewsArticle } from '@/lib/actions/content'
+import { useAdminLocale } from './AdminLocaleContext'
+
+const NEWS_FORM_STRINGS = {
+  ar: {
+    cancel: 'إلغاء والعودة',
+    saving: 'جارٍ الحفظ...',
+    update: 'تحديث بيانات المقال',
+    create: 'نشر المقال الإخباري',
+    uploadBtn: 'رفع صورة الغلاف',
+    uploading: 'جارٍ الرفع...',
+  },
+  fr: {
+    cancel: 'Annuler et revenir',
+    saving: 'Enregistrement...',
+    update: 'Mettre à jour l\'article',
+    create: 'Créer et publier l\'article',
+    uploadBtn: 'Téléverser la couverture',
+    uploading: 'Téléversement...',
+  },
+  en: {
+    cancel: 'Cancel & Return',
+    saving: 'Saving...',
+    update: 'Update Article',
+    create: 'Create Article',
+    uploadBtn: 'Upload Cover Image',
+    uploading: 'Uploading...',
+  },
+}
 
 const CATEGORIES = [
   { value: 'association', label: 'Association News' },
@@ -37,9 +65,11 @@ interface NewsFormProps {
 
 export function NewsForm({ article }: NewsFormProps) {
   const router = useRouter()
+  const { locale, dir } = useAdminLocale()
+  const tr = NEWS_FORM_STRINGS[locale] || NEWS_FORM_STRINGS.ar
   const [isPending, startTransition] = useTransition()
   const [error, setError] = useState<string | null>(null)
-  const [activeLocale, setActiveLocale] = useState<'ar' | 'fr' | 'en'>('ar')
+  const [activeLocale, setActiveLocale] = useState<'ar' | 'fr' | 'en'>(locale)
   const [coverImage, setCoverImage] = useState(article?.cover_image || '')
   const [uploadingImage, setUploadingImage] = useState(false)
   const [uploadError, setUploadError] = useState<string | null>(null)
@@ -324,20 +354,20 @@ export function NewsForm({ article }: NewsFormProps) {
       </div>
 
       {/* Actions */}
-      <div className="flex items-center justify-between gap-4">
+      <div className="flex items-center justify-between gap-4" dir={dir}>
         <button
           type="button"
           onClick={() => router.back()}
           className="px-5 py-2.5 text-xs font-bold text-[#5C5A55] border border-[#cfc7b9] rounded-xl hover:bg-[#FAF8F5] transition-colors"
         >
-          Cancel
+          {tr.cancel}
         </button>
         <button
           type="submit"
           disabled={isPending}
           className="px-6 py-2.5 text-xs font-bold text-white bg-[#231f20] hover:bg-[#d2a82b] active:scale-98 rounded-xl disabled:opacity-60 disabled:cursor-not-allowed transition-all shadow-subtle hover:shadow-card"
         >
-          {isPending ? 'Saving…' : article ? 'Update Article' : 'Create Article'}
+          {isPending ? tr.saving : article ? tr.update : tr.create}
         </button>
       </div>
     </form>

@@ -1,7 +1,7 @@
 import { createClient } from '@/lib/supabase/server'
 import { redirect, notFound } from 'next/navigation'
-import Link from 'next/link'
 import { ProgramForm } from '@/components/admin/ProgramForm'
+import { AdminPageHeader } from '@/components/admin/AdminPageHeader'
 
 export default async function EditProgramPage(props: {
   params: Promise<{ id: string }>
@@ -28,23 +28,16 @@ export default async function EditProgramPage(props: {
 
   return (
     <div className="space-y-6 max-w-4xl">
-      <div className="flex items-center gap-3">
-        <Link
-          href="/admin/programs"
-          className="p-2 text-slate-400 hover:text-slate-600 rounded-lg hover:bg-slate-100 transition-colors"
-          title="Back to Programs"
-        >
-          <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-          </svg>
-        </Link>
-        <div>
-          <h1 className="text-2xl font-extrabold text-[#181516]">Edit Program</h1>
-          <p className="text-xs text-slate-500 mt-0.5">
-            Update program information and trilingual content.
-          </p>
-        </div>
-      </div>
+      <AdminPageHeader
+        backHref="/admin/programs"
+        backTitle={{ ar: 'العودة للبرامج', fr: 'Retour aux programmes', en: 'Back to Programs' }}
+        title={{ ar: 'تعديل البرنامج الثقافي', fr: 'Modifier le programme', en: 'Edit Program' }}
+        subtitle={{
+          ar: 'تحديث تفاصيل البرنامج والمحتوى التحريري باللغات الثلاث.',
+          fr: 'Mettre à jour les informations et le contenu trilingue du programme.',
+          en: 'Update program information and trilingual content.',
+        }}
+      />
 
       <ProgramForm program={program} />
     </div>

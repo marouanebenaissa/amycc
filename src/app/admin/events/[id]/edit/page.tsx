@@ -1,7 +1,7 @@
 import { createClient } from '@/lib/supabase/server'
 import { redirect, notFound } from 'next/navigation'
-import Link from 'next/link'
 import { EventForm } from '@/components/admin/EventForm'
+import { AdminPageHeader } from '@/components/admin/AdminPageHeader'
 
 export default async function EditEventPage(props: {
   params: Promise<{ id: string }>
@@ -28,23 +28,16 @@ export default async function EditEventPage(props: {
 
   return (
     <div className="space-y-6 max-w-4xl">
-      <div className="flex items-center gap-3">
-        <Link
-          href="/admin/events"
-          className="p-2 text-slate-400 hover:text-slate-600 rounded-lg hover:bg-slate-100 transition-colors"
-          title="Back to Events"
-        >
-          <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-          </svg>
-        </Link>
-        <div>
-          <h1 className="text-2xl font-extrabold text-[#181516]">Edit Event</h1>
-          <p className="text-xs text-slate-500 mt-0.5">
-            Modify event schedule, capacity, registration availability, and multilingual texts.
-          </p>
-        </div>
-      </div>
+      <AdminPageHeader
+        backHref="/admin/events"
+        backTitle={{ ar: 'العودة للفعاليات', fr: 'Retour aux événements', en: 'Back to Events' }}
+        title={{ ar: 'تعديل الفعالية أو الورشة', fr: 'Modifier l\'événement', en: 'Edit Event' }}
+        subtitle={{
+          ar: 'تعديل مواعيد الفعالية، السعة، حالة التذاكر، والنصوص بثلاث لغات.',
+          fr: 'Modifier les dates, la capacité, la billetterie et les textes trilingues.',
+          en: 'Modify event schedule, capacity, registration availability, and multilingual texts.',
+        }}
+      />
 
       <EventForm event={event} />
     </div>
