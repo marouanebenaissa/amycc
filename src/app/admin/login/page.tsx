@@ -40,23 +40,15 @@ export default async function AdminLoginPage(props: {
         <div className="p-6 sm:p-10">
           {/* Official Emblem & Institutional Typography */}
           <div className="text-center mb-7">
-            {/* Seal Emblem */}
-            <div className="relative inline-block mb-3.5">
-              <div className="w-20 h-20 rounded-2xl bg-gradient-to-b from-white via-[#FAF8F5] to-[#FEF6CC]/60 border-2 border-[#d2a82b]/40 flex items-center justify-center p-3 shadow-md mx-auto">
-                <Image
-                  src="/logo.png"
-                  alt="AMYCC Emblem"
-                  width={56}
-                  height={56}
-                  className="object-contain w-auto h-auto"
-                  priority
-                />
-              </div>
-              {/* Active Encryption Indicator */}
-              <span
-                className="absolute -bottom-1 -end-1 w-4 h-4 rounded-full bg-[#18794E] border-2 border-white shadow-xs"
-                title="بوابة مؤمنة / Secure Gateway"
-                aria-label="Secure Gateway"
+            {/* Seal Emblem — Standalone Logo */}
+            <div className="relative inline-flex items-center justify-center mb-3.5">
+              <Image
+                src="/logo.png"
+                alt="AMYCC Logo"
+                width={70}
+                height={70}
+                className="object-contain w-16 h-16 sm:w-18 sm:h-18 transition-transform duration-300 hover:scale-105"
+                priority
               />
             </div>
 
