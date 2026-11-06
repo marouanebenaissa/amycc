@@ -1,20 +1,20 @@
 import type { Metadata } from 'next'
 import '../globals.css'
-import { Cairo, Sora } from 'next/font/google'
+import { Sora, Cairo } from 'next/font/google'
 import { createClient } from '@/lib/supabase/server'
 import { AdminLayoutClient } from '@/components/admin/AdminLayoutClient'
 
-const cairo = Cairo({
-  subsets: ['arabic', 'latin'],
-  weight: ['400', '600', '700', '800', '900'],
-  variable: '--font-cairo',
+const sora = Sora({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700', '800'],
+  variable: '--font-sans',
   display: 'swap',
 })
 
-const sora = Sora({
-  subsets: ['latin'],
-  weight: ['400', '600', '700', '800'],
-  variable: '--font-sora',
+const cairo = Cairo({
+  subsets: ['arabic', 'latin'],
+  weight: ['400', '500', '600', '700', '800', '900'],
+  variable: '--font-arabic',
   display: 'swap',
 })
 
@@ -29,7 +29,9 @@ export default async function AdminLayout({
   children: React.ReactNode
 }) {
   const supabase = await createClient()
-  const { data: { user } } = await supabase.auth.getUser()
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
 
   let userFullName: string | null = null
   if (user) {
@@ -42,8 +44,16 @@ export default async function AdminLayout({
   }
 
   return (
-    <html lang="ar" dir="rtl" className={`h-full ${cairo.variable} ${sora.variable}`} suppressHydrationWarning>
-      <body className="min-h-full text-[#231f20] bg-[#FAF8F5] font-arabic antialiased" suppressHydrationWarning>
+    <html
+      lang="ar"
+      dir="rtl"
+      className={`h-full ${sora.variable} ${cairo.variable}`}
+      suppressHydrationWarning
+    >
+      <body
+        className="min-h-full text-[#231f20] bg-[#FAF8F5] antialiased"
+        suppressHydrationWarning
+      >
         {user ? (
           <AdminLayoutClient
             userEmail={user.email || 'admin@amycc.org'}
