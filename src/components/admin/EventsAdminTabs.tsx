@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import type { EventsPageConfig, EventsPageStatItem } from '@/lib/settings'
 import { saveEventsPageConfiguration } from '@/lib/actions/admin'
+import { useAdminLocale } from './AdminLocaleContext'
 
 export interface RegistrationItem {
   id: string
@@ -43,6 +44,123 @@ interface EventsAdminTabsProps {
   onDeleteEvent: (id: string) => Promise<{ success: boolean; error?: string } | void>
 }
 
+export const EVENT_STRINGS = {
+  ar: {
+    badge: 'منظومة إدارة الفعاليات والأنشطة',
+    title: 'إدارة الفعاليات والعروض (Events CMS)',
+    subtitle: 'إدارة مواعيد الفعاليات الحية، وتتبع تسجيلات المقاعد، وتخصيص واجهة ورأس صفحة الفعاليات.',
+    tabList: 'قائمة الفعاليات والمواعيد',
+    tabCms: 'تخصيص واجهة ورأس صفحة الفعاليات (Events CMS)',
+    previewSite: 'معاينة صفحة الفعاليات',
+    searchPlaceholder: 'ابحث في الفعاليات بالاسم، المدينة، أو الفضاء...',
+    downloadRegistrationsCsv: 'تحميل قائمة المسجلين (CSV)',
+    downloadRegistrationsCsvTitle: 'تحميل جدول كافة المسجلين في جميع الفعاليات بصيغة CSV المتوافقة مع Microsoft Excel',
+    addNewEvent: '+ إضافة فعالية جديدة (New Event)',
+    thEvent: 'الفعالية',
+    thDateVenue: 'التاريخ والفضاء',
+    thCapacity: 'المقاعد والحجوزات',
+    thGate: 'بوابة التسجيل',
+    thActions: 'الإجراءات',
+    venueDefault: 'المركز الثقافي',
+    seatsUnit: 'مقعد',
+    unlimitedSeats: 'غير محدد',
+    gateOpen: 'مفتوح (Open) ✓',
+    gateClosed: 'مغلق (Closed) ✕',
+    updating: 'جارٍ التحديث...',
+    attendeesList: 'لائحة الحضور',
+    edit: 'تعديل',
+    delete: 'حذف',
+    deleting: 'جارٍ الحذف...',
+    noEventsFound: 'لا توجد فعاليات مسجلة حالياً. اضغط على "إضافة فعالية جديدة" لبدء الجدولة.',
+    deleteConfirm: (title: string) =>
+      `هل أنت متأكد من رغبتك في حذف فعالية "${title}" نهائياً؟\nسيتم حذف كافة الترجمات وبيانات التسجيل المرتبطة بها.`,
+    deleteSuccess: (title: string) => `تم حذف فعالية "${title}" بنجاح وإزالتها من النظام والموقع.`,
+    deleteError: 'حدث خطأ أثناء محاولة حذف الفعالية',
+    noRegistrationsAlert: (title: string) => `لا توجد تسجيلات حضور مسجلة لفعالية "${title}" حتى الآن.`,
+    noAllRegistrationsAlert: 'لا توجد أي تسجيلات حضور مسجلة في كافة الفعاليات حتى الآن.',
+    uploadImageError: 'يرجى اختيار ملف صورة صالح (JPEG, PNG, WebP)',
+    uploadSuccess: 'تم رفع صورة هيدر الفعاليات بنجاح وتفعيلها!',
+    saveSuccess: 'تم حفظ إعدادات وواجهة صفحة الفعاليات بنجاح وتحديث الموقع العام فوراً!',
+    saveError: 'فشل حفظ الإعدادات',
+  },
+  fr: {
+    badge: 'Gestion des Événements & Spectacles',
+    title: 'Gestion des Événements & Spectacles (Events CMS)',
+    subtitle: 'Programmation des spectacles, gestion des jauges de places et personnalisation de la page vitrine.',
+    tabList: 'Liste des Événements & Dates',
+    tabCms: 'Configuration Vitrine & En-tête (CMS)',
+    previewSite: 'Aperçu de la page',
+    searchPlaceholder: 'Rechercher par titre, ville ou lieu...',
+    downloadRegistrationsCsv: 'Exporter tous les inscrits (CSV)',
+    downloadRegistrationsCsvTitle: 'Télécharger la liste complète de tous les inscrits au format CSV Excel',
+    addNewEvent: '+ Nouvel Événement (New Event)',
+    thEvent: 'Événement',
+    thDateVenue: 'Date & Lieu',
+    thCapacity: 'Jauge & Réservations',
+    thGate: 'Portail d\'Inscription',
+    thActions: 'Actions',
+    venueDefault: 'Centre Culturel',
+    seatsUnit: 'places',
+    unlimitedSeats: 'Illimité',
+    gateOpen: 'Ouvert (Open) ✓',
+    gateClosed: 'Fermé (Closed) ✕',
+    updating: 'Mise à jour...',
+    attendeesList: 'Liste des inscrits',
+    edit: 'Modifier',
+    delete: 'Supprimer',
+    deleting: 'Suppression...',
+    noEventsFound: 'Aucun événement programmé. Cliquez sur "Nouvel Événement" pour commencer.',
+    deleteConfirm: (title: string) =>
+      `Êtes-vous sûr de vouloir supprimer définitivement l'événement "${title}" ?\nToutes les traductions et inscriptions seront supprimées.`,
+    deleteSuccess: (title: string) => `L'événement "${title}" a été supprimé avec succès.`,
+    deleteError: 'Une erreur est survenue lors de la suppression de l\'événement',
+    noRegistrationsAlert: (title: string) => `Aucune inscription enregistrée pour "${title}".`,
+    noAllRegistrationsAlert: 'Aucune inscription enregistrée sur l\'ensemble des événements.',
+    uploadImageError: 'Veuillez sélectionner un fichier image valide (JPEG, PNG, WebP)',
+    uploadSuccess: 'Image d\'en-tête téléversée avec succès !',
+    saveSuccess: 'Configuration enregistrée avec succès et appliquée au site public !',
+    saveError: 'Échec de l\'enregistrement de la configuration',
+  },
+  en: {
+    badge: 'Events & Public Programming Management',
+    title: 'Events & Public Programming (Events CMS)',
+    subtitle: 'Manage live cultural events, attendance quotas, bookings, and configure the events showcase header.',
+    tabList: 'Events Directory & Schedule',
+    tabCms: 'Page Hero & CMS Settings',
+    previewSite: 'Preview Events Page',
+    searchPlaceholder: 'Search events by title, venue or city...',
+    downloadRegistrationsCsv: 'Export All Registrations (CSV)',
+    downloadRegistrationsCsvTitle: 'Download complete list of all registered attendees as an Excel-compatible CSV',
+    addNewEvent: '+ Add New Event',
+    thEvent: 'Event',
+    thDateVenue: 'Date & Venue',
+    thCapacity: 'Capacity & Bookings',
+    thGate: 'Registration Gate',
+    thActions: 'Actions',
+    venueDefault: 'Cultural Center',
+    seatsUnit: 'seats',
+    unlimitedSeats: 'Unlimited',
+    gateOpen: 'Open ✓',
+    gateClosed: 'Closed ✕',
+    updating: 'Updating...',
+    attendeesList: 'Attendees',
+    edit: 'Edit',
+    delete: 'Delete',
+    deleting: 'Deleting...',
+    noEventsFound: 'No events scheduled yet. Click "+ Add New Event" to get started.',
+    deleteConfirm: (title: string) =>
+      `Are you sure you want to permanently delete event "${title}"?\nAll associated translations and registrations will be deleted.`,
+    deleteSuccess: (title: string) => `Event "${title}" has been successfully deleted.`,
+    deleteError: 'An error occurred while deleting the event',
+    noRegistrationsAlert: (title: string) => `No registrations recorded for "${title}" yet.`,
+    noAllRegistrationsAlert: 'No registrations recorded across any events yet.',
+    uploadImageError: 'Please select a valid image file (JPEG, PNG, WebP)',
+    uploadSuccess: 'Events hero image uploaded successfully!',
+    saveSuccess: 'Events page configuration saved and published to the live site!',
+    saveError: 'Failed to save configuration',
+  },
+}
+
 export function EventsAdminTabs({
   events,
   initialPageConfig,
@@ -50,6 +168,8 @@ export function EventsAdminTabs({
   onDeleteEvent,
 }: EventsAdminTabsProps) {
   const router = useRouter()
+  const { locale, dir } = useAdminLocale()
+  const tr = EVENT_STRINGS[locale] || EVENT_STRINGS.ar
   const [activeMainTab, setActiveMainTab] = useState<'events_list' | 'cms_header'>('events_list')
   const [eventList, setEventList] = useState<AdminEventRow[]>(events)
   const [prevEvents, setPrevEvents] = useState<AdminEventRow[]>(events)
@@ -361,7 +481,31 @@ export function EventsAdminTabs({
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6" dir={dir}>
+      {/* Top Header */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2 border-b border-[#e5e0d6]">
+        <div>
+          <span className="text-3xs font-extrabold uppercase text-[#bd3227] tracking-wider block mb-1">
+            {tr.badge}
+          </span>
+          <h1 className="text-xl sm:text-2xl font-black text-[#231f20] tracking-tight">
+            {tr.title}
+          </h1>
+          <p className="text-xs sm:text-sm text-[#5C5A55] mt-1">
+            {tr.subtitle}
+          </p>
+        </div>
+
+        <Link
+          href={`/${locale}/events`}
+          target="_blank"
+          className="px-4 py-2 rounded-xl text-xs font-bold text-[#bd3227] bg-[#FAF8F5] hover:bg-[#F4EFE6] border border-[#e5e0d6] transition-colors flex items-center gap-1.5 self-start sm:self-auto shrink-0"
+        >
+          <span>{tr.previewSite}</span>
+          <span>↗</span>
+        </Link>
+      </div>
+
       {/* Primary Section Switcher Tabs */}
       <div className="flex flex-wrap items-center justify-between gap-4 p-1.5 bg-white rounded-2xl border border-[#e5e0d6] shadow-2xs">
         <div className="flex items-center gap-2">
@@ -375,7 +519,7 @@ export function EventsAdminTabs({
             }`}
           >
             <span>📅</span>
-            <span>قائمة الفعاليات والمواعيد ({eventList.length})</span>
+            <span>{tr.tabList} ({eventList.length})</span>
           </button>
 
           <button
@@ -388,18 +532,9 @@ export function EventsAdminTabs({
             }`}
           >
             <span>✨</span>
-            <span>تخصيص واجهة ورأس صفحة الفعاليات (Events CMS)</span>
+            <span>{tr.tabCms}</span>
           </button>
         </div>
-
-        <Link
-          href="/ar/events"
-          target="_blank"
-          className="px-4 py-2 rounded-xl text-xs font-bold text-[#bd3227] bg-[#F4EFE6] hover:bg-[#F4EFE6] transition-colors flex items-center gap-1.5"
-        >
-          <span>معاينة صفحة الفعاليات</span>
-          <span>↗</span>
-        </Link>
       </div>
 
       {/* Feedback Alert */}
@@ -436,7 +571,7 @@ export function EventsAdminTabs({
                 type="text"
                 value={searchFilter}
                 onChange={(e) => setSearchFilter(e.target.value)}
-                placeholder="ابحث في الفعاليات بالاسم، المدينة، أو الفضاء..."
+                placeholder={tr.searchPlaceholder}
                 className="w-full ps-10 pe-4 py-2.5 rounded-xl border border-[#e5e0d6] bg-white text-xs outline-none focus:border-[#bd3227]"
               />
             </div>
@@ -446,10 +581,10 @@ export function EventsAdminTabs({
                 type="button"
                 onClick={exportAllRegistrationsToCSV}
                 className="inline-flex items-center gap-2 px-4 py-2.5 bg-emerald-800 hover:bg-emerald-900 active:scale-98 text-white text-xs font-bold rounded-xl transition-all shadow-subtle cursor-pointer"
-                title="تحميل جدول كافة المسجلين في جميع الفعاليات بصيغة CSV المتوافقة مع Microsoft Excel"
+                title={tr.downloadRegistrationsCsvTitle}
               >
                 <span>📥</span>
-                <span>تحميل قائمة المسجلين (CSV)</span>
+                <span>{tr.downloadRegistrationsCsv}</span>
                 <span className="px-1.5 py-0.5 rounded-full bg-emerald-700 text-3xs font-black">
                   {totalRegistrationsCount}
                 </span>
@@ -460,27 +595,145 @@ export function EventsAdminTabs({
                 className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#231f20] text-white text-xs font-bold rounded-xl hover:bg-[#231f20] active:scale-98 transition-all shadow-subtle hover:shadow-card"
               >
                 <span>+</span>
-                <span>إضافة فعالية جديدة (New Event)</span>
+                <span>{tr.addNewEvent}</span>
               </Link>
             </div>
           </div>
 
           <div className="bg-white rounded-2xl border border-[#e5e0d6] overflow-hidden shadow-2xs">
-            <div className="overflow-x-auto">
+            {/* Mobile Cards View (< md) */}
+            <div className="block md:hidden divide-y divide-[#e5e0d6]">
+              {filteredEvents.length > 0 ? (
+                filteredEvents.map((ev) => {
+                  const trans =
+                    ev.event_translations?.find((t) => t.locale === locale) ||
+                    ev.event_translations?.find((t) => t.locale === 'ar') ||
+                    ev.event_translations?.[0]
+                  const title = trans?.title || ev.slug
+                  const regCount = ev.event_registrations
+                    ? Array.isArray(ev.event_registrations) &&
+                      ev.event_registrations.length > 0 &&
+                      'count' in (ev.event_registrations[0] as object)
+                      ? (ev.event_registrations[0] as { count: number }).count
+                      : ev.event_registrations.length
+                    : 0
+                  const dateObj = new Date(ev.start_date)
+
+                  return (
+                    <div key={ev.id} className="p-4 space-y-3">
+                      <div className="flex items-start gap-3">
+                        <div className="w-12 h-12 rounded-xl bg-[#231f20] overflow-hidden shrink-0 relative border border-[#e5e0d6]">
+                          {ev.cover_image ? (
+                            <Image
+                              src={ev.cover_image}
+                              alt={title}
+                              fill
+                              className="object-cover"
+                              unoptimized
+                            />
+                          ) : (
+                            <div className="w-full h-full flex items-center justify-center text-lg">
+                              🎭
+                            </div>
+                          )}
+                        </div>
+                        <div className="min-w-0 flex-1">
+                          <h4 className="font-extrabold text-[#231f20] text-xs sm:text-sm line-clamp-1">
+                            {title}
+                          </h4>
+                          <span className="text-[#5C5A55] text-3xs font-mono block">
+                            /{ev.slug}
+                          </span>
+                          <span className="text-3xs text-[#5C5A55] mt-1 block">
+                            📍 {ev.venue || tr.venueDefault} {ev.city ? `• ${ev.city}` : ''}
+                          </span>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center justify-between text-2xs text-[#5C5A55] pt-2 border-t border-[#f0ece1]">
+                        <span>
+                          🗓️ {dateObj.toLocaleDateString(locale === 'ar' ? 'ar-MA' : locale === 'fr' ? 'fr-FR' : 'en-US', {
+                            year: 'numeric',
+                            month: 'short',
+                            day: 'numeric',
+                          })}
+                        </span>
+                        <span className="font-bold text-[#231f20]">
+                          🎟️ {regCount} / {ev.capacity ? `${ev.capacity} ${tr.seatsUnit}` : tr.unlimitedSeats}
+                        </span>
+                      </div>
+
+                      <div className="flex items-center justify-between gap-2 pt-2 border-t border-[#f0ece1]">
+                        <button
+                          type="button"
+                          disabled={togglingId === ev.id}
+                          onClick={() => handleToggleRegistration(ev.id, ev.registration_open)}
+                          className={`px-3 py-1 rounded-full text-3xs font-extrabold cursor-pointer transition-all disabled:opacity-60 ${
+                            ev.registration_open
+                              ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
+                              : 'bg-slate-100 text-slate-600'
+                          }`}
+                        >
+                          {togglingId === ev.id
+                            ? tr.updating
+                            : ev.registration_open
+                            ? tr.gateOpen
+                            : tr.gateClosed}
+                        </button>
+
+                        <div className="flex items-center gap-1.5">
+                          <button
+                            type="button"
+                            onClick={() => exportEventRegistrationsToCSV(ev)}
+                            className="px-2 py-1 rounded-lg text-3xs font-bold bg-emerald-50 text-emerald-800 border border-emerald-200"
+                          >
+                            📥 ({regCount})
+                          </button>
+                          <Link
+                            href={`/admin/events/${ev.id}/edit`}
+                            className="px-2.5 py-1 rounded-lg text-3xs font-bold bg-[#FAF8F5] border border-[#e5e0d6] text-[#231f20]"
+                          >
+                            {tr.edit}
+                          </Link>
+                          <button
+                            type="button"
+                            disabled={deletingId === ev.id}
+                            onClick={() => handleDeleteEvent(ev.id, title)}
+                            className="px-2.5 py-1 rounded-lg text-3xs font-bold text-rose-600 hover:bg-rose-50 border border-transparent"
+                          >
+                            {deletingId === ev.id ? tr.deleting : tr.delete}
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  )
+                })
+              ) : (
+                <div className="p-8 text-center text-[#5C5A55] text-xs font-semibold">
+                  {tr.noEventsFound}
+                </div>
+              )}
+            </div>
+
+            {/* Desktop Table View (>= md) */}
+            <div className="hidden md:block overflow-x-auto">
               <table className="w-full text-start text-xs text-[#231f20]">
                 <thead className="bg-[#FAF8F5] border-b border-[#e5e0d6] text-3xs uppercase tracking-wider text-[#5C5A55] font-bold">
                   <tr>
-                    <th className="px-6 py-4 text-start">الفعالية</th>
-                    <th className="px-6 py-4 text-start">التاريخ والفضاء</th>
-                    <th className="px-6 py-4 text-start">المقاعد والحجوزات</th>
-                    <th className="px-6 py-4 text-start">بوابة التسجيل</th>
-                    <th className="px-6 py-4 text-start">الإجراءات</th>
+                    <th className="px-6 py-4 text-start">{tr.thEvent}</th>
+                    <th className="px-6 py-4 text-start">{tr.thDateVenue}</th>
+                    <th className="px-6 py-4 text-start">{tr.thCapacity}</th>
+                    <th className="px-6 py-4 text-start">{tr.thGate}</th>
+                    <th className="px-6 py-4 text-start">{tr.thActions}</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-[#FEF6CC]">
                   {filteredEvents.length > 0 ? (
                     filteredEvents.map((ev) => {
-                      const trans = ev.event_translations?.find((t) => t.locale === 'ar') || ev.event_translations?.[0]
+                      const trans =
+                        ev.event_translations?.find((t) => t.locale === locale) ||
+                        ev.event_translations?.find((t) => t.locale === 'ar') ||
+                        ev.event_translations?.[0]
                       const title = trans?.title || ev.slug
                       const regCount = ev.event_registrations
                         ? Array.isArray(ev.event_registrations) &&
@@ -522,14 +775,14 @@ export function EventsAdminTabs({
                           </td>
                           <td className="px-6 py-4">
                             <span className="font-bold block text-[#231f20]">
-                              {dateObj.toLocaleDateString('ar-MA', {
+                              {dateObj.toLocaleDateString(locale === 'ar' ? 'ar-MA' : locale === 'fr' ? 'fr-FR' : 'en-US', {
                                 year: 'numeric',
                                 month: 'short',
                                 day: 'numeric',
                               })}
                             </span>
                             <span className="text-[#5C5A55] text-3xs">
-                              {ev.venue || 'المركز الثقافي'} {ev.city ? `• ${ev.city}` : ''}
+                              {ev.venue || tr.venueDefault} {ev.city ? `• ${ev.city}` : ''}
                             </span>
                           </td>
                           <td className="px-6 py-4">
@@ -538,7 +791,7 @@ export function EventsAdminTabs({
                                 {regCount}
                               </span>
                               <span className="text-[#5C5A55] text-3xs">
-                                / {ev.capacity ? `${ev.capacity} مقعد` : 'غير محدد'}
+                                / {ev.capacity ? `${ev.capacity} ${tr.seatsUnit}` : tr.unlimitedSeats}
                               </span>
                             </div>
                           </td>
@@ -554,28 +807,28 @@ export function EventsAdminTabs({
                               }`}
                             >
                               {togglingId === ev.id
-                                ? 'جارٍ التحديث...'
+                                ? tr.updating
                                 : ev.registration_open
-                                ? 'مفتوح (Open) ✓'
-                                : 'مغلق (Closed) ✕'}
+                                ? tr.gateOpen
+                                : tr.gateClosed}
                             </button>
                           </td>
                           <td className="px-6 py-4">
                             <div className="flex items-center gap-2">
                               <button
                                 type="button"
-                                title="تحميل لائحة الحضور لهذه الفعالية بصيغة CSV المتوافقة مع Excel"
+                                title={tr.downloadRegistrationsCsvTitle}
                                 onClick={() => exportEventRegistrationsToCSV(ev)}
                                 className="px-2.5 py-1.5 rounded-lg text-2xs font-bold bg-emerald-50 text-emerald-800 border border-emerald-200 hover:bg-emerald-100 transition-colors flex items-center gap-1 cursor-pointer"
                               >
                                 <span>📥</span>
-                                <span>لائحة الحضور ({regCount})</span>
+                                <span>{tr.attendeesList} ({regCount})</span>
                               </button>
                               <Link
                                 href={`/admin/events/${ev.id}/edit`}
                                 className="px-3 py-1.5 rounded-lg text-2xs font-bold bg-[#FAF8F5] border border-[#e5e0d6] text-[#231f20] hover:bg-[#F4EFE6] transition-colors"
                               >
-                                تعديل
+                                {tr.edit}
                               </Link>
                               <button
                                 type="button"
@@ -583,7 +836,7 @@ export function EventsAdminTabs({
                                 onClick={() => handleDeleteEvent(ev.id, title)}
                                 className="px-3 py-1.5 rounded-lg text-2xs font-bold text-rose-600 hover:bg-rose-50 border border-transparent hover:border-rose-200 transition-colors disabled:opacity-50 cursor-pointer"
                               >
-                                {deletingId === ev.id ? 'جارٍ الحذف...' : 'حذف'}
+                                {deletingId === ev.id ? tr.deleting : tr.delete}
                               </button>
                             </div>
                           </td>
@@ -593,7 +846,7 @@ export function EventsAdminTabs({
                   ) : (
                     <tr>
                       <td colSpan={5} className="px-6 py-12 text-center text-[#5C5A55]">
-                        لا توجد فعاليات مسجلة حالياً. اضغط على &quot;إضافة فعالية جديدة&quot; لبدء الجدولة.
+                        {tr.noEventsFound}
                       </td>
                     </tr>
                   )}

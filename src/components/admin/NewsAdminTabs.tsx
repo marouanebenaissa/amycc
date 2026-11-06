@@ -5,6 +5,142 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import type { NewsPageConfig, NewsPageStatItem } from '@/lib/settings'
+import { useAdminLocale } from './AdminLocaleContext'
+
+export const NEWS_STRINGS = {
+  ar: {
+    badge: 'المركز الإعلامي وإدارة الأخبار',
+    title: 'إدارة الأخبار والبيانات الصحفية (News CMS)',
+    subtitle: 'نشر البيانات الرسمية، ومتابعة التغطيات الإعلامية، وتخصيص واجهة صفحة الأخبار بالكامل.',
+    tabList: 'قائمة الأخبار والمقالات',
+    tabCms: 'تخصيص واجهة صفحة الأخبار (CMS)',
+    previewSite: 'معاينة صفحة الأخبار',
+    kpiTotal: 'إجمالي المواد الإخبارية',
+    kpiTotalSub: 'مقالات وبيانات مسجلة',
+    kpiLive: 'منشور حالياً (Live)',
+    kpiLiveSub: 'يظهر للعموم في الموقع',
+    kpiDrafts: 'مسودات قيد الإعداد',
+    kpiDraftsSub: 'غير منشورة بعد',
+    searchPlaceholder: 'بحث في المقالات بالعنوان أو الرابط...',
+    filterAllStatus: 'كافة الحالات',
+    statusPublished: 'المنشورة فقط',
+    statusDraft: 'المسودات فقط',
+    newArticleBtn: '✍️ كتابة مقال جديد',
+    categories: {
+      all: 'الكل',
+      press: 'بيان صحفي',
+      association: 'أخبار الجمعية',
+      culture: 'ثقافة وتراث',
+      youth: 'شباب',
+      partnership: 'شراكات',
+    } as Record<string, string>,
+    thArticle: 'المقال والغلاف',
+    thCategory: 'التصنيف',
+    thDate: 'تاريخ النشر',
+    thStatus: 'الحالة',
+    thActions: 'الإجراءات',
+    publishedBadge: 'منشور (Live) ✓',
+    draftBadge: 'مسودة (Draft) ✕',
+    updating: 'جارٍ التحديث...',
+    preview: 'معاينة',
+    previewTitle: 'معاينة المقال في الموقع',
+    edit: 'تعديل',
+    delete: 'حذف',
+    deleting: 'جارٍ الحذف...',
+    draftDate: 'مسودة',
+    noArticlesFound: 'لا توجد مقالات مسجلة تطابق معايير البحث.',
+    deleteConfirm: (title: string) =>
+      `هل أنت متأكد من رغبتك في حذف المقال "${title}" نهائياً؟\nسيتم حذف نصوص المقال وترجماته وصورته من الموقع.`,
+  },
+  fr: {
+    badge: 'Centre de Presse & Actualités',
+    title: 'Gestion des Actualités & Communiqués (News CMS)',
+    subtitle: 'Publication des déclarations officielles, revues de presse et configuration de la vitrine d\'actualités.',
+    tabList: 'Liste des Articles & Communiqués',
+    tabCms: 'Configuration de la Page (CMS)',
+    previewSite: 'Aperçu de la page',
+    kpiTotal: 'Total des Articles',
+    kpiTotalSub: 'Articles et communiqués enregistrés',
+    kpiLive: 'Publiés en Ligne',
+    kpiLiveSub: 'Visibles par le public',
+    kpiDrafts: 'Brouillons en Cours',
+    kpiDraftsSub: 'Non publiés',
+    searchPlaceholder: 'Rechercher par titre ou identifiant...',
+    filterAllStatus: 'Tous les statuts',
+    statusPublished: 'Publiés uniquement',
+    statusDraft: 'Brouillons uniquement',
+    newArticleBtn: '✍️ Rédiger un article',
+    categories: {
+      all: 'Tous',
+      press: 'Communiqué de Presse',
+      association: 'Vie de l\'Association',
+      culture: 'Culture & Patrimoine',
+      youth: 'Jeunesse',
+      partnership: 'Partenariats',
+    } as Record<string, string>,
+    thArticle: 'Article & Couverture',
+    thCategory: 'Catégorie',
+    thDate: 'Date de Publication',
+    thStatus: 'Statut',
+    thActions: 'Actions',
+    publishedBadge: 'En ligne ✓',
+    draftBadge: 'Brouillon ✕',
+    updating: 'Mise à jour...',
+    preview: 'Aperçu',
+    previewTitle: 'Voir l\'article sur le site',
+    edit: 'Modifier',
+    delete: 'Supprimer',
+    deleting: 'Suppression...',
+    draftDate: 'Brouillon',
+    noArticlesFound: 'Aucun article trouvé selon vos critères.',
+    deleteConfirm: (title: string) =>
+      `Êtes-vous sûr de vouloir supprimer définitivement l'article "${title}" ?\nSes traductions et images associées seront supprimées.`,
+  },
+  en: {
+    badge: 'Press Room & News Publishing',
+    title: 'News & Press Releases CMS',
+    subtitle: 'Publish official statements, multimedia press releases, and customize the news showcase page.',
+    tabList: 'Articles & Press Releases',
+    tabCms: 'Page CMS Settings',
+    previewSite: 'Preview News Page',
+    kpiTotal: 'Total News Items',
+    kpiTotalSub: 'Recorded news & press articles',
+    kpiLive: 'Currently Published',
+    kpiLiveSub: 'Publicly visible on the website',
+    kpiDrafts: 'Pending Drafts',
+    kpiDraftsSub: 'Unpublished drafts',
+    searchPlaceholder: 'Search articles by title or slug...',
+    filterAllStatus: 'All Statuses',
+    statusPublished: 'Published only',
+    statusDraft: 'Drafts only',
+    newArticleBtn: '✍️ Write New Article',
+    categories: {
+      all: 'All',
+      press: 'Press Release',
+      association: 'Association News',
+      culture: 'Culture & Heritage',
+      youth: 'Youth',
+      partnership: 'Partnerships',
+    } as Record<string, string>,
+    thArticle: 'Article & Cover',
+    thCategory: 'Category',
+    thDate: 'Published Date',
+    thStatus: 'Status',
+    thActions: 'Actions',
+    publishedBadge: 'Live ✓',
+    draftBadge: 'Draft ✕',
+    updating: 'Updating...',
+    preview: 'Preview',
+    previewTitle: 'View article on public website',
+    edit: 'Edit',
+    delete: 'Delete',
+    deleting: 'Deleting...',
+    draftDate: 'Draft',
+    noArticlesFound: 'No news articles matched your search criteria.',
+    deleteConfirm: (title: string) =>
+      `Are you sure you want to permanently delete article "${title}"?\nAll associated translations and images will be removed.`,
+  },
+}
 
 export interface AdminNewsArticleItem {
   id: string
@@ -33,6 +169,8 @@ export function NewsAdminTabs({
   onDeleteArticle,
 }: NewsAdminTabsProps) {
   const router = useRouter()
+  const { locale, dir } = useAdminLocale()
+  const tr = NEWS_STRINGS[locale] || NEWS_STRINGS.ar
   // Tab Navigation: 'articles' or 'page-settings'
   const [activeTab, setActiveTab] = useState<'articles' | 'page-settings'>('articles')
 
@@ -45,7 +183,6 @@ export function NewsAdminTabs({
   const [articles, setArticles] = useState<AdminNewsArticleItem[]>(initialArticles)
   const [togglingId, setTogglingId] = useState<string | null>(null)
   const [deletingId, setDeletingId] = useState<string | null>(null)
-  const [seedingArticles, setSeedingArticles] = useState(false)
 
   // Page Settings state
   const [config, setConfig] = useState<NewsPageConfig>(initialConfig)
@@ -197,38 +334,7 @@ export function NewsAdminTabs({
     }
   }
 
-  async function handleSeedDefaultArticles() {
-    if (
-      !confirm(
-        'هل ترغب في استيراد وتحديث المقالات النموذجية الرسمية الثلاث؟ سيتم حفظها في قاعدة البيانات فوراً.'
-      )
-    ) {
-      return
-    }
 
-    setSeedingArticles(true)
-    try {
-      const res = await fetch('/api/admin/news/seed', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-      })
-
-      const data = await res.json()
-      if (!res.ok || !data.success) {
-        throw new Error(data.error || 'فشل استيراد المقالات')
-      }
-
-      if (Array.isArray(data.articles)) {
-        setArticles(data.articles)
-      } else {
-        window.location.reload()
-      }
-    } catch (err: unknown) {
-      alert(err instanceof Error ? err.message : 'حدث خطأ أثناء استيراد المقالات')
-    } finally {
-      setSeedingArticles(false)
-    }
-  }
 
   // -------------------------------------------------------------
   // Handlers for Page Settings
@@ -332,47 +438,61 @@ export function NewsAdminTabs({
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6" dir={dir}>
       {/* Top Header & Tab Switcher */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2 border-b border-[#e5e0d6]">
         <div>
+          <span className="text-3xs font-extrabold uppercase text-[#bd3227] tracking-wider block mb-1">
+            {tr.badge}
+          </span>
           <div className="flex items-center gap-2 mb-1">
             <span className="text-xl">📰</span>
-            <h1 className="text-2xl font-black text-[#231f20]">
-              إدارة الأخبار والمركز الإعلامي
+            <h1 className="text-xl sm:text-2xl font-black text-[#231f20] tracking-tight">
+              {tr.title}
             </h1>
           </div>
-          <p className="text-xs text-[#5C5A55]">
-            نشر البيانات الصحفية، متابعة المقالات الثقافية، وتخصيص واجهة صفحة الأخبار بالكامل
+          <p className="text-xs sm:text-sm text-[#5C5A55]">
+            {tr.subtitle}
           </p>
         </div>
 
-        {/* Tab Buttons */}
-        <div className="flex items-center p-1 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6] shadow-2xs self-start sm:self-auto">
-          <button
-            type="button"
-            onClick={() => setActiveTab('articles')}
-            className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-2 ${
-              activeTab === 'articles'
-                ? 'bg-[#231f20] text-white shadow-xs'
-                : 'text-[#5C5A55] hover:bg-[#F4EFE6]'
-            }`}
+        <div className="flex items-center gap-2 self-start sm:self-auto flex-wrap">
+          <Link
+            href={`/${locale}/news`}
+            target="_blank"
+            className="px-4 py-2 rounded-xl text-xs font-bold text-[#bd3227] bg-[#FAF8F5] hover:bg-[#F4EFE6] border border-[#e5e0d6] transition-colors flex items-center gap-1.5"
           >
-            <span>📑</span>
-            <span>قائمة الأخبار والمقالات ({articles.length})</span>
-          </button>
-          <button
-            type="button"
-            onClick={() => setActiveTab('page-settings')}
-            className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-2 ${
-              activeTab === 'page-settings'
-                ? 'bg-[#231f20] text-white shadow-xs'
-                : 'text-[#5C5A55] hover:bg-[#F4EFE6]'
-            }`}
-          >
-            <span>⚙️</span>
-            <span>تخصيص واجهة صفحة الأخبار (CMS)</span>
-          </button>
+            <span>{tr.previewSite}</span>
+            <span>↗</span>
+          </Link>
+
+          {/* Tab Buttons */}
+          <div className="flex items-center p-1 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6] shadow-2xs">
+            <button
+              type="button"
+              onClick={() => setActiveTab('articles')}
+              className={`px-3.5 sm:px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-2 ${
+                activeTab === 'articles'
+                  ? 'bg-[#231f20] text-white shadow-xs'
+                  : 'text-[#5C5A55] hover:bg-[#F4EFE6]'
+              }`}
+            >
+              <span>📑</span>
+              <span>{tr.tabList} ({articles.length})</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => setActiveTab('page-settings')}
+              className={`px-3.5 sm:px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-2 ${
+                activeTab === 'page-settings'
+                  ? 'bg-[#231f20] text-white shadow-xs'
+                  : 'text-[#5C5A55] hover:bg-[#F4EFE6]'
+              }`}
+            >
+              <span>⚙️</span>
+              <span>{tr.tabCms}</span>
+            </button>
+          </div>
         </div>
       </div>
 
@@ -409,26 +529,26 @@ export function NewsAdminTabs({
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div className="bg-white p-5 rounded-2xl border border-[#e5e0d6] shadow-2xs">
               <span className="text-3xs font-extrabold uppercase text-[#5C5A55] block mb-1">
-                إجمالي المواد الإخبارية
+                {tr.kpiTotal}
               </span>
               <span className="text-2xl font-black text-[#231f20]">{totalArticles}</span>
-              <span className="text-3xs text-[#5C5A55] block mt-1">مقالات وبيانات مسجلة</span>
+              <span className="text-3xs text-[#5C5A55] block mt-1">{tr.kpiTotalSub}</span>
             </div>
 
             <div className="bg-white p-5 rounded-2xl border border-[#e5e0d6] shadow-2xs">
               <span className="text-3xs font-extrabold uppercase text-emerald-700 block mb-1">
-                منشور حالياً (Live)
+                {tr.kpiLive}
               </span>
               <span className="text-2xl font-black text-emerald-800">{publishedCount}</span>
-              <span className="text-3xs text-[#5C5A55] block mt-1">يظهر للعموم في الموقع</span>
+              <span className="text-3xs text-[#5C5A55] block mt-1">{tr.kpiLiveSub}</span>
             </div>
 
             <div className="bg-white p-5 rounded-2xl border border-[#e5e0d6] shadow-2xs">
               <span className="text-3xs font-extrabold uppercase text-amber-700 block mb-1">
-                مسودات قيد الإعداد (Drafts)
+                {tr.kpiDrafts}
               </span>
               <span className="text-2xl font-black text-amber-800">{draftCount}</span>
-              <span className="text-3xs text-[#5C5A55] block mt-1">غير منشورة بعد</span>
+              <span className="text-3xs text-[#5C5A55] block mt-1">{tr.kpiDraftsSub}</span>
             </div>
           </div>
 
@@ -441,7 +561,7 @@ export function NewsAdminTabs({
                   type="text"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="بحث في المقالات بالعنوان أو الرابط..."
+                  placeholder={tr.searchPlaceholder}
                   className="w-full ps-9 pe-4 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#FAF8F5] focus:bg-white focus:border-[#231f20] outline-none transition-all"
                 />
                 <span className="absolute start-3 top-1/2 -translate-y-1/2 text-xs text-[#5C5A55]">
@@ -465,75 +585,167 @@ export function NewsAdminTabs({
                   onChange={(e) => setStatusFilter(e.target.value as 'all' | 'published' | 'draft')}
                   className="px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs font-bold bg-[#FAF8F5] text-[#231f20] outline-none"
                 >
-                  <option value="all">كافة الحالات</option>
-                  <option value="published">المنشورة فقط</option>
-                  <option value="draft">المسودات فقط</option>
+                  <option value="all">{tr.filterAllStatus}</option>
+                  <option value="published">{tr.statusPublished}</option>
+                  <option value="draft">{tr.statusDraft}</option>
                 </select>
-
-                <button
-                  type="button"
-                  disabled={seedingArticles}
-                  onClick={handleSeedDefaultArticles}
-                  className="inline-flex items-center gap-2 px-3.5 py-2 bg-[#FAF8F5] border border-[#e5e0d6] text-[#231f20] text-xs font-bold rounded-xl hover:bg-[#F4EFE6] active:scale-98 transition-all shadow-2xs disabled:opacity-50 cursor-pointer"
-                  title="استيراد وتحديث المقالات النموذجية الرسمية الثلاث"
-                >
-                  <span>📥</span>
-                  <span>{seedingArticles ? 'جارٍ الاستيراد...' : 'استيراد المقالات النموذجية'}</span>
-                </button>
 
                 <Link
                   href="/admin/news/new"
                   className="inline-flex items-center gap-2 px-4 py-2 bg-[#231f20] text-white text-xs font-bold rounded-xl hover:bg-[#d2a82b] active:scale-98 transition-all shadow-xs"
                 >
-                  <span>✍️</span>
-                  <span>كتابة مقال جديد</span>
+                  <span>{tr.newArticleBtn}</span>
                 </Link>
               </div>
             </div>
 
             {/* Category Filter Pills */}
             <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none text-2xs">
-              {[
-                { id: 'all', label: 'الكل' },
-                { id: 'press', label: 'بيان صحفي' },
-                { id: 'association', label: 'أخبار الجمعية' },
-                { id: 'culture', label: 'ثقافة وتراث' },
-                { id: 'youth', label: 'شباب' },
-                { id: 'partnership', label: 'شراكات' },
-              ].map((c) => (
-                <button
-                  key={c.id}
-                  type="button"
-                  onClick={() => setSelectedCategory(c.id)}
-                  className={`px-3 py-1.5 rounded-lg font-bold transition-all cursor-pointer shrink-0 ${
-                    selectedCategory === c.id
-                      ? 'bg-[#231f20] text-white shadow-2xs'
-                      : 'bg-[#FAF8F5] text-[#5C5A55] hover:bg-[#F4EFE6]'
-                  }`}
-                >
-                  {c.label}
-                </button>
-              ))}
+              {(['all', 'press', 'association', 'culture', 'youth', 'partnership'] as const).map(
+                (catKey) => (
+                  <button
+                    key={catKey}
+                    type="button"
+                    onClick={() => setSelectedCategory(catKey)}
+                    className={`px-3 py-1.5 rounded-lg font-bold transition-all cursor-pointer shrink-0 ${
+                      selectedCategory === catKey
+                        ? 'bg-[#231f20] text-white shadow-2xs'
+                        : 'bg-[#FAF8F5] text-[#5C5A55] hover:bg-[#F4EFE6]'
+                    }`}
+                  >
+                    {tr.categories[catKey] || catKey}
+                  </button>
+                )
+              )}
             </div>
           </div>
 
-          {/* Articles Table */}
+          {/* Articles Responsive Views */}
           <div className="bg-white rounded-2xl border border-[#e5e0d6] overflow-hidden shadow-2xs">
-            <div className="overflow-x-auto">
+            {/* Mobile Cards View (< md) */}
+            <div className="block md:hidden divide-y divide-[#e5e0d6]">
+              {filteredArticles.length > 0 ? (
+                filteredArticles.map((art) => {
+                  const trans =
+                    art.news_translations?.find((t) => t.locale === locale) ||
+                    art.news_translations?.find((t) => t.locale === 'ar') ||
+                    art.news_translations?.[0]
+                  const title = trans?.title || art.slug
+                  const dateObj = art.published_at ? new Date(art.published_at) : null
+
+                  return (
+                    <div key={art.id} className="p-4 space-y-3">
+                      <div className="flex items-start gap-3">
+                        <div className="relative w-12 h-12 rounded-xl bg-[#231f20] overflow-hidden shrink-0 border border-[#e5e0d6]">
+                          {art.cover_image ? (
+                            <Image
+                              src={art.cover_image}
+                              alt={title}
+                              fill
+                              className="object-cover"
+                              unoptimized
+                            />
+                          ) : (
+                            <div className="w-full h-full flex items-center justify-center text-lg">
+                              📰
+                            </div>
+                          )}
+                        </div>
+                        <div className="min-w-0 flex-1">
+                          <h4 className="font-extrabold text-[#231f20] text-xs sm:text-sm line-clamp-1">
+                            {title}
+                          </h4>
+                          <span className="text-[#5C5A55] text-3xs font-mono block">
+                            /{art.slug}
+                          </span>
+                          <span className="inline-block mt-1 px-2 py-0.5 rounded text-4xs font-bold bg-[#FAF8F5] border border-[#e5e0d6] text-[#bd3227]">
+                            {tr.categories[art.category] || art.category}
+                          </span>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center justify-between text-2xs text-[#5C5A55] pt-2 border-t border-[#f0ece1]">
+                        <span>
+                          🗓️{' '}
+                          {dateObj
+                            ? dateObj.toLocaleDateString(
+                                locale === 'ar' ? 'ar-MA' : locale === 'fr' ? 'fr-FR' : 'en-US',
+                                { year: 'numeric', month: 'short', day: 'numeric' }
+                              )
+                            : tr.draftDate}
+                        </span>
+                        <button
+                          type="button"
+                          disabled={togglingId === art.id}
+                          onClick={() => handleToggleStatus(art.id, art.status)}
+                          className={`px-3 py-1 rounded-full text-3xs font-extrabold cursor-pointer transition-all disabled:opacity-60 ${
+                            art.status === 'published'
+                              ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
+                              : 'bg-slate-100 text-slate-600'
+                          }`}
+                        >
+                          {togglingId === art.id
+                            ? tr.updating
+                            : art.status === 'published'
+                            ? tr.publishedBadge
+                            : tr.draftBadge}
+                        </button>
+                      </div>
+
+                      <div className="flex items-center justify-end gap-2 pt-2 border-t border-[#f0ece1]">
+                        <Link
+                          href={`/${locale}/news/${art.slug}`}
+                          target="_blank"
+                          className="px-2.5 py-1 rounded-lg text-3xs font-bold bg-[#FAF8F5] border border-[#e5e0d6] text-[#231f20]"
+                          title={tr.previewTitle}
+                        >
+                          {tr.preview} ↗
+                        </Link>
+                        <Link
+                          href={`/admin/news/${art.id}/edit`}
+                          className="px-2.5 py-1 rounded-lg text-3xs font-bold bg-[#FAF8F5] border border-[#e5e0d6] text-[#231f20]"
+                        >
+                          {tr.edit}
+                        </Link>
+                        <button
+                          type="button"
+                          disabled={deletingId === art.id}
+                          onClick={() => handleDeleteArticle(art.id, title)}
+                          className="px-2.5 py-1 rounded-lg text-3xs font-bold text-rose-600 hover:bg-rose-50 border border-transparent"
+                        >
+                          {deletingId === art.id ? tr.deleting : tr.delete}
+                        </button>
+                      </div>
+                    </div>
+                  )
+                })
+              ) : (
+                <div className="p-8 text-center text-[#5C5A55] text-xs font-semibold">
+                  {tr.noArticlesFound}
+                </div>
+              )}
+            </div>
+
+            {/* Desktop Table View (>= md) */}
+            <div className="hidden md:block overflow-x-auto">
               <table className="w-full text-start text-xs text-[#231f20]">
                 <thead className="bg-[#FAF8F5] border-b border-[#e5e0d6] text-3xs uppercase tracking-wider text-[#5C5A55] font-black">
                   <tr>
-                    <th className="px-6 py-4 text-start">المقال والغلاف</th>
-                    <th className="px-6 py-4 text-start">التصنيف</th>
-                    <th className="px-6 py-4 text-start">تاريخ النشر</th>
-                    <th className="px-6 py-4 text-start">الحالة</th>
-                    <th className="px-6 py-4 text-start">الإجراءات</th>
+                    <th className="px-6 py-4 text-start">{tr.thArticle}</th>
+                    <th className="px-6 py-4 text-start">{tr.thCategory}</th>
+                    <th className="px-6 py-4 text-start">{tr.thDate}</th>
+                    <th className="px-6 py-4 text-start">{tr.thStatus}</th>
+                    <th className="px-6 py-4 text-start">{tr.thActions}</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-[#FEF6CC]">
                   {filteredArticles.length > 0 ? (
                     filteredArticles.map((art) => {
-                      const title = art.news_translations?.[0]?.title || art.slug
+                      const trans =
+                        art.news_translations?.find((t) => t.locale === locale) ||
+                        art.news_translations?.find((t) => t.locale === 'ar') ||
+                        art.news_translations?.[0]
+                      const title = trans?.title || art.slug
                       const dateObj = art.published_at ? new Date(art.published_at) : null
 
                       return (
@@ -567,18 +779,21 @@ export function NewsAdminTabs({
                           </td>
                           <td className="px-6 py-4">
                             <span className="px-2.5 py-1 rounded-md text-3xs font-extrabold bg-[#FAF8F5] border border-[#e5e0d6] text-[#231f20]">
-                              {art.category}
+                              {tr.categories[art.category] || art.category}
                             </span>
                           </td>
                           <td className="px-6 py-4">
                             <span className="font-bold block text-[#231f20]">
                               {dateObj
-                                ? dateObj.toLocaleDateString('ar-MA', {
-                                    year: 'numeric',
-                                    month: 'short',
-                                    day: 'numeric',
-                                  })
-                                : 'مسودة'}
+                                ? dateObj.toLocaleDateString(
+                                    locale === 'ar' ? 'ar-MA' : locale === 'fr' ? 'fr-FR' : 'en-US',
+                                    {
+                                      year: 'numeric',
+                                      month: 'short',
+                                      day: 'numeric',
+                                    }
+                                  )
+                                : tr.draftDate}
                             </span>
                           </td>
                           <td className="px-6 py-4">
@@ -593,29 +808,28 @@ export function NewsAdminTabs({
                               }`}
                             >
                               {togglingId === art.id
-                                ? 'جارٍ التحديث...'
+                                ? tr.updating
                                 : art.status === 'published'
-                                ? 'منشور (Live) ✓'
-                                : 'مسودة (Draft) ✕'}
+                                ? tr.publishedBadge
+                                : tr.draftBadge}
                             </button>
                           </td>
                           <td className="px-6 py-4">
                             <div className="flex items-center gap-2">
-                              <a
-                                href={`/ar/news/${art.slug}`}
+                              <Link
+                                href={`/${locale}/news/${art.slug}`}
                                 target="_blank"
-                                rel="noopener noreferrer"
                                 className="px-2.5 py-1.5 rounded-lg text-2xs font-bold bg-[#FAF8F5] border border-[#e5e0d6] text-[#231f20] hover:bg-[#F4EFE6] transition-colors flex items-center gap-1"
-                                title="معاينة المقال في الموقع"
+                                title={tr.previewTitle}
                               >
-                                <span>معاينة</span>
+                                <span>{tr.preview}</span>
                                 <span className="text-3xs">↗</span>
-                              </a>
+                              </Link>
                               <Link
                                 href={`/admin/news/${art.id}/edit`}
                                 className="px-3 py-1.5 rounded-lg text-2xs font-bold bg-[#FAF8F5] border border-[#e5e0d6] text-[#231f20] hover:bg-[#F4EFE6] transition-colors"
                               >
-                                تعديل
+                                {tr.edit}
                               </Link>
                               <button
                                 type="button"
@@ -623,7 +837,7 @@ export function NewsAdminTabs({
                                 onClick={() => handleDeleteArticle(art.id, title)}
                                 className="px-3 py-1.5 rounded-lg text-2xs font-bold text-rose-600 hover:bg-rose-50 border border-transparent hover:border-rose-200 transition-colors disabled:opacity-50 cursor-pointer"
                               >
-                                {deletingId === art.id ? 'جارٍ الحذف...' : 'حذف'}
+                                {deletingId === art.id ? tr.deleting : tr.delete}
                               </button>
                             </div>
                           </td>
@@ -632,42 +846,8 @@ export function NewsAdminTabs({
                     })
                   ) : (
                     <tr>
-                      <td colSpan={5} className="px-6 py-12 text-center">
-                        {articles.length === 0 ? (
-                          <div className="max-w-md mx-auto space-y-3">
-                            <div className="w-12 h-12 mx-auto rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6] flex items-center justify-center text-xl">
-                              📰
-                            </div>
-                            <h3 className="text-sm font-extrabold text-[#231f20]">
-                              لا توجد مقالات مسجلة في قاعدة البيانات حالياً
-                            </h3>
-                            <p className="text-xs text-[#5C5A55] leading-relaxed">
-                              يمكنك البدء بكتابة مقال إخباري جديد، أو استيراد المقالات النموذجية الرسمية الثلاث (الإطلاق الرسمي، تطوع شباب في العمل، ورشات المسرح) لتظهر في لوحة التحكم والموقع مباشرة.
-                            </p>
-                            <div className="flex items-center justify-center gap-3 pt-2">
-                              <button
-                                type="button"
-                                disabled={seedingArticles}
-                                onClick={handleSeedDefaultArticles}
-                                className="inline-flex items-center gap-2 px-4 py-2 bg-[#231f20] text-white text-xs font-bold rounded-xl hover:bg-[#d2a82b] transition-all shadow-xs disabled:opacity-50 cursor-pointer"
-                              >
-                                <span>📥</span>
-                                <span>{seedingArticles ? 'جارٍ الاستيراد...' : 'استيراد المقالات النموذجية الآن'}</span>
-                              </button>
-                              <Link
-                                href="/admin/news/new"
-                                className="inline-flex items-center gap-2 px-4 py-2 bg-[#FAF8F5] border border-[#e5e0d6] text-[#231f20] text-xs font-bold rounded-xl hover:bg-[#F4EFE6] transition-all"
-                              >
-                                <span>✍️</span>
-                                <span>كتابة مقال جديد</span>
-                              </Link>
-                            </div>
-                          </div>
-                        ) : (
-                          <span className="text-[#5C5A55] text-xs">
-                            لا توجد مقالات مطابقة لمعايير البحث حالياً.
-                          </span>
-                        )}
+                      <td colSpan={5} className="px-6 py-12 text-center text-[#5C5A55] text-xs">
+                        {tr.noArticlesFound}
                       </td>
                     </tr>
                   )}

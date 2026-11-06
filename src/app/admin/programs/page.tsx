@@ -42,25 +42,12 @@ export default async function AdminProgramsPage() {
   }
 
   return (
-    <div className="space-y-6">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div>
-          <h1 className="text-2xl sm:text-3xl font-black text-[#231f20] tracking-tight">
-            إدارة البرامج والمشاريع الثقافية (Programs CMS)
-          </h1>
-          <p className="text-xs sm:text-sm text-[#5C5A55] mt-1">
-            إدارة كتالوج المبادرات، وتخصيص واجهة ورأس صفحة البرامج، ومؤشرات الأثر بالمملكة.
-          </p>
-        </div>
-      </div>
-
-      <ProgramsAdminTabs
-        programs={programs}
-        initialPageConfig={pageSettings}
-        defaultPageConfig={defaultProgramsPageConfig}
-        onUpdateStatus={updateProgramStatus}
-        onDeleteProgram={handleDelete}
-      />
-    </div>
+    <ProgramsAdminTabs
+      programs={programs}
+      initialPageConfig={pageSettings}
+      defaultPageConfig={defaultProgramsPageConfig}
+      onUpdateStatus={updateProgramStatus}
+      onDeleteProgram={handleDelete}
+    />
   )
 }
