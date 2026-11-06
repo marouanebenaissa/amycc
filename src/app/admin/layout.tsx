@@ -52,7 +52,7 @@ export default async function AdminLayout({
             {children}
           </AdminLayoutClient>
         ) : (
-          <main className="min-h-screen w-full flex items-center justify-center p-4 sm:p-6 bg-[#FAF8F5] relative overflow-hidden">
+          <main className="min-h-screen w-full bg-[#FAF8F5]">
             {children}
           </main>
         )}
