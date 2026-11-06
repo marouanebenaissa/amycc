@@ -15,7 +15,7 @@ const TRANSLATIONS = {
   ar: {
     state_reference: 'المملكة المغربية • الظهير الشريف رقم 1.58.376',
     association_name: 'جمعية روح الفنون والثقافة',
-    association_subtitle: 'Spirit of Arts & Culture Association • Marrakech',
+    association_subtitle: 'AMYCC • Marrakech',
     showcase_badge: '✦ البوابة الإدارية المركزية',
     showcase_desc:
       'فضاء التدبير المؤسساتي المخصص للمكتب التنفيذي والمسؤولين المخولين، لإدارة البرامج، تنظيم الفعاليات، ومواكبة الأثر المجتمعي والثقافي للشباب.',
@@ -35,7 +35,7 @@ const TRANSLATIONS = {
     card_subtitle: 'أدخل بيانات الاعتماد المخولة لولوج لوحة الإدارة',
     email_label: 'البريد الإلكتروني المؤسساتي',
     password_label: 'كلمة المرور المشفرة',
-    email_placeholder: 'admin@amycc.org',
+    email_placeholder: 'example@amycc.org',
     password_placeholder: '••••••••••••',
     btn_submit: 'تسجيل الدخول إلى لوحة التحكم',
     btn_submitting: 'جاري التحقق من الصلاحيات...',
@@ -49,7 +49,7 @@ const TRANSLATIONS = {
   fr: {
     state_reference: 'Royaume du Maroc • Dahir n° 1.58.376',
     association_name: 'Association Esprit des Arts et de la Culture',
-    association_subtitle: 'Spirit of Arts & Culture Association • Marrakech',
+    association_subtitle: 'AMYCC • Marrakech',
     showcase_badge: "✦ Portail d'Administration Centrale",
     showcase_desc:
       "Espace de gestion institutionnelle dédié au bureau exécutif et aux responsables autorisés, pour piloter les programmes, coordonner les événements et mesurer l'impact culturel auprès des jeunes.",
@@ -69,7 +69,7 @@ const TRANSLATIONS = {
     card_subtitle: 'Entrez vos identifiants autorisés pour accéder au tableau de bord',
     email_label: 'Adresse e-mail institutionnelle',
     password_label: 'Mot de passe chiffré',
-    email_placeholder: 'admin@amycc.org',
+    email_placeholder: 'example@amycc.org',
     password_placeholder: '••••••••••••',
     btn_submit: 'Se connecter au tableau de bord',
     btn_submitting: 'Vérification des accès en cours...',
@@ -83,7 +83,7 @@ const TRANSLATIONS = {
   en: {
     state_reference: 'Kingdom of Morocco • Dahir No. 1.58.376',
     association_name: 'Spirit of Arts & Culture Association',
-    association_subtitle: 'Spirit of Arts & Culture Association • Marrakech',
+    association_subtitle: 'AMYCC • Marrakech',
     showcase_badge: '✦ Central Institutional Administration',
     showcase_desc:
       'Institutional management portal dedicated to the executive board and authorized leadership for overseeing programs, cultural events, and community youth impact across Morocco.',
@@ -103,7 +103,7 @@ const TRANSLATIONS = {
     card_subtitle: 'Enter your authorized credentials to access the admin portal',
     email_label: 'Institutional Email Address',
     password_label: 'Encrypted Password',
-    email_placeholder: 'admin@amycc.org',
+    email_placeholder: 'example@amycc.org',
     password_placeholder: '••••••••••••',
     btn_submit: 'Sign In to Dashboard',
     btn_submitting: 'Verifying credentials...',

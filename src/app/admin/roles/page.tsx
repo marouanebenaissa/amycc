@@ -1,4 +1,5 @@
 import { createClient } from '@/lib/supabase/server'
+import { createAdminClientSafe } from '@/lib/supabase/admin'
 import { redirect } from 'next/navigation'
 import { assignUserRole, removeUserRole } from '@/lib/actions/admin'
 
@@ -94,17 +95,35 @@ export default async function AdminRolesPage() {
     redirect('/admin/login')
   }
 
-  // Fetch current user roles and all profiles
-  const [
-    { data: rawUserRoles },
-    { data: rawProfiles },
-  ] = await Promise.all([
-    supabase.from('user_roles').select('user_id, role_id, profiles(id, email, full_name)'),
-    supabase.from('profiles').select('id, email, full_name').order('email', { ascending: true }),
-  ])
+  // Fetch current user roles and all profiles with admin client (bypasses RLS)
+  const adminClient = createAdminClientSafe()
+  const dbClient = adminClient || supabase
 
-  const userRoles = (rawUserRoles || []) as unknown as UserRoleRow[]
-  const profiles = rawProfiles || []
+  let rawUserRoles: UserRoleRow[] = []
+  let rawProfiles: { id: string; email: string; full_name: string | null }[] = []
+
+  try {
+    const [{ data: urData }, { data: pData }] = await Promise.all([
+      dbClient.from('user_roles').select('user_id, role_id, profiles(id, email, full_name)'),
+      dbClient.from('profiles').select('id, email, full_name').order('email', { ascending: true }),
+    ])
+    rawUserRoles = (urData || []) as unknown as UserRoleRow[]
+    rawProfiles = pData || []
+  } catch {
+    // Graceful fallback
+  }
+
+  // Ensure current logged in admin is in profiles list
+  if (!rawProfiles.some((p) => p.id === user.id || p.email.toLowerCase() === (user.email || '').toLowerCase())) {
+    rawProfiles.unshift({
+      id: user.id,
+      email: user.email || 'admin@amycc.org',
+      full_name: (user.user_metadata?.full_name as string) || (user.email?.split('@')[0] ?? 'Administrator'),
+    })
+  }
+
+  const userRoles = rawUserRoles
+  const profiles = rawProfiles
 
   async function handleAssignRole(formData: FormData) {
     'use server'

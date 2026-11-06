@@ -15,3 +15,11 @@ export function createAdminClient() {
     },
   })
 }
+
+export function createAdminClientSafe() {
+  try {
+    return createAdminClient()
+  } catch {
+    return null
+  }
+}

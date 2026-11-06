@@ -1,128 +1,170 @@
 import { createClient } from '@/lib/supabase/server'
+import { createAdminClientSafe } from '@/lib/supabase/admin'
 import { redirect } from 'next/navigation'
-
-interface RoleInfo {
-  name: string
-  description: string
-}
-
-interface UserRoleRelation {
-  role_id: number
-  roles: RoleInfo | null
-}
+import {
+  AdminUsersClient,
+  AdminUserItem,
+  PREDEFINED_ROLES,
+} from '@/components/admin/AdminUsersClient'
 
 interface ProfileRow {
   id: string
   email: string
-  full_name?: string
+  full_name: string | null
   created_at: string
-  user_roles?: UserRoleRelation[]
+}
+
+interface UserRoleRelationRow {
+  user_id: string
+  role_id: number
+  roles: {
+    id?: number
+    name?: string
+    description?: string
+  } | null
 }
 
 export default async function AdminUsersPage() {
   const supabase = await createClient()
-  const { data: { user } } = await supabase.auth.getUser()
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
 
   if (!user) {
     redirect('/admin/login')
   }
 
-  const [{ data: rawProfiles }, { data: roles }] = await Promise.all([
-    supabase.from('profiles').select('*, user_roles(role_id, roles(name, description))').order('created_at', { ascending: false }),
-    supabase.from('roles').select('*').order('id', { ascending: true }),
-  ])
+  const adminClient = createAdminClientSafe()
+  let profiles: ProfileRow[] = []
+  let userRoles: UserRoleRelationRow[] = []
 
-  const profiles = (rawProfiles || []) as ProfileRow[]
+  if (adminClient) {
+    try {
+      const [{ data: pData }, { data: urData }, { data: authData }] =
+        await Promise.all([
+          adminClient.from('profiles').select('id, email, full_name, created_at'),
+          adminClient
+            .from('user_roles')
+            .select('user_id, role_id, roles(id, name, description)'),
+          adminClient.auth.admin.listUsers(),
+        ])
+
+      profiles = (pData || []) as ProfileRow[]
+      userRoles = (urData || []) as unknown as UserRoleRelationRow[]
+
+      // If auth users exist that are not yet in profiles, sync them
+      const authUsers = authData?.users || []
+      const existingProfileIds = new Set(profiles.map((p) => p.id))
+
+      for (const authU of authUsers) {
+        if (!existingProfileIds.has(authU.id)) {
+          const newProfile: ProfileRow = {
+            id: authU.id,
+            email: authU.email || '',
+            full_name:
+              (authU.user_metadata?.full_name as string) ||
+              (authU.email?.split('@')[0] ?? 'Staff Administrator'),
+            created_at: authU.created_at || new Date().toISOString(),
+          }
+          profiles.push(newProfile)
+
+          // Auto-upsert into DB for future persistence
+          try {
+            await adminClient.from('profiles').upsert([newProfile], { onConflict: 'id' })
+          } catch {
+            // Ignore background sync errors
+          }
+        }
+      }
+    } catch {
+      // Fallback if admin query fails
+    }
+  }
+
+  // Fallback to standard client if profiles are still empty
+  if (profiles.length === 0) {
+    try {
+      const [{ data: pData }, { data: urData }] = await Promise.all([
+        supabase.from('profiles').select('id, email, full_name, created_at'),
+        supabase
+          .from('user_roles')
+          .select('user_id, role_id, roles(id, name, description)'),
+      ])
+      profiles = (pData || []) as ProfileRow[]
+      userRoles = (urData || []) as unknown as UserRoleRelationRow[]
+    } catch {
+      // Ignore
+    }
+  }
+
+  // Ensure current user is ALWAYS included so the table is never empty for logged-in admin
+  const currentUserId = user.id
+  const currentUserEmail = user.email || 'admin@amycc.org'
+  const currentUserFullName =
+    (user.user_metadata?.full_name as string) ||
+    currentUserEmail.split('@')[0] ||
+    'Staff Administrator'
+
+  const userFoundInProfiles = profiles.some(
+    (p) => p.id === currentUserId || p.email.toLowerCase() === currentUserEmail.toLowerCase()
+  )
+
+  if (!userFoundInProfiles) {
+    profiles.unshift({
+      id: currentUserId,
+      email: currentUserEmail,
+      full_name: currentUserFullName,
+      created_at: user.created_at || new Date().toISOString(),
+    })
+  }
+
+  // Map into AdminUserItem[]
+  const users: AdminUserItem[] = profiles.map((p) => {
+    const isCurrent =
+      p.id === currentUserId ||
+      p.email.toLowerCase() === currentUserEmail.toLowerCase()
+
+    // Find role for this user
+    const matchedRoleRelation = userRoles.find((ur) => ur.user_id === p.id)
+    let roleId = matchedRoleRelation?.role_id
+    let roleName = matchedRoleRelation?.roles?.name
+
+    if (!roleId || !roleName) {
+      // If user is the logged in super admin, default to super_admin (id: 1)
+      if (isCurrent) {
+        roleId = 1
+        roleName = 'super_admin'
+      } else {
+        // Fallback default
+        const defaultRole = PREDEFINED_ROLES[0]
+        roleId = defaultRole.id
+        roleName = defaultRole.name
+      }
+    }
+
+    return {
+      id: p.id,
+      email: p.email,
+      full_name: p.full_name || 'Staff Member',
+      created_at: p.created_at,
+      roleId,
+      roleName,
+      isCurrentUser: isCurrent,
+    }
+  })
+
+  // Sort so current logged in admin is at the top, then alphabetically by email
+  users.sort((a, b) => {
+    if (a.isCurrentUser) return -1
+    if (b.isCurrentUser) return 1
+    return a.email.localeCompare(b.email)
+  })
 
   return (
-    <div className="space-y-6">
-      <div>
-        <h1 className="text-2xl font-black text-[#231f20]">Users & Role-Based Permissions (RBAC)</h1>
-        <p className="text-xs text-[#5C5A55] mt-1">
-          Enforce the principle of least privilege. Manage authorized staff roles and access levels.
-        </p>
-      </div>
-
-      <div className="bg-white rounded-2xl border border-[#e5e0d6] overflow-hidden shadow-2xs">
-        <div className="overflow-x-auto">
-          <table className="w-full text-start text-xs text-[#231f20]">
-            <thead className="bg-[#FAF8F5] border-b border-[#e5e0d6] text-2xs uppercase tracking-wider text-[#5C5A55] font-bold">
-              <tr>
-                <th className="px-6 py-4 text-start">Staff User</th>
-                <th className="px-6 py-4 text-start">Assigned Roles</th>
-                <th className="px-6 py-4 text-start">Member Since</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-[#FEF6CC]">
-              {profiles.length > 0 ? (
-                profiles.map((p) => {
-                  const userRoles = p.user_roles?.map((ur) => ur.roles?.name).filter((name): name is string => Boolean(name)) || []
-                  return (
-                    <tr key={p.id} className="hover:bg-[#FAF8F5]/60 transition-colors">
-                      <td className="px-6 py-4">
-                        <div className="font-bold text-[#231f20]">{p.full_name || 'Staff Member'}</div>
-                        <div className="text-[#5C5A55] text-3xs font-mono">{p.email}</div>
-                      </td>
-                      <td className="px-6 py-4">
-                        {userRoles.length > 0 ? (
-                          <div className="flex flex-wrap gap-1.5">
-                            {userRoles.map((r: string) => (
-                              <span
-                                key={r}
-                                className={`px-2.5 py-0.5 rounded-full text-3xs font-bold uppercase tracking-wider ${
-                                  r === 'super_admin'
-                                    ? 'bg-[#fde8e7] text-[#bd3227] border border-[#fde8e7]'
-                                    : 'bg-[#F4EFE6] text-[#231f20] border border-[#d2a82b]'
-                                }`}
-                              >
-                                {r.replace('_', ' ')}
-                              </span>
-                            ))}
-                          </div>
-                        ) : (
-                          <span className="text-[#5C5A55] text-2xs">No active role assigned</span>
-                        )}
-                      </td>
-                      <td className="px-6 py-4 text-[#5C5A55] text-3xs">
-                        {new Date(p.created_at).toLocaleDateString()}
-                      </td>
-                    </tr>
-                  )
-                })
-              ) : (
-                <tr>
-                  <td colSpan={3} className="px-6 py-12 text-center text-[#5C5A55]">
-                    No users loaded.
-                  </td>
-                </tr>
-              )}
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      {/* Predefined Roles Reference Card */}
-      <div className="bg-white p-6 rounded-2xl border border-[#e5e0d6] shadow-2xs">
-        <h2 className="text-xs font-bold text-[#231f20] mb-3 uppercase tracking-wider">
-          Predefined Role Definitions in AMYCC Security Matrix
-        </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-          {roles && roles.length > 0 ? (
-            roles.map((role) => (
-              <div key={role.id} className="p-3 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6] text-xs">
-                <span className="font-bold text-[#231f20] capitalize block">
-                  {role.name.replace(/_/g, ' ')}
-                </span>
-                <span className="text-3xs text-[#5C5A55] leading-relaxed mt-0.5 block">
-                  {role.description}
-                </span>
-              </div>
-            ))
-          ) : (
-            <p className="text-xs text-[#5C5A55]">9 standard roles initialized.</p>
-          )}
-        </div>
-      </div>
-    </div>
+    <AdminUsersClient
+      initialUsers={users}
+      currentUserId={currentUserId}
+      currentUserEmail={currentUserEmail}
+    />
   )
 }

@@ -1,7 +1,7 @@
 'use server'
 
 import { createClient } from '@/lib/supabase/server'
-import { createAdminClient } from '@/lib/supabase/admin'
+import { createAdminClient, createAdminClientSafe } from '@/lib/supabase/admin'
 import { redirect } from 'next/navigation'
 import { revalidatePath } from 'next/cache'
 import type { FaqItemConfig, AreasConfig, TeamConfig, CommissionsConfig, ContactConfig, ProgramsPageConfig, AnnualProgramConfig, ImpactConfig, EventsPageConfig, NewsPageConfig, PartnershipsPageConfig, MembershipPageConfig, SupportPageConfig } from '@/lib/settings'
@@ -101,7 +101,10 @@ export async function deleteApplicationRecord(
 export async function assignUserRole(userId: string, roleId: number): Promise<{ success: boolean; error?: string }> {
   try {
     const supabase = await createClient()
-    const { error } = await supabase
+    const adminClient = createAdminClientSafe()
+    const client = adminClient || supabase
+
+    const { error } = await client
       .from('user_roles')
       .upsert([{ user_id: userId, role_id: roleId }], { onConflict: 'user_id,role_id' })
 
@@ -119,7 +122,10 @@ export async function assignUserRole(userId: string, roleId: number): Promise<{ 
 export async function removeUserRole(userId: string, roleId: number): Promise<{ success: boolean; error?: string }> {
   try {
     const supabase = await createClient()
-    const { error } = await supabase
+    const adminClient = createAdminClientSafe()
+    const client = adminClient || supabase
+
+    const { error } = await client
       .from('user_roles')
       .delete()
       .match({ user_id: userId, role_id: roleId })
@@ -127,6 +133,161 @@ export async function removeUserRole(userId: string, roleId: number): Promise<{ 
     if (error) return { success: false, error: error.message }
 
     await recordAuditLog('revoke_role', 'user_roles', userId, { role_id: roleId })
+    revalidatePath('/admin/users')
+    revalidatePath('/admin/roles')
+    return { success: true }
+  } catch (err) {
+    return { success: false, error: (err as Error).message }
+  }
+}
+
+export async function updateUserRoleAction(userId: string, newRoleId: number): Promise<{ success: boolean; error?: string }> {
+  try {
+    const supabase = await createClient()
+    const { data: { user: currentUser } } = await supabase.auth.getUser()
+    if (!currentUser) {
+      return { success: false, error: 'Unauthorized: Admin session required' }
+    }
+
+    const adminClient = createAdminClientSafe()
+    const client = adminClient || supabase
+
+    // Remove existing roles for this user and set the newly selected role
+    await client.from('user_roles').delete().eq('user_id', userId)
+
+    const { error: insertError } = await client.from('user_roles').insert([
+      {
+        user_id: userId,
+        role_id: newRoleId,
+        granted_by: currentUser.id,
+        granted_at: new Date().toISOString(),
+      },
+    ])
+
+    if (insertError) {
+      return { success: false, error: insertError.message }
+    }
+
+    await recordAuditLog('update_user_role', 'user_roles', userId, {
+      newRoleId,
+      updatedBy: currentUser.email,
+    })
+
+    revalidatePath('/admin/users')
+    revalidatePath('/admin/roles')
+    return { success: true }
+  } catch (err) {
+    return { success: false, error: (err as Error).message }
+  }
+}
+
+export async function createUserWithRoleAction(formData: FormData): Promise<{ success: boolean; error?: string }> {
+  try {
+    const email = (formData.get('email') as string)?.trim()?.toLowerCase()
+    const password = (formData.get('password') as string)?.trim()
+    const fullName = (formData.get('fullName') as string)?.trim() || 'Staff Administrator'
+    const roleId = Number(formData.get('roleId')) || 1
+
+    if (!email || !password) {
+      return { success: false, error: 'Email and password are required' }
+    }
+    if (password.length < 6) {
+      return { success: false, error: 'Password must be at least 6 characters' }
+    }
+
+    const supabase = await createClient()
+    const { data: { user: currentUser } } = await supabase.auth.getUser()
+    if (!currentUser) {
+      return { success: false, error: 'Unauthorized: Admin session required' }
+    }
+
+    const adminClient = createAdminClientSafe()
+    if (!adminClient) {
+      return {
+        success: false,
+        error: 'SUPABASE_SERVICE_ROLE_KEY is required to provision staff users. Please set this variable in Vercel.',
+      }
+    }
+
+    // 1. Create auth user with service role client
+    const { data: authData, error: authError } = await adminClient.auth.admin.createUser({
+      email,
+      password,
+      email_confirm: true,
+      user_metadata: { full_name: fullName },
+    })
+
+    if (authError || !authData?.user) {
+      return { success: false, error: authError?.message || 'Failed to create user in authentication system' }
+    }
+
+    const newUserId = authData.user.id
+
+    // 2. Upsert profile
+    await adminClient.from('profiles').upsert([
+      {
+        id: newUserId,
+        email,
+        full_name: fullName,
+        created_at: new Date().toISOString(),
+      },
+    ], { onConflict: 'id' })
+
+    // 3. Assign role
+    await adminClient.from('user_roles').upsert([
+      {
+        user_id: newUserId,
+        role_id: roleId,
+        granted_by: currentUser.id,
+        granted_at: new Date().toISOString(),
+      },
+    ], { onConflict: 'user_id,role_id' })
+
+    await recordAuditLog('create_staff_user', 'profiles', newUserId, {
+      email,
+      fullName,
+      roleId,
+      createdBy: currentUser.email,
+    })
+
+    revalidatePath('/admin/users')
+    revalidatePath('/admin/roles')
+    return { success: true }
+  } catch (err) {
+    return { success: false, error: (err as Error).message }
+  }
+}
+
+export async function deleteStaffUserAction(userId: string): Promise<{ success: boolean; error?: string }> {
+  try {
+    const supabase = await createClient()
+    const { data: { user: currentUser } } = await supabase.auth.getUser()
+    if (!currentUser) {
+      return { success: false, error: 'Unauthorized: Admin session required' }
+    }
+    if (currentUser.id === userId) {
+      return { success: false, error: 'You cannot delete your own active administrator account' }
+    }
+
+    const adminClient = createAdminClientSafe()
+    if (!adminClient) {
+      return { success: false, error: 'SUPABASE_SERVICE_ROLE_KEY required to delete staff accounts' }
+    }
+
+    // 1. Delete user_roles
+    await adminClient.from('user_roles').delete().eq('user_id', userId)
+    // 2. Delete profile
+    await adminClient.from('profiles').delete().eq('id', userId)
+    // 3. Delete from auth.users
+    const { error: authDeleteError } = await adminClient.auth.admin.deleteUser(userId)
+    if (authDeleteError) {
+      return { success: false, error: authDeleteError.message }
+    }
+
+    await recordAuditLog('delete_staff_user', 'profiles', userId, {
+      deletedBy: currentUser.email,
+    })
+
     revalidatePath('/admin/users')
     revalidatePath('/admin/roles')
     return { success: true }
