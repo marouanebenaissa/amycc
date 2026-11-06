@@ -423,27 +423,27 @@ export default async function HomePage(props: { params: Promise<{ locale: string
               <div className="p-5 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6] shadow-2xs hover:border-[#231f20]/30 transition-all">
                 <div className="text-3xl sm:text-4xl font-black text-[#231f20]">2026</div>
                 <div className="text-xs font-bold text-[#231f20] mt-1.5">
-                  {isAr ? 'سنة التأسيس الرسمية بالمغرب' : 'Foundation Year in Morocco'}
+                  {isAr ? 'سنة التأسيس الرسمية بالمغرب' : isFr ? 'Année de fondation au Maroc' : 'Foundation Year in Morocco'}
                 </div>
                 <div className="text-3xs text-[#5C5A55] mt-1 font-medium">
-                  {isAr ? 'تأسيس جمعوي مدني' : 'Nonprofit Association'}
+                  {isAr ? 'تأسيس جمعوي مدني' : isFr ? 'Association citoyenne' : 'Nonprofit Association'}
                 </div>
               </div>
 
               <div className="p-5 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6] shadow-2xs hover:border-[#bd3227]/30 transition-all">
                 <div className="text-3xl sm:text-4xl font-black text-[#bd3227]">6</div>
                 <div className="text-xs font-bold text-[#231f20] mt-1.5">
-                  {isAr ? 'مجالات عمل فني وثقافي' : 'Core Cultural Domains'}
+                  {isAr ? 'مجالات عمل فني وثقافي' : isFr ? 'Pôles d\'action culturelle et artistique' : 'Core Cultural Domains'}
                 </div>
                 <div className="text-3xs text-[#5C5A55] mt-1 font-medium">
-                  {isAr ? 'فنون، موسيقى، مسرح، تطوع' : 'Arts, Music, Theatre, Civic'}
+                  {isAr ? 'فنون، موسيقى، مسرح، تطوع' : isFr ? 'Arts, musique, théâtre, bénévolat' : 'Arts, Music, Theatre, Civic'}
                 </div>
               </div>
 
               <div className="p-5 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6] shadow-2xs hover:border-[#d2a82b]/30 transition-all">
                 <div className="text-3xl sm:text-4xl font-black text-[#d2a82b]">3</div>
                 <div className="text-xs font-bold text-[#231f20] mt-1.5">
-                  {isAr ? 'لغات تواصل معتمدة' : 'Official Platform Languages'}
+                  {isAr ? 'لغات تواصل معتمدة' : isFr ? 'Langues officielles de la plateforme' : 'Official Platform Languages'}
                 </div>
                 <div className="text-3xs text-[#5C5A55] mt-1 font-medium">
                   العربية • Français • English
@@ -453,10 +453,10 @@ export default async function HomePage(props: { params: Promise<{ locale: string
               <div className="p-5 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6] shadow-2xs hover:border-[#231f20]/30 transition-all">
                 <div className="text-3xl sm:text-4xl font-black text-[#231f20]">100%</div>
                 <div className="text-xs font-bold text-[#231f20] mt-1.5">
-                  {isAr ? 'عمل مدني غير ربحي' : 'Civic Non-Profit Mission'}
+                  {isAr ? 'عمل مدني غير ربحي' : isFr ? 'Engagement civique à but non lucratif' : 'Civic Non-Profit Mission'}
                 </div>
                 <div className="text-3xs text-[#5C5A55] mt-1 font-medium">
-                  {isAr ? 'لخدمة الثقافة والشباب' : 'Serving Youth & Culture'}
+                  {isAr ? 'لخدمة الثقافة والشباب' : isFr ? 'Au service de la jeunesse et de la culture' : 'Serving Youth & Culture'}
                 </div>
               </div>
             </div>
@@ -498,17 +498,20 @@ export default async function HomePage(props: { params: Promise<{ locale: string
                     {dict.about.mission_title}
                   </h3>
                   <p className="text-sm text-[#5C5A55] leading-relaxed">
-                    {isAr
+                    {dict.about.mission_desc || (isAr
                       ? 'تؤمن الجمعية بأن لكل شاب موهبة وقدرات إبداعية تستحق الاكتشاف والرعاية، وتعمل انطلاقاً من مدينة مراكش على صقل الطاقات الفنية وتمكين الشباب في خدمة المجتمع.'
-                      : dict.about.description}
+                      : isFr
+                      ? "L'association est convaincue que chaque jeune possède un potentiel créatif unique. Depuis Marrakech, nous mobilisons l'art pour autonomiser la jeunesse et dynamiser la communauté."
+                      : 'We believe every young person possesses creative talents that deserve discovery and care. Originating from Marrakech, we empower youth and cultivate artistic potential to serve communities across Morocco.')}
                   </p>
                 </div>
                 <div className="pt-6 mt-6 border-t border-[#E5E0D6]">
                   <Link
                     href={`/${locale}/about#mission`}
-                    className="text-xs font-bold text-[#231f20] hover:text-[#bd3227] transition-colors"
+                    className="text-xs font-bold text-[#231f20] hover:text-[#bd3227] transition-colors inline-flex items-center gap-1.5"
                   >
-                    {isAr ? 'اكتشف رسالتنا الكاملة' : 'Read Our Full Mission'} →
+                    <span>{dict.about.mission_cta || (isAr ? 'اكتشف رسالتنا الكاملة' : isFr ? 'Découvrir notre mission complète' : 'Read Our Full Mission')}</span>
+                    <span aria-hidden="true">{isAr ? '←' : '→'}</span>
                   </Link>
                 </div>
               </div>
@@ -530,17 +533,20 @@ export default async function HomePage(props: { params: Promise<{ locale: string
                     {dict.about.vision_title}
                   </h3>
                   <p className="text-sm text-[#5C5A55] leading-relaxed">
-                    {isAr
+                    {dict.about.vision_desc || (isAr
                       ? 'أن تصبح جمعية رائدة في الفنون والتمكين، عبر شبكة متكاملة من الفروع تنطلق إقليمياً وتمتد لمختلف جهات المملكة وصولاً للمستوى الوطني والدولي.'
-                      : dict.hero.subtitle}
+                      : isFr
+                      ? "Devenir une association de référence dans les arts et l'autonomisation des jeunes, via un réseau structuré débutant à Marrakech et s'étendant à toutes les régions du Royaume et à l'international."
+                      : 'To become a leading association in arts and youth empowerment through an integrated network of chapters starting from Marrakech, expanding across all Moroccan regions, and scaling internationally.')}
                   </p>
                 </div>
                 <div className="pt-6 mt-6 border-t border-[#E5E0D6] relative z-10">
                   <Link
                     href={`/${locale}/about#vision`}
-                    className="text-xs font-bold text-[#bd3227] hover:underline"
+                    className="text-xs font-bold text-[#bd3227] hover:underline inline-flex items-center gap-1.5"
                   >
-                    {isAr ? 'استكشف خارطة الرؤية' : 'Explore Vision Roadmap'} →
+                    <span>{dict.about.vision_cta || (isAr ? 'استكشف خارطة الرؤية' : isFr ? 'Explorer la feuille de route' : 'Explore Vision Roadmap')}</span>
+                    <span aria-hidden="true">{isAr ? '←' : '→'}</span>
                   </Link>
                 </div>
               </div>
@@ -561,17 +567,20 @@ export default async function HomePage(props: { params: Promise<{ locale: string
                     {dict.about.values_title}
                   </h3>
                   <p className="text-sm text-[#5C5A55] leading-relaxed">
-                    {isAr
+                    {dict.about.values_desc || (isAr
                       ? 'تستند الجمعية إلى 7 قيم أساسية: الإبداع، الشمولية، التضامن، التعليم والتطوير، الاحترام والتنوع، التعاون والشراكة، والشفافية والمسؤولية.'
-                      : dict.footer.description}
+                      : isFr
+                      ? "L'AMYCC s'appuie sur 7 valeurs fondamentales : Créativité, Inclusivité, Solidarité, Éducation continue, Respect de la diversité, Coopération et Transparence responsable."
+                      : 'Guided by 7 fundamental values: Creativity, Inclusivity, Solidarity, Continuous Learning, Respect for Diversity, Active Partnerships, and Transparent Stewardship.')}
                   </p>
                 </div>
                 <div className="pt-6 mt-6 border-t border-[#E5E0D6]">
                   <Link
                     href={`/${locale}/about#values`}
-                    className="text-xs font-bold text-[#d2a82b] hover:text-[#231f20] transition-colors"
+                    className="text-xs font-bold text-[#d2a82b] hover:text-[#231f20] transition-colors inline-flex items-center gap-1.5"
                   >
-                    {isAr ? 'تفاصيل قيمنا الـ 7' : 'Our 7 Core Values'} →
+                    <span>{dict.about.values_cta || (isAr ? 'تفاصيل قيمنا الـ 7' : isFr ? 'Nos 7 valeurs piliers' : 'Our 7 Core Values')}</span>
+                    <span aria-hidden="true">{isAr ? '←' : '→'}</span>
                   </Link>
                 </div>
               </div>
@@ -594,7 +603,7 @@ export default async function HomePage(props: { params: Promise<{ locale: string
                 : '“Arts and culture are vital catalysts for human development, youth leadership, and civic empowerment across Morocco.”'}
             </blockquote>
             <p className="text-xs font-bold text-[#d2a82b] uppercase tracking-widest pt-2">
-              — {isAr ? 'جمعية روح الفنون والثقافة (AMYCC)' : 'Spirit of Arts & Culture Association'}
+              — {isAr ? 'جمعية روح الفنون والثقافة (AMYCC)' : isFr ? 'Association Esprit des Arts et de la Culture (AMYCC)' : 'Spirit of Arts & Culture Association (AMYCC)'}
             </p>
           </div>
         </section>
@@ -1023,6 +1032,8 @@ export default async function HomePage(props: { params: Promise<{ locale: string
               <p className="text-sm text-[#5C5A55] max-w-xl mx-auto">
                 {isAr
                   ? 'إجابات واضحة عن كيفية الانخراط، التطوع في شباب في العمل، وحضور الفعاليات الثقافية.'
+                  : isFr
+                  ? 'Réponses claires sur l’adhésion, le bénévolat dans Jeunesse en Action et la participation aux événements.'
                   : 'Clear answers on membership, volunteering, and institutional partnership opportunities.'}
               </p>
             </div>
@@ -1034,8 +1045,8 @@ export default async function HomePage(props: { params: Promise<{ locale: string
                 href={`/${locale}/faq`}
                 className="text-xs font-bold text-[#231f20] hover:text-[#bd3227] transition-colors inline-flex items-center gap-1"
               >
-                <span>{isAr ? 'عرض جميع الأسئلة والإرشادات' : 'View full FAQ page'}</span>
-                <span aria-hidden="true">→</span>
+                <span>{isAr ? 'عرض جميع الأسئلة والإرشادات' : isFr ? 'Consulter toutes les questions' : 'View full FAQ page'}</span>
+                <span aria-hidden="true">{isAr ? '←' : '→'}</span>
               </Link>
             </div>
           </div>
@@ -1101,7 +1112,7 @@ export default async function HomePage(props: { params: Promise<{ locale: string
 
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 space-y-6">
             <span className="inline-block px-3.5 py-1 rounded-full text-xs font-bold bg-[#d2a82b] text-[#ffd22f] border border-[#d2a82b]/40">
-              {isAr ? 'انضم إلى مسيرة روح الفنون والثقافة 2026' : 'Join the Cultural Journey'}
+              {isAr ? 'انضم إلى مسيرة روح الفنون والثقافة 2026' : isFr ? 'Rejoignez l’aventure culturelle 2026' : 'Join the Cultural Journey'}
             </span>
 
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white leading-tight">

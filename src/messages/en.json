@@ -30,7 +30,13 @@
     "description": "The Spirit of Arts & Culture Association (AMYCC) is a nonprofit association based in Morocco, founded in 2026, dedicated to promoting arts, culture, and youth empowerment.",
     "mission_title": "Our Mission",
     "vision_title": "Our Vision",
-    "values_title": "Our Values"
+    "values_title": "Our Values",
+    "mission_desc": "We believe every young person possesses creative talents that deserve discovery and care. Originating from Marrakech, we empower youth and cultivate artistic potential to serve communities across Morocco.",
+    "mission_cta": "Read Our Full Mission",
+    "vision_desc": "To become a leading association in arts and youth empowerment through an integrated network of chapters starting from Marrakech, expanding across all Moroccan regions, and scaling internationally.",
+    "vision_cta": "Explore Vision Roadmap",
+    "values_desc": "Guided by 7 fundamental values: Creativity, Inclusivity, Solidarity, Continuous Learning, Respect for Diversity, Active Partnerships, and Transparent Stewardship.",
+    "values_cta": "Our 7 Core Values"
   },
   "home": {
     "intro_badge": "Moroccan Cultural Association",

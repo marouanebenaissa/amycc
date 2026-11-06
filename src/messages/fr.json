@@ -30,7 +30,13 @@
     "description": "L'Association Esprit des Arts et de la Culture (AMYCC) est une association à but non lucratif basée au Maroc, fondée en 2026, œuvrant pour la promotion des arts, de la culture et l'autonomisation de la jeunesse.",
     "mission_title": "Notre Mission",
     "vision_title": "Notre Vision",
-    "values_title": "Nos Valeurs"
+    "values_title": "Nos Valeurs",
+    "mission_desc": "L'association est convaincue que chaque jeune possède un potentiel créatif unique. Depuis Marrakech, nous mobilisons l'art pour autonomiser la jeunesse et dynamiser la communauté.",
+    "mission_cta": "Découvrir notre mission complète",
+    "vision_desc": "Devenir une association de référence dans les arts et l'autonomisation des jeunes, via un réseau structuré débutant à Marrakech et s'étendant à toutes les régions du Royaume et à l'international.",
+    "vision_cta": "Explorer la feuille de route",
+    "values_desc": "L'AMYCC s'appuie sur 7 valeurs fondamentales : Créativité, Inclusivité, Solidarité, Éducation continue, Respect de la diversité, Coopération et Transparence responsable.",
+    "values_cta": "Nos 7 valeurs piliers"
   },
   "home": {
     "intro_badge": "Association culturelle marocaine fondée en 2026",
