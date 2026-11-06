@@ -471,7 +471,7 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
                   {isAr ? 'نقطة الانطلاق والنطاق' : isFr ? 'Point de Départ & Rayonnement' : 'Origin & Reach'}
                 </span>
                 <div className="min-h-[3rem] flex items-center justify-center">
-                  <span className="text-base sm:text-lg lg:text-xl font-black text-[#bd3227] group-hover:scale-105 transition-transform block whitespace-nowrap">
+                  <span className="text-base sm:text-lg xl:text-xl font-black text-[#bd3227] group-hover:scale-105 transition-transform block text-center leading-tight text-balance">
                     {isAr ? 'مراكش • المغرب' : isFr ? 'Marrakech • Maroc' : 'Marrakech • Morocco'}
                   </span>
                 </div>
@@ -490,7 +490,7 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
                   {isAr ? 'المنظومة التوجيهية' : isFr ? 'Cadre d’Orientation' : 'Core Framework'}
                 </span>
                 <div className="min-h-[3rem] flex items-center justify-center">
-                  <span className="text-lg sm:text-xl font-black text-[#d2a82b] group-hover:scale-105 transition-transform block whitespace-nowrap">
+                  <span className="text-base sm:text-lg xl:text-xl font-black text-[#d2a82b] group-hover:scale-105 transition-transform block text-center leading-tight">
                     {isAr ? '7 قيم موجهة' : isFr ? '7 Valeurs' : '7 Values'}
                   </span>
                 </div>
@@ -509,7 +509,7 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
                   {isAr ? 'البرنامج الرائد والمبادرة' : isFr ? 'Programme Phare' : 'Flagship Initiative'}
                 </span>
                 <div className="min-h-[3rem] flex items-center justify-center">
-                  <span className="text-base sm:text-lg lg:text-xl font-black text-[#231f20] group-hover:scale-105 transition-transform block whitespace-nowrap">
+                  <span className="text-base sm:text-lg xl:text-xl font-black text-[#231f20] group-hover:scale-105 transition-transform block text-center leading-tight">
                     {isAr ? 'شباب في العمل' : isFr ? 'Jeunesse en Action' : 'Youth in Action'}
                   </span>
                 </div>

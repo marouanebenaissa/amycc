@@ -272,12 +272,12 @@ export default async function TeamPage(props: { params: Promise<{ locale: string
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
               {/* Card 1: 6 Statutory Roles */}
-              <div className="p-5 sm:p-6 rounded-3xl bg-[#FAF8F5] border border-[#e5e0d6] hover:border-[#231f20]/30 transition-all text-center flex flex-col justify-between group shadow-2xs">
+              <div className="p-5 sm:p-6 rounded-3xl bg-[#FAF8F5] border border-[#e5e0d6] hover:border-[#231f20]/30 transition-all text-center flex flex-col justify-between group shadow-2xs overflow-hidden">
                 <span className="text-xs font-bold text-[#5C5A55] block mb-1">
                   {isAr ? 'المكتب التنفيذي المنتخب' : isFr ? 'Bureau Exécutif Élu' : 'Elected Executive Board'}
                 </span>
-                <div className="min-h-[3rem] flex items-center justify-center">
-                  <span className="text-xl sm:text-2xl font-black text-[#231f20] group-hover:scale-105 transition-transform block whitespace-nowrap">
+                <div className="min-h-[3.25rem] flex items-center justify-center px-1">
+                  <span className="text-lg sm:text-xl xl:text-2xl font-black text-[#231f20] group-hover:scale-105 transition-transform block text-center leading-tight">
                     {isAr ? '6 مناصب قانونية' : isFr ? '6 Postes Statutaires' : '6 Statutory Roles'}
                   </span>
                 </div>
@@ -291,12 +291,12 @@ export default async function TeamPage(props: { params: Promise<{ locale: string
               </div>
 
               {/* Card 2: 6 Specialized Hubs */}
-              <div className="p-5 sm:p-6 rounded-3xl bg-[#FAF8F5] border border-[#e5e0d6] hover:border-[#bd3227]/30 transition-all text-center flex flex-col justify-between group shadow-2xs">
+              <div className="p-5 sm:p-6 rounded-3xl bg-[#FAF8F5] border border-[#e5e0d6] hover:border-[#bd3227]/30 transition-all text-center flex flex-col justify-between group shadow-2xs overflow-hidden">
                 <span className="text-xs font-bold text-[#5C5A55] block mb-1">
                   {isAr ? 'اللجان الميدانية المتخصصة' : isFr ? 'Commissions Thématiques' : 'Specialized Commissions'}
                 </span>
-                <div className="min-h-[3rem] flex items-center justify-center">
-                  <span className="text-xl sm:text-2xl font-black text-[#bd3227] group-hover:scale-105 transition-transform block whitespace-nowrap">
+                <div className="min-h-[3.25rem] flex items-center justify-center px-1">
+                  <span className="text-lg sm:text-xl xl:text-2xl font-black text-[#bd3227] group-hover:scale-105 transition-transform block text-center leading-tight">
                     {isAr ? '6 محاور وظيفية' : isFr ? '6 Pôles d’Action' : '6 Functional Hubs'}
                   </span>
                 </div>
@@ -310,12 +310,12 @@ export default async function TeamPage(props: { params: Promise<{ locale: string
               </div>
 
               {/* Card 3: 100% Civic Volunteering */}
-              <div className="p-5 sm:p-6 rounded-3xl bg-[#FAF8F5] border border-[#e5e0d6] hover:border-[#d2a82b]/30 transition-all text-center flex flex-col justify-between group shadow-2xs">
+              <div className="p-5 sm:p-6 rounded-3xl bg-[#FAF8F5] border border-[#e5e0d6] hover:border-[#d2a82b]/30 transition-all text-center flex flex-col justify-between group shadow-2xs overflow-hidden">
                 <span className="text-xs font-bold text-[#5C5A55] block mb-1">
                   {isAr ? 'روح العمل الجمعوي' : isFr ? 'Engagement Associatif' : 'Civic Dedication'}
                 </span>
-                <div className="min-h-[3rem] flex items-center justify-center">
-                  <span className="text-xl sm:text-2xl font-black text-[#d2a82b] group-hover:scale-105 transition-transform block whitespace-nowrap">
+                <div className="min-h-[3.25rem] flex items-center justify-center px-1">
+                  <span className="text-lg sm:text-xl xl:text-2xl font-black text-[#d2a82b] group-hover:scale-105 transition-transform block text-center leading-tight">
                     {isAr ? '100% تطوع مدني' : isFr ? '100% Volontariat' : '100% Civic Service'}
                   </span>
                 </div>
@@ -329,12 +329,12 @@ export default async function TeamPage(props: { params: Promise<{ locale: string
               </div>
 
               {/* Card 4: Geographic Scope */}
-              <div className="p-5 sm:p-6 rounded-3xl bg-[#FAF8F5] border border-[#e5e0d6] hover:border-[#231f20]/30 transition-all text-center flex flex-col justify-between group shadow-2xs">
+              <div className="p-5 sm:p-6 rounded-3xl bg-[#FAF8F5] border border-[#e5e0d6] hover:border-[#231f20]/30 transition-all text-center flex flex-col justify-between group shadow-2xs overflow-hidden">
                 <span className="text-xs font-bold text-[#5C5A55] block mb-1">
                   {isAr ? 'النطاق والمقر' : isFr ? 'Siège & Rayonnement' : 'Headquarters & Scope'}
                 </span>
-                <div className="min-h-[3rem] flex items-center justify-center">
-                  <span className="text-xl sm:text-2xl font-black text-[#231f20] group-hover:scale-105 transition-transform block whitespace-nowrap">
+                <div className="min-h-[3.25rem] flex items-center justify-center px-1">
+                  <span className="text-base sm:text-lg xl:text-xl font-black text-[#231f20] group-hover:scale-105 transition-transform block text-center leading-tight text-balance">
                     {isAr ? 'مراكش • جهات المغرب' : isFr ? 'Marrakech • Maroc' : 'Marrakech • Morocco'}
                   </span>
                 </div>
