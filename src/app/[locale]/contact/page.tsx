@@ -5,6 +5,8 @@ import { ContactForm } from '@/components/forms/ContactForm'
 import { getContactSettings, defaultContactConfig } from '@/lib/settings'
 import Link from 'next/link'
 
+export const revalidate = 0
+
 export const dynamic = 'force-dynamic'
 
 export default async function ContactPage(props: { params: Promise<{ locale: string }> }) {

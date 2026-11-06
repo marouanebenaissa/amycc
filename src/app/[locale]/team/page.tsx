@@ -5,6 +5,8 @@ import Link from 'next/link'
 import { getTeamSettings, getCommissionsSettings, defaultTeamHeroConfig } from '@/lib/settings'
 import { ImageWithFallback } from '@/components/ui/ImageWithFallback'
 
+export const revalidate = 0
+
 export default async function TeamPage(props: { params: Promise<{ locale: string }> }) {
   const { locale } = await props.params
   const dict = await getDictionary(locale)

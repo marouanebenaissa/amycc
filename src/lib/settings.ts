@@ -1,4 +1,27 @@
-import { createClient } from '@/lib/supabase/server'
+import { createAdminClient } from '@/lib/supabase/admin'
+import { createClient as createServerClient } from '@/lib/supabase/server'
+import { createPublicClient } from '@/lib/supabase/public'
+
+/**
+ * Unified server-side settings client:
+ * 1. Uses Service Role admin client when available on the server (bypasses RLS, guarantees data availability)
+ * 2. Falls back to SSR client if cookies/session are present
+ * 3. Falls back to public anonymous client
+ */
+async function getSettingsClient() {
+  if (process.env.SUPABASE_SERVICE_ROLE_KEY) {
+    try {
+      return createAdminClient()
+    } catch {
+      // Fall through to cookie-based or public client
+    }
+  }
+  try {
+    return await createServerClient()
+  } catch {
+    return createPublicClient()
+  }
+}
 
 export interface TopBarConfig {
   enabled: boolean
@@ -26,7 +49,7 @@ export const defaultTopBarConfig: TopBarConfig = {
 
 export async function getTopBarSettings(): Promise<TopBarConfig> {
   try {
-    const supabase = await createClient()
+    const supabase = await getSettingsClient()
     const { data, error } = await supabase
       .from('site_settings')
       .select('value')
@@ -79,7 +102,7 @@ export interface HeroConfig {
 }
 
 export const defaultHeroConfig: HeroConfig = {
-  imageUrl: '/images/youth-in-action.jpg',
+  imageUrl: 'https://ovyrzgztzaewdfwqnzbv.supabase.co/storage/v1/object/public/upload/hero/hero-1793052508301-ynwjqn.jpg',
   tagAr: 'الفنون والثقافة للأثر والتمكين',
   tagFr: 'ARTS ET CULTURE POUR L\'IMPACT',
   tagEn: 'ARTS & CULTURE FOR IMPACT',
@@ -104,7 +127,7 @@ export const defaultHeroConfig: HeroConfig = {
 
 export async function getHeroSettings(): Promise<HeroConfig> {
   try {
-    const supabase = await createClient()
+    const supabase = await getSettingsClient()
     const { data, error } = await supabase
       .from('site_settings')
       .select('value')
@@ -265,7 +288,7 @@ export const defaultFlagshipProgramConfig: FlagshipProgramConfig = {
 
 export async function getFlagshipProgramSettings(): Promise<FlagshipProgramConfig> {
   try {
-    const supabase = await createClient()
+    const supabase = await getSettingsClient()
     const { data, error } = await supabase
       .from('site_settings')
       .select('value')
@@ -430,7 +453,7 @@ export const defaultFaqConfig: FaqConfig = {
 
 export async function getFaqSettings(): Promise<FaqConfig> {
   try {
-    const supabase = await createClient()
+    const supabase = await getSettingsClient()
     const { data, error } = await supabase
       .from('site_settings')
       .select('value')
@@ -870,7 +893,7 @@ export const defaultAreasConfig: AreasConfig = {
 
 export async function getAreasSettings(): Promise<AreasConfig> {
   try {
-    const supabase = await createClient()
+    const supabase = await getSettingsClient()
     const { data, error } = await supabase
       .from('site_settings')
       .select('value')
@@ -1014,10 +1037,10 @@ export const defaultTeamConfig: TeamConfig = {
   members: [
     {
       id: 'president',
-      nameAr: 'عضوية الرئاسة والتوجيه العام',
-      nameFr: 'Président(e) Fondateur(rice)',
-      nameEn: 'President & Founder',
-      roleAr: 'رئيس(ة) الجمعية',
+      nameAr: 'محمد بليل',
+      nameFr: 'Mohamed Balil',
+      nameEn: 'Mohamed Balil',
+      roleAr: 'رئيس الجمعية',
       roleFr: 'Président(e) de l’Association',
       roleEn: 'President of the Association',
       category: 'executive',
@@ -1036,15 +1059,15 @@ export const defaultTeamConfig: TeamConfig = {
       dutiesAr: ['إبرام الشراكات والاتفاقيات الرسمية', 'السهر على احترام القانون الأساسي والداخلي', 'الناطق الرسمي باسم الجمعية'],
       dutiesFr: ['Signature des accords officiels', 'Garant du respect des statuts associatifs', 'Porte-parole institutionnel'],
       dutiesEn: ['Executing official agreements & partnerships', 'Safeguarding statutory bylaws compliance', 'Official association spokesperson'],
-      photoUrl: '',
+      photoUrl: 'https://ovyrzgztzaewdfwqnzbv.supabase.co/storage/v1/object/public/upload/hero/hero-1793979737895-g8u91p.jpeg',
       order: 1,
       enabled: true,
     },
     {
       id: 'secretary_general',
-      nameAr: 'عضوية الكتابة العامة والتوثيق',
-      nameFr: 'Secrétaire Général(e)',
-      nameEn: 'Secretary General',
+      nameAr: 'مروان بنعيسى',
+      nameFr: 'Marouane Benaissa',
+      nameEn: 'Marouane Benaissa',
       roleAr: 'الكاتب(ة) العام',
       roleFr: 'Secrétaire Général(e)',
       roleEn: 'Secretary General',
@@ -1064,15 +1087,15 @@ export const defaultTeamConfig: TeamConfig = {
       dutiesAr: ['تحرير وتوثيق المحاضر والتقارير الأدبية', 'ضبط سجلات الانخراط وملفات العضوية', 'التنسيق الإداري والمراسلات الرسمية'],
       dutiesFr: ['Rédaction des procès-verbaux et rapports moraux', 'Tenue rigoureuse du registre des adhérents', 'Liaison administrative et correspondances officielles'],
       dutiesEn: ['Drafting minutes and annual moral reports', 'Maintaining membership and volunteer registries', 'Managing administrative and official communications'],
-      photoUrl: '',
+      photoUrl: 'https://ovyrzgztzaewdfwqnzbv.supabase.co/storage/v1/object/public/upload/hero/hero-1793979757232-xmcy5n.jpeg',
       order: 2,
       enabled: true,
     },
     {
       id: 'treasurer',
-      nameAr: 'عضوية أمانة المال والتدبير المالي',
-      nameFr: 'Trésorier(ère) Général(e)',
-      nameEn: 'General Treasurer',
+      nameAr: 'أنس أيت سعدان',
+      nameFr: 'Anass Ait Saadan',
+      nameEn: 'Anass Ait Saadan',
       roleAr: 'أمين(ة) المال',
       roleFr: 'Trésorier(ère) Général(e)',
       roleEn: 'General Treasurer',
@@ -1092,15 +1115,15 @@ export const defaultTeamConfig: TeamConfig = {
       dutiesAr: ['المسك المحاسباتي والتدبير البنكي الرسمي', 'إعداد التقرير المالي السنوي للافتحاص', 'توثيق وصولات التبرعات وسندات النفقات'],
       dutiesFr: ['Tenue de la comptabilité et gestion bancaire', 'Élaboration du rapport financier annuel pour audit', 'Émission des reçus officiels et suivi des dépenses'],
       dutiesEn: ['Verified accounting & official bank administration', 'Compiling annual financial report for audit', 'Issuing receipts & tracking program budgets'],
-      photoUrl: '',
+      photoUrl: 'https://ovyrzgztzaewdfwqnzbv.supabase.co/storage/v1/object/public/upload/hero/hero-1793979770962-meqwol.jpeg',
       order: 3,
       enabled: true,
     },
     {
       id: 'vice_president',
-      nameAr: 'عضوية نيابة الرئاسة والتنسيق',
-      nameFr: 'Vice-Président(e)',
-      nameEn: 'Vice President',
+      nameAr: 'محمد ياسين البصطامي',
+      nameFr: 'Mohamed Yassine El Bastami',
+      nameEn: 'Mohamed Yassine El Bastami',
       roleAr: 'نائب(ة) الرئيس',
       roleFr: 'Vice-Président(e)',
       roleEn: 'Vice President',
@@ -1185,7 +1208,7 @@ export const defaultTeamConfig: TeamConfig = {
 
 export async function getTeamSettings(): Promise<TeamConfig> {
   try {
-    const supabase = await createClient()
+    const supabase = await getSettingsClient()
     const { data, error } = await supabase
       .from('site_settings')
       .select('value')
@@ -1477,7 +1500,7 @@ export const defaultCommissionsConfig: CommissionsConfig = {
 
 export async function getCommissionsSettings(): Promise<CommissionsConfig> {
   try {
-    const supabase = await createClient()
+    const supabase = await getSettingsClient()
     const { data, error } = await supabase
       .from('site_settings')
       .select('value')
@@ -1737,7 +1760,7 @@ export const defaultContactConfig: ContactConfig = {
 
 export async function getContactSettings(): Promise<ContactConfig> {
   try {
-    const supabase = await createClient()
+    const supabase = await getSettingsClient()
     const { data, error } = await supabase
       .from('site_settings')
       .select('value')
@@ -1977,7 +2000,7 @@ export const defaultProgramsPageConfig: ProgramsPageConfig = {
 
 export async function getProgramsPageSettings(): Promise<ProgramsPageConfig> {
   try {
-    const supabase = await createClient()
+    const supabase = await getSettingsClient()
     const { data, error } = await supabase
       .from('site_settings')
       .select('value')
@@ -2568,7 +2591,7 @@ export const defaultAnnualProgramConfig: AnnualProgramConfig = {
 
 export async function getAnnualProgramSettings(): Promise<AnnualProgramConfig> {
   try {
-    const supabase = await createClient()
+    const supabase = await getSettingsClient()
     const { data, error } = await supabase
       .from('site_settings')
       .select('value')
@@ -3181,7 +3204,7 @@ export const defaultImpactConfig: ImpactConfig = {
 
 export async function getImpactSettings(): Promise<ImpactConfig> {
   try {
-    const supabase = await createClient()
+    const supabase = await getSettingsClient()
     const { data, error } = await supabase
       .from('site_settings')
       .select('value')
@@ -3525,7 +3548,7 @@ export const defaultEventsPageConfig: EventsPageConfig = {
 
 export async function getEventsPageSettings(): Promise<EventsPageConfig> {
   try {
-    const supabase = await createClient()
+    const supabase = await getSettingsClient()
     const { data, error } = await supabase
       .from('site_settings')
       .select('value')
@@ -3765,7 +3788,7 @@ export const defaultNewsPageConfig: NewsPageConfig = {
 
 export async function getNewsPageSettings(): Promise<NewsPageConfig> {
   try {
-    const supabase = await createClient()
+    const supabase = await getSettingsClient()
     const { data, error } = await supabase
       .from('site_settings')
       .select('value')
@@ -4202,7 +4225,7 @@ export const defaultPartnershipsPageConfig: PartnershipsPageConfig = {
 
 export async function getPartnershipsPageSettings(): Promise<PartnershipsPageConfig> {
   try {
-    const supabase = await createClient()
+    const supabase = await getSettingsClient()
     const { data } = await supabase
       .from('site_settings')
       .select('value')
@@ -4844,7 +4867,7 @@ export const defaultMembershipPageConfig: MembershipPageConfig = {
 
 export async function getMembershipPageSettings(): Promise<MembershipPageConfig> {
   try {
-    const supabase = await createClient()
+    const supabase = await getSettingsClient()
     const { data } = await supabase
       .from('site_settings')
       .select('value')
@@ -5460,7 +5483,7 @@ export const defaultSupportPageConfig: SupportPageConfig = {
 
 export async function getSupportPageSettings(): Promise<SupportPageConfig> {
   try {
-    const supabase = await createClient()
+    const supabase = await getSettingsClient()
     const { data } = await supabase
       .from('site_settings')
       .select('value')

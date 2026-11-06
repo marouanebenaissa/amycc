@@ -7,6 +7,8 @@ import { ProgramsCatalog, type ProgramDisplayItem } from '@/components/programs/
 import Link from 'next/link'
 import { ImageWithFallback } from '@/components/ui/ImageWithFallback'
 
+export const revalidate = 0
+
 export const dynamic = 'force-dynamic'
 
 interface RawProgramItem {

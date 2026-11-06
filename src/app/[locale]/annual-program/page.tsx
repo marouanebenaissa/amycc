@@ -6,6 +6,8 @@ import { getAnnualProgramSettings, defaultAnnualProgramConfig } from '@/lib/sett
 import { AnnualProgramTimeline } from '@/components/annual-program/AnnualProgramTimeline'
 import Link from 'next/link'
 
+export const revalidate = 0
+
 export const dynamic = 'force-dynamic'
 
 export default async function AnnualProgramPage(props: { params: Promise<{ locale: string }> }) {

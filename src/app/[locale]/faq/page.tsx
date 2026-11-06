@@ -3,6 +3,8 @@ import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { getTopBarSettings, getFaqSettings } from '@/lib/settings'
 
+export const revalidate = 0
+
 const CATEGORY_NAMES: Record<string, { ar: string; fr: string; en: string }> = {
   general: { ar: 'معلومات عامة', fr: 'Général', en: 'General' },
   membership: { ar: 'العضوية والانخراط', fr: 'Adhésion', en: 'Membership' },

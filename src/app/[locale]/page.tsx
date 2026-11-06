@@ -9,6 +9,8 @@ import { IconWithFallback } from '@/components/ui/IconWithFallback'
 import { ImageWithFallback } from '@/components/ui/ImageWithFallback'
 import Link from 'next/link'
 
+export const revalidate = 0
+
 interface ProgramItem {
   id: string
   slug: string
