@@ -215,17 +215,17 @@ export function AdminDashboardOverview({
       badgeEn: 'Finance 💰',
     },
     {
-      titleAr: 'تتبع اكتمال الترجمات الثلاث (AR • FR • EN)',
-      titleFr: 'Suivi de l\'achèvement des traductions (Trilingue)',
-      titleEn: 'Trilingual Translation Completeness Tracker',
-      descAr: 'مؤشرات دقيقة لجاهزية اللغات الثلاث لكافة صفحات ومحتويات المنصة.',
-      descFr: 'Indicateurs de couverture linguistique intégrale de la plateforme.',
-      descEn: 'Track readiness and translation completeness across all CMS sections.',
-      href: '/admin/translations',
-      icon: '🌐',
-      badgeAr: '3 لغات',
-      badgeFr: '3 Langues',
-      badgeEn: '3 Languages',
+      titleAr: 'الملف الشخصي والأمان واستبدال كلمة المرور',
+      titleFr: 'Profil Personnel & Sécurité du Compte',
+      titleEn: 'Admin Profile & Security Center',
+      descAr: 'تحديث بيانات المشرف، استبدال كلمة المرور، وإدارة الجلسات.',
+      descFr: 'Mettre à jour vos informations et changer votre mot de passe.',
+      descEn: 'Update profile details, change password, and manage session credentials.',
+      href: '/admin/profile',
+      icon: '🛡️',
+      badgeAr: 'أمان 🔑',
+      badgeFr: 'Sécurité 🔑',
+      badgeEn: 'Security 🔑',
     },
   ]
 
@@ -283,11 +283,11 @@ export function AdminDashboardOverview({
                 <span>{t('new_program')}</span>
               </Link>
               <Link
-                href="/admin/translations"
+                href="/admin/profile"
                 className="px-4 py-2.5 rounded-2xl bg-white/10 hover:bg-white/20 text-white font-semibold text-xs border border-white/15 backdrop-blur-xs transition-all flex items-center gap-2"
               >
-                <span>🌐</span>
-                <span>{t('translations_tracker')}</span>
+                <span>👤</span>
+                <span>{t('my_profile_and_security')}</span>
               </Link>
             </div>
           </div>

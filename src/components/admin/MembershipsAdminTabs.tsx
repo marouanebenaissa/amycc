@@ -12,6 +12,7 @@ import type {
 } from '@/lib/settings'
 import { CsvExportButton } from '@/components/admin/CsvExportButton'
 import { saveMembershipPageConfiguration } from '@/lib/actions/admin'
+import { useAdminLocale } from './AdminLocaleContext'
 
 export interface MembershipApplicationRow {
   id: string
@@ -33,6 +34,87 @@ interface MembershipsAdminTabsProps {
   onDeleteApplication?: (id: string) => Promise<void>
 }
 
+const MEMBERSHIP_STRINGS = {
+  ar: {
+    badge: 'منظومة تدبير شؤون الأعضاء والانخراط',
+    title: 'إدارة العضوية والانخراط السنوي',
+    subtitle: 'متابعة طلبات الانخراط الواردة، مراجعة فئات وبطاقات العضوية، وتخصيص محتوى واجهة العضوية العامة باللغات الثلاث.',
+    previewPage: 'معاينة الصفحة العامة',
+    saveChanges: 'حفظ التعديلات',
+    saving: 'جاري الحفظ...',
+    tabApplications: 'طلبات الانخراط الواردة',
+    tabTiers: 'فئات وبطاقات الانخراط',
+    tabCms: 'تخصيص الواجهة (CMS)',
+    searchPlaceholder: 'بحث بالاسم، البريد، الهاتف، أو المدينة...',
+    filterAll: 'كافة الحالات',
+    statusPending: 'قيد المراجعة',
+    statusApproved: 'مقبول ومعتمد',
+    statusRejected: 'مرفوض',
+    exportCsv: 'تصدير البيانات (CSV)',
+    colApplicant: 'المترشح للانخراط',
+    colContact: 'بيانات التواصل',
+    colCity: 'المدينة والمهنة',
+    colMotivation: 'رسالة الدوافع',
+    colStatus: 'الحالة الإدارية',
+    colActions: 'الإجراءات',
+    viewDetails: 'عرض التفاصيل',
+    delete: 'حذف',
+    noAppsFound: 'لا توجد طلبات انخراط واردة حالياً.',
+  },
+  fr: {
+    badge: 'Système de Gestion des Adhésions & Membres',
+    title: 'Gestion des Adhésions & Cartes Annuelles',
+    subtitle: 'Traitement des demandes d\'adhésion, gestion des formules de cartes et personnalisation intégrale de la page.',
+    previewPage: 'Voir la Page Publique',
+    saveChanges: 'Enregistrer',
+    saving: 'Enregistrement...',
+    tabApplications: 'Demandes d\'Adhésion',
+    tabTiers: 'Formules & Cartes d\'Adhésion',
+    tabCms: 'Configuration CMS',
+    searchPlaceholder: 'Rechercher nom, email, téléphone, ville...',
+    filterAll: 'Tous les statuts',
+    statusPending: 'En attente',
+    statusApproved: 'Approuvé',
+    statusRejected: 'Refusé',
+    exportCsv: 'Exporter (CSV)',
+    colApplicant: 'Candidat / Adhérent',
+    colContact: 'Coordonnées',
+    colCity: 'Ville & Profession',
+    colMotivation: 'Motivation',
+    colStatus: 'Statut',
+    colActions: 'Actions',
+    viewDetails: 'Détails',
+    delete: 'Supprimer',
+    noAppsFound: 'Aucune demande d\'adhésion trouvée.',
+  },
+  en: {
+    badge: 'Member Services & Annual Membership Engine',
+    title: 'Annual Membership & Member Services',
+    subtitle: 'Process annual membership submissions, curate membership card tiers, and configure public page CMS content.',
+    previewPage: 'Visit Public Page',
+    saveChanges: 'Save Changes',
+    saving: 'Saving...',
+    tabApplications: 'Incoming Applications',
+    tabTiers: 'Membership Tiers & Cards',
+    tabCms: 'Page CMS Settings',
+    searchPlaceholder: 'Search by applicant name, email, city...',
+    filterAll: 'All Statuses',
+    statusPending: 'Pending',
+    statusApproved: 'Approved',
+    statusRejected: 'Rejected',
+    exportCsv: 'Export (CSV)',
+    colApplicant: 'Applicant',
+    colContact: 'Contact Info',
+    colCity: 'City & Profession',
+    colMotivation: 'Motivation',
+    colStatus: 'Status',
+    colActions: 'Actions',
+    viewDetails: 'View Details',
+    delete: 'Delete',
+    noAppsFound: 'No membership applications found.',
+  },
+}
+
 export function MembershipsAdminTabs({
   initialApplications,
   initialConfig,
@@ -40,6 +122,8 @@ export function MembershipsAdminTabs({
   onDeleteApplication,
 }: MembershipsAdminTabsProps) {
   const router = useRouter()
+  const { locale, dir } = useAdminLocale()
+  const tr = MEMBERSHIP_STRINGS[locale] || MEMBERSHIP_STRINGS.ar
 
   // Tabs: 'applications' | 'tiers' | 'page-settings'
   const [activeTab, setActiveTab] = useState<'applications' | 'tiers' | 'page-settings'>('applications')
@@ -441,33 +525,33 @@ export function MembershipsAdminTabs({
   }
 
   return (
-    <div className="space-y-8" dir="rtl">
+    <div className="space-y-8" dir={dir}>
       {/* Top Header & Main Navigation Tabs */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-[#e5e0d6] pb-6">
         <div>
           <div className="flex items-center gap-2 mb-1">
             <span className="w-2.5 h-2.5 rounded-full bg-[#231f20] animate-pulse" />
             <span className="text-2xs font-extrabold tracking-widest uppercase text-[#bd3227]">
-              منظومة تدبير شؤون الأعضاء والانخراط
+              {tr.badge}
             </span>
           </div>
           <h1 className="text-2xl sm:text-3xl font-black text-[#231f20]">
-            إدارة العضوية والانخراط السنوي
+            {tr.title}
           </h1>
           <p className="text-xs text-[#5C5A55] mt-1 font-medium max-w-2xl">
-            متابعة طلبات الانخراط الواردة، مراجعة فئات وبطاقات العضوية، وتخصيص محتوى واجهة العضوية العامة باللغات الثلاث.
+            {tr.subtitle}
           </p>
         </div>
 
         {/* Action Buttons */}
         <div className="flex items-center gap-3">
           <a
-            href="/ar/membership"
+            href={`/${locale}/membership`}
             target="_blank"
             rel="noopener noreferrer"
             className="px-4 py-2 rounded-xl text-xs font-bold text-[#231f20] bg-white border border-[#231f20]/30 hover:bg-[#231f20]/5 transition-all flex items-center gap-1.5 shadow-2xs"
           >
-            <span>معاينة الصفحة العامة</span>
+            <span>{tr.previewPage}</span>
             <span className="text-3xs">↗</span>
           </a>
 
@@ -479,12 +563,12 @@ export function MembershipsAdminTabs({
             {savingConfig ? (
               <>
                 <span className="w-3.5 h-3.5 border-2 border-white/40 border-t-white rounded-full animate-spin" />
-                <span>جاري الحفظ...</span>
+                <span>{tr.saving}</span>
               </>
             ) : (
               <>
                 <span>💾</span>
-                <span>حفظ التعديلات</span>
+                <span>{tr.saveChanges}</span>
               </>
             )}
           </button>
@@ -524,7 +608,7 @@ export function MembershipsAdminTabs({
           }`}
         >
           <span>📋</span>
-          <span>طلبات الانخراط الواردة</span>
+          <span>{tr.tabApplications}</span>
           <span
             className={`px-2 py-0.5 rounded-full text-3xs font-black ${
               activeTab === 'applications'
@@ -545,7 +629,7 @@ export function MembershipsAdminTabs({
           }`}
         >
           <span>💳</span>
-          <span>فئات وبطاقات الانخراط</span>
+          <span>{tr.tabTiers}</span>
           <span
             className={`px-2 py-0.5 rounded-full text-3xs font-black ${
               activeTab === 'tiers' ? 'bg-[#bd3227] text-white' : 'bg-[#e5e0d6] text-[#5C5A55]'
@@ -564,7 +648,7 @@ export function MembershipsAdminTabs({
           }`}
         >
           <span>🎨</span>
-          <span>تخصيص واجهة صفحة العضوية (CMS)</span>
+          <span>{tr.tabCms}</span>
         </button>
       </div>
 
@@ -581,7 +665,7 @@ export function MembershipsAdminTabs({
               </span>
               <div>
                 <div className="text-xl font-black text-[#231f20]">{totalAppsCount}</div>
-                <div className="text-3xs text-[#5C5A55] font-bold">إجمالي الطلبات المسجلة</div>
+                <div className="text-3xs text-[#5C5A55] font-bold">{tr.tabApplications}</div>
               </div>
             </div>
 
@@ -591,7 +675,7 @@ export function MembershipsAdminTabs({
               </span>
               <div>
                 <div className="text-xl font-black text-amber-700">{pendingAppsCount}</div>
-                <div className="text-3xs text-[#5C5A55] font-bold">قيد الدراسة والمراجعة</div>
+                <div className="text-3xs text-[#5C5A55] font-bold">{tr.statusPending}</div>
               </div>
             </div>
 
@@ -601,7 +685,7 @@ export function MembershipsAdminTabs({
               </span>
               <div>
                 <div className="text-xl font-black text-emerald-700">{approvedAppsCount}</div>
-                <div className="text-3xs text-[#5C5A55] font-bold">طلبات مقبولة ومعتمدة</div>
+                <div className="text-3xs text-[#5C5A55] font-bold">{tr.statusApproved}</div>
               </div>
             </div>
 
@@ -611,7 +695,7 @@ export function MembershipsAdminTabs({
               </span>
               <div>
                 <div className="text-xl font-black text-red-700">{rejectedAppsCount}</div>
-                <div className="text-3xs text-[#5C5A55] font-bold">طلبات مرفوضة أو ملغاة</div>
+                <div className="text-3xs text-[#5C5A55] font-bold">{tr.statusRejected}</div>
               </div>
             </div>
           </div>
@@ -624,10 +708,10 @@ export function MembershipsAdminTabs({
                   type="text"
                   value={searchApplication}
                   onChange={(e) => setSearchApplication(e.target.value)}
-                  placeholder="بحث بالاسم، البريد، الهاتف، المدينة، المهنة أو الدافع..."
-                  className="w-full pl-4 pr-10 py-2.5 rounded-xl border border-[#e5e0d6] text-xs outline-none focus:border-[#231f20] bg-[#FAF8F5]"
+                  placeholder={tr.searchPlaceholder}
+                  className="w-full ps-10 pe-4 py-2.5 rounded-xl border border-[#e5e0d6] text-xs outline-none focus:border-[#231f20] bg-[#FAF8F5]"
                 />
-                <span className="absolute right-3.5 top-2.5 text-slate-400">🔍</span>
+                <span className="absolute start-3.5 top-2.5 text-slate-400">🔍</span>
               </div>
 
               <select
@@ -635,10 +719,10 @@ export function MembershipsAdminTabs({
                 onChange={(e) => setStatusFilter(e.target.value)}
                 className="px-3.5 py-2.5 rounded-xl border border-[#e5e0d6] text-xs font-bold text-[#231f20] bg-[#FAF8F5] outline-none"
               >
-                <option value="all">كل الحالات ({totalAppsCount})</option>
-                <option value="pending">قيد الانتظار ({pendingAppsCount})</option>
-                <option value="approved">مقبول ({approvedAppsCount})</option>
-                <option value="rejected">مرفوض ({rejectedAppsCount})</option>
+                <option value="all">{tr.filterAll} ({totalAppsCount})</option>
+                <option value="pending">{tr.statusPending} ({pendingAppsCount})</option>
+                <option value="approved">{tr.statusApproved} ({approvedAppsCount})</option>
+                <option value="rejected">{tr.statusRejected} ({rejectedAppsCount})</option>
               </select>
             </div>
 
@@ -653,12 +737,12 @@ export function MembershipsAdminTabs({
               <table className="w-full text-start text-xs text-[#231f20]">
                 <thead className="bg-[#FAF8F5] border-b border-[#e5e0d6] text-2xs uppercase tracking-wider text-[#5C5A55] font-bold">
                   <tr>
-                    <th className="px-6 py-4 text-start">المترشح للعضوية</th>
-                    <th className="px-6 py-4 text-start">المدينة / المهنة</th>
+                    <th className="px-6 py-4 text-start">{tr.colApplicant}</th>
+                    <th className="px-6 py-4 text-start">{tr.colCity}</th>
                     <th className="px-6 py-4 text-start">مجالات الاهتمام</th>
-                    <th className="px-6 py-4 text-start">الدافع ورسالة الانخراط</th>
-                    <th className="px-6 py-4 text-start">الحالة</th>
-                    <th className="px-6 py-4 text-center">الإجراءات</th>
+                    <th className="px-6 py-4 text-start">{tr.colMotivation}</th>
+                    <th className="px-6 py-4 text-start">{tr.colStatus}</th>
+                    <th className="px-6 py-4 text-center">{tr.colActions}</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-[#FEF6CC]">
@@ -735,10 +819,10 @@ export function MembershipsAdminTabs({
                             }`}
                           >
                             {app.status === 'approved'
-                              ? 'مقبول'
+                              ? tr.statusApproved
                               : app.status === 'rejected'
-                              ? 'مرفوض'
-                              : 'قيد الانتظار'}
+                              ? tr.statusRejected
+                              : tr.statusPending}
                           </span>
                         </td>
 
@@ -748,9 +832,9 @@ export function MembershipsAdminTabs({
                             <button
                               onClick={() => setViewingApp(app)}
                               className="px-2.5 py-1 rounded-lg text-2xs font-bold bg-[#FAF8F5] text-[#231f20] hover:bg-[#F4EFE6] border border-[#e5e0d6] transition-colors cursor-pointer"
-                              title="عرض بطاقة المترشح الكاملة"
+                              title={tr.viewDetails}
                             >
-                              عرض الملف
+                              {tr.viewDetails}
                             </button>
 
                             {app.status !== 'approved' && (
@@ -759,7 +843,7 @@ export function MembershipsAdminTabs({
                                 onClick={() => handleStatusChange(app.id, 'approved')}
                                 className="px-2.5 py-1 rounded-lg text-2xs font-bold bg-emerald-50 text-emerald-700 hover:bg-emerald-100 border border-emerald-200 transition-colors disabled:opacity-50 cursor-pointer"
                               >
-                                قبول
+                                {tr.statusApproved}
                               </button>
                             )}
 
@@ -769,7 +853,7 @@ export function MembershipsAdminTabs({
                                 onClick={() => handleStatusChange(app.id, 'rejected')}
                                 className="px-2.5 py-1 rounded-lg text-2xs font-bold bg-red-50 text-red-700 hover:bg-red-100 border border-red-200 transition-colors disabled:opacity-50 cursor-pointer"
                               >
-                                رفض
+                                {tr.statusRejected}
                               </button>
                             )}
 
@@ -777,7 +861,7 @@ export function MembershipsAdminTabs({
                               disabled={processingAppId === app.id}
                               onClick={() => handleDeleteApp(app.id, app.full_name)}
                               className="px-2 py-1 rounded-lg text-2xs font-bold text-slate-400 hover:text-red-600 transition-colors cursor-pointer"
-                              title="حذف نهائي"
+                              title={tr.delete}
                             >
                               🗑️
                             </button>
@@ -788,7 +872,7 @@ export function MembershipsAdminTabs({
                   ) : (
                     <tr>
                       <td colSpan={6} className="px-6 py-12 text-center text-[#5C5A55]">
-                        لا توجد طلبات انخراط مطابقة لمعايير البحث الحالية.
+                        {tr.noAppsFound}
                       </td>
                     </tr>
                   )}

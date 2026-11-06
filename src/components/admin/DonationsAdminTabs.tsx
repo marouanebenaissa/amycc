@@ -12,6 +12,7 @@ import type {
 } from '@/lib/settings'
 import { CsvExportButton } from '@/components/admin/CsvExportButton'
 import { saveSupportPageConfiguration } from '@/lib/actions/admin'
+import { useAdminLocale } from './AdminLocaleContext'
 
 export interface DonationRecordRow {
   id: string
@@ -33,6 +34,108 @@ interface DonationsAdminTabsProps {
   onDeleteRecord?: (id: string) => Promise<void>
 }
 
+const DONATION_STRINGS = {
+  ar: {
+    badge: 'منظومة الرعاية والدعم والتحصيل المالي',
+    title: 'إدارة الدعم والمساهمات وبوابات الأداء',
+    subtitle: 'متابعة إشعارات الدعم والتبرعات، ضبط بوابة الأداء الإلكتروني المباشر (CMI / Stripe)، الحساب البنكي الرسمي، وباقات الرعاية الثقافية.',
+    previewPage: 'معاينة صفحة الدعم',
+    saveChanges: 'حفظ التعديلات',
+    saving: 'جاري الحفظ...',
+    tabDonations: 'المساهمات والتبرعات',
+    tabGatewayBank: 'بوابة الأداء والحساب البنكي',
+    tabPackages: 'باقات الرعاية الثقافية',
+    tabCms: 'تخصيص الواجهة (CMS)',
+    tabGuide: 'دليل ربط CMI والمستندات',
+    searchPlaceholder: 'بحث باسم المتبرع، البريد، أو الملاحظات...',
+    filterAll: 'كافة الحالات',
+    statusPending: 'قيد المعالجة',
+    statusCompleted: 'مكتمل ومؤكد',
+    statusFailed: 'ملغى أو فشل',
+    colDonor: 'المتبرع / المساهم',
+    colAmount: 'المبلغ والعملة',
+    colType: 'طريقة الدعم',
+    colNotes: 'الملاحظات والبيانات',
+    colStatus: 'الحالة',
+    colActions: 'الإجراءات',
+    noDonationsFound: 'لا توجد سجلات مساهمات مسجلة حالياً.',
+    statTotal: 'إجمالي إشعارات الدعم',
+    statTotalAmount: 'مجموع المبالغ المصرح بها',
+    statPending: 'قيد التحقق والتوثيق',
+    statConfirmed: 'مساهمات مؤكدة قانونياً',
+    viewDetails: 'عرض',
+    confirmReceipt: 'تأكيد الاستلام',
+    deleteRecord: 'حذف',
+    inKind: 'مساهمة عينية / لوجستية',
+  },
+  fr: {
+    badge: 'Système de Mécénat, Dons & Passerelle CMI',
+    title: 'Gestion des Dons & Passerelles de Paiement',
+    subtitle: 'Suivi des dons et mécénats, configuration de la passerelle CMI, RIB bancaire et formules de parrainage.',
+    previewPage: 'Voir la Page Soutien',
+    saveChanges: 'Enregistrer',
+    saving: 'Enregistrement...',
+    tabDonations: 'Dons & Contributions',
+    tabGatewayBank: 'Passerelle & Compte Bancaire',
+    tabPackages: 'Formules de Mécénat',
+    tabCms: 'Configuration CMS',
+    tabGuide: 'Guide Technique CMI',
+    searchPlaceholder: 'Rechercher par nom, email, notes...',
+    filterAll: 'Tous les statuts',
+    statusPending: 'En attente',
+    statusCompleted: 'Confirmé & Reçu',
+    statusFailed: 'Échoué / Annulé',
+    colDonor: 'Donateur',
+    colAmount: 'Montant',
+    colType: 'Mode de Soutien',
+    colNotes: 'Notes & Détails',
+    colStatus: 'Statut',
+    colActions: 'Actions',
+    noDonationsFound: 'Aucune contribution enregistrée pour le moment.',
+    statTotal: 'Total déclarations',
+    statTotalAmount: 'Montant total déclaré',
+    statPending: 'En attente de vérification',
+    statConfirmed: 'Contributions certifiées',
+    viewDetails: 'Voir',
+    confirmReceipt: 'Confirmer réception',
+    deleteRecord: 'Supprimer',
+    inKind: 'Contribution en nature / logistique',
+  },
+  en: {
+    badge: 'Patronage, Philanthropy & Payment Gateway Engine',
+    title: 'Donations, Sponsorship & CMI Gateway',
+    subtitle: 'Track donations and patronage records, configure CMI payment gateway, official bank account, and cultural sponsorship tiers.',
+    previewPage: 'Visit Support Page',
+    saveChanges: 'Save Changes',
+    saving: 'Saving...',
+    tabDonations: 'Donations & Pledges',
+    tabGatewayBank: 'Gateway & Bank Account',
+    tabPackages: 'Sponsorship Packages',
+    tabCms: 'Page CMS Settings',
+    tabGuide: 'CMI Integration Guide',
+    searchPlaceholder: 'Search by donor name, email, or notes...',
+    filterAll: 'All Statuses',
+    statusPending: 'Pending',
+    statusCompleted: 'Completed',
+    statusFailed: 'Failed / Cancelled',
+    colDonor: 'Donor / Patron',
+    colAmount: 'Amount',
+    colType: 'Support Type',
+    colNotes: 'Notes & Reference',
+    colStatus: 'Status',
+    colActions: 'Actions',
+    noDonationsFound: 'No donation records found.',
+    statTotal: 'Total Support Notices',
+    statTotalAmount: 'Total Declared Amount',
+    statPending: 'Pending Verification',
+    statConfirmed: 'Confirmed Contributions',
+    viewDetails: 'View',
+    confirmReceipt: 'Confirm Receipt',
+    deleteRecord: 'Delete',
+    inKind: 'In-Kind / Logistics Contribution',
+  },
+}
+
 export function DonationsAdminTabs({
   initialDonations,
   initialConfig,
@@ -40,6 +143,8 @@ export function DonationsAdminTabs({
   onDeleteRecord,
 }: DonationsAdminTabsProps) {
   const router = useRouter()
+  const { locale, dir } = useAdminLocale()
+  const tr = DONATION_STRINGS[locale] || DONATION_STRINGS.ar
 
   // Tabs: 'donations' | 'gateway-and-bank' | 'packages' | 'page-settings' | 'integration-guide'
   const [activeTab, setActiveTab] = useState<
@@ -478,33 +583,33 @@ export function DonationsAdminTabs({
   }
 
   return (
-    <div className="space-y-8" dir="rtl">
+    <div className="space-y-8" dir={dir}>
       {/* Top Header & Quick Actions */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-[#e5e0d6] pb-6">
         <div>
           <div className="flex items-center gap-2 mb-1">
             <span className="w-2.5 h-2.5 rounded-full bg-[#231f20] animate-pulse" />
             <span className="text-2xs font-extrabold tracking-widest uppercase text-[#bd3227]">
-              منظومة الرعاية والدعم والتحصيل المالي
+              {tr.badge}
             </span>
           </div>
           <h1 className="text-2xl sm:text-3xl font-black text-[#231f20]">
-            إدارة الدعم والمساهمات وبوابات الأداء
+            {tr.title}
           </h1>
           <p className="text-xs text-[#5C5A55] mt-1 font-medium max-w-2xl">
-            متابعة إشعارات الدعم والتبرعات، ضبط بوابة الأداء الإلكتروني المباشر (CMI / Stripe)، الحساب البنكي الرسمي، وباقات الرعاية الثقافية.
+            {tr.subtitle}
           </p>
         </div>
 
         {/* Action Buttons */}
         <div className="flex items-center gap-3">
           <a
-            href="/ar/support"
+            href={`/${locale}/support`}
             target="_blank"
             rel="noopener noreferrer"
             className="px-4 py-2 rounded-xl text-xs font-bold text-[#231f20] bg-white border border-[#231f20]/30 hover:bg-[#231f20]/5 transition-all flex items-center gap-1.5 shadow-2xs"
           >
-            <span>معاينة صفحة الدعم</span>
+            <span>{tr.previewPage}</span>
             <span className="text-3xs">↗</span>
           </a>
 
@@ -516,12 +621,12 @@ export function DonationsAdminTabs({
             {savingConfig ? (
               <>
                 <span className="w-3.5 h-3.5 border-2 border-white/40 border-t-white rounded-full animate-spin" />
-                <span>جاري الحفظ...</span>
+                <span>{tr.saving}</span>
               </>
             ) : (
               <>
                 <span>💾</span>
-                <span>حفظ التعديلات</span>
+                <span>{tr.saveChanges}</span>
               </>
             )}
           </button>
@@ -561,7 +666,7 @@ export function DonationsAdminTabs({
           }`}
         >
           <span>📥</span>
-          <span>المساهمات والتبرعات</span>
+          <span>{tr.tabDonations}</span>
           <span
             className={`px-2 py-0.5 rounded-full text-3xs font-black ${
               activeTab === 'donations'
@@ -582,7 +687,7 @@ export function DonationsAdminTabs({
           }`}
         >
           <span>💳</span>
-          <span>بوابة الأداء والحساب البنكي</span>
+          <span>{tr.tabGatewayBank}</span>
           {config.paymentGateway.enabled && (
             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
           )}
@@ -597,7 +702,7 @@ export function DonationsAdminTabs({
           }`}
         >
           <span>🏆</span>
-          <span>باقات الرعاية الثقافية</span>
+          <span>{tr.tabPackages}</span>
           <span
             className={`px-2 py-0.5 rounded-full text-3xs font-black ${
               activeTab === 'packages' ? 'bg-[#bd3227] text-white' : 'bg-[#e5e0d6] text-[#5C5A55]'
@@ -616,7 +721,7 @@ export function DonationsAdminTabs({
           }`}
         >
           <span>🎨</span>
-          <span>تخصيص الواجهة (CMS)</span>
+          <span>{tr.tabCms}</span>
         </button>
 
         <button
@@ -628,7 +733,7 @@ export function DonationsAdminTabs({
           }`}
         >
           <span>📖</span>
-          <span>دليل الربط وتوجيه CMI</span>
+          <span>{tr.tabGuide}</span>
         </button>
       </div>
 
@@ -645,7 +750,7 @@ export function DonationsAdminTabs({
               </span>
               <div>
                 <div className="text-xl font-black text-[#231f20]">{totalDonationsCount}</div>
-                <div className="text-3xs text-[#5C5A55] font-bold">إجمالي إشعارات الدعم</div>
+                <div className="text-3xs text-[#5C5A55] font-bold">{tr.statTotal}</div>
               </div>
             </div>
 
@@ -657,7 +762,7 @@ export function DonationsAdminTabs({
                 <div className="text-xl font-black text-emerald-700">
                   {totalAmountMad.toLocaleString()} MAD
                 </div>
-                <div className="text-3xs text-[#5C5A55] font-bold">مجموع المبالغ المصرح بها</div>
+                <div className="text-3xs text-[#5C5A55] font-bold">{tr.statTotalAmount}</div>
               </div>
             </div>
 
@@ -667,7 +772,7 @@ export function DonationsAdminTabs({
               </span>
               <div>
                 <div className="text-xl font-black text-amber-700">{pendingCount}</div>
-                <div className="text-3xs text-[#5C5A55] font-bold">قيد التحقق والتوثيق</div>
+                <div className="text-3xs text-[#5C5A55] font-bold">{tr.statPending}</div>
               </div>
             </div>
 
@@ -677,7 +782,7 @@ export function DonationsAdminTabs({
               </span>
               <div>
                 <div className="text-xl font-black text-emerald-700">{confirmedCount}</div>
-                <div className="text-3xs text-[#5C5A55] font-bold">مساهمات مؤكدة قانونياً</div>
+                <div className="text-3xs text-[#5C5A55] font-bold">{tr.statConfirmed}</div>
               </div>
             </div>
           </div>
@@ -690,10 +795,9 @@ export function DonationsAdminTabs({
                   type="text"
                   value={searchDonation}
                   onChange={(e) => setSearchDonation(e.target.value)}
-                  placeholder="بحث باسم الداعم، البريد، الهاتف، أو الملاحظات..."
-                  className="w-full pl-4 pr-10 py-2.5 rounded-xl border border-[#e5e0d6] text-xs outline-none focus:border-[#231f20] bg-[#FAF8F5]"
+                  placeholder={tr.searchPlaceholder}
+                  className="w-full px-4 py-2.5 rounded-xl border border-[#e5e0d6] text-xs outline-none focus:border-[#231f20] bg-[#FAF8F5]"
                 />
-                <span className="absolute right-3.5 top-2.5 text-slate-400">🔍</span>
               </div>
 
               <select
@@ -701,9 +805,9 @@ export function DonationsAdminTabs({
                 onChange={(e) => setStatusFilter(e.target.value)}
                 className="px-3 py-2.5 rounded-xl border border-[#e5e0d6] text-xs font-bold text-[#231f20] bg-[#FAF8F5] outline-none"
               >
-                <option value="all">كل الحالات ({totalDonationsCount})</option>
-                <option value="pending">قيد الانتظار ({pendingCount})</option>
-                <option value="confirmed">مؤكد ومستلم ({confirmedCount})</option>
+                <option value="all">{tr.filterAll} ({totalDonationsCount})</option>
+                <option value="pending">{tr.statusPending} ({pendingCount})</option>
+                <option value="confirmed">{tr.statusCompleted} ({confirmedCount})</option>
               </select>
 
               <select
@@ -725,17 +829,95 @@ export function DonationsAdminTabs({
             </div>
           </div>
 
-          {/* Table */}
-          <div className="bg-white rounded-2xl border border-[#e5e0d6] overflow-hidden shadow-2xs">
+          {/* Mobile Cards View (< md) */}
+          <div className="md:hidden space-y-3">
+            {filteredDonations.length > 0 ? (
+              filteredDonations.map((d) => (
+                <div key={d.id} className="bg-white p-4 rounded-2xl border border-[#e5e0d6] shadow-2xs space-y-3">
+                  <div className="flex items-start justify-between gap-2">
+                    <div>
+                      <div className="font-bold text-[#231f20] text-sm">{d.donor_name}</div>
+                      <a href={`mailto:${d.donor_email}`} className="text-3xs text-[#5C5A55] font-mono block">
+                        {d.donor_email}
+                      </a>
+                      {d.donor_phone && (
+                        <a href={`tel:${d.donor_phone}`} className="text-3xs text-[#5C5A55] font-mono block" dir="ltr">
+                          {d.donor_phone}
+                        </a>
+                      )}
+                    </div>
+                    <span
+                      className={`inline-block px-2.5 py-1 rounded-full text-2xs font-bold ${
+                        d.status === 'confirmed' || d.status === 'approved'
+                          ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
+                          : 'bg-amber-50 text-amber-700 border border-amber-200'
+                      }`}
+                    >
+                      {d.status === 'confirmed' || d.status === 'approved' ? tr.statusCompleted : tr.statusPending}
+                    </span>
+                  </div>
+
+                  <div className="bg-[#FAF8F5] p-3 rounded-xl border border-[#e5e0d6] flex items-center justify-between">
+                    <span className="text-2xs font-bold text-[#231f20] capitalize">{d.support_type.replace('_', ' ')}</span>
+                    {d.amount ? (
+                      <span className="text-xs font-black text-[#bd3227]">
+                        {d.amount.toLocaleString()} {d.currency}
+                      </span>
+                    ) : (
+                      <span className="text-3xs text-[#5C5A55]">{tr.inKind}</span>
+                    )}
+                  </div>
+
+                  {d.notes && (
+                    <p className="text-2xs text-[#5C5A55] bg-[#FAF8F5]/60 p-2.5 rounded-xl border border-[#e5e0d6]">
+                      {d.notes}
+                    </p>
+                  )}
+
+                  <div className="flex items-center justify-end gap-2 pt-2 border-t border-[#e5e0d6]">
+                    <button
+                      onClick={() => setViewingRecord(d)}
+                      className="px-3 py-1.5 rounded-lg text-2xs font-bold bg-[#FAF8F5] text-[#231f20] hover:bg-[#F4EFE6] border border-[#e5e0d6]"
+                    >
+                      {tr.viewDetails}
+                    </button>
+                    {d.status !== 'confirmed' && (
+                      <button
+                        disabled={processingId === d.id}
+                        onClick={() => handleStatusChange(d.id, 'confirmed')}
+                        className="px-3 py-1.5 rounded-lg text-2xs font-bold bg-emerald-50 text-emerald-700 hover:bg-emerald-100 border border-emerald-200 disabled:opacity-50"
+                      >
+                        {tr.confirmReceipt}
+                      </button>
+                    )}
+                    <button
+                      disabled={processingId === d.id}
+                      onClick={() => handleDeleteDonation(d.id, d.donor_name)}
+                      className="px-2.5 py-1.5 rounded-lg text-2xs font-bold text-red-600 hover:bg-red-50 border border-red-200"
+                    >
+                      {tr.deleteRecord}
+                    </button>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <div className="bg-white p-8 rounded-2xl border border-[#e5e0d6] text-center text-xs text-[#5C5A55]">
+                {tr.noDonationsFound}
+              </div>
+            )}
+          </div>
+
+          {/* Desktop Table (>= md) */}
+          <div className="hidden md:block bg-white rounded-2xl border border-[#e5e0d6] overflow-hidden shadow-2xs">
             <div className="overflow-x-auto">
               <table className="w-full text-start text-xs text-[#231f20]">
                 <thead className="bg-[#FAF8F5] border-b border-[#e5e0d6] text-2xs uppercase tracking-wider text-[#5C5A55] font-bold">
                   <tr>
-                    <th className="px-6 py-4 text-start">الداعم / الهيئة</th>
-                    <th className="px-6 py-4 text-start">نوع المساهمة والقيمة</th>
-                    <th className="px-6 py-4 text-start">الملاحظات وتفاصيل الدعم</th>
-                    <th className="px-6 py-4 text-start">الحالة</th>
-                    <th className="px-6 py-4 text-center">الإجراءات</th>
+                    <th className="px-6 py-4 text-start">{tr.colDonor}</th>
+                    <th className="px-6 py-4 text-start">{tr.colAmount}</th>
+                    <th className="px-6 py-4 text-start">{tr.colNotes}</th>
+                    <th className="px-6 py-4 text-start">{tr.colStatus}</th>
+                    <th className="px-6 py-4 text-center">{tr.colActions}</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-[#FEF6CC]">
@@ -770,7 +952,7 @@ export function DonationsAdminTabs({
                               {d.amount.toLocaleString()} {d.currency}
                             </span>
                           ) : (
-                            <span className="text-3xs text-[#5C5A55]">مساهمة عينية / لوجستية</span>
+                            <span className="text-3xs text-[#5C5A55]">{tr.inKind}</span>
                           )}
                         </td>
 
@@ -796,8 +978,8 @@ export function DonationsAdminTabs({
                             }`}
                           >
                             {d.status === 'confirmed' || d.status === 'approved'
-                              ? 'مؤكد ومستلم'
-                              : 'قيد الانتظار'}
+                              ? tr.statusCompleted
+                              : tr.statusPending}
                           </span>
                         </td>
 
@@ -806,9 +988,9 @@ export function DonationsAdminTabs({
                             <button
                               onClick={() => setViewingRecord(d)}
                               className="px-2.5 py-1 rounded-lg text-2xs font-bold bg-[#FAF8F5] text-[#231f20] hover:bg-[#F4EFE6] border border-[#e5e0d6] transition-colors cursor-pointer"
-                              title="عرض ملف المساهمة"
+                              title={tr.viewDetails}
                             >
-                              عرض
+                              {tr.viewDetails}
                             </button>
 
                             {d.status !== 'confirmed' && (
@@ -817,7 +999,7 @@ export function DonationsAdminTabs({
                                 onClick={() => handleStatusChange(d.id, 'confirmed')}
                                 className="px-2.5 py-1 rounded-lg text-2xs font-bold bg-emerald-50 text-emerald-700 hover:bg-emerald-100 border border-emerald-200 transition-colors disabled:opacity-50 cursor-pointer"
                               >
-                                تأكيد الاستلام
+                                {tr.confirmReceipt}
                               </button>
                             )}
 
@@ -825,7 +1007,7 @@ export function DonationsAdminTabs({
                               disabled={processingId === d.id}
                               onClick={() => handleDeleteDonation(d.id, d.donor_name)}
                               className="px-2 py-1 rounded-lg text-2xs font-bold text-slate-400 hover:text-red-600 transition-colors cursor-pointer"
-                              title="حذف نهائي"
+                              title={tr.deleteRecord}
                             >
                               🗑️
                             </button>
@@ -836,7 +1018,7 @@ export function DonationsAdminTabs({
                   ) : (
                     <tr>
                       <td colSpan={5} className="px-6 py-12 text-center text-[#5C5A55]">
-                        لا توجد إشعارات مساهمة مسجلة تطابق معايير البحث الحالية.
+                        {tr.noDonationsFound}
                       </td>
                     </tr>
                   )}

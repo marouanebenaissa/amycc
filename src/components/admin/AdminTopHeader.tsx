@@ -20,7 +20,9 @@ export function AdminTopHeader({
   const pathname = usePathname()
   const { locale, setLocale, isAr, isFr, t } = useAdminLocale()
   const [isQuickMenuOpen, setIsQuickMenuOpen] = useState(false)
+  const [isUserMenuOpen, setIsUserMenuOpen] = useState(false)
   const quickMenuRef = useRef<HTMLDivElement>(null)
+  const userMenuRef = useRef<HTMLDivElement>(null)
 
   // Close dropdown on outside click
   useEffect(() => {
@@ -30,6 +32,12 @@ export function AdminTopHeader({
         !quickMenuRef.current.contains(event.target as Node)
       ) {
         setIsQuickMenuOpen(false)
+      }
+      if (
+        userMenuRef.current &&
+        !userMenuRef.current.contains(event.target as Node)
+      ) {
+        setIsUserMenuOpen(false)
       }
     }
     document.addEventListener('mousedown', handleClickOutside)
@@ -230,23 +238,72 @@ export function AdminTopHeader({
           </button>
         </div>
 
-        {/* User Identity Chip */}
-        <div className="hidden lg:flex items-center gap-2.5 px-3 py-1.5 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6]">
-          <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-[#bd3227] to-[#d2a82b] text-white font-black text-xs flex items-center justify-center shadow-xs">
-            {staffInitial}
-          </div>
-          <div className="text-start leading-none max-w-[130px]">
-            <span className="text-xs font-bold text-[#231f20] block truncate">
-              {userName || 'Staff Admin'}
+        {/* User Identity Chip & Dropdown */}
+        <div className="relative" ref={userMenuRef}>
+          <button
+            type="button"
+            onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
+            className="flex items-center gap-2.5 px-3 py-1.5 rounded-xl bg-[#FAF8F5] hover:bg-[#F4EFE6] border border-[#e5e0d6] transition-all cursor-pointer group active:scale-98"
+            title={t('profile_settings')}
+          >
+            <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-[#bd3227] to-[#d2a82b] text-white font-black text-xs flex items-center justify-center shadow-xs group-hover:scale-105 transition-transform">
+              {staffInitial}
+            </div>
+            <div className="hidden sm:block text-start leading-none max-w-[130px]">
+              <span className="text-xs font-bold text-[#231f20] block truncate">
+                {userName || 'Staff Admin'}
+              </span>
+              <span className="text-3xs text-[#5C5A55] font-mono block truncate mt-0.5">
+                {userEmail.split('@')[0]}
+              </span>
+            </div>
+            <span className="text-3xs text-[#5C5A55] group-hover:text-[#231f20] transition-colors">
+              ▼
             </span>
-            <span className="text-3xs text-[#5C5A55] font-mono block truncate mt-0.5">
-              {userEmail.split('@')[0]}
-            </span>
-          </div>
+          </button>
+
+          {isUserMenuOpen && (
+            <div className="absolute end-0 top-full mt-2 w-64 bg-white rounded-2xl shadow-xl border border-[#e5e0d6] p-2 z-50 space-y-1 animate-fadeIn">
+              <div className="px-3 py-2 border-b border-[#e5e0d6] mb-1">
+                <span className="text-2xs font-extrabold text-[#231f20] block truncate">
+                  {userName || 'Staff Administrator'}
+                </span>
+                <span className="text-3xs text-[#5C5A55] font-mono block truncate">
+                  {userEmail}
+                </span>
+              </div>
+              <Link
+                href="/admin/profile"
+                onClick={() => setIsUserMenuOpen(false)}
+                className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-semibold text-[#231f20] hover:bg-[#FAF8F5] hover:text-[#bd3227] transition-colors"
+              >
+                <span>👤</span>
+                <span>{t('profile_settings')}</span>
+              </Link>
+              <Link
+                href="/admin/profile?tab=password"
+                onClick={() => setIsUserMenuOpen(false)}
+                className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-semibold text-[#231f20] hover:bg-[#FAF8F5] hover:text-[#bd3227] transition-colors"
+              >
+                <span>🔑</span>
+                <span>{t('change_password')}</span>
+              </Link>
+              <div className="border-t border-[#e5e0d6] my-1" />
+              <form action={logoutAdmin} className="w-full">
+                <button
+                  type="submit"
+                  className="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-semibold text-rose-600 hover:bg-rose-50 transition-colors text-start cursor-pointer"
+                >
+                  <span>🚪</span>
+                  <span>{t('sign_out')}</span>
+                </button>
+              </form>
+            </div>
+          )}
         </div>
 
-        {/* Sign Out Action */}
-        <form action={logoutAdmin} className="inline">
+        {/* Direct Sign Out Action (hidden on small screens since it's in the menu) */}
+        <form action={logoutAdmin} className="hidden sm:inline">
           <button
             type="submit"
             className="p-2 sm:px-3 sm:py-2 rounded-xl bg-[#fde8e7] hover:bg-[#bd3227] text-[#bd3227] hover:text-white border border-[#bd3227]/20 text-xs font-bold transition-all shadow-2xs active:scale-98 flex items-center gap-1.5 cursor-pointer"

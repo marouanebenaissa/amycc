@@ -13,62 +13,7 @@ import type {
 } from '@/lib/settings'
 import { CsvExportButton } from '@/components/admin/CsvExportButton'
 import { savePartnershipsPageConfiguration } from '@/lib/actions/admin'
-
-const DEFAULT_SAMPLE_PARTNERS: PartnerItemConfig[] = [
-  {
-    id: 'partner-isadac',
-    nameAr: 'المعهد العالي للفن المسرحي والتنشيط الثقافي (ISADAC)',
-    nameFr: "Institut Supérieur d'Art Dramatique et d'Animation Culturelle",
-    nameEn: 'Higher Institute of Theatrical Arts and Cultural Animation',
-    tier: 'educational',
-    logoUrl: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=300&q=80',
-    websiteUrl: 'https://isadac.ac.ma',
-    descriptionAr: 'شراكة أكاديمية وفنية لتأطير محترفات المسرح وفنون الأداء للشباب.',
-    descriptionFr: "Partenariat académique pour l'encadrement des ateliers de théâtre et arts de la scène.",
-    descriptionEn: 'Academic partnership co-curating youth theater and stage performance masterclasses.',
-    active: true,
-    order: 1,
-  },
-  {
-    id: 'partner-cultural-centers',
-    nameAr: 'شبكة المراكز الثقافية ودور الشباب',
-    nameFr: 'Réseau des Centres Culturels & Maisons de Jeunes',
-    nameEn: 'Network of Cultural Centers & Youth Houses',
-    tier: 'cultural',
-    logoUrl: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=300&q=80',
-    descriptionAr: 'احتضان الورشات المتنقلة واللقاءات الإبداعية للناشئة بمختلف العمالات.',
-    descriptionFr: 'Accueil des ateliers itinérants et rencontres artistiques pour la jeunesse.',
-    descriptionEn: 'Hosting traveling creative workshops and youth cultural gatherings across regions.',
-    active: true,
-    order: 2,
-  },
-  {
-    id: 'partner-civil-society',
-    nameAr: 'الفيدرالية الوطنية لجمعيات التنمية الثقافية',
-    nameFr: 'Fédération Nationale du Développement Culturel',
-    nameEn: 'National Federation for Cultural Development',
-    tier: 'civil_society',
-    logoUrl: 'https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?auto=format&fit=crop&w=300&q=80',
-    descriptionAr: 'تنسيق المبادرات التضامنية والتطوعية الثقافية في الأوساط القروية وشبه الحضرية.',
-    descriptionFr: 'Coordination des initiatives de solidarité et de bénévolat culturel en milieu rural et périurbain.',
-    descriptionEn: 'Coordinating cultural volunteerism and artistic outreach in suburban and rural areas.',
-    active: true,
-    order: 3,
-  },
-  {
-    id: 'partner-heritage-found',
-    nameAr: 'مؤسسة صون التراث الموسيقي المغربي',
-    nameFr: 'Fondation pour la Préservation du Patrimoine Musical',
-    nameEn: 'Foundation for Moroccan Musical Heritage Preservation',
-    tier: 'institutional',
-    logoUrl: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=300&q=80',
-    descriptionAr: 'توثيق وأرشفة التراث الشفهي والموسيقي التقليدي ورقمنته للأجيال الصاعدة.',
-    descriptionFr: 'Documentation, archivage et numérisation des traditions musicales orales.',
-    descriptionEn: 'Documenting, archiving, and digitizing traditional oral and musical treasures.',
-    active: true,
-    order: 4,
-  },
-]
+import { useAdminLocale } from './AdminLocaleContext'
 
 export interface PartnershipInquiryRow {
   id: string
@@ -91,6 +36,165 @@ interface PartnershipsAdminTabsProps {
   onDeleteInquiry?: (id: string) => Promise<void>
 }
 
+const PARTNERSHIP_STRINGS = {
+  ar: {
+    pageTitle: 'إدارة الشراكات والتعاون المؤسساتي',
+    pageSubtitle: 'معالجة مقترحات التعاون الواردة، إدارة شبكة الشركاء المعتمدين، وتخصيص واجهة صفحة الشراكات بالكامل',
+    tabPartners: 'دليل الشركاء والصور المتحركة',
+    tabInquiries: 'مقترحات الشراكة',
+    tabCms: 'تخصيص الواجهة (CMS)',
+    marqueeTitle: 'دليل الشركاء وشريط الصور المتحركة',
+    marqueeSubtitle: 'معاينة وإدارة حركة صور الشركاء المعروضة في شريط الواجهة العامة، مع إمكانية التعديل والإضافة والحذف',
+    liveMarquee: 'شريط الصور المتحركة الحي (المعروض في الموقع حالياً)',
+    activePartnersMoving: 'صور نشطة تتحرك في الموقع',
+    noActivePartners: 'لا توجد صور شركاء معروضة حالياً. اضغط على "إضافة شريك وصورة جديدة" لبدء العرض.',
+    addPartner: 'إضافة شريك وصورة جديدة +',
+    clearAllPartners: 'حذف كافة الشركاء',
+    partnersListTitle: 'قائمة وتفاصيل الشركاء المعتمدين',
+    searchPartnerPlaceholder: 'بحث في اسم الشريك...',
+    colImage: 'الصورة',
+    colPartnerName: 'اسم الشريك',
+    colTier: 'التصنيف',
+    colMarqueeStatus: 'شريط الحركة',
+    colActions: 'الإجراءات',
+    activeInMarquee: 'نشط في الموقع ✓',
+    hiddenFromMarquee: 'مخفي ✕',
+    edit: 'تعديل',
+    delete: 'حذف',
+    hide: 'إخفاء',
+    show: 'تفعيل',
+    noPartnersFound: 'لا توجد نتائج مطابقة لبحثك.',
+    // Inquiries
+    totalInquiries: 'إجمالي المقترحات',
+    pendingInquiries: 'قيد المراجعة',
+    approvedInquiries: 'مقبولة ومعتمدة',
+    declinedInquiries: 'مرفوضة أو مؤرشفة',
+    searchInquiryPlaceholder: 'بحث في المقترحات، المؤسسة، أو المسؤول...',
+    filterAllStatus: 'كافة الحالات',
+    filterAllTypes: 'كافة التصنيفات',
+    exportCsv: 'تصدير البيانات (CSV)',
+    colOrg: 'المؤسسة / الجهة',
+    colContact: 'المسؤول والاتصال',
+    colCity: 'المدينة والدولة',
+    colProposal: 'المقترح',
+    colStatus: 'الحالة',
+    colDate: 'تاريخ الإرسال',
+    noInquiriesFound: 'لا توجد مقترحات شراكة واردة حالياً.',
+    statusPending: 'قيد المراجعة',
+    statusUnderReview: 'جاري الفحص',
+    statusApproved: 'تمت الموافقة',
+    statusDeclined: 'مرفوض',
+    statusArchived: 'مؤرشف',
+    viewDetails: 'عرض التفاصيل',
+    saveChanges: 'حفظ كافة التغييرات',
+    saving: 'جارٍ الحفظ...',
+  },
+  fr: {
+    pageTitle: 'Partenariats & Coopération Institutionnelle',
+    pageSubtitle: 'Traitement des propositions reçues, gestion de l\'annuaire des partenaires et personnalisation CMS',
+    tabPartners: 'Annuaire des Partenaires & Marquee',
+    tabInquiries: 'Propositions Reçues',
+    tabCms: 'Configuration CMS',
+    marqueeTitle: 'Bande Défilante des Partenaires',
+    marqueeSubtitle: 'Aperçu en temps réel des logos et photos de partenaires affichés sur le site public',
+    liveMarquee: 'Bande Défilante en Direct (Site Public)',
+    activePartnersMoving: 'logos actifs affichés sur le site',
+    noActivePartners: 'Aucun partenaire affiché actuellement. Cliquez sur "Ajouter un partenaire" pour commencer.',
+    addPartner: 'Ajouter un Partenaire +',
+    clearAllPartners: 'Supprimer tous les partenaires',
+    partnersListTitle: 'Liste des Partenaires Agréés',
+    searchPartnerPlaceholder: 'Rechercher un partenaire...',
+    colImage: 'Logo / Photo',
+    colPartnerName: 'Nom du Partenaire',
+    colTier: 'Catégorie',
+    colMarqueeStatus: 'Visibilité',
+    colActions: 'Actions',
+    activeInMarquee: 'Actif sur le site ✓',
+    hiddenFromMarquee: 'Masqué ✕',
+    edit: 'Modifier',
+    delete: 'Supprimer',
+    hide: 'Masquer',
+    show: 'Activer',
+    noPartnersFound: 'Aucun partenaire ne correspond à votre recherche.',
+    // Inquiries
+    totalInquiries: 'Total des Propositions',
+    pendingInquiries: 'En Attente',
+    approvedInquiries: 'Approuvées',
+    declinedInquiries: 'Refusées / Archivées',
+    searchInquiryPlaceholder: 'Rechercher organisation, contact...',
+    filterAllStatus: 'Tous les statuts',
+    filterAllTypes: 'Tous les types',
+    exportCsv: 'Exporter (CSV)',
+    colOrg: 'Organisation',
+    colContact: 'Personne de Contact',
+    colCity: 'Ville / Pays',
+    colProposal: 'Proposition',
+    colStatus: 'Statut',
+    colDate: 'Reçu le',
+    noInquiriesFound: 'Aucune proposition de partenariat reçue.',
+    statusPending: 'En attente',
+    statusUnderReview: 'En examen',
+    statusApproved: 'Approuvé',
+    statusDeclined: 'Refusé',
+    statusArchived: 'Archivé',
+    viewDetails: 'Détails',
+    saveChanges: 'Enregistrer les Modifications',
+    saving: 'Enregistrement...',
+  },
+  en: {
+    pageTitle: 'Institutional Partnerships & Cooperation',
+    pageSubtitle: 'Review incoming partnership inquiries, manage official partners marquee, and configure page CMS',
+    tabPartners: 'Partners Directory & Marquee',
+    tabInquiries: 'Partnership Inquiries',
+    tabCms: 'Page CMS Settings',
+    marqueeTitle: 'Live Partner Logo Marquee',
+    marqueeSubtitle: 'Real-time preview and management of rotating partner logos and photos on the public website',
+    liveMarquee: 'Live Infinite Marquee (Public Website)',
+    activePartnersMoving: 'active logos rotating on website',
+    noActivePartners: 'No partner logos currently displayed. Click "Add New Partner" to begin.',
+    addPartner: 'Add New Partner +',
+    clearAllPartners: 'Clear All Partners',
+    partnersListTitle: 'Official Partners Directory',
+    searchPartnerPlaceholder: 'Search partner by name...',
+    colImage: 'Logo / Photo',
+    colPartnerName: 'Partner Name',
+    colTier: 'Category',
+    colMarqueeStatus: 'Marquee Status',
+    colActions: 'Actions',
+    activeInMarquee: 'Active in Marquee ✓',
+    hiddenFromMarquee: 'Hidden ✕',
+    edit: 'Edit',
+    delete: 'Delete',
+    hide: 'Hide',
+    show: 'Enable',
+    noPartnersFound: 'No partners matched your search.',
+    // Inquiries
+    totalInquiries: 'Total Proposals',
+    pendingInquiries: 'Under Review',
+    approvedInquiries: 'Approved',
+    declinedInquiries: 'Declined / Archived',
+    searchInquiryPlaceholder: 'Search organization, contact...',
+    filterAllStatus: 'All Statuses',
+    filterAllTypes: 'All Categories',
+    exportCsv: 'Export (CSV)',
+    colOrg: 'Organization',
+    colContact: 'Contact Person',
+    colCity: 'City / Country',
+    colProposal: 'Proposal',
+    colStatus: 'Status',
+    colDate: 'Received Date',
+    noInquiriesFound: 'No partnership proposals received yet.',
+    statusPending: 'Pending',
+    statusUnderReview: 'Under Review',
+    statusApproved: 'Approved',
+    statusDeclined: 'Declined',
+    statusArchived: 'Archived',
+    viewDetails: 'View Details',
+    saveChanges: 'Save All Changes',
+    saving: 'Saving...',
+  },
+}
+
 export function PartnershipsAdminTabs({
   initialInquiries,
   initialConfig,
@@ -98,6 +202,8 @@ export function PartnershipsAdminTabs({
   onDeleteInquiry,
 }: PartnershipsAdminTabsProps) {
   const router = useRouter()
+  const { locale, isAr, isFr } = useAdminLocale()
+  const tr = PARTNERSHIP_STRINGS[locale] || PARTNERSHIP_STRINGS.ar
 
   // Tabs: 'partners', 'inquiries', 'page-settings'
   const [activeTab, setActiveTab] = useState<'partners' | 'inquiries' | 'page-settings'>('partners')
@@ -345,23 +451,6 @@ export function PartnershipsAdminTabs({
     const updatedConfig = { ...config, partners: updatedPartners }
     setConfig(updatedConfig)
     await persistConfig(updatedConfig, 'تم تحديث حالة ظهور الشريك في الموقع.')
-  }
-
-  async function handleSeedDefaultPartners() {
-    if (
-      !confirm(
-        'هل ترغب في استيراد الشركاء النموذجيين الأربعة المعتمدين؟ سيتم إدراجهم في دليل الشركاء.'
-      )
-    ) {
-      return
-    }
-
-    const updatedConfig = {
-      ...config,
-      partners: DEFAULT_SAMPLE_PARTNERS,
-    }
-    setConfig(updatedConfig)
-    await persistConfig(updatedConfig, 'تم استيراد الشركاء النموذجيين وتحديث الموقع بنجاح.')
   }
 
   // -------------------------------------------------------------
@@ -628,12 +717,12 @@ export function PartnershipsAdminTabs({
         <div>
           <div className="flex items-center gap-2 mb-1">
             <span className="text-xl">🤝</span>
-            <h1 className="text-2xl font-black text-[#231f20]">
-              إدارة الشراكات والتعاون المؤسساتي
+            <h1 className="text-xl sm:text-2xl font-black text-[#231f20]">
+              {tr.pageTitle}
             </h1>
           </div>
           <p className="text-xs text-[#5C5A55]">
-            معالجة مقترحات التعاون الواردة، إدارة شبكة الشركاء المعتمدين، وتخصيص واجهة صفحة الشراكات بالكامل
+            {tr.pageSubtitle}
           </p>
         </div>
 
@@ -642,40 +731,50 @@ export function PartnershipsAdminTabs({
           <button
             type="button"
             onClick={() => setActiveTab('partners')}
-            className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-2 shrink-0 ${
+            className={`px-3.5 sm:px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-2 shrink-0 ${
               activeTab === 'partners'
                 ? 'bg-[#231f20] text-white shadow-xs'
                 : 'text-[#5C5A55] hover:bg-[#F4EFE6]'
             }`}
           >
             <span>🎬</span>
-            <span>دليل الشركاء والصور المتحركة ({config.partners?.length || 0})</span>
+            <span>{tr.tabPartners}</span>
+            <span className={`px-2 py-0.5 rounded-full text-3xs font-extrabold ${
+              activeTab === 'partners' ? 'bg-white/20 text-white' : 'bg-[#e5e0d6] text-[#231f20]'
+            }`}>
+              {config.partners?.length || 0}
+            </span>
           </button>
 
           <button
             type="button"
             onClick={() => setActiveTab('inquiries')}
-            className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-2 shrink-0 ${
+            className={`px-3.5 sm:px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-2 shrink-0 ${
               activeTab === 'inquiries'
                 ? 'bg-[#231f20] text-white shadow-xs'
                 : 'text-[#5C5A55] hover:bg-[#F4EFE6]'
             }`}
           >
             <span>📥</span>
-            <span>مقترحات الشراكة ({inquiries.length})</span>
+            <span>{tr.tabInquiries}</span>
+            <span className={`px-2 py-0.5 rounded-full text-3xs font-extrabold ${
+              activeTab === 'inquiries' ? 'bg-white/20 text-white' : 'bg-[#e5e0d6] text-[#231f20]'
+            }`}>
+              {inquiries.length}
+            </span>
           </button>
 
           <button
             type="button"
             onClick={() => setActiveTab('page-settings')}
-            className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-2 shrink-0 ${
+            className={`px-3.5 sm:px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-2 shrink-0 ${
               activeTab === 'page-settings'
                 ? 'bg-[#231f20] text-white shadow-xs'
                 : 'text-[#5C5A55] hover:bg-[#F4EFE6]'
             }`}
           >
             <span>⚙️</span>
-            <span>تخصيص الواجهة (CMS)</span>
+            <span>{tr.tabCms}</span>
           </button>
         </div>
       </div>
@@ -710,37 +809,33 @@ export function PartnershipsAdminTabs({
       {activeTab === 'inquiries' && (
         <div className="space-y-6">
           {/* Quick Metrics Cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
             <div className="bg-white p-5 rounded-2xl border border-[#e5e0d6] shadow-2xs">
               <span className="text-3xs font-extrabold uppercase text-[#5C5A55] block mb-1">
-                إجمالي المقترحات
+                {tr.totalInquiries}
               </span>
               <span className="text-2xl font-black text-[#231f20]">{totalInquiries}</span>
-              <span className="text-3xs text-[#5C5A55] block mt-1">طلبات شراكة مستلمة</span>
             </div>
 
             <div className="bg-white p-5 rounded-2xl border border-[#e5e0d6] shadow-2xs">
               <span className="text-3xs font-extrabold uppercase text-amber-700 block mb-1">
-                قيد المراجعة والدراسة
+                {tr.pendingInquiries}
               </span>
               <span className="text-2xl font-black text-amber-800">{pendingCount}</span>
-              <span className="text-3xs text-[#5C5A55] block mt-1">بحاجة إلى تواصل ومتابعة</span>
             </div>
 
             <div className="bg-white p-5 rounded-2xl border border-[#e5e0d6] shadow-2xs">
               <span className="text-3xs font-extrabold uppercase text-emerald-700 block mb-1">
-                مقترحات معتمدة
+                {tr.approvedInquiries}
               </span>
               <span className="text-2xl font-black text-emerald-800">{approvedCount}</span>
-              <span className="text-3xs text-[#5C5A55] block mt-1">تم توقيع اتفاقيات معها</span>
             </div>
 
             <div className="bg-white p-5 rounded-2xl border border-[#e5e0d6] shadow-2xs">
               <span className="text-3xs font-extrabold uppercase text-slate-500 block mb-1">
-                مرفوضة أو مؤرشفة
+                {tr.declinedInquiries}
               </span>
               <span className="text-2xl font-black text-slate-700">{declinedCount}</span>
-              <span className="text-3xs text-[#5C5A55] block mt-1">ملفات غير متوافقة</span>
             </div>
           </div>
 
@@ -753,7 +848,7 @@ export function PartnershipsAdminTabs({
                   type="text"
                   value={searchInquiry}
                   onChange={(e) => setSearchInquiry(e.target.value)}
-                  placeholder="بحث باسم الهيئة، المسؤول، المدينة..."
+                  placeholder={tr.searchInquiryPlaceholder}
                   className="w-full ps-9 pe-4 py-2 rounded-xl border border-[#e5e0d6] text-xs bg-[#FAF8F5] focus:bg-white focus:border-[#231f20] outline-none transition-all"
                 />
                 <span className="absolute start-3 top-1/2 -translate-y-1/2 text-xs text-[#5C5A55]">
@@ -777,11 +872,11 @@ export function PartnershipsAdminTabs({
                   onChange={(e) => setStatusFilter(e.target.value)}
                   className="px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs font-bold bg-[#FAF8F5] text-[#231f20] outline-none"
                 >
-                  <option value="all">كافة الحالات</option>
-                  <option value="pending">جديد (Pending)</option>
-                  <option value="under_review">قيد الدراسة (Reviewing)</option>
-                  <option value="approved">معتمد (Approved)</option>
-                  <option value="declined">مرفوض (Declined)</option>
+                  <option value="all">{tr.filterAllStatus}</option>
+                  <option value="pending">{tr.statusPending}</option>
+                  <option value="under_review">{tr.statusUnderReview}</option>
+                  <option value="approved">{tr.statusApproved}</option>
+                  <option value="declined">{tr.statusDeclined}</option>
                 </select>
 
                 <select
@@ -789,12 +884,12 @@ export function PartnershipsAdminTabs({
                   onChange={(e) => setTypeFilter(e.target.value)}
                   className="px-3 py-2 rounded-xl border border-[#e5e0d6] text-xs font-bold bg-[#FAF8F5] text-[#231f20] outline-none"
                 >
-                  <option value="all">كافة أنواع الهيئات</option>
-                  <option value="cultural_center">مراكز ثقافية</option>
-                  <option value="educational">تعليمي وجامعي</option>
-                  <option value="ngo">مجتمع مدني / جمعيات</option>
-                  <option value="corporate">قطاع خاص / رعاة</option>
-                  <option value="public_body">مؤسسات عمومية</option>
+                  <option value="all">{tr.filterAllTypes}</option>
+                  <option value="cultural_center">Cultural Center</option>
+                  <option value="educational">Educational</option>
+                  <option value="ngo">Civil Society / NGO</option>
+                  <option value="corporate">Private Sponsor</option>
+                  <option value="public_body">Public Institution</option>
                 </select>
 
                 <CsvExportButton data={exportData} filename="amycc-partnerships-inquiries" />
@@ -802,20 +897,100 @@ export function PartnershipsAdminTabs({
             </div>
           </div>
 
-          {/* Inquiries Table */}
-          <div className="bg-white rounded-2xl border border-[#e5e0d6] overflow-hidden shadow-2xs">
-            <div className="overflow-x-auto">
+          {/* Inquiries Mobile Cards & Desktop Table */}
+          <div className="bg-white rounded-3xl border border-[#e5e0d6] overflow-hidden shadow-2xs">
+            {/* Mobile Cards View (< md) */}
+            <div className="block md:hidden divide-y divide-[#e5e0d6]">
+              {filteredInquiries.length > 0 ? (
+                filteredInquiries.map((inq) => {
+                  const dateObj = new Date(inq.created_at)
+                  return (
+                    <div key={inq.id} className="p-4 space-y-3">
+                      <div className="flex items-start justify-between gap-2">
+                        <div>
+                          <span className="font-extrabold text-[#231f20] text-xs block">
+                            {inq.organization_name}
+                          </span>
+                          <span className="inline-block mt-0.5 px-2 py-0.5 rounded text-4xs font-bold bg-[#FAF8F5] border border-[#e5e0d6] text-[#bd3227]">
+                            {inq.organization_type}
+                          </span>
+                        </div>
+                        <span className="text-4xs text-[#5C5A55] font-mono shrink-0">
+                          {dateObj.toLocaleDateString(locale === 'ar' ? 'ar-MA' : 'en-US')}
+                        </span>
+                      </div>
+
+                      <div className="text-2xs text-[#5C5A55] space-y-1">
+                        <div>👤 <span className="font-bold text-[#231f20]">{inq.contact_name}</span> ({inq.email})</div>
+                        <div>📍 {inq.city}, {inq.country}</div>
+                      </div>
+
+                      <p className="text-2xs text-[#5C5A55] line-clamp-2 bg-[#FAF8F5] p-2.5 rounded-xl border border-[#e5e0d6]">
+                        {inq.proposal}
+                      </p>
+
+                      <div className="flex items-center justify-between gap-2 pt-1 border-t border-[#f0ece1]">
+                        <select
+                          value={inq.status}
+                          disabled={processingInquiryId === inq.id}
+                          onChange={(e) => handleStatusChange(inq.id, e.target.value)}
+                          className={`px-3 py-1 rounded-full text-3xs font-extrabold cursor-pointer outline-none border transition-all ${
+                            inq.status === 'approved'
+                              ? 'bg-emerald-50 text-emerald-700 border-emerald-200'
+                              : inq.status === 'under_review'
+                              ? 'bg-amber-50 text-amber-700 border-amber-200'
+                              : inq.status === 'declined'
+                              ? 'bg-rose-50 text-rose-700 border-rose-200'
+                              : 'bg-slate-100 text-slate-700 border-slate-200'
+                          }`}
+                        >
+                          <option value="pending">{tr.statusPending}</option>
+                          <option value="under_review">{tr.statusUnderReview}</option>
+                          <option value="approved">{tr.statusApproved}</option>
+                          <option value="declined">{tr.statusDeclined}</option>
+                        </select>
+
+                        <div className="flex items-center gap-2">
+                          <button
+                            type="button"
+                            onClick={() => setViewingInquiry(inq)}
+                            className="px-2.5 py-1 rounded-lg text-2xs font-bold bg-[#FAF8F5] border border-[#e5e0d6] text-[#231f20]"
+                          >
+                            {tr.viewDetails}
+                          </button>
+                          <button
+                            type="button"
+                            disabled={processingInquiryId === inq.id}
+                            onClick={() => handleDeleteInquiry(inq.id, inq.organization_name)}
+                            className="px-2.5 py-1 rounded-lg text-2xs font-bold text-rose-600 hover:bg-rose-50"
+                          >
+                            {tr.delete}
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  )
+                })
+              ) : (
+                <div className="p-8 text-center text-[#5C5A55] text-xs font-semibold">
+                  {tr.noInquiriesFound}
+                </div>
+              )}
+            </div>
+
+            {/* Desktop Table View (>= md) */}
+            <div className="hidden md:block overflow-x-auto">
               <table className="w-full text-start text-xs text-[#231f20]">
                 <thead className="bg-[#FAF8F5] border-b border-[#e5e0d6] text-3xs uppercase tracking-wider text-[#5C5A55] font-extrabold">
                   <tr>
-                    <th className="px-6 py-4 text-start">الهيئة أو المؤسسة</th>
-                    <th className="px-6 py-4 text-start">الشخص المسؤول</th>
-                    <th className="px-6 py-4 text-start">ملخص المقترح</th>
-                    <th className="px-6 py-4 text-start">الحالة</th>
-                    <th className="px-6 py-4 text-start">الإجراءات</th>
+                    <th className="px-6 py-4 text-start">{tr.colOrg}</th>
+                    <th className="px-6 py-4 text-start">{tr.colContact}</th>
+                    <th className="px-6 py-4 text-start">{tr.colProposal}</th>
+                    <th className="px-6 py-4 text-start">{tr.colStatus}</th>
+                    <th className="px-6 py-4 text-start">{tr.colActions}</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-[#FEF6CC]">
+                <tbody className="divide-y divide-[#f0ece1]">
                   {filteredInquiries.length > 0 ? (
                     filteredInquiries.map((inq) => {
                       const dateObj = new Date(inq.created_at)
@@ -853,7 +1028,7 @@ export function PartnershipsAdminTabs({
                               {inq.proposal}
                             </p>
                             <span className="text-4xs text-[#5C5A55] block mt-1">
-                              📅 {dateObj.toLocaleDateString('ar-MA')}
+                              📅 {dateObj.toLocaleDateString(locale === 'ar' ? 'ar-MA' : 'en-US')}
                             </span>
                           </td>
 
@@ -872,11 +1047,10 @@ export function PartnershipsAdminTabs({
                                   : 'bg-slate-100 text-slate-700 border-slate-200'
                               }`}
                             >
-                              <option value="pending">جديد (Pending)</option>
-                              <option value="under_review">قيد الدراسة</option>
-                              <option value="approved">معتمد ✓</option>
-                              <option value="declined">مرفوض ✕</option>
-                              <option value="archived">مؤرشف</option>
+                              <option value="pending">{tr.statusPending}</option>
+                              <option value="under_review">{tr.statusUnderReview}</option>
+                              <option value="approved">{tr.statusApproved}</option>
+                              <option value="declined">{tr.statusDeclined}</option>
                             </select>
                           </td>
 
@@ -886,9 +1060,9 @@ export function PartnershipsAdminTabs({
                                 type="button"
                                 onClick={() => setViewingInquiry(inq)}
                                 className="px-3 py-1.5 rounded-lg text-2xs font-bold bg-[#FAF8F5] border border-[#e5e0d6] text-[#231f20] hover:bg-[#F4EFE6] transition-colors cursor-pointer"
-                                title="عرض المقترح كاملاً"
+                                title={tr.viewDetails}
                               >
-                                عرض المقترح
+                                {tr.viewDetails}
                               </button>
                               <button
                                 type="button"
@@ -896,7 +1070,7 @@ export function PartnershipsAdminTabs({
                                 onClick={() => handleDeleteInquiry(inq.id, inq.organization_name)}
                                 className="px-2.5 py-1.5 rounded-lg text-2xs font-bold text-rose-600 hover:bg-rose-50 border border-transparent hover:border-rose-200 transition-colors disabled:opacity-50 cursor-pointer"
                               >
-                                حذف
+                                {tr.delete}
                               </button>
                             </div>
                           </td>
@@ -906,7 +1080,7 @@ export function PartnershipsAdminTabs({
                   ) : (
                     <tr>
                       <td colSpan={5} className="px-6 py-12 text-center text-[#5C5A55]">
-                        لا توجد مقترحات شراكة مطابقة لمعايير البحث حالياً.
+                        {tr.noInquiriesFound}
                       </td>
                     </tr>
                   )}
@@ -929,34 +1103,24 @@ export function PartnershipsAdminTabs({
                 <div className="flex items-center gap-2">
                   <span className="text-xl">🎬</span>
                   <h2 className="text-base sm:text-lg font-black text-[#231f20]">
-                    دليل الشركاء وشريط الصور المتحركة
+                    {tr.marqueeTitle}
                   </h2>
                 </div>
                 <p className="text-xs text-[#5C5A55] mt-0.5">
-                  معاينة وإدارة حركة صور الشركاء المعروضة في شريط الواجهة العامة، مع إمكانية التعديل والإضافة والحذف
+                  {tr.marqueeSubtitle}
                 </p>
               </div>
 
               <div className="flex items-center gap-2 flex-wrap">
-                <button
-                  type="button"
-                  onClick={handleSeedDefaultPartners}
-                  className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-[#FAF8F5] border border-[#e5e0d6] text-[#231f20] text-xs font-bold rounded-xl hover:bg-[#F4EFE6] transition-all cursor-pointer shadow-2xs"
-                  title="استيراد الشركاء الأربعة النموذجيين"
-                >
-                  <span>📥</span>
-                  <span>استيراد الشركاء النموذجيين</span>
-                </button>
-
                 {config.partners && config.partners.length > 0 && (
                   <button
                     type="button"
                     onClick={handleClearAllPartners}
                     className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-rose-50 border border-rose-200 text-rose-700 text-xs font-bold rounded-xl hover:bg-rose-100 transition-all cursor-pointer shadow-2xs"
-                    title="حذف جميع الشركاء وإفراغ الدليل"
+                    title={tr.clearAllPartners}
                   >
                     <span>🗑️</span>
-                    <span>حذف كافة الشركاء ({config.partners.length})</span>
+                    <span>{tr.clearAllPartners} ({config.partners.length})</span>
                   </button>
                 )}
 
@@ -966,7 +1130,7 @@ export function PartnershipsAdminTabs({
                   className="inline-flex items-center gap-2 px-4 py-2 bg-[#231f20] text-white text-xs font-bold rounded-xl hover:bg-[#d2a82b] active:scale-98 transition-all shadow-xs cursor-pointer"
                 >
                   <span>➕</span>
-                  <span>إضافة شريك وصورة جديدة</span>
+                  <span>{tr.addPartner}</span>
                 </button>
               </div>
             </div>
@@ -977,10 +1141,10 @@ export function PartnershipsAdminTabs({
                 <div className="flex items-center gap-2">
                   <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
                   <span className="text-[#231f20]">
-                    شريط الصور المتحركة الحي (المعروض في الموقع حالياً)
+                    {tr.liveMarquee}
                   </span>
                   <span className="text-2xs font-bold bg-[#FAF8F5] px-2 py-0.5 rounded-md border border-[#e5e0d6] text-[#5C5A55]">
-                    {activePartnersCount} صور نشطة تتحرك
+                    {activePartnersCount} {tr.activePartnersMoving}
                   </span>
                 </div>
               </div>
@@ -1017,8 +1181,8 @@ export function PartnershipsAdminTabs({
                     </div>
                   </div>
                 ) : (
-                  <div className="p-8 text-center text-[#5C5A55]" dir="rtl">
-                    لا توجد صور شركاء معروضة حالياً. يمكنك استيراد الشركاء النموذجيين أو إضافة شريك جديد.
+                  <div className="p-8 text-center text-[#5C5A55] text-xs font-semibold">
+                    {tr.noActivePartners}
                   </div>
                 )}
               </div>
@@ -1031,7 +1195,7 @@ export function PartnershipsAdminTabs({
               <div className="flex items-center gap-2">
                 <span className="text-base">📋</span>
                 <h3 className="text-xs sm:text-sm font-black text-[#231f20]">
-                  قائمة وتفاصيل الشركاء المعتمدين ({config.partners?.length || 0})
+                  {tr.partnersListTitle} ({config.partners?.length || 0})
                 </h3>
               </div>
 
@@ -1041,7 +1205,7 @@ export function PartnershipsAdminTabs({
                     type="text"
                     value={searchPartner}
                     onChange={(e) => setSearchPartner(e.target.value)}
-                    placeholder="بحث في اسم الشريك..."
+                    placeholder={tr.searchPartnerPlaceholder}
                     className="w-full ps-8 pe-3 py-1.5 rounded-xl border border-[#e5e0d6] text-xs bg-[#FAF8F5] outline-none"
                   />
                   <span className="absolute start-2.5 top-1/2 -translate-y-1/2 text-xs text-[#5C5A55]">
@@ -1051,18 +1215,83 @@ export function PartnershipsAdminTabs({
               </div>
             </div>
 
-            <div className="overflow-x-auto">
+            {/* Mobile Cards View (< md) */}
+            <div className="block md:hidden divide-y divide-[#e5e0d6]">
+              {filteredPartners.length > 0 ? (
+                filteredPartners.map((partner) => (
+                  <div key={partner.id} className="p-4 space-y-3">
+                    <div className="flex items-center gap-3">
+                      <div className="relative w-12 h-12 rounded-xl border border-[#e5e0d6] overflow-hidden bg-[#FAF8F5] shrink-0">
+                        <ImageWithFallback
+                          src={partner.logoUrl}
+                          fallbackSrc="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=300&q=80"
+                          alt={partner.nameAr}
+                          fill
+                          className="object-cover"
+                        />
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <span className="font-extrabold text-[#231f20] block text-xs truncate">
+                          {isAr ? partner.nameAr : isFr ? (partner.nameFr || partner.nameAr) : (partner.nameEn || partner.nameAr)}
+                        </span>
+                        <span className="inline-block mt-0.5 px-2 py-0.5 rounded text-4xs font-bold bg-[#FAF8F5] border border-[#e5e0d6] text-[#bd3227]">
+                          {tierLabels[partner.tier]?.[locale as 'ar' | 'fr' | 'en'] || partner.tier}
+                        </span>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center justify-between gap-2 pt-1 border-t border-[#f0ece1]">
+                      <button
+                        type="button"
+                        onClick={() => handleTogglePartnerActive(partner.id)}
+                        className={`px-3 py-1 rounded-full text-3xs font-extrabold border transition-all cursor-pointer ${
+                          partner.active
+                            ? 'bg-emerald-50 text-emerald-800 border-emerald-200'
+                            : 'bg-rose-50 text-rose-800 border-rose-200'
+                        }`}
+                      >
+                        {partner.active ? tr.activeInMarquee : tr.hiddenFromMarquee}
+                      </button>
+
+                      <div className="flex items-center gap-2">
+                        <button
+                          type="button"
+                          onClick={() => openEditPartnerModal(partner)}
+                          className="px-2.5 py-1 rounded-lg text-2xs font-bold bg-[#FAF8F5] border border-[#e5e0d6] hover:bg-[#F4EFE6] text-[#231f20]"
+                        >
+                          {tr.edit}
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => handleDeletePartner(partner.id, partner.nameAr)}
+                          className="px-2.5 py-1 rounded-lg text-2xs font-bold text-rose-600 hover:bg-rose-50 border border-transparent hover:border-rose-200"
+                        >
+                          {tr.delete}
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <div className="p-8 text-center text-[#5C5A55] text-xs font-semibold">
+                  {tr.noPartnersFound}
+                </div>
+              )}
+            </div>
+
+            {/* Desktop Table View (>= md) */}
+            <div className="hidden md:block overflow-x-auto">
               <table className="w-full text-start text-xs">
                 <thead className="bg-[#FAF8F5] text-[#5C5A55] font-bold border-b border-[#e5e0d6]">
                   <tr>
-                    <th className="px-5 py-3 text-start">الصورة</th>
-                    <th className="px-5 py-3 text-start">اسم الشريك</th>
-                    <th className="px-5 py-3 text-start">التصنيف</th>
-                    <th className="px-5 py-3 text-center">الظهور في شريط الحركة</th>
-                    <th className="px-5 py-3 text-end">الإجراءات</th>
+                    <th className="px-5 py-3 text-start">{tr.colImage}</th>
+                    <th className="px-5 py-3 text-start">{tr.colPartnerName}</th>
+                    <th className="px-5 py-3 text-start">{tr.colTier}</th>
+                    <th className="px-5 py-3 text-center">{tr.colMarqueeStatus}</th>
+                    <th className="px-5 py-3 text-end">{tr.colActions}</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-[#FEF6CC]">
+                <tbody className="divide-y divide-[#f0ece1]">
                   {filteredPartners.length > 0 ? (
                     filteredPartners.map((partner) => (
                       <tr key={partner.id} className="hover:bg-stone-50/50 transition-colors">
@@ -1078,14 +1307,16 @@ export function PartnershipsAdminTabs({
                           </div>
                         </td>
                         <td className="px-5 py-3">
-                          <span className="font-extrabold text-[#231f20] block">{partner.nameAr}</span>
-                          {partner.nameFr && (
+                          <span className="font-extrabold text-[#231f20] block">
+                            {isAr ? partner.nameAr : isFr ? (partner.nameFr || partner.nameAr) : (partner.nameEn || partner.nameAr)}
+                          </span>
+                          {partner.nameFr && !isFr && (
                             <span className="text-3xs text-[#5C5A55] block">{partner.nameFr}</span>
                           )}
                         </td>
                         <td className="px-5 py-3">
                           <span className="inline-block px-2 py-0.5 rounded text-4xs font-bold bg-[#FAF8F5] border border-[#e5e0d6] text-[#bd3227]">
-                            {tierLabels[partner.tier]?.ar || partner.tier}
+                            {tierLabels[partner.tier]?.[locale as 'ar' | 'fr' | 'en'] || partner.tier}
                           </span>
                         </td>
                         <td className="px-5 py-3 text-center">
@@ -1098,7 +1329,7 @@ export function PartnershipsAdminTabs({
                                 : 'bg-rose-50 text-rose-800 border-rose-200'
                             }`}
                           >
-                            {partner.active ? 'يتحرك في الموقع ✓' : 'مخفي ✕'}
+                            {partner.active ? tr.activeInMarquee : tr.hiddenFromMarquee}
                           </button>
                         </td>
                         <td className="px-5 py-3 text-end">
@@ -1108,14 +1339,14 @@ export function PartnershipsAdminTabs({
                               onClick={() => openEditPartnerModal(partner)}
                               className="px-2.5 py-1 rounded-lg text-2xs font-bold bg-[#FAF8F5] border border-[#e5e0d6] hover:bg-[#F4EFE6] text-[#231f20] transition-colors cursor-pointer"
                             >
-                              تعديل
+                              {tr.edit}
                             </button>
                             <button
                               type="button"
                               onClick={() => handleDeletePartner(partner.id, partner.nameAr)}
                               className="px-2.5 py-1 rounded-lg text-2xs font-bold text-rose-600 hover:bg-rose-50 border border-transparent hover:border-rose-200 transition-colors cursor-pointer"
                             >
-                              حذف
+                              {tr.delete}
                             </button>
                           </div>
                         </td>
@@ -1123,8 +1354,9 @@ export function PartnershipsAdminTabs({
                     ))
                   ) : (
                     <tr>
-                      <td colSpan={5} className="px-5 py-8 text-center text-[#5C5A55]">
-                        لا توجد نتائج مطابقة لبحثك.
+                      <td colSpan={5} className="px-5 py-12 text-center text-[#5C5A55] text-xs font-semibold">
+                        <span className="text-xl block mb-1">🔍</span>
+                        <span>{tr.noPartnersFound}</span>
                       </td>
                     </tr>
                   )}

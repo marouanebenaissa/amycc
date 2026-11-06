@@ -916,3 +916,69 @@ export async function saveSupportPageConfiguration(
     return { success: false, error: (err as Error).message }
   }
 }
+
+
+export async function updateAdminPasswordAction(newPassword: string): Promise<{ success: boolean; error?: string }> {
+  try {
+    if (!newPassword || newPassword.length < 6) {
+      return { success: false, error: 'كلمة المرور يجب أن تتكون من 6 أحرف على الأقل.' }
+    }
+
+    const supabase = await createClient()
+    const { data: { user }, error: userError } = await supabase.auth.getUser()
+
+    if (userError || !user) {
+      return { success: false, error: 'انتهت الجلسة. يرجى تسجيل الدخول مجدداً.' }
+    }
+
+    const { error: updateError } = await supabase.auth.updateUser({
+      password: newPassword,
+    })
+
+    if (updateError) {
+      return { success: false, error: updateError.message }
+    }
+
+    await recordAuditLog('password_updated', 'auth_users', user.id, {
+      email: user.email,
+      updated_at: new Date().toISOString(),
+    })
+
+    return { success: true }
+  } catch (err) {
+    return { success: false, error: (err as Error).message }
+  }
+}
+
+export async function updateAdminProfileAction(displayName: string): Promise<{ success: boolean; error?: string }> {
+  try {
+    const supabase = await createClient()
+    const { data: { user }, error: userError } = await supabase.auth.getUser()
+
+    if (userError || !user) {
+      return { success: false, error: 'انتهت الجلسة. يرجى تسجيل الدخول مجدداً.' }
+    }
+
+    const { error: updateError } = await supabase.auth.updateUser({
+      data: {
+        full_name: displayName,
+        name: displayName,
+      },
+    })
+
+    if (updateError) {
+      return { success: false, error: updateError.message }
+    }
+
+    await recordAuditLog('profile_updated', 'auth_users', user.id, {
+      display_name: displayName,
+      updated_at: new Date().toISOString(),
+    })
+
+    revalidatePath('/admin')
+    revalidatePath('/admin/profile')
+    return { success: true }
+  } catch (err) {
+    return { success: false, error: (err as Error).message }
+  }
+}

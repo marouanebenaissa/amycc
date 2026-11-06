@@ -321,21 +321,32 @@ export function AdminSidebar({
 
           {/* Staff User Session Card */}
           <div className="bg-white/5 p-3 rounded-2xl border border-white/10 flex items-center justify-between gap-2.5">
-            <div className="flex items-center gap-2.5 min-w-0">
-              <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#bd3227] to-[#d2a82b] text-white flex items-center justify-center font-black text-sm shrink-0 shadow-md">
+            <Link
+              href="/admin/profile"
+              className="flex items-center gap-2.5 min-w-0 group hover:opacity-90 transition-opacity"
+              title={t('profile_settings')}
+            >
+              <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#bd3227] to-[#d2a82b] text-white flex items-center justify-center font-black text-sm shrink-0 shadow-md group-hover:scale-105 transition-transform">
                 {staffInitial}
               </div>
               <div className="min-w-0">
-                <span className="text-xs font-bold text-white block truncate leading-tight">
+                <span className="text-xs font-bold text-white block truncate leading-tight group-hover:text-[#ffd22f] transition-colors">
                   {userName || 'Staff Administrator'}
                 </span>
                 <span className="text-4xs text-white/50 block truncate font-mono mt-0.5">
                   {userEmail}
                 </span>
               </div>
-            </div>
+            </Link>
 
             <div className="shrink-0 flex items-center gap-1">
+              <Link
+                href="/admin/profile"
+                className="p-2 rounded-xl text-white/60 hover:text-white hover:bg-white/10 transition-all cursor-pointer"
+                title={t('profile_settings')}
+              >
+                <span className="text-sm">⚙️</span>
+              </Link>
               <form action={logoutAdmin}>
                 <button
                   type="submit"
