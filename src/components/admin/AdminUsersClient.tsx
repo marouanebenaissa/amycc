@@ -7,6 +7,8 @@ import {
   createUserWithRoleAction,
   updateUserRoleAction,
   deleteStaffUserAction,
+  unlockStaffUserAction,
+  forcePasswordChangeAction,
 } from '@/lib/actions/admin'
 
 export interface AdminUserItem {
@@ -17,6 +19,10 @@ export interface AdminUserItem {
   roleId: number
   roleName: string
   isCurrentUser: boolean
+  isLocked?: boolean
+  lockedAt?: string | null
+  failedAttempts?: number
+  mustChangePassword?: boolean
 }
 
 export interface AdminRoleItem {
@@ -296,7 +302,7 @@ export function AdminUsersClient({
   // KPI calculations
   const totalUsersCount = users.length
   const superAdminsCount = users.filter((u) => u.roleName === 'super_admin' || u.roleId === 1).length
-  const standardRolesCount = PREDEFINED_ROLES.length
+  const lockedUsersCount = users.filter((u) => u.isLocked).length
 
   function getRoleInfo(roleId: number, roleName: string): AdminRoleItem {
     return (
@@ -430,6 +436,64 @@ export function AdminUsersClient({
     })
   }
 
+  function handleUnlockUser(user: AdminUserItem) {
+    setStatusMessage(null)
+    startTransition(async () => {
+      const res = await unlockStaffUserAction(user.id)
+      if (res.success) {
+        setUsers((prev) =>
+          prev.map((u) =>
+            u.id === user.id
+              ? { ...u, isLocked: false, failedAttempts: 0 }
+              : u
+          )
+        )
+        setStatusMessage({
+          type: 'success',
+          text: isAr
+            ? `تم إلغاء قفل حساب (${user.email}) وإعادة تفعيل صلاحية الدخول بنجاح!`
+            : isFr
+            ? `Le compte (${user.email}) a été déverrouillé avec succès !`
+            : `Staff account (${user.email}) has been unlocked successfully!`,
+        })
+      } else {
+        setStatusMessage({
+          type: 'error',
+          text: res.error || (isAr ? 'فشل إلغاء قفل الحساب.' : 'Failed to unlock account.'),
+        })
+      }
+    })
+  }
+
+  function handleForcePasswordChange(user: AdminUserItem) {
+    setStatusMessage(null)
+    startTransition(async () => {
+      const res = await forcePasswordChangeAction(user.id)
+      if (res.success) {
+        setUsers((prev) =>
+          prev.map((u) =>
+            u.id === user.id
+              ? { ...u, mustChangePassword: true }
+              : u
+          )
+        )
+        setStatusMessage({
+          type: 'success',
+          text: isAr
+            ? `تم إلزام المستخدم (${user.email}) بتغيير كلمة المرور في أول تسجيل دخول قادم.`
+            : isFr
+            ? `Changement de mot de passe rendu obligatoire pour (${user.email}).`
+            : `Mandatory password change enforced for (${user.email}).`,
+        })
+      } else {
+        setStatusMessage({
+          type: 'error',
+          text: res.error || 'Failed to enforce password change.',
+        })
+      }
+    })
+  }
+
   return (
     <div className="space-y-8 max-w-7xl mx-auto pb-12">
       {/* Top Banner / Header */}
@@ -543,21 +607,51 @@ export function AdminUsersClient({
           </div>
         </div>
 
-        {/* Predefined Roles */}
-        <div className="bg-white p-5 rounded-2xl border border-[#e5e0d6] shadow-2xs hover:shadow-card transition-all">
+        {/* Security & Account Lockouts */}
+        <div
+          className={`p-5 rounded-2xl border shadow-2xs hover:shadow-card transition-all ${
+            lockedUsersCount > 0 ? 'bg-rose-50/70 border-rose-300' : 'bg-white border-[#e5e0d6]'
+          }`}
+        >
           <div className="flex items-center justify-between gap-2 mb-2">
-            <span className="text-3xs font-black uppercase tracking-wider text-[#d2a82b]">
-              {t.kpiRolesCount}
+            <span
+              className={`text-3xs font-black uppercase tracking-wider ${
+                lockedUsersCount > 0 ? 'text-rose-700' : 'text-[#8a6e14]'
+              }`}
+            >
+              {isAr ? 'الحسابات المقفلة أمنياً' : isFr ? 'Comptes Verrouillés' : 'Security Locked Accounts'}
             </span>
-            <span className="w-8 h-8 rounded-xl bg-[#FEF6CC] flex items-center justify-center text-sm">
-              📜
+            <span
+              className={`w-8 h-8 rounded-xl flex items-center justify-center text-sm ${
+                lockedUsersCount > 0 ? 'bg-rose-200 text-rose-800' : 'bg-[#FEF6CC] text-[#8a6e14]'
+              }`}
+            >
+              {lockedUsersCount > 0 ? '🚨' : '🔒'}
             </span>
           </div>
-          <div className="text-2xl sm:text-3xl font-black text-[#231f20]">
-            {standardRolesCount}
+          <div
+            className={`text-2xl sm:text-3xl font-black ${
+              lockedUsersCount > 0 ? 'text-rose-700' : 'text-[#231f20]'
+            }`}
+          >
+            {lockedUsersCount}
           </div>
-          <div className="text-3xs text-[#5C5A55] mt-1 font-medium">
-            {isAr ? 'أدوار مؤسسية معتمدة' : isFr ? 'Profils de fonction' : 'Active RBAC roles defined'}
+          <div
+            className={`text-3xs mt-1 font-semibold ${
+              lockedUsersCount > 0 ? 'text-rose-600' : 'text-[#5C5A55]'
+            }`}
+          >
+            {lockedUsersCount > 0
+              ? isAr
+                ? '⚠️ تجاوز 5 محاولات (يتطلب إلغاء القفل)'
+                : isFr
+                ? '5 échecs consécutifs (action requise)'
+                : 'Exceeded 5 tries (unlock required)'
+              : isAr
+              ? '✓ لا توجد حسابات محظورة حالياً'
+              : isFr
+              ? 'Aucun compte verrouillé'
+              : 'Zero locked accounts'}
           </div>
         </div>
 
@@ -568,14 +662,14 @@ export function AdminUsersClient({
               {t.kpiSecurity}
             </span>
             <span className="w-8 h-8 rounded-xl bg-emerald-50 flex items-center justify-center text-sm">
-              🔒
+              🛡️
             </span>
           </div>
           <div className="text-2xl sm:text-3xl font-black text-emerald-700">
             {t.kpiSecurityDesc}
           </div>
           <div className="text-3xs text-[#5C5A55] mt-1 font-medium">
-            {isAr ? 'Row Level Security مشدد' : isFr ? 'Isolation stricte des données' : 'Row Level Security active'}
+            {isAr ? 'حماية مشددة + تغيير كلمة المرور عند أول دخول' : isFr ? 'Sécurité renforcée + premier login forcé' : 'Hardened security & first-login reset'}
           </div>
         </div>
       </div>
@@ -634,6 +728,9 @@ export function AdminUsersClient({
               <tr>
                 <th className="px-6 py-4 text-start">{t.thUser}</th>
                 <th className="px-6 py-4 text-start">{t.thRole}</th>
+                <th className="px-6 py-4 text-start">
+                  {isAr ? 'الحالة والأمان' : isFr ? 'Sécurité' : 'Security'}
+                </th>
                 <th className="px-6 py-4 text-start">{t.thDate}</th>
                 <th className="px-6 py-4 text-end">{t.thActions}</th>
               </tr>
@@ -651,14 +748,18 @@ export function AdminUsersClient({
                     <tr
                       key={u.id}
                       className={`hover:bg-[#FAF8F5]/80 transition-colors ${
-                        isCurrent ? 'bg-[#FEF6CC]/25' : ''
+                        isCurrent ? 'bg-[#FEF6CC]/25' : u.isLocked ? 'bg-rose-50/40' : ''
                       }`}
                     >
                       {/* Staff Member Info */}
                       <td className="px-6 py-4">
                         <div className="flex items-center gap-3">
-                          <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-[#bd3227] to-[#d2a82b] text-white flex items-center justify-center font-black text-sm shadow-2xs shrink-0">
-                            {u.full_name ? u.full_name.charAt(0).toUpperCase() : u.email.charAt(0).toUpperCase()}
+                          <div className={`w-10 h-10 rounded-2xl flex items-center justify-center font-black text-sm shadow-2xs shrink-0 ${
+                            u.isLocked
+                              ? 'bg-rose-600 text-white'
+                              : 'bg-gradient-to-br from-[#bd3227] to-[#d2a82b] text-white'
+                          }`}>
+                            {u.isLocked ? '🔒' : u.full_name ? u.full_name.charAt(0).toUpperCase() : u.email.charAt(0).toUpperCase()}
                           </div>
                           <div>
                             <div className="flex items-center gap-2">
@@ -705,6 +806,31 @@ export function AdminUsersClient({
                         </div>
                       </td>
 
+                      {/* Security Status */}
+                      <td className="px-6 py-4">
+                        {u.isLocked ? (
+                          <div className="space-y-0.5">
+                            <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-3xs font-black bg-rose-100 text-rose-800 border border-rose-300">
+                              <span>🔒</span>
+                              <span>{isAr ? 'مقفل (5 محاولات)' : isFr ? 'Verrouillé (5 échecs)' : 'Locked (5 fails)'}</span>
+                            </span>
+                            <div className="text-3xs text-rose-600 font-bold">
+                              {isAr ? 'يتطلب فك القفل' : 'Action required'}
+                            </div>
+                          </div>
+                        ) : u.mustChangePassword ? (
+                          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-3xs font-bold bg-amber-100 text-amber-900 border border-amber-300">
+                            <span>🔑</span>
+                            <span>{isAr ? 'يلزم كلمة جديدة' : isFr ? 'Mdp obligatoire' : 'Password change pending'}</span>
+                          </span>
+                        ) : (
+                          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-3xs font-bold bg-emerald-50 text-emerald-800 border border-emerald-200">
+                            <span>🛡️</span>
+                            <span>{isAr ? 'نشط وآمن' : isFr ? 'Actif & Sécurisé' : 'Active & Secure'}</span>
+                          </span>
+                        )}
+                      </td>
+
                       {/* Join Date */}
                       <td className="px-6 py-4 text-[#5C5A55] text-3xs whitespace-nowrap">
                         {u.created_at
@@ -717,26 +843,56 @@ export function AdminUsersClient({
 
                       {/* Actions */}
                       <td className="px-6 py-4 text-end">
-                        {!isCurrent && u.roleName !== 'super_admin' && u.roleId !== 1 ? (
-                          <button
-                            disabled={isPending}
-                            onClick={() => setUserToDelete(u)}
-                            className="px-3 py-1.5 rounded-xl text-3xs font-bold text-red-600 bg-red-50 hover:bg-red-100 border border-red-200 transition-all cursor-pointer active:scale-95 disabled:opacity-50"
-                          >
-                            🗑️ {t.deleteUserBtn}
-                          </button>
-                        ) : (
-                          <span className="text-3xs text-[#5C5A55] italic">
-                            {isAr ? 'حساب محمي' : isFr ? 'Protégé' : 'Protected'}
-                          </span>
-                        )}
+                        <div className="flex items-center justify-end gap-1.5">
+                          {u.isLocked && (
+                            <button
+                              disabled={isPending}
+                              onClick={() => handleUnlockUser(u)}
+                              className="px-3 py-1.5 rounded-xl text-3xs font-bold text-white bg-emerald-600 hover:bg-emerald-700 shadow-xs transition-all cursor-pointer active:scale-95 disabled:opacity-50 flex items-center gap-1"
+                              title={isAr ? 'إلغاء قفل الحساب واستعادة صلاحية الدخول' : 'Unlock Account'}
+                            >
+                              <span>🔓</span>
+                              <span>{isAr ? 'إلغاء القفل' : isFr ? 'Débloquer' : 'Unlock'}</span>
+                            </button>
+                          )}
+
+                          {!isCurrent && !u.isLocked && (
+                            <button
+                              disabled={isPending || u.mustChangePassword}
+                              onClick={() => handleForcePasswordChange(u)}
+                              className={`px-2.5 py-1.5 rounded-xl text-3xs font-bold border transition-all cursor-pointer flex items-center gap-1 ${
+                                u.mustChangePassword
+                                  ? 'bg-gray-100 text-gray-400 border-gray-200 cursor-not-allowed'
+                                  : 'bg-amber-50 text-amber-800 border-amber-200 hover:bg-amber-100 active:scale-95'
+                              }`}
+                              title={isAr ? 'إلزام هذا الحساب بتغيير كلمة المرور' : 'Force password change'}
+                            >
+                              <span>🔄</span>
+                              <span className="hidden xl:inline">{isAr ? 'إلزام كلمة جديدة' : 'Force change'}</span>
+                            </button>
+                          )}
+
+                          {!isCurrent && u.roleName !== 'super_admin' && u.roleId !== 1 ? (
+                            <button
+                              disabled={isPending}
+                              onClick={() => setUserToDelete(u)}
+                              className="px-3 py-1.5 rounded-xl text-3xs font-bold text-red-600 bg-red-50 hover:bg-red-100 border border-red-200 transition-all cursor-pointer active:scale-95 disabled:opacity-50"
+                            >
+                              🗑️ {t.deleteUserBtn}
+                            </button>
+                          ) : !u.isLocked ? (
+                            <span className="text-3xs text-[#5C5A55] italic">
+                              {isAr ? 'حساب محمي' : isFr ? 'Protégé' : 'Protected'}
+                            </span>
+                          ) : null}
+                        </div>
                       </td>
                     </tr>
                   )
                 })
               ) : (
                 <tr>
-                  <td colSpan={4} className="px-6 py-12 text-center text-[#5C5A55]">
+                  <td colSpan={5} className="px-6 py-12 text-center text-[#5C5A55]">
                     <div className="text-3xl mb-2">🔍</div>
                     <div className="font-semibold">{t.noUsersFound}</div>
                   </td>
@@ -811,6 +967,29 @@ export function AdminUsersClient({
                     </div>
                   </div>
 
+                  {/* Security Status Badge on Mobile */}
+                  <div className="pt-2 border-t border-[#FEF6CC] flex items-center justify-between text-3xs">
+                    <span className="font-bold text-[#5C5A55]">
+                      {isAr ? 'الحالة الأمنية:' : 'Sécurité:'}
+                    </span>
+                    {u.isLocked ? (
+                      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-3xs font-black bg-rose-100 text-rose-800 border border-rose-300">
+                        <span>🔒</span>
+                        <span>{isAr ? 'مقفل (5 محاولات خاطئة)' : 'Verrouillé'}</span>
+                      </span>
+                    ) : u.mustChangePassword ? (
+                      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-3xs font-bold bg-amber-100 text-amber-900 border border-amber-300">
+                        <span>🔑</span>
+                        <span>{isAr ? 'يلزم كلمة جديدة' : 'Mdp requis'}</span>
+                      </span>
+                    ) : (
+                      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-3xs font-bold bg-emerald-50 text-emerald-800 border border-emerald-200">
+                        <span>🛡️</span>
+                        <span>{isAr ? 'نشط وآمن' : 'Actif & Sécurisé'}</span>
+                      </span>
+                    )}
+                  </div>
+
                   <div className="flex items-center justify-between pt-2 border-t border-[#FEF6CC] text-3xs text-[#5C5A55]">
                     <span>
                       {u.created_at
@@ -821,19 +1000,45 @@ export function AdminUsersClient({
                         : '—'}
                     </span>
 
-                    {!isCurrent && u.roleName !== 'super_admin' && u.roleId !== 1 ? (
-                      <button
-                        disabled={isPending}
-                        onClick={() => setUserToDelete(u)}
-                        className="px-3 py-1 rounded-lg text-3xs font-bold text-red-600 bg-red-50 hover:bg-red-100 border border-red-200 transition-all cursor-pointer"
-                      >
-                        🗑️ {t.deleteUserBtn}
-                      </button>
-                    ) : (
-                      <span className="text-3xs text-[#5C5A55] italic">
-                        {isAr ? 'حساب محمي' : isFr ? 'Protégé' : 'Protected'}
-                      </span>
-                    )}
+                    <div className="flex items-center gap-1.5">
+                      {u.isLocked && (
+                        <button
+                          disabled={isPending}
+                          onClick={() => handleUnlockUser(u)}
+                          className="px-2.5 py-1 rounded-lg text-3xs font-bold text-white bg-emerald-600 hover:bg-emerald-700 transition-all cursor-pointer"
+                        >
+                          🔓 {isAr ? 'إلغاء القفل' : 'Débloquer'}
+                        </button>
+                      )}
+
+                      {!isCurrent && !u.isLocked && (
+                        <button
+                          disabled={isPending || u.mustChangePassword}
+                          onClick={() => handleForcePasswordChange(u)}
+                          className={`px-2 py-1 rounded-lg text-3xs font-bold border transition-all ${
+                            u.mustChangePassword
+                              ? 'bg-gray-100 text-gray-400 border-gray-200 cursor-not-allowed'
+                              : 'bg-amber-50 text-amber-800 border-amber-200 hover:bg-amber-100'
+                          }`}
+                        >
+                          🔄 {isAr ? 'كلمة جديدة' : 'Reset'}
+                        </button>
+                      )}
+
+                      {!isCurrent && u.roleName !== 'super_admin' && u.roleId !== 1 ? (
+                        <button
+                          disabled={isPending}
+                          onClick={() => setUserToDelete(u)}
+                          className="px-2.5 py-1 rounded-lg text-3xs font-bold text-red-600 bg-red-50 hover:bg-red-100 border border-red-200 transition-all cursor-pointer"
+                        >
+                          🗑️ {t.deleteUserBtn}
+                        </button>
+                      ) : !u.isLocked ? (
+                        <span className="text-3xs text-[#5C5A55] italic">
+                          {isAr ? 'محمي' : 'Protégé'}
+                        </span>
+                      ) : null}
+                    </div>
                   </div>
                 </div>
               )

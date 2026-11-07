@@ -9,6 +9,8 @@ type AdminLocale = 'ar' | 'fr' | 'en'
 
 interface AdminLoginViewProps {
   initialError?: string
+  isLocked?: boolean
+  remainingAttempts?: number
 }
 
 const TRANSLATIONS = {
@@ -116,7 +118,11 @@ const TRANSLATIONS = {
   },
 }
 
-export function AdminLoginView({ initialError }: AdminLoginViewProps) {
+export function AdminLoginView({
+  initialError,
+  isLocked = false,
+  remainingAttempts,
+}: AdminLoginViewProps) {
   const [locale, setLocale] = useState<AdminLocale>(() => {
     if (typeof window !== 'undefined') {
       try {
@@ -367,14 +373,45 @@ export function AdminLoginView({ initialError }: AdminLoginViewProps) {
                 </p>
               </div>
 
-              {/* Error Alert */}
-              {initialError && (
+              {/* Security Alert: Locked or Failed Attempts */}
+              {isLocked ? (
                 <div
                   role="alert"
-                  className="p-3.5 mb-5 rounded-2xl bg-[#fde8e7] text-[#bd3227] text-xs font-bold border border-[#bd3227]/25 flex items-start gap-2.5 animate-in fade-in slide-in-from-top-1 duration-200"
+                  className="p-4 mb-5 rounded-2xl bg-[#bd3227] text-white text-xs font-medium border border-[#a3261c] shadow-lg flex items-start gap-3 animate-in fade-in slide-in-from-top-1 duration-200"
+                >
+                  <span className="text-2xl shrink-0 mt-0.5">🔒</span>
+                  <div className="space-y-1">
+                    <p className="font-bold text-sm">
+                      {locale === 'ar'
+                        ? 'تم إقفال هذا الحساب أمنياً'
+                        : locale === 'fr'
+                        ? 'Compte Verrouillé par Mesure de Sécurité'
+                        : 'Account Locked for Security'}
+                    </p>
+                    <p className="leading-relaxed opacity-95">
+                      {locale === 'ar'
+                        ? 'تم استنفاد 5 محاولات خاطئة متتالية. لحماية لوحة التحكم من الاختراق، تم تجميد الحساب نهائياً، ويجب عليك التحدث مع مدير عام النظام (السوبر أدمن) لإلغاء القفل واستعادة صلاحية الدخول.'
+                        : locale === 'fr'
+                        ? 'Nombre maximal de 5 tentatives incorrectes dépassé. Par mesure de sécurité anti-intrusion, votre compte a été verrouillé. Veuillez contacter le Super Administrateur pour le débloquer.'
+                        : 'Maximum limit of 5 consecutive failed attempts exceeded. To protect the portal from unauthorized intrusions, this account is locked. You must contact the Super Administrator to unlock it.'}
+                    </p>
+                  </div>
+                </div>
+              ) : initialError ? (
+                <div
+                  role="alert"
+                  className={`p-3.5 mb-5 rounded-2xl text-xs font-bold border flex items-start gap-2.5 animate-in fade-in slide-in-from-top-1 duration-200 ${
+                    remainingAttempts !== undefined && remainingAttempts <= 2
+                      ? 'bg-[#FEF6CC] text-[#8C6A14] border-[#d2a82b]/60'
+                      : 'bg-[#fde8e7] text-[#bd3227] border-[#bd3227]/25'
+                  }`}
                 >
                   <svg
-                    className="w-4 h-4 shrink-0 mt-0.5 text-[#bd3227]"
+                    className={`w-4 h-4 shrink-0 mt-0.5 ${
+                      remainingAttempts !== undefined && remainingAttempts <= 2
+                        ? 'text-[#8C6A14]'
+                        : 'text-[#bd3227]'
+                    }`}
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -389,7 +426,7 @@ export function AdminLoginView({ initialError }: AdminLoginViewProps) {
                   </svg>
                   <span className="leading-relaxed">{initialError}</span>
                 </div>
-              )}
+              ) : null}
 
               {/* Form */}
               <form
@@ -397,6 +434,15 @@ export function AdminLoginView({ initialError }: AdminLoginViewProps) {
                 onSubmit={() => setIsPending(true)}
                 className="space-y-4"
               >
+                {/* Anti-Bot Security Honeypot */}
+                <div className="hidden" aria-hidden="true" tabIndex={-1}>
+                  <input
+                    type="text"
+                    name="admin_security_shield"
+                    tabIndex={-1}
+                    autoComplete="off"
+                  />
+                </div>
                 {/* Email Address */}
                 <div>
                   <label

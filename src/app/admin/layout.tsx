@@ -73,6 +73,7 @@ export default async function AdminLayout({
             userName={userFullName}
             userAvatar={userAvatarUrl}
             userRole={userRole}
+            mustChangePassword={Boolean(user.user_metadata?.must_change_password)}
           >
             {children}
           </AdminLayoutClient>

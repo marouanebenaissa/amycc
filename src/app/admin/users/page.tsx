@@ -3,6 +3,7 @@ import { createAdminClientSafe } from '@/lib/supabase/admin'
 import { redirect } from 'next/navigation'
 import { getCurrentUserRole } from '@/lib/auth/server-rbac'
 import { PREDEFINED_ROLES } from '@/lib/auth/rbac'
+import { getSecurityState } from '@/lib/auth/security'
 import {
   AdminUsersClient,
   AdminUserItem,
@@ -124,6 +125,8 @@ export default async function AdminUsersPage() {
     })
   }
 
+  const secState = await getSecurityState()
+
   // Map into AdminUserItem[]
   const users: AdminUserItem[] = profiles.map((p) => {
     const isCurrent =
@@ -146,6 +149,12 @@ export default async function AdminUsersPage() {
       }
     }
 
+    const normEmail = p.email.toLowerCase().trim()
+    const secAccount = secState.accounts[normEmail]
+    const isLocked = Boolean(secAccount?.isLocked)
+    const failedAttempts = secAccount?.failedAttempts || 0
+    const mustChangePassword = Boolean(secAccount?.mustChangePassword)
+
     return {
       id: p.id,
       email: p.email,
@@ -154,6 +163,9 @@ export default async function AdminUsersPage() {
       roleId,
       roleName,
       isCurrentUser: isCurrent,
+      isLocked,
+      failedAttempts,
+      mustChangePassword,
     }
   })
 

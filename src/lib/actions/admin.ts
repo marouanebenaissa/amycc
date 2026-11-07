@@ -5,6 +5,18 @@ import { createAdminClient, createAdminClientSafe } from '@/lib/supabase/admin'
 import { redirect } from 'next/navigation'
 import { revalidatePath } from 'next/cache'
 import { getCurrentUserRole } from '@/lib/auth/server-rbac'
+import {
+  getClientIp,
+  getClientUserAgent,
+  checkAccountLockout,
+  recordFailedLoginAttempt,
+  recordSuccessfulLogin,
+  recordSecurityAudit,
+  unlockAccountBySuperAdmin,
+  validateStrictPassword,
+  getSecurityState,
+  saveSecurityState,
+} from '@/lib/auth/security'
 import type { FaqItemConfig, AreasConfig, TeamConfig, CommissionsConfig, ContactConfig, ProgramsPageConfig, AnnualProgramConfig, ImpactConfig, EventsPageConfig, NewsPageConfig, PartnershipsPageConfig, MembershipPageConfig, SupportPageConfig } from '@/lib/settings'
 
 export async function recordAuditLog(
@@ -31,24 +43,75 @@ export async function recordAuditLog(
 }
 
 export async function loginAdmin(formData: FormData): Promise<void> {
-  const email = formData.get('email') as string
-  const password = formData.get('password') as string
+  const email = ((formData.get('email') as string) || '').trim().toLowerCase()
+  const password = (formData.get('password') as string) || ''
+  const honeypot = (formData.get('admin_security_shield') as string) || ''
 
-  if (!email || !password) {
-    redirect('/admin/login?error=Email%20and%20password%20are%20required')
+  const clientIp = await getClientIp()
+  const userAgent = await getClientUserAgent()
+
+  // 1. Anti-Bot Honeypot Defense
+  if (honeypot) {
+    await recordSecurityAudit('BOT_HONEYPOT_TRIGGERED', {
+      email,
+      ip: clientIp,
+      userAgent,
+      honeypotValue: honeypot,
+      severity: 'CRITICAL',
+    })
+    redirect('/admin/login?error=Security%20violation%20detected&bot=1')
   }
 
+  if (!email || !password) {
+    redirect('/admin/login?error=البريد%20الإلكتروني%20وكلمة%20المرور%20مطلوبان')
+  }
+
+  // 2. Strict Account Lockout & IP Threat Check
+  const lockoutCheck = await checkAccountLockout(email, clientIp)
+  if (lockoutCheck.isLocked) {
+    const errorMsg =
+      lockoutCheck.messageAr ||
+      'تم إقفال حسابك لتجاوز 5 محاولات خاطئة لكلمة المرور لحماية لوحة التحكم. يجب عليك التحدث مع مدير عام النظام (السوبر أدمن).'
+    redirect(`/admin/login?error=${encodeURIComponent(errorMsg)}&locked=1`)
+  }
+
+  // 3. Supabase Authentication Attempt
   const supabase = await createClient()
-  const { error } = await supabase.auth.signInWithPassword({
+  const { data: authData, error } = await supabase.auth.signInWithPassword({
     email,
     password,
   })
 
   if (error) {
-    redirect(`/admin/login?error=${encodeURIComponent(error.message)}`)
+    // 4. Record Failed Attempt (Enforce 5-attempt permanent lockout)
+    const failResult = await recordFailedLoginAttempt(email, clientIp, userAgent)
+
+    if (failResult.lockedNow) {
+      const lockMsg =
+        'تم إقفال حسابك لتجاوز 5 محاولات خاطئة لكلمة المرور لحماية لوحة التحكم من الاختراق. يجب عليك التحدث مع مدير عام النظام (السوبر أدمن) لإلغاء القفل.'
+      redirect(`/admin/login?error=${encodeURIComponent(lockMsg)}&locked=1`)
+    } else {
+      const remainingMsg = `بيانات الاعتماد غير صحيحة. تنبيه أمني: تبقى لك ${failResult.remainingAttempts} محاولات من أصل 5 قبل إقفال الحساب.`
+      redirect(
+        `/admin/login?error=${encodeURIComponent(remainingMsg)}&attempts=${failResult.failedAttempts}&remaining=${failResult.remainingAttempts}`
+      )
+    }
   }
 
-  await recordAuditLog('user_login', 'auth', email, { timestamp: new Date().toISOString() })
+  // 5. Success: Reset failed attempts & log success
+  await recordSuccessfulLogin(email, clientIp)
+  await recordAuditLog('user_login', 'auth', email, {
+    ip: clientIp,
+    userAgent,
+    timestamp: new Date().toISOString(),
+  })
+
+  // 6. Force Password Change check on First Login
+  const loggedInUser = authData.user
+  if (loggedInUser?.user_metadata?.must_change_password) {
+    redirect('/admin/change-password?first_login=1')
+  }
+
   redirect('/admin')
 }
 
@@ -220,12 +283,18 @@ export async function createUserWithRoleAction(formData: FormData): Promise<{ su
       }
     }
 
-    // 1. Create auth user with service role client
+    // 1. Create auth user with service role client (with mandatory first-login password change)
     const { data: authData, error: authError } = await adminClient.auth.admin.createUser({
       email,
       password,
       email_confirm: true,
-      user_metadata: { full_name: fullName },
+      user_metadata: {
+        full_name: fullName,
+        must_change_password: true,
+        first_login: true,
+        created_by_admin: currentUser.email,
+        created_at: new Date().toISOString(),
+      },
     })
 
     if (authError || !authData?.user) {
@@ -234,7 +303,22 @@ export async function createUserWithRoleAction(formData: FormData): Promise<{ su
 
     const newUserId = authData.user.id
 
-    // 2. Upsert profile
+    // 2. Register in security state for first-login tracking
+    try {
+      const secState = await getSecurityState()
+      secState.accounts[email] = {
+        email,
+        userId: newUserId,
+        failedAttempts: 0,
+        isLocked: false,
+        mustChangePassword: true,
+      }
+      await saveSecurityState(secState)
+    } catch {
+      // Non-fatal
+    }
+
+    // 3. Upsert profile
     await adminClient.from('profiles').upsert([
       {
         id: newUserId,
@@ -244,7 +328,7 @@ export async function createUserWithRoleAction(formData: FormData): Promise<{ su
       },
     ], { onConflict: 'id' })
 
-    // 3. Assign role
+    // 4. Assign role
     await adminClient.from('user_roles').upsert([
       {
         user_id: newUserId,
@@ -259,10 +343,181 @@ export async function createUserWithRoleAction(formData: FormData): Promise<{ su
       fullName,
       roleId,
       createdBy: currentUser.email,
+      mustChangePassword: true,
     })
 
     revalidatePath('/admin/users')
     revalidatePath('/admin/roles')
+    return { success: true }
+  } catch (err) {
+    return { success: false, error: (err as Error).message }
+  }
+}
+
+export async function unlockStaffUserAction(
+  userIdOrEmail: string
+): Promise<{ success: boolean; error?: string }> {
+  try {
+    const supabase = await createClient()
+    const { data: { user: currentUser } } = await supabase.auth.getUser()
+
+    if (!currentUser) {
+      return { success: false, error: 'Unauthorized: Admin session required' }
+    }
+
+    const currentUserRole = await getCurrentUserRole(currentUser.id)
+    if (currentUserRole.key !== 'super_admin') {
+      await recordSecurityAudit('UNAUTHORIZED_UNLOCK_ATTEMPT', {
+        perpetrator: currentUser.email,
+        target: userIdOrEmail,
+        severity: 'CRITICAL',
+      }, currentUser.id)
+      return { success: false, error: 'غير مصرح: إلغاء قفل الحسابات متاح فقط لمدير عام النظام (Super Admin)' }
+    }
+
+    const res = await unlockAccountBySuperAdmin(userIdOrEmail, currentUser.email || 'super_admin')
+    revalidatePath('/admin/users')
+    revalidatePath('/admin/roles')
+    return res
+  } catch (err) {
+    return { success: false, error: (err as Error).message }
+  }
+}
+
+export async function forcePasswordChangeAction(
+  userIdOrEmail: string
+): Promise<{ success: boolean; error?: string }> {
+  try {
+    const supabase = await createClient()
+    const { data: { user: currentUser } } = await supabase.auth.getUser()
+
+    if (!currentUser) {
+      return { success: false, error: 'Unauthorized: Admin session required' }
+    }
+
+    const currentUserRole = await getCurrentUserRole(currentUser.id)
+    if (currentUserRole.key !== 'super_admin') {
+      return { success: false, error: 'غير مصرح: إلزام تغيير كلمة المرور متاح فقط لمدير عام النظام' }
+    }
+
+    const adminClient = createAdminClientSafe()
+    if (!adminClient) {
+      return { success: false, error: 'Admin client required' }
+    }
+
+    let targetEmail = userIdOrEmail.toLowerCase().trim()
+    let targetUserId = userIdOrEmail
+
+    if (userIdOrEmail.includes('-') && !userIdOrEmail.includes('@')) {
+      const { data: userData } = await adminClient.auth.admin.getUserById(userIdOrEmail)
+      if (userData?.user?.email) {
+        targetEmail = userData.user.email.toLowerCase().trim()
+        targetUserId = userData.user.id
+      }
+    } else {
+      const { data: listData } = await adminClient.auth.admin.listUsers()
+      const matched = listData?.users.find((u) => u.email?.toLowerCase() === targetEmail)
+      if (matched) {
+        targetUserId = matched.id
+      }
+    }
+
+    await adminClient.auth.admin.updateUserById(targetUserId, {
+      user_metadata: {
+        must_change_password: true,
+        forced_by: currentUser.email,
+        forced_at: new Date().toISOString(),
+      },
+    })
+
+    const secState = await getSecurityState()
+    if (secState.accounts[targetEmail]) {
+      secState.accounts[targetEmail].mustChangePassword = true
+    } else {
+      secState.accounts[targetEmail] = {
+        email: targetEmail,
+        userId: targetUserId,
+        failedAttempts: 0,
+        isLocked: false,
+        mustChangePassword: true,
+      }
+    }
+    await saveSecurityState(secState)
+
+    await recordSecurityAudit('FORCED_PASSWORD_CHANGE_TRIGGERED', {
+      targetEmail,
+      forcedBy: currentUser.email,
+      timestamp: new Date().toISOString(),
+    }, targetUserId)
+
+    revalidatePath('/admin/users')
+    return { success: true }
+  } catch (err) {
+    return { success: false, error: (err as Error).message }
+  }
+}
+
+export async function completeFirstLoginPasswordChangeAction(
+  formData: FormData
+): Promise<{ success: boolean; error?: string }> {
+  try {
+    const newPassword = ((formData.get('newPassword') as string) || '').trim()
+    const confirmPassword = ((formData.get('confirmPassword') as string) || '').trim()
+
+    if (!newPassword || !confirmPassword) {
+      return { success: false, error: 'يرجى إدخال كلمة المرور وتأكيدها.' }
+    }
+
+    if (newPassword !== confirmPassword) {
+      return { success: false, error: 'كلمتا المرور غير متطابقتين.' }
+    }
+
+    const valResult = validateStrictPassword(newPassword)
+    if (!valResult.isValid) {
+      return { success: false, error: valResult.errorsAr.join(' ') }
+    }
+
+    const supabase = await createClient()
+    const { data: { user } } = await supabase.auth.getUser()
+
+    if (!user) {
+      return { success: false, error: 'انتهت الجلسة. يرجى تسجيل الدخول مجدداً.' }
+    }
+
+    // Update password in Supabase Auth
+    const { error: updateError } = await supabase.auth.updateUser({
+      password: newPassword,
+      data: {
+        ...(user.user_metadata || {}),
+        must_change_password: false,
+        first_login: false,
+        password_changed_at: new Date().toISOString(),
+      },
+    })
+
+    if (updateError) {
+      return { success: false, error: updateError.message }
+    }
+
+    // Clear mustChangePassword in security state
+    try {
+      const state = await getSecurityState()
+      const normEmail = (user.email || '').toLowerCase().trim()
+      if (state.accounts[normEmail]) {
+        state.accounts[normEmail].mustChangePassword = false
+        await saveSecurityState(state)
+      }
+    } catch {
+      // Non-fatal
+    }
+
+    await recordSecurityAudit('FIRST_LOGIN_PASSWORD_CHANGE_COMPLETED', {
+      email: user.email,
+      userId: user.id,
+      timestamp: new Date().toISOString(),
+    }, user.id)
+
+    revalidatePath('/admin')
     return { success: true }
   } catch (err) {
     return { success: false, error: (err as Error).message }

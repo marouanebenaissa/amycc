@@ -196,11 +196,12 @@ export function getArticleJsonLd(params: ArticleSchemaParams) {
   }
 }
 
-export function getBreadcrumbJsonLd(items: BreadcrumbItem[], _locale?: string) {
+export function getBreadcrumbJsonLd(items: BreadcrumbItem[], locale?: string) {
   const siteUrl = getSiteUrl()
   return {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
+    ...(locale ? { inLanguage: locale } : {}),
     itemListElement: items.map((item, index) => {
       const fullUrl = item.url
         ? item.url
