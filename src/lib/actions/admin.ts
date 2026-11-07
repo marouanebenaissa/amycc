@@ -323,7 +323,10 @@ export async function savePageConfiguration(
 ): Promise<{ success: boolean; error?: string }> {
   try {
     const supabase = await createClient()
-    const { error } = await supabase
+    const adminClient = createAdminClientSafe()
+    const db = adminClient || supabase
+
+    const { error } = await db
       .from('site_settings')
       .upsert([
         {
@@ -357,7 +360,10 @@ export async function saveFaqConfiguration(
       return { success: false, error: 'غير مصرح لك بتعديل الأسئلة الشائعة (Unauthorized)' }
     }
 
-    const { error } = await supabase
+    const adminClient = createAdminClientSafe()
+    const db = adminClient || supabase
+
+    const { error } = await db
       .from('site_settings')
       .upsert([
         {
@@ -392,7 +398,10 @@ export async function saveAreasConfiguration(
       return { success: false, error: 'غير مصرح لك بتعديل مجالات التدخل (Unauthorized)' }
     }
 
-    const { error } = await supabase
+    const adminClient = createAdminClientSafe()
+    const db = adminClient || supabase
+
+    const { error } = await db
       .from('site_settings')
       .upsert([
         {
@@ -427,7 +436,10 @@ export async function saveTeamConfiguration(
       return { success: false, error: 'غير مصرح لك بتعديل بيانات الفريق (Unauthorized)' }
     }
 
-    const { error } = await supabase
+    const adminClient = createAdminClientSafe()
+    const db = adminClient || supabase
+
+    const { error } = await db
       .from('site_settings')
       .upsert([
         {
@@ -463,7 +475,10 @@ export async function saveCommissionsConfiguration(
       return { success: false, error: 'غير مصرح لك بتعديل بيانات اللجان الوظيفية (Unauthorized)' }
     }
 
-    const { error } = await supabase
+    const adminClient = createAdminClientSafe()
+    const db = adminClient || supabase
+
+    const { error } = await db
       .from('site_settings')
       .upsert([
         {
@@ -500,10 +515,12 @@ export async function saveContactConfiguration(
       return { success: false, error: 'غير مصرح لك بتعديل بيانات التواصل (Unauthorized)' }
     }
 
+    const adminClient = createAdminClientSafe()
+    const db = adminClient || supabase
     const now = new Date().toISOString()
 
     // 1. Save rich contact config
-    const { error: mainErr } = await supabase
+    const { error: mainErr } = await db
       .from('site_settings')
       .upsert([
         {
@@ -516,7 +533,7 @@ export async function saveContactConfiguration(
     if (mainErr) return { success: false, error: mainErr.message }
 
     // 2. Synchronize legacy contact_info and social_links for layout & footer
-    await supabase.from('site_settings').upsert([
+    await db.from('site_settings').upsert([
       {
         key: 'contact_info',
         value: {
@@ -539,7 +556,7 @@ export async function saveContactConfiguration(
     ])
 
     // 3. Synchronize top_bar contact email if present
-    const { data: topBarRow } = await supabase
+    const { data: topBarRow } = await db
       .from('site_settings')
       .select('value')
       .eq('key', 'top_bar')
@@ -547,7 +564,7 @@ export async function saveContactConfiguration(
 
     if (topBarRow?.value) {
       const topBarVal = topBarRow.value as Record<string, unknown>
-      await supabase.from('site_settings').upsert([
+      await db.from('site_settings').upsert([
         {
           key: 'top_bar',
           value: {
@@ -588,7 +605,10 @@ export async function saveProgramsPageConfiguration(
       return { success: false, error: 'غير مصرح لك بتعديل إعدادات صفحة البرامج (Unauthorized)' }
     }
 
-    const { error } = await supabase
+    const adminClient = createAdminClientSafe()
+    const db = adminClient || supabase
+
+    const { error } = await db
       .from('site_settings')
       .upsert([
         {
@@ -626,7 +646,10 @@ export async function saveAnnualProgramConfiguration(
       return { success: false, error: 'غير مصرح لك بتعديل البرنامج السنوي (Unauthorized)' }
     }
 
-    const { error } = await supabase
+    const adminClient = createAdminClientSafe()
+    const db = adminClient || supabase
+
+    const { error } = await db
       .from('site_settings')
       .upsert([
         {
@@ -671,7 +694,10 @@ export async function saveImpactConfiguration(
       return { success: false, error: 'غير مصرح لك بتعديل بيانات الأثر المجتمعي (Unauthorized)' }
     }
 
-    const { error } = await supabase
+    const adminClient = createAdminClientSafe()
+    const db = adminClient || supabase
+
+    const { error } = await db
       .from('site_settings')
       .upsert([
         {
@@ -717,7 +743,10 @@ export async function saveEventsPageConfiguration(
       return { success: false, error: 'غير مصرح لك بتعديل واجهة الفعاليات (Unauthorized)' }
     }
 
-    const { error } = await supabase
+    const adminClient = createAdminClientSafe()
+    const db = adminClient || supabase
+
+    const { error } = await db
       .from('site_settings')
       .upsert([
         {
@@ -763,7 +792,10 @@ export async function saveNewsPageConfiguration(
       return { success: false, error: 'غير مصرح لك بتعديل واجهة الأخبار (Unauthorized)' }
     }
 
-    const { error } = await supabase
+    const adminClient = createAdminClientSafe()
+    const db = adminClient || supabase
+
+    const { error } = await db
       .from('site_settings')
       .upsert([
         {
