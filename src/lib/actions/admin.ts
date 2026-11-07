@@ -692,6 +692,72 @@ export async function verifyResetCodeAndSetPasswordAction(
   }
 }
 
+export async function initiateGoogleSignInAction(origin: string): Promise<{
+  success: boolean
+  url?: string
+  notConfigured?: boolean
+  error?: string
+  projectId?: string
+  callbackUrl?: string
+}> {
+  try {
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://ovyrzgztzaewdfwqnzbv.supabase.co'
+    const projectId = supabaseUrl.replace('https://', '').split('.')[0]
+    const callbackUrl = `${supabaseUrl}/auth/v1/callback`
+    const redirectTo = `${origin}/api/auth/callback`
+
+    const authorizeUrl = `${supabaseUrl}/auth/v1/authorize?provider=google&redirect_to=${encodeURIComponent(
+      redirectTo
+    )}&queryParams=${encodeURIComponent(JSON.stringify({ hd: 'amycc.org', prompt: 'select_account' }))}`
+
+    // Probe the Supabase OAuth endpoint server-side to check if Google provider is enabled
+    try {
+      const probeRes = await fetch(authorizeUrl, {
+        method: 'GET',
+        redirect: 'manual',
+        headers: {
+          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+        },
+      })
+
+      // If Supabase returned 400 (e.g. Unsupported provider: provider is not enabled)
+      if (probeRes.status === 400) {
+        const bodyText = await probeRes.text()
+        if (bodyText.includes('provider is not enabled') || bodyText.includes('validation_failed')) {
+          return {
+            success: false,
+            notConfigured: true,
+            projectId,
+            callbackUrl,
+            error: 'مزوّد تسجيل الدخول Google غير مفعّل بعد في لوحة تحكم مشروع Supabase.',
+          }
+        }
+      }
+
+      // If Supabase returned a redirect (302, 303, 307) to accounts.google.com
+      const redirectLocation = probeRes.headers.get('location')
+      if (redirectLocation) {
+        return {
+          success: true,
+          url: redirectLocation,
+        }
+      }
+    } catch {
+      // If server-side fetch cannot complete, return authorizeUrl as fallback
+    }
+
+    return {
+      success: true,
+      url: authorizeUrl,
+    }
+  } catch (err) {
+    return {
+      success: false,
+      error: (err as Error).message,
+    }
+  }
+}
+
 export async function completeFirstLoginPasswordChangeAction(
   formData: FormData
 ): Promise<{ success: boolean; error?: string }> {

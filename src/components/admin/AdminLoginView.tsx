@@ -3,7 +3,12 @@
 import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { loginAdmin, sendPasswordResetCodeAction, verifyResetCodeAndSetPasswordAction } from '@/lib/actions/admin'
+import {
+  loginAdmin,
+  sendPasswordResetCodeAction,
+  verifyResetCodeAndSetPasswordAction,
+  initiateGoogleSignInAction,
+} from '@/lib/actions/admin'
 import { createClient } from '@/lib/supabase/client'
 import { TurnstileCaptcha } from '@/components/ui/TurnstileCaptcha'
 
@@ -155,9 +160,37 @@ export function AdminLoginView({
   const [forgotError, setForgotError] = useState<string | null>(null)
   const [showForgotPass, setShowForgotPass] = useState(false)
 
+  // Google OAuth setup assistant modal state
+  const [googleSetupModal, setGoogleSetupModal] = useState<{
+    open: boolean
+    projectId: string
+    callbackUrl: string
+  } | null>(null)
+  const [copiedCallback, setCopiedCallback] = useState(false)
+
   async function handleGoogleSignIn() {
     try {
       setIsPending(true)
+      const res = await initiateGoogleSignInAction(window.location.origin)
+
+      if (res.notConfigured) {
+        setIsPending(false)
+        setGoogleSetupModal({
+          open: true,
+          projectId: res.projectId || 'ovyrzgztzaewdfwqnzbv',
+          callbackUrl:
+            res.callbackUrl ||
+            `https://${res.projectId || 'ovyrzgztzaewdfwqnzbv'}.supabase.co/auth/v1/callback`,
+        })
+        return
+      }
+
+      if (res.success && res.url) {
+        window.location.href = res.url
+        return
+      }
+
+      // If server probe was indeterminate, attempt client oauth
       const supabase = createClient()
       const { error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
@@ -169,13 +202,22 @@ export function AdminLoginView({
           },
         },
       })
+
       if (error) {
         setIsPending(false)
-        alert(error.message)
+        setGoogleSetupModal({
+          open: true,
+          projectId: 'ovyrzgztzaewdfwqnzbv',
+          callbackUrl: 'https://ovyrzgztzaewdfwqnzbv.supabase.co/auth/v1/callback',
+        })
       }
-    } catch (err) {
+    } catch {
       setIsPending(false)
-      console.error(err)
+      setGoogleSetupModal({
+        open: true,
+        projectId: 'ovyrzgztzaewdfwqnzbv',
+        callbackUrl: 'https://ovyrzgztzaewdfwqnzbv.supabase.co/auth/v1/callback',
+      })
     }
   }
 
@@ -1043,6 +1085,160 @@ export function AdminLoginView({
                 </div>
               </form>
             )}
+          </div>
+        </div>
+      )}
+
+      {/* ============================================================
+          GOOGLE OAUTH SUPABASE SETUP ASSISTANT MODAL
+          ============================================================ */}
+      {googleSetupModal?.open && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs animate-fadeIn">
+          <div className="relative w-full max-w-lg bg-white rounded-3xl shadow-2xl border border-[#e5e0d6] overflow-hidden p-6 sm:p-7 space-y-5">
+            {/* Moroccan tricolor ribbon */}
+            <div className="h-1.5 -mx-7 -mt-7 mb-4 bg-gradient-to-r from-[#bd3227] via-[#ffd22f] to-[#d2a82b]" />
+
+            <div className="flex items-start justify-between gap-3">
+              <div className="space-y-1">
+                <span className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-[#FEF6CC] text-[#8C6A14] text-3xs font-bold border border-[#d2a82b]/30">
+                  ✦ {locale === 'ar' ? 'إعداد مصادقة Google المؤسساتية' : 'Google SSO Setup'}
+                </span>
+                <h3 className="text-base sm:text-lg font-black text-[#231f20]">
+                  {locale === 'ar'
+                    ? 'تفعيل مزود تسجيل الدخول Google في Supabase'
+                    : locale === 'fr'
+                    ? 'Activer le fournisseur Google dans Supabase'
+                    : 'Enable Google Sign-In Provider in Supabase'}
+                </h3>
+              </div>
+
+              <button
+                type="button"
+                onClick={() => setGoogleSetupModal(null)}
+                className="w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 text-[#5C5A55] flex items-center justify-center text-sm cursor-pointer shrink-0"
+              >
+                ✕
+              </button>
+            </div>
+
+            {/* Explanation Alert */}
+            <div className="p-3.5 rounded-2xl bg-[#FEF6CC]/50 border border-[#d2a82b]/50 text-xs text-[#8C6A14] leading-relaxed space-y-1">
+              <div className="flex items-center gap-1.5 font-bold">
+                <span>ℹ️</span>
+                <span>
+                  {locale === 'ar'
+                    ? 'سبب ظهور خطأ "Unsupported provider: provider is not enabled":'
+                    : 'Why "Unsupported provider" occurs:'}
+                </span>
+              </div>
+              <p className="text-3xs text-[#8C6A14]/90">
+                {locale === 'ar'
+                  ? 'مشروع Supabase الخاص بك يحتاج فقط إلى تفعيل خيار Google في صفحة Authentication Providers وإدخال مفاتيح OAuth لتفعيل الدخول الموحد بنطاق @amycc.org.'
+                  : 'Your Supabase project needs Google Provider enabled under Authentication -> Providers with your Google OAuth Client ID and Secret.'}
+              </p>
+            </div>
+
+            {/* Step-by-Step Instructions */}
+            <div className="space-y-3.5 text-xs text-[#231f20]">
+              {/* Step 1: Redirect URI */}
+              <div className="space-y-1.5">
+                <div className="flex items-center gap-1.5 font-bold text-2xs uppercase tracking-wider text-[#5C5A55]">
+                  <span className="w-4 h-4 rounded-full bg-[#bd3227] text-white flex items-center justify-center text-3xs font-bold">
+                    1
+                  </span>
+                  <span>
+                    {locale === 'ar'
+                      ? 'رابط إعادة التوجيه المطلوب (Redirect URI):'
+                      : 'Authorized Redirect URI:'}
+                  </span>
+                </div>
+                <div className="flex items-center gap-2 p-2 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6]">
+                  <input
+                    type="text"
+                    readOnly
+                    value={googleSetupModal.callbackUrl}
+                    className="flex-1 bg-transparent text-3xs font-mono text-[#231f20] outline-none select-all"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => {
+                      navigator.clipboard.writeText(googleSetupModal.callbackUrl)
+                      setCopiedCallback(true)
+                      setTimeout(() => setCopiedCallback(false), 2000)
+                    }}
+                    className="px-2.5 py-1 rounded-lg text-3xs font-bold bg-white hover:bg-gray-100 border border-[#e5e0d6] text-[#231f20] cursor-pointer shrink-0"
+                  >
+                    {copiedCallback ? (
+                      <span className="text-emerald-700">✓ تم النسخ</span>
+                    ) : (
+                      <span>نسخ الرابط</span>
+                    )}
+                  </button>
+                </div>
+                <p className="text-4xs text-[#8a857b]">
+                  {locale === 'ar'
+                    ? 'انسخ هذا الرابط وضعه في Google Cloud Console -> APIs & Services -> Credentials -> OAuth 2.0 Client.'
+                    : 'Add this exact URI to Authorized Redirect URIs in your Google Cloud Console.'}
+                </p>
+              </div>
+
+              {/* Step 2: Supabase Dashboard Action */}
+              <div className="space-y-1.5">
+                <div className="flex items-center gap-1.5 font-bold text-2xs uppercase tracking-wider text-[#5C5A55]">
+                  <span className="w-4 h-4 rounded-full bg-[#bd3227] text-white flex items-center justify-center text-3xs font-bold">
+                    2
+                  </span>
+                  <span>
+                    {locale === 'ar'
+                      ? 'تفعيل خيار Google في Supabase Dashboard:'
+                      : 'Enable Google in Supabase Dashboard:'}
+                  </span>
+                </div>
+                <p className="text-3xs text-[#5C5A55] leading-relaxed">
+                  {locale === 'ar'
+                    ? 'انتقل إلى تبويب Authentication -> Providers -> Google، فعّل المفتاح، وضع Client ID و Client Secret، واضغط Save.'
+                    : 'Toggle Enable Google provider to ON, paste Client ID and Secret, and Save.'}
+                </p>
+                <div className="pt-1">
+                  <a
+                    href={`https://supabase.com/dashboard/project/${googleSetupModal.projectId}/auth/providers`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold bg-[#18794E] hover:bg-[#156742] text-white shadow-xs transition-all cursor-pointer"
+                  >
+                    <span>⚡</span>
+                    <span>
+                      {locale === 'ar'
+                        ? 'فتح إعدادات مزوّدي الدخول في Supabase ↗'
+                        : 'Open Supabase Auth Providers ↗'}
+                    </span>
+                  </a>
+                </div>
+              </div>
+
+              {/* Alternative reassurance */}
+              <div className="p-3 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6] text-3xs text-[#5C5A55] flex items-center gap-2">
+                <span>🔐</span>
+                <span>
+                  {locale === 'ar'
+                    ? 'ملاحظة: يمكنك تسجيل الدخول في أي وقت باستخدام البريد الإلكتروني وكلمة المرور بشكل طبيعي.'
+                    : 'You can always sign in using your standard email and password credentials.'}
+                </span>
+              </div>
+            </div>
+
+            {/* Modal Actions */}
+            <div className="flex items-center justify-end pt-3 border-t border-[#e5e0d6]">
+              <button
+                type="button"
+                onClick={() => setGoogleSetupModal(null)}
+                className="px-5 py-2.5 rounded-xl text-xs font-bold bg-[#231f20] hover:bg-[#bd3227] text-white shadow-md transition-all cursor-pointer"
+              >
+                {locale === 'ar'
+                  ? 'فهمت، العودة لتسجيل الدخول بكلمة المرور'
+                  : 'Back to Login Form'}
+              </button>
+            </div>
           </div>
         </div>
       )}
