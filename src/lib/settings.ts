@@ -1728,6 +1728,9 @@ export interface ContactConfig {
     instagram?: string
     linkedin?: string
     youtube?: string
+    twitter?: string
+    tiktok?: string
+    whatsapp?: string
   }
   departments: ContactDepartmentConfig[]
   formTopics: ContactFormTopicConfig[]
@@ -1776,6 +1779,9 @@ export const defaultContactConfig: ContactConfig = {
     instagram: 'https://instagram.com',
     linkedin: 'https://linkedin.com',
     youtube: 'https://youtube.com',
+    twitter: '',
+    tiktok: '',
+    whatsapp: '',
   },
   departments: [
     {
@@ -1886,6 +1892,9 @@ export async function getContactSettings(): Promise<ContactConfig> {
           instagram: socialVal.instagram || defaultContactConfig.social.instagram,
           linkedin: socialVal.linkedin || defaultContactConfig.social.linkedin,
           youtube: socialVal.youtube || defaultContactConfig.social.youtube,
+          twitter: typeof socialVal.twitter === 'string' ? socialVal.twitter : '',
+          tiktok: typeof socialVal.tiktok === 'string' ? socialVal.tiktok : '',
+          whatsapp: typeof socialVal.whatsapp === 'string' ? socialVal.whatsapp : '',
         },
       }
     }
@@ -1937,6 +1946,9 @@ export async function getContactSettings(): Promise<ContactConfig> {
         instagram: typeof socialVal.instagram === 'string' ? socialVal.instagram : defaultContactConfig.social.instagram,
         linkedin: typeof socialVal.linkedin === 'string' ? socialVal.linkedin : defaultContactConfig.social.linkedin,
         youtube: typeof socialVal.youtube === 'string' ? socialVal.youtube : defaultContactConfig.social.youtube,
+        twitter: typeof socialVal.twitter === 'string' ? socialVal.twitter : '',
+        tiktok: typeof socialVal.tiktok === 'string' ? socialVal.tiktok : '',
+        whatsapp: typeof socialVal.whatsapp === 'string' ? socialVal.whatsapp : '',
       },
       departments: Array.isArray(val.departments) && val.departments.length > 0
         ? val.departments

@@ -81,6 +81,11 @@ export default async function AdminSettingsPage() {
     const contactAddress = (formData.get('contactAddress') as string) || ''
     const facebookUrl = (formData.get('facebookUrl') as string) || ''
     const instagramUrl = (formData.get('instagramUrl') as string) || ''
+    const linkedinUrl = (formData.get('linkedinUrl') as string) || ''
+    const youtubeUrl = (formData.get('youtubeUrl') as string) || ''
+    const twitterUrl = (formData.get('twitterUrl') as string) || ''
+    const tiktokUrl = (formData.get('tiktokUrl') as string) || ''
+    const whatsappUrl = (formData.get('whatsappUrl') as string) || ''
 
     // Top Bar Settings
     const topBarEnabled = formData.get('topBarEnabled') === 'on'
@@ -192,6 +197,11 @@ export default async function AdminSettingsPage() {
         ...(rawContact.social || defaultContactConfig.social),
         facebook: facebookUrl || rawContact.social?.facebook,
         instagram: instagramUrl || rawContact.social?.instagram,
+        linkedin: linkedinUrl || rawContact.social?.linkedin,
+        youtube: youtubeUrl || rawContact.social?.youtube,
+        twitter: twitterUrl || rawContact.social?.twitter,
+        tiktok: tiktokUrl || rawContact.social?.tiktok,
+        whatsapp: whatsappUrl || rawContact.social?.whatsapp,
       },
     }
 
@@ -206,7 +216,15 @@ export default async function AdminSettingsPage() {
       },
       {
         key: 'social_links',
-        value: { facebook: facebookUrl, instagram: instagramUrl },
+        value: {
+          facebook: facebookUrl,
+          instagram: instagramUrl,
+          linkedin: linkedinUrl,
+          youtube: youtubeUrl,
+          twitter: twitterUrl,
+          tiktok: tiktokUrl,
+          whatsapp: whatsappUrl,
+        },
       },
       {
         key: 'top_bar',
@@ -322,6 +340,11 @@ export default async function AdminSettingsPage() {
   const effectivePhone = contactVal.phone || rawContactSetting.channels?.phone || '+212 5 24 00 00 00'
   const effectiveAddress = contactVal.address || rawContactSetting.channels?.addressAr || 'Marrakech / مراكش، المملكة المغربية'
   const socialVal = (settingsMap['social_links'] as Record<string, string>) || {}
+  const effectiveSocial = {
+    ...defaultContactConfig.social,
+    ...(rawContactSetting.social || {}),
+    ...socialVal,
+  }
   const topBarVal = (settingsMap['top_bar'] as Partial<TopBarConfig>) || {}
   const isTopBarEnabled = typeof topBarVal.enabled === 'boolean' ? topBarVal.enabled : false
   const heroVal = (settingsMap['hero'] as Partial<HeroConfig>) || {}
@@ -1239,26 +1262,84 @@ export default async function AdminSettingsPage() {
               />
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 pt-2">
               <div>
                 <label className="block text-2xs font-bold text-[#5C5A55] mb-1">
-                  Facebook Page URL
+                  Facebook Page URL (فيسبوك)
                 </label>
                 <input
                   name="facebookUrl"
                   type="url"
-                  defaultValue={socialVal.facebook || 'https://facebook.com/amycc'}
+                  defaultValue={effectiveSocial.facebook || 'https://facebook.com/amycc'}
                   className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#231f20]"
                 />
               </div>
               <div>
                 <label className="block text-2xs font-bold text-[#5C5A55] mb-1">
-                  Instagram Profile URL
+                  Instagram Profile URL (إنستغرام)
                 </label>
                 <input
                   name="instagramUrl"
                   type="url"
-                  defaultValue={socialVal.instagram || 'https://instagram.com/amycc'}
+                  defaultValue={effectiveSocial.instagram || 'https://instagram.com/amycc'}
+                  className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#231f20]"
+                />
+              </div>
+              <div>
+                <label className="block text-2xs font-bold text-[#5C5A55] mb-1">
+                  LinkedIn Page URL (لينكد إن)
+                </label>
+                <input
+                  name="linkedinUrl"
+                  type="url"
+                  defaultValue={effectiveSocial.linkedin || 'https://linkedin.com/company/amycc'}
+                  className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#231f20]"
+                />
+              </div>
+              <div>
+                <label className="block text-2xs font-bold text-[#5C5A55] mb-1">
+                  YouTube Channel URL (يوتيوب)
+                </label>
+                <input
+                  name="youtubeUrl"
+                  type="url"
+                  defaultValue={effectiveSocial.youtube || 'https://youtube.com/@amycc'}
+                  className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#231f20]"
+                />
+              </div>
+              <div>
+                <label className="block text-2xs font-bold text-[#5C5A55] mb-1">
+                  X / Twitter Profile URL (منصة إكس)
+                </label>
+                <input
+                  name="twitterUrl"
+                  type="url"
+                  defaultValue={effectiveSocial.twitter || ''}
+                  placeholder="https://x.com/amycc_morocco"
+                  className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#231f20]"
+                />
+              </div>
+              <div>
+                <label className="block text-2xs font-bold text-[#5C5A55] mb-1">
+                  TikTok Channel URL (تيك توك)
+                </label>
+                <input
+                  name="tiktokUrl"
+                  type="url"
+                  defaultValue={effectiveSocial.tiktok || ''}
+                  placeholder="https://tiktok.com/@amycc"
+                  className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#231f20]"
+                />
+              </div>
+              <div>
+                <label className="block text-2xs font-bold text-[#5C5A55] mb-1">
+                  WhatsApp Direct URL (واتساب)
+                </label>
+                <input
+                  name="whatsappUrl"
+                  type="url"
+                  defaultValue={effectiveSocial.whatsapp || ''}
+                  placeholder="https://wa.me/212600000000"
                   className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-[#e5e0d6] outline-none focus:border-[#231f20]"
                 />
               </div>

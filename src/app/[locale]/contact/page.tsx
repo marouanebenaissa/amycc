@@ -372,6 +372,42 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
                       <span>YouTube</span>
                     </a>
                   )}
+
+                  {social.twitter && (
+                    <a
+                      href={social.twitter}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="p-3.5 rounded-xl bg-[#FAF8F5] hover:bg-black text-[#231f20] hover:text-white transition-all flex items-center gap-2.5 text-xs sm:text-sm font-bold group border border-[#e5e0d6]"
+                    >
+                      <span className="text-base">𝕏</span>
+                      <span>X (Twitter)</span>
+                    </a>
+                  )}
+
+                  {social.tiktok && (
+                    <a
+                      href={social.tiktok}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="p-3.5 rounded-xl bg-[#FAF8F5] hover:bg-black text-[#231f20] hover:text-white transition-all flex items-center gap-2.5 text-xs sm:text-sm font-bold group border border-[#e5e0d6]"
+                    >
+                      <span className="text-base">🎵</span>
+                      <span>TikTok</span>
+                    </a>
+                  )}
+
+                  {social.whatsapp && (
+                    <a
+                      href={social.whatsapp}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="p-3.5 rounded-xl bg-[#FAF8F5] hover:bg-[#25D366] text-[#231f20] hover:text-white transition-all flex items-center gap-2.5 text-xs sm:text-sm font-bold group border border-[#e5e0d6]"
+                    >
+                      <span className="text-base">💬</span>
+                      <span>WhatsApp</span>
+                    </a>
+                  )}
                 </div>
               </div>
 

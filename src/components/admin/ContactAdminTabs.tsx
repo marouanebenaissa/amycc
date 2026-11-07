@@ -4,6 +4,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import type { ContactConfig } from '@/lib/settings'
 import { ContactManager } from '@/components/admin/ContactManager'
+import { SocialMediaManager } from '@/components/admin/SocialMediaManager'
 import { CsvExportButton } from '@/components/admin/CsvExportButton'
 import { useAdminLocale } from './AdminLocaleContext'
 
@@ -28,9 +29,10 @@ interface ContactAdminTabsProps {
 
 const STRINGS = {
   ar: {
-    pageTitle: 'إدارة بيانات التواصل والرسائل الواردة',
-    pageSubtitle: 'تحكم كامل في أرقام الهاتف، العناوين، قنوات الاتصال، واستقبال رسائل واستفسارات الزوار والشركاء.',
+    pageTitle: 'إدارة قنوات التواصل والشبكات الاجتماعية والرسائل',
+    pageSubtitle: 'تحكم كامل في روابط مواقع التواصل الاجتماعي (Footer)، وأرقام الهاتف، وقنوات الاتصال، وصندوق الرسائل الواردة.',
     previewFront: 'معاينة صفحة اتصل بنا',
+    tabSocial: 'مواقع التواصل الاجتماعي (Footer & Social)',
     tabCms: 'إدارة صفحة ومعلومات اتصل بنا (Contact CMS)',
     tabInbox: 'صندوق الرسائل الواردة',
     newBadge: 'جديد',
@@ -52,9 +54,10 @@ const STRINGS = {
     confirmDelete: 'هل ترغب في حذف هذه الرسالة نهائياً؟',
   },
   fr: {
-    pageTitle: 'Centre de Contact & Messages Reçus',
-    pageSubtitle: 'Gestion des coordonnées, adresses officielles, réseaux sociaux et traitement des messages entrants.',
+    pageTitle: 'Centre de Contact & Réseaux Sociaux',
+    pageSubtitle: 'Gestion des réseaux sociaux (Pied de page / Footer), coordonnées officielles et messagerie entrante.',
     previewFront: 'Voir la page contact',
+    tabSocial: 'Réseaux Sociaux (Footer & Social)',
     tabCms: 'Configuration CMS Contact',
     tabInbox: 'Messages Reçus',
     newBadge: 'Nouveau',
@@ -76,9 +79,10 @@ const STRINGS = {
     confirmDelete: 'Êtes-vous sûr de vouloir supprimer ce message ?',
   },
   en: {
-    pageTitle: 'Contact Center & Inquiries',
-    pageSubtitle: 'Manage institutional phone numbers, physical address, communication channels, and visitor inquiries.',
+    pageTitle: 'Contact Center & Social Media Management',
+    pageSubtitle: 'Full control over social media channels (Footer & Contact page), association coordinates, and visitor messages.',
     previewFront: 'Preview Contact Page',
+    tabSocial: 'Social Media Channels (Footer & Social)',
     tabCms: 'Contact Page CMS',
     tabInbox: 'Incoming Messages',
     newBadge: 'New',
@@ -111,7 +115,16 @@ export function ContactAdminTabs({
   const { locale, dir } = useAdminLocale()
   const tr = STRINGS[locale] || STRINGS.ar
 
-  const [activeTab, setActiveTab] = useState<'cms' | 'inbox'>('cms')
+  const [activeTab, setActiveTab] = useState<'social' | 'cms' | 'inbox'>(() => {
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search)
+      const tab = params.get('tab')
+      if (tab === 'social' || tab === 'cms' || tab === 'inbox') {
+        return tab as 'social' | 'cms' | 'inbox'
+      }
+    }
+    return 'social'
+  })
   const [searchTerm, setSearchTerm] = useState('')
   const [filterStatus, setFilterStatus] = useState<string>('all')
 
@@ -165,6 +178,19 @@ export function ContactAdminTabs({
       <div className="flex flex-wrap items-center gap-2 p-1.5 bg-[#FAF8F5] rounded-2xl border border-[#e5e0d6] w-full sm:w-fit shadow-2xs">
         <button
           type="button"
+          onClick={() => setActiveTab('social')}
+          className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-black transition-all cursor-pointer ${
+            activeTab === 'social'
+              ? 'bg-[#231f20] text-white shadow-sm'
+              : 'text-[#5C5A55] hover:text-[#231f20] hover:bg-[#F4EFE6]'
+          }`}
+        >
+          <span>🌐</span>
+          <span>{tr.tabSocial}</span>
+        </button>
+
+        <button
+          type="button"
           onClick={() => setActiveTab('cms')}
           className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-black transition-all cursor-pointer ${
             activeTab === 'cms'
@@ -196,9 +222,15 @@ export function ContactAdminTabs({
       </div>
 
       {/* Render Active View */}
-      {activeTab === 'cms' ? (
+      {activeTab === 'social' && (
+        <SocialMediaManager initialConfig={initialConfig} />
+      )}
+
+      {activeTab === 'cms' && (
         <ContactManager initialConfig={initialConfig} defaultConfig={defaultConfig} />
-      ) : (
+      )}
+
+      {activeTab === 'inbox' && (
         <div className="space-y-4">
           {/* Inbox Filter & Search Toolbar */}
           <div className="p-4 rounded-3xl bg-white border border-[#e5e0d6] flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 shadow-2xs">

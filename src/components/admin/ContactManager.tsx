@@ -711,7 +711,7 @@ export function ContactManager({ initialConfig }: ContactManagerProps) {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             <div>
               <label className="block text-2xs font-bold text-[#5C5A55] uppercase tracking-wider mb-1">
                 رابط صفحة فيسبوك (Facebook URL)
@@ -760,6 +760,45 @@ export function ContactManager({ initialConfig }: ContactManagerProps) {
                 value={config.social.youtube ?? ''}
                 onChange={(e) => updateSocial('youtube', e.target.value)}
                 placeholder="https://youtube.com/@amycc"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6] text-xs text-[#231f20] font-mono focus:bg-white focus:outline-none focus:border-[#231f20]"
+              />
+            </div>
+
+            <div>
+              <label className="block text-2xs font-bold text-[#5C5A55] uppercase tracking-wider mb-1">
+                رابط منصة إكس / تويتر (X / Twitter URL)
+              </label>
+              <input
+                type="url"
+                value={config.social.twitter ?? ''}
+                onChange={(e) => updateSocial('twitter', e.target.value)}
+                placeholder="https://x.com/amycc_morocco"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6] text-xs text-[#231f20] font-mono focus:bg-white focus:outline-none focus:border-[#231f20]"
+              />
+            </div>
+
+            <div>
+              <label className="block text-2xs font-bold text-[#5C5A55] uppercase tracking-wider mb-1">
+                رابط حساب تيك توك (TikTok URL)
+              </label>
+              <input
+                type="url"
+                value={config.social.tiktok ?? ''}
+                onChange={(e) => updateSocial('tiktok', e.target.value)}
+                placeholder="https://tiktok.com/@amycc"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6] text-xs text-[#231f20] font-mono focus:bg-white focus:outline-none focus:border-[#231f20]"
+              />
+            </div>
+
+            <div>
+              <label className="block text-2xs font-bold text-[#5C5A55] uppercase tracking-wider mb-1">
+                رابط الواتساب المباشر (Direct WhatsApp URL)
+              </label>
+              <input
+                type="url"
+                value={config.social.whatsapp ?? ''}
+                onChange={(e) => updateSocial('whatsapp', e.target.value)}
+                placeholder="https://wa.me/212600000000"
                 className="w-full px-3.5 py-2.5 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6] text-xs text-[#231f20] font-mono focus:bg-white focus:outline-none focus:border-[#231f20]"
               />
             </div>

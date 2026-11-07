@@ -153,12 +153,12 @@ export const ADMIN_NAV_CATEGORIES: AdminNavCategory[] = [
       },
       {
         href: '/admin/contacts',
-        labelAr: 'رسائل التواصل',
-        labelFr: 'Messages de Contact',
-        labelEn: 'Contact Messages',
-        descAr: 'استفسارات ومراسلات الزوار',
-        descFr: 'Courriers et questions des visiteurs',
-        descEn: 'Visitor inquiries and general messages',
+        labelAr: 'رسائل وقنوات التواصل (الشبكات)',
+        labelFr: 'Contact & Réseaux Sociaux',
+        labelEn: 'Contact & Social Channels',
+        descAr: 'مواقع التواصل الاجتماعي (Footer) والرسائل',
+        descFr: 'Réseaux sociaux (Footer) et messagerie',
+        descEn: 'Social media channels (Footer) & inbox',
         icon: '💬',
       },
       {
