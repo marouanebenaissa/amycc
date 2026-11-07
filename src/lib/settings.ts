@@ -1027,13 +1027,89 @@ export const defaultTeamHeroConfig: TeamHeroConfig = {
   descriptionEn: 'The team of the Spirit of Arts & Culture Association (AMYCC) comprises an elected executive board and specialized committees dedicated to arts education, heritage celebration, and empowering young creatives across Morocco.',
 }
 
+export interface TeamMetricCard {
+  id: string
+  labelAr: string
+  labelFr: string
+  labelEn: string
+  valueAr: string
+  valueFr: string
+  valueEn: string
+  descriptionAr: string
+  descriptionFr: string
+  descriptionEn: string
+  accentColor?: 'black' | 'red' | 'gold' | 'emerald' | 'blue'
+  order?: number
+}
+
+export const defaultTeamMetrics: TeamMetricCard[] = [
+  {
+    id: 'roles',
+    labelAr: 'المكتب التنفيذي المنتخب',
+    labelFr: 'Bureau Exécutif Élu',
+    labelEn: 'Elected Executive Board',
+    valueAr: '6 مناصب قانونية',
+    valueFr: '6 Postes Statutaires',
+    valueEn: '6 Statutory Roles',
+    descriptionAr: 'تسيير إداري ومالي مطابق لظهير تأسيس الجمعيات بالمغرب',
+    descriptionFr: 'Direction administrative conforme au Dahir associatif marocain',
+    descriptionEn: 'Administrative management governed by Moroccan non-profit law.',
+    accentColor: 'black',
+    order: 1,
+  },
+  {
+    id: 'hubs',
+    labelAr: 'اللجان الميدانية المتخصصة',
+    labelFr: 'Commissions Thématiques',
+    labelEn: 'Specialized Commissions',
+    valueAr: '6 محاور وظيفية',
+    valueFr: '6 Pôles d’Action',
+    valueEn: '6 Functional Hubs',
+    descriptionAr: 'الفنون التشكيلية، المسرح، الموسيقى، الإعلام، والتطوع والتكوين',
+    descriptionFr: 'Arts visuels, théâtre, musique, médias, volontariat et formation',
+    descriptionEn: 'Visual arts, theatre, music, media, volunteering, and training.',
+    accentColor: 'red',
+    order: 2,
+  },
+  {
+    id: 'volunteering',
+    labelAr: 'روح العمل الجمعوي',
+    labelFr: 'Engagement Associatif',
+    labelEn: 'Civic Dedication',
+    valueAr: '100% تطوع مدني',
+    valueFr: '100% Volontariat',
+    valueEn: '100% Civic Service',
+    descriptionAr: 'عطاء غير ربحي تحركه المسؤولية الأخلاقية والوطنية تجاه الشباب',
+    descriptionFr: 'Engagement désintéressé guidé par la passion culturelle',
+    descriptionEn: 'Non-profit dedication driven by cultural passion and civic mission.',
+    accentColor: 'gold',
+    order: 3,
+  },
+  {
+    id: 'scope',
+    labelAr: 'النطاق والمقر',
+    labelFr: 'Siège & Rayonnement',
+    labelEn: 'Headquarters & Scope',
+    valueAr: 'مراكش • جهات المغرب',
+    valueFr: 'Marrakech • Maroc',
+    valueEn: 'Marrakech • Morocco',
+    descriptionAr: 'انطلاق من مراكش الحمراء مع الانفتاح على كافة جهات المملكة',
+    descriptionFr: 'Ancrage à Marrakech avec extension vers toutes les régions',
+    descriptionEn: 'Grounded in Marrakech with phased expansion across all regions.',
+    accentColor: 'black',
+    order: 4,
+  },
+]
+
 export interface TeamConfig {
   hero?: TeamHeroConfig
+  metrics?: TeamMetricCard[]
   members: TeamMemberConfig[]
 }
 
 export const defaultTeamConfig: TeamConfig = {
   hero: defaultTeamHeroConfig,
+  metrics: defaultTeamMetrics,
   members: [
     {
       id: 'president',
@@ -1242,8 +1318,27 @@ export async function getTeamSettings(): Promise<TeamConfig> {
       descriptionEn: heroVal.descriptionEn || defaultTeamHeroConfig.descriptionEn,
     }
 
+    const rawMetrics = Array.isArray(val.metrics) ? val.metrics : defaultTeamMetrics
+    const metrics: TeamMetricCard[] = rawMetrics.map((item, index) => ({
+      id: item.id || `metric-${index + 1}`,
+      labelAr: item.labelAr || '',
+      labelFr: item.labelFr || '',
+      labelEn: item.labelEn || '',
+      valueAr: item.valueAr || '',
+      valueFr: item.valueFr || '',
+      valueEn: item.valueEn || '',
+      descriptionAr: item.descriptionAr || '',
+      descriptionFr: item.descriptionFr || '',
+      descriptionEn: item.descriptionEn || '',
+      accentColor: (['black', 'red', 'gold', 'emerald', 'blue'].includes(item.accentColor || '')
+        ? item.accentColor
+        : 'black') as 'black' | 'red' | 'gold' | 'emerald' | 'blue',
+      order: typeof item.order === 'number' ? item.order : index + 1,
+    }))
+
     return {
       hero,
+      metrics,
       members: val.members
         .filter((item): item is TeamMemberConfig => typeof item === 'object' && item !== null && typeof item.id === 'string')
         .map((item, index) => ({

@@ -184,6 +184,7 @@ export function TeamHeroManager({
       const updatedConfig: TeamConfig = {
         hero,
         members: initialConfig.members,
+        metrics: initialConfig.metrics,
       }
 
       const res = await saveTeamConfiguration(updatedConfig)

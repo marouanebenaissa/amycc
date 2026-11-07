@@ -2,7 +2,7 @@ import { getDictionary } from '@/lib/i18n/dictionaries'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import Link from 'next/link'
-import { getTeamSettings, getCommissionsSettings, defaultTeamHeroConfig } from '@/lib/settings'
+import { getTeamSettings, getCommissionsSettings, defaultTeamHeroConfig, defaultTeamMetrics } from '@/lib/settings'
 import { ImageWithFallback } from '@/components/ui/ImageWithFallback'
 
 export const revalidate = 0
@@ -20,6 +20,7 @@ export default async function TeamPage(props: { params: Promise<{ locale: string
   ])
 
   const enabledMembers = teamSettings.members.filter((m) => m.enabled !== false)
+  const teamMetrics = teamSettings.metrics && teamSettings.metrics.length > 0 ? teamSettings.metrics : defaultTeamMetrics
 
   // Executive Board Members (fallback to default statutory members if empty)
   const executiveMembers =
@@ -266,86 +267,62 @@ export default async function TeamPage(props: { params: Promise<{ locale: string
         </section>
 
         {/* ============================================================
-            2. INSTITUTIONAL METRICS & CAPACITY STRIP (4 CARDS)
+            2. INSTITUTIONAL METRICS & CAPACITY STRIP (DYNAMIC CARDS)
             ============================================================ */}
-        <section className="py-12 bg-white border-b border-[#e5e0d6]">
+        <section id="metrics" className="py-12 bg-white border-b border-[#e5e0d6]">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
-              {/* Card 1: 6 Statutory Roles */}
-              <div className="p-5 sm:p-6 rounded-3xl bg-[#FAF8F5] border border-[#e5e0d6] hover:border-[#231f20]/30 transition-all text-center flex flex-col justify-between group shadow-2xs overflow-hidden">
-                <span className="text-xs font-bold text-[#5C5A55] block mb-1">
-                  {isAr ? 'المكتب التنفيذي المنتخب' : isFr ? 'Bureau Exécutif Élu' : 'Elected Executive Board'}
-                </span>
-                <div className="min-h-[3.25rem] flex items-center justify-center px-1">
-                  <span className="text-lg sm:text-xl xl:text-2xl font-black text-[#231f20] group-hover:scale-105 transition-transform block text-center leading-tight">
-                    {isAr ? '6 مناصب قانونية' : isFr ? '6 Postes Statutaires' : '6 Statutory Roles'}
-                  </span>
-                </div>
-                <p className="text-xs text-[#5C5A55] leading-relaxed mt-2 text-balance">
-                  {isAr
-                    ? 'تسيير إداري ومالي مطابق لظهير تأسيس الجمعيات بالمغرب'
-                    : isFr
-                    ? 'Direction administrative conforme au Dahir associatif marocain'
-                    : 'Administrative management governed by Moroccan non-profit law.'}
-                </p>
-              </div>
+              {teamMetrics.map((card, idx) => {
+                const cardLabel = isAr
+                  ? card.labelAr
+                  : isFr
+                  ? (card.labelFr || card.labelAr)
+                  : (card.labelEn || card.labelAr)
 
-              {/* Card 2: 6 Specialized Hubs */}
-              <div className="p-5 sm:p-6 rounded-3xl bg-[#FAF8F5] border border-[#e5e0d6] hover:border-[#bd3227]/30 transition-all text-center flex flex-col justify-between group shadow-2xs overflow-hidden">
-                <span className="text-xs font-bold text-[#5C5A55] block mb-1">
-                  {isAr ? 'اللجان الميدانية المتخصصة' : isFr ? 'Commissions Thématiques' : 'Specialized Commissions'}
-                </span>
-                <div className="min-h-[3.25rem] flex items-center justify-center px-1">
-                  <span className="text-lg sm:text-xl xl:text-2xl font-black text-[#bd3227] group-hover:scale-105 transition-transform block text-center leading-tight">
-                    {isAr ? '6 محاور وظيفية' : isFr ? '6 Pôles d’Action' : '6 Functional Hubs'}
-                  </span>
-                </div>
-                <p className="text-xs text-[#5C5A55] leading-relaxed mt-2 text-balance">
-                  {isAr
-                    ? 'الفنون التشكيلية، المسرح، الموسيقى، الإعلام، والتطوع والتكوين'
-                    : isFr
-                    ? 'Arts visuels, théâtre, musique, médias, volontariat et formation'
-                    : 'Visual arts, theatre, music, media, volunteering, and training.'}
-                </p>
-              </div>
+                const cardValue = isAr
+                  ? card.valueAr
+                  : isFr
+                  ? (card.valueFr || card.valueAr)
+                  : (card.valueEn || card.valueAr)
 
-              {/* Card 3: 100% Civic Volunteering */}
-              <div className="p-5 sm:p-6 rounded-3xl bg-[#FAF8F5] border border-[#e5e0d6] hover:border-[#d2a82b]/30 transition-all text-center flex flex-col justify-between group shadow-2xs overflow-hidden">
-                <span className="text-xs font-bold text-[#5C5A55] block mb-1">
-                  {isAr ? 'روح العمل الجمعوي' : isFr ? 'Engagement Associatif' : 'Civic Dedication'}
-                </span>
-                <div className="min-h-[3.25rem] flex items-center justify-center px-1">
-                  <span className="text-lg sm:text-xl xl:text-2xl font-black text-[#d2a82b] group-hover:scale-105 transition-transform block text-center leading-tight">
-                    {isAr ? '100% تطوع مدني' : isFr ? '100% Volontariat' : '100% Civic Service'}
-                  </span>
-                </div>
-                <p className="text-xs text-[#5C5A55] leading-relaxed mt-2 text-balance">
-                  {isAr
-                    ? 'عطاء غير ربحي تحركه المسؤولية الأخلاقية والوطنية تجاه الشباب'
-                    : isFr
-                    ? 'Engagement désintéressé guidé par la passion culturelle'
-                    : 'Non-profit dedication driven by cultural passion and civic mission.'}
-                </p>
-              </div>
+                const cardDesc = isAr
+                  ? card.descriptionAr
+                  : isFr
+                  ? (card.descriptionFr || card.descriptionAr)
+                  : (card.descriptionEn || card.descriptionAr)
 
-              {/* Card 4: Geographic Scope */}
-              <div className="p-5 sm:p-6 rounded-3xl bg-[#FAF8F5] border border-[#e5e0d6] hover:border-[#231f20]/30 transition-all text-center flex flex-col justify-between group shadow-2xs overflow-hidden">
-                <span className="text-xs font-bold text-[#5C5A55] block mb-1">
-                  {isAr ? 'النطاق والمقر' : isFr ? 'Siège & Rayonnement' : 'Headquarters & Scope'}
-                </span>
-                <div className="min-h-[3.25rem] flex items-center justify-center px-1">
-                  <span className="text-base sm:text-lg xl:text-xl font-black text-[#231f20] group-hover:scale-105 transition-transform block text-center leading-tight text-balance">
-                    {isAr ? 'مراكش • جهات المغرب' : isFr ? 'Marrakech • Maroc' : 'Marrakech • Morocco'}
-                  </span>
-                </div>
-                <p className="text-xs text-[#5C5A55] leading-relaxed mt-2 text-balance">
-                  {isAr
-                    ? 'انطلاق من مراكش الحمراء مع الانفتاح على كافة جهات المملكة'
-                    : isFr
-                    ? 'Ancrage à Marrakech avec extension vers toutes les régions'
-                    : 'Grounded in Marrakech with phased expansion across all regions.'}
-                </p>
-              </div>
+                const colorClasses =
+                  card.accentColor === 'red'
+                    ? { border: 'hover:border-[#bd3227]/30', text: 'text-[#bd3227]' }
+                    : card.accentColor === 'gold'
+                    ? { border: 'hover:border-[#d2a82b]/30', text: 'text-[#d2a82b]' }
+                    : card.accentColor === 'emerald'
+                    ? { border: 'hover:border-emerald-600/30', text: 'text-emerald-700' }
+                    : card.accentColor === 'blue'
+                    ? { border: 'hover:border-blue-600/30', text: 'text-blue-700' }
+                    : { border: 'hover:border-[#231f20]/30', text: 'text-[#231f20]' }
+
+                return (
+                  <div
+                    key={card.id || `metric-${idx}`}
+                    className={`p-5 sm:p-6 rounded-3xl bg-[#FAF8F5] border border-[#e5e0d6] ${colorClasses.border} transition-all text-center flex flex-col justify-between group shadow-2xs overflow-hidden`}
+                  >
+                    <span className="text-xs font-bold text-[#5C5A55] block mb-1">
+                      {cardLabel}
+                    </span>
+                    <div className="min-h-[3.25rem] flex items-center justify-center px-1">
+                      <span
+                        className={`text-lg sm:text-xl xl:text-2xl font-black ${colorClasses.text} group-hover:scale-105 transition-transform block text-center leading-tight`}
+                      >
+                        {cardValue}
+                      </span>
+                    </div>
+                    <p className="text-xs text-[#5C5A55] leading-relaxed mt-2 text-balance">
+                      {cardDesc}
+                    </p>
+                  </div>
+                )
+              })}
             </div>
           </div>
         </section>

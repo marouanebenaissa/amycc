@@ -6,6 +6,7 @@ import type { TeamConfig, CommissionsConfig } from '@/lib/settings'
 import { TeamManager } from '@/components/admin/TeamManager'
 import { CommissionsManager } from '@/components/admin/CommissionsManager'
 import { TeamHeroManager } from '@/components/admin/TeamHeroManager'
+import { TeamMetricsManager } from '@/components/admin/TeamMetricsManager'
 import { useAdminLocale } from './AdminLocaleContext'
 
 export const TEAM_STRINGS = {
@@ -14,6 +15,7 @@ export const TEAM_STRINGS = {
     title: 'فريق العمل واللجان الوظيفية (Team & Structure)',
     subtitle: 'إدارة أعضاء المكتب التنفيذي، اللجان الوظيفية الست، وواجهة صفحة فريق العمل.',
     tabHero: 'واجهة وغلاف الصفحة (Hero)',
+    tabMetrics: 'مؤشرات الهيكلة (4 بطاقات)',
     tabMembers: 'أعضاء المكتب التنفيذي',
     tabCommissions: 'اللجان الوظيفية وفرق التأطير',
     previewSite: 'معاينة صفحة الفريق',
@@ -23,6 +25,7 @@ export const TEAM_STRINGS = {
     title: 'Équipe & Commissions Fonctionnelles (Team & Structure)',
     subtitle: 'Gestion des membres du bureau exécutif, des commissions thématiques et de la page vitrine.',
     tabHero: 'En-tête & Vitrine (Hero)',
+    tabMetrics: 'Indicateurs Clés (4 Cartes)',
     tabMembers: 'Bureau Exécutif',
     tabCommissions: 'Commissions Thématiques',
     previewSite: 'Aperçu de la page',
@@ -32,6 +35,7 @@ export const TEAM_STRINGS = {
     title: 'Team & Functional Commissions (Team & Structure)',
     subtitle: 'Manage executive board members, 6 functional commissions, and team showcase page.',
     tabHero: 'Page Showcase & Hero',
+    tabMetrics: 'Capacity Strip (4 Cards)',
     tabMembers: 'Executive Board Members',
     tabCommissions: 'Functional Commissions',
     previewSite: 'Preview Team Page',
@@ -53,7 +57,7 @@ export function TeamAdminTabs({
 }: TeamAdminTabsProps) {
   const { locale, dir } = useAdminLocale()
   const tr = TEAM_STRINGS[locale] || TEAM_STRINGS.ar
-  const [activeTab, setActiveTab] = useState<'hero' | 'members' | 'commissions'>('hero')
+  const [activeTab, setActiveTab] = useState<'hero' | 'metrics' | 'members' | 'commissions'>('hero')
 
   return (
     <div className="space-y-6" dir={dir}>
@@ -98,6 +102,19 @@ export function TeamAdminTabs({
 
         <button
           type="button"
+          onClick={() => setActiveTab('metrics')}
+          className={`flex-1 sm:flex-initial flex items-center justify-center gap-2 px-4 sm:px-5 py-2.5 rounded-xl text-xs sm:text-sm font-black transition-all cursor-pointer ${
+            activeTab === 'metrics'
+              ? 'bg-[#bd3227] text-white shadow-sm'
+              : 'text-[#5C5A55] hover:text-[#231f20] hover:bg-[#F4EFE6]'
+          }`}
+        >
+          <span>📊</span>
+          <span>{tr.tabMetrics}</span>
+        </button>
+
+        <button
+          type="button"
           onClick={() => setActiveTab('members')}
           className={`flex-1 sm:flex-initial flex items-center justify-center gap-2 px-4 sm:px-5 py-2.5 rounded-xl text-xs sm:text-sm font-black transition-all cursor-pointer ${
             activeTab === 'members'
@@ -114,7 +131,7 @@ export function TeamAdminTabs({
           onClick={() => setActiveTab('commissions')}
           className={`flex-1 sm:flex-initial flex items-center justify-center gap-2 px-4 sm:px-5 py-2.5 rounded-xl text-xs sm:text-sm font-black transition-all cursor-pointer ${
             activeTab === 'commissions'
-              ? 'bg-[#bd3227] text-white shadow-sm'
+              ? 'bg-[#d2a82b] text-[#231f20] shadow-sm'
               : 'text-[#5C5A55] hover:text-[#231f20] hover:bg-[#F4EFE6]'
           }`}
         >
@@ -126,6 +143,10 @@ export function TeamAdminTabs({
       {/* Render Active Manager */}
       {activeTab === 'hero' ? (
         <TeamHeroManager
+          initialConfig={teamConfig}
+        />
+      ) : activeTab === 'metrics' ? (
+        <TeamMetricsManager
           initialConfig={teamConfig}
         />
       ) : activeTab === 'members' ? (
