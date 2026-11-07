@@ -12,6 +12,7 @@ import {
   saveUserGranularPermissionsAction,
 } from '@/lib/actions/admin'
 import { PERMISSION_MODULES } from '@/lib/auth/rbac'
+import { Flaticon } from '@/components/ui/Flaticon'
 
 export interface AdminUserItem {
   id: string
@@ -587,7 +588,7 @@ export function AdminUsersClient({
         <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div className="space-y-2 max-w-3xl">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-xs border border-white/15 text-3xs font-black tracking-widest uppercase text-[#ffd22f]">
-              <span>🛡️</span>
+              <Flaticon name="shield" size={13} className="text-[#ffd22f]" />
               <span>{t.badge}</span>
               <span>•</span>
               <span className="text-white/80 font-mono">RBAC v2.4</span>
@@ -654,14 +655,14 @@ export function AdminUsersClient({
               {t.kpiTotal}
             </span>
             <span className="w-8 h-8 rounded-xl bg-[#FAF8F5] flex items-center justify-center text-sm">
-              👥
+              <Flaticon name="users" size={18} className="text-[#231f20]" />
             </span>
           </div>
           <div className="text-2xl sm:text-3xl font-black text-[#231f20]">
             {totalUsersCount}
           </div>
           <div className="text-3xs text-[#8a6e14] mt-1 font-semibold flex items-center gap-1">
-            <span>✓</span>
+            <Flaticon name="check" size={12} className="text-[#8a6e14]" />
             <span>
               {isAr
                 ? 'حسابات نشطة ومحمية بـ Supabase Auth'
@@ -679,7 +680,7 @@ export function AdminUsersClient({
               {t.kpiSuperAdmins}
             </span>
             <span className="w-8 h-8 rounded-xl bg-[#fde8e7] flex items-center justify-center text-sm">
-              🛡️
+              <Flaticon name="shield" size={18} className="text-[#bd3227]" />
             </span>
           </div>
           <div className="text-2xl sm:text-3xl font-black text-[#bd3227]">
@@ -709,7 +710,7 @@ export function AdminUsersClient({
                 lockedUsersCount > 0 ? 'bg-rose-200 text-rose-800' : 'bg-[#FEF6CC] text-[#8a6e14]'
               }`}
             >
-              {lockedUsersCount > 0 ? '🚨' : '🔒'}
+              <Flaticon name={lockedUsersCount > 0 ? 'lock' : 'shield'} size={18} />
             </span>
           </div>
           <div
@@ -745,7 +746,7 @@ export function AdminUsersClient({
               {t.kpiSecurity}
             </span>
             <span className="w-8 h-8 rounded-xl bg-emerald-50 flex items-center justify-center text-sm">
-              🛡️
+              <Flaticon name="shield" size={18} className="text-emerald-700" />
             </span>
           </div>
           <div className="text-2xl sm:text-3xl font-black text-emerald-700">
@@ -909,8 +910,8 @@ export function AdminUsersClient({
                       <td className="px-6 py-4">
                         {u.isLocked ? (
                           <div className="space-y-0.5">
-                            <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-3xs font-black bg-rose-100 text-rose-800 border border-rose-300">
-                              <span>🔒</span>
+                            <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-3xs font-black bg-rose-100 text-rose-800 border border-rose-300">
+                              <Flaticon name="lock" size={11} className="text-rose-700" />
                               <span>{isAr ? 'مقفل (5 محاولات)' : isFr ? 'Verrouillé (5 échecs)' : 'Locked (5 fails)'}</span>
                             </span>
                             <div className="text-3xs text-rose-600 font-bold">
@@ -918,13 +919,13 @@ export function AdminUsersClient({
                             </div>
                           </div>
                         ) : u.mustChangePassword ? (
-                          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-3xs font-bold bg-amber-100 text-amber-900 border border-amber-300">
-                            <span>🔑</span>
+                          <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-3xs font-bold bg-amber-100 text-amber-900 border border-amber-300">
+                            <Flaticon name="key" size={11} className="text-amber-800" />
                             <span>{isAr ? 'يلزم كلمة جديدة' : isFr ? 'Mdp obligatoire' : 'Password change pending'}</span>
                           </span>
                         ) : (
-                          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-3xs font-bold bg-emerald-50 text-emerald-800 border border-emerald-200">
-                            <span>🛡️</span>
+                          <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-3xs font-bold bg-emerald-50 text-emerald-800 border border-emerald-200">
+                            <Flaticon name="shield" size={11} className="text-emerald-700" />
                             <span>{isAr ? 'نشط وآمن' : isFr ? 'Actif & Sécurisé' : 'Active & Secure'}</span>
                           </span>
                         )}
@@ -1107,18 +1108,18 @@ export function AdminUsersClient({
                       {isAr ? 'الحالة الأمنية:' : 'Sécurité:'}
                     </span>
                     {u.isLocked ? (
-                      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-3xs font-black bg-rose-100 text-rose-800 border border-rose-300">
-                        <span>🔒</span>
+                      <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-3xs font-black bg-rose-100 text-rose-800 border border-rose-300">
+                        <Flaticon name="lock" size={11} className="text-rose-700" />
                         <span>{isAr ? 'مقفل (5 محاولات خاطئة)' : 'Verrouillé'}</span>
                       </span>
                     ) : u.mustChangePassword ? (
-                      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-3xs font-bold bg-amber-100 text-amber-900 border border-amber-300">
-                        <span>🔑</span>
+                      <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-3xs font-bold bg-amber-100 text-amber-900 border border-amber-300">
+                        <Flaticon name="key" size={11} className="text-amber-800" />
                         <span>{isAr ? 'يلزم كلمة جديدة' : 'Mdp requis'}</span>
                       </span>
                     ) : (
-                      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-3xs font-bold bg-emerald-50 text-emerald-800 border border-emerald-200">
-                        <span>🛡️</span>
+                      <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-3xs font-bold bg-emerald-50 text-emerald-800 border border-emerald-200">
+                        <Flaticon name="shield" size={11} className="text-emerald-700" />
                         <span>{isAr ? 'نشط وآمن' : 'Actif & Sécurisé'}</span>
                       </span>
                     )}
@@ -1295,8 +1296,8 @@ export function AdminUsersClient({
           <div className="relative w-full max-w-lg bg-white rounded-3xl shadow-2xl border border-[#e5e0d6] overflow-hidden p-6 sm:p-8 space-y-6">
             <div className="flex items-start justify-between gap-4 pb-4 border-b border-[#e5e0d6]">
               <div className="flex items-center gap-3">
-                <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#bd3227] to-[#d2a82b] text-white flex items-center justify-center text-xl shadow-md">
-                  👤
+                <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#bd3227] to-[#d2a82b] text-white flex items-center justify-center shadow-md">
+                  <Flaticon name="users" size={24} className="text-white" />
                 </div>
                 <div>
                   <h3 className="text-lg font-black text-[#231f20]">

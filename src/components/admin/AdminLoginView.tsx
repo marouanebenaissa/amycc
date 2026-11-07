@@ -11,6 +11,7 @@ import {
 } from '@/lib/actions/admin'
 import { createClient } from '@/lib/supabase/client'
 import { TurnstileCaptcha } from '@/components/ui/TurnstileCaptcha'
+import { Flaticon } from '@/components/ui/Flaticon'
 
 type AdminLocale = 'ar' | 'fr' | 'en'
 
@@ -376,8 +377,8 @@ export function AdminLoginView({
           <div className="space-y-3">
             {/* Pillar 1 */}
             <div className="flex items-start gap-3.5 p-3.5 rounded-2xl bg-[#231f20]/80 border border-[#383334] backdrop-blur-sm">
-              <div className="w-10 h-10 rounded-xl bg-[#d2a82b]/15 text-[#ffd22f] flex items-center justify-center shrink-0 text-base">
-                🏛️
+              <div className="w-10 h-10 rounded-xl bg-[#d2a82b]/15 text-[#ffd22f] flex items-center justify-center shrink-0">
+                <Flaticon name="museum" size={20} className="text-[#ffd22f]" />
               </div>
               <div className="space-y-0.5">
                 <h3 className="text-xs font-bold text-white">{t.pillar1_title}</h3>
@@ -387,8 +388,8 @@ export function AdminLoginView({
 
             {/* Pillar 2 */}
             <div className="flex items-start gap-3.5 p-3.5 rounded-2xl bg-[#231f20]/80 border border-[#383334] backdrop-blur-sm">
-              <div className="w-10 h-10 rounded-xl bg-[#bd3227]/20 text-[#fde8e7] flex items-center justify-center shrink-0 text-base">
-                🛡️
+              <div className="w-10 h-10 rounded-xl bg-[#bd3227]/20 text-[#fde8e7] flex items-center justify-center shrink-0">
+                <Flaticon name="shield" size={20} className="text-[#bd3227]" />
               </div>
               <div className="space-y-0.5">
                 <h3 className="text-xs font-bold text-white">{t.pillar2_title}</h3>
@@ -398,8 +399,8 @@ export function AdminLoginView({
 
             {/* Pillar 3 */}
             <div className="flex items-start gap-3.5 p-3.5 rounded-2xl bg-[#231f20]/80 border border-[#383334] backdrop-blur-sm">
-              <div className="w-10 h-10 rounded-xl bg-[#ffd22f]/15 text-[#ffd22f] flex items-center justify-center shrink-0 text-base">
-                🇲🇦
+              <div className="w-10 h-10 rounded-xl bg-[#ffd22f]/15 text-[#ffd22f] flex items-center justify-center shrink-0">
+                <Flaticon name="morocco-star" size={20} className="text-[#ffd22f]" />
               </div>
               <div className="space-y-0.5">
                 <h3 className="text-xs font-bold text-white">{t.pillar3_title}</h3>
@@ -526,7 +527,7 @@ export function AdminLoginView({
                   role="alert"
                   className="p-4 mb-5 rounded-2xl bg-[#bd3227] text-white text-xs font-medium border border-[#a3261c] shadow-lg flex items-start gap-3 animate-in fade-in slide-in-from-top-1 duration-200"
                 >
-                  <span className="text-2xl shrink-0 mt-0.5">🔒</span>
+                  <Flaticon name="lock" size={26} className="text-white shrink-0 mt-0.5" />
                   <div className="space-y-1">
                     <p className="font-bold text-sm">
                       {locale === 'ar'
@@ -907,7 +908,7 @@ export function AdminLoginView({
             <div className="flex items-start justify-between gap-3">
               <div className="space-y-1">
                 <div className="flex items-center gap-2">
-                  <span className="text-xl">🔑</span>
+                  <Flaticon name="key" size={20} className="text-[#bd3227] shrink-0" />
                   <h3 className="text-base sm:text-lg font-black text-[#231f20]">
                     {locale === 'ar'
                       ? 'استعادة كلمة المرور المؤسساتية'
@@ -956,7 +957,7 @@ export function AdminLoginView({
             )}
             {forgotMessage && (
               <div className="p-3 rounded-xl bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-bold flex items-center gap-2">
-                <span>✓</span>
+                <Flaticon name="check" size={14} className="text-emerald-700 shrink-0" />
                 <span>{forgotMessage}</span>
               </div>
             )}

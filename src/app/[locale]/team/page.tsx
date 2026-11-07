@@ -5,6 +5,7 @@ import { Footer } from '@/components/layout/Footer'
 import Link from 'next/link'
 import { getTeamSettings, getCommissionsSettings, defaultTeamHeroConfig, defaultTeamMetrics } from '@/lib/settings'
 import { ImageWithFallback } from '@/components/ui/ImageWithFallback'
+import { Flaticon } from '@/components/ui/Flaticon'
 import { constructMetadata } from '@/lib/seo/config'
 import { METADATA_CATALOG, type SupportedLocale } from '@/lib/seo/metadata-catalog'
 import { getBreadcrumbJsonLd, JsonLd } from '@/lib/seo/schema'
@@ -226,7 +227,7 @@ export default async function TeamPage(props: { params: Promise<{ locale: string
                     ? 'bg-white/10 border border-white/20 text-[#ffd22f]'
                     : 'bg-[#d2a82b]/10 border border-[#d2a82b]/20 text-[#d2a82b]'
                 }`}>
-                  <span>📍</span>
+                  <Flaticon name="pin" size={13} className="text-[#ffd22f]" />
                   <span>{heroBadge2}</span>
                 </span>
               )}
@@ -533,8 +534,8 @@ export default async function TeamPage(props: { params: Promise<{ locale: string
                     <div className="space-y-4">
                       {/* Header: Icon & Category Tag */}
                       <div className="flex items-center justify-between">
-                        <span className="w-14 h-14 rounded-2xl bg-white border border-[#e5e0d6] flex items-center justify-center text-3xl shadow-2xs group-hover:scale-110 transition-transform">
-                          {comm.icon}
+                        <span className="w-14 h-14 rounded-2xl bg-white border border-[#e5e0d6] flex items-center justify-center shadow-2xs group-hover:scale-110 transition-transform">
+                          <Flaticon icon={comm.icon} size={28} className="text-[#bd3227]" />
                         </span>
                         <span className={`px-3 py-1 rounded-full text-xs font-bold ${comm.accentBg || 'bg-[#bd3227]/10'} ${comm.accentColor || 'text-[#bd3227]'} border border-current/20`}>
                           {tag}
@@ -624,8 +625,8 @@ export default async function TeamPage(props: { params: Promise<{ locale: string
                                 />
                               </div>
                             ) : (
-                              <span className="w-14 h-14 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6] flex items-center justify-center text-2xl shadow-2xs group-hover:scale-110 transition-transform shrink-0">
-                                {member.icon || '👤'}
+                              <span className="w-14 h-14 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6] flex items-center justify-center shadow-2xs group-hover:scale-110 transition-transform shrink-0">
+                                <Flaticon icon={member.icon || '👤'} size={24} className="text-[#231f20]" />
                               </span>
                             )}
 
@@ -722,8 +723,8 @@ export default async function TeamPage(props: { params: Promise<{ locale: string
                               />
                             </div>
                           ) : (
-                            <span className="w-16 h-16 rounded-2xl bg-white border border-[#e5e0d6] flex items-center justify-center text-3xl shadow-2xs group-hover:scale-110 transition-transform shrink-0">
-                              {member.icon || '🌟'}
+                            <span className="w-16 h-16 rounded-2xl bg-white border border-[#e5e0d6] flex items-center justify-center shadow-2xs group-hover:scale-110 transition-transform shrink-0">
+                              <Flaticon icon={member.icon || '🌟'} size={28} className="text-[#d2a82b]" />
                             </span>
                           )}
 
@@ -898,8 +899,8 @@ export default async function TeamPage(props: { params: Promise<{ locale: string
                 >
                   <div className="space-y-4">
                     <div className="flex items-center justify-between">
-                      <span className="w-12 h-12 rounded-2xl bg-white border border-[#e5e0d6] flex items-center justify-center text-2xl shadow-2xs group-hover:scale-110 transition-transform">
-                        {p.icon}
+                      <span className="w-12 h-12 rounded-2xl bg-white border border-[#e5e0d6] flex items-center justify-center shadow-2xs group-hover:scale-110 transition-transform">
+                        <Flaticon icon={p.icon} size={24} className="text-[#bd3227]" />
                       </span>
                       <span className="text-xs font-black text-[#5C5A55] font-mono">
                         #{p.num}

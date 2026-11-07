@@ -8,6 +8,7 @@ import { logoutAdmin } from '@/lib/actions/admin'
 import { useAdminLocale, ADMIN_NAV_CATEGORIES } from './AdminLocaleContext'
 import type { AdminRoleMeta } from '@/lib/auth/rbac'
 import { canUserAccessPath, PREDEFINED_ROLES } from '@/lib/auth/rbac'
+import { Flaticon } from '@/components/ui/Flaticon'
 
 interface AdminSidebarProps {
   userEmail: string
@@ -177,8 +178,8 @@ export function AdminSidebar({
               placeholder={t('search_placeholder')}
               className="w-full ps-9 pe-8 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 focus:bg-white/10 border border-white/10 focus:border-[#d2a82b] text-white placeholder-white/40 text-xs transition-all outline-hidden font-medium"
             />
-            <span className="absolute start-3 top-1/2 -translate-y-1/2 text-xs text-white/40 pointer-events-none">
-              🔍
+            <span className="absolute start-3 top-1/2 -translate-y-1/2 pointer-events-none text-white/40">
+              <Flaticon name="search" size={14} />
             </span>
             {searchQuery ? (
               <button
@@ -208,8 +209,8 @@ export function AdminSidebar({
 
           {/* Empty search state */}
           {filteredCategories.length === 0 && (
-            <div className="p-4 rounded-2xl bg-white/5 border border-white/10 text-center text-xs text-white/60 space-y-1">
-              <span className="text-xl block">🔍</span>
+            <div className="p-4 rounded-2xl bg-white/5 border border-white/10 text-center text-xs text-white/60 space-y-2">
+              <Flaticon name="search" size={24} className="text-white/30 mx-auto block" />
               <p className="font-semibold">{t('no_results')}</p>
             </div>
           )}
@@ -227,7 +228,7 @@ export function AdminSidebar({
                 <div key={category.id} className="space-y-1">
                   {/* Category Header */}
                   <div className="px-2 py-1 text-3xs font-extrabold uppercase tracking-wider text-[#ffd22f]/90 flex items-center gap-1.5 border-b border-white/5">
-                    <span aria-hidden="true" className="text-xs">{category.icon}</span>
+                    <Flaticon icon={category.icon} size={14} className="text-[#ffd22f] shrink-0" />
                     <span className="truncate">{catTitle}</span>
                   </div>
 
@@ -258,9 +259,13 @@ export function AdminSidebar({
                           }`}
                         >
                           <div className="flex items-center gap-2.5 min-w-0">
-                            <span className="text-sm shrink-0" aria-hidden="true">
-                              {item.icon}
-                            </span>
+                            <Flaticon
+                              icon={item.icon}
+                              size={16}
+                              className={`shrink-0 transition-colors ${
+                                active ? 'text-[#ffd22f]' : 'text-white/60 group-hover:text-[#ffd22f]'
+                              }`}
+                            />
                             <div className="flex flex-col min-w-0">
                               <span className="truncate leading-tight font-bold">
                                 {itemLabel}
@@ -365,8 +370,8 @@ export function AdminSidebar({
                   {userEmail}
                 </span>
                 <div className="mt-1 flex items-center">
-                  <span className={`inline-flex items-center gap-1 text-4xs font-bold px-2 py-0.5 rounded-md border truncate shadow-2xs ${userRole.badgeColor}`}>
-                    <span>{userRole.icon}</span>
+                  <span className={`inline-flex items-center gap-1.5 text-4xs font-bold px-2 py-0.5 rounded-md border truncate shadow-2xs ${userRole.badgeColor}`}>
+                    <Flaticon icon={userRole.icon} size={12} className="shrink-0" />
                     <span className="truncate">{isAr ? userRole.nameAr : isFr ? userRole.nameFr : userRole.nameEn}</span>
                   </span>
                 </div>
@@ -376,18 +381,18 @@ export function AdminSidebar({
             <div className="shrink-0 flex items-center gap-1">
               <Link
                 href="/admin/profile"
-                className="p-2 rounded-xl text-white/60 hover:text-white hover:bg-white/10 transition-all cursor-pointer"
+                className="p-2 rounded-xl text-white/60 hover:text-[#ffd22f] hover:bg-white/10 transition-all cursor-pointer"
                 title={t('profile_settings')}
               >
-                <span className="text-sm">⚙️</span>
+                <Flaticon name="gear" size={16} />
               </Link>
               <form action={logoutAdmin}>
                 <button
                   type="submit"
-                  className="p-2 rounded-xl text-white/60 hover:text-white hover:bg-red-600/30 transition-all cursor-pointer"
+                  className="p-2 rounded-xl text-white/60 hover:text-red-400 hover:bg-red-600/30 transition-all cursor-pointer"
                   title={t('sign_out')}
                 >
-                  <span className="text-sm">🚪</span>
+                  <Flaticon name="unlock" size={16} />
                 </button>
               </form>
             </div>

@@ -8,6 +8,7 @@ import { FaqAccordion } from '@/components/home/FaqAccordion'
 import { AreasSection } from '@/components/home/AreasSection'
 import { IconWithFallback } from '@/components/ui/IconWithFallback'
 import { ImageWithFallback } from '@/components/ui/ImageWithFallback'
+import { Flaticon } from '@/components/ui/Flaticon'
 import { constructMetadata } from '@/lib/seo/config'
 import { METADATA_CATALOG } from '@/lib/seo/metadata-catalog'
 import { getOrganizationJsonLd, getWebsiteJsonLd, JsonLd } from '@/lib/seo/schema'
@@ -845,7 +846,7 @@ export default async function HomePage(props: { params: Promise<{ locale: string
                           {prog.category}
                         </span>
                         <span className="text-3xs font-medium text-[#5C5A55] flex items-center gap-1">
-                          <span>📍</span>
+                          <Flaticon name="pin" size={12} className="text-[#bd3227]" />
                           <span>{prog.city || 'Morocco'}</span>
                         </span>
                       </div>
@@ -917,7 +918,7 @@ export default async function HomePage(props: { params: Promise<{ locale: string
                     <div>
                       <div className="flex items-center justify-between mb-3">
                         <span className="text-xs font-bold text-[#231f20] flex items-center gap-1.5">
-                          <span>📅</span>
+                          <Flaticon name="calendar" size={13} className="text-[#bd3227]" />
                           <span>{formattedDate}</span>
                         </span>
                         <span
@@ -938,7 +939,7 @@ export default async function HomePage(props: { params: Promise<{ locale: string
                       </h3>
 
                       <p className="text-2xs text-[#5C5A55] flex items-center gap-1 mb-4">
-                        <span>📍</span>
+                        <Flaticon name="pin" size={12} className="text-[#bd3227]" />
                         <span>{ev.venue || ev.city || 'Morocco'}</span>
                       </p>
 

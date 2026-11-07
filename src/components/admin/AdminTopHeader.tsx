@@ -7,6 +7,7 @@ import { useAdminLocale, ADMIN_NAV_CATEGORIES } from './AdminLocaleContext'
 import { logoutAdmin } from '@/lib/actions/admin'
 import type { AdminRoleMeta } from '@/lib/auth/rbac'
 import { PREDEFINED_ROLES } from '@/lib/auth/rbac'
+import { Flaticon } from '@/components/ui/Flaticon'
 
 interface AdminTopHeaderProps {
   userEmail: string
@@ -117,9 +118,9 @@ export function AdminTopHeader({
           >
             <Link
               href="/admin"
-              className="hover:text-[#bd3227] transition-colors flex items-center gap-1"
+              className="hover:text-[#bd3227] transition-colors flex items-center gap-1.5"
             >
-              <span>🏠</span>
+              <Flaticon name="home" size={13} className="text-[#5C5A55]" />
               <span>{t('admin_title')}</span>
             </Link>
             {activeCategoryTitle && (
@@ -130,7 +131,7 @@ export function AdminTopHeader({
             )}
           </nav>
           <div className="flex items-center gap-2 mt-0.5">
-            <span className="text-sm shrink-0">{activeItemIcon}</span>
+            <Flaticon icon={activeItemIcon} size={18} className="text-[#bd3227] shrink-0" />
             <h1 className="text-sm sm:text-base font-black text-[#231f20] truncate leading-tight">
               {activeItemTitle || t('admin_title')}
             </h1>
@@ -146,7 +147,7 @@ export function AdminTopHeader({
             onClick={() => setIsQuickMenuOpen(!isQuickMenuOpen)}
             className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-gradient-to-r from-[#bd3227] to-[#a3261c] hover:from-[#a0281f] hover:to-[#8c2017] text-white text-xs font-bold shadow-md shadow-[#bd3227]/20 transition-all cursor-pointer active:scale-98"
           >
-            <span>⚡</span>
+            <Flaticon name="lightning" size={13} />
             <span>{t('quick_create')}</span>
             <span className="text-3xs">▼</span>
           </button>
@@ -158,7 +159,7 @@ export function AdminTopHeader({
                 onClick={() => setIsQuickMenuOpen(false)}
                 className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-semibold text-[#231f20] hover:bg-[#FAF8F5] hover:text-[#bd3227] transition-colors"
               >
-                <span>🎨</span>
+                <Flaticon name="palette" size={15} className="text-[#bd3227]" />
                 <span>{t('new_program')}</span>
               </Link>
               <Link
@@ -166,7 +167,7 @@ export function AdminTopHeader({
                 onClick={() => setIsQuickMenuOpen(false)}
                 className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-semibold text-[#231f20] hover:bg-[#FAF8F5] hover:text-[#bd3227] transition-colors"
               >
-                <span>📰</span>
+                <Flaticon name="newspaper" size={15} className="text-[#bd3227]" />
                 <span>{t('new_news')}</span>
               </Link>
               <Link
@@ -174,7 +175,7 @@ export function AdminTopHeader({
                 onClick={() => setIsQuickMenuOpen(false)}
                 className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-semibold text-[#231f20] hover:bg-[#FAF8F5] hover:text-[#bd3227] transition-colors"
               >
-                <span>📅</span>
+                <Flaticon name="calendar" size={15} className="text-[#bd3227]" />
                 <span>{t('new_event')}</span>
               </Link>
               <div className="border-t border-[#e5e0d6] my-1" />
@@ -183,7 +184,7 @@ export function AdminTopHeader({
                 onClick={() => setIsQuickMenuOpen(false)}
                 className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-semibold text-[#231f20] hover:bg-[#FAF8F5] hover:text-[#bd3227] transition-colors"
               >
-                <span>👤</span>
+                <Flaticon name="users" size={15} className="text-[#bd3227]" />
                 <span>{t('new_user')}</span>
               </Link>
             </div>
@@ -197,11 +198,9 @@ export function AdminTopHeader({
           rel="noopener noreferrer"
           className="hidden md:inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white hover:bg-[#FAF8F5] border border-[#e5e0d6] text-xs font-bold text-[#231f20] transition-all hover:border-[#231f20]/30 shadow-2xs group"
         >
-          <span>🌐</span>
+          <Flaticon name="museum" size={14} className="text-[#d2a82b]" />
           <span>{t('view_site')}</span>
-          <span className="text-3xs text-[#5C5A55] group-hover:text-[#bd3227] transition-colors">
-            ↗
-          </span>
+          <Flaticon name="external" size={11} className="text-[#5C5A55] group-hover:text-[#bd3227] transition-colors" />
         </Link>
 
         {/* Language Switcher Segmented Pills */}
@@ -268,8 +267,9 @@ export function AdminTopHeader({
               <span className="text-xs font-bold text-[#231f20] block truncate">
                 {userName || 'Staff Admin'}
               </span>
-              <span className="text-4xs text-[#bd3227] font-semibold block truncate mt-0.5">
-                {userRole.icon} {isAr ? userRole.nameAr : isFr ? userRole.nameFr : userRole.nameEn}
+              <span className="text-4xs text-[#bd3227] font-semibold flex items-center gap-1 truncate mt-0.5">
+                <Flaticon icon={userRole.icon} size={11} className="shrink-0" />
+                <span className="truncate">{isAr ? userRole.nameAr : isFr ? userRole.nameFr : userRole.nameEn}</span>
               </span>
             </div>
             <span className="text-3xs text-[#5C5A55] group-hover:text-[#231f20] transition-colors">
@@ -301,7 +301,7 @@ export function AdminTopHeader({
                   </span>
                   <div className="mt-1">
                     <span className={`inline-flex items-center gap-1 text-4xs font-bold px-2 py-0.5 rounded-md border ${userRole.badgeColor}`}>
-                      <span>{userRole.icon}</span>
+                      <Flaticon icon={userRole.icon} size={11} className="shrink-0" />
                       <span>{isAr ? userRole.nameAr : isFr ? userRole.nameFr : userRole.nameEn}</span>
                     </span>
                   </div>
@@ -312,7 +312,7 @@ export function AdminTopHeader({
                 onClick={() => setIsUserMenuOpen(false)}
                 className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-semibold text-[#231f20] hover:bg-[#FAF8F5] hover:text-[#bd3227] transition-colors"
               >
-                <span>👤</span>
+                <Flaticon name="users" size={14} className="text-[#5C5A55]" />
                 <span>{t('profile_settings')}</span>
               </Link>
               <Link
@@ -320,7 +320,7 @@ export function AdminTopHeader({
                 onClick={() => setIsUserMenuOpen(false)}
                 className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-semibold text-[#231f20] hover:bg-[#FAF8F5] hover:text-[#bd3227] transition-colors"
               >
-                <span>🔑</span>
+                <Flaticon name="key" size={14} className="text-[#5C5A55]" />
                 <span>{t('change_password')}</span>
               </Link>
               <div className="border-t border-[#e5e0d6] my-1" />
@@ -329,7 +329,7 @@ export function AdminTopHeader({
                   type="submit"
                   className="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-semibold text-rose-600 hover:bg-rose-50 transition-colors text-start cursor-pointer"
                 >
-                  <span>🚪</span>
+                  <Flaticon name="unlock" size={14} className="text-rose-500" />
                   <span>{t('sign_out')}</span>
                 </button>
               </form>
@@ -344,7 +344,7 @@ export function AdminTopHeader({
             className="p-2 sm:px-3 sm:py-2 rounded-xl bg-[#fde8e7] hover:bg-[#bd3227] text-[#bd3227] hover:text-white border border-[#bd3227]/20 text-xs font-bold transition-all shadow-2xs active:scale-98 flex items-center gap-1.5 cursor-pointer"
             title={t('sign_out')}
           >
-            <span className="text-xs">🚪</span>
+            <Flaticon name="unlock" size={13} className="shrink-0" />
             <span className="hidden xl:inline">{t('sign_out')}</span>
           </button>
         </form>

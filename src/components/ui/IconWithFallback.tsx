@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Image from 'next/image'
+import { Flaticon } from './Flaticon'
 
 interface IconWithFallbackProps {
   src?: string
@@ -20,10 +21,13 @@ export function IconWithFallback({
 }: IconWithFallbackProps) {
   const [hasError, setHasError] = useState(false)
 
-  if (src && !hasError) {
+  // Auto-resolve SVG version if PNG was referenced
+  const resolvedSrc = src && src.endsWith('.png') ? src.replace(/\.png$/, '.svg') : src
+
+  if (resolvedSrc && !hasError) {
     return (
       <Image
-        src={src}
+        src={resolvedSrc}
         alt={alt}
         width={size}
         height={size}
@@ -34,8 +38,11 @@ export function IconWithFallback({
   }
 
   return (
-    <span className={`inline-flex items-center justify-center select-none ${className}`} aria-hidden="true">
-      {fallbackEmoji}
-    </span>
+    <Flaticon
+      icon={fallbackEmoji}
+      size={size}
+      className={`inline-block shrink-0 ${className}`}
+      aria-label={alt}
+    />
   )
 }

@@ -7,6 +7,7 @@ import { METADATA_CATALOG } from '@/lib/seo/metadata-catalog'
 import { getBreadcrumbJsonLd, JsonLd } from '@/lib/seo/schema'
 import { locales, type Locale, defaultLocale } from '@/lib/i18n/config'
 import Link from 'next/link'
+import { Flaticon } from '@/components/ui/Flaticon'
 
 export async function generateMetadata(props: {
   params: Promise<{ locale: string }>
@@ -379,7 +380,7 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
               </span>
 
               <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#d2a82b]/10 border border-[#d2a82b]/20 text-[#d2a82b] text-xs font-bold shadow-2xs">
-                <span>📍</span>
+                <Flaticon name="pin" size={13} className="text-[#d2a82b]" />
                 <span>
                   {isAr
                     ? 'الانطلاق: مراكش الحمراء 🇲🇦'
@@ -583,8 +584,8 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
               <div className="lg:col-span-7 bg-white p-8 sm:p-10 rounded-3xl border border-[#e5e0d6] shadow-subtle space-y-6 flex flex-col justify-between">
                 <div className="space-y-5">
                   <div className="flex items-center gap-3">
-                    <span className="w-12 h-12 rounded-2xl bg-[#231f20] text-white flex items-center justify-center font-black text-xl shadow-xs">
-                      🏛️
+                    <span className="w-12 h-12 rounded-2xl bg-[#231f20] text-white flex items-center justify-center shadow-xs">
+                      <Flaticon name="museum" size={24} className="text-[#ffd22f]" />
                     </span>
                     <div>
                       <h3 className="text-xl font-black text-[#231f20]">
@@ -625,7 +626,7 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
                     </span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <span>📜</span>
+                    <Flaticon name="scroll" size={14} className="text-[#d2a82b]" />
                     <span>
                       {isAr ? 'النظام الأساسي والداخلي مصادق عليه' : isFr ? 'Statuts & Règlement Approuvés' : 'Official Bylaws Approved'}
                     </span>
@@ -637,7 +638,7 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
               <div className="lg:col-span-5 space-y-4 flex flex-col justify-between">
                 <div className="p-6 rounded-3xl bg-white border border-[#e5e0d6] shadow-2xs hover:border-[#bd3227]/40 transition-all space-y-2">
                   <div className="flex items-center gap-2.5">
-                    <span className="text-xl">📍</span>
+                    <Flaticon name="pin" size={20} className="text-[#bd3227]" />
                     <h4 className="text-base font-black text-[#231f20]">
                       {isAr ? 'مراكش — منطلق استراتيجي' : isFr ? 'Marrakech — Tremplin Stratégique' : 'Marrakech — The Launchpad'}
                     </h4>
@@ -653,7 +654,7 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
 
                 <div className="p-6 rounded-3xl bg-white border border-[#e5e0d6] shadow-2xs hover:border-[#231f20]/40 transition-all space-y-2">
                   <div className="flex items-center gap-2.5">
-                    <span className="text-xl">🤝</span>
+                    <Flaticon name="handshake" size={20} className="text-[#231f20]" />
                     <h4 className="text-base font-black text-[#231f20]">
                       {isAr ? 'العمل التشاركي والمؤسساتي' : isFr ? 'Écosystème Collaboratif' : 'Collaborative Ecosystem'}
                     </h4>
@@ -724,8 +725,8 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
 
                   <div className="relative z-10 space-y-4">
                     <div className="flex items-center justify-between">
-                      <span className="w-12 h-12 rounded-2xl bg-white border border-[#e5e0d6] flex items-center justify-center text-2xl shadow-2xs group-hover:scale-110 transition-transform">
-                        {v.icon}
+                      <span className="w-12 h-12 rounded-2xl bg-white border border-[#e5e0d6] flex items-center justify-center shadow-2xs group-hover:scale-110 transition-transform">
+                        <Flaticon icon={v.icon} size={24} className="text-[#bd3227]" />
                       </span>
                       <div className="flex items-center gap-2">
                         <span className={`px-2.5 py-1 rounded-full text-xs font-bold ${v.accentBg}`}>
@@ -1152,8 +1153,8 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
                 >
                   <div className="space-y-4">
                     <div className="flex items-center justify-between">
-                      <span className="w-12 h-12 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6] flex items-center justify-center text-2xl shadow-2xs group-hover:scale-110 transition-transform">
-                        {obj.icon}
+                      <span className="w-12 h-12 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6] flex items-center justify-center shadow-2xs group-hover:scale-110 transition-transform">
+                        <Flaticon icon={obj.icon} size={24} className="text-[#231f20]" />
                       </span>
                       <span className="text-xs font-black text-[#231f20] font-mono px-2.5 py-0.5 rounded-full bg-[#231f20]/10">
                         {isAr ? `الهدف ${obj.num}` : isFr ? `Objectif ${obj.num}` : `Goal ${obj.num}`}
@@ -1264,8 +1265,8 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
               <div className="p-8 rounded-3xl bg-[#FAF8F5] border border-[#e5e0d6] shadow-subtle text-center space-y-4 hover:border-[#231f20]/40 transition-all flex flex-col justify-between">
                 <div className="space-y-3">
-                  <div className="w-14 h-14 rounded-2xl bg-[#231f20]/10 text-[#231f20] text-2xl flex items-center justify-center mx-auto shadow-2xs">
-                    🏛️
+                  <div className="w-14 h-14 rounded-2xl bg-[#231f20]/10 text-[#231f20] flex items-center justify-center mx-auto shadow-2xs">
+                    <Flaticon name="museum" size={28} className="text-[#231f20]" />
                   </div>
                   <span className="text-xs font-bold uppercase tracking-wider text-[#231f20] block">
                     {isAr ? 'الهيئة العليا' : isFr ? 'Instance Suprême' : 'Supreme Body'}
@@ -1288,8 +1289,8 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
 
               <div className="p-8 rounded-3xl bg-[#FAF8F5] border border-[#e5e0d6] shadow-subtle text-center space-y-4 hover:border-[#bd3227]/40 transition-all flex flex-col justify-between">
                 <div className="space-y-3">
-                  <div className="w-14 h-14 rounded-2xl bg-[#bd3227]/10 text-[#bd3227] text-2xl flex items-center justify-center mx-auto shadow-2xs">
-                    👥
+                  <div className="w-14 h-14 rounded-2xl bg-[#bd3227]/10 text-[#bd3227] flex items-center justify-center mx-auto shadow-2xs">
+                    <Flaticon name="users" size={28} className="text-[#bd3227]" />
                   </div>
                   <span className="text-xs font-bold uppercase tracking-wider text-[#bd3227] block">
                     {isAr ? 'التسيير والتنفيذ' : isFr ? 'Direction & Gestion' : 'Executive Leadership'}
@@ -1312,8 +1313,8 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
 
               <div className="p-8 rounded-3xl bg-[#FAF8F5] border border-[#e5e0d6] shadow-subtle text-center space-y-4 hover:border-[#d2a82b]/40 transition-all flex flex-col justify-between">
                 <div className="space-y-3">
-                  <div className="w-14 h-14 rounded-2xl bg-[#d2a82b]/10 text-[#d2a82b] text-2xl flex items-center justify-center mx-auto shadow-2xs">
-                    🎨
+                  <div className="w-14 h-14 rounded-2xl bg-[#d2a82b]/10 text-[#d2a82b] flex items-center justify-center mx-auto shadow-2xs">
+                    <Flaticon name="palette" size={28} className="text-[#d2a82b]" />
                   </div>
                   <span className="text-xs font-bold uppercase tracking-wider text-[#d2a82b] block">
                     {isAr ? 'المحاور الميدانية' : isFr ? 'Pôles d’Action' : 'Action Hubs'}
