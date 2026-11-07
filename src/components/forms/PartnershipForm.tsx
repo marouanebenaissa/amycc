@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { submitPartnership, type ActionResponse } from '@/lib/actions/submissions'
+import { TurnstileCaptcha } from '@/components/ui/TurnstileCaptcha'
 
 export function PartnershipForm({ locale }: { locale: string }) {
   const [loading, setLoading] = useState(false)
@@ -239,6 +240,11 @@ export function PartnershipForm({ locale }: { locale: string }) {
         {result?.errors?.proposal && (
           <p className="text-3xs text-red-600 mt-1">{result.errors.proposal[0]}</p>
         )}
+      </div>
+
+      {/* Bot Verification / CAPTCHA */}
+      <div className="pt-1">
+        <TurnstileCaptcha locale={locale} />
       </div>
 
       <button

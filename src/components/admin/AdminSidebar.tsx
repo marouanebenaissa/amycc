@@ -14,6 +14,7 @@ interface AdminSidebarProps {
   userName?: string | null
   userAvatar?: string | null
   userRole?: AdminRoleMeta
+  customPermissions?: string[] | null
   mobileOpen?: boolean
   onCloseMobile?: () => void
 }
@@ -23,6 +24,7 @@ export function AdminSidebar({
   userName,
   userAvatar,
   userRole = PREDEFINED_ROLES[0],
+  customPermissions,
   mobileOpen = false,
   onCloseMobile,
 }: AdminSidebarProps) {
@@ -56,10 +58,10 @@ export function AdminSidebar({
 
   // Filter navigation categories & items based on assigned user role and search query
   const filteredCategories = useMemo(() => {
-    // 1. Role-based RBAC filtering
+    // 1. Role-based and granular custom RBAC filtering
     const roleAllowedCategories = ADMIN_NAV_CATEGORIES.map((cat) => {
       const allowedItems = cat.items.filter((item) =>
-        canUserAccessPath(userRole.key, item.href)
+        canUserAccessPath(userRole.key, item.href, customPermissions)
       )
       return {
         ...cat,
@@ -89,7 +91,7 @@ export function AdminSidebar({
         items: matchingItems,
       }
     }).filter((cat) => cat.items.length > 0)
-  }, [searchQuery, userRole])
+  }, [searchQuery, userRole, customPermissions])
 
   const totalMatchingItems = useMemo(() => {
     return filteredCategories.reduce((acc, cat) => acc + cat.items.length, 0)

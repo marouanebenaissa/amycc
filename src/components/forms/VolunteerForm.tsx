@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { submitVolunteer, type ActionResponse } from '@/lib/actions/submissions'
+import { TurnstileCaptcha } from '@/components/ui/TurnstileCaptcha'
 
 export function VolunteerForm({ locale }: { locale: string }) {
   const [loading, setLoading] = useState(false)
@@ -277,6 +278,11 @@ export function VolunteerForm({ locale }: { locale: string }) {
         {result?.errors?.skills && (
           <p className="text-3xs text-red-600 mt-1">{result.errors.skills[0]}</p>
         )}
+      </div>
+
+      {/* Bot Verification / CAPTCHA */}
+      <div className="pt-1">
+        <TurnstileCaptcha locale={locale} />
       </div>
 
       <button

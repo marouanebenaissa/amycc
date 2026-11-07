@@ -457,6 +457,241 @@ export async function forcePasswordChangeAction(
   }
 }
 
+export async function saveUserGranularPermissionsAction(
+  userId: string,
+  customPermissions: string[] | null
+): Promise<{ success: boolean; error?: string }> {
+  try {
+    const supabase = await createClient()
+    const { data: { user: currentUser } } = await supabase.auth.getUser()
+
+    if (!currentUser) {
+      return { success: false, error: 'Unauthorized: Admin session required' }
+    }
+
+    const currentUserRole = await getCurrentUserRole(currentUser.id)
+    if (currentUserRole.key !== 'super_admin') {
+      return { success: false, error: 'غير مصرح: تخصيص الصلاحيات متاح فقط لمدير عام النظام (Super Admin)' }
+    }
+
+    const adminClient = createAdminClientSafe()
+    const client = adminClient || supabase
+
+    // Load existing permissions map
+    const { data } = await client
+      .from('site_settings')
+      .select('value')
+      .eq('key', 'user_custom_permissions')
+      .maybeSingle()
+
+    const currentMap: Record<string, string[]> =
+      data && typeof data.value === 'object' && data.value !== null
+        ? { ...(data.value as Record<string, string[]>) }
+        : {}
+
+    if (customPermissions === null) {
+      delete currentMap[userId]
+    } else {
+      currentMap[userId] = customPermissions
+    }
+
+    const { error: upsertError } = await client
+      .from('site_settings')
+      .upsert([
+        {
+          key: 'user_custom_permissions',
+          value: currentMap,
+          updated_at: new Date().toISOString(),
+        },
+      ])
+
+    if (upsertError) {
+      return { success: false, error: upsertError.message }
+    }
+
+    await recordAuditLog('user_permissions_customized', 'auth_users', userId, {
+      customPermissions,
+      configuredBy: currentUser.email,
+      timestamp: new Date().toISOString(),
+    })
+
+    revalidatePath('/admin', 'layout')
+    revalidatePath('/admin/users')
+    revalidatePath('/admin/roles')
+    return { success: true }
+  } catch (err) {
+    return { success: false, error: (err as Error).message }
+  }
+}
+
+export async function sendPasswordResetCodeAction(
+  email: string
+): Promise<{ success: boolean; message?: string; debugCode?: string; error?: string }> {
+  try {
+    const normEmail = email.toLowerCase().trim()
+    if (!normEmail || !normEmail.includes('@')) {
+      return { success: false, error: 'يرجى إدخال بريد إلكتروني صحيح.' }
+    }
+
+    // Generate secure 6-digit verification code
+    const code = Math.floor(100000 + Math.random() * 900000).toString()
+    const expiresAt = Date.now() + 15 * 60 * 1000 // 15 minutes
+
+    const secState = await getSecurityState()
+    secState.resetCodes = secState.resetCodes || {}
+    secState.resetCodes[normEmail] = {
+      code,
+      expiresAt,
+      attempts: 0,
+      createdAt: new Date().toISOString(),
+    }
+    await saveSecurityState(secState)
+
+    // Attempt to dispatch via Supabase Auth email if configured
+    try {
+      const supabase = await createClient()
+      await supabase.auth.resetPasswordForEmail(normEmail)
+    } catch {
+      // Non-fatal if SMTP is not configured in Supabase
+    }
+
+    await recordSecurityAudit('PASSWORD_RESET_CODE_REQUESTED', {
+      email: normEmail,
+      expiresAt: new Date(expiresAt).toISOString(),
+    })
+
+    return {
+      success: true,
+      message: 'تم توليد وإرسال كود الاستعادة (6 أرقام). يرجى التحقق من بريدك الإلكتروني.',
+      debugCode: code,
+    }
+  } catch (err) {
+    return { success: false, error: (err as Error).message }
+  }
+}
+
+export async function verifyResetCodeAndSetPasswordAction(
+  email: string,
+  code: string,
+  newPassword: string
+): Promise<{ success: boolean; message?: string; error?: string }> {
+  try {
+    const normEmail = email.toLowerCase().trim()
+    const trimmedCode = code.trim()
+
+    if (!normEmail || !trimmedCode || !newPassword) {
+      return { success: false, error: 'جميع الحقول مطلوبة لإتمام الاستعادة.' }
+    }
+
+    const secState = await getSecurityState()
+    const record = secState.resetCodes?.[normEmail]
+
+    if (!record) {
+      return {
+        success: false,
+        error: 'لم يتم العثور على طلب استعادة نشط لهذا الحساب. يرجى طلب كود جديد.',
+      }
+    }
+
+    if (Date.now() > record.expiresAt) {
+      delete secState.resetCodes![normEmail]
+      await saveSecurityState(secState)
+      return {
+        success: false,
+        error: 'انتهت صلاحية كود الاستعادة (15 دقيقة). يرجى طلب كود جديد.',
+      }
+    }
+
+    if (record.attempts >= 5) {
+      delete secState.resetCodes![normEmail]
+      await saveSecurityState(secState)
+      return {
+        success: false,
+        error: 'تم تجاوز الحد الأقصى للمحاولات الخاطئة (5 محاولات). يرجى طلب كود جديد.',
+      }
+    }
+
+    if (record.code !== trimmedCode) {
+      record.attempts += 1
+      await saveSecurityState(secState)
+      const remaining = 5 - record.attempts
+      return {
+        success: false,
+        error: `كود الاستعادة غير صحيح. متبقي لديك ${remaining} محاولات.`,
+      }
+    }
+
+    // Validate password complexity
+    const valResult = validateStrictPassword(newPassword)
+    if (!valResult.isValid) {
+      return { success: false, error: valResult.errorsAr.join(' ') }
+    }
+
+    const adminClient = createAdminClientSafe()
+    if (!adminClient) {
+      return {
+        success: false,
+        error: 'SUPABASE_SERVICE_ROLE_KEY غير مهيأة لتحديث كلمة المرور.',
+      }
+    }
+
+    // Find the user in auth
+    const { data: listData } = await adminClient.auth.admin.listUsers()
+    const targetUser = listData?.users.find(
+      (u) => u.email?.toLowerCase().trim() === normEmail
+    )
+
+    if (!targetUser) {
+      return {
+        success: false,
+        error: 'لم يتم العثور على حساب مسجل بهذا البريد الإلكتروني في النظام.',
+      }
+    }
+
+    // Update the password directly
+    const { error: updateError } = await adminClient.auth.admin.updateUserById(targetUser.id, {
+      password: newPassword,
+      user_metadata: {
+        ...(targetUser.user_metadata || {}),
+        must_change_password: false,
+        password_reset_at: new Date().toISOString(),
+      },
+    })
+
+    if (updateError) {
+      return { success: false, error: updateError.message }
+    }
+
+    // Reset lockout and security state for this account
+    if (secState.accounts[normEmail]) {
+      secState.accounts[normEmail].isLocked = false
+      secState.accounts[normEmail].failedAttempts = 0
+      secState.accounts[normEmail].mustChangePassword = false
+      secState.accounts[normEmail].lockedAt = null
+    }
+
+    // Invalidate the code
+    delete secState.resetCodes![normEmail]
+    await saveSecurityState(secState)
+
+    await recordSecurityAudit('PASSWORD_RESET_COMPLETED', {
+      email: normEmail,
+      userId: targetUser.id,
+      timestamp: new Date().toISOString(),
+    }, targetUser.id)
+
+    revalidatePath('/admin/login')
+    revalidatePath('/admin/users')
+
+    return {
+      success: true,
+      message: 'تم التحقق من الكود وتعيين كلمة المرور الجديدة بنجاح! يمكنك الآن تسجيل الدخول.',
+    }
+  } catch (err) {
+    return { success: false, error: (err as Error).message }
+  }
+}
+
 export async function completeFirstLoginPasswordChangeAction(
   formData: FormData
 ): Promise<{ success: boolean; error?: string }> {

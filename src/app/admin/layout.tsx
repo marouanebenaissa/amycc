@@ -3,7 +3,7 @@ import '../globals.css'
 import { Sora, Cairo } from 'next/font/google'
 import { createClient } from '@/lib/supabase/server'
 import { AdminLayoutClient } from '@/components/admin/AdminLayoutClient'
-import { getCurrentUserRole } from '@/lib/auth/server-rbac'
+import { getCurrentUserRole, getCurrentUserCustomPermissions } from '@/lib/auth/server-rbac'
 import { PREDEFINED_ROLES } from '@/lib/auth/rbac'
 
 const sora = Sora({
@@ -55,6 +55,7 @@ export default async function AdminLayout({
   }
 
   const userRole = user ? await getCurrentUserRole(user.id) : PREDEFINED_ROLES[0]
+  const customPermissions = user ? await getCurrentUserCustomPermissions(user.id) : null
 
   return (
     <html
@@ -73,6 +74,7 @@ export default async function AdminLayout({
             userName={userFullName}
             userAvatar={userAvatarUrl}
             userRole={userRole}
+            customPermissions={customPermissions}
             mustChangePassword={Boolean(user.user_metadata?.must_change_password)}
           >
             {children}

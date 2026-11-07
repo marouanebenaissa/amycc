@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { submitMembership, type ActionResponse } from '@/lib/actions/submissions'
+import { TurnstileCaptcha } from '@/components/ui/TurnstileCaptcha'
 import type { MembershipTierConfig } from '@/lib/settings'
 
 interface MembershipFormProps {
@@ -308,6 +309,11 @@ export function MembershipForm({ locale, tiers = [] }: MembershipFormProps) {
         {result?.errors?.motivation && (
           <p className="text-3xs text-red-600 mt-1">{result.errors.motivation[0]}</p>
         )}
+      </div>
+
+      {/* Bot Verification / CAPTCHA */}
+      <div className="pt-1">
+        <TurnstileCaptcha locale={locale} />
       </div>
 
       <button

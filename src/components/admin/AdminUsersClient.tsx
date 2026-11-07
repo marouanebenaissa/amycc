@@ -9,7 +9,9 @@ import {
   deleteStaffUserAction,
   unlockStaffUserAction,
   forcePasswordChangeAction,
+  saveUserGranularPermissionsAction,
 } from '@/lib/actions/admin'
+import { PERMISSION_MODULES } from '@/lib/auth/rbac'
 
 export interface AdminUserItem {
   id: string
@@ -23,6 +25,7 @@ export interface AdminUserItem {
   lockedAt?: string | null
   failedAttempts?: number
   mustChangePassword?: boolean
+  customPermissions?: string[] | null
 }
 
 export interface AdminRoleItem {
@@ -200,6 +203,12 @@ export function AdminUsersClient({
   const [isPending, startTransition] = useTransition()
   const [showPassword, setShowPassword] = useState(false)
 
+  // Granular Permissions Customization state
+  const [selectedUserForPerms, setSelectedUserForPerms] = useState<AdminUserItem | null>(null)
+  const [isCustomMode, setIsCustomMode] = useState<boolean>(false)
+  const [selectedModuleIds, setSelectedModuleIds] = useState<string[]>([])
+  const [permsFeedback, setPermsFeedback] = useState<{ type: 'success' | 'error'; message: string } | null>(null)
+
   // Add user form state
   const [fullName, setFullName] = useState('')
   const [email, setEmail] = useState('')
@@ -327,6 +336,80 @@ export function AdminUsersClient({
     if (isAr) return role.scopeAr
     if (isFr) return role.scopeFr
     return role.scopeEn
+  }
+
+  function openPermsModal(user: AdminUserItem) {
+    setSelectedUserForPerms(user)
+    setPermsFeedback(null)
+    if (Array.isArray(user.customPermissions)) {
+      setIsCustomMode(true)
+      setSelectedModuleIds([...user.customPermissions])
+    } else {
+      setIsCustomMode(false)
+      // Derive default module IDs from the user's role
+      const roleMeta = PREDEFINED_ROLES.find((r) => r.id === user.roleId || r.name === user.roleName)
+      if (roleMeta?.name === 'super_admin') {
+        setSelectedModuleIds(PERMISSION_MODULES.map((m) => m.id))
+      } else {
+        const defaultModIds = PERMISSION_MODULES.filter((m) => {
+          // If reviewer, allow reading modules
+          if (roleMeta?.name === 'reviewer') return true
+          // Match by category or paths
+          return roleMeta?.scopeAr.some((s) => m.nameAr.includes(s) || m.categoryNameAr.includes(s))
+        }).map((m) => m.id)
+        setSelectedModuleIds(defaultModIds.length > 0 ? defaultModIds : ['overview'])
+      }
+    }
+  }
+
+  function handleSaveCustomPermissions() {
+    if (!selectedUserForPerms) return
+    setPermsFeedback(null)
+
+    startTransition(async () => {
+      const newCustomPerms = isCustomMode ? selectedModuleIds : null
+      const res = await saveUserGranularPermissionsAction(selectedUserForPerms.id, newCustomPerms)
+
+      if (res.success) {
+        setUsers((prev) =>
+          prev.map((u) =>
+            u.id === selectedUserForPerms.id
+              ? { ...u, customPermissions: newCustomPerms }
+              : u
+          )
+        )
+        setPermsFeedback({
+          type: 'success',
+          message: isAr
+            ? 'تم حفظ وتحديث مصفوفة الصلاحيات المخصصة لهذا المشرف بنجاح!'
+            : isFr
+            ? 'Permissions personnalisées enregistrées avec succès !'
+            : 'Granular permissions saved and updated successfully!',
+        })
+        setTimeout(() => {
+          setSelectedUserForPerms(null)
+        }, 1200)
+      } else {
+        setPermsFeedback({
+          type: 'error',
+          message: res.error || 'Failed to save permissions',
+        })
+      }
+    })
+  }
+
+  function toggleModuleId(modId: string) {
+    setSelectedModuleIds((prev) =>
+      prev.includes(modId) ? prev.filter((id) => id !== modId) : [...prev, modId]
+    )
+  }
+
+  function selectAllModules() {
+    setSelectedModuleIds(PERMISSION_MODULES.map((m) => m.id))
+  }
+
+  function deselectAllModules() {
+    setSelectedModuleIds([])
   }
 
   function handleCreateUser(e: React.FormEvent) {
@@ -781,28 +864,44 @@ export function AdminUsersClient({
 
                       {/* Assigned Role */}
                       <td className="px-6 py-4">
-                        <div className="flex items-center gap-2">
-                          <span
-                            className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-3xs font-bold border ${roleObj.badgeColor}`}
-                          >
-                            <span>{roleObj.icon}</span>
-                            <span>{getLocalizedRoleName(roleObj)}</span>
-                          </span>
+                        <div className="flex flex-col gap-1.5">
+                          <div className="flex items-center gap-2">
+                            <span
+                              className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-3xs font-bold border ${roleObj.badgeColor}`}
+                            >
+                              <span>{roleObj.icon}</span>
+                              <span>{getLocalizedRoleName(roleObj)}</span>
+                            </span>
 
-                          {/* Quick Role Switcher */}
-                          <select
-                            disabled={isPending}
-                            value={roleObj.id}
-                            onChange={(e) => handleRoleChange(u.id, Number(e.target.value))}
-                            className="text-3xs font-semibold px-2 py-1 rounded-lg border border-[#e5e0d6] bg-[#FAF8F5] text-[#231f20] hover:border-[#bd3227] cursor-pointer focus:outline-hidden disabled:opacity-50"
-                            title={t.changeRolePrompt}
-                          >
-                            {PREDEFINED_ROLES.map((r) => (
-                              <option key={r.id} value={r.id}>
-                                {r.icon} {getLocalizedRoleName(r)}
-                              </option>
-                            ))}
-                          </select>
+                            {/* Quick Role Switcher */}
+                            <select
+                              disabled={isPending}
+                              value={roleObj.id}
+                              onChange={(e) => handleRoleChange(u.id, Number(e.target.value))}
+                              className="text-3xs font-semibold px-2 py-1 rounded-lg border border-[#e5e0d6] bg-[#FAF8F5] text-[#231f20] hover:border-[#bd3227] cursor-pointer focus:outline-hidden disabled:opacity-50"
+                              title={t.changeRolePrompt}
+                            >
+                              {PREDEFINED_ROLES.map((r) => (
+                                <option key={r.id} value={r.id}>
+                                  {r.icon} {getLocalizedRoleName(r)}
+                                </option>
+                              ))}
+                            </select>
+                          </div>
+
+                          {/* Custom Granular Indicator Badge */}
+                          {Array.isArray(u.customPermissions) && (
+                            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md text-4xs font-bold bg-purple-50 text-purple-700 border border-purple-200 w-fit">
+                              <span>🎛️</span>
+                              <span>
+                                {isAr
+                                  ? `مصفوفة مخصصة (${u.customPermissions.length} صلاحيات)`
+                                  : isFr
+                                  ? `Personnalisé (${u.customPermissions.length} modules)`
+                                  : `Custom (${u.customPermissions.length} modules)`}
+                              </span>
+                            </div>
+                          )}
                         </div>
                       </td>
 
@@ -872,7 +971,42 @@ export function AdminUsersClient({
                             </button>
                           )}
 
-                          {!isCurrent && u.roleName !== 'super_admin' && u.roleId !== 1 ? (
+                          {/* Customize Permissions Button */}
+                          <button
+                            type="button"
+                            disabled={isPending}
+                            onClick={() => openPermsModal(u)}
+                            className={`px-2.5 py-1.5 rounded-xl text-3xs font-bold border transition-all cursor-pointer flex items-center gap-1 active:scale-95 disabled:opacity-50 ${
+                              Array.isArray(u.customPermissions)
+                                ? 'bg-purple-100 text-purple-800 border-purple-300 hover:bg-purple-200 shadow-2xs'
+                                : 'bg-[#FAF8F5] text-[#231f20] border-[#e5e0d6] hover:bg-white hover:border-[#d2a82b]'
+                            }`}
+                            title={isAr ? 'تخصيص صلاحيات دقيقة ومستقلة لهذا الحساب' : 'Customize permissions'}
+                          >
+                            <span>🎛️</span>
+                            <span className="hidden lg:inline">
+                              {Array.isArray(u.customPermissions)
+                                ? (isAr ? `مخصصة (${u.customPermissions.length})` : isFr ? `Sur-mesure (${u.customPermissions.length})` : `Custom (${u.customPermissions.length})`)
+                                : (isAr ? 'الصلاحيات' : isFr ? 'Permissions' : 'Permissions')}
+                            </span>
+                          </button>
+
+                          {/* Customize Permissions Button Mobile */}
+                      <button
+                        type="button"
+                        disabled={isPending}
+                        onClick={() => openPermsModal(u)}
+                        className={`px-2 py-1 rounded-lg text-3xs font-bold border transition-all cursor-pointer flex items-center gap-1 ${
+                          Array.isArray(u.customPermissions)
+                            ? 'bg-purple-100 text-purple-800 border-purple-300'
+                            : 'bg-[#FAF8F5] text-[#231f20] border-[#e5e0d6]'
+                        }`}
+                      >
+                        <span>🎛️</span>
+                        <span>{isAr ? 'الصلاحيات' : 'Perms'}</span>
+                      </button>
+
+                      {!isCurrent && u.roleName !== 'super_admin' && u.roleId !== 1 ? (
                             <button
                               disabled={isPending}
                               onClick={() => setUserToDelete(u)}
@@ -1024,6 +1158,21 @@ export function AdminUsersClient({
                           🔄 {isAr ? 'كلمة جديدة' : 'Reset'}
                         </button>
                       )}
+
+                      {/* Customize Permissions Button Mobile */}
+                      <button
+                        type="button"
+                        disabled={isPending}
+                        onClick={() => openPermsModal(u)}
+                        className={`px-2 py-1 rounded-lg text-3xs font-bold border transition-all cursor-pointer flex items-center gap-1 ${
+                          Array.isArray(u.customPermissions)
+                            ? 'bg-purple-100 text-purple-800 border-purple-300'
+                            : 'bg-[#FAF8F5] text-[#231f20] border-[#e5e0d6]'
+                        }`}
+                      >
+                        <span>🎛️</span>
+                        <span>{isAr ? 'الصلاحيات' : 'Perms'}</span>
+                      </button>
 
                       {!isCurrent && u.roleName !== 'super_admin' && u.roleId !== 1 ? (
                         <button
@@ -1314,6 +1463,285 @@ export function AdminUsersClient({
               >
                 {isPending ? t.deleting : t.confirmDeleteBtn}
               </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Granular Permissions Configuration Modal */}
+      {selectedUserForPerms && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/60 backdrop-blur-xs overflow-y-auto animate-fadeIn">
+          <div className="relative w-full max-w-4xl bg-white rounded-3xl shadow-2xl border border-[#e5e0d6] overflow-hidden my-auto max-h-[92vh] flex flex-col">
+            {/* Moroccan ribbon */}
+            <div className="h-1.5 w-full bg-gradient-to-r from-[#bd3227] via-[#ffd22f] to-[#d2a82b] shrink-0" />
+
+            {/* Modal Header */}
+            <div className="p-5 sm:p-6 border-b border-[#e5e0d6] bg-[#FAF8F5]/80 flex items-start justify-between gap-4 shrink-0">
+              <div className="space-y-1">
+                <div className="flex items-center gap-2">
+                  <span className="text-xl">🎛️</span>
+                  <h3 className="text-base sm:text-lg font-black text-[#231f20]">
+                    {isAr
+                      ? 'التحكم الكامل بالصلاحيات وتخصيص الوصول'
+                      : isFr
+                      ? 'Contrôle Granulaire des Permissions & Accès'
+                      : 'Granular Permissions & Access Control'}
+                  </h3>
+                </div>
+                <div className="flex flex-wrap items-center gap-2 text-xs text-[#5C5A55]">
+                  <span className="font-bold text-[#231f20]">
+                    {selectedUserForPerms.full_name}
+                  </span>
+                  <span>•</span>
+                  <span className="font-mono text-3xs text-[#8a857b]">
+                    {selectedUserForPerms.email}
+                  </span>
+                  <span>•</span>
+                  <span
+                    className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-4xs font-bold border ${
+                      getRoleInfo(selectedUserForPerms.roleId, selectedUserForPerms.roleName).badgeColor
+                    }`}
+                  >
+                    <span>{getRoleInfo(selectedUserForPerms.roleId, selectedUserForPerms.roleName).icon}</span>
+                    <span>{getLocalizedRoleName(getRoleInfo(selectedUserForPerms.roleId, selectedUserForPerms.roleName))}</span>
+                  </span>
+                </div>
+              </div>
+
+              <button
+                type="button"
+                onClick={() => setSelectedUserForPerms(null)}
+                className="w-8 h-8 rounded-full bg-white hover:bg-gray-100 border border-[#e5e0d6] text-[#5C5A55] flex items-center justify-center transition-all cursor-pointer text-sm shrink-0"
+                aria-label="Close"
+              >
+                ✕
+              </button>
+            </div>
+
+            {/* Scrollable Body */}
+            <div className="p-5 sm:p-6 overflow-y-auto space-y-6 flex-1">
+              {/* Feedback Alert */}
+              {permsFeedback && (
+                <div
+                  className={`p-3.5 rounded-2xl text-xs font-bold border flex items-center gap-2 ${
+                    permsFeedback.type === 'success'
+                      ? 'bg-emerald-50 text-emerald-800 border-emerald-200'
+                      : 'bg-rose-50 text-rose-800 border-rose-200'
+                  }`}
+                >
+                  <span>{permsFeedback.type === 'success' ? '✓' : '⚠'}</span>
+                  <span>{permsFeedback.message}</span>
+                </div>
+              )}
+
+              {/* Mode Selection Cards */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                {/* Standard Role Option */}
+                <div
+                  onClick={() => setIsCustomMode(false)}
+                  className={`p-4 rounded-2xl border-2 transition-all cursor-pointer flex items-start gap-3 select-none ${
+                    !isCustomMode
+                      ? 'bg-[#FEF6CC]/30 border-[#d2a82b] shadow-xs'
+                      : 'bg-[#FAF8F5] border-[#e5e0d6] hover:border-gray-300 opacity-80'
+                  }`}
+                >
+                  <input
+                    type="radio"
+                    name="permissionMode"
+                    checked={!isCustomMode}
+                    onChange={() => setIsCustomMode(false)}
+                    className="mt-1 text-[#bd3227] focus:ring-[#bd3227]"
+                  />
+                  <div className="space-y-0.5">
+                    <div className="text-xs font-bold text-[#231f20]">
+                      {isAr
+                        ? 'الاعتماد على صلاحيات الدور القياسي'
+                        : isFr
+                        ? 'Rôle standard prédéfini'
+                        : 'Standard predefined role'}
+                    </div>
+                    <p className="text-3xs text-[#5C5A55] leading-relaxed">
+                      {isAr
+                        ? 'تطبيق النطاق الافتراضي المبرمج لدور المستخدم في مصفوفة الصلاحيات المؤسسية.'
+                        : isFr
+                        ? 'Appliquer automatiquement les périmètres définis pour ce profil.'
+                        : 'Apply standard permissions scoped to the assigned institutional role.'}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Granular Custom Mode Option */}
+                <div
+                  onClick={() => setIsCustomMode(true)}
+                  className={`p-4 rounded-2xl border-2 transition-all cursor-pointer flex items-start gap-3 select-none ${
+                    isCustomMode
+                      ? 'bg-purple-50/60 border-purple-500 shadow-xs'
+                      : 'bg-[#FAF8F5] border-[#e5e0d6] hover:border-gray-300 opacity-80'
+                  }`}
+                >
+                  <input
+                    type="radio"
+                    name="permissionMode"
+                    checked={isCustomMode}
+                    onChange={() => setIsCustomMode(true)}
+                    className="mt-1 text-purple-600 focus:ring-purple-500"
+                  />
+                  <div className="space-y-0.5">
+                    <div className="text-xs font-bold text-purple-900 flex items-center gap-1.5">
+                      <span>{isAr ? 'تخصيص صلاحيات دقيقة ومستقلة' : isFr ? 'Permissions sur-mesure personnalisées' : 'Custom granular permissions'}</span>
+                      <span className="px-2 py-0.2 rounded-full text-4xs bg-purple-200 text-purple-800 font-black">
+                        Active
+                      </span>
+                    </div>
+                    <p className="text-3xs text-purple-700/80 leading-relaxed">
+                      {isAr
+                        ? 'أنت تحدد بالضبط كل قسم ومسار يسمح لهذا المشرف بفتحه وإدارته دون قيود الدور المسبق.'
+                        : isFr
+                        ? 'Sélectionnez module par module les accès spécifiques accordés à ce collaborateur.'
+                        : 'Explicitly toggle permissions per module and path for complete access customization.'}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Granular Modules Configuration Section */}
+              {isCustomMode && (
+                <div className="space-y-5 pt-3 border-t border-[#e5e0d6]">
+                  {/* Action Bar: Counts & Bulk Select */}
+                  <div className="flex flex-wrap items-center justify-between gap-3 p-3.5 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6]">
+                    <div className="flex items-center gap-2">
+                      <span className="text-xs font-black text-[#231f20]">
+                        {isAr ? 'الأقسام المحددة:' : isFr ? 'Modules sélectionnés :' : 'Selected Modules:'}
+                      </span>
+                      <span className="px-2.5 py-0.5 rounded-full text-2xs font-bold bg-[#bd3227] text-white">
+                        {selectedModuleIds.length} / {PERMISSION_MODULES.length}
+                      </span>
+                    </div>
+
+                    <div className="flex items-center gap-2">
+                      <button
+                        type="button"
+                        onClick={selectAllModules}
+                        className="px-3 py-1 rounded-xl text-3xs font-bold text-[#231f20] bg-white hover:bg-gray-100 border border-[#e5e0d6] transition-all cursor-pointer shadow-2xs"
+                      >
+                        ✓ {isAr ? 'تحديد كل الصلاحيات' : isFr ? 'Tout sélectionner' : 'Select All'}
+                      </button>
+                      <button
+                        type="button"
+                        onClick={deselectAllModules}
+                        className="px-3 py-1 rounded-xl text-3xs font-bold text-[#bd3227] bg-white hover:bg-red-50 border border-red-200 transition-all cursor-pointer shadow-2xs"
+                      >
+                        ✕ {isAr ? 'إلغاء تحديد الكل' : isFr ? 'Tout désélectionner' : 'Clear All'}
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Group Modules by Category */}
+                  {(['overview', 'content', 'inbox', 'system'] as const).map((catKey) => {
+                    const catModules = PERMISSION_MODULES.filter((m) => m.category === catKey)
+                    if (catModules.length === 0) return null
+
+                    const firstMod = catModules[0]
+                    const categoryTitle = isAr
+                      ? firstMod.categoryNameAr
+                      : isFr
+                      ? firstMod.categoryNameFr
+                      : firstMod.categoryNameEn
+
+                    return (
+                      <div key={catKey} className="space-y-2.5">
+                        <div className="flex items-center gap-2 pb-1 border-b border-[#e5e0d6]">
+                          <span className="text-2xs font-black uppercase tracking-wider text-[#bd3227]">
+                            {categoryTitle}
+                          </span>
+                          <span className="text-3xs text-[#8a857b]">
+                            ({catModules.filter((m) => selectedModuleIds.includes(m.id)).length}/{catModules.length})
+                          </span>
+                        </div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5">
+                          {catModules.map((m) => {
+                            const isChecked = selectedModuleIds.includes(m.id)
+                            const modName = isAr ? m.nameAr : isFr ? m.nameFr : m.nameEn
+                            const modDesc = isAr ? m.descriptionAr : isFr ? m.descriptionFr : m.descriptionEn
+
+                            return (
+                              <div
+                                key={m.id}
+                                onClick={() => toggleModuleId(m.id)}
+                                className={`p-3.5 rounded-2xl border transition-all cursor-pointer select-none flex items-start gap-3 ${
+                                  isChecked
+                                    ? 'bg-purple-50/70 border-purple-300 shadow-2xs'
+                                    : 'bg-[#FAF8F5]/60 border-[#e5e0d6] hover:bg-white hover:border-gray-300'
+                                }`}
+                              >
+                                <input
+                                  type="checkbox"
+                                  checked={isChecked}
+                                  onChange={() => toggleModuleId(m.id)}
+                                  className="mt-1 rounded text-purple-600 focus:ring-purple-500 cursor-pointer"
+                                  onClick={(e) => e.stopPropagation()}
+                                />
+                                <div className="space-y-1 flex-1 min-w-0">
+                                  <div className="flex items-center justify-between gap-2">
+                                    <div className="flex items-center gap-1.5 font-bold text-xs text-[#231f20]">
+                                      <span>{m.icon}</span>
+                                      <span className="truncate">{modName}</span>
+                                    </div>
+                                    <span className="text-4xs font-mono text-[#8a857b] px-1.5 py-0.5 rounded bg-white/80 border border-gray-200">
+                                      {m.paths[0]}
+                                    </span>
+                                  </div>
+                                  <p className="text-3xs text-[#5C5A55] leading-relaxed line-clamp-2">
+                                    {modDesc}
+                                  </p>
+                                </div>
+                              </div>
+                            )
+                          })}
+                        </div>
+                      </div>
+                    )
+                  })}
+                </div>
+              )}
+            </div>
+
+            {/* Modal Footer */}
+            <div className="p-4 sm:p-5 border-t border-[#e5e0d6] bg-[#FAF8F5]/80 flex items-center justify-between gap-3 shrink-0">
+              <span className="text-3xs text-[#5C5A55]">
+                {isCustomMode
+                  ? (isAr ? 'سيتم حفظ هذه الصلاحيات وتفعيلها في جلسة المشرف فوراً.' : 'Les permissions seront appliquées immédiatement.')
+                  : (isAr ? 'سيعتمد المشرف على صلاحيات الدور الأساسي المعتمد.' : 'Le profil utilisera les permissions standard.')}
+              </span>
+
+              <div className="flex items-center gap-2.5">
+                <button
+                  type="button"
+                  disabled={isPending}
+                  onClick={() => setSelectedUserForPerms(null)}
+                  className="px-4 py-2.5 rounded-xl text-xs font-bold text-[#5C5A55] hover:bg-white border border-transparent hover:border-[#e5e0d6] transition-all cursor-pointer"
+                >
+                  {t.cancel}
+                </button>
+                <button
+                  type="button"
+                  disabled={isPending}
+                  onClick={handleSaveCustomPermissions}
+                  className="px-6 py-2.5 rounded-xl text-xs font-bold text-white bg-purple-700 hover:bg-purple-800 shadow-md hover:shadow-lg transition-all flex items-center gap-2 cursor-pointer disabled:opacity-50"
+                >
+                  {isPending ? (
+                    <>
+                      <span className="animate-spin text-sm">⏳</span>
+                      <span>{isAr ? 'جاري الحفظ والربط...' : 'Enregistrement...'}</span>
+                    </>
+                  ) : (
+                    <span>
+                      {isAr ? 'حفظ الصلاحيات المخصصة ✓' : isFr ? 'Enregistrer les permissions ✓' : 'Save Permissions ✓'}
+                    </span>
+                  )}
+                </button>
+              </div>
             </div>
           </div>
         </div>

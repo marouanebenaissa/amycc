@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { submitContact, type ActionResponse } from '@/lib/actions/submissions'
+import { TurnstileCaptcha } from '@/components/ui/TurnstileCaptcha'
 
 interface ContactFormProps {
   locale: string
@@ -215,6 +216,11 @@ export function ContactForm({ locale, topics = [], responseTime }: ContactFormPr
             ? 'Vos données personnelles sont protégées et ne seront utilisées que pour répondre à votre demande.'
             : 'Your personal information is handled with full confidentiality under applicable data privacy guidelines.'}
         </span>
+      </div>
+
+      {/* Bot Verification / CAPTCHA */}
+      <div className="pt-1">
+        <TurnstileCaptcha locale={locale} />
       </div>
 
       <button

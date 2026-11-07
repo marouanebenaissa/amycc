@@ -73,3 +73,40 @@ export async function verifySuperAdmin(): Promise<{ isSuperAdmin: boolean; userI
     email: user.email ?? null,
   }
 }
+
+const CUSTOM_PERMISSIONS_KEY = 'user_custom_permissions'
+
+/**
+ * Retrieves all user customized granular permission overrides from site_settings.
+ */
+export async function getAllUsersCustomPermissions(): Promise<Record<string, string[]>> {
+  const adminClient = createAdminClientSafe()
+  const supabase = await createClient()
+  const client = adminClient || supabase
+
+  try {
+    const { data } = await client
+      .from('site_settings')
+      .select('value')
+      .eq('key', CUSTOM_PERMISSIONS_KEY)
+      .maybeSingle()
+
+    if (data && typeof data.value === 'object' && data.value !== null) {
+      return data.value as Record<string, string[]>
+    }
+  } catch {
+    // Return empty on error
+  }
+  return {}
+}
+
+/**
+ * Retrieves granular permission modules assigned to a specific user.
+ * Returns null if the user relies on their standard assigned role.
+ */
+export async function getCurrentUserCustomPermissions(userId: string): Promise<string[] | null> {
+  const allPerms = await getAllUsersCustomPermissions()
+  const perms = allPerms[userId]
+  return Array.isArray(perms) ? perms : null
+}
+

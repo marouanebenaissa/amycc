@@ -26,15 +26,24 @@ export interface IpSecurityRecord {
   lastAttemptAt: string
 }
 
+export interface PasswordResetCodeRecord {
+  code: string
+  expiresAt: number
+  attempts: number
+  createdAt: string
+}
+
 export interface AdminSecurityState {
   accounts: Record<string, AccountSecurityRecord>
   ipThreats: Record<string, IpSecurityRecord>
+  resetCodes?: Record<string, PasswordResetCodeRecord>
 }
 
 // In-memory hot cache for instant mitigation
 let memorySecurityState: AdminSecurityState = {
   accounts: {},
   ipThreats: {},
+  resetCodes: {},
 }
 
 const SETTINGS_KEY = 'admin_security_state'

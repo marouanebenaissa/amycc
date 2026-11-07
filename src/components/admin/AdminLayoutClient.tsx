@@ -14,6 +14,7 @@ interface AdminLayoutClientProps {
   userName?: string | null
   userAvatar?: string | null
   userRole?: AdminRoleMeta
+  customPermissions?: string[] | null
   mustChangePassword?: boolean
   children: React.ReactNode
 }
@@ -23,6 +24,7 @@ function AdminLayoutInner({
   userName,
   userAvatar,
   userRole,
+  customPermissions,
   mustChangePassword = false,
   children,
 }: AdminLayoutClientProps & { userRole: AdminRoleMeta }) {
@@ -81,7 +83,7 @@ function AdminLayoutInner({
     )
   }
 
-  const isAllowed = canUserAccessPath(userRole.key, pathname)
+  const isAllowed = canUserAccessPath(userRole.key, pathname, customPermissions)
 
   return (
     <div className="min-h-screen flex text-[#231f20] bg-[#FAF8F5] transition-colors">
@@ -90,6 +92,7 @@ function AdminLayoutInner({
         userName={userName}
         userAvatar={userAvatar}
         userRole={userRole}
+        customPermissions={customPermissions}
         mobileOpen={mobileOpen}
         onCloseMobile={() => setMobileOpen(false)}
       />

@@ -1,7 +1,7 @@
 import { createClient } from '@/lib/supabase/server'
 import { createAdminClientSafe } from '@/lib/supabase/admin'
 import { redirect } from 'next/navigation'
-import { getCurrentUserRole } from '@/lib/auth/server-rbac'
+import { getCurrentUserRole, getAllUsersCustomPermissions } from '@/lib/auth/server-rbac'
 import { PREDEFINED_ROLES } from '@/lib/auth/rbac'
 import { getSecurityState } from '@/lib/auth/security'
 import {
@@ -126,6 +126,7 @@ export default async function AdminUsersPage() {
   }
 
   const secState = await getSecurityState()
+  const allCustomPermissions = await getAllUsersCustomPermissions()
 
   // Map into AdminUserItem[]
   const users: AdminUserItem[] = profiles.map((p) => {
@@ -154,6 +155,7 @@ export default async function AdminUsersPage() {
     const isLocked = Boolean(secAccount?.isLocked)
     const failedAttempts = secAccount?.failedAttempts || 0
     const mustChangePassword = Boolean(secAccount?.mustChangePassword)
+    const customPermissions = allCustomPermissions[p.id] || null
 
     return {
       id: p.id,
@@ -166,6 +168,7 @@ export default async function AdminUsersPage() {
       isLocked,
       failedAttempts,
       mustChangePassword,
+      customPermissions,
     }
   })
 
