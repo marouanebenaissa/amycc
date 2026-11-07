@@ -1,10 +1,11 @@
 import { createClient } from '@/lib/supabase/server'
 import { createAdminClientSafe } from '@/lib/supabase/admin'
 import { redirect } from 'next/navigation'
+import { getCurrentUserRole } from '@/lib/auth/server-rbac'
+import { PREDEFINED_ROLES } from '@/lib/auth/rbac'
 import {
   AdminUsersClient,
   AdminUserItem,
-  PREDEFINED_ROLES,
 } from '@/components/admin/AdminUsersClient'
 
 interface ProfileRow {
@@ -32,6 +33,11 @@ export default async function AdminUsersPage() {
 
   if (!user) {
     redirect('/admin/login')
+  }
+
+  const currentUserRole = await getCurrentUserRole(user.id)
+  if (currentUserRole.key !== 'super_admin') {
+    redirect('/admin')
   }
 
   const adminClient = createAdminClientSafe()
@@ -130,15 +136,13 @@ export default async function AdminUsersPage() {
     let roleName = matchedRoleRelation?.roles?.name
 
     if (!roleId || !roleName) {
-      // If user is the logged in super admin, default to super_admin (id: 1)
-      if (isCurrent) {
+      if (isCurrent && currentUserRole.key === 'super_admin') {
         roleId = 1
         roleName = 'super_admin'
       } else {
-        // Fallback default
-        const defaultRole = PREDEFINED_ROLES[0]
-        roleId = defaultRole.id
-        roleName = defaultRole.name
+        const fallbackRole = PREDEFINED_ROLES.find((r) => r.key === 'reviewer') || PREDEFINED_ROLES[PREDEFINED_ROLES.length - 1]
+        roleId = fallbackRole.id
+        roleName = fallbackRole.name
       }
     }
 

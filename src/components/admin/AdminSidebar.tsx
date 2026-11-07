@@ -6,11 +6,14 @@ import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { logoutAdmin } from '@/lib/actions/admin'
 import { useAdminLocale, ADMIN_NAV_CATEGORIES } from './AdminLocaleContext'
+import type { AdminRoleMeta } from '@/lib/auth/rbac'
+import { canUserAccessPath, PREDEFINED_ROLES } from '@/lib/auth/rbac'
 
 interface AdminSidebarProps {
   userEmail: string
   userName?: string | null
   userAvatar?: string | null
+  userRole?: AdminRoleMeta
   mobileOpen?: boolean
   onCloseMobile?: () => void
 }
@@ -19,6 +22,7 @@ export function AdminSidebar({
   userEmail,
   userName,
   userAvatar,
+  userRole = PREDEFINED_ROLES[0],
   mobileOpen = false,
   onCloseMobile,
 }: AdminSidebarProps) {
@@ -50,14 +54,25 @@ export function AdminSidebar({
     return () => window.removeEventListener('keydown', handleKeyDown)
   }, [])
 
-  // Filter navigation categories & items based on search query
+  // Filter navigation categories & items based on assigned user role and search query
   const filteredCategories = useMemo(() => {
+    // 1. Role-based RBAC filtering
+    const roleAllowedCategories = ADMIN_NAV_CATEGORIES.map((cat) => {
+      const allowedItems = cat.items.filter((item) =>
+        canUserAccessPath(userRole.key, item.href)
+      )
+      return {
+        ...cat,
+        items: allowedItems,
+      }
+    }).filter((cat) => cat.items.length > 0)
+
     if (!searchQuery.trim()) {
-      return ADMIN_NAV_CATEGORIES
+      return roleAllowedCategories
     }
     const q = searchQuery.toLowerCase().trim()
 
-    return ADMIN_NAV_CATEGORIES.map((cat) => {
+    return roleAllowedCategories.map((cat) => {
       const matchingItems = cat.items.filter((item) => {
         return (
           item.labelAr.toLowerCase().includes(q) ||
@@ -74,7 +89,7 @@ export function AdminSidebar({
         items: matchingItems,
       }
     }).filter((cat) => cat.items.length > 0)
-  }, [searchQuery])
+  }, [searchQuery, userRole])
 
   const totalMatchingItems = useMemo(() => {
     return filteredCategories.reduce((acc, cat) => acc + cat.items.length, 0)
@@ -347,6 +362,12 @@ export function AdminSidebar({
                 <span className="text-4xs text-white/50 block truncate font-mono mt-0.5">
                   {userEmail}
                 </span>
+                <div className="mt-1 flex items-center">
+                  <span className={`inline-flex items-center gap-1 text-4xs font-bold px-2 py-0.5 rounded-md border truncate shadow-2xs ${userRole.badgeColor}`}>
+                    <span>{userRole.icon}</span>
+                    <span className="truncate">{isAr ? userRole.nameAr : isFr ? userRole.nameFr : userRole.nameEn}</span>
+                  </span>
+                </div>
               </div>
             </Link>
 

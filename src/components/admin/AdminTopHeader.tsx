@@ -5,11 +5,14 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useAdminLocale, ADMIN_NAV_CATEGORIES } from './AdminLocaleContext'
 import { logoutAdmin } from '@/lib/actions/admin'
+import type { AdminRoleMeta } from '@/lib/auth/rbac'
+import { PREDEFINED_ROLES } from '@/lib/auth/rbac'
 
 interface AdminTopHeaderProps {
   userEmail: string
   userName?: string | null
   userAvatar?: string | null
+  userRole?: AdminRoleMeta
   onToggleMobileMenu?: () => void
 }
 
@@ -17,6 +20,7 @@ export function AdminTopHeader({
   userEmail,
   userName,
   userAvatar,
+  userRole = PREDEFINED_ROLES[0],
   onToggleMobileMenu,
 }: AdminTopHeaderProps) {
   const pathname = usePathname()
@@ -260,12 +264,12 @@ export function AdminTopHeader({
                 staffInitial
               )}
             </div>
-            <div className="hidden sm:block text-start leading-none max-w-[130px]">
+            <div className="hidden sm:block text-start leading-none max-w-[150px]">
               <span className="text-xs font-bold text-[#231f20] block truncate">
                 {userName || 'Staff Admin'}
               </span>
-              <span className="text-3xs text-[#5C5A55] font-mono block truncate mt-0.5">
-                {userEmail.split('@')[0]}
+              <span className="text-4xs text-[#bd3227] font-semibold block truncate mt-0.5">
+                {userRole.icon} {isAr ? userRole.nameAr : isFr ? userRole.nameFr : userRole.nameEn}
               </span>
             </div>
             <span className="text-3xs text-[#5C5A55] group-hover:text-[#231f20] transition-colors">
@@ -295,6 +299,12 @@ export function AdminTopHeader({
                   <span className="text-3xs text-[#5C5A55] font-mono block truncate">
                     {userEmail}
                   </span>
+                  <div className="mt-1">
+                    <span className={`inline-flex items-center gap-1 text-4xs font-bold px-2 py-0.5 rounded-md border ${userRole.badgeColor}`}>
+                      <span>{userRole.icon}</span>
+                      <span>{isAr ? userRole.nameAr : isFr ? userRole.nameFr : userRole.nameEn}</span>
+                    </span>
+                  </div>
                 </div>
               </div>
               <Link

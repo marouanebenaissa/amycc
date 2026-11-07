@@ -3,6 +3,8 @@ import '../globals.css'
 import { Sora, Cairo } from 'next/font/google'
 import { createClient } from '@/lib/supabase/server'
 import { AdminLayoutClient } from '@/components/admin/AdminLayoutClient'
+import { getCurrentUserRole } from '@/lib/auth/server-rbac'
+import { PREDEFINED_ROLES } from '@/lib/auth/rbac'
 
 const sora = Sora({
   subsets: ['latin'],
@@ -52,6 +54,8 @@ export default async function AdminLayout({
       null
   }
 
+  const userRole = user ? await getCurrentUserRole(user.id) : PREDEFINED_ROLES[0]
+
   return (
     <html
       lang="ar"
@@ -68,6 +72,7 @@ export default async function AdminLayout({
             userEmail={user.email || 'admin@amycc.org'}
             userName={userFullName}
             userAvatar={userAvatarUrl}
+            userRole={userRole}
           >
             {children}
           </AdminLayoutClient>

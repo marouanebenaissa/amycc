@@ -3,10 +3,13 @@
 import React, { useMemo } from 'react'
 import Link from 'next/link'
 import { useAdminLocale } from './AdminLocaleContext'
+import type { AdminRoleMeta } from '@/lib/auth/rbac'
+import { PREDEFINED_ROLES, canUserAccessPath } from '@/lib/auth/rbac'
 
 interface AdminDashboardOverviewProps {
   userName?: string | null
   userEmail: string
+  userRole?: AdminRoleMeta
   counts: {
     membershipCount: number
     volunteerCount: number
@@ -24,6 +27,7 @@ interface AdminDashboardOverviewProps {
 export function AdminDashboardOverview({
   userName,
   userEmail,
+  userRole = PREDEFINED_ROLES[0],
   counts,
 }: AdminDashboardOverviewProps) {
   const { locale, isAr, isFr, t } = useAdminLocale()
@@ -261,6 +265,10 @@ export function AdminDashboardOverview({
           {/* Main Title & Personalized Welcome */}
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
             <div className="space-y-2 max-w-3xl">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/20 text-xs font-bold text-white mb-1 shadow-xs">
+                <span>{userRole.icon}</span>
+                <span>{isAr ? userRole.nameAr : isFr ? userRole.nameFr : userRole.nameEn}</span>
+              </div>
               <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black text-white tracking-tight leading-tight">
                 {t('welcome_banner_title')}
               </h1>
@@ -275,13 +283,24 @@ export function AdminDashboardOverview({
 
             {/* Quick CTAs inside Hero */}
             <div className="flex flex-wrap items-center gap-3 shrink-0">
-              <Link
-                href="/admin/programs/new"
-                className="px-4 py-2.5 rounded-2xl bg-gradient-to-r from-[#bd3227] to-[#d2a82b] hover:from-[#a0281f] hover:to-[#b89123] text-white font-bold text-xs shadow-lg shadow-[#bd3227]/25 hover:shadow-xl hover:scale-102 active:scale-98 transition-all flex items-center gap-2"
-              >
-                <span>+</span>
-                <span>{t('new_program')}</span>
-              </Link>
+              {canUserAccessPath(userRole.key, '/admin/programs/new') && (
+                <Link
+                  href="/admin/programs/new"
+                  className="px-4 py-2.5 rounded-2xl bg-gradient-to-r from-[#bd3227] to-[#d2a82b] hover:from-[#a0281f] hover:to-[#b89123] text-white font-bold text-xs shadow-lg shadow-[#bd3227]/25 hover:shadow-xl hover:scale-102 active:scale-98 transition-all flex items-center gap-2"
+                >
+                  <span>+</span>
+                  <span>{t('new_program')}</span>
+                </Link>
+              )}
+              {canUserAccessPath(userRole.key, '/admin/news/new') && (
+                <Link
+                  href="/admin/news/new"
+                  className="px-4 py-2.5 rounded-2xl bg-gradient-to-r from-[#bd3227] to-[#d2a82b] hover:from-[#a0281f] hover:to-[#b89123] text-white font-bold text-xs shadow-lg shadow-[#bd3227]/25 hover:shadow-xl hover:scale-102 active:scale-98 transition-all flex items-center gap-2"
+                >
+                  <span>+</span>
+                  <span>{isAr ? 'مقال أو بيان صحفي' : isFr ? 'Nouvel Article' : 'New Article'}</span>
+                </Link>
+              )}
               <Link
                 href="/admin/profile"
                 className="px-4 py-2.5 rounded-2xl bg-white/10 hover:bg-white/20 text-white font-semibold text-xs border border-white/15 backdrop-blur-xs transition-all flex items-center gap-2"
@@ -405,7 +424,9 @@ export function AdminDashboardOverview({
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
-          {inboxes.map((item) => {
+          {inboxes
+            .filter((item) => canUserAccessPath(userRole.key, item.href))
+            .map((item) => {
             const title = isAr
               ? item.labelAr
               : isFr
@@ -475,12 +496,14 @@ export function AdminDashboardOverview({
               </h2>
             </div>
             <span className="text-3xs font-mono font-bold px-2 py-1 rounded-lg bg-[#FAF8F5] text-[#5C5A55] border border-[#e5e0d6]">
-              6 Core Tools
+              {operationalActions.filter((a) => canUserAccessPath(userRole.key, a.href)).length} Tools
             </span>
           </div>
 
           <div className="space-y-2.5">
-            {operationalActions.map((action, idx) => {
+            {operationalActions
+              .filter((action) => canUserAccessPath(userRole.key, action.href))
+              .map((action, idx) => {
               const actTitle = isAr
                 ? action.titleAr
                 : isFr

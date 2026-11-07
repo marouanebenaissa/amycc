@@ -1,6 +1,7 @@
 import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import { AdminDashboardOverview } from '@/components/admin/AdminDashboardOverview'
+import { getCurrentUserRole } from '@/lib/auth/server-rbac'
 
 export const dynamic = 'force-dynamic'
 
@@ -14,7 +15,7 @@ export default async function AdminDashboardPage() {
     redirect('/admin/login')
   }
 
-  // Fetch staff user full name from profiles
+  // Fetch staff user full name from profiles and assigned role
   let userFullName: string | null = null
   try {
     const { data: profile } = await supabase
@@ -26,6 +27,8 @@ export default async function AdminDashboardPage() {
   } catch {
     // Graceful fallback
   }
+
+  const userRole = await getCurrentUserRole(user.id)
 
   // Fetch real counts from Supabase with safe fallback
   let membershipCount = 0
@@ -82,6 +85,7 @@ export default async function AdminDashboardPage() {
     <AdminDashboardOverview
       userName={userFullName || (user.user_metadata?.full_name as string) || null}
       userEmail={user.email || 'admin@amycc.org'}
+      userRole={userRole}
       counts={{
         membershipCount,
         volunteerCount,

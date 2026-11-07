@@ -717,7 +717,7 @@ export function AdminUsersClient({
 
                       {/* Actions */}
                       <td className="px-6 py-4 text-end">
-                        {!isCurrent ? (
+                        {!isCurrent && u.roleName !== 'super_admin' && u.roleId !== 1 ? (
                           <button
                             disabled={isPending}
                             onClick={() => setUserToDelete(u)}
@@ -821,7 +821,7 @@ export function AdminUsersClient({
                         : '—'}
                     </span>
 
-                    {!isCurrent && (
+                    {!isCurrent && u.roleName !== 'super_admin' && u.roleId !== 1 ? (
                       <button
                         disabled={isPending}
                         onClick={() => setUserToDelete(u)}
@@ -829,6 +829,10 @@ export function AdminUsersClient({
                       >
                         🗑️ {t.deleteUserBtn}
                       </button>
+                    ) : (
+                      <span className="text-3xs text-[#5C5A55] italic">
+                        {isAr ? 'حساب محمي' : isFr ? 'Protégé' : 'Protected'}
+                      </span>
                     )}
                   </div>
                 </div>

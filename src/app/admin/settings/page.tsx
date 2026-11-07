@@ -2,6 +2,7 @@ import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import { revalidatePath } from 'next/cache'
 import Link from 'next/link'
+import { getCurrentUserRole } from '@/lib/auth/server-rbac'
 import {
   defaultTopBarConfig,
   type TopBarConfig,
@@ -37,6 +38,11 @@ export default async function AdminSettingsPage() {
 
   if (!user) {
     redirect('/admin/login')
+  }
+
+  const userRole = await getCurrentUserRole(user.id)
+  if (userRole.key !== 'super_admin') {
+    redirect('/admin')
   }
 
   const [settingsRes, programsRes] = await Promise.all([

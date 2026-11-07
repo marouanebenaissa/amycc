@@ -4,6 +4,7 @@ import { createClient } from '@/lib/supabase/server'
 import { createAdminClient, createAdminClientSafe } from '@/lib/supabase/admin'
 import { redirect } from 'next/navigation'
 import { revalidatePath } from 'next/cache'
+import { getCurrentUserRole } from '@/lib/auth/server-rbac'
 import type { FaqItemConfig, AreasConfig, TeamConfig, CommissionsConfig, ContactConfig, ProgramsPageConfig, AnnualProgramConfig, ImpactConfig, EventsPageConfig, NewsPageConfig, PartnershipsPageConfig, MembershipPageConfig, SupportPageConfig } from '@/lib/settings'
 
 export async function recordAuditLog(
@@ -149,6 +150,11 @@ export async function updateUserRoleAction(userId: string, newRoleId: number): P
       return { success: false, error: 'Unauthorized: Admin session required' }
     }
 
+    const currentUserRole = await getCurrentUserRole(currentUser.id)
+    if (currentUserRole.key !== 'super_admin') {
+      return { success: false, error: 'غير مصرح: تعديل الأدوار والصلاحيات متاح فقط لمدير عام النظام' }
+    }
+
     const adminClient = createAdminClientSafe()
     const client = adminClient || supabase
 
@@ -199,6 +205,11 @@ export async function createUserWithRoleAction(formData: FormData): Promise<{ su
     const { data: { user: currentUser } } = await supabase.auth.getUser()
     if (!currentUser) {
       return { success: false, error: 'Unauthorized: Admin session required' }
+    }
+
+    const currentUserRole = await getCurrentUserRole(currentUser.id)
+    if (currentUserRole.key !== 'super_admin') {
+      return { success: false, error: 'غير مصرح: تعديل الأدوار والصلاحيات متاح فقط لمدير عام النظام' }
     }
 
     const adminClient = createAdminClientSafe()
@@ -265,8 +276,18 @@ export async function deleteStaffUserAction(userId: string): Promise<{ success: 
     if (!currentUser) {
       return { success: false, error: 'Unauthorized: Admin session required' }
     }
+
+    const currentUserRole = await getCurrentUserRole(currentUser.id)
+    if (currentUserRole.key !== 'super_admin') {
+      return { success: false, error: 'غير مصرح: حذف الحسابات متاح فقط لمدير عام النظام' }
+    }
     if (currentUser.id === userId) {
       return { success: false, error: 'You cannot delete your own active administrator account' }
+    }
+
+    const targetUserRole = await getCurrentUserRole(userId)
+    if (targetUserRole.key === 'super_admin') {
+      return { success: false, error: 'غير مسموح: لا يمكن حذف حساب مدير عام النظام' }
     }
 
     const adminClient = createAdminClientSafe()

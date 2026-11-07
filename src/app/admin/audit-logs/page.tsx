@@ -1,6 +1,7 @@
 import { createClient } from '@/lib/supabase/server'
 import { createAdminClientSafe } from '@/lib/supabase/admin'
 import { redirect } from 'next/navigation'
+import { getCurrentUserRole } from '@/lib/auth/server-rbac'
 import { AdminAuditLogsClient, AuditLogRow } from '@/components/admin/AdminAuditLogsClient'
 
 export const dynamic = 'force-dynamic'
@@ -13,6 +14,11 @@ export default async function AdminAuditLogsPage() {
 
   if (!user) {
     redirect('/admin/login')
+  }
+
+  const userRole = await getCurrentUserRole(user.id)
+  if (userRole.key !== 'super_admin') {
+    redirect('/admin')
   }
 
   const adminClient = createAdminClientSafe()

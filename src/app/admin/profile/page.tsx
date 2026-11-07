@@ -1,6 +1,7 @@
 import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import { AdminProfileClient } from '@/components/admin/AdminProfileClient'
+import { getCurrentUserRole } from '@/lib/auth/server-rbac'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -15,22 +16,9 @@ export default async function AdminProfilePage() {
     redirect('/admin/login')
   }
 
-  // Fetch assigned role name if exists
-  let roleTitle = 'Staff Administrator'
-  try {
-    const { data: userRole } = await supabase
-      .from('user_roles')
-      .select('roles(name)')
-      .eq('user_id', user.id)
-      .single()
-
-    if (userRole?.roles) {
-      const r = userRole.roles as unknown as { name?: string }
-      if (r?.name) roleTitle = r.name
-    }
-  } catch {
-    // Default fallback
-  }
+  // Fetch assigned role name reliably using RBAC server helper
+  const roleMeta = await getCurrentUserRole(user.id)
+  const roleTitle = roleMeta.nameAr || roleMeta.name
 
   const initialName =
     user.user_metadata?.full_name ||
