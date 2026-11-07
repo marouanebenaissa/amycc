@@ -1,7 +1,8 @@
 import type { MetadataRoute } from 'next'
+import { getSiteUrl } from '@/lib/seo/config'
 
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://amycc.org'
+  const baseUrl = getSiteUrl()
 
   return {
     rules: [
@@ -12,5 +13,6 @@ export default function robots(): MetadataRoute.Robots {
       },
     ],
     sitemap: `${baseUrl}/sitemap.xml`,
+    host: baseUrl,
   }
 }

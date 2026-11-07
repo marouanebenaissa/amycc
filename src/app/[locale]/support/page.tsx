@@ -6,6 +6,9 @@ import { ImageWithFallback } from '@/components/ui/ImageWithFallback'
 import { SupportForm } from '@/components/forms/SupportForm'
 import { OnlineDonationHub } from '@/components/support/OnlineDonationHub'
 import { getSupportPageSettings } from '@/lib/settings'
+import { constructMetadata } from '@/lib/seo/config'
+import { METADATA_CATALOG, type SupportedLocale } from '@/lib/seo/metadata-catalog'
+import { getBreadcrumbJsonLd, JsonLd } from '@/lib/seo/schema'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -15,31 +18,16 @@ export async function generateMetadata(props: {
   params: Promise<{ locale: string }>
 }): Promise<Metadata> {
   const { locale } = await props.params
-  const config = await getSupportPageSettings()
-  const isAr = locale === 'ar'
-  const isFr = locale === 'fr'
+  const safeLocale = (['ar', 'fr', 'en'].includes(locale) ? locale : 'ar') as SupportedLocale
+  const meta = METADATA_CATALOG.support[safeLocale]
 
-  const title = isAr
-    ? `${config.hero.titleAr} | جمعية روح الفنون والثقافة`
-    : isFr
-    ? `${config.hero.titleFr} | Association Esprit des Arts et de la Culture`
-    : `${config.hero.titleEn} | Spirit of Arts and Culture Association`
-
-  const description = isAr
-    ? config.hero.descriptionAr
-    : isFr
-    ? config.hero.descriptionFr
-    : config.hero.descriptionEn
-
-  return {
-    title,
-    description,
-    openGraph: {
-      title,
-      description,
-      type: 'website',
-    },
-  }
+  return constructMetadata({
+    title: meta.title,
+    description: meta.description,
+    path: '/support',
+    locale: safeLocale,
+    keywords: meta.keywords,
+  })
 }
 
 export default async function SupportPage(props: { params: Promise<{ locale: string }> }) {
@@ -57,8 +45,19 @@ export default async function SupportPage(props: { params: Promise<{ locale: str
 
   const activePackages = (config.packages || []).filter((p) => p.active !== false)
 
+  const breadcrumbSchema = getBreadcrumbJsonLd(
+    [
+      {
+        name: isAr ? 'الدعم والرعاية' : isFr ? 'Soutien & Don' : 'Support & Sponsorship',
+        path: `/${locale}/support`,
+      },
+    ],
+    locale
+  )
+
   return (
     <>
+      <JsonLd data={breadcrumbSchema} />
       <Header locale={locale} dict={dict} />
 
       <main id="main-content" className="flex-1 bg-[#FAF8F5]">
@@ -77,7 +76,13 @@ export default async function SupportPage(props: { params: Promise<{ locale: str
               <ImageWithFallback
                 src={config.hero.imageUrl}
                 fallbackSrc="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=1920&q=80"
-                alt="AMYCC Cultural Patronage"
+                alt={
+                  isAr
+                    ? 'دعم ورعاية المبادرات الثقافية والشبابية - جمعية روح الفنون والثقافة بمراكش'
+                    : isFr
+                    ? 'Soutien et Mécénat Culturel pour la Jeunesse - AMYCC Marrakech'
+                    : 'Cultural Patronage and Youth Sponsorship AMYCC Marrakech Morocco'
+                }
                 fill
                 priority
                 className="object-cover object-center scale-105 filter brightness-[0.32] contrast-105"

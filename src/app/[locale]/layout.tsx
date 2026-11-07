@@ -1,8 +1,9 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { isValidLocale, localeDir, type Locale } from '@/lib/i18n/config'
-import { getDictionary } from '@/lib/i18n/dictionaries'
 import { Sora, Cairo } from 'next/font/google'
+import { constructMetadata } from '@/lib/seo/config'
+import { METADATA_CATALOG } from '@/lib/seo/metadata-catalog'
 import '../globals.css'
 
 const sora = Sora({
@@ -26,21 +27,22 @@ export async function generateStaticParams() {
 export async function generateMetadata(props: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await props.params
   if (!isValidLocale(locale)) return {}
-  const dict = await getDictionary(locale)
+
+  const validLocale = locale as Locale
+  const meta = METADATA_CATALOG.home[validLocale]
+
+  const baseMeta = constructMetadata({
+    title: meta.title,
+    description: meta.description,
+    path: '',
+    locale: validLocale,
+  })
+
   return {
-    title: { default: dict.meta.home_title, template: `%s | AMYCC` },
-    description: dict.meta.home_description,
-    metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000'),
-    alternates: {
-      languages: {
-        ar: '/ar',
-        fr: '/fr',
-        en: '/en',
-      },
-    },
-    openGraph: {
-      siteName: dict.meta.site_name,
-      locale,
+    ...baseMeta,
+    title: {
+      default: meta.title,
+      template: validLocale === 'ar' ? '%s | AMYCC مراكش' : '%s | AMYCC Marrakech',
     },
   }
 }
@@ -60,6 +62,10 @@ export default async function LocaleLayout(props: {
       dir={dir}
       className={`h-full ${sora.variable} ${cairo.variable}`}
     >
+      <head>
+        <meta name="theme-color" content="#181516" />
+        <meta name="apple-mobile-web-app-title" content="AMYCC" />
+      </head>
       <body className="flex flex-col min-h-full bg-[#FAF8F5] text-[#231f20] antialiased selection:bg-[#bd3227]/20 selection:text-[#231f20]">
         {props.children}
       </body>

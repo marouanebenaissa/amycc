@@ -6,6 +6,9 @@ import { Footer } from '@/components/layout/Footer'
 import { IconWithFallback } from '@/components/ui/IconWithFallback'
 import { ImageWithFallback } from '@/components/ui/ImageWithFallback'
 import { getImpactSettings } from '@/lib/settings'
+import { constructMetadata } from '@/lib/seo/config'
+import { METADATA_CATALOG, type SupportedLocale } from '@/lib/seo/metadata-catalog'
+import { getBreadcrumbJsonLd, JsonLd } from '@/lib/seo/schema'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -15,31 +18,16 @@ export async function generateMetadata(props: {
   params: Promise<{ locale: string }>
 }): Promise<Metadata> {
   const { locale } = await props.params
-  const config = await getImpactSettings()
-  const isAr = locale === 'ar'
-  const isFr = locale === 'fr'
+  const safeLocale = (['ar', 'fr', 'en'].includes(locale) ? locale : 'ar') as SupportedLocale
+  const meta = METADATA_CATALOG.impact[safeLocale]
 
-  const title = isAr
-    ? `${config.hero.titleAr} | جمعية روح الفنون والثقافة`
-    : isFr
-    ? `${config.hero.titleFr} | Association Esprit des Arts et de la Culture`
-    : `${config.hero.titleEn} | Spirit of Arts and Culture Association`
-
-  const description = isAr
-    ? config.hero.descriptionAr
-    : isFr
-    ? config.hero.descriptionFr
-    : config.hero.descriptionEn
-
-  return {
-    title,
-    description,
-    openGraph: {
-      title,
-      description,
-      type: 'website',
-    },
-  }
+  return constructMetadata({
+    title: meta.title,
+    description: meta.description,
+    path: '/impact',
+    locale: safeLocale,
+    keywords: meta.keywords,
+  })
 }
 
 export default async function ImpactPage(props: { params: Promise<{ locale: string }> }) {
@@ -54,8 +42,19 @@ export default async function ImpactPage(props: { params: Promise<{ locale: stri
       config.hero.heroImageUrl.trim() !== ''
   )
 
+  const breadcrumbSchema = getBreadcrumbJsonLd(
+    [
+      {
+        name: isAr ? 'الأثر والمؤشرات' : isFr ? 'Impact & Indicateurs' : 'Impact & Metrics',
+        path: `/${locale}/impact`,
+      },
+    ],
+    locale
+  )
+
   return (
     <>
+      <JsonLd data={breadcrumbSchema} />
       <Header locale={locale} dict={dict} />
 
       <main id="main-content" className="flex-1 bg-[#FAF8F5]">

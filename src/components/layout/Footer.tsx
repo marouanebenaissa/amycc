@@ -35,10 +35,10 @@ export function Footer({ locale, dict, contactEmail: initialEmail, initialSocial
     tiktok?: string
     whatsapp?: string
   }>(initialSocial || {
-    facebook: 'https://facebook.com',
-    instagram: 'https://instagram.com',
-    linkedin: 'https://linkedin.com',
-    youtube: 'https://youtube.com',
+    facebook: 'https://facebook.com/amycc.marrakech',
+    instagram: 'https://instagram.com/amycc.officiel',
+    linkedin: 'https://linkedin.com/company/amycc-marrakech',
+    youtube: 'https://youtube.com/@amycc-marrakech',
   })
   const [email, setEmail] = useState('')
   const [subscribed, setSubscribed] = useState(false)

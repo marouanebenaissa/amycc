@@ -7,6 +7,9 @@ import { Footer } from '@/components/layout/Footer'
 import { createPublicClient } from '@/lib/supabase/public'
 import { ImageWithFallback } from '@/components/ui/ImageWithFallback'
 import { defaultNewsArticlesData } from '@/lib/supabase/seed-news'
+import { constructMetadata, getSiteUrl } from '@/lib/seo/config'
+import { getArticleJsonLd, getBreadcrumbJsonLd, JsonLd } from '@/lib/seo/schema'
+import { locales, type Locale, defaultLocale } from '@/lib/i18n/config'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -69,6 +72,11 @@ export async function generateMetadata(props: {
   params: Promise<{ locale: string; slug: string }>
 }): Promise<Metadata> {
   const { locale, slug } = await props.params
+  const validLocale = (locales.includes(locale as Locale) ? locale : defaultLocale) as Locale
+
+  let title = slug
+  let description = ''
+  let coverImage: string | undefined
 
   try {
     const supabase = createPublicClient()
@@ -80,51 +88,41 @@ export async function generateMetadata(props: {
 
     if (data) {
       const trans =
-        data.news_translations?.find((t) => t.locale === locale) ||
+        data.news_translations?.find((t) => t.locale === validLocale) ||
         data.news_translations?.find((t) => t.locale === 'ar') ||
         data.news_translations?.[0]
 
-      const orgName =
-        locale === 'ar'
-          ? 'جمعية روح الفنون والثقافة'
-          : locale === 'fr'
-          ? 'Association Esprit des Arts et de la Culture'
-          : 'Spirit of Arts and Culture Association'
-
-      const title = `${trans?.title || data.slug} | ${orgName}`
-      const description =
-        trans?.excerpt ||
-        (locale === 'ar'
-          ? 'مقال ومستجدات إعلامية من جمعية روح الفنون والثقافة (AMYCC)'
-          : locale === 'fr'
-          ? "Actualités et communiqués de presse de l'Association Esprit des Arts et de la Culture (AMYCC)"
-          : 'News and press releases from the Spirit of Arts and Culture Association (AMYCC)')
-
-      return {
-        title,
-        description,
-        openGraph: {
-          title,
-          description,
-          type: 'article',
-          images: data.cover_image ? [{ url: data.cover_image }] : undefined,
-        },
-      }
+      if (trans?.title) title = trans.title
+      if (trans?.excerpt) description = trans.excerpt
+      if (data.cover_image) coverImage = data.cover_image
     }
   } catch {
     // Fallback
   }
 
-  const fallbackTitle =
-    locale === 'ar'
-      ? 'المستجدات والأخبار | جمعية روح الفنون والثقافة'
-      : locale === 'fr'
-      ? 'Actualités & Publications | Association Esprit des Arts et de la Culture'
-      : 'News & Media | Spirit of Arts and Culture Association'
-
-  return {
-    title: fallbackTitle,
+  if (title === slug) {
+    const fallbackItem = defaultNewsArticlesData.find((d) => d.slug === slug)
+    if (fallbackItem) {
+      const trans =
+        fallbackItem.translations.find((t) => t.locale === validLocale) ||
+        fallbackItem.translations.find((t) => t.locale === 'ar') ||
+        fallbackItem.translations[0]
+      if (trans?.title) title = trans.title
+      if (trans?.excerpt) description = trans.excerpt
+      if (fallbackItem.cover_image) coverImage = fallbackItem.cover_image
+    }
   }
+
+  const orgSuffix = validLocale === 'ar' ? 'جمعية روح الفنون والثقافة بمراكش' : 'AMYCC Marrakech'
+
+  return constructMetadata({
+    title: `${title} | ${orgSuffix}`,
+    description: description || `مقال وبلاغ صحفي من جمعية روح الفنون والثقافة بمراكش (${slug})`,
+    path: `/news/${slug}`,
+    locale: validLocale,
+    image: coverImage,
+    type: 'article',
+  })
 }
 
 export default async function NewsDetailPage(props: {
@@ -260,8 +258,27 @@ export default async function NewsDetailPage(props: {
       ? 'Dossier de Presse • AMYCC'
       : 'AMYCC Media Dossier'
 
+  const siteUrl = getSiteUrl()
+  const articleUrl = `${siteUrl}/${locale}/news/${slug}`
+
+  const articleJsonLd = getArticleJsonLd({
+    headline: trans.title,
+    description: trans.excerpt || trans.title,
+    publishedAt: article.published_at,
+    imageUrl: article.cover_image,
+    url: articleUrl,
+    locale,
+  })
+
+  const breadcrumbSchema = getBreadcrumbJsonLd([
+    { name: isAr ? 'الرئيسية' : isFr ? 'Accueil' : 'Home', url: `${siteUrl}/${locale}` },
+    { name: isAr ? 'الأخبار والمستجدات' : isFr ? 'Actualités' : 'News & Press', url: `${siteUrl}/${locale}/news` },
+    { name: trans.title, url: articleUrl },
+  ])
+
   return (
     <>
+      <JsonLd data={[articleJsonLd, breadcrumbSchema]} />
       <Header locale={locale} dict={dict} />
 
       <main id="main-content" className="flex-1 bg-[#FAF8F5] py-12 lg:py-16">

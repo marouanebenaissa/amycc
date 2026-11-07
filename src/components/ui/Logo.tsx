@@ -15,11 +15,25 @@ export function Logo({
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   variant = 'light',
 }: LogoProps) {
+  const isAr = locale === 'ar'
+  const isFr = locale === 'fr'
+  const ariaLabel = isAr
+    ? 'جمعية روح الفنون والثقافة بمراكش — الصفحة الرئيسية'
+    : isFr
+    ? 'AMYCC Marrakech — Accueil'
+    : 'AMYCC Marrakech — Home'
+
+  const logoAlt = isAr
+    ? 'شعار جمعية روح الفنون والثقافة بمراكش AMYCC'
+    : isFr
+    ? 'Logo officiel AMYCC - Association Esprit des Arts et de la Culture Marrakech'
+    : 'AMYCC Official Logo - Spirit of Arts & Culture Marrakech'
+
   return (
     <Link
       href={`/${locale}`}
       className={`group inline-flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#bd3227] focus-visible:ring-offset-2 rounded-xl transition-all ${className}`}
-      aria-label="AMYCC — الرئيسية"
+      aria-label={ariaLabel}
     >
       {/* Visual Seal / Official Logo Standalone Without Frame */}
       <div
@@ -31,7 +45,7 @@ export function Logo({
       >
         <Image
           src="/logo.png"
-          alt="AMYCC Logo"
+          alt={logoAlt}
           width={compact ? 40 : 52}
           height={compact ? 40 : 52}
           className="object-contain w-auto h-auto max-w-full max-h-full"

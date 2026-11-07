@@ -1,15 +1,36 @@
+import type { Metadata } from 'next'
 import { getDictionary } from '@/lib/i18n/dictionaries'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { createPublicClient } from '@/lib/supabase/public'
 import { getProgramsPageSettings, defaultProgramsPageConfig } from '@/lib/settings'
 import { ProgramsCatalog, type ProgramDisplayItem } from '@/components/programs/ProgramsCatalog'
+import { constructMetadata, getSiteUrl } from '@/lib/seo/config'
+import { METADATA_CATALOG } from '@/lib/seo/metadata-catalog'
+import { getBreadcrumbJsonLd, JsonLd } from '@/lib/seo/schema'
+import { locales, type Locale, defaultLocale } from '@/lib/i18n/config'
 import Link from 'next/link'
 import { ImageWithFallback } from '@/components/ui/ImageWithFallback'
 
 export const revalidate = 0
 
 export const dynamic = 'force-dynamic'
+
+export async function generateMetadata(props: {
+  params: Promise<{ locale: string }>
+}): Promise<Metadata> {
+  const { locale } = await props.params
+  const validLocale = (locales.includes(locale as Locale) ? locale : defaultLocale) as Locale
+  const meta = METADATA_CATALOG.programs[validLocale]
+
+  return constructMetadata({
+    title: meta.title,
+    description: meta.description,
+    path: '/programs',
+    locale: validLocale,
+    keywords: meta.keywords,
+  })
+}
 
 interface RawProgramItem {
   id: string
@@ -158,8 +179,15 @@ export default async function ProgramsPage(props: { params: Promise<{ locale: st
 
   const displayPrograms = programs.length > 0 ? programs : defaultPrograms
 
+  const siteUrl = getSiteUrl()
+  const breadcrumbSchema = getBreadcrumbJsonLd([
+    { name: isAr ? 'الرئيسية' : isFr ? 'Accueil' : 'Home', url: `${siteUrl}/${locale}` },
+    { name: isAr ? 'البرامج والمشاريع الثقافية' : isFr ? 'Programmes' : 'Programs', url: `${siteUrl}/${locale}/programs` },
+  ])
+
   return (
     <>
+      <JsonLd data={breadcrumbSchema} />
       <Header locale={locale} dict={dict} />
 
       <main id="main-content" className="flex-1 bg-[#FAF8F5]">
@@ -179,7 +207,13 @@ export default async function ProgramsPage(props: { params: Promise<{ locale: st
               <ImageWithFallback
                 src={hero.imageUrl!}
                 fallbackSrc="/images/youth-in-action.jpg"
-                alt="AMYCC Programs Hero Banner"
+                alt={
+                  isAr
+                    ? 'دليل البرامج والمشاريع الثقافية والتكوينية - جمعية روح الفنون والثقافة بمراكش'
+                    : isFr
+                    ? 'Programmes Culturels et Ateliers Créatifs AMYCC Marrakech'
+                    : 'AMYCC Cultural Programs and Creative Workshops Marrakech Morocco'
+                }
                 fill
                 priority
                 sizes="100vw"

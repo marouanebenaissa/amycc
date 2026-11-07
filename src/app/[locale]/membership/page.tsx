@@ -5,6 +5,9 @@ import { Footer } from '@/components/layout/Footer'
 import { ImageWithFallback } from '@/components/ui/ImageWithFallback'
 import { MembershipForm } from '@/components/forms/MembershipForm'
 import { getMembershipPageSettings } from '@/lib/settings'
+import { constructMetadata } from '@/lib/seo/config'
+import { METADATA_CATALOG, type SupportedLocale } from '@/lib/seo/metadata-catalog'
+import { getBreadcrumbJsonLd, JsonLd } from '@/lib/seo/schema'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -14,31 +17,16 @@ export async function generateMetadata(props: {
   params: Promise<{ locale: string }>
 }): Promise<Metadata> {
   const { locale } = await props.params
-  const config = await getMembershipPageSettings()
-  const isAr = locale === 'ar'
-  const isFr = locale === 'fr'
+  const safeLocale = (['ar', 'fr', 'en'].includes(locale) ? locale : 'ar') as SupportedLocale
+  const meta = METADATA_CATALOG.membership[safeLocale]
 
-  const title = isAr
-    ? `${config.hero.titleAr} | جمعية روح الفنون والثقافة`
-    : isFr
-    ? `${config.hero.titleFr} | Association Esprit des Arts et de la Culture`
-    : `${config.hero.titleEn} | Spirit of Arts and Culture Association`
-
-  const description = isAr
-    ? config.hero.descriptionAr
-    : isFr
-    ? config.hero.descriptionFr
-    : config.hero.descriptionEn
-
-  return {
-    title,
-    description,
-    openGraph: {
-      title,
-      description,
-      type: 'website',
-    },
-  }
+  return constructMetadata({
+    title: meta.title,
+    description: meta.description,
+    path: '/membership',
+    locale: safeLocale,
+    keywords: meta.keywords,
+  })
 }
 
 export default async function MembershipPage(props: { params: Promise<{ locale: string }> }) {
@@ -56,8 +44,19 @@ export default async function MembershipPage(props: { params: Promise<{ locale: 
 
   const activeTiers = (config.tiers || []).filter((t) => t.active !== false)
 
+  const breadcrumbSchema = getBreadcrumbJsonLd(
+    [
+      {
+        name: isAr ? 'الانخراط والعضوية' : isFr ? 'Adhésion' : 'Membership',
+        path: `/${locale}/membership`,
+      },
+    ],
+    locale
+  )
+
   return (
     <>
+      <JsonLd data={breadcrumbSchema} />
       <Header locale={locale} dict={dict} />
 
       <main id="main-content" className="flex-1 bg-[#FAF8F5]">
@@ -76,7 +75,13 @@ export default async function MembershipPage(props: { params: Promise<{ locale: 
               <ImageWithFallback
                 src={config.hero.imageUrl}
                 fallbackSrc="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=1920&q=80"
-                alt="AMYCC Membership"
+                alt={
+                  isAr
+                    ? 'الانخراط والعضوية السنوية في جمعية روح الفنون والثقافة بمراكش'
+                    : isFr
+                    ? 'Adhésion et carte de membre annuelle AMYCC Marrakech'
+                    : 'Annual Membership and Youth Engagement AMYCC Marrakech'
+                }
                 fill
                 priority
                 className="object-cover object-center scale-105 filter brightness-[0.32] contrast-105"

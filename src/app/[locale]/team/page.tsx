@@ -1,11 +1,31 @@
+import type { Metadata } from 'next'
 import { getDictionary } from '@/lib/i18n/dictionaries'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import Link from 'next/link'
 import { getTeamSettings, getCommissionsSettings, defaultTeamHeroConfig, defaultTeamMetrics } from '@/lib/settings'
 import { ImageWithFallback } from '@/components/ui/ImageWithFallback'
+import { constructMetadata } from '@/lib/seo/config'
+import { METADATA_CATALOG, type SupportedLocale } from '@/lib/seo/metadata-catalog'
+import { getBreadcrumbJsonLd, JsonLd } from '@/lib/seo/schema'
 
 export const revalidate = 0
+
+export async function generateMetadata(props: {
+  params: Promise<{ locale: string }>
+}): Promise<Metadata> {
+  const { locale } = await props.params
+  const safeLocale = (['ar', 'fr', 'en'].includes(locale) ? locale : 'ar') as SupportedLocale
+  const meta = METADATA_CATALOG.team[safeLocale]
+
+  return constructMetadata({
+    title: meta.title,
+    description: meta.description,
+    path: '/team',
+    locale: safeLocale,
+    keywords: meta.keywords,
+  })
+}
 
 export default async function TeamPage(props: { params: Promise<{ locale: string }> }) {
   const { locale } = await props.params
@@ -112,8 +132,19 @@ export default async function TeamPage(props: { params: Promise<{ locale: string
     },
   ]
 
+  const breadcrumbSchema = getBreadcrumbJsonLd(
+    [
+      {
+        name: isAr ? 'فريق العمل والهيكلة' : isFr ? 'Équipe & Direction' : 'Team & Leadership',
+        path: `/${locale}/team`,
+      },
+    ],
+    locale
+  )
+
   return (
     <>
+      <JsonLd data={breadcrumbSchema} />
       <Header locale={locale} dict={dict} />
 
       <main id="main-content" className="flex-1 bg-[#FAF8F5]">
@@ -131,7 +162,13 @@ export default async function TeamPage(props: { params: Promise<{ locale: string
               <ImageWithFallback
                 src={heroImageUrl!}
                 fallbackSrc="/images/youth-in-action.jpg"
-                alt="AMYCC Team Hero Banner"
+                alt={
+                  isAr
+                    ? 'المكتب التنفيذي وفريق العمل واللجان المتخصصة - جمعية روح الفنون والثقافة مراكش'
+                    : isFr
+                    ? 'Équipe de Direction, Bureau Exécutif et Commissions AMYCC Marrakech'
+                    : 'AMYCC Executive Board and Leadership Team Marrakech Morocco'
+                }
                 fill
                 priority
                 sizes="100vw"

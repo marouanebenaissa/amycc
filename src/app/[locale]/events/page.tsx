@@ -7,6 +7,10 @@ import { createPublicClient } from '@/lib/supabase/public'
 import { getEventsPageSettings } from '@/lib/settings'
 import { ImageWithFallback } from '@/components/ui/ImageWithFallback'
 import { EventsCatalog, type EventItemData } from '@/components/events/EventsCatalog'
+import { constructMetadata, getSiteUrl } from '@/lib/seo/config'
+import { METADATA_CATALOG } from '@/lib/seo/metadata-catalog'
+import { getBreadcrumbJsonLd, JsonLd } from '@/lib/seo/schema'
+import { locales, type Locale, defaultLocale } from '@/lib/i18n/config'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -16,31 +20,16 @@ export async function generateMetadata(props: {
   params: Promise<{ locale: string }>
 }): Promise<Metadata> {
   const { locale } = await props.params
-  const config = await getEventsPageSettings()
-  const isAr = locale === 'ar'
-  const isFr = locale === 'fr'
+  const validLocale = (locales.includes(locale as Locale) ? locale : defaultLocale) as Locale
+  const meta = METADATA_CATALOG.events[validLocale]
 
-  const title = isAr
-    ? `${config.hero.titleAr} | جمعية روح الفنون والثقافة`
-    : isFr
-    ? `${config.hero.titleFr} | Association Esprit des Arts et de la Culture`
-    : `${config.hero.titleEn} | Spirit of Arts and Culture Association`
-
-  const description = isAr
-    ? config.hero.descriptionAr
-    : isFr
-    ? config.hero.descriptionFr
-    : config.hero.descriptionEn
-
-  return {
-    title,
-    description,
-    openGraph: {
-      title,
-      description,
-      type: 'website',
-    },
-  }
+  return constructMetadata({
+    title: meta.title,
+    description: meta.description,
+    path: '/events',
+    locale: validLocale,
+    keywords: meta.keywords,
+  })
 }
 
 export default async function EventsPage(props: { params: Promise<{ locale: string }> }) {
@@ -105,8 +94,15 @@ export default async function EventsPage(props: { params: Promise<{ locale: stri
       pageSettings.hero.imageUrl.trim() !== ''
   )
 
+  const siteUrl = getSiteUrl()
+  const breadcrumbSchema = getBreadcrumbJsonLd([
+    { name: isAr ? 'الرئيسية' : isFr ? 'Accueil' : 'Home', url: `${siteUrl}/${locale}` },
+    { name: isAr ? 'الفعاليات الثقافية' : isFr ? 'Événements' : 'Events', url: `${siteUrl}/${locale}/events` },
+  ])
+
   return (
     <>
+      <JsonLd data={breadcrumbSchema} />
       <Header locale={locale} dict={dict} />
 
       <main id="main-content" className="flex-1 bg-[#FAF8F5]">

@@ -1,7 +1,11 @@
+import type { Metadata } from 'next'
 import { getDictionary } from '@/lib/i18n/dictionaries'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { createPublicClient } from '@/lib/supabase/public'
+import { constructMetadata, getSiteUrl } from '@/lib/seo/config'
+import { getBreadcrumbJsonLd, JsonLd } from '@/lib/seo/schema'
+import { locales, type Locale, defaultLocale } from '@/lib/i18n/config'
 import Link from 'next/link'
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
@@ -40,6 +44,96 @@ export async function generateStaticParams() {
   }
 
   return params
+}
+
+export async function generateMetadata(props: {
+  params: Promise<{ locale: string; slug: string }>
+}): Promise<Metadata> {
+  const { locale, slug } = await props.params
+  const validLocale = (locales.includes(locale as Locale) ? locale : defaultLocale) as Locale
+
+  let title = slug
+  let description = ''
+  let coverImage: string | undefined
+
+  try {
+    const supabase = createPublicClient()
+    const { data } = await supabase
+      .from('programs')
+      .select('slug, cover_image, program_translations(locale, title, description)')
+      .eq('slug', slug)
+      .single()
+
+    if (data) {
+      const trans =
+        data.program_translations?.find((t) => t.locale === validLocale) ||
+        data.program_translations?.find((t) => t.locale === 'ar') ||
+        data.program_translations?.[0]
+      if (trans?.title) title = trans.title
+      if (trans?.description) description = trans.description
+      if (data.cover_image) coverImage = data.cover_image
+    }
+  } catch {
+    // Fallback
+  }
+
+  if (title === slug) {
+    if (slug === 'youth-in-action') {
+      title =
+        validLocale === 'ar'
+          ? 'مبادرة شباب في العمل (Youth in Action)'
+          : validLocale === 'fr'
+          ? 'Initiative Jeunesse en Action'
+          : 'Youth in Action Initiative'
+      description =
+        validLocale === 'ar'
+          ? 'البرنامج التطوعي والتأطيري الرائد لجمعية روح الفنون والثقافة بمراكش لإدماج الشباب في الحياة الثقافية والمبادرات المدنية.'
+          : 'Flagship cultural youth volunteering initiative by AMYCC in Morocco.'
+    } else if (slug === 'arts-heritage-workshops') {
+      title =
+        validLocale === 'ar'
+          ? 'ورشات الفنون والتراث الإبداعي'
+          : validLocale === 'fr'
+          ? 'Ateliers des Arts et du Patrimoine'
+          : 'Arts & Heritage Workshops'
+      description =
+        validLocale === 'ar'
+          ? 'سلسلة محترفات متخصصة في الفنون التشكيلية، الخزف، والخط العربي وصون التراث المغربي الأصيل بمراكش.'
+          : 'Specialized visual arts, calligraphy, and Moroccan heritage craftsmanship workshops in Marrakech.'
+    } else if (slug === 'theatre-scenic-expression') {
+      title =
+        validLocale === 'ar'
+          ? 'محترف التعبير المسرحي وفنون الخشبة'
+          : validLocale === 'fr'
+          ? "Atelier d'Expression Théâtrale & Scénique"
+          : 'Theatre & Scenic Expression Workshop'
+      description =
+        validLocale === 'ar'
+          ? 'ورشات تدريبية متقدمة في الأداء المسرحي، فن الارتجال، والتعبير الجسدي لشباب مراكش.'
+          : 'Advanced scenic acting, improvisation, and theatrical body expression for youth in Marrakech.'
+    } else if (slug === 'musical-heritage-revival') {
+      title =
+        validLocale === 'ar'
+          ? 'مختبر إحياء التراث الموسيقي المغربي'
+          : validLocale === 'fr'
+          ? 'Laboratoire du Patrimoine Musical Marocain'
+          : 'Moroccan Musical Heritage Lab'
+      description =
+        validLocale === 'ar'
+          ? 'توثيق الأهازيج التقليدية وتدريب الشباب على العزف على الآلات والمقامات التراثية الأصيلة.'
+          : 'Traditional Moroccan musical heritage lab documenting oral melodies and instrumental scales.'
+    }
+  }
+
+  const orgSuffix = validLocale === 'ar' ? 'جمعية روح الفنون والثقافة بمراكش' : 'AMYCC Marrakech'
+
+  return constructMetadata({
+    title: `${title} | ${orgSuffix}`,
+    description: description || `برنامج ثقافي وإبداعي من جمعية روح الفنون والثقافة (${slug})`,
+    path: `/programs/${slug}`,
+    locale: validLocale,
+    image: coverImage,
+  })
 }
 
 export default async function ProgramDetailPage(props: {
@@ -143,8 +237,16 @@ export default async function ProgramDetailPage(props: {
 
   const translation = program.program_translations?.find((t) => t.locale === locale) || program.program_translations?.[0]
 
+  const siteUrl = getSiteUrl()
+  const breadcrumbSchema = getBreadcrumbJsonLd([
+    { name: isAr ? 'الرئيسية' : isFr ? 'Accueil' : 'Home', url: `${siteUrl}/${locale}` },
+    { name: isAr ? 'البرامج الثقافية' : isFr ? 'Programmes' : 'Programs', url: `${siteUrl}/${locale}/programs` },
+    { name: translation?.title || slug, url: `${siteUrl}/${locale}/programs/${slug}` },
+  ])
+
   return (
     <>
+      <JsonLd data={breadcrumbSchema} />
       <Header locale={locale} dict={dict} />
 
       <main id="main-content" className="flex-1 bg-[#FAF8F5] py-12 lg:py-16">

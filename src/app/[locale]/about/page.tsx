@@ -1,13 +1,40 @@
+import type { Metadata } from 'next'
 import { getDictionary } from '@/lib/i18n/dictionaries'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
+import { constructMetadata, getSiteUrl } from '@/lib/seo/config'
+import { METADATA_CATALOG } from '@/lib/seo/metadata-catalog'
+import { getBreadcrumbJsonLd, JsonLd } from '@/lib/seo/schema'
+import { locales, type Locale, defaultLocale } from '@/lib/i18n/config'
 import Link from 'next/link'
+
+export async function generateMetadata(props: {
+  params: Promise<{ locale: string }>
+}): Promise<Metadata> {
+  const { locale } = await props.params
+  const validLocale = (locales.includes(locale as Locale) ? locale : defaultLocale) as Locale
+  const meta = METADATA_CATALOG.about[validLocale]
+
+  return constructMetadata({
+    title: meta.title,
+    description: meta.description,
+    path: '/about',
+    locale: validLocale,
+    keywords: meta.keywords,
+  })
+}
 
 export default async function AboutPage(props: { params: Promise<{ locale: string }> }) {
   const { locale } = await props.params
   const dict = await getDictionary(locale)
   const isAr = locale === 'ar'
   const isFr = locale === 'fr'
+
+  const siteUrl = getSiteUrl()
+  const breadcrumbSchema = getBreadcrumbJsonLd([
+    { name: isAr ? 'الرئيسية' : isFr ? 'Accueil' : 'Home', url: `${siteUrl}/${locale}` },
+    { name: isAr ? 'من نحن' : isFr ? 'À Propos' : 'About Us', url: `${siteUrl}/${locale}/about` },
+  ])
 
   // The 7 Official Core Values (قيمنا الجوهرية)
   const values = [
@@ -312,6 +339,7 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
 
   return (
     <>
+      <JsonLd data={breadcrumbSchema} />
       <Header locale={locale} dict={dict} />
 
       <main id="main-content" className="flex-1 bg-[#FAF8F5]">

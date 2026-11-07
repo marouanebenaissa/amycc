@@ -6,6 +6,9 @@ import { ImageWithFallback } from '@/components/ui/ImageWithFallback'
 import { PartnershipForm } from '@/components/forms/PartnershipForm'
 import { PartnersDirectory } from '@/components/partnerships/PartnersDirectory'
 import { getPartnershipsPageSettings } from '@/lib/settings'
+import { constructMetadata } from '@/lib/seo/config'
+import { METADATA_CATALOG, type SupportedLocale } from '@/lib/seo/metadata-catalog'
+import { getBreadcrumbJsonLd, JsonLd } from '@/lib/seo/schema'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -15,31 +18,16 @@ export async function generateMetadata(props: {
   params: Promise<{ locale: string }>
 }): Promise<Metadata> {
   const { locale } = await props.params
-  const config = await getPartnershipsPageSettings()
-  const isAr = locale === 'ar'
-  const isFr = locale === 'fr'
+  const safeLocale = (['ar', 'fr', 'en'].includes(locale) ? locale : 'ar') as SupportedLocale
+  const meta = METADATA_CATALOG.partnerships[safeLocale]
 
-  const title = isAr
-    ? `${config.hero.titleAr} | جمعية روح الفنون والثقافة`
-    : isFr
-    ? `${config.hero.titleFr} | Association Esprit des Arts et de la Culture`
-    : `${config.hero.titleEn} | Spirit of Arts and Culture Association`
-
-  const description = isAr
-    ? config.hero.descriptionAr
-    : isFr
-    ? config.hero.descriptionFr
-    : config.hero.descriptionEn
-
-  return {
-    title,
-    description,
-    openGraph: {
-      title,
-      description,
-      type: 'website',
-    },
-  }
+  return constructMetadata({
+    title: meta.title,
+    description: meta.description,
+    path: '/partnerships',
+    locale: safeLocale,
+    keywords: meta.keywords,
+  })
 }
 
 export default async function PartnershipsPage(props: { params: Promise<{ locale: string }> }) {
@@ -53,6 +41,16 @@ export default async function PartnershipsPage(props: { params: Promise<{ locale
     config.hero.hasHeroImage &&
       config.hero.imageUrl &&
       config.hero.imageUrl.trim() !== ''
+  )
+
+  const breadcrumbSchema = getBreadcrumbJsonLd(
+    [
+      {
+        name: isAr ? 'الشراكات المؤسسية' : isFr ? 'Partenariats' : 'Partnerships',
+        path: `/${locale}/partnerships`,
+      },
+    ],
+    locale
   )
 
   const steps = [
@@ -100,6 +98,7 @@ export default async function PartnershipsPage(props: { params: Promise<{ locale
 
   return (
     <>
+      <JsonLd data={breadcrumbSchema} />
       <Header locale={locale} dict={dict} />
 
       <main id="main-content" className="flex-1 bg-[#FAF8F5]">

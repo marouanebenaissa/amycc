@@ -1,14 +1,35 @@
+import type { Metadata } from 'next'
 import { getDictionary } from '@/lib/i18n/dictionaries'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { ImageWithFallback } from '@/components/ui/ImageWithFallback'
 import { getAnnualProgramSettings, defaultAnnualProgramConfig } from '@/lib/settings'
 import { AnnualProgramTimeline } from '@/components/annual-program/AnnualProgramTimeline'
+import { constructMetadata, getSiteUrl } from '@/lib/seo/config'
+import { METADATA_CATALOG } from '@/lib/seo/metadata-catalog'
+import { getBreadcrumbJsonLd, JsonLd } from '@/lib/seo/schema'
+import { locales, type Locale, defaultLocale } from '@/lib/i18n/config'
 import Link from 'next/link'
 
 export const revalidate = 0
 
 export const dynamic = 'force-dynamic'
+
+export async function generateMetadata(props: {
+  params: Promise<{ locale: string }>
+}): Promise<Metadata> {
+  const { locale } = await props.params
+  const validLocale = (locales.includes(locale as Locale) ? locale : defaultLocale) as Locale
+  const meta = METADATA_CATALOG.annualProgram[validLocale]
+
+  return constructMetadata({
+    title: meta.title,
+    description: meta.description,
+    path: '/annual-program',
+    locale: validLocale,
+    keywords: meta.keywords,
+  })
+}
 
 export default async function AnnualProgramPage(props: { params: Promise<{ locale: string }> }) {
   const { locale } = await props.params
@@ -43,8 +64,15 @@ export default async function AnnualProgramPage(props: { params: Promise<{ local
   const ctaPrimaryText = isAr ? cta.primaryBtnTextAr : isFr ? (cta.primaryBtnTextFr || cta.primaryBtnTextAr) : (cta.primaryBtnTextEn || cta.primaryBtnTextAr)
   const ctaSecondaryText = isAr ? cta.secondaryBtnTextAr : isFr ? (cta.secondaryBtnTextFr || cta.secondaryBtnTextAr) : (cta.secondaryBtnTextEn || cta.secondaryBtnTextAr)
 
+  const siteUrl = getSiteUrl()
+  const breadcrumbSchema = getBreadcrumbJsonLd([
+    { name: isAr ? 'الرئيسية' : isFr ? 'Accueil' : 'Home', url: `${siteUrl}/${locale}` },
+    { name: isAr ? 'البرنامج السنوي 2026' : isFr ? 'Programme Annuel 2026' : 'Annual Program 2026', url: `${siteUrl}/${locale}/annual-program` },
+  ])
+
   return (
     <>
+      <JsonLd data={breadcrumbSchema} />
       <Header locale={locale} dict={dict} />
 
       <main id="main-content" className="flex-1 bg-[#FAF8F5]">
@@ -64,7 +92,13 @@ export default async function AnnualProgramPage(props: { params: Promise<{ local
               <ImageWithFallback
                 src={hero.imageUrl!}
                 fallbackSrc="/images/youth-in-action.jpg"
-                alt="AMYCC Annual Program Hero Banner"
+                alt={
+                  isAr
+                    ? 'البرنامج الثقافي السنوي 2026 - جمعية روح الفنون والثقافة مراكش'
+                    : isFr
+                    ? 'Programme Culturel Annuel 2026 - AMYCC Marrakech'
+                    : 'AMYCC Annual Cultural Program 2026 Marrakech Morocco'
+                }
                 fill
                 priority
                 sizes="100vw"

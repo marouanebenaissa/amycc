@@ -1,3 +1,4 @@
+import type { Metadata } from 'next'
 import { getDictionary } from '@/lib/i18n/dictionaries'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
@@ -7,9 +8,29 @@ import { FaqAccordion } from '@/components/home/FaqAccordion'
 import { AreasSection } from '@/components/home/AreasSection'
 import { IconWithFallback } from '@/components/ui/IconWithFallback'
 import { ImageWithFallback } from '@/components/ui/ImageWithFallback'
+import { constructMetadata } from '@/lib/seo/config'
+import { METADATA_CATALOG } from '@/lib/seo/metadata-catalog'
+import { getOrganizationJsonLd, getWebsiteJsonLd, JsonLd } from '@/lib/seo/schema'
+import { locales, type Locale, defaultLocale } from '@/lib/i18n/config'
 import Link from 'next/link'
 
 export const revalidate = 0
+
+export async function generateMetadata(props: {
+  params: Promise<{ locale: string }>
+}): Promise<Metadata> {
+  const { locale } = await props.params
+  const validLocale = (locales.includes(locale as Locale) ? locale : defaultLocale) as Locale
+  const meta = METADATA_CATALOG.home[validLocale]
+
+  return constructMetadata({
+    title: meta.title,
+    description: meta.description,
+    path: '',
+    locale: validLocale,
+    keywords: meta.keywords,
+  })
+}
 
 interface ProgramItem {
   id: string
@@ -323,8 +344,12 @@ export default async function HomePage(props: { params: Promise<{ locale: string
       : (item.answerEn || item.answerAr),
   }))
 
+  const orgSchema = getOrganizationJsonLd(locale)
+  const siteSchema = getWebsiteJsonLd(locale)
+
   return (
     <>
+      <JsonLd data={[orgSchema, siteSchema]} />
       <Header locale={locale} dict={dict} topBar={topBar} />
 
       <main id="main-content" className="flex flex-col flex-1 bg-[#FAF8F5]">
@@ -340,7 +365,13 @@ export default async function HomePage(props: { params: Promise<{ locale: string
                 <ImageWithFallback
                   src={hero.imageUrl}
                   fallbackSrc="/images/youth-in-action.jpg"
-                  alt="AMYCC Hero Banner"
+                  alt={
+                    isAr
+                      ? 'أنشطة وورشات جمعية روح الفنون والثقافة بمراكش لتمكين الشباب وصون التراث المغربي'
+                      : isFr
+                      ? "Ateliers créatifs de l'Association Esprit des Arts et de la Culture à Marrakech pour la jeunesse"
+                      : 'AMYCC Marrakech youth arts, theatre, and Moroccan cultural heritage workshops'
+                  }
                   fill
                   priority
                   sizes="100vw"
@@ -737,7 +768,14 @@ export default async function HomePage(props: { params: Promise<{ locale: string
                           <ImageWithFallback
                             src={flagship.imageUrl}
                             fallbackSrc="/images/youth-in-action.jpg"
-                            alt={flagshipTitle || 'Flagship Program'}
+                            alt={
+                              flagshipTitle ||
+                              (isAr
+                                ? 'مبادرة شباب في العمل — البرنامج التطوعي الثقافي الرائد لجمعية AMYCC'
+                                : isFr
+                                ? "Initiative Jeunesse en Action — Programme bénévole et culturel de l'AMYCC"
+                                : 'Youth in Action Initiative — Flagship cultural volunteering program by AMYCC')
+                            }
                             fill
                             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 45vw, 480px"
                             className="object-cover object-center"

@@ -1,13 +1,34 @@
+import type { Metadata } from 'next'
 import { getDictionary } from '@/lib/i18n/dictionaries'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { ContactForm } from '@/components/forms/ContactForm'
 import { getContactSettings, defaultContactConfig } from '@/lib/settings'
+import { constructMetadata, getSiteUrl } from '@/lib/seo/config'
+import { METADATA_CATALOG } from '@/lib/seo/metadata-catalog'
+import { getBreadcrumbJsonLd, JsonLd } from '@/lib/seo/schema'
+import { locales, type Locale, defaultLocale } from '@/lib/i18n/config'
 import Link from 'next/link'
 
 export const revalidate = 0
 
 export const dynamic = 'force-dynamic'
+
+export async function generateMetadata(props: {
+  params: Promise<{ locale: string }>
+}): Promise<Metadata> {
+  const { locale } = await props.params
+  const validLocale = (locales.includes(locale as Locale) ? locale : defaultLocale) as Locale
+  const meta = METADATA_CATALOG.contact[validLocale]
+
+  return constructMetadata({
+    title: meta.title,
+    description: meta.description,
+    path: '/contact',
+    locale: validLocale,
+    keywords: meta.keywords,
+  })
+}
 
 export default async function ContactPage(props: { params: Promise<{ locale: string }> }) {
   const { locale } = await props.params
@@ -39,8 +60,15 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
   const cleanWaNumber = (channels.whatsapp || '').replace(/[^0-9]/g, '')
   const whatsappUrl = cleanWaNumber ? `https://wa.me/${cleanWaNumber}` : undefined
 
+  const siteUrl = getSiteUrl()
+  const breadcrumbSchema = getBreadcrumbJsonLd([
+    { name: isAr ? 'الرئيسية' : isFr ? 'Accueil' : 'Home', url: `${siteUrl}/${locale}` },
+    { name: isAr ? 'اتصل بنا' : isFr ? 'Contact' : 'Contact Us', url: `${siteUrl}/${locale}/contact` },
+  ])
+
   return (
     <>
+      <JsonLd data={breadcrumbSchema} />
       <Header locale={locale} dict={dict} />
 
       <main id="main-content" className="flex-1 bg-[#FAF8F5]">

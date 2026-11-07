@@ -8,6 +8,10 @@ import { getNewsPageSettings } from '@/lib/settings'
 import { ImageWithFallback } from '@/components/ui/ImageWithFallback'
 import { NewsCatalog, type NewsItemData } from '@/components/news/NewsCatalog'
 import { defaultNewsArticlesData } from '@/lib/supabase/seed-news'
+import { constructMetadata, getSiteUrl } from '@/lib/seo/config'
+import { METADATA_CATALOG } from '@/lib/seo/metadata-catalog'
+import { getBreadcrumbJsonLd, JsonLd } from '@/lib/seo/schema'
+import { locales, type Locale, defaultLocale } from '@/lib/i18n/config'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -17,31 +21,16 @@ export async function generateMetadata(props: {
   params: Promise<{ locale: string }>
 }): Promise<Metadata> {
   const { locale } = await props.params
-  const config = await getNewsPageSettings()
-  const isAr = locale === 'ar'
-  const isFr = locale === 'fr'
+  const validLocale = (locales.includes(locale as Locale) ? locale : defaultLocale) as Locale
+  const meta = METADATA_CATALOG.news[validLocale]
 
-  const title = isAr
-    ? `${config.hero.titleAr} | جمعية روح الفنون والثقافة`
-    : isFr
-    ? `${config.hero.titleFr} | Association Esprit des Arts et de la Culture`
-    : `${config.hero.titleEn} | Spirit of Arts and Culture Association`
-
-  const description = isAr
-    ? config.hero.descriptionAr
-    : isFr
-    ? config.hero.descriptionFr
-    : config.hero.descriptionEn
-
-  return {
-    title,
-    description,
-    openGraph: {
-      title,
-      description,
-      type: 'website',
-    },
-  }
+  return constructMetadata({
+    title: meta.title,
+    description: meta.description,
+    path: '/news',
+    locale: validLocale,
+    keywords: meta.keywords,
+  })
 }
 
 export default async function NewsPage(props: { params: Promise<{ locale: string }> }) {
@@ -125,8 +114,15 @@ export default async function NewsPage(props: { params: Promise<{ locale: string
 
   const displayArticles = dbArticles.length > 0 ? dbArticles : defaultArticles
 
+  const siteUrl = getSiteUrl()
+  const breadcrumbSchema = getBreadcrumbJsonLd([
+    { name: isAr ? 'الرئيسية' : isFr ? 'Accueil' : 'Home', url: `${siteUrl}/${locale}` },
+    { name: isAr ? 'الأخبار والمستجدات' : isFr ? 'Actualités' : 'News & Press', url: `${siteUrl}/${locale}/news` },
+  ])
+
   return (
     <>
+      <JsonLd data={breadcrumbSchema} />
       <Header locale={locale} dict={dict} />
 
       <main id="main-content" className="flex-1 bg-[#FAF8F5]">

@@ -7,6 +7,9 @@ import { Footer } from '@/components/layout/Footer'
 import { createPublicClient } from '@/lib/supabase/public'
 import { ImageWithFallback } from '@/components/ui/ImageWithFallback'
 import { EventRegistrationForm } from '@/components/events/EventRegistrationForm'
+import { constructMetadata, getSiteUrl } from '@/lib/seo/config'
+import { getEventJsonLd, getBreadcrumbJsonLd, JsonLd } from '@/lib/seo/schema'
+import { locales, type Locale, defaultLocale } from '@/lib/i18n/config'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -50,6 +53,11 @@ export async function generateMetadata(props: {
   params: Promise<{ locale: string; slug: string }>
 }): Promise<Metadata> {
   const { locale, slug } = await props.params
+  const validLocale = (locales.includes(locale as Locale) ? locale : defaultLocale) as Locale
+
+  let title = slug
+  let description = ''
+  let coverImage: string | undefined
 
   try {
     const supabase = createPublicClient()
@@ -61,32 +69,41 @@ export async function generateMetadata(props: {
 
     if (event) {
       const trans =
-        event.event_translations?.find((t) => t.locale === locale) ||
+        event.event_translations?.find((t) => t.locale === validLocale) ||
         event.event_translations?.find((t) => t.locale === 'ar') ||
         event.event_translations?.[0]
 
-      const title = `${trans?.title || event.slug} | جمعية روح الفنون والثقافة`
-      const description =
-        trans?.description ||
-        'فعالية ثقافية وفنية تنظمها جمعية روح الفنون والثقافة (AMYCC)'
-
-      return {
-        title,
-        description,
-        openGraph: {
-          title,
-          description,
-          images: event.cover_image ? [{ url: event.cover_image }] : undefined,
-        },
-      }
+      if (trans?.title) title = trans.title
+      if (trans?.description) description = trans.description
+      if (event.cover_image) coverImage = event.cover_image
     }
   } catch {
     // Fallback
   }
 
-  return {
-    title: 'تفاصيل الفعالية | جمعية روح الفنون والثقافة',
+  if (title === slug && slug === 'AMYCC-Association-Launch-Event') {
+    title =
+      validLocale === 'ar'
+        ? 'حفل الإطلاق الرسمي لجمعية روح الفنون والثقافة (20 نونبر 2026)'
+        : validLocale === 'fr'
+        ? "Cérémonie de Lancement Officiel de l'AMYCC (20 Novembre 2026)"
+        : 'AMYCC Official Association Launch Event (November 20, 2026)'
+    description =
+      validLocale === 'ar'
+        ? 'أمسية ثقافية وفنية كبرى بمراكش للإعلان الرسمي عن انطلاق برامج جمعية روح الفنون والثقافة بمراكش بحضور الفاعلين الثقافيين.'
+        : 'Inaugural cultural ceremony and artistic gala marking the official launch of AMYCC activities in Marrakech, Morocco.'
   }
+
+  const orgSuffix = validLocale === 'ar' ? 'جمعية روح الفنون والثقافة بمراكش' : 'AMYCC Marrakech'
+
+  return constructMetadata({
+    title: `${title} | ${orgSuffix}`,
+    description: description || `فعالية ثقافية وفنية تنظمها جمعية روح الفنون والثقافة بمراكش (${slug})`,
+    path: `/events/${slug}`,
+    locale: validLocale,
+    image: coverImage,
+    type: 'article',
+  })
 }
 
 export default async function EventDetailPage(props: {
@@ -117,7 +134,30 @@ export default async function EventDetailPage(props: {
   }
 
   if (!event) {
-    notFound()
+    if (slug === 'AMYCC-Association-Launch-Event') {
+      event = {
+        id: 'launch-event-1',
+        slug: 'AMYCC-Association-Launch-Event',
+        start_date: '2026-11-20T18:00:00+01:00',
+        end_date: '2026-11-20T21:30:00+01:00',
+        venue: isAr ? 'المركب الثقافي والمسرحي، الداوديات' : isFr ? 'Complexe Culturel et Théâtral, Daoudiate' : 'Daoudiate Cultural & Theatre Complex',
+        city: isAr ? 'مراكش' : isFr ? 'Marrakech' : 'Marrakech',
+        capacity: 350,
+        registration_open: true,
+        registration_deadline: '2026-11-19T23:59:59+01:00',
+        cover_image: '/images/events/launch-banner.jpg',
+        status: 'published',
+        event_translations: [
+          {
+            locale,
+            title: isAr ? 'حفل الإطلاق الرسمي لجمعية روح الفنون والثقافة (AMYCC)' : isFr ? "Cérémonie de Lancement Officiel de l'AMYCC" : 'Official Launch Event of AMYCC',
+            description: isAr ? 'أمسية ثقافية وفنية كبرى للإعلان الرسمي عن انطلاق أنشطة وبرامج جمعية روح الفنون والثقافة بمراكش، تتضمن عروضاً مسرحية، فقرات موسيقية أصيلة، وتقديم استراتيجية 2026.' : isFr ? "Grande soirée culturelle marquant le lancement officiel des activités de l'AMYCC à Marrakech avec spectacles vivants et présentation du programme 2026." : 'Grand inaugural cultural evening presenting AMYCC cultural roadmap, live theatrical showcases, and youth artistic performances.',
+          },
+        ],
+      }
+    } else {
+      notFound()
+    }
   }
 
   const translations = Array.isArray(event.event_translations)
@@ -135,6 +175,27 @@ export default async function EventDetailPage(props: {
   const title = currentTrans.title || event.slug
   const description = currentTrans.description || ''
 
+  const siteUrl = getSiteUrl()
+  const eventUrl = `${siteUrl}/${locale}/events/${slug}`
+
+  const eventJsonLd = getEventJsonLd({
+    name: title,
+    description,
+    startDate: event.start_date,
+    endDate: event.end_date,
+    venue: event.venue,
+    city: event.city,
+    imageUrl: event.cover_image,
+    url: eventUrl,
+    locale,
+  })
+
+  const breadcrumbSchema = getBreadcrumbJsonLd([
+    { name: isAr ? 'الرئيسية' : isFr ? 'Accueil' : 'Home', url: `${siteUrl}/${locale}` },
+    { name: isAr ? 'الفعاليات الثقافية' : isFr ? 'Événements' : 'Events', url: `${siteUrl}/${locale}/events` },
+    { name: title, url: eventUrl },
+  ])
+
   const startDateObj = new Date(event.start_date)
   const formattedFullDate = startDateObj.toLocaleDateString(locale, {
     weekday: 'long',
@@ -149,6 +210,7 @@ export default async function EventDetailPage(props: {
 
   return (
     <>
+      <JsonLd data={[eventJsonLd, breadcrumbSchema]} />
       <Header locale={locale} dict={dict} />
 
       <main id="main-content" className="flex-1 bg-[#FAF8F5] py-10 sm:py-16">

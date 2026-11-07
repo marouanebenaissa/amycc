@@ -1,6 +1,26 @@
+import type { Metadata } from 'next'
 import { getDictionary } from '@/lib/i18n/dictionaries'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
+import { constructMetadata } from '@/lib/seo/config'
+import { METADATA_CATALOG, type SupportedLocale } from '@/lib/seo/metadata-catalog'
+import { getBreadcrumbJsonLd, JsonLd } from '@/lib/seo/schema'
+
+export async function generateMetadata(props: {
+  params: Promise<{ locale: string }>
+}): Promise<Metadata> {
+  const { locale } = await props.params
+  const safeLocale = (['ar', 'fr', 'en'].includes(locale) ? locale : 'ar') as SupportedLocale
+  const meta = METADATA_CATALOG.privacy[safeLocale]
+
+  return constructMetadata({
+    title: meta.title,
+    description: meta.description,
+    path: '/privacy',
+    locale: safeLocale,
+    keywords: meta.keywords,
+  })
+}
 
 export default async function PrivacyPage(props: { params: Promise<{ locale: string }> }) {
   const { locale } = await props.params
@@ -8,8 +28,19 @@ export default async function PrivacyPage(props: { params: Promise<{ locale: str
   const isAr = locale === 'ar'
   const isFr = locale === 'fr'
 
+  const breadcrumbSchema = getBreadcrumbJsonLd(
+    [
+      {
+        name: isAr ? 'سياسة الخصوصية' : isFr ? 'Confidentialité' : 'Privacy Policy',
+        path: `/${locale}/privacy`,
+      },
+    ],
+    locale
+  )
+
   return (
     <>
+      <JsonLd data={breadcrumbSchema} />
       <Header locale={locale} dict={dict} />
 
       <main id="main-content" className="flex-1 bg-[#FAF8F5]">
