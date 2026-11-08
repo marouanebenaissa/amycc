@@ -17,6 +17,7 @@ import {
   getSecurityState,
   saveSecurityState,
 } from '@/lib/auth/security'
+import { sendPasswordResetEmail } from '@/lib/email/mailer'
 import type { FaqItemConfig, AreasConfig, TeamConfig, CommissionsConfig, ContactConfig, ProgramsPageConfig, AnnualProgramConfig, ImpactConfig, EventsPageConfig, NewsPageConfig, PartnershipsPageConfig, MembershipPageConfig, SupportPageConfig } from '@/lib/settings'
 
 export async function recordAuditLog(
@@ -547,22 +548,45 @@ export async function sendPasswordResetCodeAction(
     }
     await saveSecurityState(secState)
 
-    // Attempt to dispatch via Supabase Auth email if configured
+    // Formulate direct reset URL
+    const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || 'https://amycc.vercel.app').replace(/\/$/, '')
+    const resetUrl = `${siteUrl}/api/auth/callback?next=/admin/change-password`
+
+    // 1. Dispatch custom 6-digit code via Gmail SMTP (Nodemailer) or Resend
+    let dispatchedVia = 'none'
+    try {
+      const emailRes = await sendPasswordResetEmail({
+        toEmail: normEmail,
+        code,
+        resetUrl,
+        locale: 'ar',
+      })
+      if (emailRes.success) {
+        dispatchedVia = emailRes.via || 'direct_mailer'
+      }
+    } catch (mailErr) {
+      console.warn('[Password Reset] Direct mailer notice:', (mailErr as Error).message)
+    }
+
+    // 2. Also dispatch via Supabase Auth email with proper redirectTo URL
     try {
       const supabase = await createClient()
-      await supabase.auth.resetPasswordForEmail(normEmail)
+      await supabase.auth.resetPasswordForEmail(normEmail, {
+        redirectTo: resetUrl,
+      })
     } catch {
-      // Non-fatal if SMTP is not configured in Supabase
+      // Non-fatal if Supabase rate-limited
     }
 
     await recordSecurityAudit('PASSWORD_RESET_CODE_REQUESTED', {
       email: normEmail,
+      dispatchedVia,
       expiresAt: new Date(expiresAt).toISOString(),
     })
 
     return {
       success: true,
-      message: 'تم توليد وإرسال كود الاستعادة (6 أرقام). يرجى التحقق من بريدك الإلكتروني.',
+      message: 'تم توليد وإرسال كود الاستعادة (6 أرقام) ورابط التعيين المباشر إلى بريدك الإلكتروني.',
       debugCode: code,
     }
   } catch (err) {
@@ -586,35 +610,55 @@ export async function verifyResetCodeAndSetPasswordAction(
     const secState = await getSecurityState()
     const record = secState.resetCodes?.[normEmail]
 
-    if (!record) {
-      return {
-        success: false,
-        error: 'لم يتم العثور على طلب استعادة نشط لهذا الحساب. يرجى طلب كود جديد.',
+    let isCodeValid = false
+
+    // Check 1: Match our internal 6-digit code
+    if (record) {
+      if (Date.now() > record.expiresAt) {
+        delete secState.resetCodes![normEmail]
+        await saveSecurityState(secState)
+        return {
+          success: false,
+          error: 'انتهت صلاحية كود الاستعادة (15 دقيقة). يرجى طلب كود جديد.',
+        }
+      }
+
+      if (record.attempts >= 5) {
+        delete secState.resetCodes![normEmail]
+        await saveSecurityState(secState)
+        return {
+          success: false,
+          error: 'تم تجاوز الحد الأقصى للمحاولات الخاطئة (5 محاولات). يرجى طلب كود جديد.',
+        }
+      }
+
+      if (record.code === trimmedCode) {
+        isCodeValid = true
+      } else {
+        record.attempts += 1
+        await saveSecurityState(secState)
       }
     }
 
-    if (Date.now() > record.expiresAt) {
-      delete secState.resetCodes![normEmail]
-      await saveSecurityState(secState)
-      return {
-        success: false,
-        error: 'انتهت صلاحية كود الاستعادة (15 دقيقة). يرجى طلب كود جديد.',
+    // Check 2: Try verifying as Supabase OTP Token if internal check didn't match
+    if (!isCodeValid) {
+      try {
+        const supabase = await createClient()
+        const { data: otpData, error: otpError } = await supabase.auth.verifyOtp({
+          email: normEmail,
+          token: trimmedCode,
+          type: 'recovery',
+        })
+        if (!otpError && otpData?.user) {
+          isCodeValid = true
+        }
+      } catch {
+        // Non-fatal
       }
     }
 
-    if (record.attempts >= 5) {
-      delete secState.resetCodes![normEmail]
-      await saveSecurityState(secState)
-      return {
-        success: false,
-        error: 'تم تجاوز الحد الأقصى للمحاولات الخاطئة (5 محاولات). يرجى طلب كود جديد.',
-      }
-    }
-
-    if (record.code !== trimmedCode) {
-      record.attempts += 1
-      await saveSecurityState(secState)
-      const remaining = 5 - record.attempts
+    if (!isCodeValid) {
+      const remaining = record ? Math.max(0, 5 - record.attempts) : 4
       return {
         success: false,
         error: `كود الاستعادة غير صحيح. متبقي لديك ${remaining} محاولات.`,

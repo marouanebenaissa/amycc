@@ -1024,6 +1024,14 @@ export function AdminLoginView({
                     placeholder="123456"
                     className="w-full px-3.5 py-2.5 text-center rounded-xl border-2 border-[#d2a82b] bg-[#FEF6CC]/20 text-lg font-black tracking-widest text-[#231f20] font-mono outline-none"
                   />
+                  <div className="mt-2 p-2.5 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6] text-3xs text-[#5C5A55] flex items-start gap-2">
+                    <Flaticon name="mail" size={13} className="text-[#bd3227] shrink-0 mt-0.5" />
+                    <span>
+                      {locale === 'ar'
+                        ? 'يرجى مراجعة صندوق الوارد في بريدك (أو مجلد Spam). يمكنك إدخال الرمز أعلاه، أو النقر مباشرة على رابط "Reset password" في الرسالة.'
+                        : 'Vérifiez votre boîte de réception ou spams. Entrez le code à 6 chiffres ou cliquez directement sur le lien reçu.'}
+                    </span>
+                  </div>
                 </div>
 
                 <div>

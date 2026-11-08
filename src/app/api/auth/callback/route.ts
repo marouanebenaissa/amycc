@@ -17,9 +17,10 @@ export async function GET(request: Request) {
     }
 
     const email = (data.user.email || '').toLowerCase().trim()
+    const provider = data.user.app_metadata?.provider
 
-    // Strict Domain Restriction: ONLY official @amycc.org accounts are authorized
-    if (!email.endsWith('@amycc.org')) {
+    // Strict Domain Restriction for Google OAuth: ONLY official @amycc.org accounts are authorized
+    if (provider === 'google' && !email.endsWith('@amycc.org')) {
       await supabase.auth.signOut()
       try {
         await recordSecurityAudit(
