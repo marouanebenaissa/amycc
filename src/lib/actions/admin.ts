@@ -534,8 +534,8 @@ export async function sendPasswordResetCodeAction(
       return { success: false, error: 'يرجى إدخال بريد إلكتروني صحيح.' }
     }
 
-    // Generate secure 6-digit verification code
-    const code = Math.floor(100000 + Math.random() * 900000).toString()
+    // Generate secure 8-digit verification code (supporting both 6 and 8 digit tokens)
+    const code = Math.floor(10000000 + Math.random() * 90000000).toString()
     const expiresAt = Date.now() + 15 * 60 * 1000 // 15 minutes
 
     const secState = await getSecurityState()
@@ -552,7 +552,7 @@ export async function sendPasswordResetCodeAction(
     const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || 'https://amycc.vercel.app').replace(/\/$/, '')
     const resetUrl = `${siteUrl}/api/auth/callback?next=/admin/change-password`
 
-    // 1. Dispatch custom 6-digit code via Gmail SMTP (Nodemailer) or Resend
+    // 1. Dispatch custom verification code via Gmail SMTP (Nodemailer) or Resend
     let dispatchedVia = 'none'
     try {
       const emailRes = await sendPasswordResetEmail({
@@ -586,7 +586,7 @@ export async function sendPasswordResetCodeAction(
 
     return {
       success: true,
-      message: 'تم توليد وإرسال كود الاستعادة (6 أرقام) ورابط التعيين المباشر إلى بريدك الإلكتروني.',
+      message: 'تم توليد وإرسال كود الاستعادة (6 أو 8 أرقام) ورابط التعيين المباشر إلى بريدك الإلكتروني.',
       debugCode: code,
     }
   } catch (err) {
@@ -612,35 +612,14 @@ export async function verifyResetCodeAndSetPasswordAction(
 
     let isCodeValid = false
 
-    // Check 1: Match our internal 6-digit code
+    // Check 1: Match our internal verification code (6 or 8 digits)
     if (record) {
-      if (Date.now() > record.expiresAt) {
-        delete secState.resetCodes![normEmail]
-        await saveSecurityState(secState)
-        return {
-          success: false,
-          error: 'انتهت صلاحية كود الاستعادة (15 دقيقة). يرجى طلب كود جديد.',
-        }
-      }
-
-      if (record.attempts >= 5) {
-        delete secState.resetCodes![normEmail]
-        await saveSecurityState(secState)
-        return {
-          success: false,
-          error: 'تم تجاوز الحد الأقصى للمحاولات الخاطئة (5 محاولات). يرجى طلب كود جديد.',
-        }
-      }
-
-      if (record.code === trimmedCode) {
+      if (Date.now() <= record.expiresAt && record.code === trimmedCode) {
         isCodeValid = true
-      } else {
-        record.attempts += 1
-        await saveSecurityState(secState)
       }
     }
 
-    // Check 2: Try verifying as Supabase OTP Token if internal check didn't match
+    // Check 2: Try verifying as Supabase OTP Token (recovery token, 6 or 8 digits)
     if (!isCodeValid) {
       try {
         const supabase = await createClient()
@@ -658,10 +637,17 @@ export async function verifyResetCodeAndSetPasswordAction(
     }
 
     if (!isCodeValid) {
+      if (record) {
+        record.attempts += 1
+        if (record.attempts >= 5) {
+          delete secState.resetCodes![normEmail]
+        }
+        await saveSecurityState(secState)
+      }
       const remaining = record ? Math.max(0, 5 - record.attempts) : 4
       return {
         success: false,
-        error: `كود الاستعادة غير صحيح. متبقي لديك ${remaining} محاولات.`,
+        error: `كود الاستعادة غير صحيح أو منتهي الصلاحية. متبقي لديك ${remaining} محاولات.`,
       }
     }
 
@@ -680,7 +666,7 @@ export async function verifyResetCodeAndSetPasswordAction(
     }
 
     // Find the user in auth
-    const { data: listData } = await adminClient.auth.admin.listUsers()
+    const { data: listData } = await adminClient.auth.admin.listUsers({ perPage: 1000 })
     const targetUser = listData?.users.find(
       (u) => u.email?.toLowerCase().trim() === normEmail
     )
@@ -692,7 +678,7 @@ export async function verifyResetCodeAndSetPasswordAction(
       }
     }
 
-    // Update the password directly
+    // Update the password directly via service role
     const { error: updateError } = await adminClient.auth.admin.updateUserById(targetUser.id, {
       password: newPassword,
       user_metadata: {
@@ -706,6 +692,14 @@ export async function verifyResetCodeAndSetPasswordAction(
       return { success: false, error: updateError.message }
     }
 
+    // Also attempt update via user session if verifyOtp established a session
+    try {
+      const supabase = await createClient()
+      await supabase.auth.updateUser({ password: newPassword })
+    } catch {
+      // Non-fatal
+    }
+
     // Reset lockout and security state for this account
     if (secState.accounts[normEmail]) {
       secState.accounts[normEmail].isLocked = false
@@ -715,7 +709,9 @@ export async function verifyResetCodeAndSetPasswordAction(
     }
 
     // Invalidate the code
-    delete secState.resetCodes![normEmail]
+    if (secState.resetCodes) {
+      delete secState.resetCodes[normEmail]
+    }
     await saveSecurityState(secState)
 
     await recordSecurityAudit('PASSWORD_RESET_COMPLETED', {

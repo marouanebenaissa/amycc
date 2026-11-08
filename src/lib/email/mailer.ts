@@ -91,7 +91,7 @@ export function generatePasswordResetEmailHtml(options: PasswordResetEmailOption
       </p>
 
       <div class="code-box">
-        <div class="code-label">${isAr ? 'رمز التحقق السري (6 أرقام)' : isFr ? 'Code de vérification (6 chiffres)' : 'Verification Code (6 digits)'}</div>
+        <div class="code-label">${isAr ? 'رمز التحقق السري' : isFr ? 'Code de vérification' : 'Verification Code'}</div>
         <div class="code-digits">${formattedCode}</div>
         <div class="code-validity">⏱️ ${isAr ? 'صالح لمدة 15 دقيقة فقط • استخدام لمرة واحدة' : isFr ? 'Valide pendant 15 minutes • Usage unique' : 'Valid for 15 minutes • One-time use'}</div>
       </div>

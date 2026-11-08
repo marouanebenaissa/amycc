@@ -99,6 +99,7 @@ export async function getSecurityState(): Promise<AdminSecurityState> {
       memorySecurityState = {
         accounts: { ...memorySecurityState.accounts, ...(remoteState.accounts || {}) },
         ipThreats: { ...memorySecurityState.ipThreats, ...(remoteState.ipThreats || {}) },
+        resetCodes: { ...memorySecurityState.resetCodes, ...(remoteState.resetCodes || {}) },
       }
     }
   } catch {

@@ -920,11 +920,11 @@ export function AdminLoginView({
                 <p className="text-xs text-[#5C5A55]">
                   {forgotStep === 1
                     ? (locale === 'ar'
-                        ? 'أدخل بريدك الإلكتروني المؤسساتي لتلقي كود التحقق المكون من 6 أرقام.'
-                        : 'Entrez votre email institutionnel pour recevoir un code à 6 chiffres.')
+                        ? 'أدخل بريدك الإلكتروني المؤسساتي لتلقي كود التحقق (6 أو 8 أرقام).'
+                        : 'Entrez votre email institutionnel pour recevoir un code de vérification (6 ou 8 chiffres).')
                     : (locale === 'ar'
-                        ? 'أدخل كود التحقق المستلم وعيّن كلمة المرور الجديدة لحسابك.'
-                        : 'Entrez le code à 6 chiffres et définissez votre nouveau mot de passe.')}
+                        ? 'أدخل كود التحقق المستلم (6 أو 8 أرقام) وعيّن كلمة المرور الجديدة لحسابك.'
+                        : 'Entrez le code reçu (6 ou 8 chiffres) et définissez votre nouveau mot de passe.')}
                 </p>
               </div>
 
@@ -992,7 +992,7 @@ export function AdminLoginView({
                     disabled={forgotPending}
                     className="px-5 py-2 rounded-xl text-xs font-bold text-white bg-[#bd3227] hover:bg-[#a3261c] shadow-md transition-all flex items-center gap-2 cursor-pointer disabled:opacity-50"
                   >
-                    {forgotPending ? '⏳ جاري الإرسال...' : (locale === 'ar' ? 'إرسال كود الاستعادة (6 أرقام) ←' : 'Envoyer le code →')}
+                    {forgotPending ? '⏳ جاري الإرسال...' : (locale === 'ar' ? 'إرسال كود الاستعادة ←' : 'Envoyer le code →')}
                   </button>
                 </div>
               </form>
@@ -1004,7 +1004,7 @@ export function AdminLoginView({
                 <div>
                   <div className="flex items-center justify-between mb-1">
                     <label className="text-2xs font-bold uppercase tracking-wider text-[#5C5A55]">
-                      {locale === 'ar' ? 'كود التحقق المستلم (6 أرقام)' : 'Code de vérification (6 chiffres)'}
+                      {locale === 'ar' ? 'كود التحقق المستلم (6 أو 8 أرقام)' : 'Code de vérification (6 ou 8 chiffres)'}
                     </label>
                     <button
                       type="button"
@@ -1017,19 +1017,19 @@ export function AdminLoginView({
                   <input
                     type="text"
                     required
-                    maxLength={6}
-                    pattern="[0-9]{6}"
+                    maxLength={10}
+                    pattern="[0-9]{6,10}"
                     value={forgotCode}
                     onChange={(e) => setForgotCode(e.target.value.replace(/\D/g, ''))}
-                    placeholder="123456"
-                    className="w-full px-3.5 py-2.5 text-center rounded-xl border-2 border-[#d2a82b] bg-[#FEF6CC]/20 text-lg font-black tracking-widest text-[#231f20] font-mono outline-none"
+                    placeholder="16929603"
+                    className="w-full px-3.5 py-2.5 text-center rounded-xl border-2 border-[#d2a82b] bg-[#FEF6CC]/20 text-lg sm:text-xl font-black tracking-widest text-[#231f20] font-mono outline-none"
                   />
                   <div className="mt-2 p-2.5 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6] text-3xs text-[#5C5A55] flex items-start gap-2">
                     <Flaticon name="mail" size={13} className="text-[#bd3227] shrink-0 mt-0.5" />
                     <span>
                       {locale === 'ar'
-                        ? 'يرجى مراجعة صندوق الوارد في بريدك (أو مجلد Spam). يمكنك إدخال الرمز أعلاه، أو النقر مباشرة على رابط "Reset password" في الرسالة.'
-                        : 'Vérifiez votre boîte de réception ou spams. Entrez le code à 6 chiffres ou cliquez directement sur le lien reçu.'}
+                        ? 'يرجى مراجعة صندوق الوارد في بريدك (أو مجلد Spam). يمكنك إدخال رمز التحقق المستلم (6 أو 8 أرقام)، أو النقر مباشرة على رابط "Reset password" في الرسالة.'
+                        : 'Vérifiez votre boîte de réception ou spams. Entrez le code reçu (6 ou 8 chiffres) ou cliquez directement sur le lien reçu.'}
                     </span>
                   </div>
                 </div>
