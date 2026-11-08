@@ -1,5 +1,6 @@
 'use server'
 
+import { headers } from 'next/headers'
 import { createClient } from '@/lib/supabase/server'
 import { createAdminClient, createAdminClientSafe } from '@/lib/supabase/admin'
 import { redirect } from 'next/navigation'
@@ -548,8 +549,18 @@ export async function sendPasswordResetCodeAction(
     }
     await saveSecurityState(secState)
 
-    // Formulate direct reset URL
-    const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || 'https://amycc.vercel.app').replace(/\/$/, '')
+    // Formulate direct reset URL dynamically from current domain
+    let siteUrl = 'https://amycc.vercel.app'
+    try {
+      const h = await headers()
+      const host = h.get('x-forwarded-host') || h.get('host')
+      const proto = h.get('x-forwarded-proto') || 'https'
+      if (host) {
+        siteUrl = `${proto}://${host}`
+      }
+    } catch {
+      siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || 'https://amycc.vercel.app').replace(/\/$/, '')
+    }
     const resetUrl = `${siteUrl}/api/auth/callback?next=/admin/change-password`
 
     // 1. Dispatch custom verification code via Gmail SMTP (Nodemailer) or Resend
