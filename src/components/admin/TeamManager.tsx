@@ -5,6 +5,7 @@ import type { TeamConfig, TeamMemberConfig } from '@/lib/settings'
 import { saveTeamConfiguration } from '@/lib/actions/admin'
 import { ImageWithFallback } from '@/components/ui/ImageWithFallback'
 import { useAdminLocale } from './AdminLocaleContext'
+import { ImageCropperModal } from './ImageCropperModal'
 
 const TM_STRINGS = {
   ar: {
@@ -159,6 +160,19 @@ export function TeamManager({ initialConfig }: TeamManagerProps) {
   const cardFileInputRef = useRef<HTMLInputElement>(null)
   const [activeUploadMemberId, setActiveUploadMemberId] = useState<string | null>(null)
 
+  // Image Cropper & Dimension Controller State
+  const [cropperState, setCropperState] = useState<{
+    isOpen: boolean
+    imageSrc: string | null
+    type: 'card' | 'modal'
+    memberId?: string
+    memberName?: string
+  }>({
+    isOpen: false,
+    imageSrc: null,
+    type: 'card',
+  })
+
   // Open modal for editing
   function handleEdit(member: TeamMemberConfig) {
     setEditingMember(member)
@@ -210,46 +224,53 @@ export function TeamManager({ initialConfig }: TeamManagerProps) {
     setIsModalOpen(true)
   }
 
-  // Handle Photo Upload inside Modal
-  async function handlePhotoFileChange(e: React.ChangeEvent<HTMLInputElement>) {
+  // Handle Photo File Select inside Member Modal -> Opens Cropper
+  function handlePhotoFileChange(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0]
     if (!file) return
 
-    setUploadingPhoto(true)
-    setUploadError(null)
-
-    try {
-      const formData = new FormData()
-      formData.append('file', file)
-
-      const res = await fetch('/api/admin/upload', {
-        method: 'POST',
-        body: formData,
+    const reader = new FileReader()
+    reader.onload = () => {
+      setCropperState({
+        isOpen: true,
+        imageSrc: reader.result as string,
+        type: 'modal',
+        memberName: modalForm.nameAr || modalForm.nameFr || 'العضو',
       })
-
-      const data = await res.json()
-      if (!res.ok || !data.success) {
-        throw new Error(data.error || 'فشل رفع الصورة. يرجى التأكد من الحجم والصيغة.')
-      }
-
-      setModalForm((prev) => ({
-        ...prev,
-        photoUrl: data.url,
-      }))
-    } catch (err: unknown) {
-      setUploadError(err instanceof Error ? err.message : 'حدث خطأ أثناء رفع الصورة')
-    } finally {
-      setUploadingPhoto(false)
-      if (fileInputRef.current) fileInputRef.current.value = ''
     }
+    reader.readAsDataURL(file)
+    if (fileInputRef.current) fileInputRef.current.value = ''
   }
 
-  // Handle Quick Photo Upload directly from card
-  async function handleQuickUpload(memberId: string, file: File) {
-    setActiveUploadMemberId(memberId)
+  // Re-crop existing photo in edit modal
+  function handleReCropModalPhoto() {
+    if (!modalForm.photoUrl) return
+    setCropperState({
+      isOpen: true,
+      imageSrc: modalForm.photoUrl,
+      type: 'modal',
+      memberName: modalForm.nameAr || modalForm.nameFr || 'العضو',
+    })
+  }
+
+  // Re-crop existing photo on member card
+  function handleReCropCardPhoto(member: TeamMemberConfig) {
+    if (!member.photoUrl) return
+    setCropperState({
+      isOpen: true,
+      imageSrc: member.photoUrl,
+      type: 'card',
+      memberId: member.id,
+      memberName: member.nameAr || member.nameFr || 'العضو',
+    })
+  }
+
+  // Handle Cropper Complete (Uploads cropped WebP file and binds URL)
+  async function handleCropperComplete(croppedFile: File) {
+    setUploadingPhoto(true)
     try {
       const formData = new FormData()
-      formData.append('file', file)
+      formData.append('file', croppedFile)
 
       const res = await fetch('/api/admin/upload', {
         method: 'POST',
@@ -258,24 +279,28 @@ export function TeamManager({ initialConfig }: TeamManagerProps) {
 
       const data = await res.json()
       if (!res.ok || !data.success) {
-        throw new Error(data.error || 'فشل رفع الصورة')
+        throw new Error(data.error || 'فشل رفع وحفظ الصورة المقصوصة')
       }
 
-      setConfig((prev) => ({
-        ...prev,
-        members: prev.members.map((m) =>
-          m.id === memberId ? { ...m, photoUrl: data.url } : m
-        ),
-      }))
-      setHasUnsavedChanges(true)
-      setSuccessMessage('تم رفع وتحديث صورة العضو مباشرة!')
-      setTimeout(() => setSuccessMessage(null), 3500)
-    } catch (err: unknown) {
-      setErrorMessage(err instanceof Error ? err.message : 'تعذر رفع الصورة')
-      setTimeout(() => setErrorMessage(null), 4000)
+      if (cropperState.type === 'card' && cropperState.memberId) {
+        const targetId = cropperState.memberId
+        setConfig((prev) => ({
+          ...prev,
+          members: prev.members.map((m) =>
+            m.id === targetId ? { ...m, photoUrl: data.url } : m
+          ),
+        }))
+        setHasUnsavedChanges(true)
+        setSuccessMessage('تم ضبط أبعاد الصورة وحفظها بنجاح!')
+        setTimeout(() => setSuccessMessage(null), 3500)
+      } else if (cropperState.type === 'modal') {
+        setModalForm((prev) => ({
+          ...prev,
+          photoUrl: data.url,
+        }))
+      }
     } finally {
-      setActiveUploadMemberId(null)
-      if (cardFileInputRef.current) cardFileInputRef.current.value = ''
+      setUploadingPhoto(false)
     }
   }
 
@@ -427,7 +452,7 @@ export function TeamManager({ initialConfig }: TeamManagerProps) {
 
   return (
     <div className="space-y-6" dir={dir}>
-      {/* Hidden file input for quick card upload */}
+      {/* Hidden file input for quick card upload & crop */}
       <input
         ref={cardFileInputRef}
         type="file"
@@ -436,8 +461,20 @@ export function TeamManager({ initialConfig }: TeamManagerProps) {
         onChange={(e) => {
           const file = e.target.files?.[0]
           if (file && activeUploadMemberId) {
-            handleQuickUpload(activeUploadMemberId, file)
+            const reader = new FileReader()
+            reader.onload = () => {
+              const targetMem = config.members.find((m) => m.id === activeUploadMemberId)
+              setCropperState({
+                isOpen: true,
+                imageSrc: reader.result as string,
+                type: 'card',
+                memberId: activeUploadMemberId,
+                memberName: targetMem?.nameAr || targetMem?.nameFr || 'العضو',
+              })
+            }
+            reader.readAsDataURL(file)
           }
+          if (cardFileInputRef.current) cardFileInputRef.current.value = ''
         }}
       />
 
@@ -586,18 +623,22 @@ export function TeamManager({ initialConfig }: TeamManagerProps) {
                         </div>
                       )}
 
-                      {/* Quick upload overlay button */}
+                      {/* Quick upload / crop overlay button */}
                       <button
                         type="button"
                         onClick={() => {
-                          setActiveUploadMemberId(member.id)
-                          cardFileInputRef.current?.click()
+                          if (member.photoUrl) {
+                            handleReCropCardPhoto(member)
+                          } else {
+                            setActiveUploadMemberId(member.id)
+                            cardFileInputRef.current?.click()
+                          }
                         }}
                         disabled={isUploadingThisCard}
-                        title="رفع أو تغيير صورة العضو"
+                        title={member.photoUrl ? 'التحكم في أبعاد وقص الصورة الحالية' : 'رفع وقص صورة جديدة'}
                         className="absolute -bottom-1 -end-1 w-6 h-6 rounded-full bg-[#231f20] hover:bg-[#bd3227] text-white flex items-center justify-center text-3xs shadow-xs transition-colors cursor-pointer"
                       >
-                        {isUploadingThisCard ? '⏳' : '📷'}
+                        {isUploadingThisCard ? '⏳' : member.photoUrl ? '📐' : '📷'}
                       </button>
                     </div>
 
@@ -690,11 +731,23 @@ export function TeamManager({ initialConfig }: TeamManagerProps) {
                     }}
                     disabled={isUploadingThisCard}
                     className="px-2.5 py-1 rounded-lg bg-[#231f20]/10 hover:bg-[#231f20] text-[#231f20] hover:text-white text-3xs font-bold transition-all flex items-center gap-1 cursor-pointer"
-                    title="رفع أو تغيير صورة العضو"
+                    title="رفع صورة جديدة وقص أبعادها"
                   >
                     <span>📷</span>
-                    <span>{isUploadingThisCard ? 'جارٍ الرفع...' : member.photoUrl ? 'تغيير الصورة' : 'رفع صورة'}</span>
+                    <span>{isUploadingThisCard ? 'جارٍ الرفع...' : member.photoUrl ? 'تغيير الصورة' : 'رفع وقص صورة'}</span>
                   </button>
+
+                  {member.photoUrl && (
+                    <button
+                      type="button"
+                      onClick={() => handleReCropCardPhoto(member)}
+                      className="px-2.5 py-1 rounded-lg bg-[#d2a82b]/20 hover:bg-[#d2a82b] text-[#8a6e14] hover:text-white text-3xs font-bold transition-all flex items-center gap-1 cursor-pointer border border-[#d2a82b]/30"
+                      title="التحكم في أبعاد وتكبير وتوسيط الصورة الحالية"
+                    >
+                      <span>📐</span>
+                      <span>ضبط الأبعاد</span>
+                    </button>
+                  )}
                   <button
                     type="button"
                     onClick={() => handleEdit(member)}
@@ -1186,19 +1239,27 @@ export function TeamManager({ initialConfig }: TeamManagerProps) {
                             <p className="text-3xs text-[#5C5A55] break-all font-mono">
                               {modalForm.photoUrl}
                             </p>
-                            <div className="flex items-center gap-2">
+                            <div className="flex items-center gap-2 flex-wrap">
+                              <button
+                                type="button"
+                                onClick={handleReCropModalPhoto}
+                                className="px-3 py-1.5 rounded-xl bg-[#d2a82b] text-white text-3xs font-bold hover:bg-[#b89124] transition-colors flex items-center gap-1 cursor-pointer"
+                              >
+                                <span>📐</span>
+                                <span>التحكم في أبعاد وقص الصورة</span>
+                              </button>
                               <button
                                 type="button"
                                 onClick={() => fileInputRef.current?.click()}
                                 disabled={uploadingPhoto}
-                                className="px-3 py-1.5 rounded-xl bg-[#231f20] text-white text-3xs font-bold hover:bg-[#d2a82b] transition-colors"
+                                className="px-3 py-1.5 rounded-xl bg-[#231f20] text-white text-3xs font-bold hover:bg-[#403b3c] transition-colors cursor-pointer"
                               >
-                                {uploadingPhoto ? 'جارٍ الاستبدال...' : 'استبدال الصورة'}
+                                {uploadingPhoto ? 'جارٍ الاستبدال...' : 'استبدال بصورة جديدة'}
                               </button>
                               <button
                                 type="button"
                                 onClick={handleRemovePhoto}
-                                className="px-3 py-1.5 rounded-xl bg-red-50 text-red-600 text-3xs font-bold hover:bg-red-100 transition-colors"
+                                className="px-3 py-1.5 rounded-xl bg-red-50 text-red-600 text-3xs font-bold hover:bg-red-100 transition-colors cursor-pointer"
                               >
                                 حذف الصورة
                               </button>
@@ -1207,16 +1268,16 @@ export function TeamManager({ initialConfig }: TeamManagerProps) {
                         ) : (
                           <>
                             <p className="text-xs text-[#5C5A55]">
-                              انقر أدناه لاختيار صورة من جهازك (JPG, PNG, WEBP) بحد أقصى 5 ميغابايت.
+                              انقر أدناه لاختيار صورة من جهازك، ستتمكن من تكبير وتوسيط الوجه واختيار الأبعاد وقصها بدقة قبل الحفظ.
                             </p>
                             <button
                               type="button"
                               onClick={() => fileInputRef.current?.click()}
                               disabled={uploadingPhoto}
-                              className="px-4 py-2 rounded-xl bg-[#bd3227] text-white text-xs font-bold hover:bg-[#a3261c] transition-colors flex items-center gap-2"
+                              className="px-4 py-2 rounded-xl bg-[#bd3227] text-white text-xs font-bold hover:bg-[#a3261c] transition-colors flex items-center gap-2 cursor-pointer"
                             >
                               <span>📷</span>
-                              <span>{uploadingPhoto ? 'جارٍ رفع الصورة...' : 'اختر صورة لرفعها الآن'}</span>
+                              <span>{uploadingPhoto ? 'جارٍ المعالجة...' : 'اختر صورة من جهازك وقصها'}</span>
                             </button>
                           </>
                         )}
@@ -1506,6 +1567,16 @@ export function TeamManager({ initialConfig }: TeamManagerProps) {
           </div>
         </div>
       )}
+      {/* Image Cropper & Dimension Controller Modal */}
+      <ImageCropperModal
+        isOpen={cropperState.isOpen}
+        onClose={() => setCropperState((prev) => ({ ...prev, isOpen: false }))}
+        imageSrc={cropperState.imageSrc}
+        title="التحكم في أبعاد وقص صورة العضو"
+        memberName={cropperState.memberName}
+        initialAspectRatio={1} // 1:1 Square for team member cards
+        onCropComplete={handleCropperComplete}
+      />
     </div>
   )
 }
