@@ -65,6 +65,9 @@ export default async function LocaleLayout(props: {
       <head>
         <meta name="theme-color" content="#181516" />
         <meta name="apple-mobile-web-app-title" content="AMYCC" />
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" type="image/png" sizes="512x512" href="/icon.png" />
+        <link rel="apple-touch-icon" href="/apple-icon.png" />
       </head>
       <body className="flex flex-col min-h-full bg-[#FAF8F5] text-[#231f20] antialiased selection:bg-[#bd3227]/20 selection:text-[#231f20]">
         {props.children}

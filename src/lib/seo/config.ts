@@ -136,6 +136,16 @@ export function constructMetadata({
       canonical: canonicalUrl,
       languages: alternates.languages,
     },
+    icons: {
+      icon: [
+        { url: '/favicon.ico', sizes: 'any' },
+        { url: '/icon.png', sizes: '512x512', type: 'image/png' },
+      ],
+      apple: [
+        { url: '/apple-icon.png', sizes: '180x180', type: 'image/png' },
+      ],
+      shortcut: '/favicon.ico',
+    },
     robots: noIndex
       ? { index: false, follow: false }
       : {
