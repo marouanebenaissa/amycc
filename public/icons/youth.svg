@@ -1,4 +1,15 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#231f20">
-  <path d="M12 2.5s-4 4.5-4 10.5h8c0-6-4-10.5-4-10.5z" opacity="0.25"/>
-  <path d="M12 2.5s-4 4.5-4 10.5h8c0-6-4-10.5-4-10.5zm0 8c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm-4 4.5l-2.5 3.5h13l-2.5-3.5H8zm-3 5.5v1.5h14V20.5H5z"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <!-- Rocket Body (Angled 45 deg) -->
+  <path d="M48 8s-18 2-26 18c-3 6-3 12-2 15l15 15c3 1 9 1 15-2 16-8 18-26 18-26l-20-20z" fill="currentColor" fill-opacity="0.15"/>
+  <path d="M48 8s-18 2-26 18c-3 6-3 12-2 15l15 15c3 1 9 1 15-2 16-8 18-26 18-26l-20-20z" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Cockpit Porthole -->
+  <circle cx="39" cy="25" r="5" fill="#ffd22f" stroke="currentColor" stroke-width="2.5"/>
+  <!-- Left Fin -->
+  <path d="M22 26l-10 4 2 10 8-2" fill="currentColor" fill-opacity="0.3" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/>
+  <!-- Right Fin -->
+  <path d="M38 42l4 10 10-2-2-8" fill="currentColor" fill-opacity="0.3" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/>
+  <!-- Thrust Flames -->
+  <path d="M19 45l-7 7 4 1-5 5 8-2 1 4 7-7" fill="#bd3227"/>
+  <!-- Stars / Innovation Sparkles -->
+  <path d="M14 16l1.5 3 3 1.5-3 1.5-1.5 3-1.5-3-3-1.5 3-1.5z" fill="#ffd22f"/>
 </svg>

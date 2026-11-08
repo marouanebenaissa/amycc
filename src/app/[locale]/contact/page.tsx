@@ -9,6 +9,7 @@ import { METADATA_CATALOG } from '@/lib/seo/metadata-catalog'
 import { getBreadcrumbJsonLd, JsonLd } from '@/lib/seo/schema'
 import { locales, type Locale, defaultLocale } from '@/lib/i18n/config'
 import Link from 'next/link'
+import { Flaticon } from '@/components/ui/Flaticon'
 
 export const revalidate = 0
 
@@ -103,7 +104,7 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
 
               {heroBadge && (
                 <span className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs sm:text-sm font-bold shadow-2xs bg-[#231f20]/10 border border-[#231f20]/20 text-[#231f20]">
-                  <span>📍</span>
+                  <Flaticon name="pin" size={13} className="text-[#231f20]" />
                   <span>{heroBadge}</span>
                 </span>
               )}
@@ -129,8 +130,8 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
             {/* Card 1: Official Email */}
             <div className="p-6 sm:p-7 rounded-3xl bg-white border border-[#e5e0d6] hover:border-[#231f20]/40 shadow-subtle hover:shadow-lg transition-all text-center flex flex-col justify-between group min-h-[260px]">
               <div>
-                <div className="w-14 h-14 rounded-2xl bg-[#231f20]/10 text-[#231f20] flex items-center justify-center text-2xl mx-auto mb-4 group-hover:scale-110 transition-transform">
-                  ✉️
+                <div className="w-14 h-14 rounded-2xl bg-[#231f20]/10 text-[#231f20] flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                  <Flaticon name="mail" size={28} className="text-[#231f20]" />
                 </div>
                 <span className="text-xs sm:text-sm font-bold text-[#5C5A55] uppercase tracking-wider block mb-2">
                   {isAr ? 'البريد الإلكتروني الرسمي' : isFr ? 'Email Institutionnel' : 'Official Email'}
@@ -164,8 +165,8 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
             {/* Card 2: Phone & WhatsApp */}
             <div className="p-6 sm:p-7 rounded-3xl bg-white border border-[#e5e0d6] hover:border-[#bd3227]/40 shadow-subtle hover:shadow-lg transition-all text-center flex flex-col justify-between group min-h-[260px]">
               <div>
-                <div className="w-14 h-14 rounded-2xl bg-[#bd3227]/10 text-[#bd3227] flex items-center justify-center text-2xl mx-auto mb-4 group-hover:scale-110 transition-transform">
-                  📞
+                <div className="w-14 h-14 rounded-2xl bg-[#bd3227]/10 text-[#bd3227] flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                  <Flaticon name="phone" size={28} className="text-[#bd3227]" />
                 </div>
                 <span className="text-xs sm:text-sm font-bold text-[#5C5A55] uppercase tracking-wider block mb-2">
                   {isAr ? 'الهاتف والتواصل المباشر' : isFr ? 'Téléphone & Direct' : 'Direct Call & Line'}
@@ -209,8 +210,8 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
             {/* Card 3: Headquarters & City */}
             <div className="p-6 sm:p-7 rounded-3xl bg-white border border-[#e5e0d6] hover:border-[#d2a82b]/40 shadow-subtle hover:shadow-lg transition-all text-center flex flex-col justify-between group min-h-[260px]">
               <div>
-                <div className="w-14 h-14 rounded-2xl bg-[#d2a82b]/10 text-[#d2a82b] flex items-center justify-center text-2xl mx-auto mb-4 group-hover:scale-110 transition-transform">
-                  🏛️
+                <div className="w-14 h-14 rounded-2xl bg-[#d2a82b]/10 text-[#d2a82b] flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                  <Flaticon name="museum" size={28} className="text-[#d2a82b]" />
                 </div>
                 <span className="text-xs sm:text-sm font-bold text-[#5C5A55] uppercase tracking-wider block mb-2">
                   {isAr ? 'المقر والنطاق الجغرافي' : isFr ? 'Siège & Rayonnement' : 'Headquarters & Scope'}
@@ -244,8 +245,8 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
             {/* Card 4: Working Hours & SLA */}
             <div className="p-6 sm:p-7 rounded-3xl bg-white border border-[#e5e0d6] hover:border-emerald-600/40 shadow-subtle hover:shadow-lg transition-all text-center flex flex-col justify-between group min-h-[260px]">
               <div>
-                <div className="w-14 h-14 rounded-2xl bg-emerald-50 text-emerald-700 flex items-center justify-center text-2xl mx-auto mb-4 group-hover:scale-110 transition-transform">
-                  ⏱️
+                <div className="w-14 h-14 rounded-2xl bg-emerald-50 text-emerald-700 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                  <Flaticon name="calendar" size={28} className="text-emerald-700" />
                 </div>
                 <span className="text-xs sm:text-sm font-bold text-[#5C5A55] uppercase tracking-wider block mb-2">
                   {isAr ? 'أوقات العمل وسرعة الرد' : isFr ? 'Horaires & Réactivité' : 'Hours & Response SLA'}
@@ -333,7 +334,7 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
                           rel="noopener noreferrer"
                           className="mt-3.5 inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-[#ffd22f] hover:bg-[#ffd22f] text-[#231f20] text-xs sm:text-sm font-bold transition-all shadow-xs"
                         >
-                          <span>📍</span>
+                          <Flaticon name="pin" size={13} className="text-[#231f20]" />
                           <span>{isAr ? 'الاتجاهات عبر خرائط Google' : 'Get Directions on Google Maps'}</span>
                         </a>
                       )}
@@ -432,7 +433,7 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
                       rel="noopener noreferrer"
                       className="p-3.5 rounded-xl bg-[#FAF8F5] hover:bg-[#25D366] text-[#231f20] hover:text-white transition-all flex items-center gap-2.5 text-xs sm:text-sm font-bold group border border-[#e5e0d6]"
                     >
-                      <span className="text-base">💬</span>
+                      <Flaticon name="chat" size={16} className="text-[#25D366] group-hover:text-white transition-colors" />
                       <span>WhatsApp</span>
                     </a>
                   )}

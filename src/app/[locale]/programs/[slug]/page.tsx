@@ -9,6 +9,7 @@ import { locales, type Locale, defaultLocale } from '@/lib/i18n/config'
 import Link from 'next/link'
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
+import { Flaticon } from '@/components/ui/Flaticon'
 
 interface ProgramTranslation {
   locale: string
@@ -285,8 +286,9 @@ export default async function ProgramDetailPage(props: {
                 <span className="px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-[#F4EFE6] text-[#231f20]">
                   {program.category}
                 </span>
-                <span className="px-3.5 py-1.5 rounded-full text-xs font-bold bg-[#FAF8F5] border border-[#e5e0d6] text-[#5C5A55]">
-                  📍 {program.city || (isAr ? 'المملكة المغربية' : isFr ? 'Royaume du Maroc' : 'Morocco')}
+                <span className="px-3.5 py-1.5 rounded-full text-xs font-bold bg-[#FAF8F5] border border-[#e5e0d6] text-[#5C5A55] flex items-center gap-1.5">
+                  <Flaticon name="pin" size={12} className="text-[#bd3227] shrink-0" />
+                  <span>{program.city || (isAr ? 'المملكة المغربية' : isFr ? 'Royaume du Maroc' : 'Morocco')}</span>
                 </span>
               </div>
 
@@ -307,7 +309,7 @@ export default async function ProgramDetailPage(props: {
             {translation?.objectives && (
               <div className="p-6 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6] space-y-2">
                 <h2 className="text-base sm:text-lg font-black text-[#231f20] flex items-center gap-2">
-                  <span>🎯</span>
+                  <Flaticon name="target" size={16} className="text-[#bd3227] shrink-0" />
                   <span>{isAr ? 'أهداف ومخرجات البرنامج' : isFr ? 'Objectifs et résultats attendus' : 'Program Objectives'}</span>
                 </h2>
                 <p className="leading-relaxed text-[#5C5A55]">{translation.objectives}</p>
@@ -317,7 +319,7 @@ export default async function ProgramDetailPage(props: {
             {translation?.target_audience && (
               <div className="p-6 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6] space-y-2">
                 <h2 className="text-base sm:text-lg font-black text-[#231f20] flex items-center gap-2">
-                  <span>👥</span>
+                  <Flaticon name="users" size={16} className="text-[#d2a82b] shrink-0" />
                   <span>{isAr ? 'الفئة المستهدفة وشروط المشاركة' : isFr ? 'Public cible et conditions' : 'Target Audience'}</span>
                 </h2>
                 <p className="leading-relaxed text-[#5C5A55]">{translation.target_audience}</p>
@@ -327,7 +329,7 @@ export default async function ProgramDetailPage(props: {
             {translation?.activities && (
               <div className="space-y-3">
                 <h2 className="text-base sm:text-lg font-black text-[#231f20] flex items-center gap-2">
-                  <span>🎨</span>
+                  <Flaticon name="palette" size={16} className="text-[#bd3227] shrink-0" />
                   <span>{isAr ? 'الأنشطة والورشات المبرمجة' : isFr ? 'Activités et ateliers au programme' : 'Key Activities & Masterclasses'}</span>
                 </h2>
                 <p className="leading-relaxed text-[#5C5A55]">{translation.activities}</p>

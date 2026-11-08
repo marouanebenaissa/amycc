@@ -870,7 +870,7 @@ export function AdminUsersClient({
                             <span
                               className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-3xs font-bold border ${roleObj.badgeColor}`}
                             >
-                              <span>{roleObj.icon}</span>
+                              <Flaticon icon={roleObj.icon} size={12} className="shrink-0" />
                               <span>{getLocalizedRoleName(roleObj)}</span>
                             </span>
 
@@ -893,7 +893,7 @@ export function AdminUsersClient({
                           {/* Custom Granular Indicator Badge */}
                           {Array.isArray(u.customPermissions) && (
                             <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md text-4xs font-bold bg-purple-50 text-purple-700 border border-purple-200 w-fit">
-                              <span>🎛️</span>
+                              <Flaticon name="sliders" size={11} className="shrink-0" />
                               <span>
                                 {isAr
                                   ? `مصفوفة مخصصة (${u.customPermissions.length} صلاحيات)`
@@ -948,10 +948,10 @@ export function AdminUsersClient({
                             <button
                               disabled={isPending}
                               onClick={() => handleUnlockUser(u)}
-                              className="px-3 py-1.5 rounded-xl text-3xs font-bold text-white bg-emerald-600 hover:bg-emerald-700 shadow-xs transition-all cursor-pointer active:scale-95 disabled:opacity-50 flex items-center gap-1"
+                              className="px-3 py-1.5 rounded-xl text-3xs font-bold text-white bg-emerald-600 hover:bg-emerald-700 shadow-xs transition-all cursor-pointer active:scale-95 disabled:opacity-50 flex items-center gap-1.5"
                               title={isAr ? 'إلغاء قفل الحساب واستعادة صلاحية الدخول' : 'Unlock Account'}
                             >
-                              <span>🔓</span>
+                              <Flaticon name="unlock" size={12} className="shrink-0" />
                               <span>{isAr ? 'إلغاء القفل' : isFr ? 'Débloquer' : 'Unlock'}</span>
                             </button>
                           )}
@@ -960,14 +960,14 @@ export function AdminUsersClient({
                             <button
                               disabled={isPending || u.mustChangePassword}
                               onClick={() => handleForcePasswordChange(u)}
-                              className={`px-2.5 py-1.5 rounded-xl text-3xs font-bold border transition-all cursor-pointer flex items-center gap-1 ${
+                              className={`px-2.5 py-1.5 rounded-xl text-3xs font-bold border transition-all cursor-pointer flex items-center gap-1.5 ${
                                 u.mustChangePassword
                                   ? 'bg-gray-100 text-gray-400 border-gray-200 cursor-not-allowed'
                                   : 'bg-amber-50 text-amber-800 border-amber-200 hover:bg-amber-100 active:scale-95'
                               }`}
                               title={isAr ? 'إلزام هذا الحساب بتغيير كلمة المرور' : 'Force password change'}
                             >
-                              <span>🔄</span>
+                              <Flaticon name="refresh" size={12} className="shrink-0" />
                               <span className="hidden xl:inline">{isAr ? 'إلزام كلمة جديدة' : 'Force change'}</span>
                             </button>
                           )}
@@ -977,14 +977,14 @@ export function AdminUsersClient({
                             type="button"
                             disabled={isPending}
                             onClick={() => openPermsModal(u)}
-                            className={`px-2.5 py-1.5 rounded-xl text-3xs font-bold border transition-all cursor-pointer flex items-center gap-1 active:scale-95 disabled:opacity-50 ${
+                            className={`px-2.5 py-1.5 rounded-xl text-3xs font-bold border transition-all cursor-pointer flex items-center gap-1.5 active:scale-95 disabled:opacity-50 ${
                               Array.isArray(u.customPermissions)
                                 ? 'bg-purple-100 text-purple-800 border-purple-300 hover:bg-purple-200 shadow-2xs'
                                 : 'bg-[#FAF8F5] text-[#231f20] border-[#e5e0d6] hover:bg-white hover:border-[#d2a82b]'
                             }`}
                             title={isAr ? 'تخصيص صلاحيات دقيقة ومستقلة لهذا الحساب' : 'Customize permissions'}
                           >
-                            <span>🎛️</span>
+                            <Flaticon name="sliders" size={12} className="shrink-0" />
                             <span className="hidden lg:inline">
                               {Array.isArray(u.customPermissions)
                                 ? (isAr ? `مخصصة (${u.customPermissions.length})` : isFr ? `Sur-mesure (${u.customPermissions.length})` : `Custom (${u.customPermissions.length})`)
@@ -997,13 +997,13 @@ export function AdminUsersClient({
                         type="button"
                         disabled={isPending}
                         onClick={() => openPermsModal(u)}
-                        className={`px-2 py-1 rounded-lg text-3xs font-bold border transition-all cursor-pointer flex items-center gap-1 ${
+                        className={`px-2 py-1 rounded-lg text-3xs font-bold border transition-all cursor-pointer flex items-center gap-1.5 ${
                           Array.isArray(u.customPermissions)
                             ? 'bg-purple-100 text-purple-800 border-purple-300'
                             : 'bg-[#FAF8F5] text-[#231f20] border-[#e5e0d6]'
                         }`}
                       >
-                        <span>🎛️</span>
+                        <Flaticon name="sliders" size={12} className="shrink-0" />
                         <span>{isAr ? 'الصلاحيات' : 'Perms'}</span>
                       </button>
 
@@ -1011,9 +1011,10 @@ export function AdminUsersClient({
                             <button
                               disabled={isPending}
                               onClick={() => setUserToDelete(u)}
-                              className="px-3 py-1.5 rounded-xl text-3xs font-bold text-red-600 bg-red-50 hover:bg-red-100 border border-red-200 transition-all cursor-pointer active:scale-95 disabled:opacity-50"
+                              className="px-3 py-1.5 rounded-xl text-3xs font-bold text-red-600 bg-red-50 hover:bg-red-100 border border-red-200 transition-all cursor-pointer active:scale-95 disabled:opacity-50 flex items-center gap-1"
                             >
-                              🗑️ {t.deleteUserBtn}
+                              <Flaticon name="trash" size={11} className="shrink-0" />
+                              <span>{t.deleteUserBtn}</span>
                             </button>
                           ) : !u.isLocked ? (
                             <span className="text-3xs text-[#5C5A55] italic">
@@ -1083,7 +1084,7 @@ export function AdminUsersClient({
                       <span
                         className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-3xs font-bold border shrink-0 ${roleObj.badgeColor}`}
                       >
-                        <span>{roleObj.icon}</span>
+                        <Flaticon icon={roleObj.icon} size={12} className="shrink-0" />
                         <span>{getLocalizedRoleName(roleObj)}</span>
                       </span>
 
@@ -1140,9 +1141,10 @@ export function AdminUsersClient({
                         <button
                           disabled={isPending}
                           onClick={() => handleUnlockUser(u)}
-                          className="px-2.5 py-1 rounded-lg text-3xs font-bold text-white bg-emerald-600 hover:bg-emerald-700 transition-all cursor-pointer"
+                          className="px-2.5 py-1 rounded-lg text-3xs font-bold text-white bg-emerald-600 hover:bg-emerald-700 transition-all cursor-pointer flex items-center gap-1"
                         >
-                          🔓 {isAr ? 'إلغاء القفل' : 'Débloquer'}
+                          <Flaticon name="unlock" size={11} className="shrink-0" />
+                          <span>{isAr ? 'إلغاء القفل' : 'Débloquer'}</span>
                         </button>
                       )}
 
@@ -1150,13 +1152,14 @@ export function AdminUsersClient({
                         <button
                           disabled={isPending || u.mustChangePassword}
                           onClick={() => handleForcePasswordChange(u)}
-                          className={`px-2 py-1 rounded-lg text-3xs font-bold border transition-all ${
+                          className={`px-2 py-1 rounded-lg text-3xs font-bold border transition-all flex items-center gap-1 ${
                             u.mustChangePassword
                               ? 'bg-gray-100 text-gray-400 border-gray-200 cursor-not-allowed'
                               : 'bg-amber-50 text-amber-800 border-amber-200 hover:bg-amber-100'
                           }`}
                         >
-                          🔄 {isAr ? 'كلمة جديدة' : 'Reset'}
+                          <Flaticon name="refresh" size={11} className="shrink-0" />
+                          <span>{isAr ? 'كلمة جديدة' : 'Reset'}</span>
                         </button>
                       )}
 
@@ -1171,7 +1174,7 @@ export function AdminUsersClient({
                             : 'bg-[#FAF8F5] text-[#231f20] border-[#e5e0d6]'
                         }`}
                       >
-                        <span>🎛️</span>
+                        <Flaticon name="sliders" size={11} className="shrink-0" />
                         <span>{isAr ? 'الصلاحيات' : 'Perms'}</span>
                       </button>
 
@@ -1179,9 +1182,10 @@ export function AdminUsersClient({
                         <button
                           disabled={isPending}
                           onClick={() => setUserToDelete(u)}
-                          className="px-2.5 py-1 rounded-lg text-3xs font-bold text-red-600 bg-red-50 hover:bg-red-100 border border-red-200 transition-all cursor-pointer"
+                          className="px-2.5 py-1 rounded-lg text-3xs font-bold text-red-600 bg-red-50 hover:bg-red-100 border border-red-200 transition-all cursor-pointer flex items-center gap-1"
                         >
-                          🗑️ {t.deleteUserBtn}
+                          <Flaticon name="trash" size={11} className="shrink-0" />
+                          <span>{t.deleteUserBtn}</span>
                         </button>
                       ) : !u.isLocked ? (
                         <span className="text-3xs text-[#5C5A55] italic">
@@ -1195,7 +1199,9 @@ export function AdminUsersClient({
             })
           ) : (
             <div className="p-8 text-center text-[#5C5A55]">
-              <div className="text-3xl mb-2">🔍</div>
+              <div className="w-12 h-12 mx-auto mb-2 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6] flex items-center justify-center text-[#bd3227]">
+                <Flaticon name="search" size={24} />
+              </div>
               <div className="font-semibold text-xs">{t.noUsersFound}</div>
             </div>
           )}

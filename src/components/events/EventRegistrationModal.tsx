@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { submitEventRegistration } from '@/lib/actions/submissions'
+import { Flaticon } from '@/components/ui/Flaticon'
 
 interface EventRegistrationModalProps {
   eventId: string
@@ -59,9 +60,9 @@ export function EventRegistrationModal({
       <button
         type="button"
         onClick={() => setIsOpen(true)}
-        className={className || "px-4 py-2 rounded-xl text-xs font-bold text-white bg-[#231f20] hover:bg-[#d2a82b] active:scale-95 transition-all shadow-subtle inline-flex items-center gap-1.5"}
+        className={className || "px-4 py-2 rounded-xl text-xs font-bold text-white bg-[#231f20] hover:bg-[#d2a82b] active:scale-95 transition-all shadow-subtle inline-flex items-center gap-2"}
       >
-        <span>🎟️</span>
+        <Flaticon name="ticket" size={14} className="shrink-0" />
         <span>{defaultBtnLabel}</span>
       </button>
 
@@ -94,8 +95,18 @@ export function EventRegistrationModal({
               </h3>
               {(eventDate || eventVenue) && (
                 <div className="flex flex-wrap gap-2 text-2xs text-[#5C5A55] mt-2">
-                  {eventDate && <span>📅 {eventDate}</span>}
-                  {eventVenue && <span>📍 {eventVenue}</span>}
+                  {eventDate && (
+                    <span className="flex items-center gap-1 bg-[#FAF8F5] px-2.5 py-1 rounded-lg border border-[#e5e0d6]">
+                      <Flaticon name="calendar" size={12} className="text-[#bd3227] shrink-0" />
+                      <span>{eventDate}</span>
+                    </span>
+                  )}
+                  {eventVenue && (
+                    <span className="flex items-center gap-1 bg-[#FAF8F5] px-2.5 py-1 rounded-lg border border-[#e5e0d6]">
+                      <Flaticon name="pin" size={12} className="text-[#bd3227] shrink-0" />
+                      <span>{eventVenue}</span>
+                    </span>
+                  )}
                 </div>
               )}
             </div>
@@ -110,7 +121,11 @@ export function EventRegistrationModal({
                 }`}
               >
                 <div className="flex items-center gap-2">
-                  <span>{response.success ? '✅' : '⚠️'}</span>
+                  <Flaticon
+                    name={response.success ? 'check' : 'alert-circle'}
+                    size={16}
+                    className={response.success ? 'text-emerald-600' : 'text-red-600'}
+                  />
                   <span>{response.message}</span>
                 </div>
                 {response.success && (
@@ -170,11 +185,16 @@ export function EventRegistrationModal({
                   <button
                     type="submit"
                     disabled={isPending}
-                    className="w-full py-3 px-4 rounded-xl font-bold text-white bg-[#231f20] hover:bg-[#d2a82b] disabled:opacity-50 transition-all text-xs shadow-md"
+                    className="w-full py-3 px-4 rounded-xl font-bold text-white bg-[#231f20] hover:bg-[#d2a82b] disabled:opacity-50 transition-all text-xs shadow-md flex items-center justify-center gap-2"
                   >
-                    {isPending
-                      ? (isAr ? 'جارٍ تأكيد الحجز...' : 'Processing registration...')
-                      : (isAr ? 'تأكيد التسجيل الآن ✓' : 'Confirm Registration ✓')}
+                    {isPending ? (
+                      <span>{isAr ? 'جارٍ تأكيد الحجز...' : 'Processing registration...'}</span>
+                    ) : (
+                      <>
+                        <Flaticon name="check" size={14} className="shrink-0" />
+                        <span>{isAr ? 'تأكيد التسجيل الآن' : 'Confirm Registration'}</span>
+                      </>
+                    )}
                   </button>
                 </div>
               </form>
@@ -217,7 +237,7 @@ export function EventRegistrationModal({
               {/* Key Highlights Card */}
               <div className="grid grid-cols-2 gap-3 text-3xs sm:text-2xs">
                 <div className="p-3 rounded-xl bg-white border border-[#e5e0d6] flex items-center gap-2.5">
-                  <span className="text-base sm:text-lg">🎟️</span>
+                  <Flaticon name="ticket" size={20} className="text-[#bd3227] shrink-0" />
                   <div>
                     <span className="font-black text-[#231f20] block">
                       {isAr ? 'تأكيد الحجز المباشر' : isFr ? 'Réservation confirmée' : 'Direct Booking'}
@@ -229,7 +249,7 @@ export function EventRegistrationModal({
                 </div>
 
                 <div className="p-3 rounded-xl bg-white border border-[#e5e0d6] flex items-center gap-2.5">
-                  <span className="text-base sm:text-lg">✉️</span>
+                  <Flaticon name="mail" size={20} className="text-[#d2a82b] shrink-0" />
                   <div>
                     <span className="font-black text-[#231f20] block">
                       {isAr ? 'تأكيد ودعوة رسمية' : isFr ? 'Invitation par e-mail' : 'Email Invitation'}
@@ -241,10 +261,13 @@ export function EventRegistrationModal({
                 </div>
               </div>
 
-              <p className="text-3xs text-[#5C5A55] text-center pt-1 font-medium">
-                {isAr
-                  ? '📍 يرجى الحضور قبل الموعد بـ 15 دقيقة وإبراز رمز التأكيد لدى مكتب الاستقبال.'
-                  : '📍 Please arrive 15 minutes before the start time and present your ticket reference at check-in.'}
+              <p className="text-3xs text-[#5C5A55] text-center pt-1 font-medium flex items-center justify-center gap-1.5">
+                <Flaticon name="pin" size={12} className="text-[#bd3227] shrink-0" />
+                <span>
+                  {isAr
+                    ? 'يرجى الحضور قبل الموعد بـ 15 دقيقة وإبراز رمز التأكيد لدى مكتب الاستقبال.'
+                    : 'Please arrive 15 minutes before the start time and present your ticket reference at check-in.'}
+                </span>
               </p>
             </div>
           </div>

@@ -11,6 +11,7 @@ import { getBreadcrumbJsonLd, JsonLd } from '@/lib/seo/schema'
 import { locales, type Locale, defaultLocale } from '@/lib/i18n/config'
 import Link from 'next/link'
 import { ImageWithFallback } from '@/components/ui/ImageWithFallback'
+import { Flaticon } from '@/components/ui/Flaticon'
 
 export const revalidate = 0
 
@@ -378,7 +379,9 @@ export default async function ProgramsPage(props: { params: Promise<{ locale: st
 
               <div className="lg:col-span-4 flex justify-center">
                 <div className="p-6 rounded-2xl bg-white/10 border border-white/15 backdrop-blur-md text-center space-y-3 w-full max-w-xs">
-                  <span className="text-4xl sm:text-5xl block">🤝</span>
+                  <div className="w-14 h-14 mx-auto rounded-2xl bg-white/10 flex items-center justify-center text-[#ffd22f]">
+                    <Flaticon name="handshake" size={32} />
+                  </div>
                   <h4 className="font-bold text-sm sm:text-base text-[#ffd22f]">
                     {isAr ? 'تأطير مجتمعي وتضامني' : isFr ? 'Mentorat Civique & Solidaire' : 'Civic Mentorship'}
                   </h4>

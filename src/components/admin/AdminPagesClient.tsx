@@ -3,6 +3,7 @@
 import React, { useState } from 'react'
 import Link from 'next/link'
 import { useAdminLocale } from './AdminLocaleContext'
+import { Flaticon } from '@/components/ui/Flaticon'
 
 export interface AdminPageItem {
   key: string
@@ -171,8 +172,8 @@ export function AdminPagesClient({ pages }: AdminPagesClientProps) {
               >
                 <div>
                   <div className="flex items-start justify-between gap-3 mb-3">
-                    <span className="w-11 h-11 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6] flex items-center justify-center text-xl shrink-0 group-hover:scale-105 transition-transform shadow-2xs">
-                      {page.icon}
+                    <span className="w-11 h-11 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform shadow-2xs">
+                      <Flaticon icon={page.icon} size={22} className="text-[#bd3227]" />
                     </span>
 
                     <span className="px-2.5 py-0.5 rounded-full text-4xs font-black uppercase tracking-wider bg-emerald-50 text-emerald-800 border border-emerald-200">

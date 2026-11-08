@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { submitContact, type ActionResponse } from '@/lib/actions/submissions'
 import { TurnstileCaptcha } from '@/components/ui/TurnstileCaptcha'
+import { Flaticon } from '@/components/ui/Flaticon'
 
 interface ContactFormProps {
   locale: string
@@ -89,7 +90,11 @@ export function ContactForm({ locale, topics = [], responseTime }: ContactFormPr
           }`}
         >
           <div className="flex items-center gap-2">
-            <span>{result.success ? '✓' : '⚠'}</span>
+            <Flaticon
+              name={result.success ? 'check' : 'alert-circle'}
+              size={16}
+              className={result.success ? 'text-emerald-700' : 'text-rose-700'}
+            />
             <span>{result.message}</span>
           </div>
           {result.success && responseTime && (
@@ -208,7 +213,7 @@ export function ContactForm({ locale, topics = [], responseTime }: ContactFormPr
 
       {/* Privacy & Trust Assurance */}
       <div className="p-3.5 rounded-xl bg-[#FAF8F5] border border-[#E5E0D6] flex items-center gap-2.5 text-xs text-[#5C5A55]">
-        <span className="text-sm">🔒</span>
+        <Flaticon name="shield" size={15} className="text-[#bd3227] shrink-0" />
         <span>
           {isAr
             ? 'تلتزم الجمعية بالسرية التامة لبياناتك الشخصية ولن يتم استخدامها إلا للتواصل معك بخصوص هذا الطلب.'

@@ -10,6 +10,7 @@ export type FlaticonName =
   | 'calendar'
   | 'ticket'
   | 'newspaper'
+  | 'news'
   | 'mail'
   | 'chat'
   | 'scroll'
@@ -20,11 +21,14 @@ export type FlaticonName =
   | 'shield'
   | 'morocco-star'
   | 'heart-donation'
+  | 'heart'
   | 'brain'
   | 'file'
+  | 'document'
   | 'faq'
   | 'eye'
   | 'megaphone'
+  | 'bullhorn'
   | 'sparkles'
   | 'star'
   | 'music'
@@ -43,6 +47,14 @@ export type FlaticonName =
   | 'external'
   | 'check'
   | 'cross'
+  | 'clock'
+  | 'target'
+  | 'alert-circle'
+  | 'credit-card'
+  | 'bank'
+  | 'certificate'
+  | 'edit'
+  | 'contract'
 
 const EMOJI_TO_NAME: Record<string, FlaticonName> = {
   // Creative & Cultural
@@ -212,26 +224,33 @@ const ICON_PATHS: Record<FlaticonName, React.ReactNode> = {
   theater: (
     <>
       <path
-        d="M9 3C5.13 3 2 6.13 2 10c0 3.31 2.3 6.09 5.37 6.81l.46 2.19c.1.48.52.82 1.01.82.35 0 .68-.17.88-.47L11.5 17h.5c.34 0 .68-.03 1.01-.08C11.75 15.35 11 13.27 11 11c0-2.82 1.25-5.36 3.24-7.07C12.75 3.35 10.94 3 9 3z"
+        d="M10 4c-4.4 0-8 3.58-8 8 0 3.7 2.65 6.78 6.27 7.7L8.5 22l3-1.8c.8.13 1.63.2 2.5.2 4.4 0 8-3.58 8-8s-3.6-8-8-8h-4z"
         opacity="0.2"
       />
-      <circle cx="6.5" cy="9" r="1.2" />
-      <circle cx="10" cy="9" r="1.2" />
-      <path d="M6 13c.6 1 1.6 1.5 2.5 1.5s1.9-.5 2.5-1.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" fill="none" />
+      <circle cx="7" cy="11" r="1.5" />
+      <circle cx="13" cy="11" r="1.5" />
       <path
-        d="M16 7c-3.31 0-6 2.69-6 6 0 2.97 2.16 5.43 5 5.91V21c0 .55.45 1 1 1s1-.45 1-1v-2.09c2.84-.48 5-2.94 5-5.91 0-3.31-2.69-6-6-6zm0 10c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z"
+        d="M6.5 14.5c1 1.5 5 1.5 6 0"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        fill="none"
       />
-      <circle cx="14.5" cy="12" r="1" />
-      <circle cx="17.5" cy="12" r="1" />
-      <path d="M14.5 15c.5.5 1 .8 1.5.8s1-.3 1.5-.8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" fill="none" />
+      <path
+        d="M14 6c3.87 0 7 2.96 7 6.6 0 3.04-2.17 5.61-5.15 6.37l-.23 1.8-2.18-1.31c-.73.1-1.48.14-2.24.14"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        fill="none"
+      />
     </>
   ),
 
   // Museum / Heritage / Institution
   museum: (
     <>
-      <path d="M12 2L2 7v2h20V7L12 2z" opacity="0.25" />
-      <path d="M12 2L2 7v2h20V7L12 2zm8 5H4l8-4 8 4zM4 11h2v7H4zm5 0h2v7H9zm5 0h2v7h-2zm5 0h2v7h-2zM2 20h20v2H2z" />
+      <path d="M12 2L4 6v2h16V6L12 2z" opacity="0.3" />
+      <path d="M12 2L3 6.5V9h18V6.5L12 2zm7 5.5H5L12 4l7 3.5zM5 11h2.5v7H5zm4.75 0h2.5v7h-2.5zm4.75 0h2.5v7H14.5zm4.75 0h2.5v7h-2.5zM2 20h20v2H2z" />
     </>
   ),
 
@@ -247,10 +266,17 @@ const ICON_PATHS: Record<FlaticonName, React.ReactNode> = {
   handshake: (
     <>
       <path
-        d="M21.71 8.71l-3.42-3.42a2.008 2.008 0 0 0-2.83 0L13.5 7.25 11.54 5.3a1.996 1.996 0 0 0-2.83 0L2.29 11.71a1.003 1.003 0 0 0 0 1.42l3.42 3.42c.78.78 2.05.78 2.83 0l2.46-2.46 2.46 2.46c.78.78 2.05.78 2.83 0l5.42-5.42c.39-.39.39-1.03 0-1.42z"
-        opacity="0.18"
+        d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+        opacity="0.25"
       />
-      <path d="M21.71 8.71l-3.42-3.42a2.008 2.008 0 0 0-2.83 0L13.5 7.25 11.54 5.3a1.996 1.996 0 0 0-2.83 0L2.29 11.71a1.003 1.003 0 0 0 0 1.42l3.42 3.42c.78.78 2.05.78 2.83 0l2.46-2.46 2.46 2.46c.78.78 2.05.78 2.83 0l5.42-5.42c.39-.39.39-1.03 0-1.42zm-8.21 6.88l-2.46-2.46a1.003 1.003 0 0 0-1.42 0l-2.46 2.46-2.71-2.71 5.71-5.71 2.46 2.46a1.003 1.003 0 0 0 1.42 0l2.46-2.46 2.71 2.71-5.71 5.71z" />
+      <path
+        d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35zM2 19l4-3c2-1 4-1 6 0l2 1M22 19l-4-3c-2-1-4-1-6 0l-2 1"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        fill="none"
+      />
     </>
   ),
 
@@ -432,17 +458,31 @@ const ICON_PATHS: Record<FlaticonName, React.ReactNode> = {
   // Music / Notes
   music: (
     <>
-      <circle cx="9" cy="18" r="3" opacity="0.3" />
-      <circle cx="17" cy="16" r="3" opacity="0.3" />
-      <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h6V3h-8zm-2 16c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm8-2c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z" />
+      <ellipse cx="7" cy="17" rx="3.5" ry="2.5" opacity="0.3" transform="rotate(-15 7 17)" />
+      <ellipse cx="17" cy="14" rx="3.5" ry="2.5" opacity="0.3" transform="rotate(-15 17 14)" />
+      <path d="M9 16V5l10-2v11" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+      <path d="M9 9l10-2" stroke="currentColor" strokeWidth="2" />
+      <ellipse cx="7" cy="17" rx="3" ry="2" transform="rotate(-15 7 17)" />
+      <ellipse cx="17" cy="14" rx="3" ry="2" transform="rotate(-15 17 14)" />
     </>
   ),
 
   // Rocket / Launch
   rocket: (
     <>
-      <path d="M12 2.5s-4 4.5-4 10.5h8c0-6-4-10.5-4-10.5z" opacity="0.25" />
-      <path d="M12 2.5s-4 4.5-4 10.5h8c0-6-4-10.5-4-10.5zm0 8c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm-4 4.5l-2.5 3.5h13l-2.5-3.5H8zm-3 5.5v1.5h14V20.5H5z" />
+      <path
+        d="M18 3s-6 1-9 6c-1.5 2.5-1.5 5-1 7l5 5c2 .5 4.5.5 7-1 5-3 6-9 6-9l-8-8z"
+        opacity="0.25"
+      />
+      <circle cx="14.5" cy="9.5" r="2" />
+      <path
+        d="M18 3s-6 1-9 6c-1.5 2.5-1.5 5-1 7l5 5c2 .5 4.5.5 7-1 5-3 6-9 6-9l-8-8zm-9.5 9l-3.5 1.5 1 3.5 2.5-.5M14 19.5l1.5 3.5 3.5-1-.5-2.5M7 17l-3 3 2 1-1 2 3-1 1 2 2-3"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        fill="none"
+      />
     </>
   ),
 
@@ -545,6 +585,84 @@ const ICON_PATHS: Record<FlaticonName, React.ReactNode> = {
   cross: (
     <>
       <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
+    </>
+  ),
+
+  // Clock / Time
+  clock: (
+    <>
+      <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z" />
+    </>
+  ),
+
+  // Target / Objectives
+  target: (
+    <>
+      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm0-14c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm0 10c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm0-6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" />
+    </>
+  ),
+
+  // Alert Circle / Warning
+  'alert-circle': (
+    <>
+      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z" />
+    </>
+  ),
+
+  // Credit Card / CMI
+  'credit-card': (
+    <>
+      <path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z" />
+    </>
+  ),
+
+  // Bank / RIB
+  bank: (
+    <>
+      <path d="M4 10v7h3v-7H4zm6 0v7h3v-7h-3zM2 22h19v-3H2v3zm14-12v7h3v-7h-3zm-4.5-9L2 6v2h19V6l-9.5-5z" />
+    </>
+  ),
+
+  // Certificate / Receipt
+  certificate: (
+    <>
+      <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z" />
+    </>
+  ),
+
+  // Edit / Form
+  edit: (
+    <>
+      <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" />
+    </>
+  ),
+
+  // Contract / Agreement
+  contract: (
+    <>
+      <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z" />
+    </>
+  ),
+
+  // Aliases for convenience
+  news: (
+    <>
+      <path d="M22 3l-1.67 1.67L18.67 3 17 4.67 15.33 3l-1.66 1.67L12 3l-1.67 1.67L8.67 3 7 4.67 5.33 3 3.67 4.67 2 3v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V3zM11 19H4v-6h7v6zm9 0h-7v-2h7v2zm0-4h-7v-2h7v2zm0-4H4V8h16v3z" />
+    </>
+  ),
+  bullhorn: (
+    <>
+      <path d="M4 10v4h3l4 4V6L7 10H4zm13.5 2c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM15 4v2.06c2.89.86 5 3.54 5 6.94s-2.11 6.08-5 6.94V22c4.01-.91 7-4.49 7-9s-2.99-8.09-7-9z" />
+    </>
+  ),
+  document: (
+    <>
+      <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z" />
+    </>
+  ),
+  heart: (
+    <>
+      <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
     </>
   ),
 }

@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { IconWithFallback } from '@/components/ui/IconWithFallback'
+import { Flaticon } from '@/components/ui/Flaticon'
 import type { AreaItemConfig } from '@/lib/settings'
 
 interface AreaItem {
@@ -488,7 +489,7 @@ export function AreasSection({
 
                 <div className="relative z-10">
                   <div className="flex items-center justify-between mb-5">
-                    <div className="w-14 h-14 rounded-2xl bg-white border border-[#e5e0d6] flex items-center justify-center p-2.5 text-3xl shadow-2xs group-hover:scale-105 transition-transform overflow-hidden">
+                    <div className={`w-14 h-14 rounded-2xl bg-white border border-[#e5e0d6] flex items-center justify-center p-2.5 shadow-2xs group-hover:scale-105 transition-transform overflow-hidden ${area.accent}`}>
                       <IconWithFallback
                         src={area.iconImg}
                         fallbackEmoji={area.icon}
@@ -553,7 +554,7 @@ export function AreasSection({
             {/* Modal Header */}
             <div className="p-6 sm:p-7 border-b border-[#E5E0D6] flex items-start justify-between gap-4 relative bg-[#FAF8F5]/50">
               <div className="flex items-start gap-4">
-                <div className="w-14 h-14 rounded-2xl bg-white border border-[#e5e0d6] flex items-center justify-center p-2.5 text-3xl shadow-sm shrink-0">
+                <div className={`w-14 h-14 rounded-2xl bg-white border border-[#e5e0d6] flex items-center justify-center p-2.5 shadow-sm shrink-0 ${selectedArea.accent}`}>
                   <IconWithFallback
                     src={selectedArea.iconImg}
                     fallbackEmoji={selectedArea.icon}
@@ -602,8 +603,8 @@ export function AreasSection({
               {/* Strategic Objectives */}
               <div className="space-y-3">
                 <div className="flex items-center gap-2">
-                  <span className="w-6 h-6 rounded-lg bg-[#231f20] text-white flex items-center justify-center text-xs font-bold shrink-0">
-                    🎯
+                  <span className="w-6 h-6 rounded-lg bg-[#231f20] text-white flex items-center justify-center shrink-0">
+                    <Flaticon name="morocco-star" size={13} className="text-[#ffd22f]" />
                   </span>
                   <h4 className="text-xs sm:text-sm font-black text-[#231f20] uppercase tracking-wide">
                     {isAr
@@ -636,8 +637,8 @@ export function AreasSection({
                 selectedArea.initiatives.length > 0 && (
                   <div className="space-y-3 pt-4 border-t border-[#E5E0D6]">
                     <div className="flex items-center gap-2">
-                      <span className="w-6 h-6 rounded-lg bg-[#bd3227] text-white flex items-center justify-center text-xs font-bold shrink-0">
-                        ✨
+                      <span className="w-6 h-6 rounded-lg bg-[#bd3227] text-white flex items-center justify-center shrink-0">
+                        <Flaticon name="sparkles" size={13} className="text-[#ffd22f]" />
                       </span>
                       <h4 className="text-xs sm:text-sm font-black text-[#231f20] uppercase tracking-wide">
                         {isAr

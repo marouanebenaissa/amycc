@@ -6,6 +6,7 @@ import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { createPublicClient } from '@/lib/supabase/public'
 import { ImageWithFallback } from '@/components/ui/ImageWithFallback'
+import { Flaticon } from '@/components/ui/Flaticon'
 import { EventRegistrationForm } from '@/components/events/EventRegistrationForm'
 import { constructMetadata, getSiteUrl } from '@/lib/seo/config'
 import { getEventJsonLd, getBreadcrumbJsonLd, JsonLd } from '@/lib/seo/schema'
@@ -244,12 +245,12 @@ export default async function EventDetailPage(props: {
           <div className="bg-white rounded-3xl border border-[#e5e0d6] p-6 sm:p-10 shadow-card space-y-6">
             <div className="flex flex-wrap items-center gap-2 sm:gap-3">
               <span className="px-3.5 py-1.5 rounded-xl text-2xs sm:text-xs font-black bg-[#231f20] text-white flex items-center gap-1.5">
-                <span>📅</span>
+                <Flaticon name="calendar" size={13} className="text-[#ffd22f] shrink-0" />
                 <span>{formattedFullDate}</span>
               </span>
 
               <span className="px-3 py-1.5 rounded-xl text-2xs sm:text-xs font-bold bg-[#FAF8F5] border border-[#e5e0d6] text-[#231f20] flex items-center gap-1.5">
-                <span>📍</span>
+                <Flaticon name="pin" size={13} className="text-[#bd3227] shrink-0" />
                 <span>{event.venue || (isAr ? 'المركز الثقافي' : 'Cultural Center')} {event.city ? `• ${event.city}` : ''}</span>
               </span>
 
@@ -277,8 +278,9 @@ export default async function EventDetailPage(props: {
               </span>
 
               {event.capacity && (
-                <span className="px-3 py-1.5 rounded-xl text-2xs sm:text-xs font-bold bg-[#FAF8F5] text-[#5C5A55]">
-                  👥 {isAr ? `الطاقة: ${event.capacity} مقعد` : isFr ? `Capacité : ${event.capacity} places` : `Capacity: ${event.capacity}`}
+                <span className="px-3 py-1.5 rounded-xl text-2xs sm:text-xs font-bold bg-[#FAF8F5] text-[#5C5A55] flex items-center gap-1.5">
+                  <Flaticon name="users" size={13} className="text-[#5C5A55] shrink-0" />
+                  <span>{isAr ? `الطاقة: ${event.capacity} مقعد` : isFr ? `Capacité : ${event.capacity} places` : `Capacity: ${event.capacity}`}</span>
                 </span>
               )}
             </div>
@@ -296,7 +298,7 @@ export default async function EventDetailPage(props: {
               <div className="rounded-3xl border border-[#e5e0d6] bg-white overflow-hidden shadow-card">
                 <div className="p-4 sm:p-5 border-b border-[#E5E0D6] flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <span className="text-base">🎨</span>
+                    <Flaticon name="palette" size={16} className="text-[#bd3227] shrink-0" />
                     <h2 className="text-xs sm:text-sm font-black text-[#231f20]">
                       {isAr ? 'البوستر والملصق الرسمي للفعالية' : isFr ? 'Affiche officielle' : 'Official Event Poster'}
                     </h2>
@@ -319,7 +321,7 @@ export default async function EventDetailPage(props: {
                   ) : (
                     <div className="absolute inset-0 bg-gradient-to-br from-[#231f20] via-[#231f20] to-[#181516] flex flex-col items-center justify-center p-8 text-center text-white">
                       <div className="w-20 h-20 rounded-3xl bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-4xl mb-4 shadow-xl">
-                        🎭
+                        <Flaticon name="theater" size={44} className="text-[#ffd22f]" />
                       </div>
                       <span className="text-lg sm:text-xl font-black max-w-md">
                         {title}
@@ -333,11 +335,13 @@ export default async function EventDetailPage(props: {
 
                   {/* Badge on Poster */}
                   <div className="absolute bottom-4 start-4 end-4 flex items-center justify-between text-white text-xs font-bold">
-                    <span className="px-3 py-1.5 rounded-xl bg-black/60 backdrop-blur-md border border-white/20">
-                      📍 {event.venue || 'الفضاء الثقافي'} {event.city ? `• ${event.city}` : ''}
+                    <span className="px-3 py-1.5 rounded-xl bg-black/60 backdrop-blur-md border border-white/20 flex items-center gap-1.5">
+                      <Flaticon name="pin" size={13} className="text-[#ffd22f] shrink-0" />
+                      <span>{event.venue || 'الفضاء الثقافي'} {event.city ? `• ${event.city}` : ''}</span>
                     </span>
-                    <span className="px-3 py-1.5 rounded-xl bg-[#bd3227] text-white shadow-md">
-                      🕒 {formattedTime}
+                    <span className="px-3 py-1.5 rounded-xl bg-[#bd3227] text-white shadow-md flex items-center gap-1.5">
+                      <Flaticon name="clock" size={13} className="text-white shrink-0" />
+                      <span>{formattedTime}</span>
                     </span>
                   </div>
                 </div>
@@ -367,20 +371,20 @@ export default async function EventDetailPage(props: {
                 {/* Guidelines Box */}
                 <div className="p-5 sm:p-6 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6] space-y-3">
                   <h3 className="text-xs sm:text-sm font-black text-[#231f20] flex items-center gap-2">
-                    <span>📌</span>
+                    <Flaticon name="pin" size={14} className="text-[#bd3227] shrink-0" />
                     <span>{isAr ? 'إرشادات وشروط المشاركة' : isFr ? 'Consignes importantes' : 'Important Guidelines'}</span>
                   </h3>
                   <ul className="text-2xs sm:text-xs text-[#5C5A55] space-y-2 font-medium">
                     <li className="flex items-start gap-2">
-                      <span className="text-[#231f20] font-bold">✓</span>
+                      <Flaticon name="check" size={14} className="text-emerald-600 shrink-0 mt-0.5" />
                       <span>{isAr ? 'يرجى مراجعة تفاصيل وشروط التذاكر الموضحة في برنامج وبطاقة الفعالية.' : isFr ? 'Veuillez consulter les conditions et modalités indiquées dans le programme.' : 'Please check the terms and ticket conditions detailed in the event program.'}</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <span className="text-[#231f20] font-bold">✓</span>
+                      <Flaticon name="check" size={14} className="text-emerald-600 shrink-0 mt-0.5" />
                       <span>{isAr ? 'يرجى ملء النموذج الجانبي لتأكيد تسجيلك واستلام تذكرة الحضور الرسمية.' : 'Please complete the form to confirm your seat and receive your ticket.'}</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <span className="text-[#231f20] font-bold">✓</span>
+                      <Flaticon name="check" size={14} className="text-emerald-600 shrink-0 mt-0.5" />
                       <span>{isAr ? 'يرجى الحضور إلى عين المكان 15 دقيقة قبل انطلاق الفعالية لتسهيل الاستقبال وتأكيد الدخول.' : 'Please arrive 15 minutes before the start time.'}</span>
                     </li>
                   </ul>
