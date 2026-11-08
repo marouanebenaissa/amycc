@@ -1,23 +1,23 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
   <!-- Left Notehead (Solid Oval, Angled) -->
-  <ellipse cx="20" cy="46" rx="7" ry="5.5" transform="rotate(-20 20 46)" fill="currentColor"/>
+  <ellipse cx="18" cy="45" rx="6.5" ry="5" transform="rotate(-20 18 45)" fill="currentColor"/>
   <!-- Right Notehead (Solid Oval, Angled) -->
-  <ellipse cx="44" cy="38" rx="7" ry="5.5" transform="rotate(-20 44 38)" fill="currentColor"/>
+  <ellipse cx="40" cy="37" rx="6.5" ry="5" transform="rotate(-20 40 37)" fill="currentColor"/>
   
   <!-- Left Stem -->
-  <path d="M25 44V16" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/>
+  <path d="M23 43V16" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
   <!-- Right Stem -->
-  <path d="M49 36V10" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/>
+  <path d="M45 35V10" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
   
-  <!-- Top Connecting Musical Beams (Double Beam) -->
-  <path d="M25 16l24-6v6l-24 6z" fill="#ffd22f"/>
-  <path d="M25 16l24-6" stroke="currentColor" stroke-width="4.5" stroke-linecap="round"/>
-  <path d="M25 24l24-6" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/>
+  <!-- Double Musical Beam -->
+  <path d="M23 16l22-6v5l-22 6z" fill="#ffd22f"/>
+  <path d="M23 16l22-6" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+  <path d="M23 23l22-6" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
 
-  <!-- Acoustic Sound Radiance -->
-  <path d="M53 22c3 2 5 6 5 10" stroke="#d2a82b" stroke-width="2.5" stroke-linecap="round"/>
-  <path d="M57 18c5 3 8 9 8 15" stroke="#d2a82b" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="1 3"/>
+  <!-- Acoustic Melodic Resonance -->
+  <path d="M49 22c2.5 2 4 5 4 8" stroke="#d2a82b" stroke-width="2.2" stroke-linecap="round"/>
+  <path d="M54 18c4 3 6.5 7.5 6.5 12" stroke="#d2a82b" stroke-width="2.2" stroke-linecap="round"/>
   
   <!-- Harmony Sparkle -->
-  <circle cx="12" cy="22" r="2" fill="#ffd22f"/>
+  <circle cx="11" cy="22" r="1.8" fill="#ffd22f"/>
 </svg>

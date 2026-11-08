@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { Logo } from '@/components/ui/Logo'
-import { Flaticon } from '@/components/ui/Flaticon'
+import { ProIcon } from '@/components/ui/ProIcon'
 import type { Dictionary } from '@/lib/i18n/dictionaries'
 
 interface FooterProps {
@@ -126,7 +126,7 @@ export function Footer({ locale, dict, contactEmail: initialEmail, initialSocial
             {/* Quick Contact & Location */}
             <div className="pt-1 space-y-1.5 text-xs">
               <div className="flex items-center gap-2">
-                <Flaticon name="mail" size={13} className="text-[#ffd22f] shrink-0" />
+                <ProIcon name="mail" size={13} className="text-[#ffd22f] shrink-0" />
                 <a
                   href={`mailto:${displayEmail}`}
                   className="text-xs text-[#cfcac2] hover:text-[#ffd22f] transition-colors font-mono"
@@ -135,7 +135,7 @@ export function Footer({ locale, dict, contactEmail: initialEmail, initialSocial
                 </a>
               </div>
               <div className="flex items-center gap-2 text-2xs text-[#8a857b]">
-                <Flaticon name="pin" size={13} className="text-[#d2a82b] shrink-0" />
+                <ProIcon name="pin" size={13} className="text-[#d2a82b] shrink-0" />
                 <span>{isAr ? 'مراكش • المملكة المغربية' : 'Marrakech • Kingdom of Morocco'}</span>
               </div>
             </div>
@@ -315,7 +315,7 @@ export function Footer({ locale, dict, contactEmail: initialEmail, initialSocial
             {/* Title & Subtitle */}
             <div className="space-y-1 max-w-xl">
               <div className="flex items-center gap-2">
-                <Flaticon name="mail" size={16} className="text-[#ffd22f] shrink-0" />
+                <ProIcon name="mail" size={16} className="text-[#ffd22f] shrink-0" />
                 <h4 className="text-sm font-bold text-white">
                   {isAr
                     ? 'النشرة الثقافية لجمعية روح الفنون والثقافة (AMYCC)'
@@ -337,7 +337,7 @@ export function Footer({ locale, dict, contactEmail: initialEmail, initialSocial
             <div className="w-full lg:w-auto shrink-0">
               {subscribed ? (
                 <div className="px-4 py-2.5 rounded-xl bg-[#181516] border border-[#ffd22f]/50 text-xs text-[#ffd22f] font-bold flex items-center gap-2">
-                  <Flaticon name="check" size={14} className="text-emerald-400 shrink-0" />
+                  <ProIcon name="check" size={14} className="text-emerald-400 shrink-0" />
                   <span>
                     {isAr
                       ? 'تم تسجيل بريدك بنجاح، شكراً لاهتمامك!'
@@ -410,7 +410,7 @@ export function Footer({ locale, dict, contactEmail: initialEmail, initialSocial
               className="text-[#8a857b] hover:text-[#ffd22f] transition-colors text-3xs flex items-center gap-1.5 font-mono"
               title={isAr ? 'بوابة إدارة المنصة' : 'Admin Portal'}
             >
-              <Flaticon name="shield" size={11} className="text-[#8a857b] shrink-0" />
+              <ProIcon name="shield" size={11} className="text-[#8a857b] shrink-0" />
               <span>{isAr ? 'الإدارة' : 'Admin'}</span>
             </Link>
           </div>

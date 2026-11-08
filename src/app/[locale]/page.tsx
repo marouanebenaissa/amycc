@@ -8,7 +8,7 @@ import { FaqAccordion } from '@/components/home/FaqAccordion'
 import { AreasSection } from '@/components/home/AreasSection'
 import { IconWithFallback } from '@/components/ui/IconWithFallback'
 import { ImageWithFallback } from '@/components/ui/ImageWithFallback'
-import { Flaticon } from '@/components/ui/Flaticon'
+import { ProIcon } from '@/components/ui/ProIcon'
 import { constructMetadata } from '@/lib/seo/config'
 import { METADATA_CATALOG } from '@/lib/seo/metadata-catalog'
 import { getOrganizationJsonLd, getWebsiteJsonLd, JsonLd } from '@/lib/seo/schema'
@@ -517,13 +517,12 @@ export default async function HomePage(props: { params: Promise<{ locale: string
               {/* Mission */}
               <div className="luxury-card p-8 flex flex-col justify-between group">
                 <div>
-                  <div className="w-14 h-14 rounded-2xl bg-[#231f20] text-white flex items-center justify-center font-bold text-xl mb-6 shadow-xs p-2.5 overflow-hidden group-hover:scale-105 transition-transform">
-                    <IconWithFallback
-                      src="/icons/mission.png"
-                      fallbackEmoji="✦"
-                      alt={dict.about.mission_title}
-                      size={32}
-                      className="w-full h-full object-contain"
+                  <div className="w-14 h-14 rounded-2xl bg-[#231f20] text-[#ffd22f] flex items-center justify-center font-bold text-xl mb-6 shadow-xs p-2.5 overflow-hidden group-hover:scale-105 transition-transform">
+                    <ProIcon
+                      name="mission"
+                      size={28}
+                      className="text-[#ffd22f]"
+                      aria-label={dict.about.mission_title}
                     />
                   </div>
                   <h3 className="text-xl font-black text-[#231f20] mb-3">
@@ -553,12 +552,11 @@ export default async function HomePage(props: { params: Promise<{ locale: string
                 <div className="absolute top-0 end-0 w-24 h-24 bg-[#fde8e7] rounded-bl-full pointer-events-none" />
                 <div className="relative z-10">
                   <div className="w-14 h-14 rounded-2xl bg-[#bd3227] text-white flex items-center justify-center font-bold text-xl mb-6 shadow-xs p-2.5 overflow-hidden group-hover:scale-105 transition-transform">
-                    <IconWithFallback
-                      src="/icons/vision.png"
-                      fallbackEmoji="★"
-                      alt={dict.about.vision_title}
-                      size={32}
-                      className="w-full h-full object-contain"
+                    <ProIcon
+                      name="vision"
+                      size={28}
+                      className="text-white"
+                      aria-label={dict.about.vision_title}
                     />
                   </div>
                   <h3 className="text-xl font-black text-[#231f20] mb-3">
@@ -587,12 +585,11 @@ export default async function HomePage(props: { params: Promise<{ locale: string
               <div className="luxury-card p-8 flex flex-col justify-between group">
                 <div>
                   <div className="w-14 h-14 rounded-2xl bg-[#d2a82b] text-white flex items-center justify-center font-bold text-xl mb-6 shadow-xs p-2.5 overflow-hidden group-hover:scale-105 transition-transform">
-                    <IconWithFallback
-                      src="/icons/values.png"
-                      fallbackEmoji="♥"
-                      alt={dict.about.values_title}
-                      size={32}
-                      className="w-full h-full object-contain"
+                    <ProIcon
+                      name="values"
+                      size={28}
+                      className="text-white"
+                      aria-label={dict.about.values_title}
                     />
                   </div>
                   <h3 className="text-xl font-black text-[#231f20] mb-3">
@@ -626,7 +623,7 @@ export default async function HomePage(props: { params: Promise<{ locale: string
         <section className="bg-gradient-to-r from-[#231f20] via-[#231f20] to-[#231f20] py-14 px-4 text-center text-white relative overflow-hidden border-y border-[#d2a82b]">
           <div className="absolute inset-0 moroccan-pattern opacity-10 pointer-events-none" />
           <div className="max-w-4xl mx-auto relative z-10 space-y-3">
-            <span className="text-3xl block text-[#ffd22f]">❝</span>
+            <ProIcon name="quote" size={30} className="text-[#ffd22f] mx-auto block mb-2" />
             <blockquote className="text-xl sm:text-2xl lg:text-3xl font-extrabold leading-snug tracking-tight text-[#F5F3EE]">
               {isAr
                 ? '«الفنون ليست مجرد تعبير جمالي، بل هي رافعة حقيقية للتنمية البشرية، وإطلاق طاقات الشباب، وترسيخ الهوية والتنوع الثقافي المغربي»'
@@ -686,7 +683,7 @@ export default async function HomePage(props: { params: Promise<{ locale: string
                 <div className="lg:col-span-7 space-y-6">
                   {flagshipBadge && (
                     <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-bold bg-[#d2a82b] text-[#ffd22f] border border-[#d2a82b]/40">
-                      <span>★</span>
+                      <ProIcon name="star" size={12} className="text-[#ffd22f] fill-[#ffd22f]" />
                       <span>{flagshipBadge}</span>
                     </div>
                   )}
@@ -846,7 +843,7 @@ export default async function HomePage(props: { params: Promise<{ locale: string
                           {prog.category}
                         </span>
                         <span className="text-3xs font-medium text-[#5C5A55] flex items-center gap-1">
-                          <Flaticon name="pin" size={12} className="text-[#bd3227]" />
+                          <ProIcon name="pin" size={12} className="text-[#bd3227]" />
                           <span>{prog.city || 'Morocco'}</span>
                         </span>
                       </div>
@@ -918,7 +915,7 @@ export default async function HomePage(props: { params: Promise<{ locale: string
                     <div>
                       <div className="flex items-center justify-between mb-3">
                         <span className="text-xs font-bold text-[#231f20] flex items-center gap-1.5">
-                          <Flaticon name="calendar" size={13} className="text-[#bd3227]" />
+                          <ProIcon name="calendar" size={13} className="text-[#bd3227]" />
                           <span>{formattedDate}</span>
                         </span>
                         <span
@@ -939,7 +936,7 @@ export default async function HomePage(props: { params: Promise<{ locale: string
                       </h3>
 
                       <p className="text-2xs text-[#5C5A55] flex items-center gap-1 mb-4">
-                        <Flaticon name="pin" size={12} className="text-[#bd3227]" />
+                        <ProIcon name="pin" size={12} className="text-[#bd3227]" />
                         <span>{ev.venue || ev.city || 'Morocco'}</span>
                       </p>
 
@@ -1109,10 +1106,10 @@ export default async function HomePage(props: { params: Promise<{ locale: string
             {/* Verified Partner Categories Grid */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto mb-10">
               {[
-                { title: isAr ? 'المراكز الثقافية ودور الشباب' : 'Cultural & Youth Centers', desc: isAr ? 'وطنياً ودولياً' : 'National & International', icon: '🏛️', iconImg: '/icons/centers.png' },
-                { title: isAr ? 'المؤسسات التعليمية' : 'Educational Institutes', desc: isAr ? 'مدارس وجامعات' : 'Schools & Universities', icon: '🎓', iconImg: '/icons/education.png' },
-                { title: isAr ? 'منظمات المجتمع المدني' : 'Civil Society Organizations', desc: isAr ? 'جمعيات ومنظمات' : 'NGOs & Associations', icon: '🤝', iconImg: '/icons/ngo.png' },
-                { title: isAr ? 'الرعاية المؤسسية والقطاع الخاص' : 'Private Sector Sponsorship', desc: isAr ? 'دعم ثقافي واجتماعي' : 'Cultural Sponsorship', icon: '🏢', iconImg: '/icons/sponsors.png' },
+                { title: isAr ? 'المراكز الثقافية ودور الشباب' : 'Cultural & Youth Centers', desc: isAr ? 'وطنياً ودولياً' : 'National & International', icon: '🏛️', iconImg: '/icons/centers.svg' },
+                { title: isAr ? 'المؤسسات التعليمية' : 'Educational Institutes', desc: isAr ? 'مدارس وجامعات' : 'Schools & Universities', icon: '🎓', iconImg: '/icons/education.svg' },
+                { title: isAr ? 'منظمات المجتمع المدني' : 'Civil Society Organizations', desc: isAr ? 'جمعيات ومنظمات' : 'NGOs & Associations', icon: '🤝', iconImg: '/icons/ngo.svg' },
+                { title: isAr ? 'الرعاية المؤسسية والقطاع الخاص' : 'Private Sector Sponsorship', desc: isAr ? 'دعم ثقافي واجتماعي' : 'Cultural Sponsorship', icon: '🏢', iconImg: '/icons/sponsors.svg' },
               ].map((tier, idx) => (
                 <div
                   key={idx}

@@ -7,7 +7,7 @@ import { METADATA_CATALOG } from '@/lib/seo/metadata-catalog'
 import { getBreadcrumbJsonLd, JsonLd } from '@/lib/seo/schema'
 import { locales, type Locale, defaultLocale } from '@/lib/i18n/config'
 import Link from 'next/link'
-import { Flaticon } from '@/components/ui/Flaticon'
+import { ProIcon } from '@/components/ui/ProIcon'
 
 export async function generateMetadata(props: {
   params: Promise<{ locale: string }>
@@ -380,7 +380,7 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
               </span>
 
               <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#d2a82b]/10 border border-[#d2a82b]/20 text-[#d2a82b] text-xs font-bold shadow-2xs">
-                <Flaticon name="pin" size={13} className="text-[#d2a82b]" />
+                <ProIcon name="pin" size={13} className="text-[#d2a82b]" />
                 <span>
                   {isAr
                     ? 'الانطلاق: مراكش الحمراء 🇲🇦'
@@ -425,45 +425,52 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
             <div className="pt-2 flex flex-wrap items-center justify-center gap-2 sm:gap-3">
               <a
                 href="#profile"
-                className="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-white border border-[#cfc7b9] text-[#231f20] hover:border-[#bd3227] hover:text-[#bd3227] transition-colors shadow-2xs"
+                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-white border border-[#cfc7b9] text-[#231f20] hover:border-[#bd3227] hover:text-[#bd3227] transition-colors shadow-2xs"
               >
-                {isAr ? '🏷️ الهوية والنبذة' : isFr ? '🏷️ Identité & Statut' : '🏷️ Identity'}
+                <ProIcon name="tag" size={14} className="text-[#bd3227] shrink-0" />
+                <span>{isAr ? 'الهوية والنبذة' : isFr ? 'Identité & Statut' : 'Identity'}</span>
               </a>
               <a
                 href="#values"
-                className="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-white border border-[#cfc7b9] text-[#231f20] hover:border-[#bd3227] hover:text-[#bd3227] transition-colors shadow-2xs"
+                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-white border border-[#cfc7b9] text-[#231f20] hover:border-[#bd3227] hover:text-[#bd3227] transition-colors shadow-2xs"
               >
-                {isAr ? '💎 قيمنا الجوهرية (7)' : isFr ? '💎 Valeurs Piliers (7)' : '💎 Core Values (7)'}
+                <ProIcon name="diamond" size={14} className="text-[#d2a82b] shrink-0" />
+                <span>{isAr ? 'قيمنا الجوهرية (7)' : isFr ? 'Valeurs Piliers (7)' : 'Core Values (7)'}</span>
               </a>
               <a
                 href="#mission"
-                className="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-white border border-[#cfc7b9] text-[#231f20] hover:border-[#bd3227] hover:text-[#bd3227] transition-colors shadow-2xs"
+                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-white border border-[#cfc7b9] text-[#231f20] hover:border-[#bd3227] hover:text-[#bd3227] transition-colors shadow-2xs"
               >
-                {isAr ? '🎯 رسالتنا الميدانية' : isFr ? '🎯 Notre Mission' : '🎯 Our Mission'}
+                <ProIcon name="target" size={14} className="text-[#bd3227] shrink-0" />
+                <span>{isAr ? 'رسالتنا الميدانية' : isFr ? 'Notre Mission' : 'Our Mission'}</span>
               </a>
               <a
                 href="#vision"
-                className="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-white border border-[#cfc7b9] text-[#231f20] hover:border-[#bd3227] hover:text-[#bd3227] transition-colors shadow-2xs"
+                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-white border border-[#cfc7b9] text-[#231f20] hover:border-[#bd3227] hover:text-[#bd3227] transition-colors shadow-2xs"
               >
-                {isAr ? '🔭 رؤيتنا المستقبلية' : isFr ? '🔭 Vision Stratégique' : '🔭 Our Vision'}
+                <ProIcon name="telescope" size={14} className="text-[#231f20] shrink-0" />
+                <span>{isAr ? 'رؤيتنا المستقبلية' : isFr ? 'Vision Stratégique' : 'Our Vision'}</span>
               </a>
               <a
                 href="#roadmap"
-                className="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-white border border-[#cfc7b9] text-[#231f20] hover:border-[#bd3227] hover:text-[#bd3227] transition-colors shadow-2xs"
+                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-white border border-[#cfc7b9] text-[#231f20] hover:border-[#bd3227] hover:text-[#bd3227] transition-colors shadow-2xs"
               >
-                {isAr ? '🗺️ خارطة التوسع' : isFr ? '🗺️ Feuille de Route' : '🗺️ Roadmap'}
+                <ProIcon name="map" size={14} className="text-[#d2a82b] shrink-0" />
+                <span>{isAr ? 'خارطة التوسع' : isFr ? 'Feuille de Route' : 'Roadmap'}</span>
               </a>
               <a
                 href="#objectives"
-                className="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-white border border-[#cfc7b9] text-[#231f20] hover:border-[#bd3227] hover:text-[#bd3227] transition-colors shadow-2xs"
+                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-white border border-[#cfc7b9] text-[#231f20] hover:border-[#bd3227] hover:text-[#bd3227] transition-colors shadow-2xs"
               >
-                {isAr ? '🎯 أهدافنا (6)' : isFr ? '🎯 Nos Objectifs (6)' : '🎯 Objectives (6)'}
+                <ProIcon name="target" size={14} className="text-[#bd3227] shrink-0" />
+                <span>{isAr ? 'أهدافنا (6)' : isFr ? 'Nos Objectifs (6)' : 'Objectives (6)'}</span>
               </a>
               <a
                 href="#governance"
-                className="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-white border border-[#cfc7b9] text-[#231f20] hover:border-[#bd3227] hover:text-[#bd3227] transition-colors shadow-2xs"
+                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-white border border-[#cfc7b9] text-[#231f20] hover:border-[#bd3227] hover:text-[#bd3227] transition-colors shadow-2xs"
               >
-                {isAr ? '🏛️ الهيكلة والتنظيم' : isFr ? '🏛️ Organisation' : '🏛️ Structure'}
+                <ProIcon name="culture" size={14} className="text-[#231f20] shrink-0" />
+                <span>{isAr ? 'الهيكلة والتنظيم' : isFr ? 'Organisation' : 'Structure'}</span>
               </a>
             </div>
           </div>
@@ -585,7 +592,7 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
                 <div className="space-y-5">
                   <div className="flex items-center gap-3">
                     <span className="w-12 h-12 rounded-2xl bg-[#231f20] text-white flex items-center justify-center shadow-xs">
-                      <Flaticon name="museum" size={24} className="text-[#ffd22f]" />
+                      <ProIcon name="museum" size={24} className="text-[#ffd22f]" />
                     </span>
                     <div>
                       <h3 className="text-xl font-black text-[#231f20]">
@@ -626,7 +633,7 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
                     </span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Flaticon name="scroll" size={14} className="text-[#d2a82b]" />
+                    <ProIcon name="scroll" size={14} className="text-[#d2a82b]" />
                     <span>
                       {isAr ? 'النظام الأساسي والداخلي مصادق عليه' : isFr ? 'Statuts & Règlement Approuvés' : 'Official Bylaws Approved'}
                     </span>
@@ -638,7 +645,7 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
               <div className="lg:col-span-5 space-y-4 flex flex-col justify-between">
                 <div className="p-6 rounded-3xl bg-white border border-[#e5e0d6] shadow-2xs hover:border-[#bd3227]/40 transition-all space-y-2">
                   <div className="flex items-center gap-2.5">
-                    <Flaticon name="pin" size={20} className="text-[#bd3227]" />
+                    <ProIcon name="pin" size={20} className="text-[#bd3227]" />
                     <h4 className="text-base font-black text-[#231f20]">
                       {isAr ? 'مراكش — منطلق استراتيجي' : isFr ? 'Marrakech — Tremplin Stratégique' : 'Marrakech — The Launchpad'}
                     </h4>
@@ -654,7 +661,7 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
 
                 <div className="p-6 rounded-3xl bg-white border border-[#e5e0d6] shadow-2xs hover:border-[#231f20]/40 transition-all space-y-2">
                   <div className="flex items-center gap-2.5">
-                    <Flaticon name="handshake" size={20} className="text-[#231f20]" />
+                    <ProIcon name="handshake" size={20} className="text-[#231f20]" />
                     <h4 className="text-base font-black text-[#231f20]">
                       {isAr ? 'العمل التشاركي والمؤسساتي' : isFr ? 'Écosystème Collaboratif' : 'Collaborative Ecosystem'}
                     </h4>
@@ -670,7 +677,7 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
 
                 <div className="p-6 rounded-3xl bg-white border border-[#e5e0d6] shadow-2xs hover:border-[#d2a82b]/40 transition-all space-y-2">
                   <div className="flex items-center gap-2.5">
-                    <span className="text-xl">⚖️</span>
+                    <ProIcon name="scale" size={20} className="text-[#bd3227]" />
                     <h4 className="text-base font-black text-[#231f20]">
                       {isAr ? 'النزاهة والشفافية التامة' : isFr ? 'Intégrité & Transparence' : 'Integrity & Transparency'}
                     </h4>
@@ -726,7 +733,7 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
                   <div className="relative z-10 space-y-4">
                     <div className="flex items-center justify-between">
                       <span className="w-12 h-12 rounded-2xl bg-white border border-[#e5e0d6] flex items-center justify-center shadow-2xs group-hover:scale-110 transition-transform">
-                        <Flaticon icon={v.icon} size={24} className="text-[#bd3227]" />
+                        <ProIcon icon={v.icon} size={24} className="text-[#bd3227]" />
                       </span>
                       <div className="flex items-center gap-2">
                         <span className={`px-2.5 py-1 rounded-full text-xs font-bold ${v.accentBg}`}>
@@ -792,8 +799,8 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
                 <div className="absolute bottom-0 start-0 w-48 h-48 bg-[#d2a82b]/10 rounded-full blur-2xl pointer-events-none" />
 
                 <div className="space-y-5 relative z-10">
-                  <div className="w-14 h-14 rounded-2xl bg-[#bd3227] text-white flex items-center justify-center font-bold text-2xl shadow-xs">
-                    ✦
+                  <div className="w-14 h-14 rounded-2xl bg-[#bd3227] text-white flex items-center justify-center shadow-xs">
+                    <ProIcon name="sparkles" size={26} className="text-white" />
                   </div>
 
                   <span className="text-xs font-bold uppercase tracking-wider text-[#ffd22f] block">
@@ -819,7 +826,7 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
 
                 <div className="pt-6 mt-6 border-t border-[#d2a82b] text-xs font-bold text-[#ffd22f] flex items-center justify-between relative z-10">
                   <div className="flex items-center gap-2">
-                    <span>📍</span>
+                    <ProIcon name="pin" size={14} className="text-[#ffd22f] shrink-0" />
                     <span>
                       {isAr
                         ? 'انطلاقاً من مراكش نحو مختلف جهات المملكة'
@@ -1037,7 +1044,7 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
                     <span className="px-2.5 py-1 rounded-full text-xs font-bold bg-[#ffd22f] text-[#231f20]">
                       {isAr ? 'المرحلة 01' : isFr ? 'Phase 01' : 'Phase 01'}
                     </span>
-                    <span className="text-xs">📍</span>
+                    <ProIcon name="pin" size={16} className="text-[#ffd22f]" />
                   </div>
                   <h4 className="font-black text-base text-white">
                     {isAr ? 'المستوى الإقليمي' : isFr ? 'Échelle Provinciale' : 'Provincial Launch'}
@@ -1059,7 +1066,7 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
                     <span className="px-2.5 py-1 rounded-full text-xs font-bold bg-[#ffd22f] text-[#231f20]">
                       {isAr ? 'المرحلة 02' : isFr ? 'Phase 02' : 'Phase 02'}
                     </span>
-                    <span className="text-xs">🏛️</span>
+                    <ProIcon name="culture" size={16} className="text-[#ffd22f]" />
                   </div>
                   <h4 className="font-black text-base text-white">
                     {isAr ? 'جهات المملكة' : isFr ? 'Régions du Maroc' : 'Regional Reach'}
@@ -1081,7 +1088,7 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
                     <span className="px-2.5 py-1 rounded-full text-xs font-bold bg-[#d2a82b] text-[#231f20]">
                       {isAr ? 'المرحلة 03' : isFr ? 'Phase 03' : 'Phase 03'}
                     </span>
-                    <span className="text-xs">🇲🇦</span>
+                    <ProIcon name="morocco-star" size={16} className="text-[#ffd22f]" />
                   </div>
                   <h4 className="font-black text-base text-white">
                     {isAr ? 'المستوى الوطني' : isFr ? 'Échelle Nationale' : 'National Scale'}
@@ -1103,7 +1110,7 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
                     <span className="px-2.5 py-1 rounded-full text-xs font-bold bg-[#bd3227] text-white">
                       {isAr ? 'المرحلة 04' : isFr ? 'Phase 04' : 'Phase 04'}
                     </span>
-                    <span className="text-xs">🌍</span>
+                    <ProIcon name="globe" size={16} className="text-[#ffd22f]" />
                   </div>
                   <h4 className="font-black text-base text-white">
                     {isAr ? 'الامتداد الدولي' : isFr ? 'Rayonnement International' : 'Global Reach'}
@@ -1154,7 +1161,7 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
                   <div className="space-y-4">
                     <div className="flex items-center justify-between">
                       <span className="w-12 h-12 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6] flex items-center justify-center shadow-2xs group-hover:scale-110 transition-transform">
-                        <Flaticon icon={obj.icon} size={24} className="text-[#231f20]" />
+                        <ProIcon icon={obj.icon} size={24} className="text-[#231f20]" />
                       </span>
                       <span className="text-xs font-black text-[#231f20] font-mono px-2.5 py-0.5 rounded-full bg-[#231f20]/10">
                         {isAr ? `الهدف ${obj.num}` : isFr ? `Objectif ${obj.num}` : `Goal ${obj.num}`}
@@ -1176,7 +1183,7 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
 
                   <div className="pt-4 mt-4 border-t border-[#E5E0D6] flex items-center justify-between text-xs font-bold text-[#5C5A55]">
                     <span>{isAr ? 'محور عمل رسمي' : isFr ? 'Axe prioritaire officiel' : 'Official Priority'}</span>
-                    <span className="text-[#231f20]">✓</span>
+                    <ProIcon name="check" size={13} className="text-[#231f20]" />
                   </div>
                 </div>
               ))}
@@ -1194,7 +1201,7 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
             <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
               <div className="space-y-3 max-w-2xl text-center lg:text-start">
                 <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-[#bd3227] text-white">
-                  <span>★</span>
+                  <ProIcon name="star" size={12} className="text-[#ffd22f] fill-[#ffd22f]" />
                   <span>
                     {isAr
                       ? 'البرنامج الرائد والمبادرة الميدانية'
@@ -1266,7 +1273,7 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
               <div className="p-8 rounded-3xl bg-[#FAF8F5] border border-[#e5e0d6] shadow-subtle text-center space-y-4 hover:border-[#231f20]/40 transition-all flex flex-col justify-between">
                 <div className="space-y-3">
                   <div className="w-14 h-14 rounded-2xl bg-[#231f20]/10 text-[#231f20] flex items-center justify-center mx-auto shadow-2xs">
-                    <Flaticon name="museum" size={28} className="text-[#231f20]" />
+                    <ProIcon name="culture" size={28} className="text-[#231f20]" />
                   </div>
                   <span className="text-xs font-bold uppercase tracking-wider text-[#231f20] block">
                     {isAr ? 'الهيئة العليا' : isFr ? 'Instance Suprême' : 'Supreme Body'}
@@ -1290,7 +1297,7 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
               <div className="p-8 rounded-3xl bg-[#FAF8F5] border border-[#e5e0d6] shadow-subtle text-center space-y-4 hover:border-[#bd3227]/40 transition-all flex flex-col justify-between">
                 <div className="space-y-3">
                   <div className="w-14 h-14 rounded-2xl bg-[#bd3227]/10 text-[#bd3227] flex items-center justify-center mx-auto shadow-2xs">
-                    <Flaticon name="users" size={28} className="text-[#bd3227]" />
+                    <ProIcon name="users" size={28} className="text-[#bd3227]" />
                   </div>
                   <span className="text-xs font-bold uppercase tracking-wider text-[#bd3227] block">
                     {isAr ? 'التسيير والتنفيذ' : isFr ? 'Direction & Gestion' : 'Executive Leadership'}
@@ -1314,7 +1321,7 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
               <div className="p-8 rounded-3xl bg-[#FAF8F5] border border-[#e5e0d6] shadow-subtle text-center space-y-4 hover:border-[#d2a82b]/40 transition-all flex flex-col justify-between">
                 <div className="space-y-3">
                   <div className="w-14 h-14 rounded-2xl bg-[#d2a82b]/10 text-[#d2a82b] flex items-center justify-center mx-auto shadow-2xs">
-                    <Flaticon name="palette" size={28} className="text-[#d2a82b]" />
+                    <ProIcon name="palette" size={28} className="text-[#d2a82b]" />
                   </div>
                   <span className="text-xs font-bold uppercase tracking-wider text-[#d2a82b] block">
                     {isAr ? 'المحاور الميدانية' : isFr ? 'Pôles d’Action' : 'Action Hubs'}
@@ -1376,8 +1383,8 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
             <div className="p-8 sm:p-10 rounded-3xl bg-white border border-[#e5e0d6] shadow-subtle space-y-6">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#E5E0D6]">
                 <div className="flex items-center gap-3">
-                  <span className="w-12 h-12 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-2xl flex items-center justify-center shadow-2xs">
-                    ⚖️
+                  <span className="w-12 h-12 rounded-2xl bg-emerald-50 border border-emerald-200 flex items-center justify-center shadow-2xs">
+                    <ProIcon name="scale" size={24} className="text-emerald-800" />
                   </span>
                   <div>
                     <h3 className="text-lg font-black text-[#231f20]">
@@ -1398,7 +1405,7 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
                 </div>
 
                 <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-bold self-start sm:self-auto">
-                  <span>✓</span>
+                  <ProIcon name="check" size={13} className="text-emerald-700" />
                   <span>{isAr ? 'التزام رسمي مصادق عليه' : isFr ? 'Engagement Officiel Validé' : 'Officially Certified'}</span>
                 </div>
               </div>
@@ -1468,7 +1475,7 @@ export default async function AboutPage(props: { params: Promise<{ locale: strin
 
           <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-8">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#bd3227]/20 border border-[#bd3227]/40 text-[#fde8e7] text-xs font-bold">
-              <span>✦</span>
+              <ProIcon name="sparkles" size={13} className="text-[#ffd22f]" />
               <span>
                 {isAr
                   ? 'كن جزءاً من مسيرة الإبداع والتغيير الثقافي'

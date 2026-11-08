@@ -1,15 +1,28 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
-  <!-- Rocket Body (Angled 45 deg) -->
-  <path d="M48 8s-18 2-26 18c-3 6-3 12-2 15l15 15c3 1 9 1 15-2 16-8 18-26 18-26l-20-20z" fill="currentColor" fill-opacity="0.15"/>
-  <path d="M48 8s-18 2-26 18c-3 6-3 12-2 15l15 15c3 1 9 1 15-2 16-8 18-26 18-26l-20-20z" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Cockpit Porthole -->
-  <circle cx="39" cy="25" r="5" fill="#ffd22f" stroke="currentColor" stroke-width="2.5"/>
-  <!-- Left Fin -->
-  <path d="M22 26l-10 4 2 10 8-2" fill="currentColor" fill-opacity="0.3" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/>
-  <!-- Right Fin -->
-  <path d="M38 42l4 10 10-2-2-8" fill="currentColor" fill-opacity="0.3" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/>
-  <!-- Thrust Flames -->
-  <path d="M19 45l-7 7 4 1-5 5 8-2 1 4 7-7" fill="#bd3227"/>
-  <!-- Stars / Innovation Sparkles -->
-  <path d="M14 16l1.5 3 3 1.5-3 1.5-1.5 3-1.5-3-3-1.5 3-1.5z" fill="#ffd22f"/>
+  <!-- Dynamic Launch Rocket (Angled 45 degrees) -->
+  <g>
+    <!-- Rocket Main Fuselage -->
+    <path d="M48 8c-6 2-19 6-27 19-3 4.5-3.5 10-2.5 14l16 16c4 1 9.5.5 14-2.5 13-8 17-21 19-27l-19.5-19.5z" fill="currentColor" fill-opacity="0.12"/>
+    <path d="M48 8c-6 2-19 6-27 19-3 4.5-3.5 10-2.5 14l16 16c4 1 9.5.5 14-2.5 13-8 17-21 19-27l-19.5-19.5z" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    
+    <!-- Porthole Window -->
+    <circle cx="39" cy="25" r="4.5" fill="#ffd22f" stroke="currentColor" stroke-width="2.2"/>
+    <circle cx="39" cy="25" r="2" fill="white"/>
+    
+    <!-- Left Wing Fin -->
+    <path d="M22 28l-10 4 2 9 8-1" fill="currentColor" fill-opacity="0.25" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+    
+    <!-- Right Wing Fin -->
+    <path d="M36 42l4 10 9-2-1-8" fill="currentColor" fill-opacity="0.25" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+    
+    <!-- Engine Thrust Nozzle -->
+    <path d="M20 44l-3 3" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+    
+    <!-- Propulsion Jet Flames -->
+    <path d="M17 47l-6 6 4 1-5 4 8-1 1 3 6-5" fill="#bd3227" stroke="#bd3227" stroke-width="1.5" stroke-linejoin="round"/>
+  </g>
+
+  <!-- Youth Ambition Stars -->
+  <path d="M14 16l1.2 2.5 2.8.5-2 2 .5 2.8-2.5-1.3-2.5 1.3.5-2.8-2-2 2.8-.5L14 16z" fill="#ffd22f"/>
+  <circle cx="48" cy="48" r="1.5" fill="#ffd22f"/>
 </svg>

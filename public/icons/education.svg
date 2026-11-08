@@ -1,4 +1,17 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#231f20">
-  <path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3z" opacity="0.25" />
-  <path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zm0 13.5l-7-3.82V17c0 2.21 3.13 4 7 4s7-1.79 7-4v-4.32l-7 3.82z" />
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <!-- Mortarboard Diamond Top -->
+  <polygon points="32,10 6,23 32,36 58,23" fill="currentColor" fill-opacity="0.12"/>
+  <polygon points="32,10 6,23 32,36 58,23" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- Mortarboard Skullcap -->
+  <path d="M16 28.5v11.5c0 5 7.2 9 16 9s16-4 16-9V28.5" fill="currentColor" fill-opacity="0.18" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+  
+  <!-- Silk Tassel & Ribbon -->
+  <path d="M50 25v15c0 2-2 3.5-3 3.5" stroke="#ffd22f" stroke-width="2.5" stroke-linecap="round"/>
+  <circle cx="50" cy="25" r="2.5" fill="#ffd22f"/>
+  <path d="M47 43.5l-2 5.5h4l-2-5.5z" fill="#ffd22f"/>
+
+  <!-- Open Wisdom Book at Base -->
+  <path d="M18 54c4-2 9-2 14 0 5-2 10-2 14 0" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+  <path d="M32 49v5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
 </svg>

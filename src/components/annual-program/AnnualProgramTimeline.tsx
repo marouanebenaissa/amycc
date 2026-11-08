@@ -4,7 +4,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import type { AnnualProgramQuarter } from '@/lib/settings'
 import { IconWithFallback } from '@/components/ui/IconWithFallback'
-import { Flaticon } from '@/components/ui/Flaticon'
+import { ProIcon } from '@/components/ui/ProIcon'
 
 interface AnnualProgramTimelineProps {
   quarters: AnnualProgramQuarter[]
@@ -71,7 +71,7 @@ export function AnnualProgramTimeline({ quarters, locale, dict }: AnnualProgramT
                     : 'bg-[#FAF8F5] text-[#5C5A55] hover:bg-[#F4EFE6] border border-[#e5e0d6]'
                 }`}
               >
-                <Flaticon icon={q.icon || '📌'} size={14} />
+                <ProIcon icon={q.icon || 'calendar'} size={14} />
                 <span>{qTitle}</span>
               </button>
             )

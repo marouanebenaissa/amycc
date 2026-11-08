@@ -1,12 +1,17 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
-  <!-- Glowing Heart at Center -->
-  <path d="M32 23.5c-4-6.5-12-6.5-16-1.5-4 5-3 12 4 18l12 11 12-11c7-6 8-13 4-18-4-5-12-5-16 1.5z" fill="#bd3227"/>
-  <!-- Left Caring Hand -->
-  <path d="M12 42c4-2 9-2 14 1l6 4-3 4-7-3c-3-1-7-1-9 1l-5 4-4-5 9-6z" fill="#231f20" fill-opacity="0.2"/>
-  <path d="M7 47l6-4c4-2 9-2 14 1l6 4" stroke="#231f20" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Right Caring Hand -->
-  <path d="M52 42c-4-2-9-2-14 1l-6 4 3 4 7-3c3-1 7-1 9 1l5 4 4-5-9-6z" fill="#231f20" fill-opacity="0.2"/>
-  <path d="M57 47l-6-4c-4-2-9-2-14 1l-6 4" stroke="#231f20" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-  <!-- Warmth Sparkles -->
-  <path d="M32 10v4M22 13l2 3M42 13l-2 3" stroke="#ffd22f" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Central Standing Leader Silhouette -->
+  <circle cx="32" cy="18" r="5" fill="#bd3227"/>
+  <path d="M22 36c0-5.5 4.5-10 10-10s10 4.5 10 10v4H22v-4z" fill="currentColor" fill-opacity="0.15" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/>
+  
+  <!-- Left Partner Silhouette -->
+  <circle cx="16" cy="24" r="4" fill="#ffd22f"/>
+  <path d="M8 42c0-4.4 3.6-8 8-8s8 3.6 8 8v2H8v-2z" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>
+  
+  <!-- Right Partner Silhouette -->
+  <circle cx="48" cy="24" r="4" fill="#d2a82b"/>
+  <path d="M40 42c0-4.4 3.6-8 8-8s8 3.6 8 8v2H40v-2z" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>
+  
+  <!-- Protective Foundation Unity Arch -->
+  <path d="M12 52c6-3 13-4.5 20-4.5s14 1.5 20 4.5" stroke="#ffd22f" stroke-width="2.8" stroke-linecap="round"/>
+  <circle cx="32" cy="47.5" r="2.5" fill="#bd3227"/>
 </svg>

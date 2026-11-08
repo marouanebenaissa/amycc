@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { IconWithFallback } from '@/components/ui/IconWithFallback'
-import { Flaticon } from '@/components/ui/Flaticon'
+import { ProIcon } from '@/components/ui/ProIcon'
 import type { AreaItemConfig } from '@/lib/settings'
 
 interface AreaItem {
@@ -74,7 +74,7 @@ export function AreasSection({
         ? 'Arts plastiques, peinture, photographie et ateliers de créativité stimulant l\'innovation.'
         : 'Visual arts, painting, photography, and creative masterclasses sparking youth innovation.',
       icon: '🎨',
-      iconImg: '/icons/arts.png',
+      iconImg: '/icons/arts.svg',
       tag: isAr ? 'محترفات تشكيلية ومعارض' : isFr ? 'Arts Plastiques' : 'Visual & Fine Arts',
       accent: 'border-[#bd3227]/30 text-[#bd3227]',
       bgGlow: 'from-[#fde8e7]/40 to-transparent',
@@ -130,7 +130,7 @@ export function AreasSection({
         ? 'Renaissance du patrimoine musical marocain, composition et formation instrumentale.'
         : 'Reviving authentic Moroccan musical heritage, composition, and instrument training.',
       icon: '🎵',
-      iconImg: '/icons/music.png',
+      iconImg: '/icons/music.svg',
       tag: isAr ? 'تراث وأداء موسيقي' : isFr ? 'Patrimoine Musical' : 'Heritage & Musical Arts',
       accent: 'border-[#231f20]/30 text-[#231f20]',
       bgGlow: 'from-[#FEF6CC]/40 to-transparent',
@@ -186,7 +186,7 @@ export function AreasSection({
         ? 'Expression théâtrale, art du conte, jeu scénique et ateliers dramatiques.'
         : 'Theatrical expression, traditional storytelling, stage performance, and drama workshops.',
       icon: '🎭',
-      iconImg: '/icons/theatre.png',
+      iconImg: '/icons/theatre.svg',
       tag: isAr ? 'تعبير مسرحي وارتجال' : isFr ? 'Jeu Scénique' : 'Theatre & Scenic Expression',
       accent: 'border-[#d2a82b]/40 text-[#d2a82b]',
       bgGlow: 'from-[#FEF6CC]/40 to-transparent',
@@ -242,7 +242,7 @@ export function AreasSection({
         ? 'Sauvegarde et valorisation de la diversité culturelle marocaine et du patrimoine oral.'
         : 'Safeguarding and celebrating authentic Moroccan heritage, oral history, and traditions.',
       icon: '🏛️',
-      iconImg: '/icons/culture.png',
+      iconImg: '/icons/culture.svg',
       tag: isAr ? 'صون الذاكرة والتراث' : isFr ? 'Patrimoine & Mémoire' : 'Moroccan Cultural Heritage',
       accent: 'border-[#231f20]/30 text-[#231f20]',
       bgGlow: 'from-[#FEF6CC]/40 to-transparent',
@@ -298,7 +298,7 @@ export function AreasSection({
         ? 'Renforcement du leadership, ateliers de formation et orientation dans les métiers créatifs.'
         : 'Building leadership capacity, professional mentorship, and creative career guidance.',
       icon: '🚀',
-      iconImg: '/icons/youth.png',
+      iconImg: '/icons/youth.svg',
       tag: isAr ? 'تكوين وقيادة شبابية' : isFr ? 'Leadership Jeunesse' : 'Youth Leadership & Skills',
       accent: 'border-[#bd3227]/30 text-[#bd3227]',
       bgGlow: 'from-[#fde8e7]/40 to-transparent',
@@ -354,7 +354,7 @@ export function AreasSection({
         ? 'Bénévolat civique, animation des quartiers et actions culturelles solidaires.'
         : 'Civic volunteering, neighborhood cultural outreach, and impactful community actions.',
       icon: '🤝',
-      iconImg: '/icons/community.png',
+      iconImg: '/icons/community.svg',
       tag: isAr ? 'مبادرة شباب في العمل' : isFr ? 'Jeunesse en Action' : 'Civic Volunteering Program',
       accent: 'border-[#d2a82b]/40 text-[#d2a82b]',
       bgGlow: 'from-[#FEF6CC]/40 to-transparent',
@@ -604,7 +604,7 @@ export function AreasSection({
               <div className="space-y-3">
                 <div className="flex items-center gap-2">
                   <span className="w-6 h-6 rounded-lg bg-[#231f20] text-white flex items-center justify-center shrink-0">
-                    <Flaticon name="morocco-star" size={13} className="text-[#ffd22f]" />
+                    <ProIcon name="morocco-star" size={13} className="text-[#ffd22f]" />
                   </span>
                   <h4 className="text-xs sm:text-sm font-black text-[#231f20] uppercase tracking-wide">
                     {isAr
@@ -638,7 +638,7 @@ export function AreasSection({
                   <div className="space-y-3 pt-4 border-t border-[#E5E0D6]">
                     <div className="flex items-center gap-2">
                       <span className="w-6 h-6 rounded-lg bg-[#bd3227] text-white flex items-center justify-center shrink-0">
-                        <Flaticon name="sparkles" size={13} className="text-[#ffd22f]" />
+                        <ProIcon name="sparkles" size={13} className="text-[#ffd22f]" />
                       </span>
                       <h4 className="text-xs sm:text-sm font-black text-[#231f20] uppercase tracking-wide">
                         {isAr

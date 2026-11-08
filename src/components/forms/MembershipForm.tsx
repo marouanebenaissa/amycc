@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { submitMembership, type ActionResponse } from '@/lib/actions/submissions'
 import { TurnstileCaptcha } from '@/components/ui/TurnstileCaptcha'
-import { Flaticon } from '@/components/ui/Flaticon'
+import { ProIcon } from '@/components/ui/ProIcon'
 import type { MembershipTierConfig } from '@/lib/settings'
 
 interface MembershipFormProps {
@@ -108,8 +108,8 @@ export function MembershipForm({ locale, tiers = [] }: MembershipFormProps) {
           }`}
         >
           <div className="flex items-center gap-2">
-            <Flaticon
-              name={result.success ? 'check' : 'alert-circle'}
+            <ProIcon
+              name={result.success ? 'check' : 'cross'}
               size={16}
               className={result.success ? 'text-emerald-700' : 'text-red-700'}
             />

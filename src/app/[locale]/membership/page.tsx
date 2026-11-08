@@ -4,7 +4,7 @@ import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { ImageWithFallback } from '@/components/ui/ImageWithFallback'
 import { MembershipForm } from '@/components/forms/MembershipForm'
-import { Flaticon } from '@/components/ui/Flaticon'
+import { ProIcon } from '@/components/ui/ProIcon'
 import { getMembershipPageSettings } from '@/lib/settings'
 import { constructMetadata } from '@/lib/seo/config'
 import { METADATA_CATALOG, type SupportedLocale } from '@/lib/seo/metadata-catalog'
@@ -317,7 +317,7 @@ export default async function MembershipPage(props: { params: Promise<{ locale: 
                       </span>
                       {(benefits || []).map((b, bIdx) => (
                         <div key={bIdx} className="flex items-start gap-2 text-xs text-[#231f20]">
-                          <Flaticon name="check" size={13} className="text-emerald-600 font-bold mt-0.5 shrink-0" />
+                          <ProIcon name="check" size={13} className="text-emerald-600 font-bold mt-0.5 shrink-0" />
                           <span className="leading-snug">{b}</span>
                         </div>
                       ))}
@@ -461,7 +461,7 @@ export default async function MembershipPage(props: { params: Promise<{ locale: 
           <div className="p-6 sm:p-8 rounded-3xl bg-white border border-[#e5e0d6] shadow-2xs space-y-4">
             <div className="flex items-center gap-3">
               <span className="w-9 h-9 rounded-xl bg-[#bd3227]/10 text-[#bd3227] flex items-center justify-center font-bold">
-                <Flaticon name="scroll" size={18} />
+                <ProIcon name="scroll" size={18} />
               </span>
               <div>
                 <span className="text-3xs font-extrabold uppercase tracking-widest text-[#bd3227] block">
@@ -488,7 +488,7 @@ export default async function MembershipPage(props: { params: Promise<{ locale: 
                   key={idx}
                   className="flex items-start gap-2.5 p-3 rounded-2xl bg-[#FAF8F5] border border-[#E5E0D6] text-xs text-[#231f20]"
                 >
-                  <Flaticon name="check" size={13} className="text-emerald-600 font-bold mt-0.5 shrink-0" />
+                  <ProIcon name="check" size={13} className="text-emerald-600 font-bold mt-0.5 shrink-0" />
                   <span className="leading-snug">{item}</span>
                 </div>
               ))}
@@ -532,7 +532,7 @@ export default async function MembershipPage(props: { params: Promise<{ locale: 
                   href={`mailto:${config.cta.email}`}
                   className="px-5 py-2.5 rounded-xl bg-white text-[#231f20] hover:bg-slate-100 font-bold text-xs transition-colors flex items-center gap-2"
                 >
-                  <Flaticon name="mail" size={13} className="text-[#bd3227] shrink-0" />
+                  <ProIcon name="mail" size={13} className="text-[#bd3227] shrink-0" />
                   <span>{config.cta.email}</span>
                 </a>
               )}
@@ -542,7 +542,7 @@ export default async function MembershipPage(props: { params: Promise<{ locale: 
                   className="px-5 py-2.5 rounded-xl bg-white/10 text-white hover:bg-white/20 font-bold text-xs border border-white/20 transition-colors flex items-center gap-2"
                   dir="ltr"
                 >
-                  <Flaticon name="phone" size={13} className="text-[#ffd22f] shrink-0" />
+                  <ProIcon name="phone" size={13} className="text-[#ffd22f] shrink-0" />
                   <span>{config.cta.phone}</span>
                 </a>
               )}

@@ -3,7 +3,7 @@
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
 import { ImageWithFallback } from '@/components/ui/ImageWithFallback'
-import { Flaticon } from '@/components/ui/Flaticon'
+import { ProIcon } from '@/components/ui/ProIcon'
 
 export interface EventItemData {
   id: string
@@ -82,7 +82,7 @@ export function EventsCatalog({ events, locale }: EventsCatalogProps) {
           {/* Search Box */}
           <div className="relative flex-1">
             <span className="absolute start-4 top-1/2 -translate-y-1/2 text-slate-400 select-none flex items-center">
-              <Flaticon name="search" size={15} />
+              <ProIcon name="search" size={15} />
             </span>
             <input
               type="text"
@@ -151,7 +151,7 @@ export function EventsCatalog({ events, locale }: EventsCatalogProps) {
         {uniqueCities.length > 0 && (
           <div className="flex items-center gap-2 pt-2 border-t border-[#E5E0D6] overflow-x-auto pb-1 text-2xs sm:text-xs">
             <span className="text-[#5C5A55] font-bold shrink-0 flex items-center gap-1">
-              <Flaticon name="pin" size={13} className="text-[#bd3227] shrink-0" />
+              <ProIcon name="pin" size={13} className="text-[#bd3227] shrink-0" />
               <span>{isAr ? 'تصفية حسب المدينة:' : isFr ? 'Filtrer par ville :' : 'Filter by city:'}</span>
             </span>
             <button
@@ -235,7 +235,7 @@ export function EventsCatalog({ events, locale }: EventsCatalogProps) {
                       <div className="absolute inset-0 bg-gradient-to-br from-[#231f20] via-[#231f20] to-[#231f20] flex items-center justify-center p-6 text-center">
                         <div className="absolute inset-0 moroccan-pattern-dark opacity-25" />
                         <span className="relative">
-                          <Flaticon name="theater" size={40} className="text-[#ffd22f]" />
+                          <ProIcon name="theatre" size={40} className="text-[#ffd22f]" />
                         </span>
                       </div>
                     )}
@@ -244,7 +244,7 @@ export function EventsCatalog({ events, locale }: EventsCatalogProps) {
                     {/* Date Tag Floating over Photo */}
                     <div className="absolute top-3.5 start-3.5 z-10">
                       <span className="px-3 py-1.5 rounded-xl text-3xs font-black bg-white/95 backdrop-blur-md border border-white/20 text-[#231f20] shadow-md flex items-center gap-1.5">
-                        <Flaticon name="calendar" size={12} className="text-[#bd3227] shrink-0" />
+                        <ProIcon name="calendar" size={12} className="text-[#bd3227] shrink-0" />
                         <span>
                           {dateObj.toLocaleDateString(locale, { month: 'short', day: 'numeric' })}
                         </span>
@@ -277,7 +277,7 @@ export function EventsCatalog({ events, locale }: EventsCatalogProps) {
                     {/* Bottom overlay: City & Venue */}
                     <div className="absolute bottom-2.5 start-3.5 end-3.5 text-white z-10 flex items-center justify-between text-3xs font-semibold">
                       <span className="truncate flex items-center gap-1.5">
-                        <Flaticon name="pin" size={12} className="text-[#ffd22f] shrink-0" />
+                        <ProIcon name="pin" size={12} className="text-[#ffd22f] shrink-0" />
                         <span>{ev.venue || (isAr ? 'المركز الثقافي' : 'Cultural Center')}</span>
                       </span>
                       {ev.city && (
@@ -299,7 +299,7 @@ export function EventsCatalog({ events, locale }: EventsCatalogProps) {
                     {/* Capacity Indicator */}
                     {ev.capacity && (
                       <div className="flex items-center gap-2 text-2xs text-[#5C5A55] font-medium pt-1">
-                        <Flaticon name="users" size={13} className="text-[#5C5A55] shrink-0" />
+                        <ProIcon name="users" size={13} className="text-[#5C5A55] shrink-0" />
                         <span>
                           {isAr
                             ? `الطاقة الاستيعابية: ${ev.capacity} مقعد`
@@ -356,7 +356,7 @@ export function EventsCatalog({ events, locale }: EventsCatalogProps) {
         /* Empty State when no events exist in database */
         <div className="bg-white rounded-3xl border border-[#e5e0d6] p-12 text-center max-w-md mx-auto space-y-4">
           <div className="w-16 h-16 mx-auto rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6] flex items-center justify-center text-[#bd3227]">
-            <Flaticon name="calendar" size={32} />
+            <ProIcon name="calendar" size={32} />
           </div>
           <h3 className="text-base font-extrabold text-[#231f20]">
             {isAr
@@ -377,7 +377,7 @@ export function EventsCatalog({ events, locale }: EventsCatalogProps) {
         /* Empty State when filter yields 0 matches */
         <div className="bg-white rounded-3xl border border-[#e5e0d6] p-12 text-center max-w-md mx-auto space-y-4">
           <div className="w-16 h-16 mx-auto rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6] flex items-center justify-center text-[#bd3227]">
-            <Flaticon name="search" size={32} />
+            <ProIcon name="search" size={32} />
           </div>
           <h3 className="text-base font-extrabold text-[#231f20]">
             {isAr

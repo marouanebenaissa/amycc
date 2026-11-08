@@ -9,7 +9,7 @@ import { METADATA_CATALOG } from '@/lib/seo/metadata-catalog'
 import { getBreadcrumbJsonLd, JsonLd } from '@/lib/seo/schema'
 import { locales, type Locale, defaultLocale } from '@/lib/i18n/config'
 import Link from 'next/link'
-import { Flaticon } from '@/components/ui/Flaticon'
+import { ProIcon } from '@/components/ui/ProIcon'
 
 export const revalidate = 0
 
@@ -104,7 +104,7 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
 
               {heroBadge && (
                 <span className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs sm:text-sm font-bold shadow-2xs bg-[#231f20]/10 border border-[#231f20]/20 text-[#231f20]">
-                  <Flaticon name="pin" size={13} className="text-[#231f20]" />
+                  <ProIcon name="pin" size={13} className="text-[#231f20]" />
                   <span>{heroBadge}</span>
                 </span>
               )}
@@ -131,7 +131,7 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
             <div className="p-6 sm:p-7 rounded-3xl bg-white border border-[#e5e0d6] hover:border-[#231f20]/40 shadow-subtle hover:shadow-lg transition-all text-center flex flex-col justify-between group min-h-[260px]">
               <div>
                 <div className="w-14 h-14 rounded-2xl bg-[#231f20]/10 text-[#231f20] flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-                  <Flaticon name="mail" size={28} className="text-[#231f20]" />
+                  <ProIcon name="mail" size={28} className="text-[#231f20]" />
                 </div>
                 <span className="text-xs sm:text-sm font-bold text-[#5C5A55] uppercase tracking-wider block mb-2">
                   {isAr ? 'البريد الإلكتروني الرسمي' : isFr ? 'Email Institutionnel' : 'Official Email'}
@@ -166,7 +166,7 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
             <div className="p-6 sm:p-7 rounded-3xl bg-white border border-[#e5e0d6] hover:border-[#bd3227]/40 shadow-subtle hover:shadow-lg transition-all text-center flex flex-col justify-between group min-h-[260px]">
               <div>
                 <div className="w-14 h-14 rounded-2xl bg-[#bd3227]/10 text-[#bd3227] flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-                  <Flaticon name="phone" size={28} className="text-[#bd3227]" />
+                  <ProIcon name="phone" size={28} className="text-[#bd3227]" />
                 </div>
                 <span className="text-xs sm:text-sm font-bold text-[#5C5A55] uppercase tracking-wider block mb-2">
                   {isAr ? 'الهاتف والتواصل المباشر' : isFr ? 'Téléphone & Direct' : 'Direct Call & Line'}
@@ -211,7 +211,7 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
             <div className="p-6 sm:p-7 rounded-3xl bg-white border border-[#e5e0d6] hover:border-[#d2a82b]/40 shadow-subtle hover:shadow-lg transition-all text-center flex flex-col justify-between group min-h-[260px]">
               <div>
                 <div className="w-14 h-14 rounded-2xl bg-[#d2a82b]/10 text-[#d2a82b] flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-                  <Flaticon name="museum" size={28} className="text-[#d2a82b]" />
+                  <ProIcon name="culture" size={28} className="text-[#d2a82b]" />
                 </div>
                 <span className="text-xs sm:text-sm font-bold text-[#5C5A55] uppercase tracking-wider block mb-2">
                   {isAr ? 'المقر والنطاق الجغرافي' : isFr ? 'Siège & Rayonnement' : 'Headquarters & Scope'}
@@ -246,7 +246,7 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
             <div className="p-6 sm:p-7 rounded-3xl bg-white border border-[#e5e0d6] hover:border-emerald-600/40 shadow-subtle hover:shadow-lg transition-all text-center flex flex-col justify-between group min-h-[260px]">
               <div>
                 <div className="w-14 h-14 rounded-2xl bg-emerald-50 text-emerald-700 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-                  <Flaticon name="calendar" size={28} className="text-emerald-700" />
+                  <ProIcon name="calendar" size={28} className="text-emerald-700" />
                 </div>
                 <span className="text-xs sm:text-sm font-bold text-[#5C5A55] uppercase tracking-wider block mb-2">
                   {isAr ? 'أوقات العمل وسرعة الرد' : isFr ? 'Horaires & Réactivité' : 'Hours & Response SLA'}
@@ -285,8 +285,8 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
               {/* Location & Map Showcase */}
               <div className="p-6 sm:p-7 rounded-3xl bg-white border border-[#e5e0d6] shadow-subtle space-y-5">
                 <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-2xl bg-[#231f20]/10 text-[#231f20] flex items-center justify-center text-xl">
-                    🗺️
+                  <div className="w-12 h-12 rounded-2xl bg-[#231f20]/10 text-[#231f20] flex items-center justify-center">
+                    <ProIcon name="map" size={24} className="text-[#231f20]" />
                   </div>
                   <div>
                     <h3 className="text-base sm:text-lg font-black text-[#231f20]">
@@ -334,7 +334,7 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
                           rel="noopener noreferrer"
                           className="mt-3.5 inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-[#ffd22f] hover:bg-[#ffd22f] text-[#231f20] text-xs sm:text-sm font-bold transition-all shadow-xs"
                         >
-                          <Flaticon name="pin" size={13} className="text-[#231f20]" />
+                          <ProIcon name="pin" size={13} className="text-[#231f20]" />
                           <span>{isAr ? 'الاتجاهات عبر خرائط Google' : 'Get Directions on Google Maps'}</span>
                         </a>
                       )}
@@ -347,7 +347,7 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
               <div className="p-6 sm:p-7 rounded-3xl bg-white border border-[#e5e0d6] shadow-subtle space-y-4">
                 <div className="flex items-center justify-between pb-3 border-b border-[#E5E0D6]">
                   <h3 className="text-base font-black text-[#231f20] flex items-center gap-2">
-                    <span>🌐</span>
+                    <ProIcon name="globe" size={16} className="text-[#231f20]" />
                     <span>{isAr ? 'تابع الجمعية على المنصات الرقمية' : 'Official Social Channels'}</span>
                   </h3>
                   <span className="text-xs font-mono text-[#5C5A55]">@amycc.morocco</span>
@@ -361,7 +361,7 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
                       rel="noopener noreferrer"
                       className="p-3.5 rounded-xl bg-[#FAF8F5] hover:bg-[#1877f2] text-[#231f20] hover:text-white transition-all flex items-center gap-2.5 text-xs sm:text-sm font-bold group border border-[#e5e0d6]"
                     >
-                      <span className="text-base">📘</span>
+                      <ProIcon name="facebook" size={16} className="text-[#1877f2] group-hover:text-white" />
                       <span>Facebook</span>
                     </a>
                   )}
@@ -373,7 +373,7 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
                       rel="noopener noreferrer"
                       className="p-3.5 rounded-xl bg-[#FAF8F5] hover:bg-[#e4405f] text-[#231f20] hover:text-white transition-all flex items-center gap-2.5 text-xs sm:text-sm font-bold group border border-[#e5e0d6]"
                     >
-                      <span className="text-base">📸</span>
+                      <ProIcon name="instagram" size={16} className="text-[#e4405f] group-hover:text-white" />
                       <span>Instagram</span>
                     </a>
                   )}
@@ -385,7 +385,7 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
                       rel="noopener noreferrer"
                       className="p-3.5 rounded-xl bg-[#FAF8F5] hover:bg-[#0a66c2] text-[#231f20] hover:text-white transition-all flex items-center gap-2.5 text-xs sm:text-sm font-bold group border border-[#e5e0d6]"
                     >
-                      <span className="text-base">💼</span>
+                      <ProIcon name="linkedin" size={16} className="text-[#0a66c2] group-hover:text-white" />
                       <span>LinkedIn</span>
                     </a>
                   )}
@@ -397,7 +397,7 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
                       rel="noopener noreferrer"
                       className="p-3.5 rounded-xl bg-[#FAF8F5] hover:bg-[#ff0000] text-[#231f20] hover:text-white transition-all flex items-center gap-2.5 text-xs sm:text-sm font-bold group border border-[#e5e0d6]"
                     >
-                      <span className="text-base">▶️</span>
+                      <ProIcon name="youtube" size={16} className="text-[#ff0000] group-hover:text-white" />
                       <span>YouTube</span>
                     </a>
                   )}
@@ -409,7 +409,7 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
                       rel="noopener noreferrer"
                       className="p-3.5 rounded-xl bg-[#FAF8F5] hover:bg-black text-[#231f20] hover:text-white transition-all flex items-center gap-2.5 text-xs sm:text-sm font-bold group border border-[#e5e0d6]"
                     >
-                      <span className="text-base">𝕏</span>
+                      <ProIcon name="twitter" size={16} className="text-black group-hover:text-white" />
                       <span>X (Twitter)</span>
                     </a>
                   )}
@@ -421,7 +421,7 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
                       rel="noopener noreferrer"
                       className="p-3.5 rounded-xl bg-[#FAF8F5] hover:bg-black text-[#231f20] hover:text-white transition-all flex items-center gap-2.5 text-xs sm:text-sm font-bold group border border-[#e5e0d6]"
                     >
-                      <span className="text-base">🎵</span>
+                      <ProIcon name="music" size={16} className="text-black group-hover:text-white" />
                       <span>TikTok</span>
                     </a>
                   )}
@@ -433,7 +433,7 @@ export default async function ContactPage(props: { params: Promise<{ locale: str
                       rel="noopener noreferrer"
                       className="p-3.5 rounded-xl bg-[#FAF8F5] hover:bg-[#25D366] text-[#231f20] hover:text-white transition-all flex items-center gap-2.5 text-xs sm:text-sm font-bold group border border-[#e5e0d6]"
                     >
-                      <Flaticon name="chat" size={16} className="text-[#25D366] group-hover:text-white transition-colors" />
+                      <ProIcon name="whatsapp" size={16} className="text-[#25D366] group-hover:text-white transition-colors" />
                       <span>WhatsApp</span>
                     </a>
                   )}

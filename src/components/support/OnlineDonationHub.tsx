@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import type { SupportPageConfig } from '@/lib/settings'
-import { Flaticon } from '@/components/ui/Flaticon'
+import { ProIcon } from '@/components/ui/ProIcon'
 
 interface OnlineDonationHubProps {
   config: SupportPageConfig
@@ -187,7 +187,7 @@ export function OnlineDonationHub({ config, locale }: OnlineDonationHubProps) {
                 : 'text-[#5C5A55] hover:text-[#231f20]'
             }`}
           >
-            <Flaticon name="credit-card" size={15} />
+            <ProIcon name="credit-card" size={15} />
             <span>
               {isAr
                 ? 'الأداء الإلكتروني بالبطاقة البنكية'
@@ -210,7 +210,7 @@ export function OnlineDonationHub({ config, locale }: OnlineDonationHubProps) {
               : 'text-[#5C5A55] hover:text-[#231f20]'
           }`}
         >
-          <Flaticon name="bank" size={15} />
+          <ProIcon name="bank" size={15} />
           <span>
             {isAr
               ? 'التحويل البنكي المباشر (RIB)'
@@ -443,7 +443,7 @@ export function OnlineDonationHub({ config, locale }: OnlineDonationHubProps) {
                     </>
                   ) : (
                     <>
-                      <Flaticon name="shield" size={14} className="shrink-0" />
+                      <ProIcon name="shield" size={14} className="shrink-0" />
                       <span>
                         {isAr
                           ? `تأكيد المساهمة بمبلغ ${activeAmount.toLocaleString()} ${gateway.currency || 'MAD'}`
@@ -457,12 +457,12 @@ export function OnlineDonationHub({ config, locale }: OnlineDonationHubProps) {
 
                 <div className="flex items-center justify-center gap-4 text-3xs text-[#5C5A55] font-bold mt-3 text-center flex-wrap">
                   <span className="flex items-center gap-1">
-                    <Flaticon name="shield" size={11} className="text-emerald-600" />
+                    <ProIcon name="shield" size={11} className="text-emerald-600" />
                     <span>معالجة مشفرة SSL 256-bit</span>
                   </span>
                   <span>🇲🇦 مركز النقديات CMI / 3D-Secure</span>
                   <span className="flex items-center gap-1">
-                    <Flaticon name="certificate" size={11} className="text-[#bd3227]" />
+                    <ProIcon name="certificate" size={11} className="text-[#bd3227]" />
                     <span>وصل إبراء رسمي معتمد</span>
                   </span>
                 </div>

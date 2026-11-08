@@ -6,7 +6,7 @@ import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { createPublicClient } from '@/lib/supabase/public'
 import { ImageWithFallback } from '@/components/ui/ImageWithFallback'
-import { Flaticon } from '@/components/ui/Flaticon'
+import { ProIcon } from '@/components/ui/ProIcon'
 import { defaultNewsArticlesData } from '@/lib/supabase/seed-news'
 import { constructMetadata, getSiteUrl } from '@/lib/seo/config'
 import { getArticleJsonLd, getBreadcrumbJsonLd, JsonLd } from '@/lib/seo/schema'
@@ -308,13 +308,13 @@ export default async function NewsDetailPage(props: {
 
               {dateFormatted && (
                 <time className="text-xs text-[#5C5A55] font-medium flex items-center gap-1.5">
-                  <Flaticon name="calendar" size={13} className="text-[#bd3227] shrink-0" />
+                  <ProIcon name="calendar" size={13} className="text-[#bd3227] shrink-0" />
                   <span>{dateFormatted}</span>
                 </time>
               )}
 
               <span className="text-xs text-[#5C5A55] font-bold flex items-center gap-1.5">
-                <Flaticon name="clock" size={13} className="text-[#5C5A55] shrink-0" />
+                <ProIcon name="clock" size={13} className="text-[#5C5A55] shrink-0" />
                 <span>{isAr ? `${readingTime} دقائق قراءة` : isFr ? `${readingTime} min de lecture` : `${readingTime} min read`}</span>
               </span>
             </div>
@@ -386,7 +386,7 @@ export default async function NewsDetailPage(props: {
           {recentArticles.length > 0 && (
             <div className="pt-8 space-y-6">
               <h3 className="text-lg font-black text-[#231f20] flex items-center gap-2">
-                <Flaticon name="news" size={16} className="text-[#bd3227] shrink-0" />
+                <ProIcon name="news" size={16} className="text-[#bd3227] shrink-0" />
                 <span>{isAr ? 'مستجدات أخرى قد تهمك' : isFr ? 'Autres actualités' : 'More Stories'}</span>
               </h3>
 

@@ -1,4 +1,12 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#231f20">
-  <path d="M12 7V3H2v18h20V7H12z" opacity="0.25" />
-  <path d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2V11zm0 4h-2v2h2v-2z" />
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <!-- Corporate Sponsorship Shield Crest -->
+  <path d="M32 8l18 6v14c0 13-9.5 22-18 26-8.5-4-18-13-18-26V14l18-6z" fill="currentColor" fill-opacity="0.08"/>
+  <path d="M32 8l18 6v14c0 13-9.5 22-18 26-8.5-4-18-13-18-26V14l18-6z" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- Trust Star Crest -->
+  <path d="M32 18l2.2 4.5 5 .7-3.6 3.5.8 5-4.4-2.3-4.4 2.3.8-5-3.6-3.5 5-.7L32 18z" fill="#ffd22f"/>
+
+  <!-- Clasped Partnership Grip -->
+  <path d="M22 38l6-4c2-1.5 4.5-1 6 0l6 4" stroke="#d2a82b" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M26 42l4 3 6-4" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
 </svg>

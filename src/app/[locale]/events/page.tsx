@@ -6,7 +6,7 @@ import { Footer } from '@/components/layout/Footer'
 import { createPublicClient } from '@/lib/supabase/public'
 import { getEventsPageSettings } from '@/lib/settings'
 import { ImageWithFallback } from '@/components/ui/ImageWithFallback'
-import { Flaticon } from '@/components/ui/Flaticon'
+import { ProIcon } from '@/components/ui/ProIcon'
 import { EventsCatalog, type EventItemData } from '@/components/events/EventsCatalog'
 import { constructMetadata, getSiteUrl } from '@/lib/seo/config'
 import { METADATA_CATALOG } from '@/lib/seo/metadata-catalog'
@@ -237,7 +237,7 @@ export default async function EventsPage(props: { params: Promise<{ locale: stri
                     : 'text-white bg-[#bd3227] hover:bg-[#a3261c]'
                 }`}
               >
-                <Flaticon name="calendar" size={15} />
+                <ProIcon name="calendar" size={15} />
                 <span>
                   {isAr
                     ? pageSettings.hero.primaryBtnTextAr
@@ -272,7 +272,7 @@ export default async function EventsPage(props: { params: Promise<{ locale: stri
                 className="luxury-card p-5 sm:p-6 text-center flex flex-col justify-between items-center group bg-white shadow-card border border-[#e5e0d6] hover:border-[#bd3227]/40 transition-all rounded-2xl"
               >
                 <div className="w-12 h-12 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6] flex items-center justify-center p-2 mb-3 shadow-2xs group-hover:scale-110 transition-transform overflow-hidden">
-                  <Flaticon icon={stat.icon} size={24} className="text-[#bd3227]" />
+                  <ProIcon icon={stat.icon} size={24} className="text-[#bd3227]" />
                 </div>
                 <div className="text-3xl sm:text-4xl font-black text-[#231f20] mb-1 tracking-tight">
                   {isAr

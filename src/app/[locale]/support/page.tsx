@@ -5,7 +5,7 @@ import { Footer } from '@/components/layout/Footer'
 import { ImageWithFallback } from '@/components/ui/ImageWithFallback'
 import { SupportForm } from '@/components/forms/SupportForm'
 import { OnlineDonationHub } from '@/components/support/OnlineDonationHub'
-import { Flaticon } from '@/components/ui/Flaticon'
+import { ProIcon } from '@/components/ui/ProIcon'
 import { getSupportPageSettings } from '@/lib/settings'
 import { constructMetadata } from '@/lib/seo/config'
 import { METADATA_CATALOG, type SupportedLocale } from '@/lib/seo/metadata-catalog'
@@ -345,7 +345,7 @@ export default async function SupportPage(props: { params: Promise<{ locale: str
                         </span>
                         {(privileges || []).map((pr, prIdx) => (
                           <div key={prIdx} className="flex items-start gap-2 text-xs text-[#231f20]">
-                            <Flaticon name="check" size={13} className="text-emerald-600 shrink-0 mt-0.5" />
+                            <ProIcon name="check" size={13} className="text-emerald-600 shrink-0 mt-0.5" />
                             <span className="leading-snug">{pr}</span>
                           </div>
                         ))}
@@ -503,7 +503,7 @@ export default async function SupportPage(props: { params: Promise<{ locale: str
                   href={`mailto:${config.cta.email}`}
                   className="px-5 py-2.5 rounded-xl bg-white text-[#231f20] hover:bg-slate-100 font-bold text-xs transition-colors flex items-center gap-2"
                 >
-                  <Flaticon name="mail" size={13} className="text-[#bd3227] shrink-0" />
+                  <ProIcon name="mail" size={13} className="text-[#bd3227] shrink-0" />
                   <span>{config.cta.email}</span>
                 </a>
               )}
@@ -513,7 +513,7 @@ export default async function SupportPage(props: { params: Promise<{ locale: str
                   className="px-5 py-2.5 rounded-xl bg-white/10 text-white hover:bg-white/20 font-bold text-xs border border-white/20 transition-colors flex items-center gap-2"
                   dir="ltr"
                 >
-                  <Flaticon name="phone" size={13} className="text-[#ffd22f] shrink-0" />
+                  <ProIcon name="phone" size={13} className="text-[#ffd22f] shrink-0" />
                   <span>{config.cta.phone}</span>
                 </a>
               )}

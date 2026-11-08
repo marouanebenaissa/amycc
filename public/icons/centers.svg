@@ -1,12 +1,19 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
-  <!-- Stepped Base -->
-  <rect x="8" y="52" width="48" height="4" rx="2" fill="#d2a82b"/>
-  <rect x="12" y="48" width="40" height="4" fill="#d2a82b" fill-opacity="0.3"/>
-  <!-- Archway Structure -->
-  <path d="M14 48V28c0-9.94 8.06-18 18-18s18 8.06 18 18v20" stroke="#d2a82b" stroke-width="3" stroke-linecap="round"/>
-  <!-- Inner Keyhole Arch -->
-  <path d="M22 48V34c0-3 2-6 5-7.5 1-2.5 3-4.5 5-4.5s4 2 5 4.5c3 1.5 5 4.5 5 7.5v14" fill="#ffd22f" fill-opacity="0.25" stroke="#d2a82b" stroke-width="2.5" stroke-linejoin="round"/>
-  <!-- Moroccan Star Pinnacle -->
-  <path d="M32 8l2 3 3-1-1 3 3 2-3 2 1 3-3-1-2 3-2-3-3 1 1-3-3-2 3-2-1-3 3 1z" fill="#d2a82b"/>
-  <circle cx="32" cy="34" r="3" fill="#bd3227"/>
+  <!-- Stepped Podium Base -->
+  <rect x="8" y="52" width="48" height="4" rx="2" fill="currentColor"/>
+  <rect x="12" y="48" width="40" height="4" fill="currentColor" fill-opacity="0.25"/>
+  
+  <!-- Cultural Pavilion Building Facade -->
+  <path d="M14 48V26l18-12 18 12v22" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M14 48V26l18-12 18 12v22" fill="currentColor" fill-opacity="0.08"/>
+  
+  <!-- Moorish Keyhole Portal -->
+  <path d="M25 48V36c0-2.5 1.5-4.5 4-5.5.8-1.8 2-3 3-3s2.2 1.2 3 3c2.5 1 4 3 4 5.5v12" fill="#ffd22f" fill-opacity="0.25" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>
+  
+  <!-- Pavilion Pinnacle Crescent & Star -->
+  <circle cx="32" cy="10" r="2.5" fill="#ffd22f"/>
+  
+  <!-- Side Arched Windows -->
+  <path d="M18 36v-6c0-2 1.5-3.5 3-3.5s3 1.5 3 3.5v6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  <path d="M40 36v-6c0-2 1.5-3.5 3-3.5s3 1.5 3 3.5v6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
 </svg>

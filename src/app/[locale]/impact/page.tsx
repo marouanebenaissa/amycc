@@ -5,7 +5,7 @@ import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { IconWithFallback } from '@/components/ui/IconWithFallback'
 import { ImageWithFallback } from '@/components/ui/ImageWithFallback'
-import { Flaticon } from '@/components/ui/Flaticon'
+import { ProIcon } from '@/components/ui/ProIcon'
 import { getImpactSettings } from '@/lib/settings'
 import { constructMetadata } from '@/lib/seo/config'
 import { METADATA_CATALOG, type SupportedLocale } from '@/lib/seo/metadata-catalog'
@@ -388,7 +388,7 @@ export default async function ImpactPage(props: { params: Promise<{ locale: stri
                         {step.stepNumber}
                       </span>
                       <span className="p-2 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6] flex items-center justify-center">
-                        <Flaticon icon={step.icon} size={20} className="text-[#231f20]" />
+                        <ProIcon name={step.icon} size={20} className="text-[#231f20]" />
                       </span>
                     </div>
 
@@ -434,7 +434,7 @@ export default async function ImpactPage(props: { params: Promise<{ locale: stri
                     className="p-5 sm:p-6 rounded-2xl bg-white border border-[#e5e0d6] shadow-2xs flex items-start gap-4 hover:border-[#bd3227]/30 transition-all"
                   >
                     <div className="p-2.5 rounded-xl bg-[#FAF8F5] border border-[#e5e0d6] shrink-0 flex items-center justify-center">
-                      <Flaticon icon={item.icon} size={22} className="text-[#bd3227]" />
+                      <ProIcon name={item.icon} size={22} className="text-[#bd3227]" />
                     </div>
                     <div>
                       <h3 className="text-sm sm:text-base font-extrabold text-[#231f20] mb-1">

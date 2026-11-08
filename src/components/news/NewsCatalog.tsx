@@ -3,7 +3,7 @@
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
 import { ImageWithFallback } from '@/components/ui/ImageWithFallback'
-import { Flaticon } from '@/components/ui/Flaticon'
+import { ProIcon } from '@/components/ui/ProIcon'
 
 export interface NewsItemData {
   id: string
@@ -163,7 +163,7 @@ export function NewsCatalog({ articles, locale, readMoreLabel }: NewsCatalogProp
             className="w-full ps-11 pe-4 py-3 sm:py-3.5 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6] text-xs sm:text-sm text-[#231f20] placeholder-[#5C5A55] focus:bg-white focus:border-[#231f20] focus:outline-none transition-all"
           />
           <span className="absolute start-4 top-1/2 -translate-y-1/2 pointer-events-none text-[#5C5A55] flex items-center">
-            <Flaticon name="search" size={15} />
+            <ProIcon name="search" size={15} />
           </span>
           {searchQuery && (
             <button
@@ -241,7 +241,7 @@ export function NewsCatalog({ articles, locale, readMoreLabel }: NewsCatalogProp
                 <div className="absolute inset-0 bg-gradient-to-br from-[#231f20] via-[#231f20] to-[#181516] flex items-center justify-center p-8 text-center">
                   <div className="absolute inset-0 moroccan-pattern-dark opacity-20" />
                   <span className="relative">
-                    <Flaticon name="news" size={48} className="text-[#ffd22f]" />
+                    <ProIcon name="news" size={48} className="text-[#ffd22f]" />
                   </span>
                 </div>
               )}
@@ -264,7 +264,7 @@ export function NewsCatalog({ articles, locale, readMoreLabel }: NewsCatalogProp
                     const meta = getCategoryMeta(featuredArticle.category)
                     return (
                       <span className={`px-3 py-1 rounded-full text-3xs font-black border flex items-center gap-1.5 ${meta.badgeClass}`}>
-                        <Flaticon icon={meta.icon} size={12} className="shrink-0" />
+                        <ProIcon name={meta.icon} size={12} className="shrink-0" />
                         <span>{meta.label}</span>
                       </span>
                     )
@@ -272,7 +272,7 @@ export function NewsCatalog({ articles, locale, readMoreLabel }: NewsCatalogProp
 
                   {featuredArticle.published_at && (
                     <span className="text-3xs text-[#5C5A55] font-mono flex items-center gap-1.5">
-                      <Flaticon name="calendar" size={12} className="text-[#bd3227] shrink-0" />
+                      <ProIcon name="calendar" size={12} className="text-[#bd3227] shrink-0" />
                       <span>
                         {new Date(featuredArticle.published_at).toLocaleDateString(locale, {
                           month: 'long',
@@ -284,7 +284,7 @@ export function NewsCatalog({ articles, locale, readMoreLabel }: NewsCatalogProp
                   )}
 
                   <span className="text-3xs text-[#5C5A55] font-bold flex items-center gap-1">
-                    <Flaticon name="clock" size={11} className="text-[#5C5A55] shrink-0" />
+                    <ProIcon name="clock" size={11} className="text-[#5C5A55] shrink-0" />
                     <span>{getReadingTime(featuredArticle.news_translations?.[0]?.excerpt)}</span>
                   </span>
                 </div>
@@ -357,7 +357,7 @@ export function NewsCatalog({ articles, locale, readMoreLabel }: NewsCatalogProp
                       <div className="absolute inset-0 bg-gradient-to-br from-[#231f20] via-[#231f20] to-[#231f20] flex items-center justify-center p-6 text-center">
                         <div className="absolute inset-0 moroccan-pattern-dark opacity-20" />
                         <span className="relative">
-                          <Flaticon name="news" size={36} className="text-[#ffd22f]" />
+                          <ProIcon name="news" size={36} className="text-[#ffd22f]" />
                         </span>
                       </div>
                     )}
@@ -366,14 +366,14 @@ export function NewsCatalog({ articles, locale, readMoreLabel }: NewsCatalogProp
                     {/* Category Overlay Tag */}
                     <div className="absolute top-3.5 start-3.5 z-10">
                       <span className={`px-2.5 py-1 rounded-lg text-3xs font-black shadow-md border backdrop-blur-md flex items-center gap-1.5 ${meta.badgeClass}`}>
-                        <Flaticon icon={meta.icon} size={11} className="shrink-0" />
+                        <ProIcon name={meta.icon} size={11} className="shrink-0" />
                         <span>{meta.label}</span>
                       </span>
                     </div>
 
                     {/* Reading Time Overlay */}
                     <div className="absolute bottom-2.5 start-3.5 z-10 text-white text-3xs font-bold drop-shadow flex items-center gap-1">
-                      <Flaticon name="clock" size={11} className="text-white shrink-0" />
+                      <ProIcon name="clock" size={11} className="text-white shrink-0" />
                       <span>{getReadingTime(trans.excerpt)}</span>
                     </div>
                   </div>
@@ -382,7 +382,7 @@ export function NewsCatalog({ articles, locale, readMoreLabel }: NewsCatalogProp
                   <div className="p-6 space-y-3">
                     {dateFormatted && (
                       <div className="text-3xs text-[#5C5A55] font-mono flex items-center gap-1.5">
-                        <Flaticon name="calendar" size={12} className="text-[#bd3227] shrink-0" />
+                        <ProIcon name="calendar" size={12} className="text-[#bd3227] shrink-0" />
                         <span>{dateFormatted}</span>
                       </div>
                     )}
@@ -426,7 +426,7 @@ export function NewsCatalog({ articles, locale, readMoreLabel }: NewsCatalogProp
       ) : filteredArticles.length === 0 ? (
         <div className="bg-white rounded-3xl border border-[#e5e0d6] p-12 text-center max-w-md mx-auto space-y-4 shadow-card">
           <div className="w-16 h-16 mx-auto rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6] flex items-center justify-center text-[#bd3227]">
-            <Flaticon name="news" size={32} />
+            <ProIcon name="news" size={32} />
           </div>
           <h3 className="text-base font-extrabold text-[#231f20]">
             {isAr

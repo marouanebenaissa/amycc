@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import Image from 'next/image'
-import { Flaticon } from './Flaticon'
+import { ProIcon } from './ProIcon'
 
 interface IconWithFallbackProps {
   src?: string
@@ -38,7 +38,7 @@ export function IconWithFallback({
   }
 
   return (
-    <Flaticon
+    <ProIcon
       icon={fallbackEmoji}
       size={size}
       className={`inline-block shrink-0 ${className}`}

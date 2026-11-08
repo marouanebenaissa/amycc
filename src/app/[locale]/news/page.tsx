@@ -6,7 +6,7 @@ import { Footer } from '@/components/layout/Footer'
 import { createPublicClient } from '@/lib/supabase/public'
 import { getNewsPageSettings } from '@/lib/settings'
 import { ImageWithFallback } from '@/components/ui/ImageWithFallback'
-import { Flaticon } from '@/components/ui/Flaticon'
+import { ProIcon } from '@/components/ui/ProIcon'
 import { NewsCatalog, type NewsItemData } from '@/components/news/NewsCatalog'
 import { defaultNewsArticlesData } from '@/lib/supabase/seed-news'
 import { constructMetadata, getSiteUrl } from '@/lib/seo/config'
@@ -179,7 +179,7 @@ export default async function NewsPage(props: { params: Promise<{ locale: string
                 href={pageSettings.hero.primaryBtnUrl || '#news-catalog'}
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl font-black text-xs sm:text-sm text-white bg-[#231f20] hover:bg-[#d2a82b] active:scale-98 transition-all shadow-md hover:shadow-lg"
               >
-                <Flaticon name="news" size={15} />
+                <ProIcon name="news" size={15} />
                 <span>
                   {isAr
                     ? pageSettings.hero.primaryBtnTextAr
@@ -221,7 +221,7 @@ export default async function NewsPage(props: { params: Promise<{ locale: string
                 className="luxury-card p-5 sm:p-6 text-center flex flex-col justify-between items-center group bg-white shadow-card border border-[#e5e0d6] hover:border-[#bd3227]/40 transition-all rounded-2xl"
               >
                 <div className="w-12 h-12 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6] flex items-center justify-center p-2 mb-3 shadow-2xs group-hover:scale-110 transition-transform overflow-hidden text-2xl">
-                  {stat.icon}
+                  <ProIcon name={stat.icon} size={24} className="text-[#bd3227]" />
                 </div>
                 <div className="text-3xl sm:text-4xl font-black text-[#231f20] mb-1 tracking-tight">
                   {isAr
@@ -275,7 +275,7 @@ export default async function NewsPage(props: { params: Promise<{ locale: string
                     href={pageSettings.cta.primaryBtnUrl || '/contact'}
                     className="w-full sm:w-auto px-6 py-3 rounded-xl font-black text-xs text-[#231f20] bg-white hover:bg-[#FAF8F5] active:scale-98 transition-all shadow-md flex items-center justify-center gap-2"
                   >
-                    <Flaticon name="bullhorn" size={14} className="text-[#bd3227]" />
+                    <ProIcon name="bullhorn" size={14} className="text-[#bd3227]" />
                     <span>
                       {isAr
                         ? pageSettings.cta.primaryBtnTextAr
@@ -289,7 +289,7 @@ export default async function NewsPage(props: { params: Promise<{ locale: string
                     href={pageSettings.cta.secondaryBtnUrl || '/partnerships'}
                     className="w-full sm:w-auto px-6 py-3 rounded-xl font-black text-xs text-white bg-white/15 hover:bg-white/25 border border-white/25 active:scale-98 transition-all flex items-center justify-center gap-2"
                   >
-                    <Flaticon name="handshake" size={14} className="text-white" />
+                    <ProIcon name="handshake" size={14} className="text-white" />
                     <span>
                       {isAr
                         ? pageSettings.cta.secondaryBtnTextAr

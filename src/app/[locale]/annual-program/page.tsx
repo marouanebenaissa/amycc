@@ -10,7 +10,7 @@ import { METADATA_CATALOG } from '@/lib/seo/metadata-catalog'
 import { getBreadcrumbJsonLd, JsonLd } from '@/lib/seo/schema'
 import { locales, type Locale, defaultLocale } from '@/lib/i18n/config'
 import Link from 'next/link'
-import { Flaticon } from '@/components/ui/Flaticon'
+import { ProIcon } from '@/components/ui/ProIcon'
 
 export const revalidate = 0
 
@@ -147,7 +147,7 @@ export default async function AnnualProgramPage(props: { params: Promise<{ local
                     : 'bg-[#bd3227] text-white'
                 }`}
               >
-                <span>🗓️</span>
+                <ProIcon name="calendar" size={13} className="text-white shrink-0" />
                 <span>{heroYear}</span>
               </span>
 
@@ -174,7 +174,7 @@ export default async function AnnualProgramPage(props: { params: Promise<{ local
                       : 'bg-[#231f20]/10 border border-[#231f20]/20 text-[#231f20]'
                   }`}
                 >
-                  <Flaticon name="morocco-star" size={14} className="text-[#ffd22f]" />
+                  <ProIcon name="morocco-star" size={14} className="text-[#ffd22f]" />
                   <span>{heroBadge}</span>
                 </span>
               )}
@@ -207,7 +207,7 @@ export default async function AnnualProgramPage(props: { params: Promise<{ local
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-black text-xs sm:text-sm text-[#231f20] bg-[#ffd22f] hover:bg-[#ffd22f] active:scale-98 transition-all shadow-md"
                 >
-                  <Flaticon name="file" size={14} />
+                  <ProIcon name="file" size={14} />
                   <span>{brochureLabel}</span>
                   <span>↓</span>
                 </a>
@@ -216,7 +216,7 @@ export default async function AnnualProgramPage(props: { params: Promise<{ local
                   href={`/${locale}/events`}
                   className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-black text-xs sm:text-sm text-[#231f20] bg-[#ffd22f] hover:bg-[#ffd22f] active:scale-98 transition-all shadow-md"
                 >
-                  <Flaticon name="calendar" size={14} />
+                  <ProIcon name="calendar" size={14} />
                   <span>{dict.events.view_all}</span>
                   <span className="rtl:rotate-180">→</span>
                 </Link>
@@ -230,7 +230,7 @@ export default async function AnnualProgramPage(props: { params: Promise<{ local
                     : 'text-[#231f20] bg-white hover:bg-[#FAF8F5] border border-[#e5e0d6]'
                 }`}
               >
-                <Flaticon name="users" size={14} />
+                <ProIcon name="users" size={14} />
                 <span>{dict.membership.apply}</span>
               </Link>
             </div>
@@ -249,8 +249,8 @@ export default async function AnnualProgramPage(props: { params: Promise<{ local
                   key={st.id}
                   className="p-5 sm:p-6 rounded-3xl bg-white border border-[#e5e0d6] hover:border-[#231f20]/40 shadow-subtle hover:shadow-lg transition-all text-center flex flex-col justify-center items-center group"
                 >
-                  <div className="w-12 h-12 rounded-2xl bg-[#231f20]/10 text-[#231f20] flex items-center justify-center text-2xl mb-2.5 group-hover:scale-110 transition-transform">
-                    {st.icon || '📌'}
+                  <div className="w-12 h-12 rounded-2xl bg-[#231f20]/10 text-[#231f20] flex items-center justify-center mb-2.5 group-hover:scale-110 transition-transform">
+                    <ProIcon icon={st.icon || 'target'} size={24} className="text-[#231f20]" />
                   </div>
                   <span className="text-2xl sm:text-3xl font-black text-[#231f20] tracking-tight block">
                     {st.value}
@@ -300,7 +300,7 @@ export default async function AnnualProgramPage(props: { params: Promise<{ local
                 >
                   <div className="space-y-3">
                     <div className="w-12 h-12 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6] flex items-center justify-center group-hover:scale-110 transition-transform">
-                      <Flaticon icon={pillar.icon || '🎨'} size={24} className="text-[#bd3227]" />
+                      <ProIcon icon={pillar.icon || 'palette'} size={24} className="text-[#bd3227]" />
                     </div>
                     <h3 className="text-base font-black text-[#231f20] group-hover:text-[#231f20] transition-colors leading-snug">
                       {title}
@@ -335,8 +335,8 @@ export default async function AnnualProgramPage(props: { params: Promise<{ local
         <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
           <div className="p-8 sm:p-12 rounded-3xl bg-gradient-to-br from-[#F5F3EE] via-[#F5F3EE] to-[#F5F3EE] border border-[#e5e0d6] shadow-subtle flex flex-col md:flex-row items-center justify-between gap-8">
             <div className="flex items-start sm:items-center gap-5">
-              <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-3xl bg-[#231f20] text-white flex items-center justify-center text-3xl sm:text-4xl shadow-md shrink-0">
-                📑
+              <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-3xl bg-[#231f20] text-white flex items-center justify-center shadow-md shrink-0">
+                <ProIcon name="document" size={34} className="text-[#ffd22f]" />
               </div>
               <div className="space-y-1.5">
                 <span className="text-3xs font-black uppercase tracking-wider text-[#bd3227]">
@@ -363,7 +363,7 @@ export default async function AnnualProgramPage(props: { params: Promise<{ local
                   rel="noopener noreferrer"
                   className="w-full md:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-black text-xs sm:text-sm text-white bg-[#231f20] hover:bg-[#d2a82b] active:scale-98 transition-all shadow-md cursor-pointer"
                 >
-                  <span>📥</span>
+                  <ProIcon name="file" size={15} className="text-white shrink-0" />
                   <span>{brochureLabel}</span>
                 </a>
               ) : (
@@ -371,7 +371,7 @@ export default async function AnnualProgramPage(props: { params: Promise<{ local
                   href={`/${locale}/contact`}
                   className="w-full md:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-black text-xs sm:text-sm text-white bg-[#231f20] hover:bg-[#d2a82b] active:scale-98 transition-all shadow-md cursor-pointer"
                 >
-                  <span>📩</span>
+                  <ProIcon name="mail" size={15} className="text-white shrink-0" />
                   <span>{isAr ? 'اطلب النسخة الرسمية للدليل' : isFr ? 'Demander la brochure officielle' : 'Request Official Brochure'}</span>
                 </Link>
               )}

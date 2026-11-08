@@ -1,10 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
   <!-- Stepped Podium Base -->
   <rect x="8" y="52" width="48" height="4" rx="2" fill="currentColor"/>
-  <rect x="12" y="48" width="40" height="4" fill="currentColor" fill-opacity="0.3"/>
+  <rect x="12" y="48" width="40" height="4" fill="currentColor" fill-opacity="0.25"/>
   
   <!-- Outer Archway Structure -->
-  <path d="M14 48V28c0-9.94 8.06-18 18-18s18 8.06 18 18v20" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+  <path d="M14 48V28c0-9.94 8.06-18 18-18s18 8.06 18 18v20" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"/>
   
   <!-- Inner Moroccan Keyhole Arch (Bab) -->
   <path d="M22 48V34c0-3 2-6 5-7.5 1-2.5 3-4.5 5-4.5s4 2 5 4.5c3 1.5 5 4.5 5 7.5v14" fill="#ffd22f" fill-opacity="0.25" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/>
@@ -16,6 +16,6 @@
   <line x1="17" y1="28" x2="17" y2="48" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
   <line x1="47" y1="28" x2="47" y2="48" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
   
-  <!-- Zellij Tile Pattern Accent in Archway -->
-  <circle cx="32" cy="34" r="3" fill="#bd3227"/>
+  <!-- Zellij Tile Center Jewel -->
+  <circle cx="32" cy="34" r="2.8" fill="#bd3227"/>
 </svg>

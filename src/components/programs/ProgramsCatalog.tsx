@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Flaticon } from '@/components/ui/Flaticon'
+import { ProIcon } from '@/components/ui/ProIcon'
 
 export interface ProgramDisplayItem {
   id: string
@@ -57,8 +57,8 @@ function ProgramCoverImage({
     return (
       <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center text-white">
         <div className="absolute inset-0 moroccan-star-pattern opacity-15 pointer-events-none" />
-        <Flaticon
-          icon={CATEGORY_MAP[category]?.icon || '🎨'}
+        <ProIcon
+          icon={CATEGORY_MAP[category]?.icon || 'palette'}
           size={52}
           className="text-[#ffd22f] mb-3 group-hover:scale-110 transition-transform drop-shadow-md"
         />
@@ -135,7 +135,7 @@ export function ProgramsCatalog({ programs, locale, dict }: ProgramsCatalogProps
 
           <div className="relative min-w-[260px] sm:min-w-[320px]">
             <span className="absolute inset-y-0 start-3.5 flex items-center pointer-events-none text-[#5C5A55]">
-              <Flaticon name="search" size={16} />
+              <ProIcon name="search" size={16} />
             </span>
             <input
               type="text"
@@ -171,7 +171,7 @@ export function ProgramsCatalog({ programs, locale, dict }: ProgramsCatalogProps
                     : 'bg-[#FAF8F5] text-[#5C5A55] hover:bg-[#F4EFE6] hover:text-[#231f20] border border-[#e5e0d6]'
                 }`}
               >
-                <Flaticon icon={getCategoryIcon(catKey)} size={15} />
+                <ProIcon icon={getCategoryIcon(catKey)} size={15} />
                 <span>{getCategoryLabel(catKey)}</span>
                 {catKey === 'all' && (
                   <span className={`px-2 py-0.5 rounded-full text-3xs font-black ${
@@ -230,12 +230,12 @@ export function ProgramsCatalog({ programs, locale, dict }: ProgramsCatalogProps
                     {/* Floating Badges */}
                     <div className="absolute top-4 inset-x-4 flex items-center justify-between gap-2">
                       <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold bg-white/95 text-[#231f20] backdrop-blur-md shadow-xs">
-                        <Flaticon icon={getCategoryIcon(prog.category)} size={13} className="text-[#bd3227]" />
+                        <ProIcon icon={getCategoryIcon(prog.category)} size={13} className="text-[#bd3227]" />
                         <span>{getCategoryLabel(prog.category)}</span>
                       </span>
 
                       <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold bg-[#231f20]/80 text-white backdrop-blur-md">
-                        <Flaticon name="pin" size={13} className="text-[#ffd22f]" />
+                        <ProIcon name="pin" size={13} className="text-[#ffd22f]" />
                         <span>{prog.city || (isAr ? 'المملكة المغربية' : isFr ? 'Royaume du Maroc' : 'Morocco')}</span>
                       </span>
                     </div>
@@ -262,7 +262,7 @@ export function ProgramsCatalog({ programs, locale, dict }: ProgramsCatalogProps
                         {prog.objectives && (
                           <div className="space-y-0.5">
                             <span className="font-bold text-[#231f20] flex items-center gap-1.5">
-                              <Flaticon name="morocco-star" size={14} className="text-[#d2a82b]" />
+                              <ProIcon name="morocco-star" size={14} className="text-[#d2a82b]" />
                               <span>{isAr ? 'الأهداف والمخرجات:' : isFr ? 'Objectifs et résultats :' : 'Key Objectives:'}</span>
                             </span>
                             <p className="text-[#5C5A55] leading-relaxed line-clamp-2 ps-5">
@@ -274,7 +274,7 @@ export function ProgramsCatalog({ programs, locale, dict }: ProgramsCatalogProps
                         {prog.target_audience && (
                           <div className="space-y-0.5 pt-2 border-t border-[#E5E0D6]">
                             <span className="font-bold text-[#231f20] flex items-center gap-1.5">
-                              <Flaticon name="users" size={14} className="text-[#d2a82b]" />
+                              <ProIcon name="users" size={14} className="text-[#d2a82b]" />
                               <span>{isAr ? 'الفئة المستهدفة:' : isFr ? 'Public cible :' : 'Target Audience:'}</span>
                             </span>
                             <p className="text-[#5C5A55] leading-relaxed line-clamp-2 ps-5">
@@ -310,7 +310,7 @@ export function ProgramsCatalog({ programs, locale, dict }: ProgramsCatalogProps
         </div>
       ) : (
         <div className="p-12 sm:p-16 rounded-3xl bg-white border border-[#e5e0d6] text-center space-y-4">
-          <Flaticon name="search" size={48} className="text-[#5C5A55]/40 mx-auto block" />
+          <ProIcon name="search" size={48} className="text-[#5C5A55]/40 mx-auto block" />
           <h3 className="text-xl font-black text-[#231f20]">
             {isAr ? 'لم يتم العثور على مبادرات مطابقة لبحثك' : isFr ? 'Aucun programme correspondant trouvé' : 'No matching programs found'}
           </h3>

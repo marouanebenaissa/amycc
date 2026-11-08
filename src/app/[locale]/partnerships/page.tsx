@@ -5,7 +5,7 @@ import { Footer } from '@/components/layout/Footer'
 import { ImageWithFallback } from '@/components/ui/ImageWithFallback'
 import { PartnershipForm } from '@/components/forms/PartnershipForm'
 import { PartnersDirectory } from '@/components/partnerships/PartnersDirectory'
-import { Flaticon } from '@/components/ui/Flaticon'
+import { ProIcon } from '@/components/ui/ProIcon'
 import { getPartnershipsPageSettings } from '@/lib/settings'
 import { constructMetadata } from '@/lib/seo/config'
 import { METADATA_CATALOG, type SupportedLocale } from '@/lib/seo/metadata-catalog'
@@ -200,7 +200,7 @@ export default async function PartnershipsPage(props: { params: Promise<{ locale
                       : 'bg-white hover:bg-stone-50 text-[#231f20] border-[#e5e0d6] shadow-2xs'
                   }`}
                 >
-                  <Flaticon name="document" size={16} />
+                  <ProIcon name="document" size={16} />
                   <span>{isAr ? config.hero.brochureBtnTextAr : isFr ? config.hero.brochureBtnTextFr : config.hero.brochureBtnTextEn}</span>
                 </a>
               )}
@@ -233,7 +233,7 @@ export default async function PartnershipsPage(props: { params: Promise<{ locale
                   className="bg-white p-5 sm:p-6 rounded-2xl border border-[#e5e0d6] shadow-sm hover:shadow-md transition-all text-center flex flex-col items-center justify-center group"
                 >
                   <div className="mb-2 group-hover:scale-110 transition-transform text-[#bd3227]">
-                    <Flaticon icon={stat.icon} size={28} />
+                    <ProIcon name={stat.icon} size={28} />
                   </div>
                   <div className="text-2xl sm:text-3xl font-black text-[#231f20] tracking-tight">
                     {isAr ? (stat.valueAr || stat.value) : isFr ? (stat.valueFr || stat.value) : (stat.valueEn || stat.value)}
@@ -281,7 +281,7 @@ export default async function PartnershipsPage(props: { params: Promise<{ locale
                   <div className="space-y-4">
                     <div className="flex items-center justify-between gap-3">
                       <div className="w-12 h-12 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6] flex items-center justify-center text-[#bd3227] select-none group-hover:scale-110 transition-transform">
-                        <Flaticon icon={pillar.icon} size={22} />
+                        <ProIcon name={pillar.icon} size={22} />
                       </div>
                       <span className="text-3xs sm:text-2xs font-bold uppercase tracking-wider text-[#bd3227] bg-[#bd3227]/10 px-3 py-1 rounded-full">
                         {isAr ? pillar.tagAr : isFr ? pillar.tagFr : pillar.tagEn}
@@ -370,7 +370,7 @@ export default async function PartnershipsPage(props: { params: Promise<{ locale
                   className="bg-white p-6 rounded-3xl border border-[#e5e0d6] shadow-subtle hover:shadow-md transition-all flex flex-col space-y-3 group"
                 >
                   <div className="w-12 h-12 rounded-2xl bg-[#FAF8F5] border border-[#e5e0d6] flex items-center justify-center text-[#bd3227] select-none group-hover:scale-110 transition-transform">
-                    <Flaticon icon={benefit.icon} size={22} />
+                    <ProIcon name={benefit.icon} size={22} />
                   </div>
                   <h3 className="text-base font-bold text-[#231f20]">
                     {isAr ? benefit.titleAr : isFr ? benefit.titleFr : benefit.titleEn}
@@ -420,7 +420,7 @@ export default async function PartnershipsPage(props: { params: Promise<{ locale
                       {st.num}
                     </span>
                     <div className="text-[#bd3227] select-none group-hover:scale-110 transition-transform">
-                      <Flaticon icon={st.icon} size={24} />
+                      <ProIcon name={st.icon} size={24} />
                     </div>
                   </div>
 
@@ -493,7 +493,7 @@ export default async function PartnershipsPage(props: { params: Promise<{ locale
                     href={`mailto:${config.cta.email}`}
                     className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-xs sm:text-sm border border-white/15 transition-all text-center justify-center backdrop-blur-xs"
                   >
-                    <Flaticon name="mail" size={14} className="text-[#ffd22f]" />
+                    <ProIcon name="mail" size={14} className="text-[#ffd22f]" />
                     <span>{config.cta.email}</span>
                   </a>
                 )}
@@ -503,7 +503,7 @@ export default async function PartnershipsPage(props: { params: Promise<{ locale
                     href={`tel:${config.cta.phone}`}
                     className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-[#bd3227] hover:bg-[#a3261c] text-white font-bold text-xs sm:text-sm transition-all text-center justify-center shadow-md"
                   >
-                    <Flaticon name="phone" size={14} className="text-white" />
+                    <ProIcon name="phone" size={14} className="text-white" />
                     <span dir="ltr">{config.cta.phone}</span>
                   </a>
                 )}
